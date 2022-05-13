@@ -7,7 +7,7 @@ installierte Frameworks:
 - partyjs, https://party.js.org/
 
 zum Starten:
-cd webapp
-npm install
-npm run dev
+- cd webapp
+- npm install
+- npm run dev
 
