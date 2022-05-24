@@ -17,12 +17,14 @@ export default class CreatableMulti extends Component<{}> {
 
     render() {
         return (
-            <CreatableSelect allowCreateWhileLoading={false} formatCreateLabel={inputValue => inputValue + " hinzufügen"} noOptionsMessage={() => 'Geben Sie neues Zeichen ein!'}
-                             placeholder={<p>Eingabe...</p>} className={"text-black p-3"}
-                             isMulti
-                             onChange={this.handleChange}
-                             options={eingabeAlphabetOptionen}
-            />
+            <div className={"text-lg p-3"}>
+                <CreatableSelect allowCreateWhileLoading={false} formatCreateLabel={inputValue => inputValue + " hinzufügen"} noOptionsMessage={() => 'Geben Sie neues Zeichen ein!'}
+                                 placeholder={<p>Eingabe...</p>} className={"text-black"}
+                                 isMulti
+                                 onChange={this.handleChange}
+                                 options={eingabeAlphabetOptionen}
+                />
+            </div>
         );
     }
 }
