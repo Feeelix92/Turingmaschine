@@ -18,7 +18,7 @@ export default class CreatableMulti extends Component<{}> {
     render() {
         return (
             <CreatableSelect allowCreateWhileLoading={false} formatCreateLabel={inputValue => inputValue + " hinzufügen"} noOptionsMessage={() => 'Geben Sie neues Zeichen ein!'}
-                             placeholder={<p>Eingabe...</p>} className={"text-black p-3 px-5"}
+                             placeholder={<p>Eingabe...</p>} className={"text-black p-3"}
                              isMulti
                              onChange={this.handleChange}
                              options={eingabeAlphabetOptionen}
