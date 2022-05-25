@@ -63,18 +63,22 @@ button {
 
 .paper, .tech {
   background-image: url('./assets/images/spritesheet.png');
-  background-repeat: no-repeat;
-  
+  background-repeat: no-repeat;  
 }
 
 .paper {
-  width: 60px;
   background-position: 0 0;
 }
 
-
 .tech {
-  width: 60px;
   background-position: -60px 0;
 }
+
+.button {  
+  background-color: transparent;
+  position: absolute;  
+  box-shadow: 2px 2px 5px rgb(160, 160, 160);
+  border-radius: 50%;
+}
+
 

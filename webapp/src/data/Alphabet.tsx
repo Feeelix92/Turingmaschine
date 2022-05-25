@@ -21,3 +21,4 @@ export const eingabeAlphabete: readonly Eingabelphabet[] = [
     {value: ['eigenes'], label: 'eigenes'},
 ];
 
+
