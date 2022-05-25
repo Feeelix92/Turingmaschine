@@ -1,11 +1,12 @@
-import { Component } from "react";
+import React from "react";
+import {
+  EingabelphabetOption,
+  eingabeAlphabetOptionen,
+} from "../../data/Alphabet";
 
-export default class Editfield extends Component<{}> {
-  renderButton() {
-    return <div>PopUp</div>;
-  }
-
-  render() {
-    return <div>{this.renderButton}</div>;
-  }
+export default function EditField() {
+  return(
+  eingabeAlphabetOptionen.map((value: EingabelphabetOption, key: React.Key) => {
+    return <div key={key}>{value.label}</div>;
+  }))
 }

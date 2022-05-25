@@ -5,6 +5,8 @@ import Dialog from "./components/Eingabealphabet/Dialog";
 import DropDownSelect from "./components/Eingabealphabet/DropDownSelect";
 import Table from "./components/Zustandsüberführungsfunktion/Table";
 import Editfield from "./components/Zustandsüberführungsfunktion/EditField";
+import EditField from "./components/Zustandsüberführungsfunktion/EditField";
+import { eingabeAlphabetOptionen } from "./data/Alphabet";
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
         <Dialog /> */}
       </header>
       <Table />
+      <EditField/>
     </div>
   );
 }

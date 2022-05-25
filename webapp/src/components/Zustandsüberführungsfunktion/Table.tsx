@@ -31,19 +31,22 @@ export default class Table extends Component<{}, TableProps> {
     const loadedRows = this.state.rows;
 
     return (
-      <div className="flex flex-wrap flex-col">
-        <table className="table-fixed border-separate border border-slate-500">
-          <thead>
+      <div className="flex flex-wrap flex-col relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-white uppercase bg-gray-50 dark:bg-gray-700 dark:text-white">
             <tr>
               {this.state.header.map((value, key: React.Key) => (
-                <th key={key} className="border border-slate-600">
+                <th key={key} scope="col" className="px-6 py-3">
                   {value}
                 </th>
               ))}
+              <th scope="col" className="px-6 py-3">
+                <span className="sr-only">Delete</span>
+              </th>
             </tr>
           </thead>
           <tbody>
-            {loadedRows.map((value, key: React.Key) => (
+            {loadedRows.map((key: React.Key) => (
               <Row key={key} onClick={(i: number) => this.deleteRow(i)} />
             ))}
           </tbody>

@@ -49,5 +49,5 @@ export interface RowProps {
 }
 
 export interface CellProps {
-  content: string | number;
+  value: string | number;
 }

@@ -6,7 +6,7 @@ export default class Row extends Component<{}, RowProps> {
   constructor(props: RowProps) {
     super(props);
     this.state = {
-      cells: Array(5).fill(null),
+      cells: Array(5).fill("Cell"),
     };
   }
 
@@ -14,17 +14,18 @@ export default class Row extends Component<{}, RowProps> {
     const loadedCells = this.state.cells;
 
     return (
-      <tr>
-        {loadedCells.map((value: String, index: React.Key) => (
-          <Cell key={index} />
+      <tr className="bg-white hover:bg-gray-20 dark:hover:bg-gray-200">
+        {loadedCells.map((value: string, index: React.Key) => (
+          <Cell key={index} value={value} />
         ))}
-        <td className="px-2 py-4 text-right">
-          <button
-            className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+        <td className="px-6 py-4 text-right">
+          <a
+            href="#"
+            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
             onClick={this.props.onClick}
           >
             Delete
-          </button>
+          </a>
         </td>
       </tr>
     );
