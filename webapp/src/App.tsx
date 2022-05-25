@@ -3,6 +3,7 @@ import './App.css'
 import logo from './favicon_turing.svg'
 import Dialog from "./components/Eingabealphabet/Dialog";
 import DropDownSelect from "./components/Eingabealphabet/DropDownSelect";
+import Band from "./components/Band/Band";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
             <img src={logo} className="App-logo" alt="logo" />
             <DropDownSelect />
             <Dialog />
+            <Band />            
       </header>
     </div>
   )

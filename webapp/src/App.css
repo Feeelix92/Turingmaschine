@@ -41,3 +41,40 @@
 button {
   font-size: calc(10px + 2vmin);
 }
+
+
+/* ********** BAND ********** */
+
+.band-container {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 20px 10px;
+}
+
+.band-container__band{
+  display: inline-block;
+  padding: 5px;
+  width: 60px;
+  height: 40px;
+  color: black;
+  border: 1px solid gray;
+}
+
+.paper, .tech {
+  background-image: url('./assets/images/spritesheet.png');
+  background-repeat: no-repeat;
+  
+}
+
+.paper {
+  width: 60px;
+  background-position: 0 0;
+}
+
+
+.tech {
+  width: 60px;
+  background-position: -60px 0;
+}
+
