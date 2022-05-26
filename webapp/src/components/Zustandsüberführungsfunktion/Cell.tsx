@@ -7,6 +7,8 @@ import {
 } from "../../data/Alphabet";
 
 export default class Class extends Component<{}, CellProps> {
+  wrapperRef: React.RefObject<HTMLInputElement>;
+
   constructor(props: CellProps) {
     super(props);
     this.state = {
@@ -51,10 +53,19 @@ export default class Class extends Component<{}, CellProps> {
    * Alert if clicked on outside of element
    */
   handleClickOutside(event: MouseEvent) {
-    if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
-      this.setState({
-        showEdit: false,
-      });
+    if (this.wrapperRef) {
+      if (
+        this.wrapperRef != null &&
+        this.wrapperRef.current != null &&
+        event.target != null &&
+        event.target instanceof Node
+      ) {
+        if (!this.wrapperRef.current.contains(event.target)) {
+          this.setState({
+            showEdit: false,
+          });
+        }
+      }
     }
   }
 
