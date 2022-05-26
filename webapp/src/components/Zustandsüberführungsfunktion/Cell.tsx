@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { ChangeEvent, Component } from "react";
 import { CellProps } from "../../interfaces/CommonInterfaces";
 import EditField from "./EditField";
 import {
@@ -14,6 +14,9 @@ export default class Class extends Component<{}, CellProps> {
       showEdit: false,
       options: eingabeAlphabetOptionen,
     };
+
+    this.wrapperRef = React.createRef();
+    this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
   editMode() {
@@ -28,17 +31,45 @@ export default class Class extends Component<{}, CellProps> {
     });
   }
 
+  changeFieldValue(event: ChangeEvent) {
+    if (event.target != null && event.target instanceof HTMLInputElement) {
+      this.setState({
+        value: event.target.value,
+      });
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
+  /**
+   * Alert if clicked on outside of element
+   */
+  handleClickOutside(event: MouseEvent) {
+    if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+      this.setState({
+        showEdit: false,
+      });
+    }
+  }
+
   render() {
     const show = this.state.showEdit;
 
     return (
-      <td className="px-6 py-4">
+      <td ref={this.wrapperRef} className="px-6 py-4">
         <input
           type="text"
           name="value"
           id="valueInput"
           className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300"
           value={this.state.value}
+          onChange={this.changeFieldValue.bind(this)}
           onClick={this.editMode.bind(this)}
         />
         {show ? (

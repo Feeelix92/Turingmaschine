@@ -47,7 +47,7 @@ export default class Table extends Component<{}, TableProps> {
           </thead>
           <tbody>
             {loadedRows.map((key: React.Key) => (
-              <Row key={key} onClick={(i: number) => this.deleteRow(i)} />
+              <Row key={key} deleteRow={(i: number) => this.deleteRow(i)} />
             ))}
           </tbody>
         </table>
