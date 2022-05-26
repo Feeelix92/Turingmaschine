@@ -4,19 +4,19 @@ import {EingabelphabetOption} from "../../data/Alphabet";
 import { BandItem } from './BandItem';
 
 function Band(){
+    const bandLength = 20;
     const bandArray:EingabelphabetOption[] = []
-
     const [skin, setSkin] = useState("paper")
+    const [item, setBandItem] = useState({value:"", label: "B"});
 
-    const [item, setBandItem] = useState({value:"B",label: "B"});
-
-    for (let index = 0; index <= 20; index++) {
-        bandArray.push(item)        
+    for (let index = 0; index <= bandLength; index++) {
+        bandArray.push(item);   
     }
 
-    const deleteAll = () => {
-        console.log("DELETE ALL! >:)");
+    const [myArray, setBandArray] = useState([bandArray]);
 
+
+    const deleteAll = () => {
         const newBandItem = {value: "", label: "B"};
         setBandItem(newBandItem);
     };
@@ -27,7 +27,32 @@ function Band(){
         }else {
             setSkin("paper")
         }
-    }
+    };
+
+    const changeItem = (e: { target: { value: string; }; }) => {
+        console.log("change item! - value: " + e.target.value);
+        setBandItem({
+            value: e.target.value, 
+            label: e.target.value
+        });
+
+        const newArray = [...myArray];
+        setBandArray(newArray);
+        console.log(newArray);
+    };
+
+    //TODO:Item in Array an richtiger Stelle ändern?
+    const changeItemAt = (index: any, e: { target: { value: string; }; }) => {
+        console.log("change item! - value: " + e.target.value);
+
+        const newArray = [];
+        newArray[index] = {
+            value: e.target.value,
+            label: e.target.value 
+        };
+        //setBandArray(newArray);
+        console.log(newArray);
+    };
 
 
     const handleClick = (value: EingabelphabetOption, index: number) => {
@@ -62,9 +87,6 @@ function Band(){
         });
     }
 
-    
-    
-
     return <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 p-3 border rounded"}>
         <div className={""}>
             <h2 >Band: </h2>
@@ -78,6 +100,7 @@ function Band(){
                 skin={skin}
                 key={index}
                 handleClick={handleClick}
+                changeItem={changeItem}
                 />
                 
             ))}
