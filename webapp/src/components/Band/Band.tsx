@@ -1,6 +1,7 @@
 import anime from 'animejs';
 import { useState } from 'react';
 import {EingabelphabetOption} from "../../data/Alphabet";
+import { BandItem } from './BandItem';
 
 function Band(){
     const bandArray:EingabelphabetOption[] = []
@@ -9,6 +10,10 @@ function Band(){
         bandArray.push({value:"B",label: "B"})        
     }
     const [skin, setSkin] = useState("paper")
+
+    const [bandItems, setBandItem] = useState(() => {
+        
+    });
 
     const changeSkin = () => {     
         if(skin === "paper"){
@@ -51,6 +56,14 @@ function Band(){
         });
     }
 
+    const deleteAll = () => {
+        console.log("DELETE ALL! >:)");
+
+        for (let index = 0; index <= 20; index++) {
+            bandArray.push({value:"",label: "B"})        
+        }
+    };
+
     
     
 
@@ -60,6 +73,16 @@ function Band(){
         </div>
         <div className={"band-container"}>
             {bandArray.map((value, index) => (
+
+                <BandItem
+                value={value}
+                index={index}
+                skin={skin}
+                key={index}
+                handleClick={handleClick}
+                />
+
+                /*
                 <div 
                 className={`band-container__band ${skin}`} 
                 key={index}
@@ -71,6 +94,7 @@ function Band(){
                         <div className={`button btn-three index-${index}`}></div>
                     </div>
                 </div>
+                */
                 
             ))}            
         </div>
@@ -78,6 +102,12 @@ function Band(){
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
         onClick={() => changeSkin()}>
             Change skin
+        </button>
+
+        <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+        onClick={() => deleteAll()}>
+            Delete All
         </button>
     </div>
 }
