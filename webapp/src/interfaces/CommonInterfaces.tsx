@@ -1,3 +1,5 @@
+import { EingabelphabetOption } from "../data/Alphabet";
+
 type AppProps = {
   message: string;
   count: number;
@@ -50,4 +52,11 @@ export interface RowProps {
 
 export interface CellProps {
   value: string | number;
+  showEdit: boolean;
+  options: EingabelphabetOption[];
+}
+
+export interface EditProps {
+  options: EingabelphabetOption[];
+  updateValue: (arg: string) => void;
 }

@@ -16,7 +16,7 @@ export default class Row extends Component<{}, RowProps> {
     return (
       <tr className="bg-white hover:bg-gray-20 dark:hover:bg-gray-200">
         {loadedCells.map((value: string, index: React.Key) => (
-          <Cell key={index} value={value} />
+          <Cell key={index} />
         ))}
         <td className="px-6 py-4 text-right">
           <a
