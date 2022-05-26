@@ -6,14 +6,20 @@ import { BandItem } from './BandItem';
 function Band(){
     const bandArray:EingabelphabetOption[] = []
 
-    for (let index = 0; index <= 20; index++) {
-        bandArray.push({value:"B",label: "B"})        
-    }
     const [skin, setSkin] = useState("paper")
 
-    const [bandItems, setBandItem] = useState(() => {
-        
-    });
+    const [item, setBandItem] = useState({value:"B",label: "B"});
+
+    for (let index = 0; index <= 20; index++) {
+        bandArray.push(item)        
+    }
+
+    const deleteAll = () => {
+        console.log("DELETE ALL! >:)");
+
+        const newBandItem = {value: "", label: "B"};
+        setBandItem(newBandItem);
+    };
 
     const changeSkin = () => {     
         if(skin === "paper"){
@@ -56,14 +62,6 @@ function Band(){
         });
     }
 
-    const deleteAll = () => {
-        console.log("DELETE ALL! >:)");
-
-        for (let index = 0; index <= 20; index++) {
-            bandArray.push({value:"",label: "B"})        
-        }
-    };
-
     
     
 
@@ -81,22 +79,9 @@ function Band(){
                 key={index}
                 handleClick={handleClick}
                 />
-
-                /*
-                <div 
-                className={`band-container__band ${skin}`} 
-                key={index}
-                onClick={() => handleClick(value, index)}>
-                    {value.value}
-                    <div className={`band__buttons`}>
-                        <div className={`button btn-one index-${index}`}></div>
-                        <div className={`button btn-two index-${index}`}></div>
-                        <div className={`button btn-three index-${index}`}></div>
-                    </div>
-                </div>
-                */
                 
-            ))}            
+            ))}
+          
         </div>
         <button 
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
