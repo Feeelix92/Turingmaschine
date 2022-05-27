@@ -3,7 +3,6 @@ import Select, {ActionMeta, OnChangeValue} from 'react-select'
 import {eingabeAlphabete, Eingabelphabet} from "../../data/Alphabet";
 import MultiselectDropDown from "./DropDownMultiselect";
 
-
 function DropDownSelect()  {
     function handleChange (
         newValue: OnChangeValue<Eingabelphabet, false>,
@@ -21,6 +20,7 @@ function DropDownSelect()  {
         console.groupEnd();
 
     }
+
     const [openDialog, setOpenDialog] = useState(false);
 
     return (
@@ -34,9 +34,10 @@ function DropDownSelect()  {
                         options={eingabeAlphabete}
                 />
             </div>
+
+            @ToDo pass setOpenDialog to MultiselectDropDown
             {openDialog &&
-                // <CreateMultiselectDropDown setOpenDialog={setOpenDialog}/>
-                <MultiselectDropDown open={setOpenDialog}/>
+                <MultiselectDropDown />
             }
         </>
     );
