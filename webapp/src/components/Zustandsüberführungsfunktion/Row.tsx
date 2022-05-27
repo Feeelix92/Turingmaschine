@@ -6,8 +6,12 @@ export default class Row extends Component<{}, RowProps> {
   constructor(props: RowProps) {
     super(props);
     this.state = {
-      cells: Array(5).fill("Cell"),
+      cells: ["q1", "1", "q1", "0", "Rechts"],
     };
+  }
+
+  setCellValue(index: React.Key, value: string) {
+    console.log(index, value);
   }
 
   render() {
@@ -15,8 +19,8 @@ export default class Row extends Component<{}, RowProps> {
 
     return (
       <tr className="bg-white hover:bg-gray-20 dark:hover:bg-gray-200">
-        {loadedCells.map((value: string, index: React.Key) => (
-          <Cell key={index} />
+        {loadedCells.map((value: string, key: React.Key) => (
+          <Cell key={key} value={value} index={key} />
         ))}
         <td className="px-6 py-4 text-right">
           <a

@@ -7,7 +7,7 @@ export default class Table extends Component<{}, TableProps> {
     super(props);
     this.state = {
       header: ["Status", "Lese", "Neuer Status", "Schreibe", "Gehe nach"],
-      rows: Array(5).fill(null),
+      rows: [0],
     };
   }
 
@@ -17,10 +17,15 @@ export default class Table extends Component<{}, TableProps> {
     });
   }
 
-  deleteRow(i: number) {
+  deleteRow(i: React.Key) {
+    console.log(i);
     const newRows = this.state.rows;
 
-    newRows.splice(i, 1);
+    console.log(newRows);
+
+    newRows.splice(i as number, 1);
+
+    console.log(newRows);
 
     this.setState({
       rows: newRows,
@@ -46,8 +51,8 @@ export default class Table extends Component<{}, TableProps> {
             </tr>
           </thead>
           <tbody>
-            {loadedRows.map((key: React.Key) => (
-              <Row key={key} deleteRow={(i: number) => this.deleteRow(i)} />
+            {loadedRows.map((index: number, key: React.Key) => (
+              <Row key={key} deleteRow={() => this.deleteRow(key)} />
             ))}
           </tbody>
         </table>

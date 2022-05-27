@@ -1,10 +1,7 @@
 import React, { ChangeEvent, Component } from "react";
 import { CellProps } from "../../interfaces/CommonInterfaces";
 import EditField from "./EditField";
-import {
-  eingabeAlphabetOptionen,
-  EingabelphabetOption,
-} from "../../data/Alphabet";
+import { eingabeAlphabetOptionen } from "../../data/Alphabet";
 
 export default class Class extends Component<{}, CellProps> {
   wrapperRef: React.RefObject<HTMLInputElement>;
@@ -12,7 +9,7 @@ export default class Class extends Component<{}, CellProps> {
   constructor(props: CellProps) {
     super(props);
     this.state = {
-      value: 0,
+      value: "0",
       showEdit: false,
       options: eingabeAlphabetOptionen,
     };
@@ -27,7 +24,7 @@ export default class Class extends Component<{}, CellProps> {
     });
   }
 
-  chooseOption(option: string | number) {
+  chooseOption(option: string) {
     this.setState({
       value: option,
     });
@@ -49,9 +46,6 @@ export default class Class extends Component<{}, CellProps> {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
 
-  /**
-   * Alert if clicked on outside of element
-   */
   handleClickOutside(event: MouseEvent) {
     if (this.wrapperRef) {
       if (

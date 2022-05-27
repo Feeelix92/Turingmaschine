@@ -10,7 +10,7 @@ export interface RowProps {
 }
 
 export interface CellProps {
-  value: string | number;
+  value: string;
   showEdit: boolean;
   options: EingabelphabetOption[];
 }
