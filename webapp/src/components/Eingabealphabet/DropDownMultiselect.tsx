@@ -32,7 +32,6 @@ function MultiselectDropDown(){
                     />
                 </div>
             </div>
-            @ToDo add onClick Function for the buttons
             <div className={"text-white font-bold text-lg grid grid-cols-4 gap-2 "}>
                 <button className={"bg-red-600 hover:bg-red-800 col-start-1 col-span-2"}>abrechen</button>
                 <button className={"bg-green-600 hover:bg-green-800 col-start-3 col-span-2"}>speichern</button>

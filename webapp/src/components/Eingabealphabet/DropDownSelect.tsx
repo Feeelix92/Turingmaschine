@@ -34,8 +34,6 @@ function DropDownSelect()  {
                         options={eingabeAlphabete}
                 />
             </div>
-
-            @ToDo pass setOpenDialog to MultiselectDropDown
             {openDialog &&
                 <MultiselectDropDown />
             }
