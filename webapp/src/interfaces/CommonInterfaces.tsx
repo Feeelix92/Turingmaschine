@@ -7,8 +7,10 @@ export interface TableProps {
 }
 
 export interface RowProps {
+  index: Key;
   cells: string[];
-  deleteRow: (index: Key) => void;
+  deleteRow: () => void;
+  updateRow: (index: Key, cells: string[]) => void;
 }
 
 export interface CellProps {

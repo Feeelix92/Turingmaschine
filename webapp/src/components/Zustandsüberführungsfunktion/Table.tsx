@@ -7,25 +7,34 @@ export default class Table extends Component<{}, TableProps> {
     super(props);
     this.state = {
       header: ["Status", "Lese", "Neuer Status", "Schreibe", "Gehe nach"],
-      rows: [0],
+      rows: [["q1", "1", "q1", "0", "Rechts"]],
     };
   }
 
   addRow() {
+    const newRows = this.state.rows.slice(0, this.state.rows.length);
+
+    newRows.push(["qx", "0", "qy", "0", "Links"]);
+
     this.setState({
-      rows: this.state.rows.concat(null),
+      rows: newRows,
     });
   }
 
   deleteRow(i: React.Key) {
-    console.log(i);
-    const newRows = this.state.rows;
-
-    console.log(newRows);
+    const newRows = this.state.rows.slice(0, this.state.rows.length);
 
     newRows.splice(i as number, 1);
 
-    console.log(newRows);
+    this.setState({
+      rows: newRows,
+    });
+  }
+
+  updateRow(i: React.Key, cells: string[]) {
+    const newRows = this.state.rows.slice(0, this.state.rows.length);
+
+    newRows[i as number] = cells;
 
     this.setState({
       rows: newRows,
@@ -51,8 +60,14 @@ export default class Table extends Component<{}, TableProps> {
             </tr>
           </thead>
           <tbody>
-            {loadedRows.map((index: number, key: React.Key) => (
-              <Row key={key} deleteRow={() => this.deleteRow(key)} />
+            {loadedRows.map((value: string[], key: React.Key) => (
+              <Row
+                key={key}
+                index={key}
+                cells={value}
+                deleteRow={() => this.deleteRow(key)}
+                updateRow={this.updateRow.bind(this)}
+              />
             ))}
           </tbody>
         </table>

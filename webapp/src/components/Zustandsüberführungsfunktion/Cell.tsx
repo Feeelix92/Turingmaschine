@@ -1,10 +1,7 @@
 import React, { ChangeEvent, Component } from "react";
 import { CellProps } from "../../interfaces/CommonInterfaces";
 import EditField from "./EditField";
-import {
-  eingabeAlphabetOptionen,
-  EingabelphabetOption,
-} from "../../data/Alphabet";
+import { EingabelphabetOption } from "../../data/Alphabet";
 
 export default function Cell(props: CellProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
