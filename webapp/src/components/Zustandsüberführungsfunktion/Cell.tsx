@@ -1,7 +1,6 @@
-import React, { ChangeEvent, Component } from "react";
+import React, { useEffect } from "react";
 import { CellProps } from "../../interfaces/CommonInterfaces";
 import EditField from "./EditField";
-import { EingabelphabetOption } from "../../data/Alphabet";
 
 export default function Cell(props: CellProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -16,28 +15,26 @@ export default function Cell(props: CellProps) {
     props.updateCellValue(props.index, option);
   }
 
-  function componentDidMount() {
-    document.addEventListener("mousedown", handleClickOutside);
-  }
-
-  function componentWillUnmount() {
-    document.removeEventListener("mousedown", handleClickOutside);
-  }
-
-  function handleClickOutside(event: MouseEvent) {
-    if (wrapperRef) {
-      if (
-        wrapperRef != null &&
-        wrapperRef.current != null &&
-        event.target != null &&
-        event.target instanceof Node
-      ) {
-        if (!wrapperRef.current.contains(event.target)) {
-          setEditMode(false);
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (wrapperRef) {
+        if (
+          wrapperRef != null &&
+          wrapperRef.current != null &&
+          event.target != null &&
+          event.target instanceof Node
+        ) {
+          if (!wrapperRef.current.contains(event.target)) {
+            setEditMode(false);
+          }
         }
       }
     }
-  }
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  });
 
   return (
     <td ref={wrapperRef} className="px-6 py-4">
