@@ -1,11 +1,11 @@
 import anime from 'animejs';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {EingabelphabetOption} from "../../data/Alphabet";
 import { BandItem } from './BandItem';
 
 function Band(){
     const bandLength = 20;
-    const bandArray:EingabelphabetOption[] = []
+    const [bandArray, setBand] = useState<EingabelphabetOption[]>([]);
     const [skin, setSkin] = useState("paper")
     const [item, setBandItem] = useState({value:"", label: "B"});
 
@@ -41,18 +41,20 @@ function Band(){
         console.log(newArray);
     };
 
-    //TODO:Item in Array an richtiger Stelle ändern?
+    //TODO:Reload doesnt work right
     const changeItemAt = (index: any, e: { target: { value: string; }; }) => {
         console.log("change item! - value: " + e.target.value);
 
-        const newArray = [];
-        newArray[index] = {
+        bandArray[index] = {
             value: e.target.value,
             label: e.target.value 
         };
-        //setBandArray(newArray);
-        console.log(newArray);
+        setBand(bandArray)        
+        console.log("Band: ->", bandArray)
     };
+    useEffect(() => {
+        setBand(bandArray)
+    })
 
 
     const handleClick = (value: EingabelphabetOption, index: number) => {
@@ -93,14 +95,14 @@ function Band(){
         </div>
         <div className={"band-container"}>
             {bandArray.map((value, index) => (
-
+                
                 <BandItem
                 value={value}
                 index={index}
                 skin={skin}
                 key={index}
                 handleClick={handleClick}
-                changeItem={changeItem}
+                changeItemAt={changeItemAt}
                 />
                 
             ))}

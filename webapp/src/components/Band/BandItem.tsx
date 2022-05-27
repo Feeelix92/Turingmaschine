@@ -6,10 +6,10 @@ type Props = {
     index: number,
     skin: string,
     handleClick: (value: EingabelphabetOption, index: number) => void,
-    changeItem: (/*index: any,*/ e: any) => void
+    changeItemAt: (index: any, e: any) => void
 };
 
-export const BandItem:FunctionComponent<Props> = ({value, index, skin, handleClick, changeItem}) => {
+export const BandItem:FunctionComponent<Props> = ({value, index, skin, handleClick, changeItemAt}) => {
   return (
     <div 
         className={`band-container__band ${skin}`} 
@@ -21,7 +21,7 @@ export const BandItem:FunctionComponent<Props> = ({value, index, skin, handleCli
             type="text"
             placeholder=""
             value={value.value}
-            onChange={changeItem}
+            onChange={e => changeItemAt(index, event)}
             >
             </input>
         </form>
