@@ -5,11 +5,11 @@ import { EingabelphabetOption } from "../../data/Alphabet";
 
 export default function Cell(props: CellProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
-  let show = false;
-  const options: EingabelphabetOption[] = [];
 
-  function editMode() {
-    show = !show;
+  const [editMode, setEditMode] = React.useState(false);
+
+  function toggleEditMode() {
+    setEditMode(!editMode);
   }
 
   function chooseOption(option: string) {
@@ -33,7 +33,7 @@ export default function Cell(props: CellProps) {
         event.target instanceof Node
       ) {
         if (!wrapperRef.current.contains(event.target)) {
-          show = false;
+          setEditMode(false);
         }
       }
     }
@@ -48,9 +48,13 @@ export default function Cell(props: CellProps) {
         className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300"
         value={props.value}
         onChange={() => props.updateCellValue(props.index, event.target.value)}
-        onClick={editMode}
+        onClick={toggleEditMode}
       />
-      {show ? <EditField options={options} updateValue={chooseOption} /> : ""}
+      {editMode ? (
+        <EditField options={props.alphabet} updateValue={chooseOption} />
+      ) : (
+        ""
+      )}
     </td>
   );
 }

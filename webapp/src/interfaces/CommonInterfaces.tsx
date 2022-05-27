@@ -4,11 +4,13 @@ import { EingabelphabetOption } from "../data/Alphabet";
 export interface TableProps {
   header: string[];
   rows: any[];
+  alphabet: EingabelphabetOption[];
 }
 
 export interface RowProps {
   index: Key;
   cells: string[];
+  alphabet: EingabelphabetOption[];
   deleteRow: () => void;
   updateRow: (index: Key, cells: string[]) => void;
 }
@@ -16,8 +18,7 @@ export interface RowProps {
 export interface CellProps {
   value: string;
   index: Key;
-  // showEdit: boolean;
-  // options: EingabelphabetOption[];
+  alphabet: EingabelphabetOption[];
   updateCellValue: (index: Key, arg: string) => void;
 }
 

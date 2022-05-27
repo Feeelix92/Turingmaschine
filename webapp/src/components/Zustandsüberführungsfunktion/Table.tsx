@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { eingabeAlphabetOptionen } from "../../data/Alphabet";
 import { TableProps } from "../../interfaces/CommonInterfaces";
 import Row from "./Row";
 
@@ -8,6 +9,7 @@ export default class Table extends Component<{}, TableProps> {
     this.state = {
       header: ["Status", "Lese", "Neuer Status", "Schreibe", "Gehe nach"],
       rows: [["q1", "1", "q1", "0", "Rechts"]],
+      alphabet: eingabeAlphabetOptionen,
     };
   }
 
@@ -35,6 +37,8 @@ export default class Table extends Component<{}, TableProps> {
     const newRows = this.state.rows.slice(0, this.state.rows.length);
 
     newRows[i as number] = cells;
+
+    console.log(newRows);
 
     this.setState({
       rows: newRows,
@@ -65,6 +69,7 @@ export default class Table extends Component<{}, TableProps> {
                 key={key}
                 index={key}
                 cells={value}
+                alphabet={this.state.alphabet}
                 deleteRow={() => this.deleteRow(key)}
                 updateRow={this.updateRow.bind(this)}
               />

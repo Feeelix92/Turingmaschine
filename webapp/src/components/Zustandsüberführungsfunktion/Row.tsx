@@ -20,6 +20,7 @@ export default function Row(props: RowProps) {
           key={key}
           value={value}
           index={key}
+          alphabet={props.alphabet}
           updateCellValue={setCellValue}
         />
       ))}
