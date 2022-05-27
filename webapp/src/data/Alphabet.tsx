@@ -10,14 +10,14 @@ export const eingabeAlphabetOptionen: readonly EingabelphabetOption[] = [
 ];
 
 export interface Eingabelphabet{
-    readonly value: string[];
+    readonly value: string;
     readonly label: string;
 }
 
 export const eingabeAlphabete: readonly Eingabelphabet[] = [
-    {value: ['1', '#'], label: '{1, #}'},
-    {value: ['0', '1'], label: '{0, 1}'},
-    {value: ['0', '1', '#'], label: '{0, 1, #}'},
-    {value: ['eigenes'], label: 'eigenes'},
+    {value: '1,#', label: '{1, #}'},
+    {value: '0,1', label: '{0, 1}'},
+    {value: '0,1,#', label: '{0, 1, #}'},
+    {value: 'custom', label: 'custom'},
 ];
 
