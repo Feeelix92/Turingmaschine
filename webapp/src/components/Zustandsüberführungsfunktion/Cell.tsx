@@ -1,91 +1,59 @@
 import React, { ChangeEvent, Component } from "react";
 import { CellProps } from "../../interfaces/CommonInterfaces";
 import EditField from "./EditField";
-import { eingabeAlphabetOptionen } from "../../data/Alphabet";
+import {
+  eingabeAlphabetOptionen,
+  EingabelphabetOption,
+} from "../../data/Alphabet";
 
-export default class Class extends Component<{}, CellProps> {
-  wrapperRef: React.RefObject<HTMLInputElement>;
+export default function Cell(props: CellProps) {
+  const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
+  let show = false;
+  const options: EingabelphabetOption[] = [];
 
-  constructor(props: CellProps) {
-    super(props);
-    this.state = {
-      value: "0",
-      showEdit: false,
-      options: eingabeAlphabetOptionen,
-    };
-
-    this.wrapperRef = React.createRef();
-    this.handleClickOutside = this.handleClickOutside.bind(this);
+  function editMode() {
+    show = !show;
   }
 
-  editMode() {
-    this.setState({
-      showEdit: !this.state.showEdit,
-    });
+  function chooseOption(option: string) {
+    props.updateCellValue(props.index, option);
   }
 
-  chooseOption(option: string) {
-    this.setState({
-      value: option,
-    });
+  function componentDidMount() {
+    document.addEventListener("mousedown", handleClickOutside);
   }
 
-  changeFieldValue(event: ChangeEvent) {
-    if (event.target != null && event.target instanceof HTMLInputElement) {
-      this.setState({
-        value: event.target.value,
-      });
-    }
+  function componentWillUnmount() {
+    document.removeEventListener("mousedown", handleClickOutside);
   }
 
-  componentDidMount() {
-    document.addEventListener("mousedown", this.handleClickOutside);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("mousedown", this.handleClickOutside);
-  }
-
-  handleClickOutside(event: MouseEvent) {
-    if (this.wrapperRef) {
+  function handleClickOutside(event: MouseEvent) {
+    if (wrapperRef) {
       if (
-        this.wrapperRef != null &&
-        this.wrapperRef.current != null &&
+        wrapperRef != null &&
+        wrapperRef.current != null &&
         event.target != null &&
         event.target instanceof Node
       ) {
-        if (!this.wrapperRef.current.contains(event.target)) {
-          this.setState({
-            showEdit: false,
-          });
+        if (!wrapperRef.current.contains(event.target)) {
+          show = false;
         }
       }
     }
   }
 
-  render() {
-    const show = this.state.showEdit;
-
-    return (
-      <td ref={this.wrapperRef} className="px-6 py-4">
-        <input
-          type="text"
-          name="value"
-          id="valueInput"
-          className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300"
-          value={this.state.value}
-          onChange={this.changeFieldValue.bind(this)}
-          onClick={this.editMode.bind(this)}
-        />
-        {show ? (
-          <EditField
-            options={this.state.options}
-            updateValue={this.chooseOption.bind(this)}
-          />
-        ) : (
-          ""
-        )}
-      </td>
-    );
-  }
+  return (
+    <td ref={wrapperRef} className="px-6 py-4">
+      <input
+        type="text"
+        name="value"
+        id="valueInput"
+        className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300"
+        value={props.value}
+        onChange={() => props.updateCellValue(props.index, event.target.value)}
+        onClick={editMode}
+      />
+      {show ? <EditField options={options} updateValue={chooseOption} /> : ""}
+    </td>
+  );
 }

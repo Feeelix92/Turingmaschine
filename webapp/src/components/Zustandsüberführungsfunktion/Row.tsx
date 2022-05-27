@@ -11,7 +11,13 @@ export default class Row extends Component<{}, RowProps> {
   }
 
   setCellValue(index: React.Key, value: string) {
-    console.log(index, value);
+    let cellCopy = this.state.cells.slice(0, this.state.cells.length);
+
+    cellCopy[index as number] = value;
+
+    this.setState({
+      cells: cellCopy,
+    });
   }
 
   render() {
@@ -20,7 +26,12 @@ export default class Row extends Component<{}, RowProps> {
     return (
       <tr className="bg-white hover:bg-gray-20 dark:hover:bg-gray-200">
         {loadedCells.map((value: string, key: React.Key) => (
-          <Cell key={key} value={value} index={key} />
+          <Cell
+            key={key}
+            value={value}
+            index={key}
+            updateCellValue={this.setCellValue.bind(this)}
+          />
         ))}
         <td className="px-6 py-4 text-right">
           <a

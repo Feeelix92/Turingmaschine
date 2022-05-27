@@ -1,3 +1,4 @@
+import { Key } from "react";
 import { EingabelphabetOption } from "../data/Alphabet";
 
 export interface TableProps {
@@ -7,12 +8,15 @@ export interface TableProps {
 
 export interface RowProps {
   cells: string[];
+  deleteRow: (index: Key) => void;
 }
 
 export interface CellProps {
   value: string;
-  showEdit: boolean;
-  options: EingabelphabetOption[];
+  index: Key;
+  // showEdit: boolean;
+  // options: EingabelphabetOption[];
+  updateCellValue: (index: Key, arg: string) => void;
 }
 
 export interface EditProps {
