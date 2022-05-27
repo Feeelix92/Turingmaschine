@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { eingabeAlphabetOptionen } from "../../data/Alphabet";
-import { TableProps } from "../../interfaces/CommonInterfaces";
+import { Cell, TableProps } from "../../interfaces/CommonInterfaces";
 import Row from "./Row";
 
 export default class Table extends Component<{}, TableProps> {
@@ -8,15 +8,33 @@ export default class Table extends Component<{}, TableProps> {
     super(props);
     this.state = {
       header: ["Status", "Lese", "Neuer Status", "Schreibe", "Gehe nach"],
-      rows: [["q1", "1", "q1", "0", "Rechts"]],
       alphabet: eingabeAlphabetOptionen,
+      rows: [
+        {
+          cells: [
+            { value: "q1", editField: false },
+            { value: "1", editField: true },
+            { value: "q1", editField: false },
+            { value: "0", editField: true },
+            { value: "Rechts", editField: false },
+          ],
+        },
+      ],
     };
   }
 
   addRow() {
     const newRows = this.state.rows.slice(0, this.state.rows.length);
 
-    newRows.push(["qx", "0", "qy", "0", "Links"]);
+    newRows.push({
+      cells: [
+        { value: "q1", editField: false },
+        { value: "1", editField: true },
+        { value: "q1", editField: false },
+        { value: "0", editField: true },
+        { value: "Links", editField: false },
+      ],
+    });
 
     this.setState({
       rows: newRows,
@@ -33,12 +51,10 @@ export default class Table extends Component<{}, TableProps> {
     });
   }
 
-  updateRow(i: React.Key, cells: string[]) {
+  updateRow(i: React.Key, cells: Cell[]) {
     const newRows = this.state.rows.slice(0, this.state.rows.length);
 
-    newRows[i as number] = cells;
-
-    console.log(newRows);
+    newRows[i as number].cells = cells;
 
     this.setState({
       rows: newRows,
@@ -64,11 +80,11 @@ export default class Table extends Component<{}, TableProps> {
             </tr>
           </thead>
           <tbody>
-            {loadedRows.map((value: string[], key: React.Key) => (
+            {loadedRows.map((value, key: React.Key) => (
               <Row
                 key={key}
                 index={key}
-                cells={value}
+                cells={value.cells}
                 alphabet={this.state.alphabet}
                 deleteRow={() => this.deleteRow(key)}
                 updateRow={this.updateRow.bind(this)}

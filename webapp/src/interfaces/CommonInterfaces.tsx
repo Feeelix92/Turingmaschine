@@ -3,22 +3,32 @@ import { EingabelphabetOption } from "../data/Alphabet";
 
 export interface TableProps {
   header: string[];
-  rows: any[];
+  rows: Row[];
   alphabet: EingabelphabetOption[];
+}
+
+export interface Row {
+  cells: Cell[];
+}
+
+export interface Cell {
+  value: string;
+  editField: boolean;
 }
 
 export interface RowProps {
   index: Key;
-  cells: string[];
+  cells: Cell[];
   alphabet: EingabelphabetOption[];
   deleteRow: () => void;
-  updateRow: (index: Key, cells: string[]) => void;
+  updateRow: (index: Key, cells: Cell[]) => void;
 }
 
 export interface CellProps {
   value: string;
   index: Key;
   alphabet: EingabelphabetOption[];
+  showEditField: boolean;
   updateCellValue: (index: Key, arg: string) => void;
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Key, useEffect } from "react";
 import { CellProps } from "../../interfaces/CommonInterfaces";
 import EditField from "./EditField";
 
@@ -36,8 +36,23 @@ export default function Cell(props: CellProps) {
     };
   });
 
+  function checkValue(index: Key, value: string) {
+    let allowed = false;
+
+    props.alphabet.map((entry) => {
+      if (entry.value === value) {
+        props.updateCellValue(props.index, event.target.value);
+        allowed = true;
+      }
+    });
+
+    if (allowed === false) {
+      alert("Wert ist nicht im Alphabet enthalten!");
+    }
+  }
+
   return (
-    <td ref={wrapperRef} className="px-6 py-4">
+    <td ref={wrapperRef}>
       <input
         type="text"
         name="value"
@@ -47,7 +62,7 @@ export default function Cell(props: CellProps) {
         onChange={() => props.updateCellValue(props.index, event.target.value)}
         onClick={toggleEditMode}
       />
-      {editMode ? (
+      {editMode && props.showEditField ? (
         <EditField options={props.alphabet} updateValue={chooseOption} />
       ) : (
         ""

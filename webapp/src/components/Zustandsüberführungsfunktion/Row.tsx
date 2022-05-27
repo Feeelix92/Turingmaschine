@@ -6,21 +6,20 @@ export default function Row(props: RowProps) {
   function setCellValue(index: React.Key, value: string) {
     let cellCopy = props.cells.slice(0, props.cells.length);
 
-    cellCopy[index as number] = value;
-
-    console.log(cellCopy);
+    cellCopy[index as number].value = value;
 
     props.updateRow(props.index, cellCopy);
   }
 
   return (
     <tr className="bg-white hover:bg-gray-20 dark:hover:bg-gray-200">
-      {props.cells.map((value: string, key: React.Key) => (
+      {props.cells.map((value, key: React.Key) => (
         <Cell
           key={key}
-          value={value}
+          value={value.value}
           index={key}
           alphabet={props.alphabet}
+          showEditField={value.editField}
           updateCellValue={setCellValue}
         />
       ))}
