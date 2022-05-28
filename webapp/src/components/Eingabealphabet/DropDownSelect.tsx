@@ -35,7 +35,16 @@ function DropDownSelect()  {
                 />
             </div>
             {openDialog &&
-                <MultiselectDropDown />
+                <>
+                    <MultiselectDropDown />
+                    <div className={"text-white font-bold text-lg "}>
+                    {/*<button onClick={() => {*/}
+                    {/*    setOpenDialog(false)}} className={"bg-red-600 hover:bg-red-800 col-start-1 col-span-2"}>abrechen</button>*/}
+                    {/*/!*<button onClick={setOpenDialog(false)} className={"bg-green-600 hover:bg-green-800 col-start-3 col-span-2"}>speichern</button>*!/*/}
+                    <button onClick={() => {
+                        setOpenDialog(false)}} className={"bg-green-600 hover:bg-green-800 col-start-3 col-span-2"}>speichern</button>
+                    </div>
+                </>
             }
         </>
     );
