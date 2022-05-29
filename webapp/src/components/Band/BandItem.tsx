@@ -17,7 +17,7 @@ export const BandItem:FunctionComponent<Props> = ({value, index, skin, handleCli
         onClick={() => handleClick(value, index)}>
         <form>
             <input
-            className="bg-transparent"
+            className="bg-transparent w-10"
             type="text"
             placeholder=""
             value={value.value}

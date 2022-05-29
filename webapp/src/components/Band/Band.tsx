@@ -1,24 +1,45 @@
 import anime from 'animejs';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SetStateAction } from 'react';
 import {EingabelphabetOption} from "../../data/Alphabet";
 import { BandItem } from './BandItem';
 
 function Band(){
-    const bandLength = 20;
-    const [bandArray, setBand] = useState<EingabelphabetOption[]>([]);
+
+    const initialItems = [ //TODO: Nicht die beste Lösung, habe noch keine bessere gefunden...
+        { value: "", label: "B"},
+        { value: "", label: "B"},
+        { value: "", label: "B"},
+        { value: "", label: "B"},
+        { value: "", label: "B"},
+        { value: "", label: "B"},
+    ];
+    const bandLength = initialItems.length;
+
+    const [bandArray, setBand] = useState<EingabelphabetOption[]>(initialItems);
     const [skin, setSkin] = useState("paper")
     const [item, setBandItem] = useState({value:"", label: "B"});
 
-    for (let index = 0; index <= bandLength; index++) {
+    /*
+    for (let index = 0; index < bandLength; index++) {
         bandArray.push(item);   
+        console.log("testeteste");
     }
+    */
 
     const [myArray, setBandArray] = useState([bandArray]);
-
 
     const deleteAll = () => {
         const newBandItem = {value: "", label: "B"};
         setBandItem(newBandItem);
+
+        let newBandArray: EingabelphabetOption[] = [];
+        for (let index = 0; index < bandLength; index++) {
+            newBandArray.push(newBandItem); 
+        }
+        //setBandArray([newBandArray]);
+        setBand(newBandArray);
+        console.log(newBandItem);
+        console.log("Band: ->", bandArray);
     };
 
     const changeSkin = () => {     
@@ -39,10 +60,15 @@ function Band(){
         const newArray = [...myArray];
         setBandArray(newArray);
         console.log(newArray);
+
+        //TEST:
+        const newTest = [...bandArray];
+        setBand(newTest);
     };
 
-    //TODO:Reload doesnt work right
+    //TODO:Reload doesnt work right 
     const changeItemAt = (index: any, e: { target: { value: string; }; }) => {
+        console.log("....................... :)");
         console.log("change item! - value: " + e.target.value);
 
         bandArray[index] = {
