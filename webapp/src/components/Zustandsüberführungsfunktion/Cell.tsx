@@ -3,7 +3,7 @@ import { CellProps } from "../../interfaces/CommonInterfaces";
 import EditField from "./EditField";
 
 export default function Cell(props: CellProps) {
-  const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
+  const wrapperRef: React.RefObject<HTMLTableCellElement> = React.createRef();
 
   const [editMode, setEditMode] = React.useState(false);
 
@@ -40,7 +40,7 @@ export default function Cell(props: CellProps) {
     let allowed = false;
 
     props.alphabet.map((entry) => {
-      if (entry.value === value) {
+      if (entry.value === value || value === "") {
         props.updateCellValue(index, value);
         allowed = true;
       }
@@ -59,7 +59,7 @@ export default function Cell(props: CellProps) {
         id="valueInput"
         className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300"
         value={props.value}
-        onChange={() => checkValue(props.index, event.target.value)}
+        onChange={e => checkValue(props.index, e.target.value)}
         onClick={toggleEditMode}
       />
       {editMode && props.showEditField ? (

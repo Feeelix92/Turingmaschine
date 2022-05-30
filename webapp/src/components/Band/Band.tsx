@@ -1,136 +1,74 @@
 import anime from 'animejs';
-import { useState, useEffect, SetStateAction } from 'react';
-import {EingabelphabetOption} from "../../data/Alphabet";
-import { BandItem } from './BandItem';
+import { useState, useEffect, SetStateAction, Component } from 'react';
+import BandItem  from './BandItem';
+import { BandProps } from "../../interfaces/CommonInterfaces";
+import { eingabeAlphabetOptionen, initBand } from '../../data/Alphabet';
 
-function Band(){
-
-    const initialItems = [ //TODO: Nicht die beste Lösung, habe noch keine bessere gefunden...
-        { value: "", label: "B"},
-        { value: "", label: "B"},
-        { value: "", label: "B"},
-        { value: "", label: "B"},
-        { value: "", label: "B"},
-        { value: "", label: "B"},
-    ];
-    const bandLength = initialItems.length;
-
-    const [bandArray, setBand] = useState<EingabelphabetOption[]>(initialItems);
-    const [skin, setSkin] = useState("paper")
-    const [item, setBandItem] = useState({value:"", label: "B"});
-
-    /*
-    for (let index = 0; index < bandLength; index++) {
-        bandArray.push(item);   
-        console.log("testeteste");
+// function Band(props: BandProps){
+export default class Band extends Component<{}, BandProps> {
+    constructor(props: BandProps) {
+        super(props);
+        this.state = {
+        alphabet: eingabeAlphabetOptionen,
+        currentBand: initBand,
+        skin: "paper"
+        };
     }
-    */
-
-    const [myArray, setBandArray] = useState([bandArray]);
+    
+    render() {    
+    const bandLength = this.state.currentBand.length;
 
     const deleteAll = () => {
-        const newBandItem = {value: "", label: "B"};
-        setBandItem(newBandItem);
-
-        let newBandArray: EingabelphabetOption[] = [];
+        let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
+        
         for (let index = 0; index < bandLength; index++) {
-            newBandArray.push(newBandItem); 
-        }
-        //setBandArray([newBandArray]);
-        setBand(newBandArray);
-        console.log(newBandItem);
-        console.log("Band: ->", bandArray);
+            bandCopy[index] = {value: "", label: "B"}
+        }   
+
+        this.setState({
+            currentBand: bandCopy
+        });
+
     };
 
     const changeSkin = () => {     
-        if(skin === "paper"){
-            setSkin("tech")
+        if(this.state.skin === "paper"){
+            this.setState({
+                skin: "tech",
+            });
         }else {
-            setSkin("paper")
+            this.setState({
+                skin: "paper",
+            });
         }
     };
 
-    const changeItem = (e: { target: { value: string; }; }) => {
-        console.log("change item! - value: " + e.target.value);
-        setBandItem({
-            value: e.target.value, 
-            label: e.target.value
+
+    const changeItemAt = (index: any, value: string) => {
+        let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
+
+        bandCopy[index as number].value = value;
+        
+        this.setState({
+            currentBand: bandCopy,
         });
-
-        const newArray = [...myArray];
-        setBandArray(newArray);
-        console.log(newArray);
-
-        //TEST:
-        const newTest = [...bandArray];
-        setBand(newTest);
     };
-
-    //TODO:Reload doesnt work right 
-    const changeItemAt = (index: any, e: { target: { value: string; }; }) => {
-        console.log("....................... :)");
-        console.log("change item! - value: " + e.target.value);
-
-        bandArray[index] = {
-            value: e.target.value,
-            label: e.target.value 
-        };
-        setBand(bandArray)        
-        console.log("Band: ->", bandArray)
-    };
-    useEffect(() => {
-        setBand(bandArray)
-    })
-
-
-    const handleClick = (value: EingabelphabetOption, index: number) => {
-        console.log("value", value)
-        console.log("index", index)
-        anime({
-            targets: `.button.btn-one.index-${index}`,
-            width: [0, 30],
-            height: [0, 30],
-            translateY: [0, -50], 
-            translateX: [0, -20],               
-            backgroundColor: '#0000ff',
-            easing: 'easeInOutQuad',
-        });
-        anime({
-            targets: `.button.btn-two.index-${index}`,
-            width: [0, 30],
-            height: [0, 30],
-            translateY: [0, -55],
-            translateX: [0, 10],             
-            backgroundColor: '#0000ff',
-            easing: 'easeInOutQuad',
-        });
-        anime({
-            targets: `.button.btn-three.index-${index}`,
-            width: [0, 30],
-            height: [0, 30],
-            translateY: [0, -50],
-            translateX: [0, 40],          
-            backgroundColor: '#0000ff',
-            easing: 'easeInOutQuad',
-        });
-    }
 
     return <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 p-3 border rounded"}>
         <div className={""}>
             <h2 >Band: </h2>
         </div>
         <div className={"band-container"}>
-            {bandArray.map((value, index) => (
-                
+            {this.state.currentBand.map((value, index) => (                
                 <BandItem
-                value={value}
+                value={value.value}
                 index={index}
-                skin={skin}
+                skin={this.state.skin}
                 key={index}
-                handleClick={handleClick}
+                alphabet={eingabeAlphabetOptionen}
+                showEditField={true}
                 changeItemAt={changeItemAt}
-                />
-                
+                />                
             ))}
           
         </div>
@@ -146,6 +84,7 @@ function Band(){
             Delete All
         </button>
     </div>
+    }
 }
 
-export default Band;
+// export default Band;
