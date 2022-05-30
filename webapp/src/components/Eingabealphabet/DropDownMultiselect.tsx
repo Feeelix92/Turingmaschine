@@ -4,6 +4,11 @@ import {EingabelphabetOption, eingabeAlphabetOptionen} from "../../data/Alphabet
 import {ActionMeta, OnChangeValue} from 'react-select';
 
 function MultiselectDropDown(){
+    /**
+     * function handleChange checks if the selected option has changed
+     * @param newValue
+     * @param actionMeta
+     */
     function handleChange(
         newValue: OnChangeValue<EingabelphabetOption, true>,
         actionMeta: ActionMeta<EingabelphabetOption>
@@ -14,7 +19,7 @@ function MultiselectDropDown(){
         console.groupEnd();
     }
      return (
-        <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 p-3 border rounded"}>
+        <div className={"col-span-2"}>
             <div className={""}>
                 <h2 >Eingabealphabet hinzufügen:</h2>
             </div>
