@@ -27,7 +27,8 @@ function MultiselectDropDown(){
                 <p>Sie können Zeichen eingeben oder Zeichen aus dem Standard-Eingabealphabet auswählen!</p>
                 <div className={"text-lg p-3"}>
                     <CreatableSelect allowCreateWhileLoading={false} formatCreateLabel={inputValue => inputValue + " hinzufügen"} noOptionsMessage={() => 'Geben Sie neues Zeichen ein!'}
-                                     placeholder={<p>Eingabe...</p>} className={"text-black"}
+                                     placeholder={<p>Geben Sie ein beliebiges Zeichen ein...</p>}
+                                     className={"text-black"}
                                      isMulti
                                      onChange={handleChange}
                                      options={eingabeAlphabetOptionen}
