@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Select, {ActionMeta, OnChangeValue} from 'react-select'
-import {eingabeAlphabete, Eingabelphabet} from "../../data/Alphabet";
+import {Eingabelphabet, eingabeAlphabete} from "../../data/Alphabet";
 import MultiselectDropDown from "./DropDownMultiselect";
 
 function DropDownSelect()  {

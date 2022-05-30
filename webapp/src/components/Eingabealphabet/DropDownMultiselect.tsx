@@ -6,15 +6,23 @@ import {ActionMeta, OnChangeValue} from 'react-select';
 function MultiselectDropDown(){
     /**
      * function handleChange checks if the selected option has changed
-     * @param newValue
+     * @param newValues
      * @param actionMeta
      */
     function handleChange(
-        newValue: OnChangeValue<EingabelphabetOption, true>,
-        actionMeta: ActionMeta<EingabelphabetOption>
-    ) {
+        newValues: OnChangeValue<EingabelphabetOption, true>,
+        actionMeta: ActionMeta<EingabelphabetOption>,
+) {
         console.group('Value Changed');
-        console.log(newValue);
+        console.log(newValues);
+        // converting the object to an iteratable Array
+        const optionsArray = Array.from(newValues.values());
+        // valuesArray = current selected options as Array
+        // valuesString = current selected options as String to use it as label
+        // @TODO save the data somewhere to use it later
+        const valuesArray = optionsArray.map(({value}) => value).toString();
+        const valuesString = valuesArray.toString();
+        console.log(valuesString);
         console.log(`action: ${actionMeta.action}`);
         console.groupEnd();
     }

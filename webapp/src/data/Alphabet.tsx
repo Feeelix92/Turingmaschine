@@ -1,23 +1,23 @@
 export interface EingabelphabetOption {
-    readonly value: string;
     readonly label: string;
+    readonly value: string;
 }
 
 export const eingabeAlphabetOptionen: readonly EingabelphabetOption[] = [
-    { value: '1', label: '1' },
-    { value: '0', label: '0' },
-    { value: '#', label: '#' }
+    { label: '1', value: '1'},
+    { label: '0', value: '0' },
+    { label: '#', value: '#' }
 ];
 
 export interface Eingabelphabet{
+    label: string;
     readonly value: string;
-    readonly label: string;
 }
 
 export const eingabeAlphabete: readonly Eingabelphabet[] = [
-    {value: '1,#', label: '{1, #}'},
-    {value: '0,1', label: '{0, 1}'},
-    {value: '0,1,#', label: '{0, 1, #}'},
-    {value: 'custom', label: 'custom'},
+    { label: '{1, #}', value: '1,#'},
+    { label: '{0, 1}', value: '0,1'},
+    { label: '{0, 1, #}', value: '0,1,#'},
+    { label: 'custom', value: 'custom'},
 ];
 
