@@ -4,6 +4,8 @@ import logo from './favicon_turing.svg'
 import Dialog from "./components/Eingabealphabet/Dialog";
 import DropDownSelect from "./components/Eingabealphabet/DropDownSelect";
 import Band from "./components/Band/Band";
+import "./App.css";
+import Table from "./components/Zustandsüberführungsfunktion/Table";
 
 function App() {
   return (
@@ -13,8 +15,9 @@ function App() {
             <DropDownSelect />
             <Band />            
       </header>
+      <Table />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
