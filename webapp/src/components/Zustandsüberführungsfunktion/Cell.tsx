@@ -41,7 +41,7 @@ export default function Cell(props: CellProps) {
 
     props.alphabet.map((entry) => {
       if (entry.value === value) {
-        props.updateCellValue(props.index, event.target.value);
+        props.updateCellValue(index, value);
         allowed = true;
       }
     });
@@ -59,7 +59,7 @@ export default function Cell(props: CellProps) {
         id="valueInput"
         className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300"
         value={props.value}
-        onChange={() => props.updateCellValue(props.index, event.target.value)}
+        onChange={() => checkValue(props.index, event.target.value)}
         onClick={toggleEditMode}
       />
       {editMode && props.showEditField ? (
