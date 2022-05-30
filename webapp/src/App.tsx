@@ -1,18 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
+import logo from './favicon_turing.svg'
+import DropDownSelect from "./components/Eingabealphabet/DropDownSelect";
 import conditionsList from "./components/Zustaende/List";
 
 function App() {
-
-
-  return (
+    return (
     <div className="App">
-      <header className="App-header">
-        <h1 className="text-3xl font-bold underline">
-          Ich bin eine Turingmaschine...bald!
-        </h1>
-      </header>
-      <conditionsList />
+        <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <DropDownSelect />
+            <conditionsList />
+        </header>
     </div>
   )
 }
