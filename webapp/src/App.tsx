@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './App.css'
 import logo from './favicon_turing.svg'
 import DropDownSelect from "./components/Eingabealphabet/DropDownSelect";
-import conditionsList from "./components/Zustaende/List";
+import ConditionsList from "./components/Zustaende/List";
 
 function App() {
     return (
@@ -10,7 +10,7 @@ function App() {
         <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
             <DropDownSelect />
-            <conditionsList />
+            <ConditionsList />
         </header>
     </div>
   )
