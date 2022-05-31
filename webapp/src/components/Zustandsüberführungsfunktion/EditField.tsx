@@ -19,7 +19,7 @@ export default function EditField(props: EditProps) {
   
 
   return (
-    <div className="editBtnDiv flex space-x-2 absolute" role="group">
+    <div className="editBtnDiv flex space-x-2 absolute mt-6" role="group">
       {props.options.map((value: EingabelphabetOption, key: React.Key) => (
         <button
           key={key}

@@ -53,10 +53,10 @@ export default class Band extends Component<{}, BandProps> {
     };
 
     return <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 p-3 border rounded"}>
-        <div className={""}>
+        <div className="mb-5">
             <h2 >Band: </h2>
         </div>
-        <div className={"band-container"}>
+        <div className="{band-container}  flex flex-row mb-5 overflow-x-auto">
             {this.state.currentBand.map((value, index) => (                
                 <BandItem
                 value={value.value}
@@ -77,7 +77,7 @@ export default class Band extends Component<{}, BandProps> {
         </button>
 
         <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ml-5"
         onClick={() => deleteAll()}>
             Delete All
         </button>

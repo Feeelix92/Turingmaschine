@@ -54,7 +54,7 @@ export default function BandItem(props: BandItemProps) {
 
   return (
     <div 
-        className={`band-container__band ${props.skin}`} 
+        className={`band-container__band ${props.skin} flex justify-center`} 
         key={props.index}
         ref={wrapperRef}>        
         <input
