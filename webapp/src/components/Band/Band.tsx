@@ -1,5 +1,4 @@
-import anime from 'animejs';
-import { useState, useEffect, SetStateAction, Component } from 'react';
+import { Component } from 'react';
 import BandItem  from './BandItem';
 import { BandProps } from "../../interfaces/CommonInterfaces";
 import { eingabeAlphabetOptionen, initBand } from '../../data/Alphabet';

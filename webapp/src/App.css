@@ -77,7 +77,7 @@ button {
 /* ********** TABLE ********** */
 
 .editBtnDiv{
-  transform: translateX(-50px);
+ /* verschieben, dass Buttons in der Mitte sind...*/
 }
 
 .editBtn{
