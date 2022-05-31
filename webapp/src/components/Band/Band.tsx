@@ -4,7 +4,6 @@ import BandItem  from './BandItem';
 import { BandProps } from "../../interfaces/CommonInterfaces";
 import { eingabeAlphabetOptionen, initBand } from '../../data/Alphabet';
 
-// function Band(props: BandProps){
 export default class Band extends Component<{}, BandProps> {
     constructor(props: BandProps) {
         super(props);
@@ -86,5 +85,3 @@ export default class Band extends Component<{}, BandProps> {
     </div>
     }
 }
-
-// export default Band;

@@ -13,6 +13,7 @@ export default function Cell(props: CellProps) {
 
   function chooseOption(option: string) {
     props.updateCellValue(props.index, option);
+    setEditMode(false);
   }
 
   useEffect(() => {

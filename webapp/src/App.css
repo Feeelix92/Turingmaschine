@@ -73,12 +73,14 @@ button {
   background-position: -60px 0;
 }
 
-.button {  
-  background-color: transparent;
-  position: absolute;  
-  box-shadow: 2px 2px 5px rgb(160, 160, 160);
-  border-radius: 50%;
+
+/* ********** TABLE ********** */
+
+.editBtnDiv{
+  transform: translateX(-50px);
 }
 
-
-
+.editBtn{
+  width: 45px;
+  height: 45px;
+}

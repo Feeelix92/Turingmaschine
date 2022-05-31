@@ -13,6 +13,7 @@ export default function BandItem(props: BandItemProps) {
 
   function chooseOption(option: string) {
     props.changeItemAt(props.index, option);
+    setEditMode(false);
   }
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export default function BandItem(props: BandItemProps) {
     props.alphabet.map((entry) => {
       if (entry.value === value || value === "") {
         props.changeItemAt(index, value);
-        allowed = true;
+        allowed = true;        
       }
     });
 
