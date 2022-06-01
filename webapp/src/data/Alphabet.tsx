@@ -20,3 +20,17 @@ export const eingabeAlphabete: readonly Eingabelphabet[] = [
   { value: ["0", "1", "#"], label: "{0, 1, #}" },
   { value: ["eigenes"], label: "eigenes" },
 ];
+
+export const initBand: EingabelphabetOption[] = [ 
+  { value: "", label: "B"},
+  { value: "", label: "B"},
+  { value: "", label: "B"},
+  { value: "", label: "B"},
+  { value: "", label: "B"},
+  { value: "", label: "B"},
+  { value: "", label: "B"},
+  { value: "", label: "B"},
+  { value: "", label: "B"},
+  { value: "", label: "B"},
+];
+

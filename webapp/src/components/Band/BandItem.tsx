@@ -1,18 +1,18 @@
-import React, { Key, useEffect } from "react";
-import { CellProps } from "../../interfaces/CommonInterfaces";
-import EditField from "./EditField";
+import React, { Key, useEffect } from 'react'
+import EditField from "../Zustandsüberführungsfunktion/EditField";
+import { BandItemProps } from "../../interfaces/CommonInterfaces";
 
-export default function Cell(props: CellProps) {
-  const wrapperRef: React.RefObject<HTMLTableCellElement> = React.createRef();
+
+export default function BandItem(props: BandItemProps) {
+  const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();  
 
   const [editMode, setEditMode] = React.useState(false);
-
   function toggleEditMode() {
     setEditMode(!editMode);
   }
 
   function chooseOption(option: string) {
-    props.updateCellValue(props.index, option);
+    props.changeItemAt(props.index, option);
     setEditMode(false);
   }
 
@@ -41,9 +41,9 @@ export default function Cell(props: CellProps) {
     let allowed = false;
 
     props.alphabet.map((entry) => {
-      if (entry.value === value || props.showEditField === false || value = '') {
-        props.updateCellValue(index, value);
-        allowed = true;
+      if (entry.value === value || value === "") {
+        props.changeItemAt(index, value);
+        allowed = true;        
       }
     });
 
@@ -53,12 +53,15 @@ export default function Cell(props: CellProps) {
   }
 
   return (
-    <td ref={wrapperRef}>
-      <input
+    <div 
+        className={`band-container__band ${props.skin} flex justify-center`} 
+        key={props.index}
+        ref={wrapperRef}>        
+        <input
         type="text"
         name="value"
         id="valueInput"
-        className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300"
+        className="bandInput bg-transparent w-8 "
         value={props.value}
         onChange={e => checkValue(props.index, e.target.value)}
         onClick={toggleEditMode}
@@ -68,6 +71,6 @@ export default function Cell(props: CellProps) {
       ) : (
         ""
       )}
-    </td>
-  );
+    </div>
+  )
 }

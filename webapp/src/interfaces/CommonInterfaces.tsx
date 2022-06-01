@@ -36,3 +36,18 @@ export interface EditProps {
   options: EingabelphabetOption[];
   updateValue: (arg: string) => void;
 }
+
+export interface BandItemProps {
+  value: string,
+  index: number,
+  skin: string,
+  alphabet: EingabelphabetOption[];
+  showEditField: boolean;
+  changeItemAt: (index: Key, e: any) => void
+};
+
+export interface BandProps {
+  alphabet: EingabelphabetOption[];
+  currentBand: EingabelphabetOption[];
+  skin: string
+}
