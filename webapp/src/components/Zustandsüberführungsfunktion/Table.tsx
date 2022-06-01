@@ -24,8 +24,10 @@ export default class Table extends Component<{}, TableProps> {
   }
 
   addRow() {
+    // create flat copy of all existing rows
     const newRows = this.state.rows.slice(0, this.state.rows.length);
 
+    // add new row to existing rows
     newRows.push({
       cells: [
         { value: "q1", editField: false },
@@ -36,26 +38,33 @@ export default class Table extends Component<{}, TableProps> {
       ],
     });
 
+    // update the rows in state with our new rows-array
     this.setState({
       rows: newRows,
     });
   }
 
   deleteRow(i: React.Key) {
+    // create flat copy of all existing rows
     const newRows = this.state.rows.slice(0, this.state.rows.length);
 
+    // delete element at index
     newRows.splice(i as number, 1);
 
+    // update the rows in state with our new rows-array
     this.setState({
       rows: newRows,
     });
   }
 
   updateRow(i: React.Key, cells: Cell[]) {
+    // create flat copy of all existing rows
     const newRows = this.state.rows.slice(0, this.state.rows.length);
 
+    // overwrite rows at certain index with new value
     newRows[i as number].cells = cells;
 
+    // update the rows in state with our new rows-array
     this.setState({
       rows: newRows,
     });
@@ -97,7 +106,7 @@ export default class Table extends Component<{}, TableProps> {
                 </tbody>
               </table>
               <button
-                className="w-full bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                className="w-full bg-transparent hover:bg-gray-100 text-gray-900 font-semibold hover:text-gray-900 py-2 px-4 border border-gray-900 hover:border-transparent rounded"
                 onClick={() => this.addRow()}
               >
                 +
