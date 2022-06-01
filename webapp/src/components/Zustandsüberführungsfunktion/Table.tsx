@@ -71,19 +71,19 @@ export default class Table extends Component<{}, TableProps> {
             <div className="overflow-x-auto">
               <table className="min-w-full w-full">
                 <thead className="flex border-b w-full">
-                  <tr className="flex w-full mb-4">
+                  <tr className="flex w-full">
                     {this.state.header.map((value, key: React.Key) => (
                       <th
                         key={key}
                         scope="col"
-                        className="text-sm font-medium text-gray-900 px-6 py-4 w-1/6 text-left"
+                        className="text-sm px-2 font-medium text-gray-900 py-4 w-1/6 text-left border-r"
                       >
                         {value}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="flex flex-col items-center justify-between overflow-y-auto max-h-56">
+                <tbody className="flex flex-col items-center justify-between overflow-y-auto max-h-44">
                   {loadedRows.map((value, key: React.Key) => (
                     <Row
                       key={key}

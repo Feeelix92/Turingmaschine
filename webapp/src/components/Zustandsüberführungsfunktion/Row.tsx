@@ -11,7 +11,7 @@ export default function Row(props: RowProps) {
   }
 
   return (
-    <tr className="border-b flex w-full mb-4 hover:bg-gray-100">
+    <tr className="border-b flex w-full hover:bg-gray-100">
       {props.cells.map((value, key: React.Key) => (
         <Cell
           key={key}

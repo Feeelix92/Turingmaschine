@@ -59,13 +59,13 @@ export default function Cell(props: CellProps) {
   return (
     <td
       ref={wrapperRef}
-      className="px-6 py-4 w-1/6 whitespace-nowrap text-sm font-medium text-gray-900"
+      className="px-2 py-4 w-1/6 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
     >
       <input
         type="text"
         name="value"
         id="valueInput"
-        className="w-full min-w-full border rounded text-gray-700 focus:outline-none items-center"
+        className="w-full min-w-full rounded text-gray-700 focus:outline-none items-center"
         value={props.value}
         onChange={(e) => checkValue(props.index, e.target.value)}
         onClick={toggleEditMode}
