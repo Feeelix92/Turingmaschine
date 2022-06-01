@@ -40,7 +40,7 @@ export default function Cell(props: CellProps) {
     let allowed = false;
 
     props.alphabet.map((entry) => {
-      if (entry.value === value) {
+      if (entry.value === value || props.showEditField === false) {
         props.updateCellValue(index, value);
         allowed = true;
       }
