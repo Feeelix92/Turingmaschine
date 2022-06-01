@@ -78,6 +78,10 @@ export default class Table extends Component<{}, TableProps> {
         <div className="sm:-mx-6 lg:-mx-8">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
             <div className="overflow-x-auto">
+              <div className="flex w-full items-center text-left text-sm px-2 font-medium text-gray-900 py-4">
+                <div className="w-1/2">Wenn...</div>
+                <div className="w-1/2">Dann...</div>
+              </div>
               <table className="min-w-full w-full">
                 <thead className="flex border-b w-full">
                   <tr className="flex w-full">
