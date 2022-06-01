@@ -41,6 +41,7 @@ export interface BandItemProps {
   value: string,
   index: number,
   skin: string,
+  pointer: boolean,
   alphabet: EingabelphabetOption[];
   showEditField: boolean;
   changeItemAt: (index: Key, e: any) => void

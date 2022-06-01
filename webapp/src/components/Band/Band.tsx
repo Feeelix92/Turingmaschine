@@ -11,6 +11,7 @@ export default class Band extends Component<{}, BandProps> {
         currentBand: initBand,
         skin: "paper"
         };
+        console.log(initBand)
     }
     
     render() {    
@@ -20,7 +21,13 @@ export default class Band extends Component<{}, BandProps> {
         let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
         
         for (let index = 0; index < bandLength; index++) {
-            bandCopy[index] = {value: "", label: "B"}
+            if(index == 0) {
+                bandCopy[index] = {value: "", label: "B", pointer: true}
+                console.log(bandCopy)
+            } else {
+                bandCopy[index] = {value: "", label: "B", pointer: false}
+            }
+            
         }   
 
         this.setState({
@@ -62,6 +69,7 @@ export default class Band extends Component<{}, BandProps> {
                 value={value.value}
                 index={index}
                 skin={this.state.skin}
+                pointer={value.pointer}
                 key={index}
                 alphabet={eingabeAlphabetOptionen}
                 showEditField={true}
