@@ -41,7 +41,11 @@ export default function Cell(props: CellProps) {
     let allowed = false;
 
     props.alphabet.map((entry) => {
-      if (entry.value === value || value === "") {
+      if (
+        entry.value === value ||
+        props.showEditField === false ||
+        value === ""
+      ) {
         props.updateCellValue(index, value);
         allowed = true;
       }
@@ -53,14 +57,17 @@ export default function Cell(props: CellProps) {
   }
 
   return (
-    <td ref={wrapperRef}>
+    <td
+      ref={wrapperRef}
+      className="px-2 py-4 w-1/6 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+    >
       <input
         type="text"
         name="value"
         id="valueInput"
-        className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300"
+        className="w-full min-w-full rounded text-gray-700 focus:outline-none items-center"
         value={props.value}
-        onChange={e => checkValue(props.index, e.target.value)}
+        onChange={(e) => checkValue(props.index, e.target.value)}
         onClick={toggleEditMode}
       />
       {editMode && props.showEditField ? (

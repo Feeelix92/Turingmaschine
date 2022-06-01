@@ -1,4 +1,3 @@
-import { Component } from "react";
 import { RowProps } from "../../interfaces/CommonInterfaces";
 import Cell from "./Cell";
 
@@ -12,7 +11,7 @@ export default function Row(props: RowProps) {
   }
 
   return (
-    <tr className="bg-white hover:bg-gray-20 dark:hover:bg-gray-200">
+    <tr className="border-b flex w-full hover:bg-gray-100">
       {props.cells.map((value, key: React.Key) => (
         <Cell
           key={key}
@@ -23,13 +22,13 @@ export default function Row(props: RowProps) {
           updateCellValue={setCellValue}
         />
       ))}
-      <td className="px-6 py-4 text-right">
+      <td className="py-4 w-1/6 whitespace-nowrap text-sm font-medium text-gray-900">
         <a
           href="#"
-          className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+          className="w-full min-w-full text-gray-700 focus:outline-none items-center"
           onClick={props.deleteRow}
         >
-          Delete
+          x
         </a>
       </td>
     </tr>

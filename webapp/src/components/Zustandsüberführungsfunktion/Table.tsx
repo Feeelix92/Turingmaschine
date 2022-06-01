@@ -65,39 +65,46 @@ export default class Table extends Component<{}, TableProps> {
     const loadedRows = this.state.rows;
 
     return (
-      <div className="flex flex-wrap flex-col relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-white uppercase bg-gray-50 dark:bg-gray-700 dark:text-white">
-            <tr>
-              {this.state.header.map((value, key: React.Key) => (
-                <th key={key} scope="col" className="px-6 py-3">
-                  {value}
-                </th>
-              ))}
-              <th scope="col" className="px-6 py-3">
-                <span className="sr-only">Delete</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {loadedRows.map((value, key: React.Key) => (
-              <Row
-                key={key}
-                index={key}
-                cells={value.cells}
-                alphabet={this.state.alphabet}
-                deleteRow={() => this.deleteRow(key)}
-                updateRow={this.updateRow.bind(this)}
-              />
-            ))}
-          </tbody>
-        </table>
-        <button
-          className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-          onClick={() => this.addRow()}
-        >
-          Zeile hinzufügen
-        </button>
+      <div className="flex flex-col">
+        <div className="sm:-mx-6 lg:-mx-8">
+          <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+            <div className="overflow-x-auto">
+              <table className="min-w-full w-full">
+                <thead className="flex border-b w-full">
+                  <tr className="flex w-full">
+                    {this.state.header.map((value, key: React.Key) => (
+                      <th
+                        key={key}
+                        scope="col"
+                        className="text-sm px-2 font-medium text-gray-900 py-4 w-1/6 text-left border-r"
+                      >
+                        {value}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="flex flex-col items-center justify-between overflow-y-auto max-h-44">
+                  {loadedRows.map((value, key: React.Key) => (
+                    <Row
+                      key={key}
+                      index={key}
+                      cells={value.cells}
+                      alphabet={this.state.alphabet}
+                      deleteRow={() => this.deleteRow(key)}
+                      updateRow={this.updateRow.bind(this)}
+                    />
+                  ))}
+                </tbody>
+              </table>
+              <button
+                className="w-full bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                onClick={() => this.addRow()}
+              >
+                +
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
