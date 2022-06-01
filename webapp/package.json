@@ -11,7 +11,8 @@
     "@types/animejs": "^3.1.4",
     "party-js": "^2.1.2",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "react-select": "^5.3.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",

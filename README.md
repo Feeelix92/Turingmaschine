@@ -11,3 +11,5 @@ zum Starten:
 - npm install
 - npm run dev
 
+[//]: # (Turing Favicon:)
+[//]: # (<a href="https://www.flaticon.com/free-icons/mathematician" title="mathematician icons">Mathematician icons created by Freepik - Flaticon</a>)
