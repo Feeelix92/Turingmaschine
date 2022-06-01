@@ -1,32 +1,49 @@
 import React, { useState } from 'react';
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
+import {EingabelphabetOption} from "../../data/Alphabet";
 
 function ConditionsList() {
+    /**
+     * To check if Accordion opened or closed
+     */
     const [isActive, setIsActive] = useState(false);
+
+    /**
+     * To show the Zustandsüberführungsfunktion
+     */
+    const [showZustandsfunktion, setShowZustandsfunktion] = useState(false)
+
+    /**
+     * Accordion data (Title, Icons)
+     */
     const accordionData = {
-        title: 'Spezifikationen'
+        title: 'Spezifikationen:',
+        openAccordion: '+',
+        closeAccordion: '-',
     };
-    const { title } = accordionData;
+    const { title, openAccordion, closeAccordion } = accordionData;
 
     return (
-        <div className="accordion">
-            <div className="accordion-item">
+        <div className={"accordion border-solid border-2 border-gray-600 rounded-md mx-1 my-3"}>
+            <div className={"accordion-item"}>
                 <div
-                    className="accordion-title"
+                    className={"accordion-title"}
                     onClick={() => setIsActive(!isActive)}
                 >
-                    <div>{title}</div>
-                    <div>{isActive ? '-' : '+'}</div>
+                    <div className={"specification-header"}>
+                        <span className={"accordion-icon"}>{isActive ? closeAccordion : openAccordion}</span>
+                        <span>{title}</span>
+                    </div>
                 </div>
-                {isActive && <div className="accordion-content">
+                {isActive && <div className={"accordion-content"}>
                     <div>
-                        <p>Eingabealphabet ∑ = {}</p>
+                        <p>Eingabealphabet ∑ = </p> <DropDownSelect />
                     </div>
                     <div>
-                        <p>Bandalphabet &Gamma; = { }</p>
+                        <p>Bandalphabet &Gamma; = </p>
                     </div>
                     <div>
-                        <p>Zustandsmenge Q = { }</p>
+                        <p>Zustandsmenge Q = </p>
                     </div>
                     <div>
                         <p>Anfangszustand q0 = </p>
@@ -35,10 +52,13 @@ function ConditionsList() {
                         <p>Endzustand F = { }</p>
                     </div>
                     <div>
-                        <div className="grid grid-col-2">
-                            <p>Zustandsüberführungsfunktion S =</p>
-                            <button >...</button>
+                        <div className={"grid grid-cols-2 items-center"}>
+                            <span>Zustandsüberführungsfunktion &delta; =</span>
+                            <button className={"text-black text-left"} onClick={() => setShowZustandsfunktion(!showZustandsfunktion)}>{ showZustandsfunktion ? 'Hier steht eine Funktion' : '...' }</button>
                         </div>
+                        {/*{showZustandsfunktion && <div>
+                            <p>Hier steht eine Funktion</p>
+                        </div>}*/}
                     </div>
                 </div>}
             </div>

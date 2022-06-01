@@ -20,14 +20,13 @@ function DropDownSelect()  {
     ) {
         console.group('Value Changed');
         console.log(newValue);
-        if (newValue && newValue.value == 'custom'){
+        if (newValue && newValue.value == 'eigenes'){
             setOpenDialog(true);
         }else{
             setOpenDialog(false);
         }
         console.log(`action: ${actionMeta.action}`);
         console.groupEnd();
-
     }
 
     return (
