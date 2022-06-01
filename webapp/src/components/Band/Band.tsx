@@ -63,7 +63,7 @@ export default class Band extends Component<{}, BandProps> {
         <div className="mb-5">
             <h2 >Band: </h2>
         </div>
-        <div className="{band-container}  flex flex-row mb-5 overflow-x-auto">
+        <div className="band-container flex flex-row mb-5 overflow-x-auto">
             {this.state.currentBand.map((value, index) => (                
                 <BandItem
                 value={value.value}

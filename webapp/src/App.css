@@ -48,7 +48,7 @@ button {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
-  padding: 20px 10px;
+  padding: 40px 10px 0px 10px;
 }
 
 .band-container__band{
@@ -58,6 +58,23 @@ button {
   height: 40px;
   color: black;
   border: 1px solid gray;
+}
+
+.pointer{
+  border: 2px solid #80ba24;
+  border-top: 8px solid #80ba24;
+  position:relative;
+  cursor: move;
+  
+}
+.pointer::before{
+    content: "";
+    position: absolute;
+    border-bottom: 19px solid #80ba24;
+    border-left: 22px solid transparent;
+    border-right: 22px solid transparent;
+    bottom: 37px;
+
 }
 
 .paper, .tech {
@@ -77,7 +94,7 @@ button {
 /* ********** TABLE ********** */
 
 .editBtnDiv{
- /* verschieben, dass Buttons in der Mitte sind...*/
+ position: fixed;
 }
 
 .editBtn{

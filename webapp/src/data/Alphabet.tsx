@@ -24,8 +24,8 @@ export const eingabeAlphabete: readonly Eingabelphabet[] = [
 ];
 
 export const initBand: EingabelphabetOption[] = [ 
-  { value: "", label: "B", pointer: true},
   { value: "", label: "B", pointer: false},
+  { value: "", label: "B", pointer: true},
   { value: "", label: "B", pointer: false},
   { value: "", label: "B", pointer: false},
   { value: "", label: "B", pointer: false},
