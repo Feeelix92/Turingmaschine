@@ -3,7 +3,7 @@ import Select, {ActionMeta, OnChangeValue} from 'react-select'
 import {Eingabelphabet, eingabeAlphabete} from "../../data/Alphabet";
 import MultiselectDropDown from "./DropDownMultiselect";
 
-function DropDownSelect()  {
+function DropDownSelect() {
     /**
      * To check if Dialog opened or closed
      */
@@ -14,15 +14,15 @@ function DropDownSelect()  {
      * @param newValue
      * @param actionMeta
      */
-    function handleChange (
+    function handleChange(
         newValue: OnChangeValue<Eingabelphabet, false>,
         actionMeta: ActionMeta<Eingabelphabet>
     ) {
         console.group('Value Changed');
         console.log(newValue);
-        if (newValue && newValue.value == 'custom'){
+        if (newValue && newValue.value[0] == 'custom') {
             setOpenDialog(true);
-        }else{
+        } else {
             setOpenDialog(false);
         }
         console.log(`action: ${actionMeta.action}`);
@@ -40,15 +40,18 @@ function DropDownSelect()  {
                     options={eingabeAlphabete}
             />
             {openDialog &&
-            <div className={"text-white text-lg col-span-2"}>
-                <MultiselectDropDown />
-                <div className={""}>
-                    <button onClick={() => {
-                        setOpenDialog(false)}} className={"bg-green-600 hover:bg-green-800 col-start-3 col-span-2 m-2"}>speichern</button>
+                <div className={"text-white text-lg col-span-2"}>
+                    <MultiselectDropDown/>
+                    <div className={""}>
+                        <button onClick={() => {
+                            setOpenDialog(false)
+                        }} className={"bg-green-600 hover:bg-green-800 col-start-3 col-span-2 m-2"}>speichern
+                        </button>
+                    </div>
                 </div>
-            </div>
             }
         </div>
     );
 }
+
 export default DropDownSelect;
