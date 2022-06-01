@@ -52,11 +52,37 @@ export default function BandItem(props: BandItemProps) {
     }
   }
 
+  let dragModeActivated = false;
+
+  function startDrag (e: MouseEvent) {
+    dragModeActivated = true;
+    console.log("startDrag: ", e)
+  }
+  function onDrag (e: MouseEvent) {
+    if (dragModeActivated){
+      console.log("onDrag: ", e)
+    }
+  }
+  function endDrag (e: MouseEvent) {
+    dragModeActivated = false;
+    console.log("endDrag: ", e)
+  }
+
   return (
     <div 
-        className={`band-container__band ${props.skin} flex justify-center  ${props.pointer ? "pointer" : ""}`} 
+        className={`band-container__band ${props.skin} flex justify-center ${props.pointer ? 'pointerBorder' : ''}`} 
         key={props.index}
-        ref={wrapperRef}>        
+        ref={wrapperRef}>    
+
+        {props.pointer ? (
+          <div className="pointer"
+          onMouseDown={e => startDrag(e)}
+          onMouseMove={e => onDrag(e)}
+          onMouseUp={e => endDrag(e)}></div>
+        ) : (
+          ""
+        )}  
+           
         <input
         type="text"
         name="value"
@@ -64,13 +90,13 @@ export default function BandItem(props: BandItemProps) {
         className="bandInput bg-transparent w-8 "
         value={props.value}
         onChange={e => checkValue(props.index, e.target.value)}
-        onClick={toggleEditMode}
-      />
-      {editMode && props.showEditField ? (
-        <EditField options={props.alphabet} updateValue={chooseOption} />
+        onClick={toggleEditMode}        
+      />           
+      {editMode && props.showEditField ? (        
+        <EditField options={props.alphabet} updateValue={chooseOption} />        
       ) : (
         ""
-      )}
-    </div>
+      )}        
+    </div>    
   )
 }

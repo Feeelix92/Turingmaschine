@@ -60,21 +60,25 @@ button {
   border: 1px solid gray;
 }
 
-.pointer{
-  border: 2px solid #80ba24;
+.pointerBorder{
+  border: 3px solid #80ba24;
   border-top: 8px solid #80ba24;
   position:relative;
   cursor: move;
   
 }
-.pointer::before{
+
+.pointer{
+  cursor: move;
+}
+.pointer::after{
     content: "";
     position: absolute;
     border-bottom: 19px solid #80ba24;
     border-left: 22px solid transparent;
     border-right: 22px solid transparent;
-    bottom: 37px;
-
+    bottom: 36px;
+    left: 0px;
 }
 
 .paper, .tech {
