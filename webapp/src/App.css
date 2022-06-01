@@ -14,14 +14,14 @@
 }
 
 .App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    font-size: calc(10px + 2vmin);
-    color: white;
+  background-color: #282c34;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
 .App-link {
@@ -29,15 +29,79 @@
 }
 
 @keyframes App-logo-slide {
-    from {
-        margin-left: 100%;
-    }
-    to {
-        margin-left: -100%;
-
-    }
+  from {
+    margin-left: 100%;
+  }
+  to {
+    margin-left: -100%;
+  }
 }
 
 button {
     font-size: calc(10px + 2vmin);
+}
+
+
+/* ********** BAND ********** */
+
+.band-container {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 40px 10px 0px 10px;
+}
+
+.band-container__band{
+  display: inline-block;
+  padding: 5px;
+  width: 60px;
+  height: 40px;
+  color: black;
+  border: 1px solid gray;
+}
+
+.pointerBorder{
+  border: 3px solid #80ba24;
+  border-top: 8px solid #80ba24;
+  position:relative;
+  cursor: move;
+  
+}
+
+.pointer{
+  cursor: move;
+}
+.pointer::after{
+    content: "";
+    position: absolute;
+    border-bottom: 19px solid #80ba24;
+    border-left: 22px solid transparent;
+    border-right: 22px solid transparent;
+    bottom: 36px;
+    left: 0px;
+}
+
+.paper, .tech {
+  background-image: url('./assets/images/spritesheet.png');
+  background-repeat: no-repeat;  
+}
+
+.paper {
+  background-position: 0 0;
+}
+
+.tech {
+  background-position: -60px 0;
+}
+
+
+/* ********** TABLE ********** */
+
+.editBtnDiv{
+ position: fixed;
+}
+
+.editBtn{
+  width: 45px;
+  height: 45px;
 }
