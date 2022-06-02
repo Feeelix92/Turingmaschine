@@ -2,8 +2,14 @@ import React from 'react';
 import CreatableSelect from 'react-select/creatable';
 import {EingabelphabetOption, eingabeAlphabetOptionen} from "../../data/Alphabet";
 import {ActionMeta, OnChangeValue} from 'react-select';
+import {EingabealphabetCustomProp} from "../../interfaces/CommonInterfaces";
 
-function MultiselectDropDown() {
+export default function MultiselectDropDown(props: EingabealphabetCustomProp) {
+    // valuesArray = current selected options as Array
+    let valuesArray: string[] = [];
+    // valuesString = current selected options as String to use it as label
+    let valuesString = "";
+
     /**
      * function handleChange checks if the selected option has changed
      * @param newValues
@@ -17,11 +23,8 @@ function MultiselectDropDown() {
         console.log(newValues);
         // converting the object to an iteratable Array
         const optionsArray = Array.from(newValues.values());
-        // valuesArray = current selected options as Array
-        // valuesString = current selected options as String to use it as label
-        // @TODO save the data somewhere to use it later
-        const valuesArray = optionsArray.map(({value}) => value).toString();
-        const valuesString = valuesArray.toString();
+        valuesArray = optionsArray.map(({value}) => value);
+        valuesString = valuesArray.toString();
         console.log(valuesString);
         console.log(`action: ${actionMeta.action}`);
         console.groupEnd();
@@ -47,9 +50,14 @@ function MultiselectDropDown() {
                                      }
                     />
                 </div>
+                <div className={""}>
+                    <button onClick={() => {
+                        props.alphabet.push({label: "{" + valuesString + "}", value: valuesArray});
+                        props.customSelect(false);
+                    }} className={"bg-green-600 hover:bg-green-800 col-start-3 col-span-2 m-2"}>speichern
+                    </button>
+                </div>
             </div>
         </div>
     );
 }
-
-export default MultiselectDropDown;
