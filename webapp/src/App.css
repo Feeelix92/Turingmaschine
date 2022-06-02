@@ -1,3 +1,17 @@
+:root {
+  /* THM-Farben */
+  --primary: #80ba24; 
+  --primary2: #4a5c66;
+
+  --secondary: #9C132E;
+  --secondary2: #F4AA00;
+  --secondary3: #00B8E4;
+  --secondary4: #002878;
+
+  /* Hover-Farben */
+  --primaryHover: #5a811b;
+}
+
 .App {
     text-align: center;
 }
@@ -41,6 +55,14 @@ button {
     font-size: calc(10px + 2vmin);
 }
 
+.primaryBtn {
+  background-color: var(--primary);
+}
+
+.primaryBtn:hover {
+  background-color: var(--primaryHover);
+}
+
 
 /* ********** BAND ********** */
 
@@ -61,8 +83,8 @@ button {
 }
 
 .pointerBorder{
-  border: 3px solid #80ba24;
-  border-top: 8px solid #80ba24;
+  border: 3px solid var(--primary);
+  border-top: 8px solid var(--primary);
   position:relative;
   cursor: move;
   
@@ -74,11 +96,25 @@ button {
 .pointer::after{
     content: "";
     position: absolute;
-    border-bottom: 19px solid #80ba24;
+    /*
+    border-bottom: 19px solid var(--primary);
     border-left: 22px solid transparent;
     border-right: 22px solid transparent;
     bottom: 36px;
     left: 0px;
+    */
+
+    /* Runder Kopf vom Pointer: */
+    background: var(--primary);
+    height: 25px;
+    width: 48px;
+    border-radius: 300px 300px 0px 0px;
+    margin-left: -8px;
+    margin-top: -35px;
+}
+
+.pointer:hover {
+  background-color: var(--primaryHover);
 }
 
 .paper, .tech {

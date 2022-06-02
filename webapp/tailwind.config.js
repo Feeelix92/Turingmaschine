@@ -4,6 +4,12 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    /*
+    colors: {
+      'primaryCol' : '#80ba24'
+    }
+    */
+    
   },
   plugins: [],
 }

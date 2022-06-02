@@ -23,10 +23,10 @@ export interface Eingabelphabet {
  * standard Eingabealphabete
  */
 export const eingabeAlphabete: readonly Eingabelphabet[] = [
-    {label: '{1, #}', value: ['1', '#']},
-    {label: '{0, 1}', value: ['0', '1']},
-    {label: '{0, 1, #}', value: ['0', '1', '#']},
-    {label: 'custom', value: ['custom']},
+    {label: '{1, #}', value: ['1', '#'], pointer: false},
+    {label: '{0, 1}', value: ['0', '1'], pointer: false},
+    {label: '{0, 1, #}', value: ['0', '1', '#'], pointer: false},
+    {label: 'custom', value: ['custom'], pointer: false},
 ];
 
 export const initBand: EingabelphabetOption[] = [ 

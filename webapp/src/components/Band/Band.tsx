@@ -16,12 +16,13 @@ export default class Band extends Component<{}, BandProps> {
     
     render() {    
     const bandLength = this.state.currentBand.length;
+    const defaultPointerPos = 1; // Feld, auf dem Pointer im Default stehen soll
 
-    const deleteAll = () => {
+    const deleteAll = () => { // setzt Band auf Default zurück & löscht Inhalt der BandItems
         let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
         
         for (let index = 0; index < bandLength; index++) {
-            if(index == 0) {
+            if(index == defaultPointerPos) {
                 bandCopy[index] = {value: "", label: "B", pointer: true}
                 console.log(bandCopy)
             } else {
@@ -79,13 +80,14 @@ export default class Band extends Component<{}, BandProps> {
           
         </div>
         <button 
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+        className="primaryBtn text-white font-bold py-1 px-2 rounded"
         onClick={() => changeSkin()}>
             Change skin
         </button>
 
+        
         <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ml-5"
+        className="primaryBtn text-white font-bold py-1 px-2 rounded ml-5"
         onClick={() => deleteAll()}>
             Delete All
         </button>
