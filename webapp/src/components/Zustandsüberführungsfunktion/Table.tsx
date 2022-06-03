@@ -18,6 +18,7 @@ export default class Table extends Component<{}, TableProps> {
             { value: "0", editField: true },
             { value: "Rechts", editField: false },
           ],
+          isFinal: false,
         },
       ],
     };
@@ -36,6 +37,7 @@ export default class Table extends Component<{}, TableProps> {
         { value: "0", editField: true },
         { value: "Links", editField: false },
       ],
+      isFinal: false,
     });
 
     // update the rows in state with our new rows-array
@@ -63,6 +65,25 @@ export default class Table extends Component<{}, TableProps> {
 
     // overwrite rows at certain index with new value
     newRows[i as number].cells = cells;
+
+    // update the rows in state with our new rows-array
+    this.setState({
+      rows: newRows,
+    });
+  }
+
+  setFinal(i: React.Key) {
+    // create flat copy of all existing rows
+    const newRows = this.state.rows.slice(0, this.state.rows.length);
+
+    // overwrite rows at certain index with new value
+    newRows[i as number].isFinal = !newRows[i as number].isFinal;
+
+    if (newRows[i as number].isFinal) {
+      alert("Als Finalzustand markiert!");
+    } else {
+      alert("Finalzustand entfernt!");
+    }
 
     // update the rows in state with our new rows-array
     this.setState({
@@ -105,6 +126,7 @@ export default class Table extends Component<{}, TableProps> {
                       alphabet={this.state.alphabet}
                       deleteRow={() => this.deleteRow(key)}
                       updateRow={this.updateRow.bind(this)}
+                      setFinal={this.setFinal.bind(this)}
                     />
                   ))}
                 </tbody>

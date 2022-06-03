@@ -1,3 +1,4 @@
+import React from "react";
 import { RowProps } from "../../interfaces/CommonInterfaces";
 import Cell from "./Cell";
 
@@ -13,8 +14,16 @@ export default function Row(props: RowProps) {
     props.updateRow(props.index, cellCopy);
   }
 
+  function setFinal() {
+    // pass new data to table to update its rows-array
+    props.setFinal(props.index);
+  }
+
   return (
-    <tr className="border-b flex w-full hover:bg-gray-100">
+    <tr
+      className="border-b flex w-full hover:bg-gray-100"
+      onDoubleClick={() => setFinal()}
+    >
       {props.cells.map((value, key: React.Key) => (
         <Cell
           key={key}
