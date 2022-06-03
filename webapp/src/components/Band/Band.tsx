@@ -60,6 +60,38 @@ export default class Band extends Component<{}, BandProps> {
         });
     };
 
+    const setPointer = (index: any, value: boolean) => {
+        console.log("setPointer function called!");
+        
+        let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
+
+        bandCopy[index as number].pointer = value;
+        
+        this.setState({
+            currentBand: bandCopy,
+        });
+        
+    };
+
+    
+    const setPointerAt = () => {
+        console.log("setPointerAt function called!");
+        
+        let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
+
+        // TODO: Nicht richtige Indexdaten, nur zum Test:
+        let oldIndex = defaultPointerPos;  
+        let newIndex = defaultPointerPos+1; 
+
+        bandCopy[oldIndex as number].pointer = false;
+        bandCopy[newIndex as number].pointer = true;
+        
+        this.setState({
+            currentBand: bandCopy,
+        });
+        
+    };
+
     return <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 p-3 border rounded"}>
         <div className="mb-5">
             <h2 >Band: </h2>
@@ -75,6 +107,8 @@ export default class Band extends Component<{}, BandProps> {
                 alphabet={eingabeAlphabetOptionen}
                 showEditField={true}
                 changeItemAt={changeItemAt}
+                setPointer={setPointer}
+                setPointerAt={setPointerAt} //TODO
                 />                
             ))}
           

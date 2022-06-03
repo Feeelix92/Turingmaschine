@@ -45,6 +45,8 @@ export interface BandItemProps {
     alphabet: EingabelphabetOption[];
     showEditField: boolean;
     changeItemAt: (index: Key, e: any) => void
+    setPointer: (index: Key, e: any) => void
+    setPointerAt: () => void
 }
 
 export interface BandProps {

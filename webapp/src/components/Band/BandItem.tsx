@@ -1,4 +1,4 @@
-import React, { Key, useEffect } from 'react'
+import React, { Key, useEffect, useRef } from 'react'
 import EditField from "../Zustandsüberführungsfunktion/EditField";
 import { BandItemProps } from "../../interfaces/CommonInterfaces";
 
@@ -15,6 +15,38 @@ export default function BandItem(props: BandItemProps) {
     props.changeItemAt(props.index, option);
     setEditMode(false);
   }
+
+  const dragItem = useRef();
+  const dragOverItem = useRef()
+
+  const dragStart = (e: React.DragEvent<HTMLDivElement>, position: any) => {
+    dragItem.current = position;
+    console.log("dragStart " + e);
+  };
+
+  const dragEnter = (e: React.DragEvent<HTMLDivElement>, position: any) => {
+    // TODO: Richtige position -> Von BandItems?
+    dragOverItem.current = position;
+    console.log("dragEnter " + e);
+  };
+
+  /* TODO: Set Boolean pointer in parent to true for new position, and false for old position */
+  const drop = (e: React.DragEvent<HTMLDivElement>) => {
+    //let thisPointer = props.pointer;
+
+    props.setPointerAt();
+
+    console.log("changed props.pointer");
+    /*
+    const copyListItems = [...list];
+    const dragItemContent = copyListItems[dragItem.current];
+    copyListItems.splice(dragItem.current, 1);
+    copyListItems.splice(dragOverItem.current, 0, dragItemContent);
+    dragItem.current = null;
+    dragOverItem.current = null;
+    setList(copyListItems);
+    */
+  };
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -54,19 +86,23 @@ export default function BandItem(props: BandItemProps) {
 
   let dragModeActivated = false;
 
-  function startDrag (e: MouseEvent) {
+  /*
+  function startDrag (e: MouseEvent, position: any) {
     dragModeActivated = true;
+    dragItem.current = position;
     console.log("startDrag: ", e)
   }
-  function onDrag (e: MouseEvent) {
+  function onDrag (e: MouseEvent, position: any) {
     if (dragModeActivated){
       console.log("onDrag: ", e)
+      dragOverItem.current = position;
     }
   }
   function endDrag (e: MouseEvent) {
     dragModeActivated = false;
     console.log("endDrag: ", e)
   }
+  */
 
   return (
     <div 
@@ -76,9 +112,21 @@ export default function BandItem(props: BandItemProps) {
 
         {props.pointer ? (
           <div className="pointer"
-          onMouseDown={e => startDrag(e)}
+          /*onMouseDown={e => startDrag(e)}
           onMouseMove={e => onDrag(e)}
-          onMouseUp={e => endDrag(e)}></div>
+          onMouseUp={e => endDrag(e)}*/
+
+          /* Pointer mit Maus bewegen */
+          onDragStart={(e) => dragStart(e, props.index)}
+          onDragEnter={(e) => dragEnter(e, props.index)}
+          onDragEnd={drop}
+          
+          /* Pointer mit Touch bewegen */
+          onTouchStart={(e) => dragStart(e, props.index)}
+          onTouchMove={(e) => dragEnter(e, props.index)}
+          onTouchEnd={drop}
+
+          draggable></div>
         ) : (
           ""
         )}  
