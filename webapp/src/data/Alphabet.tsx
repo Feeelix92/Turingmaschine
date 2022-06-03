@@ -23,6 +23,7 @@ export interface Eingabelphabet {
  */
 export const eingabeAlphabete: Eingabelphabet[] = [
     {label: 'erstellen', value: ['custom']},
+    {label: '{1}', value: ['1']},
     {label: '{1,#}', value: ['1', '#']},
     {label: '{0,1}', value: ['0', '1']},
     {label: '{0,1,#}', value: ['0', '1', '#']},
