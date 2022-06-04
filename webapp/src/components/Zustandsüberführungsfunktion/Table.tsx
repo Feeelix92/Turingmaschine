@@ -1,22 +1,38 @@
 import React, { Component } from "react";
 import { eingabeAlphabetOptionen } from "../../data/Alphabet";
-import { Cell, TableProps } from "../../interfaces/CommonInterfaces";
+import {
+  Cell,
+  Direction,
+  directions,
+  status,
+  TableProps,
+  Zustand,
+} from "../../interfaces/CommonInterfaces";
 import Row from "./Row";
 
 export default class Table extends Component<{}, TableProps> {
   constructor(props: TableProps) {
     super(props);
     this.state = {
-      header: ["Status", "Lese", "Neuer Status", "Schreibe", "Gehe nach"],
+      header: ["Zustand", "Lese", "Neuer Zustand", "Schreibe", "Gehe nach"],
       alphabet: eingabeAlphabetOptionen,
       rows: [
         {
           cells: [
-            { value: "q1", editField: false },
+            {
+              value: new Zustand(status[0].value, status[0].label),
+              editField: false,
+            },
             { value: "1", editField: true },
-            { value: "q1", editField: false },
+            {
+              value: new Zustand(status[0].value, status[0].label),
+              editField: false,
+            },
             { value: "0", editField: true },
-            { value: "Rechts", editField: false },
+            {
+              value: new Direction(directions[0].value, directions[0].label),
+              editField: false,
+            },
           ],
           isFinal: false,
         },
@@ -31,11 +47,20 @@ export default class Table extends Component<{}, TableProps> {
     // add new row to existing rows
     newRows.push({
       cells: [
-        { value: "q1", editField: false },
+        {
+          value: new Zustand(status[0].value, status[0].label),
+          editField: false,
+        },
         { value: "1", editField: true },
-        { value: "q1", editField: false },
+        {
+          value: new Zustand(status[0].value, status[0].label),
+          editField: false,
+        },
         { value: "0", editField: true },
-        { value: "Links", editField: false },
+        {
+          value: new Direction(directions[0].value, directions[0].label),
+          editField: false,
+        },
       ],
       isFinal: false,
     });

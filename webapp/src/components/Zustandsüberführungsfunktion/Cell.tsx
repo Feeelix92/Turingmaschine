@@ -1,5 +1,12 @@
 import React, { Key, useEffect } from "react";
-import { CellProps } from "../../interfaces/CommonInterfaces";
+import Select, { OnChangeValue } from "react-select";
+import {
+  CellProps,
+  Direction,
+  directions,
+  status,
+  Zustand,
+} from "../../interfaces/CommonInterfaces";
 import EditField from "./EditField";
 
 export default function Cell(props: CellProps) {
@@ -17,6 +24,13 @@ export default function Cell(props: CellProps) {
     props.updateCellValue(props.index, option);
     // close the edit-buttons
     setEditMode(false);
+  }
+
+  function handleChange(newValue: OnChangeValue<Direction | Zustand, false>) {
+    if (newValue) {
+      // pass chosen options to the parent to update the cell
+      props.updateCellValue(props.index, newValue);
+    }
   }
 
   useEffect(() => {
@@ -67,15 +81,44 @@ export default function Cell(props: CellProps) {
       ref={wrapperRef}
       className="px-2 py-4 w-1/6 whitespace-nowrap text-sm font-medium text-gray-900 border-r flex justify-center"
     >
-      <input
-        type="text"
-        name="value"
-        id="valueInput"
-        className="w-full min-w-full rounded text-gray-700 focus:outline-none items-center"
-        value={props.value}
-        onChange={(e) => checkValue(props.index, e.target.value)}
-        onClick={toggleEditMode}
-      />
+      {props.value instanceof Zustand ? (
+        <Select
+          placeholder={props.value.value}
+          blurInputOnSelect={false}
+          className={"text-black p-3 text-base"}
+          onChange={handleChange}
+          options={status}
+        />
+      ) : (
+        ""
+      )}
+
+      {props.value instanceof Direction ? (
+        <Select
+          placeholder={props.value.value}
+          blurInputOnSelect={false}
+          className={"text-black p-3 text-base"}
+          onChange={handleChange}
+          options={directions}
+        />
+      ) : (
+        ""
+      )}
+
+      {typeof props.value === "string" ? (
+        <input
+          type="text"
+          name="value"
+          id="valueInput"
+          className="w-full min-w-full rounded text-gray-700 focus:outline-none items-center"
+          value={props.value}
+          onChange={(e) => checkValue(props.index, e.target.value)}
+          onClick={toggleEditMode}
+        />
+      ) : (
+        ""
+      )}
+
       {editMode && props.showEditField ? (
         <EditField options={props.alphabet} updateValue={chooseOption} />
       ) : (

@@ -1,9 +1,10 @@
 import React from "react";
-import { RowProps } from "../../interfaces/CommonInterfaces";
+import { Direction, RowProps, Zustand } from "../../interfaces/CommonInterfaces";
 import Cell from "./Cell";
+import { FaTrash } from "react-icons/fa";
 
 export default function Row(props: RowProps) {
-  function setCellValue(index: React.Key, value: string) {
+  function setCellValue(index: React.Key, value: string | Zustand | Direction) {
     // create flat copy of all existing cells
     let cellCopy = props.cells.slice(0, props.cells.length);
 
@@ -40,7 +41,7 @@ export default function Row(props: RowProps) {
           className="w-full min-w-full text-gray-700 focus:outline-none items-center"
           onClick={props.deleteRow}
         >
-          x
+          <FaTrash />
         </a>
       </td>
     </tr>
