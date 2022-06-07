@@ -1,7 +1,7 @@
-import { Component } from 'react';
+import { Component, useEffect } from 'react';
 import BandItem  from './BandItem';
 import { BandProps } from "../../interfaces/CommonInterfaces";
-import { eingabeAlphabetOptionen, initBand } from '../../data/Alphabet';
+import { eingabeAlphabetOptionen, currentBand } from '../../data/Alphabet';
 import { FaRedo } from "react-icons/fa";
 
 
@@ -10,49 +10,51 @@ export default class Band extends Component<{}, BandProps> {
         super(props);
         this.state = {
         alphabet: eingabeAlphabetOptionen,
-        currentBand: initBand,
+        currentBand: currentBand,
         skin: "paper"
         };
-        console.log(initBand)
-    }
+    }   
     
     render() {    
-    const bandLength = this.state.currentBand.length;
-    const defaultPointerPos = 1; // Feld, auf dem Pointer im Default stehen soll
-
-    const deleteAll = () => { // setzt Band auf Default zurück & löscht Inhalt der BandItems
-        let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
-        
+    const bandLength = currentBand.length;
+    const defaultPointerPos = 1; // Feld, auf dem Pointer im Default stehen soll   
+    
+    
+    /**
+     * setzt Band auf Default zurück & löscht Inhalt der BandItems
+     */
+    const deleteAll = () => {         
         for (let index = 0; index < bandLength; index++) {
             if(index == defaultPointerPos) {
-                bandCopy[index] = {value: "", label: "B", pointer: true}
-                console.log(bandCopy)
+                currentBand[index] = {value: "", label: "B", pointer: true}
+                console.log(currentBand)
             } else {
-                bandCopy[index] = {value: "", label: "B", pointer: false}
-            }
-            
+                currentBand[index] = {value: "", label: "B", pointer: false}
+            }            
         }   
 
         this.setState({
-            currentBand: bandCopy
+            currentBand: currentBand
         });
     };
 
-    const addField = (position: string) => {
-        let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
-        
+    /**
+     * fügt ein neues leeres Bandfeld an der Position "before" oder "after" hinzu
+     * @param position
+     */
+    const addField = (position: string) => {         
         if (position === "before"){
-            bandCopy.unshift({value: "", label: "B", pointer: false})
+            currentBand.unshift({value: "", label: "B", pointer: false})
         } else {
-            bandCopy.push({value: "", label: "B", pointer: false})
+            currentBand.push({value: "", label: "B", pointer: false})
         }
 
         this.setState({
-            currentBand: bandCopy
+            currentBand: currentBand
         });
     }
 
-    const changeSkin = () => {     
+    const changeSkin = () => { //Übergangsfunktion? -> ändert den Skin     
         if(this.state.skin === "paper"){
             this.setState({
                 skin: "tech",
@@ -64,54 +66,50 @@ export default class Band extends Component<{}, BandProps> {
         }
     };
 
-
-    const changeItemAt = (index: any, value: string) => {
-        let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
-
-        bandCopy[index as number].value = value;
+    /**
+     * function changeItemAt changes the Band at the index
+     * @param index
+     * @param value
+     */
+    const changeItemAt = (index: any, value: string) => { 
+        currentBand[index as number].value = value;
         
         this.setState({
-            currentBand: bandCopy,
+            currentBand: currentBand,
         });
     };
-    
-    const deleteItemAt = (index: any) => {
-        let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
 
-        bandCopy[index as number] = {value: "", label: "B", pointer: false};
+    const deleteItemAt = (index: any) => {
+        currentBand[index as number] = {value: "", label: "B", pointer: false};
         
         this.setState({
-            currentBand: bandCopy,
+            currentBand: currentBand,
         });
     };
 
     const setPointer = (index: any, value: boolean) => {
         console.log("setPointer function called!");
-        
-        let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
 
-        bandCopy[index as number].pointer = value;
+        currentBand[index as number].pointer = value;
         
         this.setState({
-            currentBand: bandCopy,
+            currentBand: currentBand,
         });        
     };
 
     
     const setPointerAt = () => {
         console.log("setPointerAt function called!");
-        
-        let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
 
         // TODO: Nicht richtige Indexdaten, nur zum Test:
         let oldIndex = defaultPointerPos;  
         let newIndex = defaultPointerPos+1; 
 
-        bandCopy[oldIndex as number].pointer = false;
-        bandCopy[newIndex as number].pointer = true;
+        currentBand[oldIndex as number].pointer = false;
+        currentBand[newIndex as number].pointer = true;
         
         this.setState({
-            currentBand: bandCopy,
+            currentBand: currentBand,
         });        
     };
 
@@ -125,7 +123,7 @@ export default class Band extends Component<{}, BandProps> {
             onClick={() => addField('before')}>
                +
             </button>
-            {this.state.currentBand.map((value, index) => (                
+            {currentBand.map((value, index) => (                
                 <BandItem
                 value={value.value}
                 index={index}

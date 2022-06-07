@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Select, {ActionMeta, OnChangeValue} from 'react-select'
-import {EingabeAlphabet, eingabeAlphabete, eingabeAlphabetOptionen} from "../../data/Alphabet";
+import {currentBand, EingabeAlphabet, eingabeAlphabete, eingabeAlphabetOptionen} from "../../data/Alphabet";
 import MultiselectDropDown from "./DropDownMultiselect";
 
 export default function DropDownSelect() {
@@ -36,12 +36,16 @@ export default function DropDownSelect() {
             eingabeAlphabetOptionen.length = 0;
             newValue.value.forEach((value) => {
                 if (value != 'custom') {
-                    setOpenDialog(false);
-                    eingabeAlphabetOptionen.push({label: value, value: value});
+                    setOpenDialog(false);                  
+                    eingabeAlphabetOptionen.push({label: value, value: value});                    
                 } else {
                     setOpenDialog(true);
-                }
+                }                
             })
+            for(let i = 0; i < currentBand.length; i++){                  
+                currentBand[i] = {value: "", label: "B", pointer: currentBand[i].pointer}         
+            }
+            console.log(currentBand)
         }
         console.log(`action: ${actionMeta.action}`);
         console.groupEnd();

@@ -43,7 +43,7 @@ export const eingabeAlphabete: EingabeAlphabet[] = [
     {label: '{0,1,#}', value: ['0', '1', '#']},
 ];
 
-export const initBand: EingabeAlphabetOption[] = [
+export const currentBand: EingabeAlphabetOption[] = [
     {value: "", label: "B", pointer: false},
     {value: "", label: "B", pointer: true},
     {value: "", label: "B", pointer: false},
