@@ -5,12 +5,17 @@ import MultiselectDropDown from "./DropDownMultiselect";
 
 export default function DropDownSelect() {
     /**
-     * To check if Dialog opened or closed
+     * checks if Dialog opened or closed
      */
     const [openDialog, setOpenDialog] = useState(false);
-
+    const [selectedOption, setSelectedOption] = useState(eingabeAlphabete[0]);
+    /**
+     * checks if Button on DropDownMultiselect is clicked
+     * @param data
+     */
     const customSelect = (data: any) => {
         setOpenDialog(data);
+        setSelectedOption(eingabeAlphabete[eingabeAlphabete.length-1])
     }
 
     /**
@@ -25,6 +30,7 @@ export default function DropDownSelect() {
         console.group('Value Changed');
         console.log(newValue);
         if (newValue) {
+            setSelectedOption(newValue);
             eingabeAlphabetOptionen.length = 0;
             newValue.value.forEach((value) => {
                 if (value != 'custom') {
@@ -48,6 +54,7 @@ export default function DropDownSelect() {
                     className={"text-black p-3 text-base"}
                     onChange={handleChange}
                     options={eingabeAlphabete}
+                    value={selectedOption}
             />
             {openDialog &&
                 <div className={"text-white text-lg col-span-2"}>
