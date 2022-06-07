@@ -8,14 +8,15 @@ export default function DropDownSelect() {
      * checks if Dialog opened or closed
      */
     const [openDialog, setOpenDialog] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(eingabeAlphabete[0]);
+    const [showPlaceholder, setShowPlaceholder] = useState(true);
+    const [selectedOption, setSelectedOption] = useState(eingabeAlphabete[1]);
     /**
      * checks if Button on DropDownMultiselect is clicked
      * @param data
      */
     const customSelect = (data: any) => {
         setOpenDialog(data);
-        setSelectedOption(eingabeAlphabete[eingabeAlphabete.length-1])
+        setSelectedOption(eingabeAlphabete[eingabeAlphabete.length - 1])
     }
 
     /**
@@ -27,6 +28,7 @@ export default function DropDownSelect() {
         newValue: OnChangeValue<EingabeAlphabet, false>,
         actionMeta: ActionMeta<EingabeAlphabet>
     ) {
+        setShowPlaceholder(false);
         console.group('Value Changed');
         console.log(newValue);
         if (newValue) {
@@ -49,13 +51,22 @@ export default function DropDownSelect() {
     return (
         <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 grid grid-cols-2 gap-2 items-center"}>
             <p className={"p-3"}>Eingabealphabet ∑ =</p>
-            <Select placeholder={<p className={"text-gray-500"}>Bitte wählen</p>}
-                    blurInputOnSelect={false}
-                    className={"text-black p-3 text-base"}
-                    onChange={handleChange}
-                    options={eingabeAlphabete}
-                    value={selectedOption}
-            />
+            {showPlaceholder &&
+                <Select placeholder={<p className={"text-gray-500"}>Bitte wählen</p>}
+                        blurInputOnSelect={false}
+                        className={"text-black p-3 text-base"}
+                        onChange={handleChange}
+                        options={eingabeAlphabete}
+                />
+            }
+            {!showPlaceholder &&
+                <Select value={selectedOption}
+                        blurInputOnSelect={false}
+                        className={"text-black p-3 text-base"}
+                        onChange={handleChange}
+                        options={eingabeAlphabete}
+                />
+            }
             {openDialog &&
                 <div className={"text-white text-lg col-span-2"}>
                     <MultiselectDropDown
