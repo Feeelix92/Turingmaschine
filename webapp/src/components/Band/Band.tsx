@@ -2,6 +2,8 @@ import { Component } from 'react';
 import BandItem  from './BandItem';
 import { BandProps } from "../../interfaces/CommonInterfaces";
 import { eingabeAlphabetOptionen, initBand } from '../../data/Alphabet';
+import { FaRedo } from "react-icons/fa";
+
 
 export default class Band extends Component<{}, BandProps> {
     constructor(props: BandProps) {
@@ -113,17 +115,18 @@ export default class Band extends Component<{}, BandProps> {
             ))}
           
         </div>
+
         <button 
         className="primaryBtn text-white font-bold py-1 px-2 rounded"
         onClick={() => changeSkin()}>
-            Change skin
+            Skin ändern
         </button>
 
         
         <button
         className="primaryBtn text-white font-bold py-1 px-2 rounded ml-5"
         onClick={() => deleteAll()}>
-            Delete All
+            <FaRedo />
         </button>
     </div>
     }
