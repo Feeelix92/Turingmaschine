@@ -124,7 +124,7 @@ export default class Band extends Component<{}, BandProps> {
 
         
         <button
-        className="primaryBtn text-white font-bold py-1 px-2 rounded ml-5"
+        className="primaryBtn text-white font-bold py-1 px-2 rounded ml-5 fixed right-5"
         onClick={() => deleteAll()}>
             <FaRedo />
         </button>

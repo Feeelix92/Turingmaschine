@@ -1,6 +1,7 @@
 import React, { Key, useEffect, useRef } from 'react'
 import EditField from "../Zustandsüberführungsfunktion/EditField";
 import { BandItemProps } from "../../interfaces/CommonInterfaces";
+import { FaTimes} from "react-icons/fa";
 
 
 export default function BandItem(props: BandItemProps) {
@@ -109,7 +110,7 @@ export default function BandItem(props: BandItemProps) {
         className={`band-container__band ${props.skin} flex justify-center ${props.pointer ? 'pointerBorder' : ''}`} 
         key={props.index}
         ref={wrapperRef}>    
-
+  
         {props.pointer ? (
           <div className="pointer"
           /*onMouseDown={e => startDrag(e)}
@@ -144,7 +145,11 @@ export default function BandItem(props: BandItemProps) {
         <EditField options={props.alphabet} updateValue={chooseOption} />        
       ) : (
         ""
-      )}        
+      )}  
+      <div className="self-center">
+         <FaTimes/>
+      </div>
+     
     </div>    
   )
 }

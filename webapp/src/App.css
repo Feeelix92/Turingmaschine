@@ -188,10 +188,10 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
     /* Runder Kopf vom Pointer: */
     background: var(--primary);
-    height: 25px;
-    width: 48px;
+    height: 30px;
+    width: 60px;
     border-radius: 300px 300px 0px 0px;
-    margin-left: -8px;
+    margin-left: -5px;
     margin-top: -35px;
 }
 
