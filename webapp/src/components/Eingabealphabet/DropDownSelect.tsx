@@ -24,10 +24,16 @@ export default function DropDownSelect() {
     ) {
         console.group('Value Changed');
         console.log(newValue);
-        if (!(newValue && newValue.value[0] == 'custom')) {
-            setOpenDialog(false);
-        } else {
-            setOpenDialog(true);
+        if (newValue) {
+            eingabeAlphabetOptionen.length = 0;
+            newValue.value.forEach((value) => {
+                if (value != 'custom') {
+                    setOpenDialog(false);
+                    eingabeAlphabetOptionen.push({label: value, value: value});
+                } else {
+                    setOpenDialog(true);
+                }
+            })
         }
         console.log(`action: ${actionMeta.action}`);
         console.groupEnd();
