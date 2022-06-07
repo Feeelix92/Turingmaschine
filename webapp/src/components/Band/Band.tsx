@@ -74,6 +74,16 @@ export default class Band extends Component<{}, BandProps> {
             currentBand: bandCopy,
         });
     };
+    
+    const deleteItemAt = (index: any) => {
+        let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
+
+        bandCopy[index as number] = {value: "", label: "B", pointer: false};
+        
+        this.setState({
+            currentBand: bandCopy,
+        });
+    };
 
     const setPointer = (index: any, value: boolean) => {
         console.log("setPointer function called!");
@@ -125,6 +135,7 @@ export default class Band extends Component<{}, BandProps> {
                 alphabet={eingabeAlphabetOptionen}
                 showEditField={true}
                 changeItemAt={changeItemAt}
+                deleteItemAt={deleteItemAt}
                 setPointer={setPointer}
                 setPointerAt={setPointerAt} //TODO
                 />                

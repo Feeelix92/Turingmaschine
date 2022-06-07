@@ -67,6 +67,7 @@ export interface BandItemProps {
   alphabet: EingabeAlphabetOption[];
   showEditField: boolean;
   changeItemAt: (index: Key, e: any) => void;
+  deleteItemAt: (index: Key) => void;
   setPointer: (index: Key, e: any) => void;
   setPointerAt: () => void;
 }

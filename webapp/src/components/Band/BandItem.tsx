@@ -17,6 +17,10 @@ export default function BandItem(props: BandItemProps) {
     setEditMode(false);
   }
 
+  function deleteValue(index: Key) {
+    props.deleteItemAt(props.index)
+  }
+
   const dragItem = useRef();
   const dragOverItem = useRef()
 
@@ -146,9 +150,11 @@ export default function BandItem(props: BandItemProps) {
       ) : (
         ""
       )}  
-      <div className="self-center">
-         <FaTimes/>
-      </div>
+      <button 
+      className="delete-value-button bg-transparent hover:bg-gray-100 text-gray-900 font-semibold hover:text-gray-900 rounded"
+      onClick={() => deleteValue(props.index)}>
+         x
+      </button>
      
     </div>    
   )

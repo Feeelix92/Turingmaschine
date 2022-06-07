@@ -231,6 +231,18 @@ Note: Beware of modifying this element as it can break the animations - you shou
   background-position: -60px 0;
 }
 
+/* ********** BAND ITEM ********** */
+.delete-value-button {
+  min-width: 20px;
+  max-width: 20px;
+  height: 28px;
+  padding: 0px;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 /* ********** TABLE ********** */
 
