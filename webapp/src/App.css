@@ -164,6 +164,25 @@ Note: Beware of modifying this element as it can break the animations - you shou
   border: 1px solid gray;
 }
 
+.left-band-button{
+  min-width: 30px;
+  max-width: 30px;
+  height: 40px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.right-band-button{
+  min-width: 30px;
+  max-width: 30px;
+  height: 40px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .pointerBorder{
   border: 3px solid var(--primary);
   border-top: 8px solid var(--primary);

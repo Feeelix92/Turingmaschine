@@ -36,8 +36,21 @@ export default class Band extends Component<{}, BandProps> {
         this.setState({
             currentBand: bandCopy
         });
-
     };
+
+    const addField = (position: string) => {
+        let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
+        
+        if (position === "before"){
+            bandCopy.unshift({value: "", label: "B", pointer: false})
+        } else {
+            bandCopy.push({value: "", label: "B", pointer: false})
+        }
+
+        this.setState({
+            currentBand: bandCopy
+        });
+    }
 
     const changeSkin = () => {     
         if(this.state.skin === "paper"){
@@ -71,8 +84,7 @@ export default class Band extends Component<{}, BandProps> {
         
         this.setState({
             currentBand: bandCopy,
-        });
-        
+        });        
     };
 
     
@@ -90,8 +102,7 @@ export default class Band extends Component<{}, BandProps> {
         
         this.setState({
             currentBand: bandCopy,
-        });
-        
+        });        
     };
 
     return <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 p-3 border rounded"}>
@@ -99,6 +110,11 @@ export default class Band extends Component<{}, BandProps> {
             <h2 >Band: </h2>
         </div>
         <div className="band-container flex flex-row mb-5 overflow-x-auto">
+            <button 
+            className="left-band-button bg-transparent hover:bg-gray-100 text-gray-900 font-semibold hover:text-gray-900  border border-gray-900 hover:border-transparent rounded"
+            onClick={() => addField('before')}>
+               +
+            </button>
             {this.state.currentBand.map((value, index) => (                
                 <BandItem
                 value={value.value}
@@ -113,6 +129,11 @@ export default class Band extends Component<{}, BandProps> {
                 setPointerAt={setPointerAt} //TODO
                 />                
             ))}
+            <button 
+            className="right-band-button bg-transparent hover:bg-gray-100 text-gray-900 font-semibold hover:text-gray-900 border border-gray-900 hover:border-transparent rounded"
+            onClick={() => addField('after')}>
+               +
+            </button>
           
         </div>
 

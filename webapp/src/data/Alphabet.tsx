@@ -49,10 +49,5 @@ export const initBand: EingabeAlphabetOption[] = [
     {value: "", label: "B", pointer: false},
     {value: "", label: "B", pointer: false},
     {value: "", label: "B", pointer: false},
-    {value: "", label: "B", pointer: false},
-    {value: "", label: "B", pointer: false},
-    {value: "", label: "B", pointer: false},
-    {value: "", label: "B", pointer: false},
-    {value: "", label: "B", pointer: false},
 ];
 
