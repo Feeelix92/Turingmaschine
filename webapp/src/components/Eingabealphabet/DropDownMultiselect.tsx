@@ -1,10 +1,10 @@
 import React from 'react';
 import CreatableSelect from 'react-select/creatable';
-import {EingabelphabetOption, eingabeAlphabetOptionen} from "../../data/Alphabet";
+import {defaultInputEingabeAlphabet, EingabeAlphabetOption} from "../../data/Alphabet";
 import {ActionMeta, OnChangeValue} from 'react-select';
-import {EingabealphabetCustomProp} from "../../interfaces/CommonInterfaces";
+import {EingabeAlphabetCustomProp} from "../../interfaces/CommonInterfaces";
 
-export default function MultiselectDropDown(props: EingabealphabetCustomProp) {
+export default function MultiselectDropDown(props: EingabeAlphabetCustomProp) {
     // valuesArray = current selected options as Array
     let valuesArray: string[] = [];
     // valuesString = current selected options as String to use it as label
@@ -16,8 +16,8 @@ export default function MultiselectDropDown(props: EingabealphabetCustomProp) {
      * @param actionMeta
      */
     function handleChange(
-        newValues: OnChangeValue<EingabelphabetOption, true>,
-        actionMeta: ActionMeta<EingabelphabetOption>,
+        newValues: OnChangeValue<EingabeAlphabetOption, true>,
+        actionMeta: ActionMeta<EingabeAlphabetOption>,
     ) {
         console.group('Value Changed');
         console.log(newValues);
@@ -44,7 +44,7 @@ export default function MultiselectDropDown(props: EingabealphabetCustomProp) {
                                      className={"text-black"}
                                      isMulti
                                      onChange={handleChange}
-                                     options={eingabeAlphabetOptionen}
+                                     options={defaultInputEingabeAlphabet}
                                      onInputChange={inputValue =>
                                          (inputValue.length <= 1 ? inputValue : inputValue.substr(0, 1))
                                      }
@@ -53,8 +53,12 @@ export default function MultiselectDropDown(props: EingabealphabetCustomProp) {
                 <div className={""}>
                     <button onClick={() => {
                         props.alphabet.push({label: "{" + valuesString + "}", value: valuesArray});
+                        props.alphabetOptions.length = 0;
+                        valuesArray.forEach((value) =>{
+                            props.alphabetOptions.push({label: value, value: value});
+                        })
                         props.customSelect(false);
-                    }} className={"bg-green-600 hover:bg-green-800 col-start-3 col-span-2 m-2"}>speichern
+                    }} className={"primaryBtn col-start-3 col-span-2 m-2"}>speichern
                     </button>
                 </div>
             </div>

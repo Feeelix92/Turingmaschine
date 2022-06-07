@@ -1,10 +1,10 @@
 import { Key } from "react";
-import { Eingabelphabet, EingabelphabetOption } from "../data/Alphabet";
+import { EingabeAlphabet, EingabeAlphabetOption } from "../data/Alphabet";
 
 export interface TableProps {
   header: string[];
   rows: Row[];
-  alphabet: EingabelphabetOption[];
+  alphabet: EingabeAlphabetOption[];
 }
 
 export interface Row {
@@ -40,7 +40,7 @@ export class Direction {
 export interface RowProps {
   index: Key;
   cells: Cell[];
-  alphabet: EingabelphabetOption[];
+  alphabet: EingabeAlphabetOption[];
   deleteRow: () => void;
   updateRow: (index: Key, cells: Cell[]) => void;
   setFinal: (index: Key) => void;
@@ -49,13 +49,13 @@ export interface RowProps {
 export interface CellProps {
   value: string | Zustand | Direction;
   index: Key;
-  alphabet: EingabelphabetOption[];
+  alphabet: EingabeAlphabetOption[];
   showEditField: boolean;
   updateCellValue: (index: Key, arg: string | Zustand | Direction) => void;
 }
 
 export interface EditProps {
-  options: EingabelphabetOption[];
+  options: EingabeAlphabetOption[];
   updateValue: (arg: string) => void;
 }
 
@@ -64,7 +64,7 @@ export interface BandItemProps {
   index: number;
   skin: string;
   pointer: boolean;
-  alphabet: EingabelphabetOption[];
+  alphabet: EingabeAlphabetOption[];
   showEditField: boolean;
   changeItemAt: (index: Key, e: any) => void;
   setPointer: (index: Key, e: any) => void;
@@ -72,13 +72,14 @@ export interface BandItemProps {
 }
 
 export interface BandProps {
-  alphabet: EingabelphabetOption[];
-  currentBand: EingabelphabetOption[];
+  alphabet: EingabeAlphabetOption[];
+  currentBand: EingabeAlphabetOption[];
   skin: string;
 }
 
-export interface EingabealphabetCustomProp {
-  alphabet: Eingabelphabet[];
+export interface EingabeAlphabetCustomProp {
+  alphabet: EingabeAlphabet[];
+  alphabetOptions: EingabeAlphabetOption[];
   customSelect: any;
 }
 

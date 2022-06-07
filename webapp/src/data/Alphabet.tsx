@@ -1,27 +1,41 @@
-export interface EingabelphabetOption {
+export interface DefaultInputEingabeAlphabet {
     label: string;
     value: string;
-    pointer: boolean;
 }
 
 /**
- * standard symbols for custom Eingabealphabet
+ * default symbols for custom Eingabealphabet
  */
-export const eingabeAlphabetOptionen: EingabelphabetOption[] = [
+export const defaultInputEingabeAlphabet: DefaultInputEingabeAlphabet[] = [
+    {label: '1', value: '1'},
+    {label: '0', value: '0'},
+    {label: '#', value: '#'}
+];
+
+export interface EingabeAlphabetOption {
+    label: string;
+    value: string;
+    pointer?: boolean;
+}
+
+/**
+ * default symbols for Eingabealphabet
+ */
+export const eingabeAlphabetOptionen: EingabeAlphabetOption[] = [
     {label: '1', value: '1', pointer: false},
     {label: '0', value: '0', pointer: false},
     {label: '#', value: '#', pointer: false}
 ];
 
-export interface Eingabelphabet {
+export interface EingabeAlphabet {
     label: string;
     value: string [];
 }
 
 /**
- * standard Eingabealphabete
+ * default Eingabealphabete
  */
-export const eingabeAlphabete: Eingabelphabet[] = [
+export const eingabeAlphabete: EingabeAlphabet[] = [
     {label: 'erstellen', value: ['custom']},
     {label: '{1}', value: ['1']},
     {label: '{1,#}', value: ['1', '#']},
@@ -29,7 +43,7 @@ export const eingabeAlphabete: Eingabelphabet[] = [
     {label: '{0,1,#}', value: ['0', '1', '#']},
 ];
 
-export const initBand: EingabelphabetOption[] = [
+export const initBand: EingabeAlphabetOption[] = [
     {value: "", label: "B", pointer: false},
     {value: "", label: "B", pointer: true},
     {value: "", label: "B", pointer: false},

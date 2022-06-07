@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Select, {ActionMeta, OnChangeValue} from 'react-select'
-import {Eingabelphabet, eingabeAlphabete} from "../../data/Alphabet";
+import {EingabeAlphabet, eingabeAlphabete, eingabeAlphabetOptionen} from "../../data/Alphabet";
 import MultiselectDropDown from "./DropDownMultiselect";
 
 export default function DropDownSelect() {
@@ -19,8 +19,8 @@ export default function DropDownSelect() {
      * @param actionMeta
      */
     function handleChange(
-        newValue: OnChangeValue<Eingabelphabet, false>,
-        actionMeta: ActionMeta<Eingabelphabet>
+        newValue: OnChangeValue<EingabeAlphabet, false>,
+        actionMeta: ActionMeta<EingabeAlphabet>
     ) {
         console.group('Value Changed');
         console.log(newValue);
@@ -45,7 +45,11 @@ export default function DropDownSelect() {
             />
             {openDialog &&
                 <div className={"text-white text-lg col-span-2"}>
-                    <MultiselectDropDown alphabet={eingabeAlphabete} customSelect={customSelect}  />
+                    <MultiselectDropDown
+                        alphabet={eingabeAlphabete}
+                        alphabetOptions={eingabeAlphabetOptionen}
+                        customSelect={customSelect}
+                    />
                 </div>
             }
         </div>

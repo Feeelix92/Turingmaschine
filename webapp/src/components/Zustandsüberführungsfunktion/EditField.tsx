@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import anime from 'animejs';
-import { EingabelphabetOption } from "../../data/Alphabet";
+import { EingabeAlphabetOption } from "../../data/Alphabet";
 import { EditProps } from "../../interfaces/CommonInterfaces";
 
 export default function EditField(props: EditProps) {
@@ -20,7 +20,7 @@ export default function EditField(props: EditProps) {
 
   return (
     <div className="editBtnDiv flex space-x-2 mt-6" role="group">
-      {props.options.map((value: EingabelphabetOption, key: React.Key) => (
+      {props.options.map((value: EingabeAlphabetOption, key: React.Key) => (
         <button
           key={key}
           type="button"
