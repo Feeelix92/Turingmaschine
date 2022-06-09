@@ -18,7 +18,6 @@ export default function DropDownSelect() {
         setOpenDialog(data);
         setSelectedOption(eingabeAlphabete[eingabeAlphabete.length - 1])
     }
-
     /**
      * function handleChange checks if the selected option has changed
      * @param newValue
@@ -51,7 +50,6 @@ export default function DropDownSelect() {
         console.groupEnd();
 
     }
-
     return (
         <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 grid grid-cols-2 gap-2 items-center"}>
             <p className={"p-3"}>Eingabealphabet ∑ =</p>
@@ -64,12 +62,19 @@ export default function DropDownSelect() {
             {/*    />*/}
             {/*}*/}
             {/*{!showPlaceholder &&*/}
-                <Select value={selectedOption}
-                        blurInputOnSelect={false}
-                        className={"text-black p-3 text-base"}
-                        onChange={handleChange}
-                        options={eingabeAlphabete}
-                />
+            <Select value={selectedOption}
+                    blurInputOnSelect={false}
+                    className={"text-black p-3 text-base"}
+                    onChange={handleChange}
+                    options={eingabeAlphabete}
+                    // @ts-ignore
+                    getOptionLabel={e => (
+                        <div className={"flex items-center place-content-start"}>
+                            {e.icon}
+                            <span className={"m-2"}>{e.label}</span>
+                        </div>
+                    )}
+            />
             {/*}*/}
             {openDialog &&
                 <div className={"text-white text-lg col-span-2"}>
