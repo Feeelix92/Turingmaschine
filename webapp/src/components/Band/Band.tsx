@@ -60,14 +60,7 @@ export default function Band () {
                +
             </button>
           
-        </div>
-
-        <button 
-        className="primaryBtn text-white font-bold py-1 px-2 rounded"
-        onClick={() => dispatch(bandChangeSkin())}>
-            Skin ändern
-        </button>
-        
+        </div>        
         <button
         className="primaryBtn text-white font-bold py-1 px-2 rounded ml-5 fixed right-5"
         onClick={() => dispatch(bandDeleteAll())}>

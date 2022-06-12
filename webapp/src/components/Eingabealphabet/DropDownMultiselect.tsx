@@ -1,10 +1,11 @@
 import React from 'react';
 import CreatableSelect from 'react-select/creatable';
+import {EingabeAlphabetOption} from "../../data/Alphabet";
 import {ActionMeta, OnChangeValue} from 'react-select';
 import {EingabeAlphabetCustomProp} from "../../interfaces/CommonInterfaces";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { alphabetPushToCustom } from '../../redux/generalStore';
+import { alphabetPushToCustom, defaultAlphabetOption4 } from '../../redux/generalStore';
 
 export default function MultiselectDropDown() {
 
@@ -29,11 +30,14 @@ export default function MultiselectDropDown() {
     ) {
         console.group('Value Changed');
         console.log(newValues);
+        
         // converting the object to an iteratable Array
         const optionsArray = Array.from(newValues.values());
         valuesArray = optionsArray.map(({value}) => value);
         valuesString = valuesArray.toString();
-        console.log(valuesString);
+        
+        console.log("valuesString: ",valuesString);
+        console.log("valuesArray: ",valuesArray);
         console.log(`action: ${actionMeta.action}`);
         console.groupEnd();
     }
@@ -52,19 +56,16 @@ export default function MultiselectDropDown() {
                                      className={"text-black"}
                                      isMulti
                                      onChange={handleChange}
-                                     options={defaultInputEingabeAlphabet}
+                                     options={defaultAlphabetOption4}
                                      onInputChange={inputValue =>
                                          (inputValue.length <= 1 ? inputValue : inputValue.substr(0, 1))
                                      }
                     />
                 </div>
                 <div className={""}>
-                    <button onClick={() => {
-                        dispatch(alphabetPushToCustom(valuesString))
-                        customAlphabet.push({label: "{" + valuesString + "}", value: valuesArray});
-                        alphabetOptions.length = 0;
+                    <button onClick={() => {                        
                         valuesArray.forEach((value) =>{
-                            alphabetOptions.push({label: value, value: value});
+                            dispatch(alphabetPushToCustom(value))
                         })
                         props.customSelect(false);
                     }} className={"primaryBtn col-start-3 col-span-2 m-2"}>speichern

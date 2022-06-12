@@ -89,7 +89,7 @@ export default function DropDownSelect() {
             {/*}*/}
             {openDialog &&
                 <div className={"text-white text-lg col-span-2"}>
-                    <MultiselectDropDown/>
+                    <MultiselectDropDown customSelect={true}/>
                 </div>
             }
         </div>
