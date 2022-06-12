@@ -38,7 +38,7 @@ export default function MultiselectDropDown(props: EingabeAlphabetCustomProp) {
                 <h2>Eingabealphabet hinzufügen:</h2>
             </div>
             <div className={""}>
-                <p>Sie können Zeichen eingeben oder Zeichen aus dem Standard-Eingabealphabet auswählen!</p>
+                <p>Sie können Zeichen eingeben oder Zeichen aus den Standard-Eingabealphabeten auswählen!</p>
                 <div className={"text-lg p-3"}>
                     <CreatableSelect allowCreateWhileLoading={false} formatCreateLabel={inputValue => inputValue + " hinzufügen"}
                                      noOptionsMessage={() => 'Geben Sie neues Zeichen ein!'}
