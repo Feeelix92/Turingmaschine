@@ -55,7 +55,7 @@ export default function Row(props: RowProps) {
             />
           ))}
       {visible === true ? (
-        <td className="py-4 w-3/6 whitespace-nowrap text-sm font-medium text-gray-900">
+        <td className="py-4 w-3/6 whitespace-nowrap text-sm font-medium text-gray-900 border-r">
           STOPP
         </td>
       ) : null}
