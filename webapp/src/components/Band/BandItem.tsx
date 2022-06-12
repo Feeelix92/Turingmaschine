@@ -1,7 +1,7 @@
 import React, { Key, useEffect, useRef } from 'react'
 import EditField from "../Zustandsüberführungsfunktion/EditField";
 import { BandItemProps } from "../../interfaces/CommonInterfaces";
-import { FaTimes} from "react-icons/fa";
+import { FaTimes, FaTrash} from "react-icons/fa";
 
 
 export default function BandItem(props: BandItemProps) {
@@ -146,16 +146,23 @@ export default function BandItem(props: BandItemProps) {
         onClick={toggleEditMode}        
       />           
       {editMode && props.showEditField ? (        
-        <EditField options={props.alphabet} updateValue={chooseOption} />        
+        <EditField options={props.alphabet} updateValue={chooseOption} />   
+            
       ) : (
         ""
       )}  
-      <button 
-      className="delete-value-button bg-transparent hover:bg-gray-100 text-gray-900 font-semibold hover:text-gray-900 rounded"
-      onClick={() => deleteValue(props.index)}>
-         x
-      </button>
-     
+     {editMode && props.showEditField ? (       
+        <a
+        href="#"
+        className="delete-value-button w-full text-gray-700 focus:outline-none items-center"
+        onClick={() => deleteValue(props.index)}
+      >
+        <FaTrash />
+      </a>
+            
+      ) : (
+        ""
+      )}     
     </div>    
   )
 }

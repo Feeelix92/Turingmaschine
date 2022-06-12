@@ -66,17 +66,23 @@ export default class Band extends Component<{}, BandProps> {
         }
     };
 
+    function test(){                   
+        useEffect (() => {
+            console.log("useEffect",currentBand)
+        },[currentBand])
+    }
+
     /**
      * function changeItemAt changes the Band at the index
      * @param index
      * @param value
      */
     const changeItemAt = (index: any, value: string) => { 
-        currentBand[index as number].value = value;
-        
+        currentBand[index as number].value = value;        
         this.setState({
             currentBand: currentBand,
         });
+        console.log("changed Band at: ",index, " -> ",currentBand[index as number].value)   
     };
 
     const deleteItemAt = (index: any) => {

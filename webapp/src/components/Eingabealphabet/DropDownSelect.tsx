@@ -44,7 +44,7 @@ export default function DropDownSelect() {
             for(let i = 0; i < currentBand.length; i++){                  
                 currentBand[i] = {value: "", label: "B", pointer: currentBand[i].pointer}         
             }
-            console.log(currentBand)
+            console.log("cleared band: ",currentBand)
         }
         console.log(`action: ${actionMeta.action}`);
         console.groupEnd();
