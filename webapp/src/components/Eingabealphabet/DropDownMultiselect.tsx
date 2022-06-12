@@ -1,10 +1,18 @@
 import React from 'react';
 import CreatableSelect from 'react-select/creatable';
-import {defaultInputEingabeAlphabet, EingabeAlphabetOption} from "../../data/Alphabet";
 import {ActionMeta, OnChangeValue} from 'react-select';
 import {EingabeAlphabetCustomProp} from "../../interfaces/CommonInterfaces";
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { alphabetPushToCustom } from '../../redux/generalStore';
 
-export default function MultiselectDropDown(props: EingabeAlphabetCustomProp) {
+export default function MultiselectDropDown() {
+
+    const currentAlphabet = useSelector((state: RootState) => state.general.currentAlphabet)
+    const alphabetOptions = useSelector((state: RootState) => state.general.alphabetOptions)
+    const customAlphabet = useSelector((state: RootState) => state.general.alphabetOptions)
+    const dispatch = useDispatch()
+    
     // valuesArray = current selected options as Array
     let valuesArray: string[] = [];
     // valuesString = current selected options as String to use it as label
@@ -52,10 +60,11 @@ export default function MultiselectDropDown(props: EingabeAlphabetCustomProp) {
                 </div>
                 <div className={""}>
                     <button onClick={() => {
-                        props.alphabet.push({label: "{" + valuesString + "}", value: valuesArray});
-                        props.alphabetOptions.length = 0;
+                        dispatch(alphabetPushToCustom(valuesString))
+                        customAlphabet.push({label: "{" + valuesString + "}", value: valuesArray});
+                        alphabetOptions.length = 0;
                         valuesArray.forEach((value) =>{
-                            props.alphabetOptions.push({label: value, value: value});
+                            alphabetOptions.push({label: value, value: value});
                         })
                         props.customSelect(false);
                     }} className={"primaryBtn col-start-3 col-span-2 m-2"}>speichern

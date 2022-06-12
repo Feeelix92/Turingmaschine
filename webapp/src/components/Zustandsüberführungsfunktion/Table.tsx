@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { eingabeAlphabetOptionen } from "../../data/Alphabet";
+import { useSelector } from "react-redux";
 import {
   Cell,
   Direction,
@@ -8,6 +8,7 @@ import {
   TableProps,
   Zustand,
 } from "../../interfaces/CommonInterfaces";
+import { RootState } from "../../redux/store";
 import Row from "./Row";
 
 export default class Table extends Component<{}, TableProps> {
@@ -15,7 +16,6 @@ export default class Table extends Component<{}, TableProps> {
     super(props);
     this.state = {
       header: ["Zustand", "Lese", "Neuer Zustand", "Schreibe", "Gehe nach"],
-      alphabet: eingabeAlphabetOptionen,
       rows: [
         {
           cells: [
@@ -38,7 +38,8 @@ export default class Table extends Component<{}, TableProps> {
         },
       ],
     };
-  }
+  }  
+
 
   addRow() {
     // create flat copy of all existing rows
