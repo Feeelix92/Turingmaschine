@@ -53,13 +53,14 @@ export default function DropDownSelect() {
             if (newValue.value !== '0') {
                 dispatch(alphabetChangeCurrent(newValue?.value))
                 setSelectedOption(newValue)
-                dispatch(bandDeleteAll())
             }else{
+                dispatch(alphabetChangeCurrent(newValue?.value))
+                setSelectedOption(newValue)
                 setOpenDialog(true)
             }
+            dispatch(bandDeleteAll())
         }
         console.groupEnd();
-
     }
     return (
         <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 grid grid-cols-2 gap-2 items-center"}>
@@ -89,7 +90,9 @@ export default function DropDownSelect() {
             {/*}*/}
             {openDialog &&
                 <div className={"text-white text-lg col-span-2"}>
-                    <MultiselectDropDown customSelect={true}/>
+                    <MultiselectDropDown 
+                    customSelect={true}
+                    onCloseDialog={() => setOpenDialog(false)}/>
                 </div>
             }
         </div>

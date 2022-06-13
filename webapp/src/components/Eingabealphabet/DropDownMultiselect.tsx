@@ -5,9 +5,10 @@ import {ActionMeta, OnChangeValue} from 'react-select';
 import {EingabeAlphabetCustomProp} from "../../interfaces/CommonInterfaces";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { alphabetPushToCustom, defaultAlphabetOption4 } from '../../redux/generalStore';
+import { alphabetDeleteCustom, alphabetPushToCustom, defaultAlphabetOption4 } from '../../redux/generalStore';
+import { GiConsoleController } from 'react-icons/gi';
 
-export default function MultiselectDropDown() {
+export default function MultiselectDropDown(props: EingabeAlphabetCustomProp) {
 
     const currentAlphabet = useSelector((state: RootState) => state.general.currentAlphabet)
     const alphabetOptions = useSelector((state: RootState) => state.general.alphabetOptions)
@@ -63,11 +64,13 @@ export default function MultiselectDropDown() {
                     />
                 </div>
                 <div className={""}>
-                    <button onClick={() => {                        
+                    <button onClick={() => {   
+                        //dispatch(alphabetDeleteCustom())               
                         valuesArray.forEach((value) =>{
                             dispatch(alphabetPushToCustom(value))
                         })
-                        props.customSelect(false);
+                        // props.customSelect(false);
+                        props.onCloseDialog()
                     }} className={"primaryBtn col-start-3 col-span-2 m-2"}>speichern
                     </button>
                 </div>

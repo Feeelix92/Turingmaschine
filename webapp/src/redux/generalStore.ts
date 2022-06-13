@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, current, PayloadAction } from '@reduxjs/toolkit'
 import { EingabeAlphabet, EingabeAlphabetDialog, EingabeAlphabetOption } from '../data/Alphabet';
 import {CgAddR} from "react-icons/all";
 
@@ -71,16 +71,16 @@ export const generalSlice = createSlice({
         } 
     },
     alphabetPushToCustom: (state, value: PayloadAction<string>) => {
-        state.customAlphabet.push({label: value.payload, value: value.payload});      
+        state.customAlphabet.push({label: value.payload, value: value.payload});     
+        state.currentAlphabet = state.customAlphabet
     },
-    alphabetDeleteFromCustom: (state, index:PayloadAction<number>) => {
-        state.customAlphabet.splice(index.payload, 1);      
-    },
-    
+    alphabetDeleteCustom: (state) => {
+        state.customAlphabet = [] 
+    },   
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { alphabetChangeCurrent, alphabetPushToCustom, alphabetDeleteFromCustom } = generalSlice.actions
+export const { alphabetChangeCurrent, alphabetPushToCustom, alphabetDeleteCustom } = generalSlice.actions
 
 export default generalSlice.reducer

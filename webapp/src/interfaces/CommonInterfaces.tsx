@@ -77,9 +77,8 @@ export interface BandProps {
 }
 
 export interface EingabeAlphabetCustomProp {
-  alphabet: EingabeAlphabet[];
-  alphabetOptions: EingabeAlphabetOption[];
   customSelect: any;
+  onCloseDialog: () => void;
 }
 
 export const directions: Direction[] = [
