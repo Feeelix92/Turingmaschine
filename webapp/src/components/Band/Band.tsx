@@ -236,14 +236,14 @@ export default class Band extends Component<{}, BandProps> {
           <div className="flex mb-4">
             <div className="w-3/4 text-left">
                 <button
-                    className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 justify-self-start"
+                    className={"primaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"}
                     onClick={() => setPointerLeft()}
                     >
                     <FaArrowAltCircleLeft/>
                 </button>
 
                 <button
-                    className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
+                    className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"
                     onClick={() => setPointerRight()}
                     >
                     <FaArrowAltCircleRight/>
