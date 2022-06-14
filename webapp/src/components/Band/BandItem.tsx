@@ -149,7 +149,7 @@ export default function BandItem(props: BandItemProps) {
         value={props.value}
         onChange={(e) => checkValue(props.index, e.target.value)}
         onClick={toggleEditMode}
-        onDragOver={(e) => props.movePointer(props.index)}
+        onDragOver={(e) => props.setPointerAt(props.index)}
       />
       {editMode && props.showEditField ? (
         <EditField options={props.alphabet} updateValue={chooseOption} />

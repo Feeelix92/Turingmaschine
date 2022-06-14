@@ -113,19 +113,29 @@ export default class Band extends Component<{}, BandProps> {
       });
     };
 
-    const setPointerAt = () => {
-      console.log("setPointerAt function called!");
+    const setPointerAt = (index: number) => {
+      let newIndex = index;
 
-      // TODO: Nicht richtige Indexdaten, nur zum Test:
-      let oldIndex = defaultPointerPos;
-      let newIndex = defaultPointerPos + 1;
+      if(currentBand[newIndex as number] != null) {
 
-      currentBand[oldIndex as number].pointer = false;
-      currentBand[newIndex as number].pointer = true;
+        // Alle alten Pointer entfernen:
+        for (let index = 0; index < bandLength; index++) {
+            currentBand[index] = { pointer: false };
+        }
+
+        this.setState({
+            currentBand: currentBand,
+        });
+
+        // Neuen Pointer auf true:
+        currentBand[newIndex as number].pointer = true;
+      }
+      
 
       this.setState({
         currentBand: currentBand,
       });
+      
     };
 
     const logPointerPos = (idx: number) => {
