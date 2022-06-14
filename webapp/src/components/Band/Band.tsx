@@ -2,7 +2,7 @@ import { Component, useEffect } from "react";
 import BandItem from "./BandItem";
 import { BandProps } from "../../interfaces/CommonInterfaces";
 import { eingabeAlphabetOptionen, currentBand } from "../../data/Alphabet";
-import { FaRedo } from "react-icons/fa";
+import { FaRedo, FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
 
 export default class Band extends Component<{}, BandProps> {
   constructor(props: BandProps) {
@@ -233,27 +233,31 @@ export default class Band extends Component<{}, BandProps> {
           Skin ändern
         </button>
           */}
-          <div className="flex justify-end mx-5">
-            <button
-                className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
-                onClick={() => setPointerLeft()}
-                >
-                Links
-            </button>
+          <div className="flex mb-4">
+            <div className="w-3/4 text-left">
+                <button
+                    className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 justify-self-start"
+                    onClick={() => setPointerLeft()}
+                    >
+                    <FaArrowAltCircleLeft/>
+                </button>
 
-            <button
-                className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
-                onClick={() => setPointerRight()}
-                >
-                Rechts
-            </button>
+                <button
+                    className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
+                    onClick={() => setPointerRight()}
+                    >
+                    <FaArrowAltCircleRight/>
+                </button>
+            </div>
 
-            <button
-                className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
-                onClick={() => deleteAll()}
-                >
-                <FaRedo />
-            </button>
+            <div className="w-1/4 text-right">   
+                <button
+                    className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
+                    onClick={() => deleteAll()}
+                    >
+                    <FaRedo />
+                </button>
+            </div>
           </div>
 
       </div>
