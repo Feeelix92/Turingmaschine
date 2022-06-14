@@ -119,7 +119,7 @@ export default class Band extends Component<{}, BandProps> {
         });        
     };
 
-    return <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 p-3 border rounded"}>
+    return <div className={"bg-white w-screen border rounded"}>
         <div className="mb-5">
             <h2 >Band: </h2>
         </div>
