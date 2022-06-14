@@ -20,12 +20,20 @@ export default class Table extends Component<{}, TableProps> {
         {
           cells: [
             {
-              value: new Zustand(status[0].value, status[0].label),
+              value: new Zustand(
+                status[0].value,
+                status[0].label,
+                status[0].isFinal
+              ),
               editField: false,
             },
             { value: "1", editField: true },
             {
-              value: new Zustand(status[0].value, status[0].label),
+              value: new Zustand(
+                status[0].value,
+                status[0].label,
+                status[0].isFinal
+              ),
               editField: false,
             },
             { value: "0", editField: true },
@@ -48,12 +56,20 @@ export default class Table extends Component<{}, TableProps> {
     newRows.push({
       cells: [
         {
-          value: new Zustand(status[0].value, status[0].label),
+          value: new Zustand(
+            status[0].value,
+            status[0].label,
+            status[0].isFinal
+          ),
           editField: false,
         },
         { value: "1", editField: true },
         {
-          value: new Zustand(status[0].value, status[0].label),
+          value: new Zustand(
+            status[0].value,
+            status[0].label,
+            status[0].isFinal
+          ),
           editField: false,
         },
         { value: "0", editField: true },
@@ -91,23 +107,12 @@ export default class Table extends Component<{}, TableProps> {
     // overwrite rows at certain index with new value
     newRows[i as number].cells = cells;
 
-    // update the rows in state with our new rows-array
-    this.setState({
-      rows: newRows,
-    });
-  }
-
-  setFinal(i: React.Key) {
-    // create flat copy of all existing rows
-    const newRows = this.state.rows.slice(0, this.state.rows.length);
-
-    // overwrite rows at certain index with new value
-    newRows[i as number].isFinal = !newRows[i as number].isFinal;
-
-    if (newRows[i as number].isFinal) {
-      alert("Als Finalzustand markiert!");
-    } else {
-      alert("Finalzustand entfernt!");
+    if (cells[0].value instanceof Zustand) {
+      if (cells[0].value.isFinal === true) {
+        newRows[i as number].isFinal = true;
+      } else {
+        newRows[i as number].isFinal = false;
+      }
     }
 
     // update the rows in state with our new rows-array
@@ -148,10 +153,10 @@ export default class Table extends Component<{}, TableProps> {
                       key={key}
                       index={key}
                       cells={value.cells}
+                      isFinal={value.isFinal}
                       alphabet={this.state.alphabet}
                       deleteRow={() => this.deleteRow(key)}
                       updateRow={this.updateRow.bind(this)}
-                      setFinal={this.setFinal.bind(this)}
                     />
                   ))}
                 </tbody>

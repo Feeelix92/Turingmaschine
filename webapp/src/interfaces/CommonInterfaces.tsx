@@ -20,10 +20,12 @@ export interface Cell {
 export class Zustand {
   label: string;
   value: string;
+  isFinal: boolean;
 
-  constructor(label: string, value: string) {
+  constructor(label: string, value: string, isFinal: boolean) {
     this.label = label;
     this.value = value;
+    this.isFinal = isFinal;
   }
 }
 
@@ -43,7 +45,7 @@ export interface RowProps {
   alphabet: EingabeAlphabetOption[];
   deleteRow: () => void;
   updateRow: (index: Key, cells: Cell[]) => void;
-  setFinal: (index: Key) => void;
+  isFinal: boolean;
 }
 
 export interface CellProps {
@@ -91,7 +93,7 @@ export const directions: Direction[] = [
 ];
 
 export const status: Zustand[] = [
-  new Zustand("q1", "q1"),
-  new Zustand("q2", "q2"),
-  new Zustand("q3", "q3"),
+  new Zustand("q1", "q1", false),
+  new Zustand("q2", "q2", false),
+  new Zustand("q3", "q3", true),
 ];
