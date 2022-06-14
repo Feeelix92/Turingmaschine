@@ -1,11 +1,10 @@
-import React, { Key, useEffect, useRef } from 'react'
+import React, { Key, useEffect, useRef } from "react";
 import EditField from "../Zustandsüberführungsfunktion/EditField";
 import { BandItemProps } from "../../interfaces/CommonInterfaces";
-import { FaTimes, FaTrash} from "react-icons/fa";
-
+import { FaTimes, FaTrash } from "react-icons/fa";
 
 export default function BandItem(props: BandItemProps) {
-  const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();  
+  const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
 
   const [editMode, setEditMode] = React.useState(false);
   function toggleEditMode() {
@@ -18,11 +17,11 @@ export default function BandItem(props: BandItemProps) {
   }
 
   function deleteValue(index: Key) {
-    props.deleteItemAt(props.index)
+    props.deleteItemAt(props.index);
   }
 
   const dragItem = useRef();
-  const dragOverItem = useRef()
+  const dragOverItem = useRef();
 
   const dragStart = (e: React.DragEvent<HTMLDivElement>, position: any) => {
     dragItem.current = position;
@@ -33,6 +32,10 @@ export default function BandItem(props: BandItemProps) {
     // TODO: Richtige position -> Von BandItems?
     dragOverItem.current = position;
     console.log("dragEnter " + e);
+  };
+
+  const dragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    console.log(e);
   };
 
   /* TODO: Set Boolean pointer in parent to true for new position, and false for old position */
@@ -80,7 +83,7 @@ export default function BandItem(props: BandItemProps) {
     props.alphabet.map((entry) => {
       if (entry.value === value || value === "") {
         props.changeItemAt(index, value);
-        allowed = true;        
+        allowed = true;
       }
     });
 
@@ -110,13 +113,16 @@ export default function BandItem(props: BandItemProps) {
   */
 
   return (
-    <div 
-        className={`band-container__band ${props.skin} flex justify-center ${props.pointer ? 'pointerBorder' : ''}`} 
-        key={props.index}
-        ref={wrapperRef}>    
-  
-        {props.pointer ? (
-          <div className="pointer"
+    <div
+      className={`band-container__band ${props.skin} flex justify-center ${
+        props.pointer ? "pointerBorder" : ""
+      }`}
+      key={props.index}
+      ref={wrapperRef}
+    >
+      {props.pointer ? (
+        <div
+          className="pointer"
           /*onMouseDown={e => startDrag(e)}
           onMouseMove={e => onDrag(e)}
           onMouseUp={e => endDrag(e)}*/
@@ -125,44 +131,42 @@ export default function BandItem(props: BandItemProps) {
           onDragStart={(e) => dragStart(e, props.index)}
           onDragEnter={(e) => dragEnter(e, props.index)}
           onDragEnd={drop}
-          
           /* Pointer mit Touch bewegen */
           onTouchStart={(e) => dragStart(e, props.index)}
           onTouchMove={(e) => dragEnter(e, props.index)}
           onTouchEnd={drop}
+          draggable
+        ></div>
+      ) : (
+        ""
+      )}
 
-          draggable></div>
-        ) : (
-          ""
-        )}  
-           
-        <input
+      <input
         type="text"
         name="value"
         id="valueInput"
         className="bandInput bg-transparent w-8 "
         value={props.value}
-        onChange={e => checkValue(props.index, e.target.value)}
-        onClick={toggleEditMode}        
-      />           
-      {editMode && props.showEditField ? (        
-        <EditField options={props.alphabet} updateValue={chooseOption} />   
-            
+        onChange={(e) => checkValue(props.index, e.target.value)}
+        onClick={toggleEditMode}
+        onDragOver={(e) => props.movePointer(props.index)}
+      />
+      {editMode && props.showEditField ? (
+        <EditField options={props.alphabet} updateValue={chooseOption} />
       ) : (
         ""
-      )}  
-     {editMode && props.showEditField ? (       
+      )}
+      {editMode && props.showEditField ? (
         <a
-        href="#"
-        className="delete-value-button w-full text-gray-700 focus:outline-none items-center"
-        onClick={() => deleteValue(props.index)}
-      >
-        <FaTrash />
-      </a>
-            
+          href="#"
+          className="delete-value-button w-full text-gray-700 focus:outline-none items-center"
+          onClick={() => deleteValue(props.index)}
+        >
+          <FaTrash />
+        </a>
       ) : (
         ""
-      )}     
-    </div>    
-  )
+      )}
+    </div>
+  );
 }

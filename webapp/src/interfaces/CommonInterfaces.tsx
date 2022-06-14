@@ -72,6 +72,7 @@ export interface BandItemProps {
   deleteItemAt: (index: Key) => void;
   setPointer: (index: Key, e: any) => void;
   setPointerAt: () => void;
+  movePointer: (arg: number) => void;
 }
 
 export interface BandProps {
