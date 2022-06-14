@@ -92,25 +92,6 @@ export default function BandItem(props: BandItemProps) {
     }
   }
 
-  let dragModeActivated = false;
-
-  /*
-  function startDrag (e: MouseEvent, position: any) {
-    dragModeActivated = true;
-    dragItem.current = position;
-    console.log("startDrag: ", e)
-  }
-  function onDrag (e: MouseEvent, position: any) {
-    if (dragModeActivated){
-      console.log("onDrag: ", e)
-      dragOverItem.current = position;
-    }
-  }
-  function endDrag (e: MouseEvent) {
-    dragModeActivated = false;
-    console.log("endDrag: ", e)
-  }
-  */
 
   return (
     <div
@@ -127,14 +108,7 @@ export default function BandItem(props: BandItemProps) {
           onMouseMove={e => onDrag(e)}
           onMouseUp={e => endDrag(e)}*/
 
-          /* Pointer mit Maus bewegen */
-          onDragStart={(e) => dragStart(e, props.index)}
-          onDragEnter={(e) => dragEnter(e, props.index)}
-          onDragEnd={drop}
-          /* Pointer mit Touch bewegen */
-          onTouchStart={(e) => dragStart(e, props.index)}
-          onTouchMove={(e) => dragEnter(e, props.index)}
-          onTouchEnd={drop}
+
           draggable
         ></div>
       ) : (
@@ -150,6 +124,7 @@ export default function BandItem(props: BandItemProps) {
         onChange={(e) => checkValue(props.index, e.target.value)}
         onClick={toggleEditMode}
         onDragOver={(e) => props.setPointerAt(props.index)}
+        
       />
       {editMode && props.showEditField ? (
         <EditField options={props.alphabet} updateValue={chooseOption} />

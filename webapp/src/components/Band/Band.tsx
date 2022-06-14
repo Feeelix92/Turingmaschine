@@ -103,15 +103,6 @@ export default class Band extends Component<{}, BandProps> {
       });
     };
 
-    const setPointer = (index: any, value: boolean) => {
-      console.log("setPointer function called!");
-
-      currentBand[index as number].pointer = value;
-
-      this.setState({
-        currentBand: currentBand,
-      });
-    };
 
     const setPointerAt = (index: number) => {
       let newIndex = index;
@@ -130,13 +121,73 @@ export default class Band extends Component<{}, BandProps> {
         // Neuen Pointer auf true:
         currentBand[newIndex as number].pointer = true;
       }
-      
 
       this.setState({
         currentBand: currentBand,
       });
-      
     };
+
+    //TODO: Für Touch nach rechts & links:
+    const setPointerLeft = () => {
+  
+        let oldPointerIndex = 0;
+
+          // Alle alten Pointer entfernen:
+          for (let index = 0; index < bandLength; index++) {
+            if(currentBand[index].pointer == true) {
+                oldPointerIndex = index;
+            }
+              currentBand[index] = { pointer: false };
+          }
+
+          let newPointerIndex = oldPointerIndex;
+          if(oldPointerIndex>0 ) {
+            newPointerIndex = oldPointerIndex - 1;
+          }
+  
+          this.setState({
+              currentBand: currentBand,
+          });
+  
+          // Neuen Pointer auf true:
+          currentBand[newPointerIndex as number].pointer = true;
+
+          
+        this.setState({
+          currentBand: currentBand,
+        });
+      };
+
+          //TODO: Für Touch nach rechts & links:
+    const setPointerRight = () => {
+  
+        let oldPointerIndex = 0;
+
+          // Alle alten Pointer entfernen:
+          for (let index = 0; index < bandLength; index++) {
+            if(currentBand[index].pointer == true) {
+                oldPointerIndex = index;
+            }
+              currentBand[index] = { pointer: false };
+          }
+
+          let newPointerIndex = oldPointerIndex;
+          if(oldPointerIndex < bandLength-1 ) {
+            newPointerIndex = oldPointerIndex + 1;
+          }
+  
+          this.setState({
+              currentBand: currentBand,
+          });
+  
+          // Neuen Pointer auf true:
+          currentBand[newPointerIndex as number].pointer = true;
+
+          
+        this.setState({
+          currentBand: currentBand,
+        });
+      };
 
     const logPointerPos = (idx: number) => {
       console.log(idx);
@@ -162,7 +213,6 @@ export default class Band extends Component<{}, BandProps> {
               showEditField={true}
               changeItemAt={changeItemAt}
               deleteItemAt={deleteItemAt}
-              setPointer={setPointer}
               setPointerAt={setPointerAt} //TODO
               movePointer={logPointerPos}
             />
@@ -184,6 +234,20 @@ export default class Band extends Component<{}, BandProps> {
         </button>
           */}
           <div className="flex justify-end mx-5">
+            <button
+                className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
+                onClick={() => setPointerLeft()}
+                >
+                Links
+            </button>
+
+            <button
+                className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
+                onClick={() => setPointerRight()}
+                >
+                Rechts
+            </button>
+
             <button
                 className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
                 onClick={() => deleteAll()}
