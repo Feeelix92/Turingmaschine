@@ -45,9 +45,7 @@ export const generalSlice = createSlice({
   },
   reducers: {    
     /**
-     * function bandChangeItemAt changes the Band at the index
-     * @param index
-     * @param value
+     * function alphabetChangeCurrent changes current Alphabet
      */
     alphabetChangeCurrent: (state, option: PayloadAction<string>) => { 
         switch (option.payload) {
@@ -70,13 +68,21 @@ export const generalSlice = createSlice({
                 break;
         } 
     },
+    /**
+     * function alphabetPushToCustom pushes a new Value to the customAlphabet
+     * @param value
+     */
     alphabetPushToCustom: (state, value: PayloadAction<string>) => {
         state.customAlphabet.push({label: value.payload, value: value.payload});     
         state.currentAlphabet = state.customAlphabet
     },
+    /**
+     * function alphabetDeleteCustom deletes the customAlphabet
+     * @param value
+     */
     alphabetDeleteCustom: (state) => {
         state.customAlphabet = [] 
-    },   
+    }  
   },
 })
 

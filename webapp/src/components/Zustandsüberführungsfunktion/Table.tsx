@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { render } from "react-dom";
 import { useSelector } from "react-redux";
+import { eingabeAlphabetOptionen } from "../../data/Alphabet";
 import {
   Cell,
   Direction,
@@ -16,6 +18,7 @@ export default class Table extends Component<{}, TableProps> {
     super(props);
     this.state = {
       header: ["Zustand", "Lese", "Neuer Zustand", "Schreibe", "Gehe nach"],
+      alphabet: eingabeAlphabetOptionen,
       rows: [
         {
           cells: [
@@ -38,7 +41,7 @@ export default class Table extends Component<{}, TableProps> {
         },
       ],
     };
-  }  
+  }
 
 
   addRow() {
@@ -115,10 +118,16 @@ export default class Table extends Component<{}, TableProps> {
     this.setState({
       rows: newRows,
     });
+
   }
 
   render() {
     const loadedRows = this.state.rows;
+
+    
+    this.setState({
+      alphabet: useSelector((state: RootState) => state.general.currentAlphabet),
+    });
 
     return (
       <div className="flex flex-col">

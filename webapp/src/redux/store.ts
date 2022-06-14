@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import generalReducer from './generalStore'
 import bandReducer from './bandStore'
+import tableReducer from './tableStore'
 
 export const store = configureStore({
   reducer: {
     general: generalReducer,
     band: bandReducer,
+    table: tableReducer,
   },
 })
 

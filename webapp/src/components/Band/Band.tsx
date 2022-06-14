@@ -12,8 +12,7 @@ export default function Band () {
 
     const currentBand = useSelector((state: RootState) => state.band.currentBand)
     const currentAlphabet = useSelector((state: RootState) => state.general.currentAlphabet)
-    const dispatch = useDispatch()
- 
+    const dispatch = useDispatch() 
 
     const setPointer = (index: any, value: boolean) => {
         console.log("setPointer function called!");
@@ -39,7 +38,7 @@ export default function Band () {
         <div className="band-container flex flex-row mb-5 overflow-x-auto">
             <button 
             className="left-band-button bg-transparent hover:bg-gray-100 text-gray-900 font-semibold hover:text-gray-900  border border-gray-900 hover:border-transparent rounded"
-            onClick={() => bandAddField('before')}>
+            onClick={() => dispatch(bandAddField('before'))}>
                +
             </button>
             {currentBand.map((value, index) => (                
@@ -56,7 +55,7 @@ export default function Band () {
             ))}
             <button 
             className="right-band-button bg-transparent hover:bg-gray-100 text-gray-900 font-semibold hover:text-gray-900 border border-gray-900 hover:border-transparent rounded"
-            onClick={() => bandAddField('after')}>
+            onClick={() => dispatch(bandAddField('after'))}>
                +
             </button>
           
