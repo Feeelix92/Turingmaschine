@@ -144,9 +144,6 @@ export default class Band extends Component<{}, BandProps> {
 
     return (
       <div className={"bg-white w-screen border rounded"}>
-        <div className="mb-5">
-          <h2>Band: </h2>
-        </div>
         <div className="band-container flex flex-row mb-5 overflow-x-auto">
           <button
             className="left-band-button bg-transparent hover:bg-gray-100 text-gray-900 font-semibold hover:text-gray-900  border border-gray-900 hover:border-transparent rounded"
@@ -178,19 +175,23 @@ export default class Band extends Component<{}, BandProps> {
           </button>
         </div>
 
+{/*
         <button
           className="primaryBtn text-white font-bold py-1 px-2 rounded"
           onClick={() => changeSkin()}
         >
           Skin ändern
         </button>
+          */}
+          <div className="flex justify-end mx-5">
+            <button
+                className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
+                onClick={() => deleteAll()}
+                >
+                <FaRedo />
+            </button>
+          </div>
 
-        <button
-          className="primaryBtn text-white font-bold py-1 px-2 rounded ml-5 fixed right-5"
-          onClick={() => deleteAll()}
-        >
-          <FaRedo />
-        </button>
       </div>
     );
   }
