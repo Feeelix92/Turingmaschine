@@ -86,7 +86,9 @@ export default class Band extends Component<{}, BandProps> {
     };
 
     const deleteItemAt = (index: any) => {
-        currentBand[index as number] = {value: "", label: "B", pointer: false};
+        const thisPointer = currentBand[index].pointer;
+
+        currentBand[index as number] = {value: "", label: "B", pointer: thisPointer};
         
         this.setState({
             currentBand: currentBand,
