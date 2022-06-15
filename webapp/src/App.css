@@ -71,6 +71,10 @@ button {
   
 }
 
+.control {
+  background-color: white;
+}
+
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: relative;

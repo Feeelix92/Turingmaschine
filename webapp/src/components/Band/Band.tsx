@@ -127,7 +127,7 @@ export default class Band extends Component<{}, BandProps> {
       });
     };
 
-    //TODO: Für Touch nach rechts & links:
+    // Für Touch nach links:
     const setPointerLeft = () => {
   
         let oldPointerIndex = 0;
@@ -158,7 +158,7 @@ export default class Band extends Component<{}, BandProps> {
         });
       };
 
-          //TODO: Für Touch nach rechts & links:
+      //Für Touch nach rechts:
     const setPointerRight = () => {
   
         let oldPointerIndex = 0;
@@ -213,7 +213,7 @@ export default class Band extends Component<{}, BandProps> {
               showEditField={true}
               changeItemAt={changeItemAt}
               deleteItemAt={deleteItemAt}
-              setPointerAt={setPointerAt} //TODO
+              setPointerAt={setPointerAt} 
               movePointer={logPointerPos}
             />
           ))}

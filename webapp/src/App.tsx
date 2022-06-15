@@ -5,6 +5,8 @@ import DropDownSelect from "./components/Eingabealphabet/DropDownSelect";
 import Band from "./components/Band/Band";
 import Table from "./components/Zustandsüberführungsfunktion/Table";
 import Menu from "./components/Menu/Menu";
+import Control from "./components/Control/Control";
+
 
 
 function App() {
@@ -13,6 +15,7 @@ function App() {
             <header className="App-header">
                 {/*<img src={logo} className="App-logo" alt="logo"/>*/}
                 <Menu/>
+                <Control/>
                 <DropDownSelect/>
                 <Band/>
             </header>
