@@ -140,7 +140,12 @@ export default function BandItem(props: BandItemProps) {
           <FaTrash />
         </a>
       ) : (
-        ""
+        <a
+        href="#"
+        className="invisible delete-value-button w-full text-gray-700 focus:outline-none items-center"
+      >
+        <FaTrash />
+      </a>
       )}
     </div>
   );
