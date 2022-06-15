@@ -30,10 +30,23 @@ function Control() {
                         <FaStepForward/>
                     </button>
                 </div>
+
+                <div className="m-2 text-black">                      
+                    {/*<label htmlFor="velSlider" className="form-label ">Geschwindigkeit</label>*/}
+
+                    <input id="velSlider" type="range" className="w-full h-2 bg-gray-500 rounded-lg 
+                    appearance-none cursor-pointer"></input>
+                    
+
+                </div>
                 
             </div>
 
         </div>
+
+        
+
+
 
         
     );

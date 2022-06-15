@@ -75,6 +75,10 @@ button {
   background-color: white;
 }
 
+#velSlider{
+  accent-color: var(--primary);
+}
+
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: relative;
