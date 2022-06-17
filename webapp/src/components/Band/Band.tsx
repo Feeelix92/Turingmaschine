@@ -1,109 +1,19 @@
-import { Component, useEffect } from "react";
-import BandItem from "./BandItem";
-import { BandProps } from "../../interfaces/CommonInterfaces";
-import { eingabeAlphabetOptionen, currentBand } from "../../data/Alphabet";
-import { FaRedo, FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
-
-export default class Band extends Component<{}, BandProps> {
-  constructor(props: BandProps) {
-    super(props);
-    this.state = {
-      alphabet: eingabeAlphabetOptionen,
-      currentBand: currentBand,
-      skin: "paper",
-    };
-  }
-
-  render() {
-    const bandLength = currentBand.length;
-    const defaultPointerPos = 1; // Feld, auf dem Pointer im Default stehen soll
-
-    /**
-     * setzt Band auf Default zurück & löscht Inhalt der BandItems
-     */
-    const deleteAll = () => {
-      for (let index = 0; index < bandLength; index++) {
-        if (index == defaultPointerPos) {
-          currentBand[index] = { value: "", label: "B", pointer: true };
-          console.log(currentBand);
-        } else {
-          currentBand[index] = { value: "", label: "B", pointer: false };
-        }
-      }
-
-      this.setState({
-        currentBand: currentBand,
-      });
-    };
-
-    /**
-     * fügt ein neues leeres Bandfeld an der Position "before" oder "after" hinzu
-     * @param position
-     */
-    const addField = (position: string) => {
-      if (position === "before") {
-        currentBand.unshift({ value: "", label: "B", pointer: false });
-      } else {
-        currentBand.push({ value: "", label: "B", pointer: false });
-      }
-
-      this.setState({
-        currentBand: currentBand,
-      });
-    };
-
-    const changeSkin = () => {
-      //Übergangsfunktion? -> ändert den Skin
-      if (this.state.skin === "paper") {
-        this.setState({
-          skin: "tech",
-        });
-      } else {
-        this.setState({
-          skin: "paper",
-        });
-      }
-    };
-
-    function test() {
-      useEffect(() => {
-        console.log("useEffect", currentBand);
-      }, [currentBand]);
-    }
-
-    /**
-     * function changeItemAt changes the Band at the index
-     * @param index
-     * @param value
-     */
-    const changeItemAt = (index: any, value: string) => {
-      currentBand[index as number].value = value;
-      this.setState({
-        currentBand: currentBand,
-      });
-      console.log(
-        "changed Band at: ",
-        index,
-        " -> ",
-        currentBand[index as number].value
-      );
-    };
-
-    const deleteItemAt = (index: any) => {
-      const thisPointer = currentBand[index].pointer;
-
-      currentBand[index as number] = {
-        value: "",
-        label: "B",
-        pointer: thisPointer,
-      };
-
-      this.setState({
-        currentBand: currentBand,
-      });
-    };
+import BandItem  from './BandItem';
+import { FaRedo } from "react-icons/fa";
+import { useDispatch, useSelector } from 'react-redux';
+import { bandAddField, bandDeleteAll } from '../../redux/bandStore';
+import { RootState } from '../../redux/store';
 
 
+export default function Band () {   
+    const defaultPointerPos = 1; // Feld, auf dem Pointer im Default stehen soll   
+
+    const currentBand = useSelector((state: RootState) => state.band.currentBand)
+    const currentAlphabet = useSelector((state: RootState) => state.general.currentAlphabet)
+    const dispatch = useDispatch() 
+
+    const setPointer = (index: any, value: boolean) => {
+        console.log("setPointer function called!");
     const setPointerAt = (index: number) => {
       let newIndex = index;
 
@@ -132,6 +42,11 @@ export default class Band extends Component<{}, BandProps> {
   
         let oldPointerIndex = 0;
 
+        currentBand[index as number].pointer = value;       
+    };
+    
+    const setPointerAt = () => {
+        console.log("setPointerAt function called!");
           // Alle alten Pointer entfernen:
           for (let index = 0; index < bandLength; index++) {
             if(currentBand[index].pointer == true) {
@@ -171,6 +86,9 @@ export default class Band extends Component<{}, BandProps> {
               currentBand[index] = { pointer: false };
           }
 
+        currentBand[oldIndex as number].pointer = false;
+        currentBand[newIndex as number].pointer = true;            
+    };   
           let newPointerIndex = oldPointerIndex;
           if(oldPointerIndex < bandLength-1 ) {
             newPointerIndex = oldPointerIndex + 1;
@@ -193,67 +111,57 @@ export default class Band extends Component<{}, BandProps> {
       console.log(idx);
     };
 
-    return (
-      <div className={"bg-white w-screen border rounded"}>
+    return ( <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 p-3 border rounded"}>
+        <div className="mb-5">
+            <h2 >Band: </h2>
+        </div>
         <div className="band-container flex flex-row mb-5 overflow-x-auto">
           <button
             className="left-band-button bg-transparent hover:bg-gray-100 text-gray-900 font-semibold hover:text-gray-900  border border-gray-900 hover:border-transparent rounded"
-            onClick={() => addField("before")}
-          >
-            +
-          </button>
-          {currentBand.map((value, index) => (
-            <BandItem
-              value={value.value}
-              index={index}
-              skin={this.state.skin}
-              pointer={value.pointer}
-              key={index}
-              alphabet={eingabeAlphabetOptionen}
-              showEditField={true}
-              changeItemAt={changeItemAt}
-              deleteItemAt={deleteItemAt}
-              setPointerAt={setPointerAt} //TODO
-              movePointer={logPointerPos}
-            />
-          ))}
-          <button
+            onClick={() => dispatch(bandAddField('before'))}>
+               +
+            </button>
+            {currentBand.map((value, index) => (                
+                <BandItem
+                value={value.value}
+                index={index}
+                pointer={value.pointer}
+                key={index}
+                alphabet={currentAlphabet}
+                showEditField={true}
+                setPointerAt={setPointerAt} //TODO
+                movePointer={logPointerPos} 
+                />                
+            ))}
+            <button 
+              
             className="right-band-button bg-transparent hover:bg-gray-100 text-gray-900 font-semibold hover:text-gray-900 border border-gray-900 hover:border-transparent rounded"
-            onClick={() => addField("after")}
-          >
-            +
-          </button>
-        </div>
-
-{/*
-        <button
-          className="primaryBtn text-white font-bold py-1 px-2 rounded"
-          onClick={() => changeSkin()}
-        >
-          Skin ändern
-        </button>
-          */}
+            onClick={() => dispatch(bandAddField('after'))}>
+               +
+            </button>
+          
+        </div>        
           <div className="flex mb-4">
             <div className="w-3/4 text-left">
                 <button
                     className={"primaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"}
-                    onClick={() => setPointerLeft()}
                     >
+                    onClick={() => setPointerLeft()}
                     <FaArrowAltCircleLeft/>
-                </button>
 
-                <button
+                </button>
                     className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"
+                <button
                     onClick={() => setPointerRight()}
                     >
                     <FaArrowAltCircleRight/>
-                </button>
             </div>
+                </button>
 
             <div className="w-1/4 text-right">   
                 <button
-                    className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
                     onClick={() => deleteAll()}
+                    className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
                     >
                     <FaRedo />
                 </button>

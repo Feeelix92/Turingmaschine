@@ -254,3 +254,21 @@ Note: Beware of modifying this element as it can break the animations - you shou
     width: 45px;
     height: 45px;
 }
+.accordion .specification-header{
+  text-align: start;
+}
+
+.accordion .specification-header span{
+  font-weight: bolder;
+}
+
+.accordion .specification-header .accordion-icon{
+  margin-right: 0.3rem;
+  margin-left: 0.3rem;
+}
+
+.accordion-content{
+  text-align: start;
+  margin-left: 0.3rem;
+
+}

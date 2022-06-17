@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.2",
     "@types/animejs": "^3.1.4",
     "@types/react-burger-menu": "^2.8.3",
     "animejs": "^3.2.1",
@@ -16,6 +17,7 @@
     "react-burger-menu": "^3.0.8",
     "react-dom": "^18.0.0",
     "react-icons": "^4.4.0",
+    "react-redux": "^8.0.2",
     "react-select": "^5.3.2"
   },
   "devDependencies": {

@@ -68,8 +68,6 @@ export interface BandItemProps {
   pointer: boolean;
   alphabet: EingabeAlphabetOption[];
   showEditField: boolean;
-  changeItemAt: (index: Key, e: any) => void;
-  deleteItemAt: (index: Key) => void;
   setPointer: (index: Key, e: any) => void;
   setPointerAt: () => void;
   movePointer: (arg: number) => void;
@@ -82,9 +80,8 @@ export interface BandProps {
 }
 
 export interface EingabeAlphabetCustomProp {
-  alphabet: EingabeAlphabet[];
-  alphabetOptions: EingabeAlphabetOption[];
   customSelect: any;
+  onCloseDialog: () => void;
 }
 
 export const directions: Direction[] = [

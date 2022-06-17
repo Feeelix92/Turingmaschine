@@ -1,7 +1,10 @@
 import React, { Key, useEffect, useRef } from "react";
 import EditField from "../Zustandsüberführungsfunktion/EditField";
 import { BandItemProps } from "../../interfaces/CommonInterfaces";
-import { FaTimes, FaTrash } from "react-icons/fa";
+import { FaTimes, FaTrash} from "react-icons/fa";
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { BandItemToChange, bandChangeItemAt, bandDeleteItemAt } from '../../redux/bandStore';
 
 export default function BandItem(props: BandItemProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -11,13 +14,17 @@ export default function BandItem(props: BandItemProps) {
     setEditMode(!editMode);
   }
 
+  const currentBandSkin = useSelector((state: RootState) => state.band.bandSkin)
+  const dispatch = useDispatch()
+
   function chooseOption(option: string) {
-    props.changeItemAt(props.index, option);
+    const temp: BandItemToChange = {index: props.index, value: option}
+    dispatch(bandChangeItemAt(temp));
     setEditMode(false);
   }
 
   function deleteValue(index: Key) {
-    props.deleteItemAt(props.index);
+    dispatch(bandDeleteItemAt(props.index))
   }
 
   const dragItem = useRef();
@@ -82,8 +89,9 @@ export default function BandItem(props: BandItemProps) {
 
     props.alphabet.map((entry) => {
       if (entry.value === value || value === "") {
-        props.changeItemAt(index, value);
-        allowed = true;
+        const temp: BandItemToChange = {index: index as number, value: value}
+        dispatch(bandChangeItemAt(temp));
+        allowed = true;        
       }
     });
 
@@ -94,16 +102,13 @@ export default function BandItem(props: BandItemProps) {
 
 
   return (
-    <div
-      className={`band-container__band ${props.skin} flex justify-center ${
-        props.pointer ? "pointerBorder" : ""
-      }`}
-      key={props.index}
-      ref={wrapperRef}
-    >
-      {props.pointer ? (
-        <div
-          className="pointer"
+    <div 
+        className={`band-container__band ${currentBandSkin} flex justify-center ${props.pointer ? 'pointerBorder' : ''}`} 
+        key={props.index}
+        ref={wrapperRef}>    
+  
+        {props.pointer ? (
+          <div className="pointer"
           /*onMouseDown={e => startDrag(e)}
           onMouseMove={e => onDrag(e)}
           onMouseUp={e => endDrag(e)}*/
@@ -133,12 +138,12 @@ export default function BandItem(props: BandItemProps) {
       )}
       {editMode && props.showEditField ? (
         <a
-          href="#"
-          className="delete-value-button w-full text-gray-700 focus:outline-none items-center"
-          onClick={() => deleteValue(props.index)}
-        >
-          <FaTrash />
-        </a>
+        href="#"
+        className="delete-value-button w-full text-gray-700 focus:outline-none items-center"
+        onClick={() => deleteValue(props.index)}
+      >
+        <FaTrash />
+      </a>            
       ) : (
         ""
       )}
