@@ -17,7 +17,6 @@ function App() {
                 <DropDownSelect/>
                 <Band/>
             </header>
-            <Table/>
             <ConditionsList />
         </div>
     );

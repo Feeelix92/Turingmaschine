@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../redux/store';
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
-import {EingabelphabetOption} from "../../data/Alphabet";
 
 function ConditionsList() {
     /**
@@ -12,6 +13,13 @@ function ConditionsList() {
      * To show the Zustandsüberführungsfunktion
      */
     const [showZustandsfunktion, setShowZustandsfunktion] = useState(false)
+
+    const bandAlphabet = useSelector((state: RootState) => state.general.bandAlphabet)
+
+    const zustandsmenge = useSelector((state: RootState) => state.general.zustandsmenge)
+    const anfangsZustand = useSelector((state: RootState) => state.general.anfangsZustand)
+    const endZustand = useSelector((state: RootState) => state.general.endZustand)
+    const dispatch = useDispatch() 
 
     /**
      * Accordion data (Title, Icons)
@@ -37,19 +45,28 @@ function ConditionsList() {
                 </div>
                 {isActive && <div className={"accordion-content"}>
                     <div>
-                        <p>Eingabealphabet ∑ = </p> <DropDownSelect />
+                     <DropDownSelect />
                     </div>
                     <div>
-                        <p>Bandalphabet &Gamma; = </p>
+                        Bandalphabet &Gamma; =
+                        {bandAlphabet.map((value) => (
+                            <span>{value.value}</span>
+                        ))}
                     </div>
                     <div>
-                        <p>Zustandsmenge Q = </p>
+                        Zustandsmenge Q = 
+                        {zustandsmenge.map((value) => (
+                            <span>{value.value}</span>
+                        ))}
                     </div>
                     <div>
-                        <p>Anfangszustand q0 = </p>
+                        <p>Anfangszustand q0 = {anfangsZustand.value}</p>
                     </div>
                     <div>
-                        <p>Endzustand F = { }</p>
+                        Endzustand F = 
+                        {endZustand.map((value) => (
+                            <span>{value.value}</span>
+                        ))}
                     </div>
                     <div>
                         <div className={"grid grid-cols-2 items-center"}>

@@ -2,24 +2,32 @@ import { createSlice, current, PayloadAction } from '@reduxjs/toolkit'
 import { EingabeAlphabet, EingabeAlphabetDialog, EingabeAlphabetOption } from '../data/Alphabet';
 import {CgAddR} from "react-icons/all";
 
-export interface CounterState {
-  value: number
-}
-
 interface EingabeAlphabetDialogOptions {
     label: string,
     value: string
 }
 
-export const defaultCustomAlphabet: EingabeAlphabet[] = []
-export const defaultAlphabetOption1: EingabeAlphabet[] = [
+interface Zustand {
+    value: string,
+    anfangszustand: boolean,
+    endzustand: boolean
+}
+
+const initialAnfangszustand: Zustand = {value: "q1", anfangszustand: true, endzustand: false}
+const initialBandAlphabet: EingabeAlphabet[] = [
+    {label: '1', value: '1'},
+    {label: 'B', value: 'B'}
+]
+
+const defaultCustomAlphabet: EingabeAlphabet[] = []
+const defaultAlphabetOption1: EingabeAlphabet[] = [
     {label: '1', value: '1'},
 ]
-export const defaultAlphabetOption2: EingabeAlphabet[] = [
+const defaultAlphabetOption2: EingabeAlphabet[] = [
     {label: '1', value: '1'},
     {label: '#', value: '#'}
 ]
-export const defaultAlphabetOption3: EingabeAlphabet[] = [
+const defaultAlphabetOption3: EingabeAlphabet[] = [
     {label: '1', value: '1'},
     {label: '0', value: '0'}
 ]
@@ -41,7 +49,11 @@ export const generalSlice = createSlice({
   initialState:{
     currentAlphabet: defaultAlphabetOption1,
     alphabetOptions: eingabeAlphabetDialogOptions,
-    customAlphabet: defaultCustomAlphabet
+    customAlphabet: defaultCustomAlphabet,
+    bandAlphabet: initialBandAlphabet,
+    zustandsmenge: [initialAnfangszustand],
+    anfangsZustand: initialAnfangszustand,
+    endZustand: [initialAnfangszustand]
   },
   reducers: {    
     /**
@@ -67,6 +79,7 @@ export const generalSlice = createSlice({
             default:
                 break;
         } 
+        alphabetChangeBandAlphabet()
     },
     /**
      * function alphabetPushToCustom pushes a new Value to the customAlphabet
@@ -82,11 +95,18 @@ export const generalSlice = createSlice({
      */
     alphabetDeleteCustom: (state) => {
         state.customAlphabet = [] 
-    }  
+    },  
+    alphabetChangeBandAlphabet: (state) => {
+        let tempAlphabet = state.currentAlphabet
+        console.log("???????",tempAlphabet)
+        tempAlphabet.push({value: "B", label: "B"})
+        state.bandAlphabet = tempAlphabet
+        console.log("!!!!!!!!!!",state.bandAlphabet)
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { alphabetChangeCurrent, alphabetPushToCustom, alphabetDeleteCustom } = generalSlice.actions
+export const { alphabetChangeCurrent, alphabetPushToCustom, alphabetDeleteCustom, alphabetChangeBandAlphabet } = generalSlice.actions
 
 export default generalSlice.reducer
