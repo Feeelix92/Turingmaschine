@@ -1,115 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { tableDeleteRow, tableUpdateRow, tableSetFinal, tableAddRow } from "../../redux/tableStore";
+import { tableDeleteRow, tableUpdateRow, tableAddRow } from "../../redux/tableStore";
 import Row from "./Row";
 
 export default function Table() {
-  // constructor(props: TableProps) {
-  //   super(props);
-  //   this.state = {
-  //     header: ["Zustand", "Lese", "Neuer Zustand", "Schreibe", "Gehe nach"],
-  //     alphabet: eingabeAlphabetOptionen,
-  //     rows: [
-  //       {
-  //         cells: [
-  //           {
-  //             value: new Zustand(status[0].value, status[0].label),
-  //             editField: false,
-  //           },
-  //           { value: "1", editField: true },
-  //           {
-  //             value: new Zustand(status[0].value, status[0].label),
-  //             editField: false,
-  //           },
-  //           { value: "0", editField: true },
-  //           {
-  //             value: new Direction(directions[0].value, directions[0].label),
-  //             editField: false,
-  //           },
-  //         ],
-  //         isFinal: false,
-  //       },
-  //     ],
-  //   };
-  // }
-
-
-  // addRow() {
-  //   // create flat copy of all existing rows
-  //   const newRows = this.state.rows.slice(0, this.state.rows.length);
-
-  //   // add new row to existing rows
-  //   newRows.push({
-  //     cells: [
-  //       {
-  //         value: new Zustand(status[0].value, status[0].label),
-  //         editField: false,
-  //       },
-  //       { value: "1", editField: true },
-  //       {
-  //         value: new Zustand(status[0].value, status[0].label),
-  //         editField: false,
-  //       },
-  //       { value: "0", editField: true },
-  //       {
-  //         value: new Direction(directions[0].value, directions[0].label),
-  //         editField: false,
-  //       },
-  //     ],
-  //     isFinal: false,
-  //   });
-
-  //   // update the rows in state with our new rows-array
-  //   this.setState({
-  //     rows: newRows,
-  //   });
-  // }
-
-  // deleteRow(i: React.Key) {
-  //   // create flat copy of all existing rows
-  //   const newRows = this.state.rows.slice(0, this.state.rows.length);
-
-  //   // delete element at index
-  //   newRows.splice(i as number, 1);
-
-  //   // update the rows in state with our new rows-array
-  //   this.setState({
-  //     rows: newRows,
-  //   });
-  // }
-
-  // updateRow(i: React.Key, cells: Cell[]) {
-  //   // create flat copy of all existing rows
-  //   const newRows = this.state.rows.slice(0, this.state.rows.length);
-
-  //   // overwrite rows at certain index with new value
-  //   newRows[i as number].cells = cells;
-
-  //   // update the rows in state with our new rows-array
-  //   this.setState({
-  //     rows: newRows,
-  //   });
-  // }
-
-  // setFinal(i: React.Key) {
-  //   // create flat copy of all existing rows
-  //   const newRows = this.state.rows.slice(0, this.state.rows.length);
-
-  //   // overwrite rows at certain index with new value
-  //   newRows[i as number].isFinal = !newRows[i as number].isFinal;
-
-  //   if (newRows[i as number].isFinal) {
-  //     alert("Als Finalzustand markiert!");
-  //   } else {
-  //     alert("Finalzustand entfernt!");
-  //   }
-
-  //   // update the rows in state with our new rows-array
-  //   this.setState({
-  //     rows: newRows,
-  //   });
-
-  // }
 
   const loadedRows = useSelector((state: RootState) => state.table.rows)
   const alphabet = useSelector((state: RootState) => state.general.currentAlphabet)
@@ -147,9 +41,8 @@ export default function Table() {
                     index={key}
                     cells={value.cells}
                     alphabet={alphabet}
+                    isFinal={value.isFinal}
                     deleteRow={() => dispatch(tableDeleteRow(key))}
-                    updateRow={() => dispatch(tableUpdateRow.bind(key))}
-                    setFinal={() => dispatch(tableSetFinal.bind(key))}
                   />
                 ))}
               </tbody>

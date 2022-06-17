@@ -8,6 +8,7 @@ import Menu from "./components/Menu/Menu";
 import ConditionsList from "./components/Zustaende/List";
 
 
+
 function App() {
     return (
         <div className="App">
@@ -15,8 +16,8 @@ function App() {
                 {/*<img src={logo} className="App-logo" alt="logo"/>*/}
                 <Menu/>
                 <Band/>
-                <DropDownSelect/>
             </header>
+            <Table/>
             <ConditionsList />
         </div>
     );

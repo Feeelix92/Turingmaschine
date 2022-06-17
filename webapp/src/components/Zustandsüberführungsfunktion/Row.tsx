@@ -6,19 +6,19 @@ import {
 } from "../../interfaces/CommonInterfaces";
 import Cell from "./Cell";
 import { FaTrash } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { tableDeleteRow, tableUpdateCell, tableUpdateRow } from "../../redux/tableStore";
+import { RootState } from "../../redux/store";
 
 export default function Row(props: RowProps) {
+  // create flat copy of all existing cells
+  const dispatch = useDispatch()
   const [visible, setVisible] = useState(props.isFinal);
 
-  function setCellValue(index: React.Key, value: string | Zustand | Direction) {
-    // create flat copy of all existing cells
-    let cellCopy = props.cells.slice(0, props.cells.length);
-
-    // overwrite cells at certain index with new value
-    cellCopy[index as number].value = value;
-
+  function setCellValue(index: React.Key, value: string | Zustand | Direction) { 
+    
     // pass new data to table to update its rows-array
-    props.updateRow(props.index, cellCopy);
+    dispatch(tableUpdateCell({index: index, value: value}));
   }
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function Row(props: RowProps) {
         <a
           href="#"
           className="w-full min-w-full text-gray-700 focus:outline-none items-center"
-          onClick={props.deleteRow}
+          onClick={() => dispatch(tableDeleteRow(props.index))}
         >
           <FaTrash />
         </a>

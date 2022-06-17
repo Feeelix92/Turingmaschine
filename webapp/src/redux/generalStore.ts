@@ -9,11 +9,19 @@ interface EingabeAlphabetDialogOptions {
 
 interface Zustand {
     value: string,
+    label: string,
     anfangszustand: boolean,
     endzustand: boolean
 }
 
-const initialAnfangszustand: Zustand = {value: "q1", anfangszustand: true, endzustand: false}
+const initialAnfangszustand: Zustand = {value: "q1",label: "q1", anfangszustand: true, endzustand: false}
+const initialZustandsmenge: Zustand[] = [
+    {value: "q1", label: "q1", anfangszustand: true, endzustand: false},
+    {value: "q2", label: "q2", anfangszustand: false, endzustand: true}
+]
+const initialEndZustandsmenge: Zustand[] = [
+    {value: "q2", label: "q2", anfangszustand: false, endzustand: true}
+]
 const initialBandAlphabet: EingabeAlphabet[] = [
     {label: '1', value: '1'},
     {label: 'B', value: 'B'}
@@ -51,9 +59,9 @@ export const generalSlice = createSlice({
     alphabetOptions: eingabeAlphabetDialogOptions,
     customAlphabet: defaultCustomAlphabet,
     bandAlphabet: initialBandAlphabet,
-    zustandsmenge: [initialAnfangszustand],
+    zustandsmenge: initialZustandsmenge,
     anfangsZustand: initialAnfangszustand,
-    endZustand: [initialAnfangszustand]
+    endZustand: initialEndZustandsmenge
   },
   reducers: {    
     /**
@@ -98,10 +106,8 @@ export const generalSlice = createSlice({
     },  
     alphabetChangeBandAlphabet: (state) => {
         let tempAlphabet = state.currentAlphabet
-        console.log("???????",tempAlphabet)
         tempAlphabet.push({value: "B", label: "B"})
         state.bandAlphabet = tempAlphabet
-        console.log("!!!!!!!!!!",state.bandAlphabet)
     }
   },
 })

@@ -44,7 +44,6 @@ export interface RowProps {
   cells: Cell[];
   alphabet: EingabeAlphabetOption[];
   deleteRow: () => void;
-  updateRow: (index: Key, cells: Cell[]) => void;
   isFinal: boolean;
 }
 

@@ -1,7 +1,7 @@
 import BandItem  from './BandItem';
-import { FaRedo } from "react-icons/fa";
+import { FaArrowAltCircleLeft, FaArrowAltCircleRight, FaRedo } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
-import { bandAddField, bandDeleteAll } from '../../redux/bandStore';
+import { bandAddField, bandChangePointer, bandDeleteAll } from '../../redux/bandStore';
 import { RootState } from '../../redux/store';
 
 
@@ -12,100 +12,64 @@ export default function Band () {
     const currentAlphabet = useSelector((state: RootState) => state.general.currentAlphabet)
     const dispatch = useDispatch() 
 
-    const setPointer = (index: any, value: boolean) => {
-        console.log("setPointer function called!");
     const setPointerAt = (index: number) => {
-      let newIndex = index;
-
-      if(currentBand[newIndex as number] != null) {
-
-        // Alle alten Pointer entfernen:
-        for (let index = 0; index < bandLength; index++) {
-            currentBand[index] = { pointer: false };
-        }
-
-        this.setState({
-            currentBand: currentBand,
-        });
-
-        // Neuen Pointer auf true:
-        currentBand[newIndex as number].pointer = true;
-      }
-
-      this.setState({
-        currentBand: currentBand,
-      });
-    };
+        let newIndex = index;
+  
+        if(currentBand[newIndex as number] != null) {
+  
+          // Alle alten Pointer entfernen:
+          for (let index = 0; index < currentBand.length; index++) {
+            dispatch(bandChangePointer({index:index, value: false}))
+          }  
+          // Neuen Pointer auf true:
+          currentBand[newIndex as number].pointer = true;
+        }  
+      };
 
     //TODO: Für Touch nach rechts & links:
     const setPointerLeft = () => {
-  
+    
         let oldPointerIndex = 0;
 
-        currentBand[index as number].pointer = value;       
-    };
-    
-    const setPointerAt = () => {
-        console.log("setPointerAt function called!");
-          // Alle alten Pointer entfernen:
-          for (let index = 0; index < bandLength; index++) {
+        // Alle alten Pointer entfernen:
+        for (let index = 0; index < currentBand.length; index++) {
             if(currentBand[index].pointer == true) {
                 oldPointerIndex = index;
             }
-              currentBand[index] = { pointer: false };
-          }
+            dispatch(bandChangePointer({index:index, value: false}))
+        }
 
-          let newPointerIndex = oldPointerIndex;
-          if(oldPointerIndex>0 ) {
+        let newPointerIndex = oldPointerIndex;
+        if(oldPointerIndex>0 ) {
             newPointerIndex = oldPointerIndex - 1;
-          }
-  
-          this.setState({
-              currentBand: currentBand,
-          });
-  
-          // Neuen Pointer auf true:
-          currentBand[newPointerIndex as number].pointer = true;
+        }
 
-          
-        this.setState({
-          currentBand: currentBand,
-        });
-      };
+        // Neuen Pointer auf true:
+        currentBand[newPointerIndex as number].pointer = true;
+    };
 
-          //TODO: Für Touch nach rechts & links:
+    //TODO: Für Touch nach rechts & links:
     const setPointerRight = () => {
   
         let oldPointerIndex = 0;
 
           // Alle alten Pointer entfernen:
-          for (let index = 0; index < bandLength; index++) {
+          for (let index = 0; index < currentBand.length; index++) {
             if(currentBand[index].pointer == true) {
                 oldPointerIndex = index;
             }
-              currentBand[index] = { pointer: false };
+            dispatch(bandChangePointer({index:index, value: false}))
           }
 
-        currentBand[oldIndex as number].pointer = false;
-        currentBand[newIndex as number].pointer = true;            
-    };   
           let newPointerIndex = oldPointerIndex;
-          if(oldPointerIndex < bandLength-1 ) {
+          if(oldPointerIndex < currentBand.length-1 ) {
             newPointerIndex = oldPointerIndex + 1;
           }
   
-          this.setState({
-              currentBand: currentBand,
-          });
-  
           // Neuen Pointer auf true:
           currentBand[newPointerIndex as number].pointer = true;
-
-          
-        this.setState({
-          currentBand: currentBand,
-        });
       };
+
 
     const logPointerPos = (idx: number) => {
       console.log(idx);
@@ -129,8 +93,8 @@ export default function Band () {
                 key={index}
                 alphabet={currentAlphabet}
                 showEditField={true}
-                setPointerAt={setPointerAt} //TODO
-                movePointer={logPointerPos} 
+                setPointerAt={() => setPointerAt(index)} //TODO
+                movePointer={() => logPointerPos(index)} 
                 />                
             ))}
             <button 
@@ -143,24 +107,20 @@ export default function Band () {
         </div>        
           <div className="flex mb-4">
             <div className="w-3/4 text-left">
-                <button
-                    className={"primaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"}
-                    >
-                    onClick={() => setPointerLeft()}
+                <button className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"
+                    onClick={() => setPointerLeft()}>
                     <FaArrowAltCircleLeft/>
-
                 </button>
-                    className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"
-                <button
-                    onClick={() => setPointerRight()}
-                    >
+                    
+                <button className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"
+                    onClick={() => setPointerRight()}>
                     <FaArrowAltCircleRight/>
-            </div>
                 </button>
+            </div>
 
             <div className="w-1/4 text-right">   
                 <button
-                    onClick={() => deleteAll()}
+                    onClick={() => dispatch(bandDeleteAll())}
                     className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
                     >
                     <FaRedo />
@@ -171,4 +131,4 @@ export default function Band () {
       </div>
     );
   }
-}
+

@@ -6,6 +6,10 @@ export interface BandItemToChange {
     index: number,
     value: string
 }
+export interface PointerItemToChange {
+    index: number,
+    value: boolean
+}
 
 const currentBand: EingabeAlphabetOption[] = [
     {value: "", label: "B", pointer: false},
@@ -30,6 +34,10 @@ export const bandSlice = createSlice({
     bandChangeItemAt: (state, bandItem: PayloadAction<BandItemToChange>) => { 
         state.currentBand[bandItem.payload.index as number].value = bandItem.payload.value;      
         console.log("item changed!")
+    },
+    bandChangePointer: (state, pointerItem: PayloadAction<PointerItemToChange>) => { 
+        state.currentBand[pointerItem.payload.index as number].pointer = pointerItem.payload.value;      
+        console.log("pointer changed!")
     },
      /**
      * function bandDeleteItemAt deletes the Band Values at the index
@@ -73,6 +81,6 @@ export const bandSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { bandChangeItemAt, bandDeleteItemAt, bandAddField, bandDeleteAll, bandChangeSkin } = bandSlice.actions
+export const { bandChangeItemAt, bandDeleteItemAt, bandAddField, bandDeleteAll, bandChangeSkin, bandChangePointer } = bandSlice.actions
 
 export default bandSlice.reducer
