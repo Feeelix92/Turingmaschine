@@ -5,6 +5,7 @@ import DropDownSelect from "./components/Eingabealphabet/DropDownSelect";
 import Band from "./components/Band/Band";
 import Table from "./components/Zustandsüberführungsfunktion/Table";
 import Menu from "./components/Menu/Menu";
+import ConditionsList from "./components/Zustaende/List";
 
 
 function App() {
@@ -17,8 +18,10 @@ function App() {
                 <Band/>
             </header>
             <Table/>
+            <ConditionsList />
         </div>
     );
+        
 }
 
 export default App;
