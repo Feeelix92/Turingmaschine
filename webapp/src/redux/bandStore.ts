@@ -1,9 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { EingabeAlphabetOption } from '../data/Alphabet';
 
-export interface CounterState {
-  value: number
-}
+
 export interface BandItemToChange {
     index: number,
     value: string
@@ -70,8 +68,7 @@ export const bandSlice = createSlice({
         }else{
             state.bandSkin = "paper"
         }
-    }
-    
+    }    
   },
 })
 

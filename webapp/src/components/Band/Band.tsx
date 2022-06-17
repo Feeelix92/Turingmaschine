@@ -1,9 +1,7 @@
-import { Component } from 'react';
 import BandItem  from './BandItem';
-import { BandProps } from "../../interfaces/CommonInterfaces";
 import { FaRedo } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
-import { bandAddField, bandChangeItemAt, bandDeleteItemAt, bandDeleteAll, bandChangeSkin } from '../../redux/bandStore';
+import { bandAddField, bandDeleteAll } from '../../redux/bandStore';
 import { RootState } from '../../redux/store';
 
 
