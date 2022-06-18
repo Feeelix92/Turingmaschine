@@ -21,6 +21,9 @@ function ConditionsList() {
     const endZustand = useSelector((state: RootState) => state.general.endZustand)
     const dispatch = useDispatch() 
 
+    const kA = "{"
+    const kZ = "}"
+
     /**
      * Accordion data (Title, Icons)
      */
@@ -48,25 +51,25 @@ function ConditionsList() {
                      <DropDownSelect />
                     </div>
                     <div>
-                        Bandalphabet &Gamma; =
+                        Bandalphabet &Gamma; ={kA}
                         {bandAlphabet.map((value) => (
-                            <span>{value.value}</span>
-                        ))}
+                            <span>{value.value},</span>
+                        ))}{kZ}
                     </div>
                     <div>
-                        Zustandsmenge Q = 
+                        Zustandsmenge Q = {kA}
                         {zustandsmenge.map((value) => (
-                            <span>{value.value}</span>
-                        ))}
+                            <span>{value.value},</span>
+                        ))}{kZ}
                     </div>
                     <div>
                         <p>Anfangszustand q0 = {anfangsZustand.value}</p>
                     </div>
                     <div>
-                        Endzustand F = 
+                        Endzustand F = {kA}
                         {endZustand.map((value) => (
-                            <span>{value.value}</span>
-                        ))}
+                            <span>{value.value},</span>
+                        ))}{kZ}
                     </div>
                     <div>
                         <div className={"grid grid-cols-2 items-center"}>

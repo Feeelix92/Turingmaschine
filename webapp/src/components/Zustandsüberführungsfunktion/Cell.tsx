@@ -5,7 +5,6 @@ import {
   CellProps,
   Direction,
   directions,
-  status,
   Zustand,
 } from "../../interfaces/CommonInterfaces";
 import { RootState } from "../../redux/store";
@@ -14,6 +13,7 @@ import EditField from "./EditField";
 export default function Cell(props: CellProps) {
   const wrapperRef: React.RefObject<HTMLTableCellElement> = React.createRef();
   const zustandsmenge = useSelector((state: RootState) => state.general.zustandsmenge)  
+  const eingabeAlphabet = useSelector((state: RootState) => state.general.currentAlphabet)  
 
   const [editMode, setEditMode] = React.useState(false);
 
@@ -24,6 +24,7 @@ export default function Cell(props: CellProps) {
 
   function chooseOption(option: string) {
     // pass chosen options to the parent to update the cell
+    console.log("Button: props.UpdateCellValue")
     props.updateCellValue(props.index, option);
     // close the edit-buttons
     setEditMode(false);
@@ -32,6 +33,7 @@ export default function Cell(props: CellProps) {
   function handleChange(newValue: OnChangeValue<Direction | Zustand, false>) {
     if (newValue) {
       // pass chosen options to the parent to update the cell
+      console.log("Input: props.UpdateCellValue")
       props.updateCellValue(props.index, newValue);
     }
   }
@@ -62,7 +64,7 @@ export default function Cell(props: CellProps) {
     let allowed = false;
 
     // map the passed alphabet to check whether the alphabet contains the new input value
-    props.alphabet.map((entry) => {
+    eingabeAlphabet.map((entry) => {
       if (
         entry.value === value ||
         props.showEditField === false ||
@@ -89,7 +91,7 @@ export default function Cell(props: CellProps) {
           placeholder={props.value.value}
           blurInputOnSelect={false}
           className={"text-black p-3 text-base"}
-          onChange={() => handleChange}
+          onChange={handleChange}
           options={zustandsmenge}
         />
       ) : (
@@ -101,7 +103,7 @@ export default function Cell(props: CellProps) {
           placeholder={props.value.value}
           blurInputOnSelect={false}
           className={"text-black p-3 text-base"}
-          onChange={() => handleChange}
+          onChange={handleChange}
           options={directions}
         />
       ) : (
@@ -123,7 +125,7 @@ export default function Cell(props: CellProps) {
       )}
 
       {editMode && props.showEditField ? (
-        <EditField options={props.alphabet} updateValue={chooseOption} />
+        <EditField options={eingabeAlphabet} updateValue={chooseOption} />
       ) : (
         ""
       )}

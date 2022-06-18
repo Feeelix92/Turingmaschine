@@ -4,21 +4,35 @@ import {
   RowProps,
   Zustand,
 } from "../../interfaces/CommonInterfaces";
-import Cell from "./Cell";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { tableDeleteRow, tableUpdateCell, tableUpdateRow } from "../../redux/tableStore";
+import { initialZustand, tableDeleteRow, tableUpdateCell } from "../../redux/tableStore";
 import { RootState } from "../../redux/store";
+import Cell from "./Cell";
 
 export default function Row(props: RowProps) {
   // create flat copy of all existing cells
   const dispatch = useDispatch()
   const [visible, setVisible] = useState(props.isFinal);
+  const test = useSelector((state: RootState) => state.table.rows[0].cells)
 
   function setCellValue(index: React.Key, value: string | Zustand | Direction) { 
-    
     // pass new data to table to update its rows-array
-    dispatch(tableUpdateCell({index: index, value: value}));
+    
+    // let tempCell = Object.assign({}, test);
+    // tempCell[index as number].value = value
+    // props.updateRowValue(tempCell)
+    console.log("setCellValue - value: ",value)
+
+    if(typeof value === "string"){
+      dispatch(tableUpdateCell({cellIndex: index, rowIndex: props.index, value: value}))
+    } else if(value instanceof Direction){
+      const tempDirection = new Direction(value.label, value.value)
+      dispatch(tableUpdateCell({cellIndex: index, rowIndex: props.index, value: tempDirection}))
+    } else {
+      const tempZustand = new Zustand(value.label, value.value, value.anfangszustand, value.endzustand)
+      dispatch(tableUpdateCell({cellIndex: index, rowIndex: props.index, value: tempZustand}))
+    }
   }
 
   useEffect(() => {
@@ -39,7 +53,6 @@ export default function Row(props: RowProps) {
                 key={key}
                 value={value.value}
                 index={key}
-                alphabet={props.alphabet}
                 showEditField={value.editField}
                 updateCellValue={setCellValue}
               />
@@ -49,7 +62,6 @@ export default function Row(props: RowProps) {
               key={key}
               value={value.value}
               index={key}
-              alphabet={props.alphabet}
               showEditField={value.editField}
               updateCellValue={setCellValue}
             />

@@ -1,17 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
+import { Cell } from "../../interfaces/CommonInterfaces";
 import { RootState } from "../../redux/store";
-import { tableDeleteRow, tableUpdateRow, tableAddRow } from "../../redux/tableStore";
+import { tableDeleteRow, tableAddRow } from "../../redux/tableStore";
 import Row from "./Row";
 
 export default function Table() {
 
   const loadedRows = useSelector((state: RootState) => state.table.rows)
-  const alphabet = useSelector((state: RootState) => state.general.currentAlphabet)
   const header = useSelector((state: RootState) => state.table.header)
   const dispatch = useDispatch() 
   
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col">     
       <div className="sm:-mx-6 lg:-mx-8">
         <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
           <div className="overflow-x-auto">
@@ -40,9 +40,8 @@ export default function Table() {
                     key={key}
                     index={key}
                     cells={value.cells}
-                    alphabet={alphabet}
                     isFinal={value.isFinal}
-                    deleteRow={() => dispatch(tableDeleteRow(key))}
+                    deleteRow={() => dispatch(tableDeleteRow(key))}                    
                   />
                 ))}
               </tbody>

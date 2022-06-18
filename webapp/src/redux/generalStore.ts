@@ -1,20 +1,14 @@
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit'
 import { EingabeAlphabet, EingabeAlphabetDialog, EingabeAlphabetOption } from '../data/Alphabet';
 import {CgAddR} from "react-icons/all";
+import { Zustand } from '../interfaces/CommonInterfaces';
 
 interface EingabeAlphabetDialogOptions {
     label: string,
     value: string
 }
 
-interface Zustand {
-    value: string,
-    label: string,
-    anfangszustand: boolean,
-    endzustand: boolean
-}
-
-const initialAnfangszustand: Zustand = {value: "q1",label: "q1", anfangszustand: true, endzustand: false}
+export const initialAnfangszustand: Zustand = {value: "q1",label: "q1", anfangszustand: true, endzustand: false}
 const initialZustandsmenge: Zustand[] = [
     {value: "q1", label: "q1", anfangszustand: true, endzustand: false},
     {value: "q2", label: "q2", anfangszustand: false, endzustand: true}
