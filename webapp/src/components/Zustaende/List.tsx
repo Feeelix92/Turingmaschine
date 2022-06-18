@@ -19,7 +19,6 @@ function ConditionsList() {
     const zustandsmenge = useSelector((state: RootState) => state.general.zustandsmenge)
     const anfangsZustand = useSelector((state: RootState) => state.general.anfangsZustand)
     const endZustand = useSelector((state: RootState) => state.general.endZustand)
-    const dispatch = useDispatch() 
 
     const kA = "{"
     const kZ = "}"
@@ -52,14 +51,14 @@ function ConditionsList() {
                     </div>
                     <div>
                         Bandalphabet &Gamma; ={kA}
-                        {bandAlphabet.map((value) => (
-                            <span>{value.value},</span>
+                        {bandAlphabet.map((value, index) => (
+                            <span key={index}>{value.value},</span>
                         ))}{kZ}
                     </div>
                     <div>
                         Zustandsmenge Q = {kA}
-                        {zustandsmenge.map((value) => (
-                            <span>{value.value},</span>
+                        {zustandsmenge.map((value, index) => (
+                            <span key={index}>{value.value},</span>
                         ))}{kZ}
                     </div>
                     <div>
@@ -67,8 +66,8 @@ function ConditionsList() {
                     </div>
                     <div>
                         Endzustand F = {kA}
-                        {endZustand.map((value) => (
-                            <span>{value.value},</span>
+                        {endZustand.map((value, index) => (
+                            <span key={index}>{value.value},</span>
                         ))}{kZ}
                     </div>
                     <div>

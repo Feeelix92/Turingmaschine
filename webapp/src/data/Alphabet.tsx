@@ -1,19 +1,7 @@
 import {CgAddR} from "react-icons/all";
 import React from "react";
 
-export interface EingabeAlphabet {
-    label: string;
-    value: string;
-}
 
-// /**
-//  * default symbols for custom Eingabealphabet
-//  */
-// export const defaultInputEingabeAlphabet: EingabeAlphabet[] = [
-//     {label: '1', value: '1'},
-//     {label: '0', value: '0'},
-//     {label: '#', value: '#'}
-// ];
 
 export interface EingabeAlphabetOption {
     label: string;

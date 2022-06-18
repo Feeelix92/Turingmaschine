@@ -82,29 +82,9 @@ export const tableSlice = createSlice({
       newRows.splice(i.payload as number, 1);
   
       // update the rows in state with our new rows-array
-      console.log("DELETE ROWS!",newRows)
       state.rows = newRows
     },
-    // tableUpdateRow: (state, updateRow: PayloadAction<updateRowType>) => {
-    //   console.log("tableUpdateRow is called")
-    //   // create flat copy of all existing rows
-    //   const newRows: Row[] = state.rows.slice(0, state.rows.length) as Row[];
-    //   // overwrite rows at certain index with new value
-    //   newRows[updateRow.payload.index as number].cells = updateRow.payload.cells;
-
-  
-    //   if (updateRow.payload.cells[0].value instanceof Zustand) {
-    //     if (updateRow.payload.cells[0].value.endzustand === true) {
-    //       newRows[updateRow.payload.index as number].isFinal = true;
-    //     } else {
-    //       newRows[updateRow.payload.index as number].isFinal = false;
-    //     }
-    //   }  
-    //   //update the rows in state with our new rows-array
-    //   state.rows = newRows;
-    // },
     tableUpdateCell: (state, updateCell: PayloadAction<updateCellType>) => {
-      console.log("updateCell value: ", updateCell.payload)
       const newCells: Cell[] = state.rows[updateCell.payload.rowIndex as number].cells.slice(0, state.rows[updateCell.payload.rowIndex as number].cells.length);
       newCells[updateCell.payload.cellIndex as number].value = updateCell.payload.value
       // tableUpdateRow({index: updateCell.payload.index, cells: newCells})
@@ -121,7 +101,6 @@ export const tableSlice = createSlice({
         }
       }  
       //update the rows in state with our new rows-array
-      console.log("UPDATE ROWS: ",newRows)
       state.rows = newRows;
      
     } 

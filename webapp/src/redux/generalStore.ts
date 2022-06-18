@@ -33,7 +33,7 @@ let initialBandAlphabet: EingabeAlphabet[] = [
 
 const defaultCustomAlphabet: Alphabet = {
     key: 0,
-    alphabet: [{value:"",label:""}]
+    alphabet: []
 }
 
 const defaultAlphabetOption1: Alphabet = {
@@ -91,14 +91,13 @@ export const generalSlice = createSlice({
      * function alphabetChangeCurrent changes current Alphabet
      */
     alphabetChangeCurrent: (state, alphabet: PayloadAction<Alphabet>) => { 
-        eingabeAlphabetDialogOptions.forEach(option => {
+        state.dialogOptions.forEach(option => {
             if(option.alphabet.key === alphabet.payload.key) {
                 state.currentAlphabet.alphabet = option.alphabet.alphabet
                 state.currentDialogOption = option
             }
         });
-        let tempAlphabet = state.currentAlphabet.alphabet
-        console.log(tempAlphabet)
+        let tempAlphabet = Object.assign([], alphabet.payload.alphabet)
         tempAlphabet.push({value: "B", label: "B"})
         state.bandAlphabet = tempAlphabet
     },
@@ -108,9 +107,16 @@ export const generalSlice = createSlice({
      */
     alphabetPushToCustom: (state, value: PayloadAction<string>) => {
         state.customAlphabet.alphabet.push({value: value.payload, label: value.payload})
-        
-        state.dialogOptions.push({label:`custom ${customKey}`, alphabet: state.customAlphabet})
-        // state.currentAlphabet = state.customAlphabet
+    },
+    alphabetPushToDialogOptions: (state, optionName: PayloadAction<string>) => {
+        state.customAlphabet.key = customKey;
+        state.dialogOptions.push({label:`{${optionName.payload}}`, alphabet: state.customAlphabet})
+        state.currentAlphabet = state.customAlphabet
+        state.dialogOptions.forEach(option => {
+            if(option.alphabet.key ===  state.customAlphabet.key) {
+                state.currentDialogOption = option
+            }
+        });
         customKey++
     },
     /**
@@ -118,12 +124,20 @@ export const generalSlice = createSlice({
      * @param value
      */
     alphabetDeleteCustom: (state) => {
-        // state.customAlphabet = [] 
+        state.customAlphabet.alphabet = []
+    },
+    /**
+     * function alphabetDeleteCustom deletes the customAlphabet
+     * @param value
+     */
+    alphabetPushToZustand: (state, zustandsInfo: PayloadAction<Zustand>) => {
+        let tempZustandsmenge = state.zustandsmenge;
+        tempZustandsmenge.push(zustandsInfo.payload)
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { alphabetChangeCurrent, alphabetPushToCustom, alphabetDeleteCustom } = generalSlice.actions
+export const { alphabetChangeCurrent, alphabetPushToCustom, alphabetPushToDialogOptions, alphabetDeleteCustom, alphabetPushToZustand } = generalSlice.actions
 
 export default generalSlice.reducer

@@ -32,12 +32,10 @@ export const bandSlice = createSlice({
      * @param value
      */
     bandChangeItemAt: (state, bandItem: PayloadAction<BandItemToChange>) => { 
-        state.currentBand[bandItem.payload.index as number].value = bandItem.payload.value;      
-        console.log("item changed!")
+        state.currentBand[bandItem.payload.index as number].value = bandItem.payload.value;     
     },
     bandChangePointer: (state, pointerItem: PayloadAction<PointerItemToChange>) => { 
-        state.currentBand[pointerItem.payload.index as number].pointer = pointerItem.payload.value;      
-        console.log("pointer changed!")
+        state.currentBand[pointerItem.payload.index as number].pointer = pointerItem.payload.value;
     },
      /**
      * function bandDeleteItemAt deletes the Band Values at the index
@@ -67,8 +65,7 @@ export const bandSlice = createSlice({
             } else {
                 state.currentBand[index] = {value: "", label: "B", pointer: false}
             }            
-        }   
-        console.log("delete all")    
+        }    
     },
     bandChangeSkin: (state) => {
         if(state.bandSkin === "paper"){

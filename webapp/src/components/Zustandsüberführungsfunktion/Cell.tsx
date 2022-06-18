@@ -24,7 +24,6 @@ export default function Cell(props: CellProps) {
 
   function chooseOption(option: string) {
     // pass chosen options to the parent to update the cell
-    console.log("Button: props.UpdateCellValue")
     props.updateCellValue(props.index, option);
     // close the edit-buttons
     setEditMode(false);
@@ -33,7 +32,6 @@ export default function Cell(props: CellProps) {
   function handleChange(newValue: OnChangeValue<Direction | Zustand, false>) {
     if (newValue) {
       // pass chosen options to the parent to update the cell
-      console.log("Input: props.UpdateCellValue")
       props.updateCellValue(props.index, newValue);
     }
   }
