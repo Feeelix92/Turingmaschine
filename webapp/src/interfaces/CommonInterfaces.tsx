@@ -1,5 +1,5 @@
 import { Key } from "react";
-import { EingabeAlphabet, EingabeAlphabetOption } from "../data/Alphabet";
+import { EingabeAlphabetOption } from "../data/Alphabet";
 
 export interface TableProps {
   header: string[];

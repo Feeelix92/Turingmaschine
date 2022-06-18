@@ -18,10 +18,6 @@ export default function Row(props: RowProps) {
 
   function setCellValue(index: React.Key, value: string | Zustand | Direction) { 
     // pass new data to table to update its rows-array
-    
-    // let tempCell = Object.assign({}, test);
-    // tempCell[index as number].value = value
-    // props.updateRowValue(tempCell)
     console.log("setCellValue - value: ",value)
 
     if(typeof value === "string"){

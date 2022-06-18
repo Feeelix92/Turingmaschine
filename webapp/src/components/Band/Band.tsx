@@ -22,7 +22,7 @@ export default function Band () {
             dispatch(bandChangePointer({index:index, value: false}))
           }  
           // Neuen Pointer auf true:
-          currentBand[newIndex as number].pointer = true;
+          dispatch(bandChangePointer({index:newIndex, value: true}))
         }  
       };
 
@@ -45,7 +45,7 @@ export default function Band () {
         }
 
         // Neuen Pointer auf true:
-        currentBand[newPointerIndex as number].pointer = true;
+        dispatch(bandChangePointer({index:newPointerIndex, value: true}))
     };
 
     //TODO: Für Touch nach rechts & links:
@@ -67,7 +67,7 @@ export default function Band () {
           }
   
           // Neuen Pointer auf true:
-          currentBand[newPointerIndex as number].pointer = true;
+          dispatch(bandChangePointer({index:newPointerIndex, value: true}))
       };
 
 
@@ -91,7 +91,7 @@ export default function Band () {
                 index={index}
                 pointer={value.pointer}
                 key={index}
-                alphabet={currentAlphabet}
+                alphabet={currentAlphabet.alphabet}
                 showEditField={true}
                 setPointerAt={() => setPointerAt(index)} //TODO
                 movePointer={() => logPointerPos(index)} 

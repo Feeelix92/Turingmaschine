@@ -7,7 +7,7 @@ function ConditionsList() {
     /**
      * To check if Accordion opened or closed
      */
-    const [isActive, setIsActive] = useState(false);
+    const [isActive, setIsActive] = useState(true);
 
     /**
      * To show the Zustandsüberführungsfunktion

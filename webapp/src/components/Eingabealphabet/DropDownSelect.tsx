@@ -1,31 +1,22 @@
+import { current } from '@reduxjs/toolkit';
 import React, {useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import Select, {ActionMeta, OnChangeValue} from 'react-select'
-import {EingabeAlphabet, EingabeAlphabetDialog} from "../../data/Alphabet";
+import { EingabeAlphabetDialog} from "../../data/Alphabet";
 import { bandDeleteAll } from '../../redux/bandStore';
-import { alphabetChangeCurrent, eingabeAlphabetDialogOptions } from '../../redux/generalStore';
+import { Alphabet, alphabetChangeCurrent, defaultAlphabetOption4, EingabeAlphabetDialogOptions, eingabeAlphabetDialogOptions } from '../../redux/generalStore';
 import { RootState } from '../../redux/store';
 import MultiselectDropDown from "./DropDownMultiselect";
 
-interface EingabeAlphabetDialogOptions {
-    label: string;
-    value: string;
-    icon?: any
-}
-
 export default function DropDownSelect() {
-    const currentBand = useSelector((state: RootState) => state.band.currentBand)
-    const currentAlphabet = useSelector((state: RootState) => state.general.currentAlphabet)
-    const alphabetOptions = useSelector((state: RootState) => state.general.alphabetOptions)
+    const dialogOptions = useSelector((state: RootState) => state.general.dialogOptions)
+    const currentDialogOption = useSelector((state: RootState) => state.general.currentDialogOption)
     const dispatch = useDispatch()
     /**
      * checks if Dialog opened or closed
      */
     const [openDialog, setOpenDialog] = useState(false);
     // const [showPlaceholder, setShowPlaceholder] = useState(true);
-
-    const [selectedOption, setSelectedOption] = useState<EingabeAlphabet[]>(currentAlphabet);
-   
 
     /**
      * checks if Button on DropDownMultiselect is clicked
@@ -50,12 +41,10 @@ export default function DropDownSelect() {
         console.group('Value Changed');
         console.log(newValue);
         if(newValue){
-            if (newValue.value !== '0') {
-                dispatch(alphabetChangeCurrent(newValue?.value))
-                setSelectedOption(newValue)
+            if (newValue.alphabet.key !== 0) {
+                dispatch(alphabetChangeCurrent(newValue.alphabet))
             }else{
-                dispatch(alphabetChangeCurrent(newValue?.value))
-                setSelectedOption(newValue)
+                dispatch(alphabetChangeCurrent(newValue.alphabet))
                 setOpenDialog(true)
             }
             dispatch(bandDeleteAll())
@@ -74,11 +63,11 @@ export default function DropDownSelect() {
             {/*    />*/}
             {/*}*/}
             {/*{!showPlaceholder &&*/}
-            <Select value={selectedOption}
+            <Select value={currentDialogOption}
                     blurInputOnSelect={false}
                     className={"text-black p-3 text-base"}
                     onChange={handleChange}
-                    options={eingabeAlphabetDialogOptions}
+                    options={dialogOptions}
                     // @ts-ignore
                     getOptionLabel={e => (
                         <div className={"flex items-center place-content-start"}>

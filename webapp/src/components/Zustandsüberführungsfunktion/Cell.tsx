@@ -64,7 +64,7 @@ export default function Cell(props: CellProps) {
     let allowed = false;
 
     // map the passed alphabet to check whether the alphabet contains the new input value
-    eingabeAlphabet.map((entry) => {
+    eingabeAlphabet.alphabet.map((entry) => {
       if (
         entry.value === value ||
         props.showEditField === false ||
@@ -125,7 +125,7 @@ export default function Cell(props: CellProps) {
       )}
 
       {editMode && props.showEditField ? (
-        <EditField options={eingabeAlphabet} updateValue={chooseOption} />
+        <EditField options={eingabeAlphabet.alphabet} updateValue={chooseOption} />
       ) : (
         ""
       )}

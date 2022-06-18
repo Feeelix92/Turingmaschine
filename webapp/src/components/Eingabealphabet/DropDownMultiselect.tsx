@@ -5,14 +5,10 @@ import {ActionMeta, OnChangeValue} from 'react-select';
 import {EingabeAlphabetCustomProp} from "../../interfaces/CommonInterfaces";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { alphabetDeleteCustom, alphabetPushToCustom, defaultAlphabetOption4 } from '../../redux/generalStore';
+import { Alphabet, alphabetDeleteCustom, alphabetPushToCustom, defaultAlphabetOption4 } from '../../redux/generalStore';
 import { GiConsoleController } from 'react-icons/gi';
 
 export default function MultiselectDropDown(props: EingabeAlphabetCustomProp) {
-
-    const currentAlphabet = useSelector((state: RootState) => state.general.currentAlphabet)
-    const alphabetOptions = useSelector((state: RootState) => state.general.alphabetOptions)
-    const customAlphabet = useSelector((state: RootState) => state.general.alphabetOptions)
     const dispatch = useDispatch()
     
     // valuesArray = current selected options as Array
@@ -28,10 +24,10 @@ export default function MultiselectDropDown(props: EingabeAlphabetCustomProp) {
      * @param actionMeta
      */
     function handleChange(
-        newValues: OnChangeValue<EingabeAlphabetOption, true>,
-        actionMeta: ActionMeta<EingabeAlphabetOption>,
+        newValues: OnChangeValue<Alphabet, true>,
+        actionMeta: ActionMeta<Alphabet>,
     ) {
-        console.group('Value Changed');
+        console.group('Value Changed !!!!!!!!!!!');
         console.log(newValues);
         
         // converting the object to an iteratable Array

@@ -82,6 +82,7 @@ export const tableSlice = createSlice({
       newRows.splice(i.payload as number, 1);
   
       // update the rows in state with our new rows-array
+      console.log("DELETE ROWS!",newRows)
       state.rows = newRows
     },
     // tableUpdateRow: (state, updateRow: PayloadAction<updateRowType>) => {
@@ -120,7 +121,7 @@ export const tableSlice = createSlice({
         }
       }  
       //update the rows in state with our new rows-array
-      console.log("!!!!!!!!!!",newRows)
+      console.log("UPDATE ROWS: ",newRows)
       state.rows = newRows;
      
     } 
