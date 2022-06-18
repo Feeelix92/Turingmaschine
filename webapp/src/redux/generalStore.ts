@@ -133,11 +133,26 @@ export const generalSlice = createSlice({
     alphabetPushToZustand: (state, zustandsInfo: PayloadAction<Zustand>) => {
         let tempZustandsmenge = state.zustandsmenge;
         tempZustandsmenge.push(zustandsInfo.payload)
+    },
+    alphabetChangeAnfangszustand: (state, zustand: PayloadAction<Zustand>) => {
+        state.anfangsZustand = zustand.payload
+    },
+    alphabetChangeEndzustand: (state, zustand: PayloadAction<Zustand[]>) => {
+        console.log(zustand.payload)
+        state.endZustand = zustand.payload
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { alphabetChangeCurrent, alphabetPushToCustom, alphabetPushToDialogOptions, alphabetDeleteCustom, alphabetPushToZustand } = generalSlice.actions
+export const { 
+    alphabetChangeCurrent, 
+    alphabetPushToCustom, 
+    alphabetPushToDialogOptions, 
+    alphabetDeleteCustom, 
+    alphabetPushToZustand, 
+    alphabetChangeAnfangszustand, 
+    alphabetChangeEndzustand 
+} = generalSlice.actions
 
 export default generalSlice.reducer
