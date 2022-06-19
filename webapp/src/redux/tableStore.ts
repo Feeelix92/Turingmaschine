@@ -50,7 +50,9 @@ const activeRow: Row | undefined = undefined;
 
 const watchedRows: Row[] = [];
 
-const schmutz: string = "Fuck you"
+const schmutz: string = "Fuck you";
+
+const activeState: Zustand = new Zustand("q1", "q1", true, false);
 
 export const tableSlice = createSlice({
   name: "table",
@@ -60,6 +62,7 @@ export const tableSlice = createSlice({
     activeRow: activeRow,
     watchedRows: watchedRows,
     schmutz: schmutz,
+    activeState: activeState,
   },
   reducers: {
     tableAddRow: (state) => {
@@ -136,6 +139,9 @@ export const tableSlice = createSlice({
     tableSetSchmutz: (state, schmutz: PayloadAction<string>) => {
       state.schmutz = schmutz.payload;
     },
+    tableSetActiveState: (state, newVal: PayloadAction<Zustand>) => {
+      state.activeState = newVal.payload;
+    },
   },
 });
 
@@ -147,6 +153,7 @@ export const {
   tableSetActiveRow,
   tableSetWatchedRows,
   tableSetSchmutz,
+  tableSetActiveState,
 } = tableSlice.actions;
 
 export default tableSlice.reducer;

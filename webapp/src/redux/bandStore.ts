@@ -32,10 +32,14 @@ export const bandSlice = createSlice({
      * @param value
      */
     bandChangeItemAt: (state, bandItem: PayloadAction<BandItemToChange>) => {
-      state.currentBand[bandItem.payload.index as number].value =
-        bandItem.payload.value;
-      state.currentBand[bandItem.payload.index as number].label =
-        bandItem.payload.label;
+      state.currentBand[bandItem.payload.index].value = bandItem.payload.value;
+
+      if (bandItem.payload.label != "B") {
+        state.currentBand[bandItem.payload.index].label =
+          bandItem.payload.label;
+      } else {
+        state.currentBand[bandItem.payload.index].label = "";
+      }
     },
     bandChangePointer: (
       state,

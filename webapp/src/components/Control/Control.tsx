@@ -1,9 +1,13 @@
 import { FaPlay, FaPause, FaStop, FaStepForward } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Zustand } from "../../interfaces/CommonInterfaces";
+import { Direction, Row, Zustand } from "../../interfaces/CommonInterfaces";
 import { RootState, store } from "../../redux/store";
-import { tableSetWatchedRows } from "../../redux/tableStore";
+import {
+  tableSetActiveState,
+  tableSetWatchedRows,
+} from "../../redux/tableStore";
 import watch from "redux-watch";
+import { bandChangeItemAt } from "../../redux/bandStore";
 
 function Control() {
   const dispatch = useDispatch();
@@ -25,13 +29,34 @@ function Control() {
     })
   );
 
+  let selectedBand = currentBand;
+
+  let wSelectedBand = watch(store.getState, "band.currentBand");
+
+  store.subscribe(
+    wSelectedBand((newVal) => {
+      selectedBand = newVal;
+    })
+  );
+
+  let activeState = initialZustand;
+
+  let wActiveState = watch(store.getState, "table.activeState");
+
+  store.subscribe(
+    wActiveState((newVal) => {
+      activeState = newVal;
+      console.log("neuer Zustand", newVal);
+    })
+  );
+
   const setSelectedRows = () => {
     let rows: Row[] = [];
 
     if (currentBand.length > 0) {
       currentTable.forEach((row) => {
         if (row.cells[0].value instanceof Zustand) {
-          if (row.cells[0].value.value === initialZustand.value) {
+          if (row.cells[0].value.value === activeState.value) {
             rows.push(row);
           }
         }
@@ -40,14 +65,73 @@ function Control() {
     dispatch(tableSetWatchedRows(rows));
   };
 
+  const updateStep = (index: number) => {
+    let idx = index;
+
+    let band = [];
+    for (let i = idx; i < selectedBand.length; i++) {
+      band.push(selectedBand[i]);
+    }
+
+    console.log(selectedRows);
+
+    band.forEach((item) => {
+      selectedRows.forEach((row) => {
+        if (
+          row.cells[1].value === item.value &&
+          typeof row.cells[3].value === "string"
+        ) {
+          if (
+            row.cells[0].value instanceof Zustand &&
+            row.cells[0].value.endzustand === false
+          ) {
+            dispatch(
+              bandChangeItemAt({
+                index: idx,
+                value: row.cells[3].value,
+                label: row.cells[3].value,
+              })
+            );
+          }
+
+          if (row.cells[4].value instanceof Direction) {
+            switch (row.cells[4].value.label) {
+              case "Rechts": {
+                idx++;
+                break;
+              }
+              case "Links": {
+                idx--;
+                break;
+              }
+              case "Neutral":
+              default: {
+                break;
+              }
+            }
+          }
+
+          if (row.cells[0].value instanceof Zustand) {
+            if (row.cells[0].value != row.cells[2].value) {
+              if (row.cells[0].value.endzustand === true) {
+                console.log("Endzustand erreicht!");
+              } else {
+                console.log("changeZustand");
+                dispatch(tableSetActiveState(row.cells[2].value as Zustand));
+                setSelectedRows();
+                updateStep(idx);
+              }
+            }
+          }
+        }
+      });
+    });
+  };
+
   const onClick = () => {
     setSelectedRows();
 
-    if (selectedRows.length > 0) {
-      console.log("selectedRows: ", selectedRows);
-
-      //   selectedRows.forEach((row) => {});
-    }
+    updateStep(0);
   };
 
   return (
