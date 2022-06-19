@@ -1,19 +1,7 @@
 import {CgAddR} from "react-icons/all";
 import React from "react";
 
-export interface DefaultInputEingabeAlphabet {
-    label: string;
-    value: string;
-}
 
-/**
- * default symbols for custom Eingabealphabet
- */
-export const defaultInputEingabeAlphabet: DefaultInputEingabeAlphabet[] = [
-    {label: '1', value: '1'},
-    {label: '0', value: '0'},
-    {label: '#', value: '#'}
-];
 
 export interface EingabeAlphabetOption {
     label: string;
@@ -30,28 +18,20 @@ export const eingabeAlphabetOptionen: EingabeAlphabetOption[] = [
     {label: '#', value: '#', pointer: false}
 ];
 
-export interface EingabeAlphabet {
+export interface EingabeAlphabetDialog {
     label: string;
     value: string [];
     icon?: any;
 }
 
-/**
- * default Eingabealphabete
- */
-export const eingabeAlphabete: EingabeAlphabet[] = [
-    {label: 'erstellen', value: ['custom'], icon: <CgAddR/>},
-    {label: '{1}', value: ['1']},
-    {label: '{1,#}', value: ['1', '#']},
-    {label: '{0,1}', value: ['0', '1']},
-    {label: '{0,1,#}', value: ['0', '1', '#']},
-];
-
-export const currentBand: EingabeAlphabetOption[] = [
-    {value: "", label: "B", pointer: false},
-    {value: "", label: "B", pointer: true},
-    {value: "", label: "B", pointer: false},
-    {value: "", label: "B", pointer: false},
-    {value: "", label: "B", pointer: false},
-];
+// /**
+//  * default Eingabealphabete
+//  */
+// export const eingabeAlphabeteDialog: EingabeAlphabetDialog[] = [
+//     {label: 'erstellen', value: ['custom'], icon: <CgAddR/>},
+//     {label: '{1}', value: ['1']},
+//     {label: '{1,#}', value: ['1', '#']},
+//     {label: '{0,1}', value: ['0', '1']},
+//     {label: '{0,1,#}', value: ['0', '1', '#']},
+// ];
 

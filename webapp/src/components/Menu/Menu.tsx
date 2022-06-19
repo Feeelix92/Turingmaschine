@@ -2,7 +2,7 @@ import Sidebar from "../Sidebar/Sidebar";
 
 
 
-function Menu() {
+function Menu() {   
     return (
         <div className={"menu w-screen"}>
             <Sidebar />

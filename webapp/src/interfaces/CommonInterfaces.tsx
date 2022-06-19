@@ -1,5 +1,5 @@
 import { Key } from "react";
-import { EingabeAlphabet, EingabeAlphabetOption } from "../data/Alphabet";
+import { EingabeAlphabetOption } from "../data/Alphabet";
 
 export interface TableProps {
   header: string[];
@@ -18,14 +18,21 @@ export interface Cell {
 }
 
 export class Zustand {
-  label: string;
   value: string;
-  isFinal: boolean;
+  label: string;
+  anfangszustand: boolean;
+  endzustand: boolean;
 
-  constructor(label: string, value: string, isFinal: boolean) {
+  constructor(
+    label: string,
+    value: string,
+    anfangszustand: boolean,
+    endzustand: boolean
+  ) {
     this.label = label;
     this.value = value;
-    this.isFinal = isFinal;
+    this.anfangszustand = anfangszustand;
+    this.endzustand = endzustand;
   }
 }
 
@@ -42,16 +49,13 @@ export class Direction {
 export interface RowProps {
   index: Key;
   cells: Cell[];
-  alphabet: EingabeAlphabetOption[];
-  deleteRow: () => void;
-  updateRow: (index: Key, cells: Cell[]) => void;
   isFinal: boolean;
+  deleteRow: () => void;
 }
 
 export interface CellProps {
   value: string | Zustand | Direction;
   index: Key;
-  alphabet: EingabeAlphabetOption[];
   showEditField: boolean;
   updateCellValue: (index: Key, arg: string | Zustand | Direction) => void;
 }
@@ -63,13 +67,12 @@ export interface EditProps {
 
 export interface BandItemProps {
   value: string;
+  label: string;
   index: number;
   skin: string;
   pointer: boolean;
   alphabet: EingabeAlphabetOption[];
   showEditField: boolean;
-  changeItemAt: (index: Key, e: any) => void;
-  deleteItemAt: (index: Key) => void;
   setPointer: (index: Key, e: any) => void;
   setPointerAt: () => void;
   movePointer: (arg: number) => void;
@@ -82,9 +85,8 @@ export interface BandProps {
 }
 
 export interface EingabeAlphabetCustomProp {
-  alphabet: EingabeAlphabet[];
-  alphabetOptions: EingabeAlphabetOption[];
   customSelect: any;
+  onCloseDialog: () => void;
 }
 
 export const directions: Direction[] = [
@@ -93,8 +95,8 @@ export const directions: Direction[] = [
   new Direction("N", "Neutral"),
 ];
 
-export const status: Zustand[] = [
-  new Zustand("q1", "q1", false),
-  new Zustand("q2", "q2", false),
-  new Zustand("q3", "q3", true),
-];
+// export const status: Zustand[] = [
+//   new Zustand("q1", "q1", false),
+//   new Zustand("q2", "q2", false),
+//   new Zustand("q3", "q3", true),
+// ];

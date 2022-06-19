@@ -1,16 +1,23 @@
 import React, { Key, useEffect } from "react";
+import { useSelector } from "react-redux";
 import Select, { OnChangeValue } from "react-select";
 import {
   CellProps,
   Direction,
   directions,
-  status,
   Zustand,
 } from "../../interfaces/CommonInterfaces";
+import { RootState } from "../../redux/store";
 import EditField from "./EditField";
 
 export default function Cell(props: CellProps) {
   const wrapperRef: React.RefObject<HTMLTableCellElement> = React.createRef();
+  const zustandsmenge = useSelector(
+    (state: RootState) => state.general.zustandsmenge
+  );
+  const eingabeAlphabet = useSelector(
+    (state: RootState) => state.general.currentAlphabet
+  );
 
   const [editMode, setEditMode] = React.useState(false);
 
@@ -59,11 +66,12 @@ export default function Cell(props: CellProps) {
     let allowed = false;
 
     // map the passed alphabet to check whether the alphabet contains the new input value
-    props.alphabet.map((entry) => {
+    eingabeAlphabet.alphabet.map((entry) => {
       if (
         entry.value === value ||
         props.showEditField === false ||
-        value === ""
+        value === "" ||
+        value === "B"
       ) {
         // if its allowed, we pass the new value to the parent to update the cell value
         props.updateCellValue(index, value);
@@ -87,7 +95,7 @@ export default function Cell(props: CellProps) {
           blurInputOnSelect={false}
           className={"text-black p-3 text-base"}
           onChange={handleChange}
-          options={status}
+          options={zustandsmenge}
         />
       ) : (
         ""
@@ -120,7 +128,10 @@ export default function Cell(props: CellProps) {
       )}
 
       {editMode && props.showEditField ? (
-        <EditField options={props.alphabet} updateValue={chooseOption} />
+        <EditField
+          options={eingabeAlphabet.alphabet}
+          updateValue={chooseOption}
+        />
       ) : (
         ""
       )}

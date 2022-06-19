@@ -4,21 +4,57 @@ import {
   RowProps,
   Zustand,
 } from "../../interfaces/CommonInterfaces";
-import Cell from "./Cell";
 import { FaTrash } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  initialZustand,
+  tableDeleteRow,
+  tableUpdateCell,
+} from "../../redux/tableStore";
+import { RootState } from "../../redux/store";
+import Cell from "./Cell";
 
 export default function Row(props: RowProps) {
+  // create flat copy of all existing cells
+  const dispatch = useDispatch();
   const [visible, setVisible] = useState(props.isFinal);
+  const test = useSelector((state: RootState) => state.table.rows[0].cells);
 
   function setCellValue(index: React.Key, value: string | Zustand | Direction) {
-    // create flat copy of all existing cells
-    let cellCopy = props.cells.slice(0, props.cells.length);
-
-    // overwrite cells at certain index with new value
-    cellCopy[index as number].value = value;
-
     // pass new data to table to update its rows-array
-    props.updateRow(props.index, cellCopy);
+
+    if (typeof value === "string") {
+      dispatch(
+        tableUpdateCell({
+          cellIndex: index,
+          rowIndex: props.index,
+          value: value,
+        })
+      );
+    } else if (value instanceof Direction) {
+      const tempDirection = new Direction(value.label, value.value);
+      dispatch(
+        tableUpdateCell({
+          cellIndex: index,
+          rowIndex: props.index,
+          value: tempDirection,
+        })
+      );
+    } else {
+      const tempZustand = new Zustand(
+        value.label,
+        value.value,
+        value.anfangszustand,
+        value.endzustand
+      );
+      dispatch(
+        tableUpdateCell({
+          cellIndex: index,
+          rowIndex: props.index,
+          value: tempZustand,
+        })
+      );
+    }
   }
 
   useEffect(() => {
@@ -39,7 +75,6 @@ export default function Row(props: RowProps) {
                 key={key}
                 value={value.value}
                 index={key}
-                alphabet={props.alphabet}
                 showEditField={value.editField}
                 updateCellValue={setCellValue}
               />
@@ -49,7 +84,6 @@ export default function Row(props: RowProps) {
               key={key}
               value={value.value}
               index={key}
-              alphabet={props.alphabet}
               showEditField={value.editField}
               updateCellValue={setCellValue}
             />
@@ -63,7 +97,7 @@ export default function Row(props: RowProps) {
         <a
           href="#"
           className="w-full min-w-full text-gray-700 focus:outline-none items-center"
-          onClick={props.deleteRow}
+          onClick={() => dispatch(tableDeleteRow(props.index))}
         >
           <FaTrash />
         </a>
