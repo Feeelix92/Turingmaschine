@@ -1,12 +1,10 @@
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit'
-import { EingabeAlphabetDialog, EingabeAlphabetOption } from '../data/Alphabet';
-import {CgAddR} from "react-icons/all";
 import { Zustand } from '../interfaces/CommonInterfaces';
 
 export interface EingabeAlphabetDialogOptions {
     label: string,
     alphabet: Alphabet,
-    icon?: string
+    icon?: boolean
 }
 
 export interface Alphabet {
@@ -66,7 +64,7 @@ export const defaultAlphabetOption4: Alphabet = {
 const initialDialogOption:EingabeAlphabetDialogOptions = {label: '{1}', alphabet: defaultAlphabetOption1}
 
 export const eingabeAlphabetDialogOptions: EingabeAlphabetDialogOptions[] = [
-    {label: 'erstellen', alphabet: defaultCustomAlphabet, icon: "<CgAddR>"},
+    {label: 'erstellen', alphabet: defaultCustomAlphabet, icon: true},
     {label: '{1}', alphabet: defaultAlphabetOption1},
     {label: '{1,#}', alphabet: defaultAlphabetOption2},
     {label: '{0,1}', alphabet: defaultAlphabetOption3},

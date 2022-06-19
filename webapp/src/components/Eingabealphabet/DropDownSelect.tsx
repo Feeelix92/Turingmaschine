@@ -1,5 +1,6 @@
 import { current } from '@reduxjs/toolkit';
 import React, {useEffect, useState} from 'react'
+import { CgAddR } from 'react-icons/cg';
 import { useSelector, useDispatch } from 'react-redux';
 import Select, {ActionMeta, OnChangeValue} from 'react-select'
 import { EingabeAlphabetDialog} from "../../data/Alphabet";
@@ -69,7 +70,12 @@ export default function DropDownSelect() {
                     // @ts-ignore
                     getOptionLabel={e => (
                         <div className={"flex items-center place-content-start"}>
-                            {e.icon}
+                            {e.icon ? (
+                               <CgAddR/>
+                            ) : (
+                                ""
+                            )}
+                            
                             <span className={"m-2"}>{e.label}</span>
                         </div>
                     )}
