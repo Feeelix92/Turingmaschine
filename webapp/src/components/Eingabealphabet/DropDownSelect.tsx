@@ -1,5 +1,6 @@
 import { current } from '@reduxjs/toolkit';
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+import { CgAddR } from 'react-icons/cg';
 import { useSelector, useDispatch } from 'react-redux';
 import Select, {ActionMeta, OnChangeValue} from 'react-select'
 import { EingabeAlphabetDialog} from "../../data/Alphabet";
@@ -16,16 +17,14 @@ export default function DropDownSelect() {
      * checks if Dialog opened or closed
      */
     const [openDialog, setOpenDialog] = useState(false);
-    // const [showPlaceholder, setShowPlaceholder] = useState(true);
 
     /**
-     * checks if Button on DropDownMultiselect is clicked
-     * @param data
+     * copy of the currentDialogOption from state, to get the correct labels in Select
      */
-    // const customSelect = (data: any) => {
-    //     setOpenDialog(data);
-    //     setSelectedOption(currentAlphabet[currentAlphabet.length - 1])
-    // }
+    const [copiedCurrentDialogOption, setCopiedCurrentDialogOption] = useState({label: "", value: ""});
+    useEffect(() => {
+        setCopiedCurrentDialogOption({label: currentDialogOption.label, value: currentDialogOption.label})
+    },[currentDialogOption])
 
     
     /**
@@ -63,7 +62,7 @@ export default function DropDownSelect() {
             {/*    />*/}
             {/*}*/}
             {/*{!showPlaceholder &&*/}
-            <Select value={currentDialogOption}
+            <Select value={copiedCurrentDialogOption}
                     blurInputOnSelect={false}
                     className={"text-black p-3 text-base"}
                     onChange={handleChange}
@@ -71,7 +70,12 @@ export default function DropDownSelect() {
                     // @ts-ignore
                     getOptionLabel={e => (
                         <div className={"flex items-center place-content-start"}>
-                            {e.icon}
+                            {e.icon ? (
+                               <CgAddR/>
+                            ) : (
+                                ""
+                            )}
+                            
                             <span className={"m-2"}>{e.label}</span>
                         </div>
                     )}

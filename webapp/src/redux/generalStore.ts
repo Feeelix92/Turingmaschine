@@ -1,11 +1,10 @@
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit'
-import { EingabeAlphabetDialog, EingabeAlphabetOption } from '../data/Alphabet';
-import {CgAddR} from "react-icons/all";
 import { Zustand } from '../interfaces/CommonInterfaces';
 
 export interface EingabeAlphabetDialogOptions {
     label: string,
-    alphabet: Alphabet
+    alphabet: Alphabet,
+    icon?: boolean
 }
 
 export interface Alphabet {
@@ -65,7 +64,7 @@ export const defaultAlphabetOption4: Alphabet = {
 const initialDialogOption:EingabeAlphabetDialogOptions = {label: '{1}', alphabet: defaultAlphabetOption1}
 
 export const eingabeAlphabetDialogOptions: EingabeAlphabetDialogOptions[] = [
-    {label: 'erstellen', alphabet: defaultCustomAlphabet},
+    {label: 'erstellen', alphabet: defaultCustomAlphabet, icon: true},
     {label: '{1}', alphabet: defaultAlphabetOption1},
     {label: '{1,#}', alphabet: defaultAlphabetOption2},
     {label: '{0,1}', alphabet: defaultAlphabetOption3},
@@ -100,6 +99,7 @@ export const generalSlice = createSlice({
         let tempAlphabet = Object.assign([], alphabet.payload.alphabet)
         tempAlphabet.push({value: "B", label: "B"})
         state.bandAlphabet = tempAlphabet
+        console.log("alphabetChangeCurrent",current(state))
     },
     /**
      * function alphabetPushToCustom pushes a new Value to the customAlphabet
@@ -117,6 +117,7 @@ export const generalSlice = createSlice({
                 state.currentDialogOption = option
             }
         });
+        console.log("alphabetPushToDialogOptions",current(state))
         customKey++
     },
     /**
