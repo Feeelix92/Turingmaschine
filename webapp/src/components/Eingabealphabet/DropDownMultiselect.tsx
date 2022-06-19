@@ -73,7 +73,7 @@ export default function MultiselectDropDown(props: EingabeAlphabetCustomProp) {
                             alert("Ein leeres Alphabet ist nicht erlaubt!");                           
                         }             
                         props.onCloseDialog()           
-                    }} className={"primaryBtn col-start-3 col-span-2 m-2"}>speichern
+                    }} className={"col-start-3 col-span-2 m-2"}>speichern
                     </button>
                 </div>
             </div>

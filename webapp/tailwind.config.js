@@ -15,6 +15,7 @@ module.exports = {
           secondary3: '#00B8E4',
           secondary4: '#002878',
           hover: '#5a811b',
+          link: '#61dafb',
         },
       }
     }

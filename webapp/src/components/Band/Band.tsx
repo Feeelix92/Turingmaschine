@@ -127,7 +127,6 @@ export default function Band () {
                 </button>
             </div>
           </div>
-
       </div>
     );
   }

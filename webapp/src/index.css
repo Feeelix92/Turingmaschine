@@ -3,26 +3,251 @@
     h1 {
         @apply text-3xl font-bold text-black;
     }
+
     h2 {
         @apply text-2xl font-bold text-black;
     }
+
     h3 {
         @apply text-xl font-bold text-black;
     }
+
     h4 {
         @apply text-lg font-bold text-black;
     }
-    p{
+
+    p {
         @apply text-base text-black;
     }
+
     a {
         @apply text-blue-600 underline;
     }
-    button{
+
+    button {
         @apply bg-thm-primary text-white font-bold px-3 rounded text-center h-12 hover:bg-thm-hover;
     }
 }
 @tailwind components;
+.App {
+    @apply text-center w-auto;
+}
+
+.App-logo {
+    @apply h-2 pointer-events-none;
+}
+
+.App-header {
+    @apply flex flex-col items-center justify-start text-white;
+}
+
+.App-link {
+    @apply text-thm-link;
+}
+
+/* ********** MENU ********** */
+.menu {
+    @apply bg-thm-primary text-left;
+}
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+    @apply relative float-right self-center w-12 h-8 m-2;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+    @apply bg-white;
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+    @apply bg-thm-hover;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+    @apply h-10 w-10;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+    @apply bg-white;
+    /*background: white;*/
+}
+
+/* Sidebar wrapper styles Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases */
+.bm-menu-wrap {
+    @apply fixed h-max right-0;
+}
+
+/* General sidebar styles */
+.bm-menu {
+    @apply bg-thm-primary2;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+    @apply text-white p-2.5 text-left;
+}
+
+/* Individual item */
+.bm-item {
+    @apply inline-block p-2.5;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+    @apply bg-transparent;
+}
+
+ /*********** BAND ***********/
+/*.band-container {*/
+/*    @apply overflow-x-scroll overflow-y-hidden whitespace-nowrap pb-40 pl-0 pr pt-10;*/
+/*}*/
+
+/*.band-container__band {*/
+/*    @apply inline-block p-5 w-60 h-10 text-black border border-2 border-solid border-thm-primary2;*/
+
+/*}*/
+
+
+.band-container {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding: 40px 10px 0 10px;
+}
+
+.band-container__band {
+    display: inline-block;
+    padding: 5px;
+    width: 60px;
+    height: 40px;
+    color: black;
+    border: 1px solid gray;
+}
+
+.left-band-button {
+    min-width: 30px;
+    max-width: 30px;
+    height: 40px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-band-button {
+    min-width: 30px;
+    max-width: 30px;
+    height: 40px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pointerBorder {
+    @apply border-4 border-t-8 border-thm-primary relative cursor-move;
+}
+/*.pointerBorder {*/
+/*    border: 3px solid green;*/
+/*    border-top: 8px solid green;*/
+/*    position: relative;*/
+/*    cursor: move;*/
+/*}*/
+
+.pointer {
+    @apply cursor-move;
+}
+
+.pointer::after {
+    /*@apply content-[''] absolute bg-thm-primary h-10 w-16 rounded-t-full bottom-8 left-0;*/
+    content: "";
+    position: absolute;
+    /*border-bottom: 19px solid green;*/
+    /*border-left: 22px solid transparent;*/
+    /*border-right: 22px solid transparent;*/
+    /*bottom: 36px;*/
+    /*left: 0;*/
+
+    /*Runder Kopf vom Pointer:*/
+    background: green;
+    height: 30px;
+    width: 60px;
+    border-radius: 300px 300px 0 0;
+    margin-left: -15px;
+    margin-top: -35px;
+}
+
+.pointer:hover {
+    @apply bg-thm-hover;
+}
+
+.paper, .tech {
+    @apply bg-[url('./assets/images/spritesheet2.png')] bg-no-repeat;
+    /*background-image: url('./assets/images/spritesheet2.png');*/
+    /*background-repeat: no-repeat;*/
+}
+
+.paper {
+    /*@apply bg-left-top;*/
+    background-position: 0 0;
+}
+
+.tech {
+    /*@apply bg-left-top;*/
+    background-position: -60px 0;
+}
+
+/* ********** BAND ITEM ********** */
+.delete-value-button {
+    @apply min-w-fit max-w-full h-10
+    /*min-width: 20px;*/
+    /*max-width: 20px;*/
+    /*height: 28px;*/
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+}
+
+
+/* ********** TABLE ********** */
+
+.editBtnDiv {
+    @apply fixed;
+    /*position: fixed;*/
+}
+
+.editBtn {
+    @apply w-10 h-10;
+    /*width: 45px;*/
+    /*height: 45px;*/
+}
+.accordion .specification-header{
+    @apply text-left;
+    /*text-align: start;*/
+}
+
+.accordion .specification-header span{
+    @apply font-bold;
+    /*font-weight: bolder;*/
+}
+
+.accordion .specification-header .accordion-icon{
+    @apply mr-0.5 ml-0.5;
+    /*margin-right: 0.3rem;*/
+    /*margin-left: 0.3rem;*/
+}
+
+.accordion-content{
+    @apply text-left m-0.5 p-5
+    /*text-align: start;*/
+    /*margin-left: 0.3rem;*/
+
+}
+
 @tailwind utilities;
 
 
