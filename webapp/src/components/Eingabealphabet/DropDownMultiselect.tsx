@@ -69,7 +69,7 @@ export default function MultiselectDropDown(props: EingabeAlphabetCustomProp) {
                         })
                         dispatch(alphabetPushToDialogOptions(valuesArray.toString()))
                         props.onCloseDialog()
-                    }} className={"primaryBtn col-start-3 col-span-2 m-2"}>speichern
+                    }} className={"col-start-3 col-span-2"}>speichern
                     </button>
                 </div>
             </div>

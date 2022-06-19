@@ -7,17 +7,18 @@ import { bandChangeSkin } from "../../redux/bandStore";
 function Sidebar() {
     const dispatch = useDispatch()
     return (
-        <Menu>
-            <a className="menu-item text-white no-underline" href="/">
-            Startseite
-            </a>
-
-            <a className="menu-item text-white no-underline"
-             onClick={() => dispatch(bandChangeSkin())}>
-            Skin ändern
-            </a>
-
-      </Menu>
+        <Menu right>
+            <div className={""}>
+                <a className={"menu-item text-white text-lg no-underline"} href="/">
+                    Startseite
+                </a>
+            </div>
+            <div className={""}>
+                <a className={"menu-item text-white text-lg no-underline"}>
+                    Skin ändern
+                </a>
+            </div>
+        </Menu>
     );
 }
 

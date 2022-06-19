@@ -19,9 +19,10 @@
         @apply text-blue-600 underline;
     }
     button{
-        @apply text-white text-white font-bold p-3 px-5 rounded;
+        @apply bg-thm-primary text-white font-bold px-3 rounded text-center h-12;
     }
 }
+@tailwind components;
 @tailwind utilities;
 
 
