@@ -107,12 +107,12 @@ export default function Band () {
         </div>        
           <div className="flex mb-4">
             <div className="w-3/4 text-left">
-                <button className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"
+                <button className="m-2 md:invisible"
                     onClick={() => setPointerLeft()}>
                     <FaArrowAltCircleLeft/>
                 </button>
                     
-                <button className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"
+                <button className="m-2 md:invisible"
                     onClick={() => setPointerRight()}>
                     <FaArrowAltCircleRight/>
                 </button>
@@ -121,7 +121,7 @@ export default function Band () {
             <div className="w-1/4 text-right">   
                 <button
                     onClick={() => dispatch(bandDeleteAll())}
-                    className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
+                    className="m-2 "
                     >
                     <FaRedo />
                 </button>

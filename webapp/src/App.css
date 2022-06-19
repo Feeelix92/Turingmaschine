@@ -49,20 +49,6 @@
         margin-left: -100%;
     }
 }
-
-button {
-    font-size: calc(10px + 2vmin);
-    height: 35px;
-}
-
-.primaryBtn {
-    background-color: var(--primary);
-}
-
-.primaryBtn:hover {
-    background-color: var(--primaryHover);
-}
-
 /* ********** MENU ********** */
 
 .menu {

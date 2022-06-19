@@ -19,7 +19,7 @@
         @apply text-blue-600 underline;
     }
     button{
-        @apply bg-thm-primary text-white font-bold px-3 rounded text-center h-12;
+        @apply bg-thm-primary text-white font-bold px-3 rounded text-center h-12 hover:bg-thm-hover;
     }
 }
 @tailwind components;
