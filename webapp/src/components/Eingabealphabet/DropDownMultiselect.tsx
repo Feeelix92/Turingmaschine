@@ -62,13 +62,17 @@ export default function MultiselectDropDown(props: EingabeAlphabetCustomProp) {
                     />
                 </div>
                 <div className={""}>
-                    <button onClick={() => {   
-                        //dispatch(alphabetDeleteCustom())               
-                        valuesArray.forEach((value) =>{
-                            dispatch(alphabetPushToCustom(value))
-                        })
-                        dispatch(alphabetPushToDialogOptions(valuesArray.toString()))
-                        props.onCloseDialog()
+                    <button onClick={() => {  
+                        if(valuesArray.length > 0) {
+                            dispatch(alphabetDeleteCustom())               
+                            valuesArray.forEach((value) =>{
+                                dispatch(alphabetPushToCustom(value))
+                            })
+                            dispatch(alphabetPushToDialogOptions(valuesArray.toString()))                            
+                        }else{
+                            alert("Ein leeres Alphabet ist nicht erlaubt!");                           
+                        }             
+                        props.onCloseDialog()           
                     }} className={"primaryBtn col-start-3 col-span-2 m-2"}>speichern
                     </button>
                 </div>
