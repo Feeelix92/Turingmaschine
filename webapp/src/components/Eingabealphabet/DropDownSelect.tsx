@@ -39,6 +39,7 @@ export default function DropDownSelect() {
         if(newValue){
             if (newValue.alphabet.key !== 0) {
                 dispatch(alphabetChangeCurrent(newValue.alphabet))
+                setOpenDialog(false)
             }else{
                 dispatch(alphabetChangeCurrent(newValue.alphabet))
                 setOpenDialog(true)
@@ -48,8 +49,8 @@ export default function DropDownSelect() {
         console.groupEnd();
     }
     return (
-        <div className={"grid grid-cols-2 gap-5 items-center m-2"}>
-            <p className={""}>Eingabealphabet ∑ =</p>
+        <div className={"grid grid-cols-3 gap-5 items-center m-2"}>
+            <p className={"col-span-2 text-left"}>Eingabealphabet ∑ =</p>
             <Select value={copiedCurrentDialogOption}
                     blurInputOnSelect={false}
                     className={""}

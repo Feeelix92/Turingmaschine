@@ -14,8 +14,8 @@ function App() {
                 <Band/>
             </header>
             <div className={"App-body"}>
-                <Table/>
                 <ConditionsList/>
+                <Table/>
             </div>
         </div>
     );

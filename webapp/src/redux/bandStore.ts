@@ -17,6 +17,14 @@ const currentBand: EingabeAlphabetOption[] = [
     {value: "", label: "B", pointer: false},
     {value: "", label: "B", pointer: false},
     {value: "", label: "B", pointer: false},
+    {value: "", label: "B", pointer: false},
+    {value: "", label: "B", pointer: false},
+    {value: "", label: "B", pointer: false},
+    {value: "", label: "B", pointer: false},
+    {value: "", label: "B", pointer: false},
+    {value: "", label: "B", pointer: false},
+    {value: "", label: "B", pointer: false},
+    {value: "", label: "B", pointer: false},
 ];
 
 export const bandSlice = createSlice({

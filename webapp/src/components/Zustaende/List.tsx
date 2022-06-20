@@ -57,71 +57,69 @@ function ConditionsList() {
     }
 
     return (
-        <div className={"border-solid border rounded bg-white w-screen sm:w-3/4 lg:w-3/4 xl:w-2/4 p-3 border rounded items-center hover:bg-gray-100"}>
-            <div className={""}>
-                <div className={""} onClick={() => setIsActive(!isActive)}>
-                    <div className={"hover:bg-none flex gap-5 items-center m-2"}>
-                        <span className={""}>{isActive ? closeAccordion : openAccordion}</span>
-                        <span>{title}</span>
+        <div className={"border-solid border rounded bg-white w-screen sm:w-3/4 lg:w-3/4 3xl:w-2/4 p-3 border rounded items-center hover:bg-gray-100 col-span-2"}>
+            <div className={""} onClick={() => setIsActive(!isActive)}>
+                <div className={"flex gap-5 items-center m-2"}>
+                    <span className={""}>{isActive ? closeAccordion : openAccordion}</span>
+                    <span>{title}</span>
+                </div>
+            </div>
+            {isActive && <div className={""}>
+                <div>
+                    <DropDownSelect />
+                </div>
+                <div className={"flex gap-5 items-center m-2 text-left"}>
+                    <div className={"col-span-2"}>Bandalphabet &Gamma; =</div>
+                    <div className={"border border-solid bg-white rounded p-2"}>{kA}
+                    {bandAlphabet.map((value, index) => (
+                        <span key={index}>{value.value},</span>
+                    ))}{kZ}
                     </div>
                 </div>
-                {isActive && <div className={""}>
-                    <div>
-                        <DropDownSelect />
+                <div className={"flex gap-5 items-center m-2 text-left"}>
+                    <div className={"col-span-2"}>Zustandsmenge Q = </div>
+                    <div className={"border border-solid bg-white rounded p-2"}>{kA}
+                    {zustandsmenge.map((value, index) => (
+                        <span key={index}>{value.value},</span>
+                    ))}{kZ}
                     </div>
-                    <div className={"grid grid-cols-2 gap-5 items-center m-2"}>
-                        <div>Bandalphabet &Gamma; =</div>
-                        <div>{kA}
-                        {bandAlphabet.map((value, index) => (
+                </div>
+                <div className={"flex gap-5 items-center m-2 text-left"}>
+                    <div className={"col-span-2"}>Anfangszustand q0 = {anfangsZustand.value} </div>
+                    <Select
+                        placeholder={anfangsZustand.value}
+                        blurInputOnSelect={false}
+                        className={""}
+                        onChange={handleChange}
+                        options={zustandsmenge}
+                    />
+                </div>
+                <div className={"flex gap-5 items-center m-2 text-left"}>
+                    <div className={"col-span-2"}>
+                        Endzustand F = {kA}
+                        {endZustand.map((value, index) => (
                             <span key={index}>{value.value},</span>
                         ))}{kZ}
-                        </div>
                     </div>
-                    <div className={"grid grid-cols-2 gap-5 items-center m-2"}>
-                        <div>Zustandsmenge Q = </div>
-                        <div>{kA}
-                        {zustandsmenge.map((value, index) => (
-                            <span key={index}>{value.value},</span>
-                        ))}{kZ}
-                        </div>
+                    <Select
+                        value={endZustand}
+                        blurInputOnSelect={false}
+                        className={""}
+                        onChange={handleChangeMulti}
+                        options={zustandsmenge}
+                        isMulti={true}
+                    />
+                </div>
+                <div>
+                    <div className={"flex gap-5 items-center m-2 text-left"}>
+                        <span className={"col-span-2"}>Zustandsüberführungsfunktion &delta; =</span>
+                        <button className={"text-black bg-white hover:bg-gray-200 text-left border border-solid"} onClick={() => setShowZustandsfunktion(!showZustandsfunktion)}>{ showZustandsfunktion ? 'Hier steht eine Funktion' : '...' }</button>
                     </div>
-                    <div className={"grid grid-cols-2 gap-5 items-center m-2"}>
-                        <div>Anfangszustand q0 = {anfangsZustand.value} </div>
-                        <Select
-                            placeholder={anfangsZustand.value}
-                            blurInputOnSelect={false}
-                            className={""}
-                            onChange={handleChange}
-                            options={zustandsmenge} 
-                        />
-                    </div>
-                    <div className={"grid grid-cols-2 gap-5 items-center m-2"}>
-                        <div>
-                            Endzustand F = {kA}
-                            {endZustand.map((value, index) => (
-                                <span key={index}>{value.value},</span>
-                            ))}{kZ}
-                        </div>
-                        <Select
-                            value={endZustand}
-                            blurInputOnSelect={false}
-                            className={""}
-                            onChange={handleChangeMulti}
-                            options={zustandsmenge} 
-                            isMulti={true}
-                        />
-                    </div>
-                    <div>
-                        <div className={"grid grid-cols-2 gap-5 items-center m-2"}>
-                            <span>Zustandsüberführungsfunktion &delta; =</span>
-                            <button className={"text-black bg-white hover:bg-gray-200 text-left"} onClick={() => setShowZustandsfunktion(!showZustandsfunktion)}>{ showZustandsfunktion ? 'Hier steht eine Funktion' : '...' }</button>
-                        </div>
-                        {/*{showZustandsfunktion && <div>
-                            <p>Hier steht eine Funktion</p>
-                        </div>}*/}
-                    </div>
-                </div>}
-            </div>
+                    {/*{showZustandsfunktion && <div>
+                        <p>Hier steht eine Funktion</p>
+                    </div>}*/}
+                </div>
+            </div>}
         </div>
     );
 }
