@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import Select, { OnChangeValue } from "react-select";
-import { Zustand } from '../../interfaces/CommonInterfaces';
-import { alphabetChangeAnfangszustand, alphabetChangeEndzustand } from '../../redux/generalStore';
-import { RootState } from '../../redux/store';
+import React, {useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import Select, {OnChangeValue} from "react-select";
+import {Zustand} from '../../interfaces/CommonInterfaces';
+import {alphabetChangeAnfangszustand, alphabetChangeEndzustand} from '../../redux/generalStore';
+import {RootState} from '../../redux/store';
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
-import {BiDownArrow, BiUpArrow} from "react-icons/all";
+import {BiCaretDown, BiCaretUp, BiDownArrow, BiUpArrow, MdOutlineArrowDropDown, MdOutlineArrowDropUp, RiArrowDownSFill, RiArrowUpSFill} from "react-icons/all";
 import CreatableSelect from "react-select/creatable";
 
 function ConditionsList() {
@@ -35,10 +35,10 @@ function ConditionsList() {
      */
     const accordionData = {
         title: <h2>Spezifikationen</h2>,
-        openAccordion: <BiDownArrow/>,
-        closeAccordion: <BiUpArrow/>,
+        openAccordion: <button className={"float-left"}><BiCaretDown/></button>,
+        closeAccordion: <button className={"float-left"}><BiCaretUp/></button>,
     };
-    const { title, openAccordion, closeAccordion } = accordionData;
+    const {title, openAccordion, closeAccordion} = accordionData;
 
     function handleChange(newValue: OnChangeValue<Zustand, false>) {
         if (newValue) {
@@ -51,7 +51,7 @@ function ConditionsList() {
         if (newValue) {
             let temp: Zustand[] = [];
             newValue.forEach(zustand => {
-                temp.push(new Zustand(zustand.value,zustand.label, zustand.anfangszustand, true))
+                temp.push(new Zustand(zustand.value, zustand.label, zustand.anfangszustand, true))
             });
             dispatch(alphabetChangeEndzustand(temp))
         }
@@ -65,70 +65,73 @@ function ConditionsList() {
                     <span>{title}</span>
                 </div>
             </div>
-            {isActive && <div className={""}>
-                <div>
-                    <DropDownSelect/>
-                </div>
-                <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
-                    <div className={"col-span-2"}>Bandalphabet &Gamma; =</div>
-                    <div className={"border border-solid bg-gray-100 rounded p-2"}>{kA}
-                    {bandAlphabet.map((value, index) => (
-                        <span key={index}>{value.value},</span>
-                    ))}{kZ}
+            {isActive &&
+                <div className={""}>
+                    <div>
+                        <DropDownSelect/>
                     </div>
-                </div>
-                <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
-                    <div className={"col-span-2"}>Zustandsmenge Q =</div>
-                    <div className={"border border-solid bg-gray-100 rounded p-2"}>{kA}
-                        {zustandsmenge.map((value, index) => (
-                            <span key={index}>{value.value},</span>
-                        ))}{kZ}</div>
-                    {/*<CreatableSelect*/}
-                    {/*    value={endZustand}*/}
-                    {/*    blurInputOnSelect={false}*/}
-                    {/*    className={""}*/}
-                    {/*    onChange={handleChangeMulti}*/}
-                    {/*    options={zustandsmenge}*/}
-                    {/*    isMulti={true}*/}
-                    {/*/>       */}
-                </div>
-                <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
-                    <div className={"col-span-2"}>Anfangszustand q0 = {anfangsZustand.value} </div>
-                    <Select
-                        placeholder={anfangsZustand.value}
-                        blurInputOnSelect={false}
-                        className={""}
-                        onChange={handleChange}
-                        options={zustandsmenge}
-                    />
-                </div>
-                <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
-                    <div className={"col-span-2"}>
-                        Endzustand F = {kA}
-                        {endZustand.map((value, index) => (
-                            <span key={index}>{value.value},</span>
-                        ))}{kZ}
-                    </div>
-                    <Select
-                        value={endZustand}
-                        blurInputOnSelect={false}
-                        className={""}
-                        onChange={handleChangeMulti}
-                        options={zustandsmenge}
-                        isMulti={true}
-                    />
-                </div>
-                <div>
                     <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
-                        <span className={"col-span-2"}>Zustandsüberführungsfunktion &delta; =</span>
-                        <button className={"text-black bg-white hover:bg-gray-200 text-left border border-solid"} onClick={() => setShowZustandsfunktion(!showZustandsfunktion)}>{ showZustandsfunktion ? 'Hier steht eine Funktion' : '...' }</button>
+                        <div className={"col-span-2"}>Bandalphabet &Gamma; =</div>
+                        <div className={"border border-solid bg-gray-100 rounded p-2"}>{kA}
+                            {bandAlphabet.map((value, index) => (
+                                <span key={index}>{value.value},</span>
+                            ))}{kZ}
+                        </div>
                     </div>
-                    {/*{showZustandsfunktion && <div>
+                    <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
+                        <div className={"col-span-2"}>Zustandsmenge Q =</div>
+                        <div className={"border border-solid bg-gray-100 rounded p-2"}>{kA}
+                            {zustandsmenge.map((value, index) => (
+                                <span key={index}>{value.value},</span>
+                            ))}{kZ}</div>
+                        {/*<CreatableSelect*/}
+                        {/*    value={endZustand}*/}
+                        {/*    blurInputOnSelect={false}*/}
+                        {/*    className={""}*/}
+                        {/*    onChange={handleChangeMulti}*/}
+                        {/*    options={zustandsmenge}*/}
+                        {/*    isMulti={true}*/}
+                        {/*/>       */}
+                    </div>
+                    <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
+                        <div className={"col-span-2"}>Anfangszustand q0 = {anfangsZustand.value} </div>
+                        <Select
+                            placeholder={anfangsZustand.value}
+                            blurInputOnSelect={false}
+                            className={""}
+                            onChange={handleChange}
+                            options={zustandsmenge}
+                        />
+                    </div>
+                    <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
+                        <div className={"col-span-2"}>
+                            Endzustand F = {kA}
+                            {endZustand.map((value, index) => (
+                                <span key={index}>{value.value},</span>
+                            ))}{kZ}
+                        </div>
+                        <Select
+                            value={endZustand}
+                            blurInputOnSelect={false}
+                            className={""}
+                            onChange={handleChangeMulti}
+                            options={zustandsmenge}
+                            isMulti={true}
+                        />
+                    </div>
+                    <div>
+                        <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
+                            <span className={"col-span-2"}>Zustandsüberführungsfunktion &delta; =</span>
+                            <button className={"text-black bg-white hover:bg-gray-200 text-left border border-solid"}
+                                    onClick={() => setShowZustandsfunktion(!showZustandsfunktion)}>{showZustandsfunktion ? 'Hier steht eine Funktion' : '...'}</button>
+                        </div>
+                        {/*{showZustandsfunktion && <div>
                         <p>Hier steht eine Funktion</p>
                     </div>}*/}
-                </div>
-            </div>}
+                    </div>
+                </div>}
         </div>
     );
 }
+
 export default ConditionsList;

@@ -13,9 +13,9 @@ export default function Table() {
   return (
     <div className="flex flex-col col-span-2 border rounded">
       <div className="sm:-mx-6 lg:-mx-8">
-        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-          <div className="overflow-x-auto">
-            <div className="flex w-full items-center text-left text-sm px-2 font-medium text-gray-900 py-4">
+        <div className="py-2 min-w-full sm:px-6 lg:px-8">
+          <div className="overflow-x-auto items-center">
+            <div className="flex w-full text-left text-sm px-2 font-medium text-gray-900">
               <div className="w-1/2">Wenn...</div>
               <div className="w-1/2">Dann...</div>
             </div>

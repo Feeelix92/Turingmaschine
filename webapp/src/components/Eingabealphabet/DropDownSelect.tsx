@@ -49,32 +49,36 @@ export default function DropDownSelect() {
         console.groupEnd();
     }
     return (
-        <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2"}>
-            <p className={"col-span-2 text-left"}>Eingabealphabet ∑ =</p>
-            <Select value={copiedCurrentDialogOption}
-                    blurInputOnSelect={false}
-                    className={""}
-                    onChange={handleChange}
-                    options={dialogOptions}
-                    // @ts-ignore
-                    getOptionLabel={e => (
-                        <div className={"flex items-center place-content-start"}>
-                            {e.icon ? (
-                               <CgAddR/>
-                            ) : (
-                                ""
-                            )}
-                            <span className={"m-2"}>{e.label}</span>
-                        </div>
-                    )}
-            />
-            {openDialog &&
-                <div className={"text-white text-lg col-span-2"}>
-                    <MultiselectDropDown 
-                    customSelect={true}
-                    onCloseDialog={() => setOpenDialog(false)}/>
-                </div>
-            }
+        <div>
+            <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2"}>
+                <p className={"col-span-2 text-left"}>Eingabealphabet ∑ =</p>
+                <Select value={copiedCurrentDialogOption}
+                        blurInputOnSelect={false}
+                        className={""}
+                        onChange={handleChange}
+                        options={dialogOptions}
+                        // @ts-ignore
+                        getOptionLabel={e => (
+                            <div className={"flex items-center place-content-start"}>
+                                {e.icon ? (
+                                   <CgAddR/>
+                                ) : (
+                                    ""
+                                )}
+                                <span className={"m-2"}>{e.label}</span>
+                            </div>
+                        )}
+                />
+            </div>
+            <div>
+                {openDialog &&
+                    <div className={"text-white text-lg col-span-2"}>
+                        <MultiselectDropDown
+                            customSelect={true}
+                            onCloseDialog={() => setOpenDialog(false)}/>
+                    </div>
+                }
+            </div>
         </div>
     );
 }
