@@ -66,15 +66,17 @@ export default function Row(props: RowProps) {
           STOPP
         </td>
       ) : null}
-      <td className="w-1/6 whitespace-nowrap text-gray-900 items-center ">
+      <td className="w-1/6 text-gray-900 items-center ">
         <a
           href="#"
           className="w-full min-w-full text-gray-700 focus:outline-none"
           onClick={() => dispatch(tableDeleteRow(props.index))}
         >
-          <button className={"invertedButton"}>
-            <FaTrash />
-          </button>
+          <div className={"p-7"}>
+            <button className={"invertedButton"}>
+              <FaTrash />
+            </button>
+          </div>
         </a>
       </td>
     </tr>
