@@ -131,17 +131,47 @@ export const generalSlice = createSlice({
      * function alphabetDeleteCustom deletes the customAlphabet
      * @param value
      */
-    alphabetPushToZustand: (state, zustandsInfo: PayloadAction<Zustand>) => {
-        let tempZustandsmenge = state.zustandsmenge;
-        tempZustandsmenge.push(zustandsInfo.payload)
+    alphabetPushToZustand: (state) => {
+        let tempNumber = state.zustandsmenge.length + 1
+        state.zustandsmenge.push({value: "q" + tempNumber,label: "q" + tempNumber, anfangszustand: false, endzustand: false})
+        console.log( current(state.zustandsmenge))
     },
+      alphabetDeleteZustand: (state) => {
+        state.zustandsmenge.pop()
+      },
+
     alphabetChangeAnfangszustand: (state, zustand: PayloadAction<Zustand>) => {
+        state.zustandsmenge.forEach(option => {
+            if(option.value === zustand.payload.value){
+                option.anfangszustand = true
+                option.endzustand = false
+            } else {
+                option.anfangszustand = false
+            }
+        })
         state.anfangsZustand = zustand.payload
+        console.log(current(state.zustandsmenge))
     },
     alphabetChangeEndzustand: (state, zustand: PayloadAction<Zustand[]>) => {
         console.log(zustand.payload)
         state.endZustand = zustand.payload
-    }
+        state.zustandsmenge.forEach(option => {
+            zustand.payload.forEach(innerzustand => {
+                if( option.value === innerzustand.value){
+                    option.endzustand = true
+                } else{
+                    option.endzustand = false
+                }
+            })
+        })
+        console.log(current(state.zustandsmenge))
+    },
+      alphabetClearEndzustand: (state) => {
+          state.zustandsmenge.forEach(option => {
+                  option.endzustand = false
+          })
+          state.endZustand = []
+      }
   },
 })
 
@@ -153,7 +183,9 @@ export const {
     alphabetDeleteCustom, 
     alphabetPushToZustand, 
     alphabetChangeAnfangszustand, 
-    alphabetChangeEndzustand 
+    alphabetChangeEndzustand,
+    alphabetClearEndzustand,
+    alphabetDeleteZustand
 } = generalSlice.actions
 
 export default generalSlice.reducer

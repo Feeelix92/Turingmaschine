@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Select, { OnChangeValue } from "react-select";
 import { Zustand } from '../../interfaces/CommonInterfaces';
-import { alphabetChangeAnfangszustand, alphabetChangeEndzustand } from '../../redux/generalStore';
+import { alphabetChangeAnfangszustand, alphabetChangeEndzustand, alphabetClearEndzustand, alphabetPushToZustand, alphabetDeleteZustand } from '../../redux/generalStore';
 import { RootState } from '../../redux/store';
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
 
@@ -22,6 +22,7 @@ function ConditionsList() {
     const zustandsmenge = useSelector((state: RootState) => state.general.zustandsmenge)
     const anfangsZustand = useSelector((state: RootState) => state.general.anfangsZustand)
     const endZustand = useSelector((state: RootState) => state.general.endZustand)
+    const possibleEnd = useSelector((state: RootState) => state.general.zustandsmenge).filter(zustand => !zustand.anfangszustand)
 
     const dispatch = useDispatch()
 
@@ -36,22 +37,32 @@ function ConditionsList() {
         openAccordion: '+',
         closeAccordion: '-',
     };
+
     const { title, openAccordion, closeAccordion } = accordionData;
+
 
     function handleChange(newValue: OnChangeValue<Zustand, false>) {
         if (newValue) {
-            const newAnfangszustand = new Zustand(newValue.label, newValue.value, true, false)
-            dispatch(alphabetChangeAnfangszustand(newAnfangszustand))
+            if (!newValue.endzustand) {
+                const newAnfangszustand = new Zustand(newValue.label, newValue.value, true, false)
+                dispatch(alphabetChangeAnfangszustand(newAnfangszustand))
+            } else{
+                const newAnfangszustand = new Zustand(newValue.label, newValue.value, true, false)
+                dispatch(alphabetChangeAnfangszustand(newAnfangszustand))
+                dispatch(alphabetClearEndzustand())
+                alert("Bitt vergiss nicht deine Endzustandsmenge neu zu setzen!");
+            }
         }
     }
 
     function handleChangeMulti(newValue: OnChangeValue<Zustand[], false>) {
-        if (newValue) {
-            let temp: Zustand[] = [];
-            newValue.forEach(zustand => {
-                temp.push(new Zustand(zustand.value,zustand.label, zustand.anfangszustand, true))
-            });
-            dispatch(alphabetChangeEndzustand(temp))
+        if (newValue.filter(zustand => !zustand.anfangszustand)) {
+            console.log('Anfang', anfangsZustand, 'Ende', endZustand, 'Menge', zustandsmenge, 'newValue', newValue)
+                let temp: Zustand[] = [];
+                newValue.forEach(zustand => {
+                    temp.push(new Zustand(zustand.value,zustand.label, zustand.anfangszustand, true))
+                });
+                dispatch(alphabetChangeEndzustand(temp))
         }
     }
 
@@ -78,10 +89,15 @@ function ConditionsList() {
                         ))}{kZ}
                     </div>
                     <div>
-                        Zustandsmenge Q = {kA}
-                        {zustandsmenge.map((value, index) => (
-                            <span key={index}>{value.value},</span>
-                        ))}{kZ}
+                        <div>
+                            Zustandsmenge Q = {kA}
+                            {zustandsmenge.map((value, index) => (
+                                <span key={index}>{value.value},</span>
+                            ))}{kZ}
+                        </div>
+                        <button onClick={() => dispatch(alphabetPushToZustand())}>+</button>
+                        <button onClick={() => dispatch(alphabetDeleteZustand())}>-</button>
+
                     </div>
                     <div className="flex">
                         <div>Anfangszustand q0 = {anfangsZustand.value} </div>
@@ -90,7 +106,7 @@ function ConditionsList() {
                             blurInputOnSelect={false}
                             className={"text-black p-3 text-base"}
                             onChange={handleChange}
-                            options={zustandsmenge} 
+                            options={zustandsmenge}
                         />
                     </div>
                     <div>
@@ -105,7 +121,7 @@ function ConditionsList() {
                             blurInputOnSelect={false}
                             className={"text-black p-3 text-base"}
                             onChange={handleChangeMulti}
-                            options={zustandsmenge} 
+                            options={possibleEnd}
                             isMulti={true}
                         />
                     </div>
