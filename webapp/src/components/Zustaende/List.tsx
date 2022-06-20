@@ -57,18 +57,18 @@ function ConditionsList() {
     }
 
     return (
-        <div className={"border-solid border rounded bg-white w-screen sm:w-3/4 lg:w-3/4 3xl:w-2/4 p-3 border rounded items-center hover:bg-gray-100 col-span-2"}>
+        <div className={"border-solid border rounded bg-white w-screen sm:w-3/4 lg:w-3/4 3xl:w-2/4 p-3 border rounded items-center hover:bg-gray-100 col-span-2 max-w-screen-sm"}>
             <div className={""} onClick={() => setIsActive(!isActive)}>
-                <div className={"flex gap-5 items-center m-2"}>
+                <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2"}>
                     <span className={""}>{isActive ? closeAccordion : openAccordion}</span>
                     <span>{title}</span>
                 </div>
             </div>
             {isActive && <div className={""}>
                 <div>
-                    <DropDownSelect />
+                    <DropDownSelect/>
                 </div>
-                <div className={"flex gap-5 items-center m-2 text-left"}>
+                <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
                     <div className={"col-span-2"}>Bandalphabet &Gamma; =</div>
                     <div className={"border border-solid bg-white rounded p-2"}>{kA}
                     {bandAlphabet.map((value, index) => (
@@ -76,7 +76,7 @@ function ConditionsList() {
                     ))}{kZ}
                     </div>
                 </div>
-                <div className={"flex gap-5 items-center m-2 text-left"}>
+                <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
                     <div className={"col-span-2"}>Zustandsmenge Q = </div>
                     <div className={"border border-solid bg-white rounded p-2"}>{kA}
                     {zustandsmenge.map((value, index) => (
@@ -84,7 +84,7 @@ function ConditionsList() {
                     ))}{kZ}
                     </div>
                 </div>
-                <div className={"flex gap-5 items-center m-2 text-left"}>
+                <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
                     <div className={"col-span-2"}>Anfangszustand q0 = {anfangsZustand.value} </div>
                     <Select
                         placeholder={anfangsZustand.value}
@@ -94,7 +94,7 @@ function ConditionsList() {
                         options={zustandsmenge}
                     />
                 </div>
-                <div className={"flex gap-5 items-center m-2 text-left"}>
+                <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
                     <div className={"col-span-2"}>
                         Endzustand F = {kA}
                         {endZustand.map((value, index) => (
@@ -111,7 +111,7 @@ function ConditionsList() {
                     />
                 </div>
                 <div>
-                    <div className={"flex gap-5 items-center m-2 text-left"}>
+                    <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
                         <span className={"col-span-2"}>Zustandsüberführungsfunktion &delta; =</span>
                         <button className={"text-black bg-white hover:bg-gray-200 text-left border border-solid"} onClick={() => setShowZustandsfunktion(!showZustandsfunktion)}>{ showZustandsfunktion ? 'Hier steht eine Funktion' : '...' }</button>
                     </div>

@@ -49,7 +49,7 @@ export default function DropDownSelect() {
         console.groupEnd();
     }
     return (
-        <div className={"grid grid-cols-3 gap-5 items-center m-2"}>
+        <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2"}>
             <p className={"col-span-2 text-left"}>Eingabealphabet ∑ =</p>
             <Select value={copiedCurrentDialogOption}
                     blurInputOnSelect={false}

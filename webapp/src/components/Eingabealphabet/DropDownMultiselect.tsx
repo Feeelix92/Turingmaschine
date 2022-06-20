@@ -42,7 +42,7 @@ export default function MultiselectDropDown(props: EingabeAlphabetCustomProp) {
     }
 
     return (
-        <div className={"col-span-2"}>
+        <div className={""}>
             <div className={""}>
                 <h2>Eingabealphabet hinzufügen:</h2>
             </div>
