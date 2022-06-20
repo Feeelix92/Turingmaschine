@@ -27,10 +27,18 @@
     button {
         @apply bg-thm-primary text-white font-bold px-3 rounded text-center h-12 hover:bg-thm-hover;
     }
+
+    Select{
+        @apply text-black text-base;
+    }
 }
 @tailwind components;
+.invertedButton {
+    @apply text-thm-primary bg-white font-bold px-3 text-center h-12 hover:bg-thm-primary2 border border-solid border-thm-primary;
+}
+
 .App {
-    @apply text-center w-auto;
+    @apply text-center w-auto sm:pr-10 sm:pl-10 sm:pb-10 content-center;
 }
 
 .App-logo {
@@ -40,9 +48,8 @@
 .App-header {
     @apply flex flex-col items-center justify-start text-white;
 }
-
 .App-body {
-    @apply w-10/12;
+    @apply flex flex-col items-center justify-start xl:grid xl:grid-cols-2 xl:items-start;
 }
 
 .App-link {
@@ -107,47 +114,47 @@
 
  /*********** BAND ***********/
 .band-container {
-    /*@apply overflow-x-scroll overflow-y-hidden whitespace-nowrap pb-40 pl-0 pr-0 pt-10;*/
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-    padding: 40px 10px 0 10px;
+    @apply overflow-x-scroll overflow-y-hidden whitespace-nowrap pb-5 pl-0 pr-0 pt-10;
+    /*overflow-x: scroll;*/
+    /*overflow-y: hidden;*/
+    /*white-space: nowrap;*/
+    /*padding: 40px 10px 0 10px;*/
 }
 
 .band-container__band {
-    /*@apply inline-block p-5 w-32 h-10 text-black border border-2 border-solid border-thm-primary2;*/
-    display: inline-block;
-    padding: 5px;
-    width: 60px;
-    height: 40px;
-    color: black;
-    border: 1px solid gray;
+    @apply inline-block p-3 w-16 h-12 text-black border border border-solid border-thm-primary2;
+    /*display: inline-block;*/
+    /*padding: 5px;*/
+    /*width: 60px;*/
+    /*height: 40px;*/
+    /*color: black;*/
+    /*border: 1px solid gray;*/
 }
 
-.left-band-button {
-    /*@apply max-w-fit w-32 h-10 p-5 flex justify-center items-center;*/
-    min-width: 30px;
-    max-width: 30px;
-    height: 40px;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+/*.left-band-button {*/
+/*    !*@apply max-w-fit w-32 h-10 p-5 flex justify-center items-center;*!*/
+/*    min-width: 30px;*/
+/*    max-width: 30px;*/
+/*    height: 40px;*/
+/*    padding: 5px;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
 
-.right-band-button {
-    /*@apply max-w-fit w-32 h-10 p-5 flex justify-center items-center;*/
-    min-width: 30px;
-    max-width: 30px;
-    height: 40px;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+/*.right-band-button {*/
+/*    !*@apply max-w-fit w-32 h-10 p-5 flex justify-center items-center;*!*/
+/*    min-width: 30px;*/
+/*    max-width: 30px;*/
+/*    height: 40px;*/
+/*    padding: 5px;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
 
 .pointerBorder {
-    @apply border-4 border-t-8 border-thm-primary relative cursor-move;
+    @apply border border-4 border-t-2 border-thm-primary relative cursor-move;
 }
 /*.pointerBorder {*/
 /*    border: 3px solid var(--primary);*/
@@ -224,28 +231,28 @@
     /*height: 45px;*/
 }
 
-.accordion .specification-header{
-    @apply text-left;
-    /*text-align: start;*/
-}
+/*.accordion .specification-header{*/
+/*    !*@apply text-left;*!*/
+/*    !*text-align: start;*!*/
+/*}*/
 
-.accordion .specification-header span{
-    @apply font-bold;
-    /*font-weight: bolder;*/
-}
+/*.accordion .specification-header span{*/
+/*    !*@apply font-bold;*!*/
+/*    !*font-weight: bolder;*!*/
+/*}*/
 
-.accordion .specification-header .accordion-icon{
-    @apply ml-0.5;
-    /*margin-right: 0.3rem;*/
-    /*margin-left: 0.3rem;*/
-}
+/*.accordion .specification-header .accordion-icon{*/
+/*    !*@apply ml-0.5;*!*/
+/*    !*margin-right: 0.3rem;*!*/
+/*    !*margin-left: 0.3rem;*!*/
+/*}*/
 
-.accordion-content{
-    @apply text-left p-5;
-    /*text-align: start;*/
-    /*margin-left: 0.3rem;*/
+/*.accordion-content{*/
+/*    !*@apply p-5;*!*/
+/*    !*text-align: start;*!*/
+/*    !*margin-left: 0.3rem;*!*/
 
-}
+/*}*/
 
 @tailwind utilities;
 

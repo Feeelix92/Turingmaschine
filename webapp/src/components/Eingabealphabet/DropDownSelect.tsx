@@ -1,11 +1,9 @@
-import { current } from '@reduxjs/toolkit';
 import React, {useEffect, useState} from 'react'
 import { CgAddR } from 'react-icons/cg';
 import { useSelector, useDispatch } from 'react-redux';
 import Select, {ActionMeta, OnChangeValue} from 'react-select'
-import { EingabeAlphabetDialog} from "../../data/Alphabet";
 import { bandDeleteAll } from '../../redux/bandStore';
-import { Alphabet, alphabetChangeCurrent, defaultAlphabetOption4, EingabeAlphabetDialogOptions, eingabeAlphabetDialogOptions } from '../../redux/generalStore';
+import {alphabetChangeCurrent,  EingabeAlphabetDialogOptions } from '../../redux/generalStore';
 import { RootState } from '../../redux/store';
 import MultiselectDropDown from "./DropDownMultiselect";
 
@@ -36,7 +34,6 @@ export default function DropDownSelect() {
         newValue: OnChangeValue<EingabeAlphabetDialogOptions, false>,
         actionMeta: ActionMeta<EingabeAlphabetDialogOptions>
     ) {
-        // setShowPlaceholder(false);
         console.group('Value Changed');
         console.log(newValue);
         if(newValue){
@@ -51,20 +48,11 @@ export default function DropDownSelect() {
         console.groupEnd();
     }
     return (
-        <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 grid grid-cols-2 gap-2 items-center"}>
+        <div className={"grid grid-cols-2 gap-5 items-center m-2"}>
             <p className={""}>Eingabealphabet ∑ =</p>
-            {/*{showPlaceholder &&*/}
-            {/*    <Select placeholder={<p className={"text-gray-500"}>Bitte wählen</p>}*/}
-            {/*            blurInputOnSelect={false}*/}
-            {/*            className={"text-black p-3 text-base"}*/}
-            {/*            onChange={handleChange}*/}
-            {/*            options={eingabeAlphabete}*/}
-            {/*    />*/}
-            {/*}*/}
-            {/*{!showPlaceholder &&*/}
             <Select value={copiedCurrentDialogOption}
                     blurInputOnSelect={false}
-                    className={"text-black p-3 text-base"}
+                    className={""}
                     onChange={handleChange}
                     options={dialogOptions}
                     // @ts-ignore
@@ -75,12 +63,10 @@ export default function DropDownSelect() {
                             ) : (
                                 ""
                             )}
-                            
                             <span className={"m-2"}>{e.label}</span>
                         </div>
                     )}
             />
-            {/*}*/}
             {openDialog &&
                 <div className={"text-white text-lg col-span-2"}>
                     <MultiselectDropDown 

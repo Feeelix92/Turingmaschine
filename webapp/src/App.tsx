@@ -13,10 +13,10 @@ function App() {
                 <Menu/>
                 <Band/>
             </header>
-            <body className={"App-body"}>
+            <div className={"App-body"}>
                 <Table/>
-                <ConditionsList />
-            </body>
+                <ConditionsList/>
+            </div>
         </div>
     );
         
