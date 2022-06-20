@@ -88,15 +88,15 @@ function ConditionsList() {
                             <span key={index}>{value.value},</span>
                         ))}{kZ}
                     </div>
-                    <div>
+                    <div className={"flex"}>
                         <div>
                             Zustandsmenge Q = {kA}
                             {zustandsmenge.map((value, index) => (
                                 <span key={index}>{value.value},</span>
                             ))}{kZ}
                         </div>
-                        <button onClick={() => dispatch(alphabetPushToZustand())}>+</button>
-                        <button onClick={() => dispatch(alphabetDeleteZustand())}>-</button>
+                        <button className={"primaryBtn text-white font-bold py-1 px-2 rounded m-2 "} onClick={() => dispatch(alphabetPushToZustand())}>+</button>
+                        <button className={"primaryBtn text-white font-bold py-1 px-2 rounded m-2 "} onClick={() => dispatch(alphabetDeleteZustand())}>-</button>
 
                     </div>
                     <div className="flex">
