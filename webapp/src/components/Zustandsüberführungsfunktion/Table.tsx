@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Cell } from "../../interfaces/CommonInterfaces";
 import { RootState } from "../../redux/store";
 import { tableDeleteRow, tableAddRow } from "../../redux/tableStore";
 import Row from "./Row";

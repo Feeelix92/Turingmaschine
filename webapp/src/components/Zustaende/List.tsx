@@ -5,8 +5,7 @@ import {Zustand} from '../../interfaces/CommonInterfaces';
 import {alphabetChangeAnfangszustand, alphabetChangeEndzustand} from '../../redux/generalStore';
 import {RootState} from '../../redux/store';
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
-import {BiCaretDown, BiCaretUp, BiDownArrow, BiUpArrow, MdOutlineArrowDropDown, MdOutlineArrowDropUp, RiArrowDownSFill, RiArrowUpSFill} from "react-icons/all";
-import CreatableSelect from "react-select/creatable";
+import {BiCaretDown, BiCaretUp,} from "react-icons/all";
 
 function ConditionsList() {
     /**

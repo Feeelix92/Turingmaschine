@@ -1,7 +1,7 @@
 import React, { Key, useEffect, useRef } from "react";
 import EditField from "../Zustandsüberführungsfunktion/EditField";
 import { BandItemProps } from "../../interfaces/CommonInterfaces";
-import { FaTimes, FaTrash} from "react-icons/fa";
+import { FaTrash} from "react-icons/fa";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { BandItemToChange, bandChangeItemAt, bandDeleteItemAt } from '../../redux/bandStore';
