@@ -67,6 +67,7 @@ function Control() {
   );
 
   const setSelectedRows = () => {
+    // get all rows, that match our current Zustand and which are therefore relevant
     let rows: Row[] = [];
 
     if (currentBand.length > 0) {
@@ -82,6 +83,7 @@ function Control() {
   };
 
   const makeStep = (idx: number) => {
+    // get the row, which matches with the symbol we read on band
     const item = selectedRows.find((elem) => {
       return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
     });
@@ -135,10 +137,7 @@ function Control() {
 
   const onPlay = () => {
     setSelectedRows();
-
-    console.log("Aktiver Startindex: ", activePointerPosition);
-
-    console.log(activeState.endzustand);
+    setPause(false);
 
     while (
       activeState.endzustand !== true &&
