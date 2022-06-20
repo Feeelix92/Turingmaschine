@@ -47,7 +47,7 @@ export default function Table() {
               </tbody>
             </table>
             <button
-              className="w-full bg-transparent hover:bg-gray-100 text-gray-900 font-semibold hover:text-gray-900 py-2 px-4 border border-gray-900 hover:border-transparent rounded"
+              className={"w-full"}
               onClick={() => dispatch(tableAddRow())}
             >
               +

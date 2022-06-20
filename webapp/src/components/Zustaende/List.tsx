@@ -78,12 +78,18 @@ function ConditionsList() {
                     </div>
                 </div>
                 <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
-                    <div className={"col-span-2"}>Zustandsmenge Q = </div>
-                    <div className={"border border-solid bg-gray-100 rounded p-2"}>{kA}
-                    {zustandsmenge.map((value, index) => (
+                    <div className={"col-span-2"}>Zustandsmenge Q = {kA}
+                        {zustandsmenge.map((value, index) => (
                         <span key={index}>{value.value},</span>
-                    ))}{kZ}
-                    </div>
+                    ))}{kZ}</div>
+                    {/*<CreatableSelect*/}
+                    {/*    value={endZustand}*/}
+                    {/*    blurInputOnSelect={false}*/}
+                    {/*    className={""}*/}
+                    {/*    onChange={handleChangeMulti}*/}
+                    {/*    options={zustandsmenge}*/}
+                    {/*    isMulti={true}*/}
+                    {/*/>       */}
                 </div>
                 <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
                     <div className={"col-span-2"}>Anfangszustand q0 = {anfangsZustand.value} </div>
