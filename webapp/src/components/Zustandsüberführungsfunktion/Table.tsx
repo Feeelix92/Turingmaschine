@@ -11,7 +11,7 @@ export default function Table() {
   const dispatch = useDispatch() 
   
   return (
-    <div className="flex flex-col col-span-2">
+    <div className="flex flex-col col-span-2 border rounded">
       <div className="sm:-mx-6 lg:-mx-8">
         <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
           <div className="overflow-x-auto">
@@ -33,7 +33,7 @@ export default function Table() {
                   ))}
                 </tr>
               </thead>
-              <tbody className="flex flex-col items-center justify-between overflow-y-auto max-h-44">
+              <tbody className="flex flex-col items-center justify-between overflow-y-auto max-h-48 xl:max-h-96">
                 {loadedRows.map((value, key: React.Key) => (
                   // TODO functions still not working
                   <Row

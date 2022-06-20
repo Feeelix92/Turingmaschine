@@ -6,6 +6,7 @@ import { alphabetChangeAnfangszustand, alphabetChangeEndzustand } from '../../re
 import { RootState } from '../../redux/store';
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
 import {BiDownArrow, BiUpArrow} from "react-icons/all";
+import CreatableSelect from "react-select/creatable";
 
 function ConditionsList() {
     /**
@@ -70,7 +71,7 @@ function ConditionsList() {
                 </div>
                 <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
                     <div className={"col-span-2"}>Bandalphabet &Gamma; =</div>
-                    <div className={"border border-solid bg-white rounded p-2"}>{kA}
+                    <div className={"border border-solid bg-gray-100 rounded p-2"}>{kA}
                     {bandAlphabet.map((value, index) => (
                         <span key={index}>{value.value},</span>
                     ))}{kZ}
@@ -78,7 +79,7 @@ function ConditionsList() {
                 </div>
                 <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2 text-left"}>
                     <div className={"col-span-2"}>Zustandsmenge Q = </div>
-                    <div className={"border border-solid bg-white rounded p-2"}>{kA}
+                    <div className={"border border-solid bg-gray-100 rounded p-2"}>{kA}
                     {zustandsmenge.map((value, index) => (
                         <span key={index}>{value.value},</span>
                     ))}{kZ}
