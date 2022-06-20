@@ -24,6 +24,7 @@ export const bandSlice = createSlice({
   initialState: {
     currentBand: currentBand,
     bandSkin: "paper",
+    pointerPosition: 0,
   },
   reducers: {
     /**
@@ -89,6 +90,12 @@ export const bandSlice = createSlice({
         state.bandSkin = "paper";
       }
     },
+    bandChangePointPos: (state, step: PayloadAction<number>) => {
+      state.pointerPosition += step.payload;
+    },
+    bandResetPointer: (state) => {
+      state.pointerPosition = 0;
+    },
   },
 });
 
@@ -100,6 +107,8 @@ export const {
   bandDeleteAll,
   bandChangeSkin,
   bandChangePointer,
+  bandChangePointPos,
+  bandResetPointer,
 } = bandSlice.actions;
 
 export default bandSlice.reducer;

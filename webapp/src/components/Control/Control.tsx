@@ -7,46 +7,62 @@ import {
   tableSetWatchedRows,
 } from "../../redux/tableStore";
 import watch from "redux-watch";
-import { bandChangeItemAt } from "../../redux/bandStore";
+import {
+  bandChangeItemAt,
+  bandChangePointPos,
+  bandResetPointer,
+} from "../../redux/bandStore";
+import { useEffect, useState } from "react";
 
 function Control() {
   const dispatch = useDispatch();
+
+  const [pause, setPause] = useState(false);
 
   const initialZustand = useSelector(
     (state: RootState) => state.general.anfangsZustand
   );
 
   const currentBand = useSelector((state: RootState) => state.band.currentBand);
-
   const currentTable = useSelector((state: RootState) => state.table.rows);
+  const pointerIdx = useSelector(
+    (state: RootState) => state.band.pointerPosition
+  );
 
+  /////////// Rows from State ///////////
   let selectedRows: Row[] = [];
   let wSelectedRows = watch(store.getState, "table.watchedRows");
-
   store.subscribe(
     wSelectedRows((newVal) => {
       selectedRows = newVal;
     })
   );
 
+  /////////// Band from State ///////////
   let selectedBand = currentBand;
-
   let wSelectedBand = watch(store.getState, "band.currentBand");
-
   store.subscribe(
     wSelectedBand((newVal) => {
       selectedBand = newVal;
     })
   );
 
+  /////////// ActiveState from State ///////////
   let activeState = initialZustand;
-
   let wActiveState = watch(store.getState, "table.activeState");
-
   store.subscribe(
     wActiveState((newVal) => {
       activeState = newVal;
-      console.log("neuer Zustand", newVal);
+    })
+  );
+
+  /////////// PointerPosition from State ///////////
+  let activePointerPosition = pointerIdx;
+  let wActivePointerPosition = watch(store.getState, "band.pointerPosition");
+  store.subscribe(
+    wActivePointerPosition((newVal) => {
+      activePointerPosition = newVal;
+      console.log(newVal);
     })
   );
 
@@ -65,73 +81,82 @@ function Control() {
     dispatch(tableSetWatchedRows(rows));
   };
 
-  const updateStep = (index: number) => {
-    let idx = index;
+  const makeStep = (idx: number) => {
+    const item = selectedRows.find((elem) => {
+      return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
+    });
 
-    let band = [];
-    for (let i = idx; i < selectedBand.length; i++) {
-      band.push(selectedBand[i]);
-    }
+    console.log(item);
 
-    console.log(selectedRows);
-
-    band.forEach((item) => {
-      selectedRows.forEach((row) => {
-        if (
-          row.cells[1].value === item.value &&
-          typeof row.cells[3].value === "string"
-        ) {
-          if (
-            row.cells[0].value instanceof Zustand &&
-            row.cells[0].value.endzustand === false
-          ) {
-            dispatch(
-              bandChangeItemAt({
-                index: idx,
-                value: row.cells[3].value,
-                label: row.cells[3].value,
-              })
-            );
+    if (item !== undefined && typeof item.cells[3].value === "string") {
+      console.log("gelesener Wert:", item.cells[1].value);
+      if (
+        item.cells[0].value instanceof Zustand &&
+        item.cells[0].value.endzustand === false
+      ) {
+        console.log("Veränder mir das hier zu:", item.cells[3].value);
+        dispatch(
+          bandChangeItemAt({
+            index: idx,
+            value: item.cells[3].value,
+            label: item.cells[3].value,
+          })
+        );
+      }
+      if (item.cells[4].value instanceof Direction) {
+        switch (item.cells[4].value.label) {
+          case "Rechts": {
+            // idx++;
+            dispatch(bandChangePointPos(1));
+            console.log("aktiver Index verändert zu: ", activePointerPosition);
+            break;
           }
-
-          if (row.cells[4].value instanceof Direction) {
-            switch (row.cells[4].value.label) {
-              case "Rechts": {
-                idx++;
-                break;
-              }
-              case "Links": {
-                idx--;
-                break;
-              }
-              case "Neutral":
-              default: {
-                break;
-              }
-            }
+          case "Links": {
+            // idx--;
+            dispatch(bandChangePointPos(-1));
+            console.log("aktiver Index verändert zu: ", activePointerPosition);
+            break;
           }
-
-          if (row.cells[0].value instanceof Zustand) {
-            if (row.cells[0].value != row.cells[2].value) {
-              if (row.cells[0].value.endzustand === true) {
-                console.log("Endzustand erreicht!");
-              } else {
-                console.log("changeZustand");
-                dispatch(tableSetActiveState(row.cells[2].value as Zustand));
-                setSelectedRows();
-                updateStep(idx);
-              }
-            }
+          case "Neutral":
+          default: {
+            break;
           }
         }
-      });
-    });
+      }
+      if (item.cells[0].value instanceof Zustand) {
+        if (item.cells[0].value != item.cells[2].value) {
+          if (item.cells[0].value.endzustand === false) {
+            console.log("changeZustand");
+            dispatch(tableSetActiveState(item.cells[2].value as Zustand));
+            setSelectedRows();
+          }
+        }
+      }
+    }
   };
 
-  const onClick = () => {
+  const onPlay = () => {
     setSelectedRows();
 
-    updateStep(0);
+    console.log("Aktiver Startindex: ", activePointerPosition);
+
+    while (
+      activeState.endzustand !== true &&
+      pause === false &&
+      activePointerPosition < 3
+    ) {
+      console.log("##########################################");
+      makeStep(activePointerPosition);
+    }
+
+    console.log("Endzustand erreicht!");
+    dispatch(bandResetPointer());
+  };
+
+  const stepByStep = () => {
+    setSelectedRows();
+
+    makeStep(activePointerPosition);
   };
 
   return (
@@ -140,7 +165,7 @@ function Control() {
         <div className="w-3/4 text-left">
           <button
             className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
-            onClick={onClick}
+            onClick={onPlay}
           >
             <FaPlay />
           </button>
@@ -153,7 +178,10 @@ function Control() {
             <FaStop />
           </button>
 
-          <button className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 ">
+          <button
+            className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
+            onClick={stepByStep}
+          >
             <FaStepForward />
           </button>
           <button className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "></button>
