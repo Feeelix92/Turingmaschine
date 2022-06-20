@@ -41,6 +41,10 @@
     @apply flex flex-col items-center justify-start text-white;
 }
 
+.App-body {
+    @apply w-10/12;
+}
+
 .App-link {
     @apply text-thm-link;
 }
@@ -102,17 +106,8 @@
 }
 
  /*********** BAND ***********/
-/*.band-container {*/
-/*    @apply overflow-x-scroll overflow-y-hidden whitespace-nowrap pb-40 pl-0 pr pt-10;*/
-/*}*/
-
-/*.band-container__band {*/
-/*    @apply inline-block p-5 w-60 h-10 text-black border border-2 border-solid border-thm-primary2;*/
-
-/*}*/
-
-
 .band-container {
+    /*@apply overflow-x-scroll overflow-y-hidden whitespace-nowrap pb-40 pl-0 pr-0 pt-10;*/
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
@@ -120,6 +115,7 @@
 }
 
 .band-container__band {
+    /*@apply inline-block p-5 w-32 h-10 text-black border border-2 border-solid border-thm-primary2;*/
     display: inline-block;
     padding: 5px;
     width: 60px;
@@ -129,6 +125,7 @@
 }
 
 .left-band-button {
+    /*@apply max-w-fit w-32 h-10 p-5 flex justify-center items-center;*/
     min-width: 30px;
     max-width: 30px;
     height: 40px;
@@ -139,6 +136,7 @@
 }
 
 .right-band-button {
+    /*@apply max-w-fit w-32 h-10 p-5 flex justify-center items-center;*/
     min-width: 30px;
     max-width: 30px;
     height: 40px;
@@ -152,8 +150,8 @@
     @apply border-4 border-t-8 border-thm-primary relative cursor-move;
 }
 /*.pointerBorder {*/
-/*    border: 3px solid green;*/
-/*    border-top: 8px solid green;*/
+/*    border: 3px solid var(--primary);*/
+/*    border-top: 8px solid var(--primary);*/
 /*    position: relative;*/
 /*    cursor: move;*/
 /*}*/
@@ -163,22 +161,22 @@
 }
 
 .pointer::after {
-    /*@apply content-[''] absolute bg-thm-primary h-10 w-16 rounded-t-full bottom-8 left-0;*/
-    content: "";
-    position: absolute;
-    /*border-bottom: 19px solid green;*/
-    /*border-left: 22px solid transparent;*/
-    /*border-right: 22px solid transparent;*/
-    /*bottom: 36px;*/
-    /*left: 0;*/
+    @apply content-[''] absolute bg-thm-primary h-10 w-16 rounded-t-full bottom-8 left-0;
+    /*content: "";*/
+    /*position: absolute;*/
+    /*!*border-bottom: 19px solid var(--primary);*!*/
+    /*!*border-left: 22px solid transparent;*!*/
+    /*!*border-right: 22px solid transparent;*!*/
+    /*!*bottom: 36px;*!*/
+    /*!*left: 0;*!*/
 
-    /*Runder Kopf vom Pointer:*/
-    background: green;
-    height: 30px;
-    width: 60px;
-    border-radius: 300px 300px 0 0;
-    margin-left: -15px;
-    margin-top: -35px;
+    /*!*Runder Kopf vom Pointer:*!*/
+    /*background: var(--primary);*/
+    /*height: 30px;*/
+    /*width: 60px;*/
+    /*border-radius: 300px 300px 0 0;*/
+    /*margin-left: -15px;*/
+    /*margin-top: -35px;*/
 }
 
 .pointer:hover {
@@ -192,18 +190,18 @@
 }
 
 .paper {
-    /*@apply bg-left-top;*/
-    background-position: 0 0;
+    @apply bg-left-top;
+    /*background-position: 0 0;*/
 }
 
 .tech {
-    /*@apply bg-left-top;*/
-    background-position: -60px 0;
+    @apply bg-left-top;
+    /*background-position: -60px 0;*/
 }
 
 /* ********** BAND ITEM ********** */
 .delete-value-button {
-    @apply min-w-fit max-w-full h-10
+    @apply min-w-fit max-w-full h-10;
     /*min-width: 20px;*/
     /*max-width: 20px;*/
     /*height: 28px;*/
@@ -225,6 +223,7 @@
     /*width: 45px;*/
     /*height: 45px;*/
 }
+
 .accordion .specification-header{
     @apply text-left;
     /*text-align: start;*/
@@ -236,13 +235,13 @@
 }
 
 .accordion .specification-header .accordion-icon{
-    @apply mr-0.5 ml-0.5;
+    @apply ml-0.5;
     /*margin-right: 0.3rem;*/
     /*margin-left: 0.3rem;*/
 }
 
 .accordion-content{
-    @apply text-left m-0.5 p-5
+    @apply text-left p-5;
     /*text-align: start;*/
     /*margin-left: 0.3rem;*/
 

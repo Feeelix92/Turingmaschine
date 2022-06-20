@@ -32,7 +32,7 @@ function ConditionsList() {
      * Accordion data (Title, Icons)
      */
     const accordionData = {
-        title: 'Spezifikationen:',
+        title: <h2>Spezifikationen</h2>,
         openAccordion: '+',
         closeAccordion: '-',
     };
@@ -56,7 +56,7 @@ function ConditionsList() {
     }
 
     return (
-        <div className={"accordion border-solid border-2 border-gray-600 rounded-md mx-1 my-3"}>
+        <div className={"accordion border-solid border-2 rounded-md"}>
             <div className={"accordion-item"}>
                 <div
                     className={"accordion-title"}
@@ -69,7 +69,7 @@ function ConditionsList() {
                 </div>
                 {isActive && <div className={"accordion-content"}>
                     <div>
-                     <DropDownSelect />
+                        <DropDownSelect />
                     </div>
                     <div>
                         Bandalphabet &Gamma; ={kA}
@@ -83,7 +83,7 @@ function ConditionsList() {
                             <span key={index}>{value.value},</span>
                         ))}{kZ}
                     </div>
-                    <div className="flex">
+                    <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 grid grid-cols-2 gap-2 items-center"}>
                         <div>Anfangszustand q0 = {anfangsZustand.value} </div>
                         <Select
                             placeholder={anfangsZustand.value}
@@ -93,7 +93,7 @@ function ConditionsList() {
                             options={zustandsmenge} 
                         />
                     </div>
-                    <div>
+                    <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 grid grid-cols-2 gap-2 items-center"}>
                         <div>
                             Endzustand F = {kA}
                             {endZustand.map((value, index) => (
@@ -110,9 +110,9 @@ function ConditionsList() {
                         />
                     </div>
                     <div>
-                        <div className={"grid grid-cols-2 items-center"}>
+                        <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 grid grid-cols-2 gap-2 items-center"}>
                             <span>Zustandsüberführungsfunktion &delta; =</span>
-                            <button className={"text-black text-left"} onClick={() => setShowZustandsfunktion(!showZustandsfunktion)}>{ showZustandsfunktion ? 'Hier steht eine Funktion' : '...' }</button>
+                            <button className={"text-black bg-white hover:bg-gray-200 text-left"} onClick={() => setShowZustandsfunktion(!showZustandsfunktion)}>{ showZustandsfunktion ? 'Hier steht eine Funktion' : '...' }</button>
                         </div>
                         {/*{showZustandsfunktion && <div>
                             <p>Hier steht eine Funktion</p>

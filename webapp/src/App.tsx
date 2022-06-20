@@ -13,8 +13,10 @@ function App() {
                 <Menu/>
                 <Band/>
             </header>
-            <Table/>
-            <ConditionsList />
+            <body className={"App-body"}>
+                <Table/>
+                <ConditionsList />
+            </body>
         </div>
     );
         

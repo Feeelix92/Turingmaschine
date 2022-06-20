@@ -52,7 +52,7 @@ export default function DropDownSelect() {
     }
     return (
         <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 grid grid-cols-2 gap-2 items-center"}>
-            <p className={"p-3"}>Eingabealphabet ∑ =</p>
+            <p className={""}>Eingabealphabet ∑ =</p>
             {/*{showPlaceholder &&*/}
             {/*    <Select placeholder={<p className={"text-gray-500"}>Bitte wählen</p>}*/}
             {/*            blurInputOnSelect={false}*/}
