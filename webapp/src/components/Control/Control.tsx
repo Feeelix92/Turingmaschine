@@ -18,6 +18,7 @@ function Control() {
   const dispatch = useDispatch();
 
   const [pause, setPause] = useState(false);
+  const [end, setEnd] = useState(false);
 
   const initialZustand = useSelector(
     (state: RootState) => state.general.anfangsZustand
@@ -62,7 +63,6 @@ function Control() {
   store.subscribe(
     wActivePointerPosition((newVal) => {
       activePointerPosition = newVal;
-      console.log(newVal);
     })
   );
 
@@ -86,8 +86,6 @@ function Control() {
       return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
     });
 
-    console.log(item);
-
     if (item !== undefined && typeof item.cells[3].value === "string") {
       console.log("gelesener Wert:", item.cells[1].value);
       if (
@@ -108,13 +106,11 @@ function Control() {
           case "Rechts": {
             // idx++;
             dispatch(bandChangePointPos(1));
-            console.log("aktiver Index verändert zu: ", activePointerPosition);
             break;
           }
           case "Links": {
             // idx--;
             dispatch(bandChangePointPos(-1));
-            console.log("aktiver Index verändert zu: ", activePointerPosition);
             break;
           }
           case "Neutral":
@@ -125,7 +121,9 @@ function Control() {
       }
       if (item.cells[0].value instanceof Zustand) {
         if (item.cells[0].value != item.cells[2].value) {
-          if (item.cells[0].value.endzustand === false) {
+          if (item.cells[0].value.endzustand === true) {
+            console.log("Endzustand erreicht!");
+          } else {
             console.log("changeZustand");
             dispatch(tableSetActiveState(item.cells[2].value as Zustand));
             setSelectedRows();
@@ -140,9 +138,12 @@ function Control() {
 
     console.log("Aktiver Startindex: ", activePointerPosition);
 
+    console.log(activeState.endzustand);
+
     while (
       activeState.endzustand !== true &&
       pause === false &&
+      end === false &&
       activePointerPosition < 3
     ) {
       console.log("##########################################");
@@ -159,6 +160,12 @@ function Control() {
     makeStep(activePointerPosition);
   };
 
+  const terminate = () => {
+    setEnd(true);
+    dispatch(bandResetPointer());
+    setEnd(false);
+  };
+
   return (
     <div className={"control w-screen"}>
       <div className="flex mb-4">
@@ -170,11 +177,17 @@ function Control() {
             <FaPlay />
           </button>
 
-          <button className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 ">
+          <button
+            className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
+            onClick={() => setPause(true)}
+          >
             <FaPause />
           </button>
 
-          <button className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 ">
+          <button
+            className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
+            onClick={terminate}
+          >
             <FaStop />
           </button>
 
