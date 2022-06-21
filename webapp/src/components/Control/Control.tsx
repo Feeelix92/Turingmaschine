@@ -20,8 +20,16 @@ function Control() {
   const [pause, setPause] = useState(false);
   const [end, setEnd] = useState(false);
 
+  let localCopyPause = false;
+  let localCopyEnd = false;
+
   useEffect(() => {
     console.log("pause->", pause);
+    if (pause === true) {
+      localCopyPause = true;
+    } else {
+      localCopyPause = false;
+    }
   }, [pause]);
 
   const handlePauseOn = async () => {
@@ -141,9 +149,9 @@ function Control() {
       if (item.cells[0].value instanceof Zustand) {
         if (item.cells[0].value != item.cells[2].value) {
           if (item.cells[0].value.endzustand === true) {
-            console.log("Endzustand erreicht!");
-            await handlePauseOn();
-            await dispatch(bandResetPointer());
+            // console.log("Endzustand erreicht!");
+            // await handlePauseOn();
+            // await dispatch(bandResetPointer());
           } else {
             console.log("changeZustand");
             await dispatch(tableSetActiveState(item.cells[2].value as Zustand));
@@ -161,28 +169,75 @@ function Control() {
     setSelectedRows();
     handlePauseOff();
 
-    let count = 0;
+    let finished = false;
 
-    let tempPause = pause;
+    while (
+      finished === false &&
+      localCopyPause === false &&
+      localCopyEnd === false
+    ) {
+      // get the row, which matches with the symbol we read on band
+      const item = selectedRows.find((elem) => {
+        return elem.cells[1].value === selectedBand[activePointerPosition].value
+          ? elem
+          : undefined;
+      });
 
-    while (tempPause === false && end === false) {
-      count++;
-
-      if (count > 10) {
-        break;
+      if (item !== undefined && typeof item.cells[3].value === "string") {
+        console.log("gelesener Wert:", item.cells[1].value);
+        if (
+          item.cells[0].value instanceof Zustand &&
+          item.cells[0].value.endzustand === false
+        ) {
+          console.log("Veränder mir das hier zu:", item.cells[3].value);
+          dispatch(
+            bandChangeItemAt({
+              index: activePointerPosition,
+              value: item.cells[3].value,
+              label: item.cells[3].value,
+            })
+          );
+        }
+        if (item.cells[4].value instanceof Direction) {
+          switch (item.cells[4].value.label) {
+            case "Rechts": {
+              // idx++;
+              dispatch(bandChangePointPos(1));
+              break;
+            }
+            case "Links": {
+              // idx--;
+              dispatch(bandChangePointPos(-1));
+              break;
+            }
+            case "Neutral":
+            default: {
+              break;
+            }
+          }
+        }
+        if (item.cells[0].value instanceof Zustand) {
+          if (item.cells[0].value != item.cells[2].value) {
+            if (item.cells[0].value.endzustand === true) {
+              console.log("Endzustand erreicht!");
+              await handlePauseOn();
+              await dispatch(bandResetPointer());
+              finished = true;
+            } else {
+              console.log("changeZustand");
+              await dispatch(
+                tableSetActiveState(item.cells[2].value as Zustand)
+              );
+              await setSelectedRows();
+            }
+          }
+        }
       }
-
-      tempPause = pause;
-
-      console.log("PAUSE:", tempPause);
-      await makeStep(activePointerPosition);
     }
 
     console.log("Schleife durchbrochen!");
     await dispatch(tableSetActiveState(initialZustand));
     await handlePauseOff();
-
-    // dispatch(bandResetPointer());
   };
 
   const stepByStep = () => {
@@ -228,7 +283,6 @@ function Control() {
           >
             <FaStepForward />
           </button>
-          <button className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "></button>
         </div>
 
         <div className="m-2 text-black">
