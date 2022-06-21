@@ -33,6 +33,8 @@
     }
 }
 @tailwind components;
+@tailwind utilities;
+
 .invertedButton {
     @apply text-thm-primary bg-white font-bold px-3 text-center h-12 hover:bg-thm-primary2 border border-solid border-thm-primary;
 }
@@ -115,53 +117,15 @@
  /*********** BAND ***********/
 .band-container {
     @apply overflow-x-scroll overflow-y-hidden whitespace-nowrap pb-5 pl-0 pr-0 pt-10 flex flex-row mb-5 justify-start max-w-max ml-auto mr-auto;
-    /*overflow-x: scroll;*/
-    /*overflow-y: hidden;*/
-    /*white-space: nowrap;*/
-    /*padding: 40px 10px 0 10px;*/
 }
 
 .band-container__band {
     @apply inline-block p-3 w-16 h-12 text-black border border border-solid border-thm-primary2;
-    /*display: inline-block;*/
-    /*padding: 5px;*/
-    /*width: 60px;*/
-    /*height: 40px;*/
-    /*color: black;*/
-    /*border: 1px solid gray;*/
 }
-
-/*.left-band-button {*/
-/*    !*@apply max-w-fit w-32 h-10 p-5 flex justify-center items-center;*!*/
-/*    min-width: 30px;*/
-/*    max-width: 30px;*/
-/*    height: 40px;*/
-/*    padding: 5px;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*}*/
-
-/*.right-band-button {*/
-/*    !*@apply max-w-fit w-32 h-10 p-5 flex justify-center items-center;*!*/
-/*    min-width: 30px;*/
-/*    max-width: 30px;*/
-/*    height: 40px;*/
-/*    padding: 5px;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*}*/
 
 .pointerBorder {
     @apply border border-4 border-t-2 border-thm-primary relative cursor-move;
 }
-/*.pointerBorder {*/
-/*    border: 3px solid var(--primary);*/
-/*    border-top: 8px solid var(--primary);*/
-/*    position: relative;*/
-/*    cursor: move;*/
-/*}*/
 
 .pointer {
     @apply cursor-move;
@@ -169,21 +133,6 @@
 
 .pointer::after {
     @apply content-[''] absolute bg-thm-primary h-10 w-16 rounded-t-full bottom-8 left-0;
-    /*content: "";*/
-    /*position: absolute;*/
-    /*!*border-bottom: 19px solid var(--primary);*!*/
-    /*!*border-left: 22px solid transparent;*!*/
-    /*!*border-right: 22px solid transparent;*!*/
-    /*!*bottom: 36px;*!*/
-    /*!*left: 0;*!*/
-
-    /*!*Runder Kopf vom Pointer:*!*/
-    /*background: var(--primary);*/
-    /*height: 30px;*/
-    /*width: 60px;*/
-    /*border-radius: 300px 300px 0 0;*/
-    /*margin-left: -15px;*/
-    /*margin-top: -35px;*/
 }
 
 .pointer:hover {
@@ -192,29 +141,19 @@
 
 .paper, .tech {
     @apply bg-[url('./assets/images/spritesheet2.png')] bg-no-repeat;
-    /*background-image: url('./assets/images/spritesheet2.png');*/
-    /*background-repeat: no-repeat;*/
 }
 
 .paper {
     @apply bg-left-top;
-    /*background-position: 0 0;*/
 }
 
 .tech {
     @apply bg-left-top;
-    /*background-position: -60px 0;*/
 }
 
 /* ********** BAND ITEM ********** */
 .delete-value-button {
     @apply min-w-fit max-w-full h-10;
-    /*min-width: 20px;*/
-    /*max-width: 20px;*/
-    /*height: 28px;*/
-    /*display: flex;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
 }
 
 
@@ -222,38 +161,10 @@
 
 .editBtnDiv {
     @apply fixed;
-    /*position: fixed;*/
 }
 
 .editBtn {
     @apply w-10 h-10;
-    /*width: 45px;*/
-    /*height: 45px;*/
 }
-
-/*.accordion .specification-header{*/
-/*    !*@apply text-left;*!*/
-/*    !*text-align: start;*!*/
-/*}*/
-
-/*.accordion .specification-header span{*/
-/*    !*@apply font-bold;*!*/
-/*    !*font-weight: bolder;*!*/
-/*}*/
-
-/*.accordion .specification-header .accordion-icon{*/
-/*    !*@apply ml-0.5;*!*/
-/*    !*margin-right: 0.3rem;*!*/
-/*    !*margin-left: 0.3rem;*!*/
-/*}*/
-
-/*.accordion-content{*/
-/*    !*@apply p-5;*!*/
-/*    !*text-align: start;*!*/
-/*    !*margin-left: 0.3rem;*!*/
-
-/*}*/
-
-@tailwind utilities;
 
 
