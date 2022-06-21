@@ -109,7 +109,7 @@ export default function Cell(props: CellProps) {
         <input
           type="text"
           name="value"
-          id="valueInput"
+          id="tableValueInput"
           className={"rounded text-gray-700 focus:outline-none items-center border rounded text-center"}
           value={props.value}
           onChange={(e) => checkValue(props.index, e.target.value)}
