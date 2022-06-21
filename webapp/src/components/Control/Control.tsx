@@ -17,28 +17,39 @@ import { useEffect, useState } from "react";
 function Control() {
   const dispatch = useDispatch();
 
-  const [pause, setPause] = useState(false);
-  const [end, setEnd] = useState(false);
+  // const [pause, setPause] = useState(false);
+  // const [end, setEnd] = useState(false);
+
+  const [slider, setSlider] = useState(1000);
 
   let localCopyPause = false;
   let localCopyEnd = false;
 
-  useEffect(() => {
-    console.log("pause->", pause);
-    if (pause === true) {
-      localCopyPause = true;
-    } else {
-      localCopyPause = false;
-    }
-  }, [pause]);
+  const changeLocalCopyPause = () => {
+    localCopyPause = !localCopyPause;
+    console.log("localCopyPause FUNCTION:",localCopyPause)
+  }
 
-  const handlePauseOn = async () => {
-    await setPause(true);
-  };
+  // useEffect(() => {
+  //   console.log("pause--------------->", pause);
+  //   if (pause === true) {
+  //     localCopyPause = true;
+  //   } else {
+  //     localCopyPause = false;
+  //   }
+  //   console.log("localCopyPause--------------->", localCopyPause);
+  // }, [pause]);
 
-  const handlePauseOff = async () => {
-    await setPause(false);
-  };
+  // const handlePauseOn = async () => {
+  //   await setPause(true);
+  //   localCopyPause = true;
+  //   console.log("MOIIIN",localCopyPause)
+  // };
+
+  // const handlePauseOff = async () => {
+  //   await setPause(false);
+  //   localCopyPause = false;
+  // };
 
   const initialZustand = useSelector(
     (state: RootState) => state.general.anfangsZustand
@@ -149,9 +160,10 @@ function Control() {
       if (item.cells[0].value instanceof Zustand) {
         if (item.cells[0].value != item.cells[2].value) {
           if (item.cells[0].value.endzustand === true) {
-            // console.log("Endzustand erreicht!");
+            console.log("Endzustand erreicht!");
             // await handlePauseOn();
-            // await dispatch(bandResetPointer());
+            localCopyPause = true;
+            await dispatch(bandResetPointer());
           } else {
             console.log("changeZustand");
             dispatch(tableSetActiveState(item.cells[2].value as Zustand));
@@ -161,81 +173,31 @@ function Control() {
       }
     } else {
       console.log("Else");
-      await handlePauseOn();
+      // await handlePauseOn();
+      localCopyPause = true;
     }
   };
 
-  const onPlay = () => {
+  const sleep = (milliseconds: number) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+  }
+
+  const onPlay = async () => {
     setSelectedRows();
-    handlePauseOff();
+    localCopyPause = false;
+    
+    //ToDo: Schleife hört nicht auf Änderungen von außerhalb... 
+    //...localCopyPause = true vom Pause Button wird nicht beachtet??
+    do {      
+      await sleep(slider)
+      makeStep(activePointerPosition);
+      console.log("localCopyPause DO-WHILE:",localCopyPause)
+    } while (localCopyPause === false && localCopyEnd === false);
 
-    let finished = false;
-
-    while (
-      finished === false &&
-      localCopyPause === false &&
-      localCopyEnd === false
-    ) {
-      // get the row, which matches with the symbol we read on band
-      const item = selectedRows.find((elem) => {
-        return elem.cells[1].value === selectedBand[activePointerPosition].value
-          ? elem
-          : undefined;
-      });
-
-      if (item !== undefined && typeof item.cells[3].value === "string") {
-        console.log("gelesener Wert:", item.cells[1].value);
-        if (
-          item.cells[0].value instanceof Zustand &&
-          item.cells[0].value.endzustand === false
-        ) {
-          console.log("Veränder mir das hier zu:", item.cells[3].value);
-          dispatch(
-            bandChangeItemAt({
-              index: activePointerPosition,
-              value: item.cells[3].value,
-              label: item.cells[3].value,
-            })
-          );
-        }
-        if (item.cells[4].value instanceof Direction) {
-          switch (item.cells[4].value.label) {
-            case "Rechts": {
-              // idx++;
-              dispatch(bandChangePointPos(1));
-              break;
-            }
-            case "Links": {
-              // idx--;
-              dispatch(bandChangePointPos(-1));
-              break;
-            }
-            case "Neutral":
-            default: {
-              break;
-            }
-          }
-        }
-        if (item.cells[0].value instanceof Zustand) {
-          if (item.cells[0].value != item.cells[2].value) {
-            if (item.cells[0].value.endzustand === true) {
-              console.log("Endzustand erreicht!");
-              handlePauseOn();
-              dispatch(bandResetPointer());
-              finished = true;
-            } else {
-              console.log("changeZustand");
-              dispatch(tableSetActiveState(item.cells[2].value as Zustand));
-              setSelectedRows();
-            }
-          }
-        }
-      }
-    }
 
     console.log("Schleife durchbrochen!");
     dispatch(tableSetActiveState(initialZustand));
-    handlePauseOff();
+    localCopyPause = false;
   };
 
   const stepByStep = () => {
@@ -263,7 +225,7 @@ function Control() {
 
           <button
             className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
-            onClick={() => setPause(true)}
+            onClick={() => changeLocalCopyPause()}
           >
             <FaPause />
           </button>
@@ -288,9 +250,13 @@ function Control() {
 
           <input
             id="velSlider"
+            className="w-full h-2 bg-gray-500 rounded-lg appearance-none cursor-pointer"
             type="range"
-            className="w-full h-2 bg-gray-500 rounded-lg 
-                    appearance-none cursor-pointer"
+            min={0}
+            max={3000}
+            value={slider}            
+            onChange={(e) => setSlider(e.target.valueAsNumber)}
+            step={500}
           ></input>
         </div>
       </div>
