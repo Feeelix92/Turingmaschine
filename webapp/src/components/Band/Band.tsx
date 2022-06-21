@@ -76,7 +76,7 @@ export default function Band() {
     };
 
     return (
-        <div className={"w-screen center p-3"}>
+        <div className={"w-screen p-3"}>
             <div className="band-container overflow-x-auto">
                 <button
                     className={"invertedButton"}
