@@ -154,8 +154,8 @@ function Control() {
             // await dispatch(bandResetPointer());
           } else {
             console.log("changeZustand");
-            await dispatch(tableSetActiveState(item.cells[2].value as Zustand));
-            await setSelectedRows();
+            dispatch(tableSetActiveState(item.cells[2].value as Zustand));
+            setSelectedRows();
           }
         }
       }
@@ -165,7 +165,7 @@ function Control() {
     }
   };
 
-  const onPlay = async () => {
+  const onPlay = () => {
     setSelectedRows();
     handlePauseOff();
 
@@ -220,15 +220,13 @@ function Control() {
           if (item.cells[0].value != item.cells[2].value) {
             if (item.cells[0].value.endzustand === true) {
               console.log("Endzustand erreicht!");
-              await handlePauseOn();
-              await dispatch(bandResetPointer());
+              handlePauseOn();
+              dispatch(bandResetPointer());
               finished = true;
             } else {
               console.log("changeZustand");
-              await dispatch(
-                tableSetActiveState(item.cells[2].value as Zustand)
-              );
-              await setSelectedRows();
+              dispatch(tableSetActiveState(item.cells[2].value as Zustand));
+              setSelectedRows();
             }
           }
         }
@@ -236,8 +234,8 @@ function Control() {
     }
 
     console.log("Schleife durchbrochen!");
-    await dispatch(tableSetActiveState(initialZustand));
-    await handlePauseOff();
+    dispatch(tableSetActiveState(initialZustand));
+    handlePauseOff();
   };
 
   const stepByStep = () => {
