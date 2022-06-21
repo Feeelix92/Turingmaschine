@@ -18,13 +18,6 @@ const currentBand: EingabeAlphabetOption[] = [
     {value: "", label: "B", pointer: false},
     {value: "", label: "B", pointer: false},
     {value: "", label: "B", pointer: false},
-    {value: "", label: "B", pointer: false},
-    {value: "", label: "B", pointer: false},
-    {value: "", label: "B", pointer: false},
-    {value: "", label: "B", pointer: false},
-    {value: "", label: "B", pointer: false},
-    {value: "", label: "B", pointer: false},
-    {value: "", label: "B", pointer: false},
 ];
 
 export const bandSlice = createSlice({
@@ -36,8 +29,8 @@ export const bandSlice = createSlice({
   reducers: {    
     /**
      * function bandChangeItemAt changes the Band at the index
-     * @param index
-     * @param value
+     * @param state
+     * @param bandItem
      */
     bandChangeItemAt: (state, bandItem: PayloadAction<BandItemToChange>) => { 
         state.currentBand[bandItem.payload.index as number].value = bandItem.payload.value;     
@@ -46,14 +39,16 @@ export const bandSlice = createSlice({
         state.currentBand[pointerItem.payload.index as number].pointer = pointerItem.payload.value;
     },
      /**
-     * function bandDeleteItemAt deletes the Band Values at the index
-     * @param index
-     */
+      * function bandDeleteItemAt deletes the Band Values at the index
+      * @param state
+      * @param index
+      */
     bandDeleteItemAt: (state, index: PayloadAction<number>) => { 
         state.currentBand[index.payload as number] = {value: "", label: "B", pointer: false};      
     },
     /**
      * fügt ein neues leeres Bandfeld an der Position "before" oder "after" hinzu
+     * @param state
      * @param position
      */
     bandAddField: (state, position: PayloadAction<string>) => {         

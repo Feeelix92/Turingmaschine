@@ -76,8 +76,8 @@ export default function Band() {
     };
 
     return (
-        <div className={"w-screen sm:w-3/4 lg:w-3/4 xl:w-2/4 p-3"}>
-            <div className="band-container flex flex-row mb-5 overflow-x-auto">
+        <div className={"w-screen center p-3"}>
+            <div className="band-container overflow-x-auto">
                 <button
                     className={"invertedButton"}
                     onClick={() => dispatch(bandAddField('before'))}>

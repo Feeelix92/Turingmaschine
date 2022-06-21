@@ -114,7 +114,7 @@
 
  /*********** BAND ***********/
 .band-container {
-    @apply overflow-x-scroll overflow-y-hidden whitespace-nowrap pb-5 pl-0 pr-0 pt-10;
+    @apply overflow-x-scroll overflow-y-hidden whitespace-nowrap pb-5 pl-0 pr-0 pt-10 flex flex-row mb-5 justify-center;
     /*overflow-x: scroll;*/
     /*overflow-y: hidden;*/
     /*white-space: nowrap;*/
