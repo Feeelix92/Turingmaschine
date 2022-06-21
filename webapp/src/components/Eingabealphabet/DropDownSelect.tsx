@@ -50,7 +50,7 @@ export default function DropDownSelect() {
     }
     return (
         <div>
-            <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center m-2"}>
+            <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center mt-2"}>
                 <p className={"col-span-2 text-left"}>Eingabealphabet ∑ =</p>
                 <Select value={copiedCurrentDialogOption}
                         blurInputOnSelect={false}

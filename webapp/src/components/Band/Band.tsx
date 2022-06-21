@@ -76,40 +76,58 @@ export default function Band() {
     };
 
     return (
-        <div className={"w-screen p-3"}>
-            <div className="band-container overflow-x-auto">
+        <div className={"w-screen mt-10"}>
+            <div className={"flex m-2"}>
                 <button
-                    className={"invertedButton"}
+                    className={"mt-10 rounded-r-none sm:rounded sm:invisible"}
                     onClick={() => dispatch(bandAddField('before'))}>
                     +
                 </button>
-                {currentBand.map((value, index) => (
-                    <BandItem
-                        value={value.value}
-                        index={index}
-                        pointer={value.pointer}
-                        key={index}
-                        alphabet={currentAlphabet.alphabet}
-                        showEditField={true}
-                        setPointerAt={() => setPointerAt(index)} //TODO
-                        movePointer={() => logPointerPos(index)}
-                    />
-                ))}
+                <div className="band-container overflow-x-auto col-span-12">
+                    {currentBand.map((value, index) => (
+                        <BandItem
+                            value={value.value}
+                            index={index}
+                            pointer={value.pointer}
+                            key={index}
+                            alphabet={currentAlphabet.alphabet}
+                            showEditField={true}
+                            setPointerAt={() => setPointerAt(index)} //TODO
+                            movePointer={() => logPointerPos(index)}
+                        />
+                    ))}
+                </div>
                 <button
-                    className={"invertedButton"}
+                    className={"mt-10 rounded-l-none sm:rounded sm:invisible"}
                     onClick={() => dispatch(bandAddField('after'))}>
                     +
                 </button>
-
             </div>
-            <div className="flex mb-4">
+            <div className={"hidden md:block"}>
+                <div className={"mb-5"}>
+                    <h2>Band erweitern:</h2>
+                </div>
+                <div className={"flex justify-center gap-2"}>
+                    <button
+                        className={"w-32"}
+                        onClick={() => dispatch(bandAddField('before'))}>
+                        + links
+                    </button>
+                    <button
+                        className={"w-32"}
+                        onClick={() => dispatch(bandAddField('after'))}>
+                        rechts +
+                    </button>
+                </div>
+            </div>
+            <div className="flex">
                 <div className="w-3/4 text-left">
-                    <button className="m-2 md:invisible"
+                    <button className={"m-2 md:invisible"}
                             onClick={() => setPointerLeft()}>
                         <FaArrowAltCircleLeft/>
                     </button>
 
-                    <button className="m-2 md:invisible"
+                    <button className="md:invisible"
                             onClick={() => setPointerRight()}>
                         <FaArrowAltCircleRight/>
                     </button>
@@ -118,7 +136,7 @@ export default function Band() {
                 <div className="w-1/4 text-right">
                     <button
                         onClick={() => dispatch(bandDeleteAll())}
-                        className="m-2 "
+                        className={"m-2"}
                     >
                         <FaRedo/>
                     </button>
