@@ -146,7 +146,6 @@ export const {
   tableUpdateCell,
   tableSetActiveRow,
   tableSetWatchedRows,
-  tableSetSchmutz,
   tableSetActiveState,
 } = tableSlice.actions;
 

@@ -91,10 +91,13 @@ export const bandSlice = createSlice({
       }
     },
     bandChangePointPos: (state, step: PayloadAction<number>) => {
+      console.log("movePointer");
       state.pointerPosition += step.payload;
     },
     bandResetPointer: (state) => {
+      console.log("Reset!");
       state.pointerPosition = 0;
+      console.log("state.PointerPosition: ", state.pointerPosition);
     },
   },
 });

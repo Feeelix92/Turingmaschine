@@ -20,6 +20,39 @@ function Control() {
   const [pause, setPause] = useState(false);
   const [end, setEnd] = useState(false);
 
+  useEffect(() => {
+    // here
+    handleChange(pause);
+
+    console.log(pause);
+  }, [pause]);
+
+  const handleChange = (p: boolean) => {
+    console.log("pause->", Boolean(p));
+
+    if (pause) {
+      // do something here
+    }
+  };
+
+  const handlePauseOn = () => {
+    setPause(true);
+  };
+
+  const handlePauseOff = () => {
+    setPause(false);
+  };
+
+  // const handleChange = (p: boolean) => {
+  //   console.log("pause->", Boolean(p)); // here
+
+  //   if (pause) {
+  //     setPause(false)
+  //   } else {
+  //     setPause
+  //   }
+  // };
+
   const initialZustand = useSelector(
     (state: RootState) => state.general.anfangsZustand
   );
@@ -63,6 +96,9 @@ function Control() {
   store.subscribe(
     wActivePointerPosition((newVal) => {
       activePointerPosition = newVal;
+      if (newVal != undefined) {
+        console.log("Pointer verschoben nach: ", newVal);
+      }
     })
   );
 
@@ -82,11 +118,13 @@ function Control() {
     dispatch(tableSetWatchedRows(rows));
   };
 
-  const makeStep = (idx: number) => {
+  const makeStep = async (idx: number) => {
     // get the row, which matches with the symbol we read on band
     const item = selectedRows.find((elem) => {
       return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
     });
+
+    console.log("Reihe:", item);
 
     if (item !== undefined && typeof item.cells[3].value === "string") {
       console.log("gelesener Wert:", item.cells[1].value);
@@ -125,32 +163,43 @@ function Control() {
         if (item.cells[0].value != item.cells[2].value) {
           if (item.cells[0].value.endzustand === true) {
             console.log("Endzustand erreicht!");
+            await handlePauseOn();
+            await dispatch(bandResetPointer());
           } else {
             console.log("changeZustand");
-            dispatch(tableSetActiveState(item.cells[2].value as Zustand));
-            setSelectedRows();
+            await dispatch(tableSetActiveState(item.cells[2].value as Zustand));
+            await setSelectedRows();
           }
         }
       }
+    } else {
+      console.log("Else");
+      await handlePauseOn();
     }
   };
 
-  const onPlay = () => {
+  const onPlay = async () => {
     setSelectedRows();
-    setPause(false);
+    handlePauseOff();
 
-    while (
-      activeState.endzustand !== true &&
-      pause === false &&
-      end === false &&
-      activePointerPosition < 3
-    ) {
-      console.log("##########################################");
-      makeStep(activePointerPosition);
+    let count = 0;
+
+    while (!pause && !end) {
+      count++;
+
+      if (count > 10) {
+        break;
+      }
+
+      console.log("PAUSE:", pause);
+      await makeStep(activePointerPosition);
     }
 
-    console.log("Endzustand erreicht!");
-    dispatch(bandResetPointer());
+    console.log("Schleife durchbrochen!");
+    await dispatch(tableSetActiveState(initialZustand));
+    await handlePauseOff();
+
+    // dispatch(bandResetPointer());
   };
 
   const stepByStep = () => {
