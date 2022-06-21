@@ -21,37 +21,16 @@ function Control() {
   const [end, setEnd] = useState(false);
 
   useEffect(() => {
-    // here
-    handleChange(pause);
-
-    console.log(pause);
+    console.log("pause->", pause);
   }, [pause]);
 
-  const handleChange = (p: boolean) => {
-    console.log("pause->", Boolean(p));
-
-    if (pause) {
-      // do something here
-    }
+  const handlePauseOn = async () => {
+    await setPause(true);
   };
 
-  const handlePauseOn = () => {
-    setPause(true);
+  const handlePauseOff = async () => {
+    await setPause(false);
   };
-
-  const handlePauseOff = () => {
-    setPause(false);
-  };
-
-  // const handleChange = (p: boolean) => {
-  //   console.log("pause->", Boolean(p)); // here
-
-  //   if (pause) {
-  //     setPause(false)
-  //   } else {
-  //     setPause
-  //   }
-  // };
 
   const initialZustand = useSelector(
     (state: RootState) => state.general.anfangsZustand
@@ -184,14 +163,18 @@ function Control() {
 
     let count = 0;
 
-    while (!pause && !end) {
+    let tempPause = pause;
+
+    while (tempPause === false && end === false) {
       count++;
 
       if (count > 10) {
         break;
       }
 
-      console.log("PAUSE:", pause);
+      tempPause = pause;
+
+      console.log("PAUSE:", tempPause);
       await makeStep(activePointerPosition);
     }
 
