@@ -77,7 +77,7 @@ export default function Band() {
 
     return (
         <div className={"w-screen mt-10"}>
-            <div className={"flex m-2"}>
+            <div className={"flex m-2 h-48"}>
                 <button
                     className={"mt-10 rounded-r-none md:rounded md:invisible"}
                     onClick={() => dispatch(bandAddField('before'))}>
@@ -111,14 +111,14 @@ export default function Band() {
                         + Feld links
                     </button>
                     <button
-                        className={"w-36 invertedButton"}
-                        onClick={() => dispatch(bandAddField('after'))}>
-                        + Feld rechts
-                    </button>
-                    <button
                         onClick={() => dispatch(bandDeleteAll())}
                         className={"w-36 invertedButton"}>
                         zurücksetzen
+                    </button>
+                    <button
+                        className={"w-36 invertedButton"}
+                        onClick={() => dispatch(bandAddField('after'))}>
+                        Feld rechts +
                     </button>
                 </div>
             </div>
