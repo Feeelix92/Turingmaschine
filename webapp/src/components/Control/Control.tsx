@@ -13,21 +13,35 @@ import {
   bandResetPointer,
 } from "../../redux/bandStore";
 import { useEffect, useState } from "react";
+import { alphabetChangePauseMaschine, alphabetChangeStoppMaschine } from "../../redux/generalStore";
 
 function Control() {
   const dispatch = useDispatch();
 
-  // const [pause, setPause] = useState(false);
-  // const [end, setEnd] = useState(false);
+  let pauseMaschine: Boolean = false;
+  let wPauseMaschine = watch(store.getState, "general.pauseMaschine");
+  store.subscribe(
+    wPauseMaschine((newVal) => {
+      pauseMaschine = newVal;
+    })
+  );
+
+  let stoppMaschine: Boolean = false;
+  let wStoppMaschine = watch(store.getState, "general.stoppMaschine");
+  store.subscribe(
+    wStoppMaschine((newVal) => {
+      stoppMaschine = newVal;
+    })
+  );
 
   const [slider, setSlider] = useState(1000);
 
-  let localCopyPause = false;
-  let localCopyEnd = false;
-
-  const changeLocalCopyPause = () => {
-    localCopyPause = !localCopyPause;
-    console.log("localCopyPause FUNCTION:",localCopyPause)
+  const changePause = (value: boolean) => {
+    dispatch(alphabetChangePauseMaschine(value))
+  }
+  const changeStopp = (value: boolean) => {
+    dispatch(alphabetChangeStoppMaschine(value))
+    dispatch(bandResetPointer());
   }
 
   // useEffect(() => {
@@ -161,8 +175,7 @@ function Control() {
         if (item.cells[0].value != item.cells[2].value) {
           if (item.cells[0].value.endzustand === true) {
             console.log("Endzustand erreicht!");
-            // await handlePauseOn();
-            localCopyPause = true;
+            changePause(true)
             await dispatch(bandResetPointer());
           } else {
             console.log("changeZustand");
@@ -174,7 +187,7 @@ function Control() {
     } else {
       console.log("Else");
       // await handlePauseOn();
-      localCopyPause = true;
+      changePause(false)
     }
   };
 
@@ -184,32 +197,27 @@ function Control() {
 
   const onPlay = async () => {
     setSelectedRows();
-    localCopyPause = false;
+    changeStopp(false)
+    changePause(false)
     
     //ToDo: Schleife hört nicht auf Änderungen von außerhalb... 
     //...localCopyPause = true vom Pause Button wird nicht beachtet??
-    do {      
+    while (stoppMaschine === false && pauseMaschine === false){
       await sleep(slider)
       makeStep(activePointerPosition);
-      console.log("localCopyPause DO-WHILE:",localCopyPause)
-    } while (localCopyPause === false && localCopyEnd === false);
+    }
 
 
     console.log("Schleife durchbrochen!");
     dispatch(tableSetActiveState(initialZustand));
-    localCopyPause = false;
+    changePause(false)
+    changeStopp(false)
   };
 
   const stepByStep = () => {
     setSelectedRows();
 
     makeStep(activePointerPosition);
-  };
-
-  const terminate = () => {
-    setEnd(true);
-    dispatch(bandResetPointer());
-    setEnd(false);
   };
 
   return (
@@ -225,14 +233,14 @@ function Control() {
 
           <button
             className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
-            onClick={() => changeLocalCopyPause()}
+            onClick={() => {pauseMaschine? changePause(false):changePause(true)}}
           >
             <FaPause />
           </button>
 
           <button
             className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
-            onClick={terminate}
+            onClick={() => changeStopp(true)}
           >
             <FaStop />
           </button>

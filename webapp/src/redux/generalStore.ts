@@ -83,7 +83,9 @@ export const generalSlice = createSlice({
     bandAlphabet: initialBandAlphabet,
     zustandsmenge: initialZustandsmenge,
     anfangsZustand: initialAnfangszustand,
-    endZustand: initialEndZustandsmenge
+    endZustand: initialEndZustandsmenge,
+    pauseMaschine: false,
+    stoppMaschine: false,
   },
   reducers: {    
     /**
@@ -166,12 +168,18 @@ export const generalSlice = createSlice({
         })
         console.log(current(state.zustandsmenge))
     },
-      alphabetClearEndzustand: (state) => {
-          state.zustandsmenge.forEach(option => {
-                  option.endzustand = false
-          })
-          state.endZustand = []
-      }
+    alphabetClearEndzustand: (state) => {
+        state.zustandsmenge.forEach(option => {
+                option.endzustand = false
+        })
+        state.endZustand = []
+    },
+    alphabetChangePauseMaschine: (state, value: PayloadAction<boolean>) => {
+        state.pauseMaschine = value.payload;
+    },
+    alphabetChangeStoppMaschine: (state, value: PayloadAction<boolean>) => {
+        state.stoppMaschine = value.payload;
+    }
   },
 })
 
@@ -185,7 +193,9 @@ export const {
     alphabetChangeAnfangszustand, 
     alphabetChangeEndzustand,
     alphabetClearEndzustand,
-    alphabetDeleteZustand
+    alphabetDeleteZustand,
+    alphabetChangePauseMaschine,
+    alphabetChangeStoppMaschine
 } = generalSlice.actions
 
 export default generalSlice.reducer
