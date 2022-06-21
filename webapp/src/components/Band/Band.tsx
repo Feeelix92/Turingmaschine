@@ -79,7 +79,7 @@ export default function Band() {
         <div className={"w-screen mt-10"}>
             <div className={"flex m-2"}>
                 <button
-                    className={"mt-10 rounded-r-none sm:rounded sm:invisible"}
+                    className={"mt-10 rounded-r-none md:rounded md:invisible"}
                     onClick={() => dispatch(bandAddField('before'))}>
                     +
                 </button>
@@ -98,42 +98,44 @@ export default function Band() {
                     ))}
                 </div>
                 <button
-                    className={"mt-10 rounded-l-none sm:rounded sm:invisible"}
+                    className={"mt-10 rounded-l-none md:rounded md:invisible"}
                     onClick={() => dispatch(bandAddField('after'))}>
                     +
                 </button>
             </div>
             <div className={"hidden md:block"}>
-                <div className={"mb-5"}>
-                    <h2>Band erweitern:</h2>
-                </div>
-                <div className={"flex justify-center gap-2"}>
+                <div className={"flex justify-center gap-2" }>
                     <button
-                        className={"w-32"}
+                        className={"w-36 invertedButton"}
                         onClick={() => dispatch(bandAddField('before'))}>
-                        + links
+                        + Feld links
                     </button>
                     <button
-                        className={"w-32"}
+                        className={"w-36 invertedButton"}
                         onClick={() => dispatch(bandAddField('after'))}>
-                        rechts +
+                        + Feld rechts
+                    </button>
+                    <button
+                        onClick={() => dispatch(bandDeleteAll())}
+                        className={"w-36 invertedButton"}>
+                        zurücksetzen
                     </button>
                 </div>
             </div>
             <div className="flex">
-                <div className="w-3/4 text-left">
+                <div className={"w-3/4 text-left"}>
                     <button className={"m-2 md:invisible"}
                             onClick={() => setPointerLeft()}>
                         <FaArrowAltCircleLeft/>
                     </button>
 
-                    <button className="md:invisible"
+                    <button className={"md:invisible"}
                             onClick={() => setPointerRight()}>
                         <FaArrowAltCircleRight/>
                     </button>
                 </div>
 
-                <div className="w-1/4 text-right">
+                <div className={"w-1/4 text-right md:hidden"}>
                     <button
                         onClick={() => dispatch(bandDeleteAll())}
                         className={"m-2"}

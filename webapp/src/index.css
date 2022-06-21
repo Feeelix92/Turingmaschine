@@ -36,7 +36,7 @@
 @tailwind utilities;
 
 .invertedButton {
-    @apply text-thm-primary bg-white font-bold px-3 text-center h-12 hover:bg-thm-primary2 border border-solid border-thm-primary;
+    @apply text-thm-primary bg-white font-bold px-3 text-center h-12 hover:bg-thm-hover hover:text-white border border-solid border-thm-primary;
 }
 
 .App {
