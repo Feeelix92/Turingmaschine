@@ -112,7 +112,7 @@ export default function Band() {
                 </button>
             </div>
             <div className={"hidden md:block"}>
-                <div className={"flex justify-center gap-2" }>
+                <div className={"flex justify-center gap-2"}>
                     <button
                         className={"w-36 invertedButton"}
                         onClick={() => dispatch(bandAddField('before'))}>

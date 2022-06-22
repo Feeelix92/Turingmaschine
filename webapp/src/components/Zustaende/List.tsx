@@ -79,20 +79,24 @@ function ConditionsList() {
                     <div>
                         <DropDownSelect/>
                     </div>
-                    <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center mt-2 text-left"}>
+                    <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
                         <div className={"col-span-2"}>Bandalphabet &Gamma; =</div>
-                        <div className={"border border-solid bg-gray-100 rounded p-2"}>{kA}
+                        <div className={"border border-solid bg-gray-100 rounded p-2 col-span-2"}>{kA}
                             {bandAlphabet.map((value, index) => (
                                 <span key={index}>{value.value},</span>
                             ))}{kZ}
                         </div>
                     </div>
-                    <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center mt-2 text-left"}>
+                    <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
                         <div className={"col-span-2"}>Zustandsmenge Q =</div>
-                        <div className={"border border-solid bg-gray-100 rounded p-2"}>{kA}
+                        <div className={"border border-solid bg-gray-100 rounded p-2 break-all"}>{kA}
                             {zustandsmenge.map((value, index) => (
-                                <span key={index}>{value.value},</span>
+                                <span key={index}>{value.value}, </span>
                             ))}{kZ}</div>
+                        <div className={"flex justify-center gap-2 col-span-1"}>
+                            <button className={"w-10"} onClick={() => dispatch(alphabetPushToZustand())}>+</button>
+                            <button className={"w-10"} onClick={() => dispatch(alphabetDeleteZustand())}>-</button>
+                        </div>
                         {/*<CreatableSelect*/}
                         {/*    value={endZustand}*/}
                         {/*    blurInputOnSelect={false}*/}
@@ -101,20 +105,18 @@ function ConditionsList() {
                         {/*    options={zustandsmenge}*/}
                         {/*    isMulti={true}*/}
                         {/*/>       */}
-                        <button className={"primaryBtn text-white font-bold py-1 px-2 rounded m-2 "} onClick={() => dispatch(alphabetPushToZustand())}>+</button>
-                        <button className={"primaryBtn text-white font-bold py-1 px-2 rounded m-2 "} onClick={() => dispatch(alphabetDeleteZustand())}>-</button>
                     </div>
-                    <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center mt-2 text-left"}>
+                    <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
                         <div className={"col-span-2"}>Anfangszustand q0 = {anfangsZustand.value} </div>
                         <Select
                             placeholder={anfangsZustand.value}
                             blurInputOnSelect={false}
-                            className={""}
+                            className={"col-span-2"}
                             onChange={handleChange}
                             options={zustandsmenge}
                         />
                     </div>
-                    <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center mt-2 text-left"}>
+                    <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
                         <div className={"col-span-2"}>
                             Endzustand F = {kA}
                             {endZustand.map((value, index) => (
@@ -124,16 +126,16 @@ function ConditionsList() {
                         <Select
                             value={endZustand}
                             blurInputOnSelect={false}
-                            className={""}
+                            className={"col-span-2"}
                             onChange={handleChangeMulti}
                             options={possibleEnd}
                             isMulti={true}
                         />
                     </div>
                     <div>
-                        <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center mt-2 text-left"}>
+                        <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
                             <span className={"col-span-2"}>Zustandsüberführungsfunktion &delta; =</span>
-                            <button className={"text-black bg-white hover:bg-gray-200 text-left border border-solid"}
+                            <button className={"text-black bg-white hover:bg-gray-200 text-left border border-solid col-span-2"}
                                     onClick={() => setShowZustandsfunktion(!showZustandsfunktion)}>{showZustandsfunktion ? 'Hier steht eine Funktion' : '...'}</button>
                         </div>
                         {/*{showZustandsfunktion && <div>
