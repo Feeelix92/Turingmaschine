@@ -224,7 +224,7 @@ function Control() {
 
   return (
     <div className={"control w-screen"}>
-      <div className="flex mb-4 ml-4">
+      <div className="flex p-4">
         <div className="w-3/4 text-left">
           <button
             className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "

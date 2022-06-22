@@ -37,42 +37,6 @@ export default function BandItem(props: BandItemProps) {
     dispatch(bandDeleteItemAt(props.index));
   }
 
-  const dragItem = useRef();
-  const dragOverItem = useRef();
-
-  const dragStart = (e: React.DragEvent<HTMLDivElement>, position: any) => {
-    dragItem.current = position;
-    console.log("dragStart " + e);
-  };
-
-  const dragEnter = (e: React.DragEvent<HTMLDivElement>, position: any) => {
-    // TODO: Richtige position -> Von BandItems?
-    dragOverItem.current = position;
-    console.log("dragEnter " + e);
-  };
-
-  const dragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    console.log(e);
-  };
-
-  /* TODO: Set Boolean pointer in parent to true for new position, and false for old position */
-  const drop = (e: React.DragEvent<HTMLDivElement>) => {
-    //let thisPointer = props.pointer;
-
-    props.setPointerAt();
-
-    console.log("changed props.pointer");
-    /*
-    const copyListItems = [...list];
-    const dragItemContent = copyListItems[dragItem.current];
-    copyListItems.splice(dragItem.current, 1);
-    copyListItems.splice(dragOverItem.current, 0, dragItemContent);
-    dragItem.current = null;
-    dragOverItem.current = null;
-    setList(copyListItems);
-    */
-  };
-
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (wrapperRef) {
@@ -133,9 +97,6 @@ export default function BandItem(props: BandItemProps) {
       {props.pointer ? (
         <div
           className="pointer"
-          /*onMouseDown={e => startDrag(e)}
-          onMouseMove={e => onDrag(e)}
-          onMouseUp={e => endDrag(e)}*/
 
           draggable
         ></div>

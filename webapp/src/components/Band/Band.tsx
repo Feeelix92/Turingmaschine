@@ -2,6 +2,8 @@ import BandItem from "./BandItem";
 import {
   FaArrowAltCircleLeft,
   FaArrowAltCircleRight,
+  FaAngleLeft,
+  FaAngleRight,
   FaRedo,
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,7 +36,7 @@ export default function Band() {
     }
   };
 
-  //TODO: Für Touch nach rechts & links:
+  // Für Touch nach rechts & links:
   const setPointerLeft = () => {
     let oldPointerIndex = 0;
 
@@ -76,10 +78,6 @@ export default function Band() {
     dispatch(bandChangePointer({ index: newPointerIndex, value: true }));
   };
 
-  const logPointerPos = (idx: number) => {
-    console.log(idx);
-  };
-
   return (
     <div
       className={
@@ -103,8 +101,8 @@ export default function Band() {
             key={index}
             alphabet={currentAlphabet.alphabet}
             showEditField={true}
-            setPointerAt={() => setPointerAt(index)} //TODO
-            movePointer={() => logPointerPos(index)}
+            setPointerAt={() => setPointerAt(index)} 
+           // movePointer={() => logPointerPos(index)}
           />
         ))}
         <button
@@ -117,17 +115,17 @@ export default function Band() {
       <div className="flex mb-4">
         <div className="w-3/4 text-left">
           <button
-            className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"
+            className="secondaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"
             onClick={() => setPointerLeft()}
           >
-            <FaArrowAltCircleLeft />
+            <FaAngleLeft />
           </button>
 
           <button
-            className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"
+            className="secondaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"
             onClick={() => setPointerRight()}
           >
-            <FaArrowAltCircleRight />
+            <FaAngleRight />
           </button>
         </div>
 

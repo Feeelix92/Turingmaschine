@@ -69,13 +69,13 @@ export interface BandItemProps {
   value: string;
   label: string;
   index: number;
-  skin: string;
+  //skin: string;
   pointer: boolean;
   alphabet: EingabeAlphabetOption[];
   showEditField: boolean;
-  setPointer: (index: Key, e: any) => void;
+  //setPointer: (index: Key, e: any) => void;
   setPointerAt: () => void;
-  movePointer: (arg: number) => void;
+  //movePointer: (arg: number) => void;
 }
 
 export interface BandProps {
