@@ -95,13 +95,13 @@ export default function Band() {
                     {currentBand.map((value, index) => (
                         <BandItem
                             value={value.value}
+                            label={value.label}
                             index={index}
-                            pointer={value.pointer}
+                            pointer={value.pointer!}
                             key={index}
                             alphabet={currentAlphabet.alphabet}
                             showEditField={true}
-                            setPointerAt={() => setPointerAt(index)} //TODO
-                            movePointer={() => logPointerPos(index)}
+                            setPointerAt={() => setPointerAt(index)}
                         />
                     ))}
                 </div>

@@ -11,9 +11,12 @@ import {
 } from "../../redux/bandStore";
 
 export default function BandItem(props: BandItemProps) {
-    const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
+  const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
 
-    const [editMode, setEditMode] = React.useState(false);
+  const [editMode, setEditMode] = React.useState(false);
+  function toggleEditMode() {
+    setEditMode(!editMode);
+  }
 
   const currentBandSkin = useSelector(
     (state: RootState) => state.band.bandSkin
@@ -52,57 +55,36 @@ export default function BandItem(props: BandItemProps) {
     document.addEventListener("click", handleClickOutside);
     return () => {
       document.removeEventListener("click", handleClickOutside);
-    };
+    };   
+  })  
 
-    useEffect(() => {
-        function handleClickOutside(event: MouseEvent) {
-            if (wrapperRef) {
-                if (
-                    wrapperRef.current != null && event.target != null &&
-                    event.target instanceof Node
-                ) {
-                    if (!wrapperRef.current.contains(event.target)) {
-                        setEditMode(false);
-                    }
-                }
-            }
+  function checkValue(index: Key, value: string) {
+      let allowed = false;
+
+      props.alphabet.map((entry) => {
+        if (entry.value === value || value === "") {
+          const temp: BandItemToChange = {
+            index: index as number,
+            value: value,
+            label: value,
+          };
+          dispatch(bandChangeItemAt(temp));
+          allowed = true;
+        } else if (value === "") {
+          const temp: BandItemToChange = {
+            index: index as number,
+            value: value,
+            label: "",
+          };
+          dispatch(bandChangeItemAt(temp));
+          allowed = true;
         }
+      });
 
-    props.alphabet.map((entry) => {
-      if (entry.value === value || value === "") {
-        const temp: BandItemToChange = {
-          index: index as number,
-          value: value,
-          label: value,
-        };
-        dispatch(bandChangeItemAt(temp));
-        allowed = true;
-      } else if (value === "") {
-        const temp: BandItemToChange = {
-          index: index as number,
-          value: value,
-          label: "",
-        };
-        dispatch(bandChangeItemAt(temp));
-        allowed = true;
+      if (!allowed) {
+          alert("Wert ist nicht im Alphabet enthalten!");
       }
-    });
-
-    function checkValue(index: Key, value: string) {
-        let allowed = false;
-
-        props.alphabet.map((entry) => {
-            if (entry.value === value || value === "") {
-                const temp: BandItemToChange = {index: index as number, value: value}
-                dispatch(bandChangeItemAt(temp));
-                allowed = true;
-            }
-        });
-
-        if (!allowed) {
-            alert("Wert ist nicht im Alphabet enthalten!");
-        }
-    }
+  }
 
 
     return (
@@ -113,11 +95,6 @@ export default function BandItem(props: BandItemProps) {
             <div>
                 {props.pointer ? (
                     <div className="pointer"
-                        /*onMouseDown={e => startDrag(e)}
-                        onMouseMove={e => onDrag(e)}
-                        onMouseUp={e => endDrag(e)}*/
-
-
                          draggable
                     ></div>
                 ) : (
@@ -128,10 +105,10 @@ export default function BandItem(props: BandItemProps) {
                     name="value"
                     id="valueInput"
                     className={"bandInput bg-transparent"}
-                    value={props.value}
+                    value={props.label}
                     onChange={(e) => checkValue(props.index, e.target.value)}
                     onClick={toggleEditMode}
-                    onDragOver={(e) => props.setPointerAt(props.index)}
+                    onDragOver={props.setPointerAt}
 
                 />
                 {editMode && props.showEditField ? (
