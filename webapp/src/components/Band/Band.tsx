@@ -1,130 +1,143 @@
-import { Component } from 'react';
-import BandItem  from './BandItem';
-import { BandProps } from "../../interfaces/CommonInterfaces";
-import { eingabeAlphabetOptionen, initBand } from '../../data/Alphabet';
+import BandItem from "./BandItem";
+import {
+  FaArrowAltCircleLeft,
+  FaArrowAltCircleRight,
+  FaAngleLeft,
+  FaAngleRight,
+  FaRedo,
+} from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  bandAddField,
+  bandChangePointer,
+  bandDeleteAll,
+} from "../../redux/bandStore";
+import { RootState } from "../../redux/store";
 
-export default class Band extends Component<{}, BandProps> {
-    constructor(props: BandProps) {
-        super(props);
-        this.state = {
-        alphabet: eingabeAlphabetOptionen,
-        currentBand: initBand,
-        skin: "paper"
-        };
-        console.log(initBand)
+export default function Band() {
+  const defaultPointerPos = 1; // Feld, auf dem Pointer im Default stehen soll
+
+  const currentBand = useSelector((state: RootState) => state.band.currentBand);
+  const currentAlphabet = useSelector(
+    (state: RootState) => state.general.currentAlphabet
+  );
+  const dispatch = useDispatch();
+
+  const setPointerAt = (index: number) => {
+    let newIndex = index;
+
+    if (currentBand[newIndex as number] != null) {
+      // Alle alten Pointer entfernen:
+      for (let index = 0; index < currentBand.length; index++) {
+        dispatch(bandChangePointer({ index: index, value: false }));
+      }
+      // Neuen Pointer auf true:
+      dispatch(bandChangePointer({ index: newIndex, value: true }));
     }
-    
-    render() {    
-    const bandLength = this.state.currentBand.length;
-    const defaultPointerPos = 1; // Feld, auf dem Pointer im Default stehen soll
+  };
 
-    const deleteAll = () => { // setzt Band auf Default zurück & löscht Inhalt der BandItems
-        let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
-        
-        for (let index = 0; index < bandLength; index++) {
-            if(index == defaultPointerPos) {
-                bandCopy[index] = {value: "", label: "B", pointer: true}
-                console.log(bandCopy)
-            } else {
-                bandCopy[index] = {value: "", label: "B", pointer: false}
-            }
-            
-        }   
+  // Für Touch nach rechts & links:
+  const setPointerLeft = () => {
+    let oldPointerIndex = 0;
 
-        this.setState({
-            currentBand: bandCopy
-        });
+    // Alle alten Pointer entfernen:
+    for (let index = 0; index < currentBand.length; index++) {
+      if (currentBand[index].pointer == true) {
+        oldPointerIndex = index;
+      }
+      dispatch(bandChangePointer({ index: index, value: false }));
+    }
 
-    };
+    let newPointerIndex = oldPointerIndex;
+    if (oldPointerIndex > 0) {
+      newPointerIndex = oldPointerIndex - 1;
+    }
 
-    const changeSkin = () => {     
-        if(this.state.skin === "paper"){
-            this.setState({
-                skin: "tech",
-            });
-        }else {
-            this.setState({
-                skin: "paper",
-            });
-        }
-    };
+    // Neuen Pointer auf true:
+    dispatch(bandChangePointer({ index: newPointerIndex, value: true }));
+  };
 
+  //Für Touch nach rechts:
+  const setPointerRight = () => {
+    let oldPointerIndex = 0;
 
-    const changeItemAt = (index: any, value: string) => {
-        let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
+    // Alle alten Pointer entfernen:
+    for (let index = 0; index < currentBand.length; index++) {
+      if (currentBand[index].pointer == true) {
+        oldPointerIndex = index;
+      }
+      dispatch(bandChangePointer({ index: index, value: false }));
+    }
 
-        bandCopy[index as number].value = value;
-        
-        this.setState({
-            currentBand: bandCopy,
-        });
-    };
+    let newPointerIndex = oldPointerIndex;
+    if (oldPointerIndex < currentBand.length - 1) {
+      newPointerIndex = oldPointerIndex + 1;
+    }
 
-    const setPointer = (index: any, value: boolean) => {
-        console.log("setPointer function called!");
-        
-        let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
+    // Neuen Pointer auf true:
+    dispatch(bandChangePointer({ index: newPointerIndex, value: true }));
+  };
 
-        bandCopy[index as number].pointer = value;
-        
-        this.setState({
-            currentBand: bandCopy,
-        });
-        
-    };
+  return (
+    <div
+      className={
+        "bg-white w-screen p-3 border rounded"
+      }
+    >
 
-    
-    const setPointerAt = () => {
-        console.log("setPointerAt function called!");
-        
-        let bandCopy = this.state.currentBand.slice(0, this.state.currentBand.length);
-
-        // TODO: Nicht richtige Indexdaten, nur zum Test:
-        let oldIndex = defaultPointerPos;  
-        let newIndex = defaultPointerPos+1; 
-
-        bandCopy[oldIndex as number].pointer = false;
-        bandCopy[newIndex as number].pointer = true;
-        
-        this.setState({
-            currentBand: bandCopy,
-        });
-        
-    };
-
-    return <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 p-3 border rounded"}>
-        <div className="mb-5">
-            <h2 >Band: </h2>
-        </div>
-        <div className="band-container flex flex-row mb-5 overflow-x-auto">
-            {this.state.currentBand.map((value, index) => (                
-                <BandItem
-                value={value.value}
-                index={index}
-                skin={this.state.skin}
-                pointer={value.pointer}
-                key={index}
-                alphabet={eingabeAlphabetOptionen}
-                showEditField={true}
-                changeItemAt={changeItemAt}
-                setPointer={setPointer}
-                setPointerAt={setPointerAt} //TODO
-                />                
-            ))}
-          
-        </div>
-        <button 
-        className="primaryBtn text-white font-bold py-1 px-2 rounded"
-        onClick={() => changeSkin()}>
-            Change skin
-        </button>
-
-        
+      <div className="band-container flex flex-row mb-5 overflow-x-auto">
         <button
-        className="primaryBtn text-white font-bold py-1 px-2 rounded ml-5"
-        onClick={() => deleteAll()}>
-            Delete All
+          className="left-band-button bg-transparent hover:bg-gray-100 text-gray-900 font-semibold hover:text-gray-900  border border-gray-900 hover:border-transparent rounded"
+          onClick={() => dispatch(bandAddField("before"))}
+        >
+          +
         </button>
+        {currentBand.map((value, index) => (
+          <BandItem
+            value={value.value}
+            label={value.label}
+            index={index}
+            pointer={value.pointer!}
+            key={index}
+            alphabet={currentAlphabet.alphabet}
+            showEditField={true}
+            setPointerAt={() => setPointerAt(index)} 
+           // movePointer={() => logPointerPos(index)}
+          />
+        ))}
+        <button
+          className="right-band-button bg-transparent hover:bg-gray-100 text-gray-900 font-semibold hover:text-gray-900 border border-gray-900 hover:border-transparent rounded"
+          onClick={() => dispatch(bandAddField("after"))}
+        >
+          +
+        </button>
+      </div>
+      <div className="flex mb-4">
+        <div className="w-3/4 text-left">
+          <button
+            className="secondaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"
+            onClick={() => setPointerLeft()}
+          >
+            <FaAngleLeft />
+          </button>
+
+          <button
+            className="secondaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"
+            onClick={() => setPointerRight()}
+          >
+            <FaAngleRight />
+          </button>
+        </div>
+
+        <div className="w-1/4 text-right">
+          <button
+            onClick={() => dispatch(bandDeleteAll())}
+            className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
+          >
+            <FaRedo />
+          </button>
+        </div>
+      </div>
     </div>
-    }
+  );
 }

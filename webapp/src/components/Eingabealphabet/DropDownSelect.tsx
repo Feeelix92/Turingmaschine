@@ -1,53 +1,108 @@
-import React, {useState} from 'react'
-import Select, {ActionMeta, OnChangeValue} from 'react-select'
-import {Eingabelphabet, eingabeAlphabete} from "../../data/Alphabet";
+import { current } from "@reduxjs/toolkit";
+import React, { useEffect, useState } from "react";
+import { CgAddR } from "react-icons/cg";
+import { useSelector, useDispatch } from "react-redux";
+import Select, { ActionMeta, OnChangeValue } from "react-select";
+import { EingabeAlphabetDialog } from "../../data/Alphabet";
+import { bandDeleteAll } from "../../redux/bandStore";
+import {
+  Alphabet,
+  alphabetChangeCurrent,
+  defaultAlphabetOption4,
+  EingabeAlphabetDialogOptions,
+  eingabeAlphabetDialogOptions,
+} from "../../redux/generalStore";
+import { RootState } from "../../redux/store";
 import MultiselectDropDown from "./DropDownMultiselect";
 
 export default function DropDownSelect() {
-    /**
-     * To check if Dialog opened or closed
-     */
-    const [openDialog, setOpenDialog] = useState(false);
+  const dialogOptions = useSelector(
+    (state: RootState) => state.general.dialogOptions
+  );
+  const currentDialogOption = useSelector(
+    (state: RootState) => state.general.currentDialogOption
+  );
+  const dispatch = useDispatch();
+  /**
+   * checks if Dialog opened or closed
+   */
+  const [openDialog, setOpenDialog] = useState(false);
 
-    const customSelect = (data: any) => {
-        setOpenDialog(data);
+  /**
+   * copy of the currentDialogOption from state, to get the correct labels in Select
+   */
+  const [copiedCurrentDialogOption, setCopiedCurrentDialogOption] = useState({
+    label: "",
+    value: "",
+  });
+  useEffect(() => {
+    setCopiedCurrentDialogOption({
+      label: currentDialogOption.label,
+      value: currentDialogOption.label,
+    });
+  }, [currentDialogOption]);
+
+  /**
+   * function handleChange checks if the selected option has changed
+   * @param newValue
+   * @param actionMeta
+   */
+  function handleChange(
+    newValue: OnChangeValue<EingabeAlphabetDialogOptions, false>,
+    actionMeta: ActionMeta<EingabeAlphabetDialogOptions>
+  ) {
+    console.group("Value Changed");
+    console.log(newValue);
+    if (newValue) {
+      if (newValue.alphabet.key !== 0) {
+        dispatch(alphabetChangeCurrent(newValue.alphabet));
+      } else {
+        dispatch(alphabetChangeCurrent(newValue.alphabet));
+        setOpenDialog(true);
+      }
+      dispatch(bandDeleteAll());
     }
+  }
+  return (
+    <div
+      className={
+        "bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 grid grid-cols-2 gap-2 items-center"
+      }
+    >
+      <p className={"p-3"}>Eingabealphabet ∑ =</p>
+      {/*{showPlaceholder &&*/}
+      {/*    <Select placeholder={<p className={"text-gray-500"}>Bitte wählen</p>}*/}
+      {/*            blurInputOnSelect={false}*/}
+      {/*            className={"text-black p-3 text-base"}*/}
+      {/*            onChange={handleChange}*/}
+      {/*            options={eingabeAlphabete}*/}
+      {/*    />*/}
+      {/*}*/}
+      {/*{!showPlaceholder &&*/}
+      <Select
+        value={copiedCurrentDialogOption}
+        blurInputOnSelect={false}
+        className={"text-black p-3 text-base"}
+        onChange={handleChange}
+        options={dialogOptions}
+        // @ts-ignore
+        getOptionLabel={(e) => (
+          <div className={"flex items-center place-content-start"}>
+            {e.icon ? <CgAddR /> : ""}
 
-    /**
-     * function handleChange checks if the selected option has changed
-     * @param newValue
-     * @param actionMeta
-     */
-    function handleChange(
-        newValue: OnChangeValue<Eingabelphabet, false>,
-        actionMeta: ActionMeta<Eingabelphabet>
-    ) {
-        console.group('Value Changed');
-        console.log(newValue);
-        if (!(newValue && newValue.value[0] == 'custom')) {
-            setOpenDialog(false);
-        } else {
-            setOpenDialog(true);
-        }
-        console.log(`action: ${actionMeta.action}`);
-        console.groupEnd();
-
-    }
-
-    return (
-        <div className={"bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 grid grid-cols-2 gap-2 items-center"}>
-            <p className={"p-3"}>Eingabealphabet ∑ =</p>
-            <Select placeholder={<p>wählen Sie Ihr Eingabealphabet...</p>}
-                    blurInputOnSelect={false}
-                    className={"text-black p-3 text-lg"}
-                    onChange={handleChange}
-                    options={eingabeAlphabete}
-            />
-            {openDialog &&
-                <div className={"text-white text-lg col-span-2"}>
-                    <MultiselectDropDown customSelect={customSelect} alphabet={eingabeAlphabete}/>
-                </div>
-            }
+            <span className={"m-2"}>{e.label}</span>
+          </div>
+        )}
+      />
+      {/*}*/}
+      {openDialog && (
+        <div className={"text-white text-lg col-span-2"}>
+          <MultiselectDropDown
+            customSelect={true}
+            onCloseDialog={() => setOpenDialog(false)}
+          />
         </div>
-    );
+      )}
+    </div>
+  );
 }

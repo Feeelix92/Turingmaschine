@@ -1,15 +1,16 @@
 :root {
-  /* THM-Farben */
-  --primary: #80ba24; 
-  --primary2: #4a5c66;
+    /* THM-Farben */
+    --primary: #80ba24;
+    --primary2: #4a5c66;
 
-  --secondary: #9C132E;
-  --secondary2: #F4AA00;
-  --secondary3: #00B8E4;
-  --secondary4: #002878;
+    --secondary: #9C132E;
+    --secondary2: #F4AA00;
+    --secondary3: #00B8E4;
+    --secondary4: #002878;
 
-  /* Hover-Farben */
-  --primaryHover: #5a811b;
+    /* Hover-Farben */
+    --primaryHover: #5a811b;
+    --secondaryHover: #2f3a41;
 }
 
 .App {
@@ -28,14 +29,13 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
@@ -43,57 +43,175 @@
 }
 
 @keyframes App-logo-slide {
-  from {
-    margin-left: 100%;
-  }
-  to {
-    margin-left: -100%;
-  }
+    from {
+        margin-left: 100%;
+    }
+    to {
+        margin-left: -100%;
+    }
 }
 
 button {
     font-size: calc(10px + 2vmin);
+    height: 35px;
 }
 
 .primaryBtn {
-  background-color: var(--primary);
+    background-color: var(--primary);
 }
 
 .primaryBtn:hover {
-  background-color: var(--primaryHover);
+    background-color: var(--primaryHover);
 }
 
+.secondaryBtn {
+    background-color: var(--primary2);
+}
+
+.secondaryBtn:hover {
+    background-color: var(--secondaryHover);
+}
+
+/* ********** MENU ********** */
+
+.menu {
+    background-color: var(--primary);
+
+}
+
+.control {
+  background-color: white;
+}
+
+#velSlider{
+  accent-color: var(--primary);
+}
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+    position: relative;
+    float: right;
+    justify-self: end;
+    width: 36px;
+    height: 30px;
+    right: 1em;
+    margin: 12px 0 12px 0;
+
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+    background: white;
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+    background: var(--primary2);
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+    height: 50px;
+    width: 50px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+    background: white;
+}
+
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+    right: 0%;
+}
+
+/* General sidebar styles */
+.bm-menu {
+    background: var(--primary2);
+    font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+/*
+.bm-morph-shape {
+  fill: #373a47;
+}
+*/
+
+/* Wrapper for item list */
+.bm-item-list {
+    color: white;
+    padding: 0.8em;
+    text-align: start;
+}
+
+/* Individual item */
+.bm-item {
+    display: inline-block;
+    padding: 0.5em;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+    background: rgba(0, 0, 0, 0.3);
+}
 
 /* ********** BAND ********** */
 
 .band-container {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  white-space: nowrap;
-  padding: 40px 10px 0px 10px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding: 40px 10px 0px 10px;
 }
 
-.band-container__band{
-  display: inline-block;
-  padding: 5px;
-  width: 60px;
-  height: 40px;
-  color: black;
-  border: 1px solid gray;
+.band-container__band {
+    display: inline-block;
+    padding: 5px;
+    width: 60px;
+    height: 40px;
+    color: black;
+    border: 1px solid gray;
 }
 
-.pointerBorder{
-  border: 3px solid var(--primary);
-  border-top: 8px solid var(--primary);
-  position:relative;
-  cursor: move;
-  
+.left-band-button {
+    min-width: 30px;
+    max-width: 30px;
+    height: 40px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.pointer{
-  cursor: move;
+.right-band-button {
+    min-width: 30px;
+    max-width: 30px;
+    height: 40px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.pointer::after{
+
+.pointerBorder {
+    border: 3px solid var(--primary);
+    border-top: 8px solid var(--primary);
+    position: relative;
+    cursor: move;
+
+}
+
+.pointer {
+    cursor: move;
+}
+
+.pointer::after {
     content: "";
     position: absolute;
     /*
@@ -106,38 +224,68 @@ button {
 
     /* Runder Kopf vom Pointer: */
     background: var(--primary);
-    height: 25px;
-    width: 48px;
+    height: 30px;
+    width: 60px;
     border-radius: 300px 300px 0px 0px;
-    margin-left: -8px;
+    margin-left: -5px;
     margin-top: -35px;
 }
 
 .pointer:hover {
-  background-color: var(--primaryHover);
+    background-color: var(--primaryHover);
 }
 
 .paper, .tech {
-  background-image: url('./assets/images/spritesheet.png');
-  background-repeat: no-repeat;  
+    background-image: url('./assets/images/spritesheet2.png');
+    background-repeat: no-repeat;
 }
 
 .paper {
-  background-position: 0 0;
+    background-position: 0 0;
 }
 
 .tech {
-  background-position: -60px 0;
+    background-position: -60px 0;
+}
+
+/* ********** BAND ITEM ********** */
+.delete-value-button {
+    min-width: 20px;
+    max-width: 20px;
+    height: 28px;
+    padding: 0px;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
 /* ********** TABLE ********** */
 
-.editBtnDiv{
- position: fixed;
+.editBtnDiv {
+    position: fixed;
 }
 
-.editBtn{
-  width: 45px;
-  height: 45px;
+.editBtn {
+    width: 45px;
+    height: 45px;
+}
+.accordion .specification-header{
+  text-align: start;
+}
+
+.accordion .specification-header span{
+  font-weight: bolder;
+}
+
+.accordion .specification-header .accordion-icon{
+  margin-right: 0.3rem;
+  margin-left: 0.3rem;
+}
+
+.accordion-content{
+  text-align: start;
+  margin-left: 0.3rem;
+
 }

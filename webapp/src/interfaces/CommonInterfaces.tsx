@@ -1,10 +1,10 @@
 import { Key } from "react";
-import { Eingabelphabet, EingabelphabetOption } from "../data/Alphabet";
+import { EingabeAlphabetOption } from "../data/Alphabet";
 
 export interface TableProps {
   header: string[];
   rows: Row[];
-  alphabet: EingabelphabetOption[];
+  alphabet: EingabeAlphabetOption[];
 }
 
 export interface Row {
@@ -13,51 +13,90 @@ export interface Row {
 }
 
 export interface Cell {
-  value: string;
+  value: string | Zustand | Direction;
   editField: boolean;
+}
+
+export class Zustand {
+  value: string;
+  label: string;
+  anfangszustand: boolean;
+  endzustand: boolean;
+
+  constructor(
+    label: string,
+    value: string,
+    anfangszustand: boolean,
+    endzustand: boolean
+  ) {
+    this.label = label;
+    this.value = value;
+    this.anfangszustand = anfangszustand;
+    this.endzustand = endzustand;
+  }
+}
+
+export class Direction {
+  label: string;
+  value: string;
+
+  constructor(label: string, value: string) {
+    this.label = label;
+    this.value = value;
+  }
 }
 
 export interface RowProps {
   index: Key;
   cells: Cell[];
-  alphabet: EingabelphabetOption[];
+  isFinal: boolean;
   deleteRow: () => void;
-  updateRow: (index: Key, cells: Cell[]) => void;
-  setFinal: (index: Key) => void;
 }
 
 export interface CellProps {
-  value: string;
+  value: string | Zustand | Direction;
   index: Key;
-  alphabet: EingabelphabetOption[];
   showEditField: boolean;
-  updateCellValue: (index: Key, arg: string) => void;
+  updateCellValue: (index: Key, arg: string | Zustand | Direction) => void;
 }
 
 export interface EditProps {
-  options: EingabelphabetOption[];
+  options: EingabeAlphabetOption[];
   updateValue: (arg: string) => void;
 }
 
 export interface BandItemProps {
-    value: string;
-    index: number;
-    skin: string;
-    pointer: boolean;
-    alphabet: EingabelphabetOption[];
-    showEditField: boolean;
-    changeItemAt: (index: Key, e: any) => void;
-    setPointer: (index: Key, e: any) => void;
-    setPointerAt: () => void;
+  value: string;
+  label: string;
+  index: number;
+  //skin: string;
+  pointer: boolean;
+  alphabet: EingabeAlphabetOption[];
+  showEditField: boolean;
+  //setPointer: (index: Key, e: any) => void;
+  setPointerAt: () => void;
+  //movePointer: (arg: number) => void;
 }
 
 export interface BandProps {
-  alphabet: EingabelphabetOption[];
-  currentBand: EingabelphabetOption[];
+  alphabet: EingabeAlphabetOption[];
+  currentBand: EingabeAlphabetOption[];
   skin: string;
 }
 
-export interface EingabealphabetCustomProp {
-  alphabet: Eingabelphabet[];
+export interface EingabeAlphabetCustomProp {
   customSelect: any;
+  onCloseDialog: () => void;
 }
+
+export const directions: Direction[] = [
+  new Direction("R", "Rechts"),
+  new Direction("L", "Links"),
+  new Direction("N", "Neutral"),
+];
+
+// export const status: Zustand[] = [
+//   new Zustand("q1", "q1", false),
+//   new Zustand("q2", "q2", false),
+//   new Zustand("q3", "q3", true),
+// ];
