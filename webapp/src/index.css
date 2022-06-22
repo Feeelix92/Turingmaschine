@@ -120,7 +120,7 @@
 }
 
 .band-container__band {
-    @apply inline-block w-16 h-12 text-black border border-solid border-thm-primary2;
+    @apply inline-block w-14 h-10 text-black border border-solid border-thm-primary2;
 }
 
 .pointerBorder {
@@ -132,7 +132,7 @@
 }
 
 .pointer::after {
-    @apply content-[''] absolute bg-thm-primary h-8 w-16 rounded-t-full bottom-12 -left-0.5 z-10;
+    @apply content-[''] absolute bg-thm-primary w-14 h-8 rounded-t-full bottom-10 -left-0.5 z-10;
 }
 
 .pointer:hover {
@@ -140,7 +140,7 @@
 }
 
 .bandInput {
-    @apply w-16 h-12 text-center ;
+    @apply w-14 h-10 text-center ;
 }
 
 .bandInput:active, .bandInput:focus, .bandInput:hover {
