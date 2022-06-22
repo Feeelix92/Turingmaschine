@@ -13,7 +13,10 @@ import {
   bandResetPointer,
 } from "../../redux/bandStore";
 import { useEffect, useState } from "react";
-import { alphabetChangePauseMaschine, alphabetChangeStoppMaschine } from "../../redux/generalStore";
+import {
+  alphabetChangePauseMaschine,
+  alphabetChangeStoppMaschine,
+} from "../../redux/generalStore";
 
 function Control() {
   const dispatch = useDispatch();
@@ -37,12 +40,12 @@ function Control() {
   const [slider, setSlider] = useState(1000);
 
   const changePause = (value: boolean) => {
-    dispatch(alphabetChangePauseMaschine(value))
-  }
+    dispatch(alphabetChangePauseMaschine(value));
+  };
   const changeStopp = (value: boolean) => {
-    dispatch(alphabetChangeStoppMaschine(value))
+    dispatch(alphabetChangeStoppMaschine(value));
     dispatch(bandResetPointer());
-  }
+  };
 
   // useEffect(() => {
   //   console.log("pause--------------->", pause);
@@ -175,7 +178,7 @@ function Control() {
         if (item.cells[0].value != item.cells[2].value) {
           if (item.cells[0].value.endzustand === true) {
             console.log("Endzustand erreicht!");
-            changePause(true)
+            changePause(true);
             await dispatch(bandResetPointer());
           } else {
             console.log("changeZustand");
@@ -187,31 +190,30 @@ function Control() {
     } else {
       console.log("Else");
       // await handlePauseOn();
-      changePause(false)
+      changePause(false);
     }
   };
 
   const sleep = (milliseconds: number) => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
-  }
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
 
   const onPlay = async () => {
     setSelectedRows();
-    changeStopp(false)
-    changePause(false)
-    
-    //ToDo: Schleife hört nicht auf Änderungen von außerhalb... 
+    dispatch(alphabetChangeStoppMaschine(false));
+    changePause(false);
+
+    //ToDo: Schleife hört nicht auf Änderungen von außerhalb...
     //...localCopyPause = true vom Pause Button wird nicht beachtet??
-    while (stoppMaschine === false && pauseMaschine === false){
-      await sleep(slider)
+    while (stoppMaschine === false && pauseMaschine === false) {
+      await sleep(slider);
       makeStep(activePointerPosition);
     }
 
-
     console.log("Schleife durchbrochen!");
     dispatch(tableSetActiveState(initialZustand));
-    changePause(false)
-    changeStopp(false)
+    changePause(false);
+    dispatch(alphabetChangeStoppMaschine(false));
   };
 
   const stepByStep = () => {
@@ -233,7 +235,9 @@ function Control() {
 
           <button
             className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
-            onClick={() => {pauseMaschine? changePause(false):changePause(true)}}
+            onClick={() => {
+              pauseMaschine ? changePause(false) : changePause(true);
+            }}
           >
             <FaPause />
           </button>
@@ -262,7 +266,7 @@ function Control() {
             type="range"
             min={0}
             max={3000}
-            value={slider}            
+            value={slider}
             onChange={(e) => setSlider(e.target.valueAsNumber)}
             step={500}
           ></input>
