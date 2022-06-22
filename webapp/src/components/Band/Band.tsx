@@ -83,12 +83,10 @@ export default function Band() {
   return (
     <div
       className={
-        "bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 p-3 border rounded"
+        "bg-white w-screen p-3 border rounded"
       }
     >
-      <div className="mb-5">
-        <h2>Band: </h2>
-      </div>
+
       <div className="band-container flex flex-row mb-5 overflow-x-auto">
         <button
           className="left-band-button bg-transparent hover:bg-gray-100 text-gray-900 font-semibold hover:text-gray-900  border border-gray-900 hover:border-transparent rounded"

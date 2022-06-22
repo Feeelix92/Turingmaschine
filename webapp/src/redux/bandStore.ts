@@ -57,7 +57,7 @@ export const bandSlice = createSlice({
       state.currentBand[index.payload as number] = {
         value: "B",
         label: "",
-        pointer: false,
+        pointer: state.currentBand[index.payload].pointer,
       };
     },
     /**
