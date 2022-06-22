@@ -107,38 +107,32 @@ export default function BandItem(props: BandItemProps) {
             key={props.index}
             ref={wrapperRef}>
             <div>
-            {props.pointer ? (
-                <div className="pointer"
-                    /*onMouseDown={e => startDrag(e)}
-                    onMouseMove={e => onDrag(e)}
-                    onMouseUp={e => endDrag(e)}*/
+                {props.pointer ? (
+                    <div className="pointer"
+                        /*onMouseDown={e => startDrag(e)}
+                        onMouseMove={e => onDrag(e)}
+                        onMouseUp={e => endDrag(e)}*/
 
 
-                     draggable
-                ></div>
-            ) : (
-                ""
-            )}
-            <input
-                type="text"
-                name="value"
-                id="valueInput"
-                className={"bandInput bg-transparent"}
-                value={props.value}
-                onChange={(e) => checkValue(props.index, e.target.value)}
-                onClick={toggleEditMode}
-                onDragOver={(e) => props.setPointerAt(props.index)}
+                         draggable
+                    ></div>
+                ) : (
+                    ""
+                )}
+                <input
+                    type="text"
+                    name="value"
+                    id="valueInput"
+                    className={"bandInput bg-transparent"}
+                    value={props.value}
+                    onChange={(e) => checkValue(props.index, e.target.value)}
+                    onClick={toggleEditMode}
+                    onDragOver={(e) => props.setPointerAt(props.index)}
 
-            />
+                />
                 {editMode && props.showEditField ? (
                     <div className={"editBtnDiv"}>
                         <EditField options={props.alphabet} updateValue={chooseOption}/>
-                        {/*<button*/}
-                        {/*    className={"delete-value-button invertedButton"}*/}
-                        {/*    onClick={() => deleteValue(props.index)}*/}
-                        {/*>*/}
-                        {/*    <FaTrash/>*/}
-                        {/*</button>*/}
                         <button
                             className={"editBtn"}
                             onClick={() => deleteValue(props.index)}
@@ -149,18 +143,7 @@ export default function BandItem(props: BandItemProps) {
                 ) : (
                     ""
                 )}
-            {/*{editMode && props.showEditField ? (*/}
-            {/*    <a*/}
-            {/*        href="#"*/}
-            {/*        className={"delete-value-button"}*/}
-            {/*        onClick={() => deleteValue(props.index)}*/}
-            {/*    >*/}
-            {/*        <FaTrash/>*/}
-            {/*    </a>*/}
-            {/*) : (*/}
-            {/*    ""*/}
-            {/*)}*/}
-        </div>
+            </div>
         </div>
     );
 }
