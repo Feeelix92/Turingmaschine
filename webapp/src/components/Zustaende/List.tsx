@@ -93,9 +93,9 @@ function ConditionsList() {
                             {zustandsmenge.map((value, index) => (
                                 <span key={index}>{value.value}, </span>
                             ))}{kZ}</div>
-                        <div className={"flex justify-center gap-2 col-span-1"}>
-                            <button className={"w-10"} onClick={() => dispatch(alphabetPushToZustand())}>+</button>
+                        <div className={"flex justify-end gap-2 col-span-1"}>
                             <button className={"w-10"} onClick={() => dispatch(alphabetDeleteZustand())}>-</button>
+                            <button className={"w-10"} onClick={() => dispatch(alphabetPushToZustand())}>+</button>
                         </div>
                         {/*<CreatableSelect*/}
                         {/*    value={endZustand}*/}
