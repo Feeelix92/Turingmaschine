@@ -110,7 +110,7 @@ export default function Cell(props: CellProps) {
           type="text"
           name="value"
           id="tableValueInput"
-          className={"rounded text-gray-700 focus:outline-none items-center border rounded text-center"}
+          className={"w-full min-w-full rounded text-gray-700 focus:outline-none items-center border rounded text-center"}
           value={props.value}
           onChange={(e) => checkValue(props.index, e.target.value)}
           onClick={toggleEditMode}

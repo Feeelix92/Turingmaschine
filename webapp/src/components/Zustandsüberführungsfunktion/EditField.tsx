@@ -20,7 +20,7 @@ export default function EditField(props: EditProps, BandItemProps) {
   
 
   return (
-    <div className="flex gap-2" role="group">
+    <div className="flex gap-2 z-10" role="group">
       {props.options.map((value: EingabeAlphabetOption, key: React.Key) => (
         <button
           key={key}
