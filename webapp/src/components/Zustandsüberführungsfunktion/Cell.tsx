@@ -16,7 +16,7 @@ export default function Cell(props: CellProps) {
     (state: RootState) => state.general.zustandsmenge
   );
   const eingabeAlphabet = useSelector(
-    (state: RootState) => state.general.currentAlphabet
+    (state: RootState) => state.general.bandAlphabet
   );
 
   const [editMode, setEditMode] = React.useState(false);
@@ -64,7 +64,7 @@ export default function Cell(props: CellProps) {
     let allowed = false;
 
     // map the passed alphabet to check whether the alphabet contains the new input value
-    eingabeAlphabet.alphabet.map((entry) => {
+    eingabeAlphabet.map((entry) => {
       if (
         entry.value === value ||
         props.showEditField === false ||
@@ -127,7 +127,7 @@ export default function Cell(props: CellProps) {
 
       {editMode && props.showEditField ? (
         <EditField
-          options={eingabeAlphabet.alphabet}
+          options={eingabeAlphabet}
           updateValue={chooseOption}
         />
       ) : (

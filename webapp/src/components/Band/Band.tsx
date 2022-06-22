@@ -10,7 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   bandAddField,
   bandChangePointer,
+  bandChangePointPos,
   bandDeleteAll,
+  bandSetPointPos,
 } from "../../redux/bandStore";
 import { RootState } from "../../redux/store";
 
@@ -24,64 +26,18 @@ export default function Band() {
   const dispatch = useDispatch();
 
   const setPointerAt = (index: number) => {
-    let newIndex = index;
-
-    if (currentBand[newIndex as number] != null) {
-      // Alle alten Pointer entfernen:
-      for (let index = 0; index < currentBand.length; index++) {
-        dispatch(bandChangePointer({ index: index, value: false }));
-      }
-      // Neuen Pointer auf true:
-      dispatch(bandChangePointer({ index: newIndex, value: true }));
-    }
+    dispatch(bandSetPointPos(index))
   };
 
   // Für Touch nach rechts & links:
   const setPointerLeft = () => {
-    let oldPointerIndex = 0;
-
-    // Alle alten Pointer entfernen:
-    for (let index = 0; index < currentBand.length; index++) {
-      if (currentBand[index].pointer == true) {
-        oldPointerIndex = index;
-      }
-      dispatch(bandChangePointer({ index: index, value: false }));
-    }
-
-    let newPointerIndex = oldPointerIndex;
-    if (oldPointerIndex > 0) {
-      newPointerIndex = oldPointerIndex - 1;
-    }
-
-    // Neuen Pointer auf true:
-    dispatch(bandChangePointer({ index: newPointerIndex, value: true }));
+    dispatch(bandChangePointPos(-1));
   };
 
   //Für Touch nach rechts:
   const setPointerRight = () => {
-    let oldPointerIndex = 0;
-
-    // Alle alten Pointer entfernen:
-    for (let index = 0; index < currentBand.length; index++) {
-      if (currentBand[index].pointer == true) {
-        oldPointerIndex = index;
-      }
-      dispatch(bandChangePointer({ index: index, value: false }));
-    }
-
-    let newPointerIndex = oldPointerIndex;
-    if (oldPointerIndex < currentBand.length - 1) {
-      newPointerIndex = oldPointerIndex + 1;
-    }
-
-    // Neuen Pointer auf true:
-    dispatch(bandChangePointer({ index: newPointerIndex, value: true }));
+    dispatch(bandChangePointPos(1));
   };
-
-
-    const logPointerPos = (idx: number) => {
-        console.log(idx);
-    };
 
     return (
         <div className={"w-screen mt-10"}>

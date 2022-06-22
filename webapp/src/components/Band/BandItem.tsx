@@ -23,6 +23,10 @@ export default function BandItem(props: BandItemProps) {
   );
   const dispatch = useDispatch();
 
+  const pointerIdx = useSelector(
+    (state: RootState) => state.band.pointerPosition
+  );
+
   function chooseOption(option: string) {
     const temp: BandItemToChange = {
       index: props.index,
@@ -89,11 +93,11 @@ export default function BandItem(props: BandItemProps) {
 
     return (
         <div
-            className={`band-container__band ${currentBandSkin} flex justify-center ${props.pointer ? 'pointerBorder' : ''}`}
+            className={`band-container__band ${currentBandSkin} flex justify-center ${(pointerIdx===props.index) ? 'pointerBorder' : ''}`}
             key={props.index}
             ref={wrapperRef}>
             <div>
-                {props.pointer ? (
+                {pointerIdx===props.index ? (
                     <div className="pointer"
                          draggable
                     ></div>

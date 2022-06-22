@@ -83,6 +83,7 @@ export const bandSlice = createSlice({
           state.currentBand[index] = { value: "B", label: "", pointer: false };
         }
       }
+      state.pointerPosition = 0;
     },
     bandChangeSkin: (state) => {
       if (state.bandSkin === "paper") {
@@ -93,7 +94,15 @@ export const bandSlice = createSlice({
     },
     bandChangePointPos: (state, step: PayloadAction<number>) => {
       console.log("movePointer");
-      state.pointerPosition += step.payload;
+      if((step.payload<0 && state.pointerPosition==0) || (step.payload>0 && state.pointerPosition>=state.currentBand.length-1) ) {
+
+      } else {
+        state.pointerPosition += step.payload;
+      }
+
+    },
+    bandSetPointPos: (state, step: PayloadAction<number>) => {
+      state.pointerPosition = step.payload;
     },
     bandResetPointer: (state) => {
       console.log("Reset!");
@@ -112,6 +121,7 @@ export const {
   bandChangeSkin,
   bandChangePointer,
   bandChangePointPos,
+  bandSetPointPos,
   bandResetPointer,
 } = bandSlice.actions;
 
