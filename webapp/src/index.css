@@ -124,7 +124,7 @@
 }
 
 .pointerBorder {
-    @apply border border-4 border-thm-primary relative cursor-move outline outline-2 outline-thm-hover;
+    @apply border border-2 border-thm-primary relative cursor-move outline outline-2 outline-thm-hover;
 }
 
 .pointer {
@@ -132,7 +132,7 @@
 }
 
 .pointer::after {
-    @apply content-[''] absolute bg-thm-primary h-10 w-16 rounded-t-full bottom-10 -left-1;
+    @apply content-[''] absolute bg-thm-primary h-8 w-16 rounded-t-full bottom-12 -left-0.5 z-10;
 }
 
 .pointer:hover {
