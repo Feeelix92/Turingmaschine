@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Select, { OnChangeValue } from "react-select";
-import { Zustand } from '../../interfaces/CommonInterfaces';
+import { Direction, Zustand } from '../../interfaces/CommonInterfaces';
 import { alphabetChangeAnfangszustand, alphabetChangeEndzustand, alphabetClearEndzustand, alphabetPushToZustand, alphabetDeleteZustand } from '../../redux/generalStore';
 import { RootState } from '../../redux/store';
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
@@ -56,14 +56,47 @@ function ConditionsList() {
     }
 
     function handleChangeMulti(newValue: OnChangeValue<Zustand[], false>) {
-        if (newValue.filter(zustand => !zustand.anfangszustand)) {
-            console.log('Anfang', anfangsZustand, 'Ende', endZustand, 'Menge', zustandsmenge, 'newValue', newValue)
-                let temp: Zustand[] = [];
-                newValue.forEach(zustand => {
-                    temp.push(new Zustand(zustand.value,zustand.label, zustand.anfangszustand, true))
-                });
-                dispatch(alphabetChangeEndzustand(temp))
+        if(newValue){
+            if (newValue.filter(zustand => !zustand.anfangszustand)) {
+                console.log('Anfang', anfangsZustand, 'Ende', endZustand, 'Menge', zustandsmenge, 'newValue', newValue)
+                    let temp: Zustand[] = [];
+                    newValue.forEach(zustand => {
+                        temp.push(new Zustand(zustand.value,zustand.label, zustand.anfangszustand, true))
+                    });
+                    dispatch(alphabetChangeEndzustand(temp))
+            }
         }
+    }
+
+    const loadedRows = useSelector((state: RootState) => state.table.rows)
+    const [zustandsFunktion] = useState([""])
+
+    function getZustandsFunktion(){           
+        if(zustandsFunktion.length<=1){
+            zustandsFunktion.pop()
+            let tempCellsString = "δ("
+            let tempHelper = true;
+            loadedRows.forEach(row => {
+                row.cells.forEach(cell => {
+                    if(cell.value instanceof Zustand){
+                        tempCellsString = tempCellsString + cell.value.value + ","
+                    }else if(cell.value instanceof Direction){
+                        tempCellsString = tempCellsString + cell.value.value + ")"
+                    }else{
+                        if(tempHelper === true){
+                            tempCellsString = tempCellsString + cell.value.toString() + ") = ("
+                            tempHelper = false;
+                        }else{
+                            tempCellsString = tempCellsString + cell.value.toString() + ","
+                            tempHelper = true;
+                        }
+                    }               
+                })   
+                zustandsFunktion.push(tempCellsString)       
+                tempCellsString="δ("; 
+            })
+        }
+        setShowZustandsfunktion(!showZustandsfunktion)           
     }
 
     return (
@@ -93,14 +126,6 @@ function ConditionsList() {
                             {zustandsmenge.map((value, index) => (
                                 <span key={index}>{value.value},</span>
                             ))}{kZ}</div>
-                        {/*<CreatableSelect*/}
-                        {/*    value={endZustand}*/}
-                        {/*    blurInputOnSelect={false}*/}
-                        {/*    className={""}*/}
-                        {/*    onChange={handleChangeMulti}*/}
-                        {/*    options={zustandsmenge}*/}
-                        {/*    isMulti={true}*/}
-                        {/*/>       */}
                         <button className={"primaryBtn text-white font-bold py-1 px-2 rounded m-2 "} onClick={() => dispatch(alphabetPushToZustand())}>+</button>
                         <button className={"primaryBtn text-white font-bold py-1 px-2 rounded m-2 "} onClick={() => dispatch(alphabetDeleteZustand())}>-</button>
                     </div>
@@ -134,11 +159,19 @@ function ConditionsList() {
                         <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center mt-2 text-left"}>
                             <span className={"col-span-2"}>Zustandsüberführungsfunktion &delta; =</span>
                             <button className={"text-black bg-white hover:bg-gray-200 text-left border border-solid"}
-                                    onClick={() => setShowZustandsfunktion(!showZustandsfunktion)}>{showZustandsfunktion ? 'Hier steht eine Funktion' : '...'}</button>
+                                    onClick={() => getZustandsFunktion()}>{showZustandsfunktion ? 'close' : 'δ:Q×Γ → Q×Γ×{R,L,N}'}</button>
+                                  
                         </div>
-                        {/*{showZustandsfunktion && <div>
-                        <p>Hier steht eine Funktion</p>
-                    </div>}*/}
+                        {showZustandsfunktion === true ? (
+                        <div className='Test'>
+                            {zustandsFunktion.map((value) => (
+                                <p key={value}>{value}</p>
+                            ))}
+                        </div>
+                        ) : (
+                            ""
+                        )}                        
+                        
                     </div>
                 </div>}
         </div>
