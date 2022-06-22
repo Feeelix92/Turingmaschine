@@ -126,8 +126,10 @@ function ConditionsList() {
                             {zustandsmenge.map((value, index) => (
                                 <span key={index}>{value.value}, </span>
                             ))}{kZ}</div>
-                        <button className={"primaryBtn text-white font-bold py-1 px-2 rounded m-2 "} onClick={() => dispatch(alphabetPushToZustand())}>+</button>
-                        <button className={"primaryBtn text-white font-bold py-1 px-2 rounded m-2 "} onClick={() => dispatch(alphabetDeleteZustand())}>-</button>
+                        <div className={"flex justify-end gap-2 col-span-1"}>
+                            <button className={"w-10"} onClick={() => dispatch(alphabetDeleteZustand())}>-</button>
+                            <button className={"w-10"} onClick={() => dispatch(alphabetPushToZustand())}>+</button>
+                        </div>
                     </div>
                     <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
                         <div className={"col-span-2"}>Anfangszustand q0 = {anfangsZustand.value} </div>
