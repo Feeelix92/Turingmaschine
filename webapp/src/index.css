@@ -3,25 +3,176 @@
     h1 {
         @apply text-3xl font-bold text-black;
     }
+
     h2 {
         @apply text-2xl font-bold text-black;
     }
+
     h3 {
         @apply text-xl font-bold text-black;
     }
+
     h4 {
         @apply text-lg font-bold text-black;
     }
-    p{
+
+    p {
         @apply text-base text-black;
     }
+
     a {
         @apply text-blue-600 underline;
     }
-    button{
-        @apply text-white text-white font-bold p-3 px-5 rounded;
+
+    button {
+        @apply bg-thm-primary text-white font-bold px-3 rounded text-center h-12 hover:bg-thm-hover;
+    }
+
+    Select{
+        @apply text-black text-base;
     }
 }
+@tailwind components;
 @tailwind utilities;
+
+.invertedButton {
+    @apply text-thm-primary bg-white font-bold px-3 text-center h-12 hover:bg-thm-hover hover:text-white border border-solid border-thm-primary;
+}
+
+.App {
+    @apply text-center w-auto sm:pr-10 sm:pl-10 sm:pb-10 content-center;
+}
+
+.App-logo {
+    @apply h-2 pointer-events-none;
+}
+
+.App-header {
+    @apply flex flex-col items-center justify-start text-white;
+}
+.App-body {
+    @apply flex flex-col items-center justify-start xl:grid xl:grid-cols-4 xl:items-start;
+}
+
+.App-link {
+    @apply text-thm-link;
+}
+
+/* ********** MENU ********** */
+.menu {
+    @apply bg-thm-primary text-left;
+}
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+    @apply relative float-right self-center w-12 h-8 m-2;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+    @apply bg-white;
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+    @apply bg-thm-hover;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+    @apply h-10 w-10;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+    @apply bg-white;
+    /*background: white;*/
+}
+
+/* Sidebar wrapper styles Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases */
+.bm-menu-wrap {
+    @apply fixed h-max right-0;
+}
+
+/* General sidebar styles */
+.bm-menu {
+    @apply bg-thm-primary2;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+    @apply text-white p-2.5 text-left;
+}
+
+/* Individual item */
+.bm-item {
+    @apply inline-block p-2.5;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+    @apply bg-transparent;
+}
+
+ /*********** BAND ***********/
+.band-container {
+    @apply overflow-x-scroll overflow-y-hidden whitespace-nowrap pb-5 pl-10 pr-10 pt-10 flex flex-row mb-5 justify-start max-w-max ml-auto mr-auto;
+}
+
+.band-container__band {
+    @apply inline-block w-16 h-12 text-black border border-solid border-thm-primary2;
+}
+
+.pointerBorder {
+    @apply border border-2 border-thm-primary relative cursor-move outline outline-2 outline-thm-hover;
+}
+
+.pointer {
+    @apply cursor-move;
+}
+
+.pointer::after {
+    @apply content-[''] absolute bg-thm-primary h-8 w-16 rounded-t-full bottom-12 -left-0.5 z-10;
+}
+
+.pointer:hover {
+    @apply bg-thm-hover;
+}
+
+.bandInput {
+    @apply w-16 h-12 text-center ;
+}
+
+.bandInput:active, .bandInput:focus, .bandInput:hover {
+    @apply border border-4 relative cursor-move outline outline-4 outline-thm-primary2;
+}
+
+.paper, .tech {
+    @apply bg-[url('./assets/images/spritesheet2.png')] bg-no-repeat;
+}
+
+.paper {
+    @apply bg-left-top;
+}
+
+.tech {
+    @apply bg-left-top;
+}
+
+/* ********** BAND ITEM ********** */
+.delete-value-button {
+    @apply min-w-fit max-w-full h-10 w-full focus:outline-none flex justify-center pt-3;
+}
+
+
+/* ********** TABLE ********** */
+
+.editBtnDiv {
+    @apply flex gap-2 justify-center mt-8;
+}
+
+.editBtn {
+    @apply w-10 h-10 rounded-full text-sm font-medium text-gray-900 bg-white hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white;
+}
 
 

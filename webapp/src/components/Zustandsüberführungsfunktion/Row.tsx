@@ -58,7 +58,7 @@ export default function Row(props: RowProps) {
   }
 
   useEffect(() => {
-    if (props.isFinal === true) {
+    if (props.isFinal) {
       setVisible(true);
     } else {
       setVisible(false);
@@ -67,7 +67,7 @@ export default function Row(props: RowProps) {
 
   return (
     <tr className="border-b flex w-full hover:bg-gray-100">
-      {visible === true
+      {visible
         ? props.cells
             .slice(0, 2)
             .map((value, key: React.Key) => (
@@ -88,18 +88,22 @@ export default function Row(props: RowProps) {
               updateCellValue={setCellValue}
             />
           ))}
-      {visible === true ? (
-        <td className="py-4 w-3/6 whitespace-nowrap text-sm font-medium text-gray-900 border-r">
+      {visible ? (
+        <td className="w-3/6 whitespace-nowrap text-gray-900 border-r">
           STOPP
         </td>
       ) : null}
-      <td className="py-4 w-1/6 whitespace-nowrap text-sm font-medium text-gray-900">
+      <td className="w-1/6 text-gray-900 items-center ">
         <a
           href="#"
-          className="w-full min-w-full text-gray-700 focus:outline-none items-center"
+          className="w-full min-w-full text-gray-700 focus:outline-none"
           onClick={() => dispatch(tableDeleteRow(props.index))}
         >
-          <FaTrash />
+          <div className={"p-7"}>
+            <button className={"invertedButton"}>
+              <FaTrash />
+            </button>
+          </div>
         </a>
       </td>
     </tr>

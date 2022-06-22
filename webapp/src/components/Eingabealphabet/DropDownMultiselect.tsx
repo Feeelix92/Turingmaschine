@@ -16,7 +16,7 @@ export default function MultiselectDropDown(props: EingabeAlphabetCustomProp) {
     // valuesString = current selected options as String to use it as label
     let valuesString = "";
 
-    const [placeholderText, setPlaceholderText] = useState(<p>Geben Sie ein beliebiges Zeichen ein...</p>);
+    const [placeholderText, setPlaceholderText] = useState("Geben Sie ein beliebiges Zeichen ein!");
 
     /**
      * function handleChange checks if the selected option has changed
@@ -42,7 +42,7 @@ export default function MultiselectDropDown(props: EingabeAlphabetCustomProp) {
     }
 
     return (
-        <div className={"col-span-2"}>
+        <div className={""}>
             <div className={""}>
                 <h2>Eingabealphabet hinzufügen:</h2>
             </div>
@@ -52,7 +52,7 @@ export default function MultiselectDropDown(props: EingabeAlphabetCustomProp) {
                     <CreatableSelect allowCreateWhileLoading={false} formatCreateLabel={inputValue => inputValue + " hinzufügen"}
                                      noOptionsMessage={() => 'Geben Sie neues Zeichen ein!'}
                                      placeholder={placeholderText}
-                                     className={"text-black"}
+                                     className={"text-base text-black"}
                                      isMulti
                                      onChange={handleChange}
                                      options={defaultAlphabetOption4.alphabet}
@@ -73,7 +73,7 @@ export default function MultiselectDropDown(props: EingabeAlphabetCustomProp) {
                             alert("Ein leeres Alphabet ist nicht erlaubt!");                           
                         }             
                         props.onCloseDialog()           
-                    }} className={"primaryBtn col-start-3 col-span-2 m-2"}>speichern
+                    }} className={"col-start-3 col-span-2 m-2"}>speichern
                     </button>
                 </div>
             </div>

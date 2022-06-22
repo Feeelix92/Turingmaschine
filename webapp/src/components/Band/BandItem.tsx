@@ -1,4 +1,4 @@
-import React, { Key, useEffect, useRef } from "react";
+import React, {Key, useEffect, useRef} from "react";
 import EditField from "../Zustandsüberführungsfunktion/EditField";
 import { BandItemProps } from "../../interfaces/CommonInterfaces";
 import { FaTimes, FaTrash } from "react-icons/fa";
@@ -11,12 +11,9 @@ import {
 } from "../../redux/bandStore";
 
 export default function BandItem(props: BandItemProps) {
-  const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
+    const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
 
-  const [editMode, setEditMode] = React.useState(false);
-  function toggleEditMode() {
-    setEditMode(!editMode);
-  }
+    const [editMode, setEditMode] = React.useState(false);
 
   const currentBandSkin = useSelector(
     (state: RootState) => state.band.bandSkin
@@ -56,10 +53,20 @@ export default function BandItem(props: BandItemProps) {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  });
 
-  function checkValue(index: Key, value: string) {
-    let allowed = false;
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (wrapperRef) {
+                if (
+                    wrapperRef.current != null && event.target != null &&
+                    event.target instanceof Node
+                ) {
+                    if (!wrapperRef.current.contains(event.target)) {
+                        setEditMode(false);
+                    }
+                }
+            }
+        }
 
     props.alphabet.map((entry) => {
       if (entry.value === value || value === "") {
@@ -81,60 +88,66 @@ export default function BandItem(props: BandItemProps) {
       }
     });
 
-    if (allowed === false) {
-      alert("Wert ist nicht im Alphabet enthalten!");
+    function checkValue(index: Key, value: string) {
+        let allowed = false;
+
+        props.alphabet.map((entry) => {
+            if (entry.value === value || value === "") {
+                const temp: BandItemToChange = {index: index as number, value: value}
+                dispatch(bandChangeItemAt(temp));
+                allowed = true;
+            }
+        });
+
+        if (!allowed) {
+            alert("Wert ist nicht im Alphabet enthalten!");
+        }
     }
-  }
 
-  return (
-    <div
-      className={`band-container__band ${currentBandSkin} flex justify-center ${
-        props.pointer ? "pointerBorder" : ""
-      }`}
-      key={props.index}
-      ref={wrapperRef}
-    >
-      {props.pointer ? (
+
+    return (
         <div
-          className="pointer"
+            className={`band-container__band ${currentBandSkin} flex justify-center ${props.pointer ? 'pointerBorder' : ''}`}
+            key={props.index}
+            ref={wrapperRef}>
+            <div>
+                {props.pointer ? (
+                    <div className="pointer"
+                        /*onMouseDown={e => startDrag(e)}
+                        onMouseMove={e => onDrag(e)}
+                        onMouseUp={e => endDrag(e)}*/
 
-          draggable
-        ></div>
-      ) : (
-        ""
-      )}
 
-      <input
-        type="text"
-        name="value"
-        id="valueInput"
-        className="bandInput bg-transparent w-8 "
-        value={props.label}
-        onChange={(e) => checkValue(props.index, e.target.value)}
-        onClick={toggleEditMode}
-        onDragOver={(e) => props.setPointerAt()}
-      />
-      {editMode && props.showEditField ? (
-        <EditField options={props.alphabet} updateValue={chooseOption} />
-      ) : (
-        ""
-      )}
-      {editMode && props.showEditField ? (
-        <a
-          href="#"
-          className="delete-value-button w-full text-gray-700 focus:outline-none items-center"
-          onClick={() => deleteValue(props.index)}
-        >
-          <FaTrash />
-        </a>
-      ) : (
-        <a
-          href="#"
-          className="invisible delete-value-button w-full text-gray-700 focus:outline-none items-center"
-        >
-          <FaTrash />
-        </a>
-      )}
-    </div>
-  );
+                         draggable
+                    ></div>
+                ) : (
+                    ""
+                )}
+                <input
+                    type="text"
+                    name="value"
+                    id="valueInput"
+                    className={"bandInput bg-transparent"}
+                    value={props.value}
+                    onChange={(e) => checkValue(props.index, e.target.value)}
+                    onClick={toggleEditMode}
+                    onDragOver={(e) => props.setPointerAt(props.index)}
+
+                />
+                {editMode && props.showEditField ? (
+                    <div className={"editBtnDiv"}>
+                        <EditField options={props.alphabet} updateValue={chooseOption}/>
+                        <button
+                            className={"editBtn"}
+                            onClick={() => deleteValue(props.index)}
+                        >
+                            <FaTrash/>
+                        </button>
+                    </div>
+                ) : (
+                    ""
+                )}
+            </div>
+        </div>
+    );
 }

@@ -5,6 +5,7 @@ import { Zustand } from '../../interfaces/CommonInterfaces';
 import { alphabetChangeAnfangszustand, alphabetChangeEndzustand, alphabetClearEndzustand, alphabetPushToZustand, alphabetDeleteZustand } from '../../redux/generalStore';
 import { RootState } from '../../redux/store';
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
+import {BiCaretDown, BiCaretUp,} from "react-icons/all";
 
 function ConditionsList() {
     /**
@@ -33,12 +34,11 @@ function ConditionsList() {
      * Accordion data (Title, Icons)
      */
     const accordionData = {
-        title: 'Spezifikationen:',
-        openAccordion: '+',
-        closeAccordion: '-',
+        title: <h2>Spezifikationen</h2>,
+        openAccordion: <button className={"float-left"}><BiCaretDown/></button>,
+        closeAccordion: <button className={"float-left"}><BiCaretUp/></button>,
     };
-
-    const { title, openAccordion, closeAccordion } = accordionData;
+    const {title, openAccordion, closeAccordion} = accordionData;
 
 
     function handleChange(newValue: OnChangeValue<Zustand, false>) {
@@ -67,50 +67,55 @@ function ConditionsList() {
     }
 
     return (
-        <div className={"accordion border-solid border-2 border-gray-600 rounded-md mx-1 my-3"}>
-            <div className={"accordion-item"}>
-                <div
-                    className={"accordion-title"}
-                    onClick={() => setIsActive(!isActive)}
-                >
-                    <div className={"specification-header"}>
-                        <span className={"accordion-icon"}>{isActive ? closeAccordion : openAccordion}</span>
-                        <span>{title}</span>
-                    </div>
+        <div className={"border-solid border rounded bg-white w-screen sm:w-3/4 lg:w-3/4 3xl:w-2/4 p-2 border rounded items-center hover:bg-gray-100 col-span-2 max-w-screen-sm"}>
+            <div className={""} onClick={() => setIsActive(!isActive)}>
+                <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center"}>
+                    <span className={""}>{isActive ? closeAccordion : openAccordion}</span>
+                    <span>{title}</span>
                 </div>
-                {isActive && <div className={"accordion-content"}>
+            </div>
+            {isActive &&
+                <div className={""}>
                     <div>
-                     <DropDownSelect />
+                        <DropDownSelect/>
                     </div>
-                    <div>
-                        Bandalphabet &Gamma; ={kA}
-                        {bandAlphabet.map((value, index) => (
-                            <span key={index}>{value.value},</span>
-                        ))}{kZ}
-                    </div>
-                    <div className={"flex"}>
-                        <div>
-                            Zustandsmenge Q = {kA}
-                            {zustandsmenge.map((value, index) => (
+                    <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center mt-2 text-left"}>
+                        <div className={"col-span-2"}>Bandalphabet &Gamma; =</div>
+                        <div className={"border border-solid bg-gray-100 rounded p-2"}>{kA}
+                            {bandAlphabet.map((value, index) => (
                                 <span key={index}>{value.value},</span>
                             ))}{kZ}
                         </div>
+                    </div>
+                    <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center mt-2 text-left"}>
+                        <div className={"col-span-2"}>Zustandsmenge Q =</div>
+                        <div className={"border border-solid bg-gray-100 rounded p-2"}>{kA}
+                            {zustandsmenge.map((value, index) => (
+                                <span key={index}>{value.value},</span>
+                            ))}{kZ}</div>
+                        {/*<CreatableSelect*/}
+                        {/*    value={endZustand}*/}
+                        {/*    blurInputOnSelect={false}*/}
+                        {/*    className={""}*/}
+                        {/*    onChange={handleChangeMulti}*/}
+                        {/*    options={zustandsmenge}*/}
+                        {/*    isMulti={true}*/}
+                        {/*/>       */}
                         <button className={"primaryBtn text-white font-bold py-1 px-2 rounded m-2 "} onClick={() => dispatch(alphabetPushToZustand())}>+</button>
                         <button className={"primaryBtn text-white font-bold py-1 px-2 rounded m-2 "} onClick={() => dispatch(alphabetDeleteZustand())}>-</button>
-
                     </div>
-                    <div className="flex">
-                        <div>Anfangszustand q0 = {anfangsZustand.value} </div>
+                    <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center mt-2 text-left"}>
+                        <div className={"col-span-2"}>Anfangszustand q0 = {anfangsZustand.value} </div>
                         <Select
                             placeholder={anfangsZustand.value}
                             blurInputOnSelect={false}
-                            className={"text-black p-3 text-base"}
+                            className={""}
                             onChange={handleChange}
                             options={zustandsmenge}
                         />
                     </div>
-                    <div>
-                        <div>
+                    <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center mt-2 text-left"}>
+                        <div className={"col-span-2"}>
                             Endzustand F = {kA}
                             {endZustand.map((value, index) => (
                                 <span key={index}>{value.value},</span>
@@ -119,24 +124,25 @@ function ConditionsList() {
                         <Select
                             value={endZustand}
                             blurInputOnSelect={false}
-                            className={"text-black p-3 text-base"}
+                            className={""}
                             onChange={handleChangeMulti}
                             options={possibleEnd}
                             isMulti={true}
                         />
                     </div>
                     <div>
-                        <div className={"grid grid-cols-2 items-center"}>
-                            <span>Zustandsüberführungsfunktion &delta; =</span>
-                            <button className={"text-black text-left"} onClick={() => setShowZustandsfunktion(!showZustandsfunktion)}>{ showZustandsfunktion ? 'Hier steht eine Funktion' : '...' }</button>
+                        <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center mt-2 text-left"}>
+                            <span className={"col-span-2"}>Zustandsüberführungsfunktion &delta; =</span>
+                            <button className={"text-black bg-white hover:bg-gray-200 text-left border border-solid"}
+                                    onClick={() => setShowZustandsfunktion(!showZustandsfunktion)}>{showZustandsfunktion ? 'Hier steht eine Funktion' : '...'}</button>
                         </div>
                         {/*{showZustandsfunktion && <div>
-                            <p>Hier steht eine Funktion</p>
-                        </div>}*/}
+                        <p>Hier steht eine Funktion</p>
+                    </div>}*/}
                     </div>
                 </div>}
-            </div>
         </div>
     );
 }
+
 export default ConditionsList;

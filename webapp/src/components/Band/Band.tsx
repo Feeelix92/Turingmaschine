@@ -78,66 +78,81 @@ export default function Band() {
     dispatch(bandChangePointer({ index: newPointerIndex, value: true }));
   };
 
-  return (
-    <div
-      className={
-        "bg-white w-screen p-3 border rounded"
-      }
-    >
 
-      <div className="band-container flex flex-row mb-5 overflow-x-auto">
-        <button
-          className="left-band-button bg-transparent hover:bg-gray-100 text-gray-900 font-semibold hover:text-gray-900  border border-gray-900 hover:border-transparent rounded"
-          onClick={() => dispatch(bandAddField("before"))}
-        >
-          +
-        </button>
-        {currentBand.map((value, index) => (
-          <BandItem
-            value={value.value}
-            label={value.label}
-            index={index}
-            pointer={value.pointer!}
-            key={index}
-            alphabet={currentAlphabet.alphabet}
-            showEditField={true}
-            setPointerAt={() => setPointerAt(index)} 
-           // movePointer={() => logPointerPos(index)}
-          />
-        ))}
-        <button
-          className="right-band-button bg-transparent hover:bg-gray-100 text-gray-900 font-semibold hover:text-gray-900 border border-gray-900 hover:border-transparent rounded"
-          onClick={() => dispatch(bandAddField("after"))}
-        >
-          +
-        </button>
-      </div>
-      <div className="flex mb-4">
-        <div className="w-3/4 text-left">
-          <button
-            className="secondaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"
-            onClick={() => setPointerLeft()}
-          >
-            <FaAngleLeft />
-          </button>
+    const logPointerPos = (idx: number) => {
+        console.log(idx);
+    };
 
-          <button
-            className="secondaryBtn text-white font-bold py-1 px-2 rounded m-2 md:invisible"
-            onClick={() => setPointerRight()}
-          >
-            <FaAngleRight />
-          </button>
+    return (
+        <div className={"w-screen mt-10"}>
+            <div className={"flex m-2 h-56"}>
+                <button
+                    className={"mt-10 rounded-r-none md:rounded md:invisible"}
+                    onClick={() => dispatch(bandAddField('before'))}>
+                    +
+                </button>
+                <div className="band-container overflow-x-auto col-span-12">
+                    {currentBand.map((value, index) => (
+                        <BandItem
+                            value={value.value}
+                            index={index}
+                            pointer={value.pointer}
+                            key={index}
+                            alphabet={currentAlphabet.alphabet}
+                            showEditField={true}
+                            setPointerAt={() => setPointerAt(index)} //TODO
+                            movePointer={() => logPointerPos(index)}
+                        />
+                    ))}
+                </div>
+                <button
+                    className={"mt-10 rounded-l-none md:rounded md:invisible"}
+                    onClick={() => dispatch(bandAddField('after'))}>
+                    +
+                </button>
+            </div>
+            <div className={"hidden md:block"}>
+                <div className={"flex justify-center gap-2" }>
+                    <button
+                        className={"w-36 invertedButton"}
+                        onClick={() => dispatch(bandAddField('before'))}>
+                        + Feld links
+                    </button>
+                    <button
+                        onClick={() => dispatch(bandDeleteAll())}
+                        className={"w-36 invertedButton"}>
+                        zurücksetzen
+                    </button>
+                    <button
+                        className={"w-36 invertedButton"}
+                        onClick={() => dispatch(bandAddField('after'))}>
+                        Feld rechts +
+                    </button>
+                </div>
+            </div>
+            <div className="flex">
+                <div className={"w-3/4 text-left"}>
+                    <button className={"m-2 md:invisible"}
+                            onClick={() => setPointerLeft()}>
+                        <FaAngleLeft />
+                    </button>
+
+                    <button className={"md:invisible"}
+                            onClick={() => setPointerRight()}>
+                        <FaAngleRight />
+                    </button>
+                </div>
+
+                <div className={"w-1/4 text-right md:hidden"}>
+                    <button
+                        onClick={() => dispatch(bandDeleteAll())}
+                        className={"m-2"}
+                    >
+                        <FaRedo/>
+                    </button>
+                </div>
+            </div>
         </div>
-
-        <div className="w-1/4 text-right">
-          <button
-            onClick={() => dispatch(bandDeleteAll())}
-            className="primaryBtn text-white font-bold py-1 px-2 rounded m-2 "
-          >
-            <FaRedo />
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+    );
 }
+            

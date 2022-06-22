@@ -2,14 +2,14 @@ import { createSlice, current, PayloadAction } from '@reduxjs/toolkit'
 import { Zustand } from '../interfaces/CommonInterfaces';
 
 export interface EingabeAlphabetDialogOptions {
-    label: string,
-    alphabet: Alphabet,
-    icon?: boolean
+    label: string;
+    alphabet: Alphabet;
+    icon?: boolean;
 }
 
 export interface Alphabet {
-    key: number,
-    alphabet: EingabeAlphabet[]
+    key: number;
+    alphabet: EingabeAlphabet[];
 }
 
 export interface EingabeAlphabet {
@@ -20,7 +20,7 @@ export interface EingabeAlphabet {
 export const initialAnfangszustand: Zustand = {value: "q1",label: "q1", anfangszustand: true, endzustand: false}
 const initialZustandsmenge: Zustand[] = [
     {value: "q1", label: "q1", anfangszustand: true, endzustand: false},
-    {value: "q2", label: "q2", anfangszustand: false, endzustand: true}
+    {value: "q2", label: "q2", anfangszustand: false, endzustand: true},
 ]
 const initialEndZustandsmenge: Zustand[] = [
     {value: "q2", label: "q2", anfangszustand: false, endzustand: true}

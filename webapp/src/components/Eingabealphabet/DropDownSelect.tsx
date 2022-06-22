@@ -42,65 +42,61 @@ export default function DropDownSelect() {
     });
   }, [currentDialogOption]);
 
-  /**
-   * function handleChange checks if the selected option has changed
-   * @param newValue
-   * @param actionMeta
-   */
-  function handleChange(
-    newValue: OnChangeValue<EingabeAlphabetDialogOptions, false>,
-    actionMeta: ActionMeta<EingabeAlphabetDialogOptions>
-  ) {
-    console.group("Value Changed");
-    console.log(newValue);
-    if (newValue) {
-      if (newValue.alphabet.key !== 0) {
-        dispatch(alphabetChangeCurrent(newValue.alphabet));
-      } else {
-        dispatch(alphabetChangeCurrent(newValue.alphabet));
-        setOpenDialog(true);
-      }
-      dispatch(bandDeleteAll());
+    
+    /**
+     * function handleChange checks if the selected option has changed
+     * @param newValue
+     * @param actionMeta
+     */
+    function handleChange(
+        newValue: OnChangeValue<EingabeAlphabetDialogOptions, false>,
+        actionMeta: ActionMeta<EingabeAlphabetDialogOptions>
+    ) {
+        console.group('Value Changed');
+        console.log(newValue);
+        if(newValue){
+            if (newValue.alphabet.key !== 0) {
+                dispatch(alphabetChangeCurrent(newValue.alphabet))
+                setOpenDialog(false)
+            }else{
+                dispatch(alphabetChangeCurrent(newValue.alphabet))
+                setOpenDialog(true)
+            }
+            dispatch(bandDeleteAll())
+        }
+        console.groupEnd();
     }
-  }
-  return (
-    <div
-      className={
-        "bg-white w-screen sm:w-3/4 lg:w-2/4 xl:w-1/4 grid grid-cols-2 gap-2 items-center"
-      }
-    >
-      <p className={"p-3"}>Eingabealphabet ∑ =</p>
-      {/*{showPlaceholder &&*/}
-      {/*    <Select placeholder={<p className={"text-gray-500"}>Bitte wählen</p>}*/}
-      {/*            blurInputOnSelect={false}*/}
-      {/*            className={"text-black p-3 text-base"}*/}
-      {/*            onChange={handleChange}*/}
-      {/*            options={eingabeAlphabete}*/}
-      {/*    />*/}
-      {/*}*/}
-      {/*{!showPlaceholder &&*/}
-      <Select
-        value={copiedCurrentDialogOption}
-        blurInputOnSelect={false}
-        className={"text-black p-3 text-base"}
-        onChange={handleChange}
-        options={dialogOptions}
-        // @ts-ignore
-        getOptionLabel={(e) => (
-          <div className={"flex items-center place-content-start"}>
-            {e.icon ? <CgAddR /> : ""}
-
-            <span className={"m-2"}>{e.label}</span>
-          </div>
-        )}
-      />
-      {/*}*/}
-      {openDialog && (
-        <div className={"text-white text-lg col-span-2"}>
-          <MultiselectDropDown
-            customSelect={true}
-            onCloseDialog={() => setOpenDialog(false)}
-          />
+    return (
+        <div>
+            <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center mt-2"}>
+                <p className={"col-span-2 text-left"}>Eingabealphabet ∑ =</p>
+                <Select value={copiedCurrentDialogOption}
+                        blurInputOnSelect={false}
+                        className={""}
+                        onChange={handleChange}
+                        options={dialogOptions}
+                        // @ts-ignore
+                        getOptionLabel={e => (
+                            <div className={"flex items-center place-content-start"}>
+                                {e.icon ? (
+                                   <CgAddR/>
+                                ) : (
+                                    ""
+                                )}
+                                <span className={"m-2"}>{e.label}</span>
+                            </div>
+                        )}
+                />
+            </div>
+            <div>
+                {openDialog &&
+                    <div className={"text-white text-lg col-span-2"}>
+                        <MultiselectDropDown
+                            customSelect={true}
+                            onCloseDialog={() => setOpenDialog(false)}/>
+                    </div>
+                }
+            </div>
         </div>
       )}
     </div>

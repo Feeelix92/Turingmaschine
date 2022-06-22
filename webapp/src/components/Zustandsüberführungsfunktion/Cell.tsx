@@ -45,9 +45,7 @@ export default function Cell(props: CellProps) {
     function handleClickOutside(event: MouseEvent) {
       if (wrapperRef) {
         if (
-          wrapperRef != null &&
-          wrapperRef.current != null &&
-          event.target != null &&
+          wrapperRef.current != null && event.target != null &&
           event.target instanceof Node
         ) {
           if (!wrapperRef.current.contains(event.target)) {
@@ -79,7 +77,7 @@ export default function Cell(props: CellProps) {
       }
     });
 
-    if (allowed === false) {
+    if (!allowed) {
       alert("Wert ist nicht im Alphabet enthalten!");
     }
   }
@@ -117,8 +115,8 @@ export default function Cell(props: CellProps) {
         <input
           type="text"
           name="value"
-          id="valueInput"
-          className="w-full min-w-full rounded text-gray-700 focus:outline-none items-center"
+          id="tableValueInput"
+          className={"w-full min-w-full rounded text-gray-700 focus:outline-none items-center border rounded text-center"}
           value={props.value}
           onChange={(e) => checkValue(props.index, e.target.value)}
           onClick={toggleEditMode}

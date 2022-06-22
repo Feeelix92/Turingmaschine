@@ -29,8 +29,8 @@ export const bandSlice = createSlice({
   reducers: {
     /**
      * function bandChangeItemAt changes the Band at the index
-     * @param index
-     * @param value
+     * @param state
+     * @param bandItem
      */
     bandChangeItemAt: (state, bandItem: PayloadAction<BandItemToChange>) => {
       state.currentBand[bandItem.payload.index].value = bandItem.payload.value;
@@ -62,6 +62,7 @@ export const bandSlice = createSlice({
     },
     /**
      * fügt ein neues leeres Bandfeld an der Position "before" oder "after" hinzu
+     * @param state
      * @param position
      */
     bandAddField: (state, position: PayloadAction<string>) => {
