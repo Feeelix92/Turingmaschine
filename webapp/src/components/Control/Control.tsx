@@ -189,8 +189,8 @@ function Control() {
             }
         } else {
             console.log("Else");
-            // await handlePauseOn();
-            changePause(false);
+            changePause(true);
+            await dispatch(bandResetPointer());
         }
     };
 
