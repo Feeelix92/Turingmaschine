@@ -88,12 +88,12 @@ export default function Band() {
             </div>
             <div className="flex">
                 <div className={"w-3/4 text-left"}>
-                    <button className={"m-2 md:invisible"}
+                    <button className={"m-2 md:invisible secondaryButton"}
                             onClick={() => setPointerLeft()}>
                         <FaAngleLeft />
                     </button>
 
-                    <button className={"md:invisible"}
+                    <button className={"md:invisible secondaryButton"}
                             onClick={() => setPointerRight()}>
                         <FaAngleRight />
                     </button>

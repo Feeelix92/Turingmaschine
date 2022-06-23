@@ -39,6 +39,10 @@
     @apply text-thm-primary bg-white font-bold px-3 text-center h-12 hover:bg-thm-hover hover:text-white border border-solid border-thm-primary;
 }
 
+.secondaryButton {
+    @apply text-thm-primary2 bg-white font-bold px-3 text-center h-12 hover:bg-thm-primary2 hover:text-white border border-solid border-thm-primary2;
+}
+
 .App {
     @apply text-center w-auto sm:pr-10 sm:pl-10 sm:pb-10 content-center;
 }
