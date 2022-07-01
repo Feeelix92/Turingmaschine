@@ -67,6 +67,10 @@
     @apply bg-thm-primary text-left;
 }
 
+.bottomnav {
+    @apply bg-thm-primary text-left;
+}
+
 /* Position and sizing of burger button */
 .bm-burger-button {
     @apply relative float-right self-center w-12 h-8 m-2;
