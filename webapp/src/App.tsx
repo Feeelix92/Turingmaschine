@@ -20,16 +20,18 @@ function App() {
 
             <div className={"App-body"}>
 
-                <div className={" invisible md:visible"}>
+                <div className={" hidden md:grid md:grid-cols-4 md:items-start"}>
                     <ConditionsList/>
                     <Table/>
                 </div>
 
+
+                <div className={"md:hidden"}>
+                    <Bottomnav/>
+                </div> 
+
             </div>
 
-            <div className={"md:invisible fixed bottom-0"}>
-                    <Bottomnav/>
-                </div>
         </div>
     );
         

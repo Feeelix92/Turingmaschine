@@ -1,21 +1,30 @@
+import ConditionsList from "../Zustaende/List";
+import Table from "../Zustandsüberführungsfunktion/Table";
 
 
 function Bottomnav() {
     return (
-        <div className={"bottomnav w-screen mt-16 p-5 flex justify-around"}>
-            <button className={""}>
-                Spezifikationen
-            </button>
+        <div>
+            <div className={"mt-11 mb-36"}>
+                <ConditionsList/>
+            </div>
 
-            <button className={""}>
-                Funktion
-            </button>
+            <div className={"bottomnav w-screen p-5 flex justify-around  fixed bottom-0"}>
+                <button className={""}>
+                    Spezifikationen
+                </button>
 
-            
-            <button className={""}>
-                Code
-            </button>
+                <button className={""}>
+                    Funktion
+                </button>
+
+                
+                <button className={""}>
+                    Code
+                </button>
+            </div>
         </div>
+
 
 
     );

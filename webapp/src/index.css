@@ -55,7 +55,7 @@
     @apply flex flex-col items-center justify-start text-white;
 }
 .App-body {
-    @apply flex flex-col items-center justify-start xl:grid xl:grid-cols-4 xl:items-start;
+    @apply flex flex-col items-center justify-start ;
 }
 
 .App-link {
