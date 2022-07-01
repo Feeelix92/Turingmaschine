@@ -32,7 +32,7 @@ export default function Table() {
                   ))}
                 </tr>
               </thead>
-              <tbody className="flex flex-col items-center justify-between overflow-y-auto max-h-48 xl:max-h-96">
+              <tbody className="flex flex-col items-center justify-between overflow-y-auto md:max-h-48 xl:max-h-96">
                 {loadedRows.map((value, key: React.Key) => (
                   // TODO functions still not working
                   <Row

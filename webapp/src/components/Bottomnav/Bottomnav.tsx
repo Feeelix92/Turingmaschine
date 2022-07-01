@@ -36,7 +36,7 @@ function Bottomnav() {
                 { code ? ("") : "" }
             </div>
 
-            <div className={"bottomnav w-screen p-5 flex justify-around  fixed bottom-0"}>
+            <div className={"bottomnav"}>
                 <button className={""}  onClick={() => showSpez()}>
                     Spezifikationen
                 </button>

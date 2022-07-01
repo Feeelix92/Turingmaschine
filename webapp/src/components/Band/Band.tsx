@@ -41,7 +41,7 @@ export default function Band() {
 
     return (
         <div className={"w-screen"}>
-            <div className={"flex m-2 h-56"}>
+            <div className={"flex m-2 h-36"}>
                 <button
                     className={"mt-10 rounded-r-none md:rounded md:invisible"}
                     onClick={() => dispatch(bandAddField('before'))}>

@@ -18,13 +18,12 @@ function App() {
             </header>
 
 
-            <div className={"App-body"}>
-
+            <div className={"App-body "}>
+                
                 <div className={" hidden md:grid md:grid-cols-4 md:items-start"}>
                     <ConditionsList/>
                     <Table/>
                 </div>
-
 
                 <div className={"md:hidden"}>
                     <Bottomnav/>
