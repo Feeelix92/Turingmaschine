@@ -113,6 +113,7 @@ export default function BandItem(props: BandItemProps) {
                     onChange={(e) => checkValue(props.index, e.target.value)}
                     onClick={toggleEditMode}
                     onDragOver={props.setPointerAt}
+                    autoComplete="0" // Bringt das schon was gegen die Vorschläge vom Browser?
 
                 />
                 {editMode && props.showEditField ? (

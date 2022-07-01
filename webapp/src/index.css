@@ -124,7 +124,7 @@
 
  /*********** BAND ***********/
 .band-container {
-    @apply overflow-x-scroll overflow-y-hidden whitespace-nowrap pb-5 pl-10 pr-10 pt-10 flex flex-row mb-5 justify-start max-w-max ml-auto mr-auto;
+    @apply overflow-x-auto overflow-y-hidden whitespace-nowrap pb-5 pl-10 pr-10 pt-10 flex flex-row justify-start max-w-max ml-auto mr-auto;
 }
 
 .band-container__band {
@@ -176,7 +176,7 @@
 /* ********** TABLE ********** */
 
 .editBtnDiv {
-    @apply flex gap-2 justify-center mt-8;
+    @apply flex gap-2 justify-center mt-2;
 }
 
 .editBtn {
