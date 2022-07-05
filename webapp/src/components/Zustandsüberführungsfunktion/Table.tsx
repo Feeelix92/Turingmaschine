@@ -1,14 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import watch from "redux-watch";
+import { RootState, store } from "../../redux/store";
 import { tableDeleteRow, tableAddRow } from "../../redux/tableStore";
 import Row from "./Row";
 
 export default function Table() {
+  const loadedRows = useSelector((state: RootState) => state.table.rows);
+  const header = useSelector((state: RootState) => state.table.header);
+  const dispatch = useDispatch();
 
-  const loadedRows = useSelector((state: RootState) => state.table.rows)
-  const header = useSelector((state: RootState) => state.table.header)
-  const dispatch = useDispatch() 
-  
+  /////////// Rows from State ///////////
+  let rows = loadedRows;
+  let wRows = watch(store.getState, "table.rows");
+  store.subscribe(
+    wRows((newVal) => {
+      rows = newVal;
+    })
+  );
+
   return (
     <div className="flex flex-col col-span-2 border rounded p-2">
       <div className="sm:-mx-6 lg:-mx-8">
@@ -33,14 +42,14 @@ export default function Table() {
                 </tr>
               </thead>
               <tbody className="flex flex-col items-center justify-between overflow-y-auto max-h-48 xl:max-h-96">
-                {loadedRows.map((value, key: React.Key) => (
+                {rows.map((value, key: React.Key) => (
                   // TODO functions still not working
                   <Row
                     key={key}
                     index={key}
                     cells={value.cells}
                     isFinal={value.isFinal}
-                    deleteRow={() => dispatch(tableDeleteRow(key))}                    
+                    deleteRow={() => dispatch(tableDeleteRow(key))}
                   />
                 ))}
               </tbody>
@@ -56,5 +65,4 @@ export default function Table() {
       </div>
     </div>
   );
-  
 }

@@ -95,6 +95,12 @@ export const directions: Direction[] = [
   new Direction("N", "Neutral"),
 ];
 
+export interface ZustandSelectProps {
+  states: Zustand[];
+  current: Zustand;
+  updateValue: (arg: Zustand) => void;
+}
+
 // export const status: Zustand[] = [
 //   new Zustand("q1", "q1", false),
 //   new Zustand("q2", "q2", false),

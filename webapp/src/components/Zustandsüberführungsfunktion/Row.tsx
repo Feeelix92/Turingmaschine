@@ -11,14 +11,14 @@ import {
   tableDeleteRow,
   tableUpdateCell,
 } from "../../redux/tableStore";
-import { RootState } from "../../redux/store";
+import { RootState, store } from "../../redux/store";
 import Cell from "./Cell";
+import watch from "redux-watch";
 
 export default function Row(props: RowProps) {
   // create flat copy of all existing cells
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(props.isFinal);
-  const test = useSelector((state: RootState) => state.table.rows[0].cells);
 
   function setCellValue(index: React.Key, value: string | Zustand | Direction) {
     // pass new data to table to update its rows-array
@@ -57,6 +57,16 @@ export default function Row(props: RowProps) {
     }
   }
 
+  const activeRow = useSelector((state: RootState) => state.table.activeRow);
+  /////////// Active-Row from State ///////////
+  let row = activeRow;
+  let wRow = watch(store.getState, "table.activeRow");
+  store.subscribe(
+    wRow((newVal) => {
+      row = newVal;
+    })
+  );
+
   useEffect(() => {
     if (props.isFinal) {
       setVisible(true);
@@ -66,7 +76,11 @@ export default function Row(props: RowProps) {
   }, [props.isFinal]);
 
   return (
-    <tr className="border-b flex w-full hover:bg-gray-100">
+    <tr
+      className={`border-b flex w-full hover:bg-gray-100 ${
+        row != undefined && row.cells === props.cells ? "bg-lime-300" : ""
+      }`}
+    >
       {visible
         ? props.cells
             .slice(0, 2)

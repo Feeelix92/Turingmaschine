@@ -1,20 +1,36 @@
 import React, { Key, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Select, { OnChangeValue } from "react-select";
+import watch from "redux-watch";
 import {
   CellProps,
   Direction,
   directions,
   Zustand,
 } from "../../interfaces/CommonInterfaces";
-import { RootState } from "../../redux/store";
+import { RootState, store } from "../../redux/store";
+import { initialZustand3 } from "../../redux/tableStore";
 import EditField from "./EditField";
+import ZustandSelect from "./ZustandSelect";
 
 export default function Cell(props: CellProps) {
   const wrapperRef: React.RefObject<HTMLTableCellElement> = React.createRef();
   const zustandsmenge = useSelector(
     (state: RootState) => state.general.zustandsmenge
   );
+
+  const temp = [initialZustand3];
+
+  /////////// States from State ///////////
+  let states = zustandsmenge.concat(temp);
+  let wStates = watch(store.getState, "general.zustandsmenge");
+  store.subscribe(
+    wStates((newVal) => {
+      states = newVal;
+      console.log(states);
+    })
+  );
+
   const eingabeAlphabet = useSelector(
     (state: RootState) => state.general.bandAlphabet
   );
@@ -45,7 +61,8 @@ export default function Cell(props: CellProps) {
     function handleClickOutside(event: MouseEvent) {
       if (wrapperRef) {
         if (
-          wrapperRef.current != null && event.target != null &&
+          wrapperRef.current != null &&
+          event.target != null &&
           event.target instanceof Node
         ) {
           if (!wrapperRef.current.contains(event.target)) {
@@ -88,12 +105,10 @@ export default function Cell(props: CellProps) {
       className="px-2 py-4 w-1/6 whitespace-nowrap text-sm font-medium text-gray-900 border-r flex justify-center"
     >
       {props.value instanceof Zustand ? (
-        <Select
-          placeholder={props.value.value}
-          blurInputOnSelect={false}
-          className={"text-black p-3 text-base"}
-          onChange={handleChange}
-          options={zustandsmenge}
+        <ZustandSelect
+          states={states}
+          current={props.value}
+          updateValue={handleChange}
         />
       ) : (
         ""
@@ -116,7 +131,9 @@ export default function Cell(props: CellProps) {
           type="text"
           name="value"
           id="tableValueInput"
-          className={"w-full min-w-full rounded text-gray-700 focus:outline-none items-center border rounded text-center"}
+          className={
+            "w-full min-w-full rounded text-gray-700 focus:outline-none items-center border rounded text-center"
+          }
           value={props.value}
           onChange={(e) => checkValue(props.index, e.target.value)}
           onClick={toggleEditMode}
@@ -126,10 +143,7 @@ export default function Cell(props: CellProps) {
       )}
 
       {editMode && props.showEditField ? (
-        <EditField
-          options={eingabeAlphabet}
-          updateValue={chooseOption}
-        />
+        <EditField options={eingabeAlphabet} updateValue={chooseOption} />
       ) : (
         ""
       )}
