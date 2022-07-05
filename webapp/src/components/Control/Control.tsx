@@ -44,7 +44,7 @@ function Control() {
     };
     const changeStopp = (value: boolean) => {
         dispatch(alphabetChangeStoppMaschine(value));
-        dispatch(bandResetPointer());
+        // dispatch(bandResetPointer());
     };
 
     // useEffect(() => {
@@ -141,7 +141,7 @@ function Control() {
 
         console.log("Reihe:", item);
 
-        if (item !== undefined && typeof item.cells[3].value === "string") {
+        if (item !== undefined && typeof item.cells[3].value === "string" && item.isFinal === false) {
             console.log("gelesener Wert:", item.cells[1].value);
             if (
                 item.cells[0].value instanceof Zustand &&
@@ -179,7 +179,7 @@ function Control() {
                     if (item.cells[0].value.endzustand === true) {
                         console.log("Endzustand erreicht!");
                         changePause(true);
-                        await dispatch(bandResetPointer());
+                        // await dispatch(bandResetPointer());
                     } else {
                         console.log("changeZustand");
                         dispatch(tableSetActiveState(item.cells[2].value as Zustand));
@@ -190,7 +190,7 @@ function Control() {
         } else {
             console.log("Else");
             changePause(true);
-            await dispatch(bandResetPointer());
+            // await dispatch(bandResetPointer());
         }
     };
 

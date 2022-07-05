@@ -67,7 +67,7 @@ export const bandSlice = createSlice({
      */
     bandAddField: (state, position: PayloadAction<string>) => {
       if (position.payload === "before") {
-        state.currentBand.unshift({ value: "B", label: "", pointer: false });
+        state.currentBand.unshift({ value: "B", label: "", pointer: false });        
       } else {
         state.currentBand.push({ value: "B", label: "", pointer: false });
       }
@@ -93,9 +93,9 @@ export const bandSlice = createSlice({
       }
     },
     bandChangePointPos: (state, step: PayloadAction<number>) => {
-      console.log("movePointer");
+      console.log("movePointer", step);
       if((step.payload<0 && state.pointerPosition==0) || (step.payload>0 && state.pointerPosition>=state.currentBand.length-1) ) {
-
+        state.pointerPosition -= step.payload;
       } else {
         state.pointerPosition += step.payload;
       }

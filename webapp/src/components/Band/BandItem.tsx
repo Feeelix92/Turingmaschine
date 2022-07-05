@@ -9,6 +9,9 @@ import {
   bandChangeItemAt,
   bandDeleteItemAt,
 } from "../../redux/bandStore";
+import { FiDelete } from "react-icons/fi";
+import { TiDelete } from "react-icons/ti";
+import { RiDeleteBack2Fill, RiDeleteBin4Fill, RiDeleteBin7Fill } from "react-icons/ri";
 
 export default function BandItem(props: BandItemProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -119,10 +122,11 @@ export default function BandItem(props: BandItemProps) {
                     <div className={"editBtnDiv"}>
                         <EditField options={props.alphabet} updateValue={chooseOption}/>
                         <button
-                            className={"editBtn"}
+                            className={"editBtn delete"}
                             onClick={() => deleteValue(props.index)}
+                            
                         >
-                            <FaTrash/>
+                            <TiDelete size={20}/>
                         </button>
                     </div>
                 ) : (

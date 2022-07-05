@@ -48,16 +48,16 @@ const defaultAlphabetOption2: Alphabet = {
 }
 const defaultAlphabetOption3: Alphabet = {
     key: 3,
-    alphabet: [
-        {label: '1', value: '1'},
-        {label: '0', value: '0'}
+    alphabet: [       
+        {label: '0', value: '0'},
+        {label: '1', value: '1'}
     ]
 }
 export const defaultAlphabetOption4: Alphabet = {
     key: 4,
     alphabet: [
-        {label: '1', value: '1'},
         {label: '0', value: '0'},
+        {label: '1', value: '1'},        
         {label: '#', value: '#'}
     ]
 }
@@ -138,10 +138,9 @@ export const generalSlice = createSlice({
         state.zustandsmenge.push({value: "q" + tempNumber,label: "q" + tempNumber, anfangszustand: false, endzustand: false})
         console.log( current(state.zustandsmenge))
     },
-      alphabetDeleteZustand: (state) => {
-        state.zustandsmenge.pop()
-      },
-
+    alphabetDeleteZustand: (state) => {
+    state.zustandsmenge.pop()
+    },
     alphabetChangeAnfangszustand: (state, zustand: PayloadAction<Zustand>) => {
         state.zustandsmenge.forEach(option => {
             if(option.value === zustand.payload.value){
