@@ -5,6 +5,7 @@ import {
   FaAngleLeft,
   FaAngleRight,
   FaRedo,
+  FaTrash,
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -71,8 +72,14 @@ export default function Band() {
                     +
                 </button>
             </div>
-            <div className={"currentZustand"}>
+            <div className={"currentZustand flex justify-center mb-8"}>
+            {/* <span className="relative">
+                <span className="block absolute -inset-1 w-12 rounded-full bg-thm-primary" aria-hidden="true"></span>
+                <span className="relative text-white text-center"> {currentZustand.value}</span>
+            </span>                */}
+            <div className={"rounded-full w-12 bg-thm-primary text-white h-8"}>
                 {currentZustand.value}
+            </div> 
             </div>
             <div className={"hidden md:block"}>
                 <div className={"flex justify-center gap-2"}>
@@ -111,7 +118,8 @@ export default function Band() {
                         onClick={() => dispatch(bandDeleteAll())}
                         className={"m-2"}
                     >
-                        <RiDeleteBin2Fill/>
+                        {/* <RiDeleteBin2Fill/> */}
+                        <FaTrash/>
                     </button>
                 </div>
             </div>

@@ -12,6 +12,7 @@ import {
 import { FiDelete } from "react-icons/fi";
 import { TiDelete } from "react-icons/ti";
 import { RiDeleteBack2Fill, RiDeleteBin4Fill, RiDeleteBin7Fill } from "react-icons/ri";
+import { BsFillEraserFill } from "react-icons/bs";
 
 export default function BandItem(props: BandItemProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -126,7 +127,8 @@ export default function BandItem(props: BandItemProps) {
                             onClick={() => deleteValue(props.index)}
                             
                         >
-                            <TiDelete size={20}/>
+                            {/* <TiDelete size={20}/> */}
+                            <BsFillEraserFill/>
                         </button>
                     </div>
                 ) : (

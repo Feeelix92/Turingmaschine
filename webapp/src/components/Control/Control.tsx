@@ -37,7 +37,7 @@ function Control() {
         })
     );
 
-    const [slider, setSlider] = useState(1000);
+    const [slider, setSlider] = useState(1);
 
     const changePause = (value: boolean) => {
         dispatch(alphabetChangePauseMaschine(value));
@@ -206,7 +206,9 @@ function Control() {
         //ToDo: Schleife hört nicht auf Änderungen von außerhalb...
         //...localCopyPause = true vom Pause Button wird nicht beachtet??
         while (stoppMaschine === false && pauseMaschine === false) {
-            await sleep(slider);
+            let tempSlider = 3000 / slider
+            console.log(tempSlider)
+            await sleep(tempSlider);
             makeStep(activePointerPosition);
         }
 
@@ -225,18 +227,20 @@ function Control() {
     return (
         <div className={"control w-screen"}>
             <div className={"p-4 justify-center"}>
-                <div className={"m-2 text-black"}>
-                    {/*<label htmlFor="velSlider" className="form-label ">Geschwindigkeit</label>*/}
+            <label htmlFor="velSlider" className="form-label text-black">Geschwindigkeit</label>
+                <div className={"m-2 text-black"}>                   
+                    <span>min </span>
                     <input
                         id="velSlider"
                         className={"w-5/6 sm:w-1/3 h-2 bg-gray-500 rounded-lg appearance-none cursor-pointer"}
                         type="range"
-                        min={0}
-                        max={3000}
+                        min={1}
+                        max={10}
                         value={slider}
                         onChange={(e) => setSlider(e.target.valueAsNumber)}
-                        step={500}
+                        step={1}
                     />
+                    <span> max</span>
                 </div>
                 <div className={""}>
                     <button
