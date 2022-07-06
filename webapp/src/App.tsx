@@ -1,5 +1,5 @@
 import React from 'react'
-import Band from "./components/Band/Band";
+import TeepeeBand from "./components/Band/TeepeeBand";
 import Table from "./components/Zustandsüberführungsfunktion/Table";
 import Menu from "./components/Menu/Menu";
 import Control from "./components/Control/Control";
@@ -11,9 +11,9 @@ function App() {
         <div className="App">
             <header className="App-header">
                 <Menu/>
-                <Control />
-                <Band/>
+                <Control/>
             </header>
+            <TeepeeBand/>
             <div className={"App-body"}>
                 <ConditionsList/>
                 <Table/>

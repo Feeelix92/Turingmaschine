@@ -176,6 +176,33 @@
 }
 
 .editBtn {
-    @apply w-10 h-10 rounded-full text-sm font-medium text-gray-900 bg-white hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white;
+    @apply w-10 h-10 text-sm font-medium text-gray-900 bg-white hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white;
 }
 
+/* Toilet paper */
+
+.teepeeContainer {
+    /*@apply bg-blue-200*/
+    /*@apply animate-spin*/
+    @apply relative
+}
+
+.teepeeHead {
+    @apply z-0 w-[20vh] h-[10vh] round translate-y-[50%] scale-50 bg-gradient-to-r from-white to-gray-100 border-t-2;
+}
+
+.teepeeBody {
+    @apply z-10 w-[10vh] h-[10vh] translate-x-[50%] bg-gradient-to-r from-white to-gray-100 border-l-2 border-r-2 z-10;
+}
+.teepeePaper {
+    @apply w-[15vh] h-[10vh] border-2 border-dotted translate-x-[65%]
+}
+.teepeeBottom {
+    @apply z-20 w-[20vh] h-[10vh] round -translate-y-[50%] scale-50 bg-white border-2;
+}
+.teepeeCardboard{
+    @apply z-30 w-[10vh] h-[5vh] round translate-x-[50%] translate-y-[50%] bg-gradient-to-r from-gray-100 to-gray-300 border-2;
+}
+.round {
+    border-radius: 50%;
+}

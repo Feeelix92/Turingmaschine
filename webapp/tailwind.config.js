@@ -4,6 +4,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      animation: {
+        //'fade': '',
+      },
       colors: {
         // Configure your color palette here
         // THM Farben
