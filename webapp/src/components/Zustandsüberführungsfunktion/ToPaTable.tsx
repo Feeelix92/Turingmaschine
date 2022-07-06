@@ -5,7 +5,6 @@ import {BiCaretDown, BiCaretUp} from "react-icons/all";
 import Table from "../Zustandsüberführungsfunktion/Table";
 
 export default function ToPaTable() {
-    const toiletPaperMode = useSelector((state: RootState) => state.general.toiletPaperMode)
 
     /**
      * Accordion data (Title, Icons)
@@ -22,19 +21,20 @@ export default function ToPaTable() {
      */
     const [isActive, setIsActive] = useState(true);
 
-    if(toiletPaperMode) {
         return (
-            <div className={"border-solid border rounded bg-white w-screen p-2 border rounded items-center hover:bg-gray-100 col-span-2 max-w-screen-xl"}>
+            <div className={"border-solid border rounded bg-white w-full p-2 border rounded items-center hover:bg-gray-100 col-span-12"}>
                 <div className={""} onClick={() => setIsActive(!isActive)}>
                     <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center"}>
                         <span className={""}>{isActive ? closeAccordion : openAccordion}</span>
                         <span>{title}</span>
                     </div>
                 </div>
+
                 {isActive &&
+                    <div className={"pt-2"}>
                         <Table/>
+                    </div>
                 }
             </div>
         );
-    }
 }

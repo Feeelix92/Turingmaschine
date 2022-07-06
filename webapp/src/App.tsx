@@ -25,7 +25,9 @@ function App() {
                 {!toiletPaperMode &&
                     <Table />
                 }
-                <ToPaTable/>
+                {toiletPaperMode &&
+                    <ToPaTable/>
+                }
             </div>
         </div>
     );
