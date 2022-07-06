@@ -4,8 +4,12 @@ import Table from "./components/Zustandsüberführungsfunktion/Table";
 import Menu from "./components/Menu/Menu";
 import Control from "./components/Control/Control";
 import ConditionsList from "./components/Zustaende/List";
+import ToPaTable from "./components/Zustandsüberführungsfunktion/ToPaTable"
+import {useSelector} from "react-redux";
+import {RootState} from "./redux/store";
 
-function App() {             
+function App() {
+    const toiletPaperMode = useSelector((state: RootState) => state.general.toiletPaperMode)
         
     return (
         <div className="App">
@@ -15,8 +19,13 @@ function App() {
                 <Band/>
             </header>
             <div className={"App-body"}>
-                <ConditionsList/>
-                <Table/>
+                {!toiletPaperMode &&
+                    <ConditionsList/>
+                }
+                {!toiletPaperMode &&
+                    <Table />
+                }
+                <ToPaTable/>
             </div>
         </div>
     );
