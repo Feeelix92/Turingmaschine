@@ -2,6 +2,10 @@ import React, {Key, useEffect, useRef} from "react";
 
 import ConditionsList from "../Zustaende/List";
 import Table from "../Zustandsüberführungsfunktion/Table";
+import {
+    FaTable,
+    FaClipboardList
+  } from "react-icons/fa";
 
 
 function Bottomnav() {
@@ -37,17 +41,16 @@ function Bottomnav() {
             </div>
 
             <div className={"bottomnav"}>
-                <button className={""}  onClick={() => showSpez()}>
+                <button className={"grid justify-items-center"}  onClick={() => showSpez()}>
+                    <FaClipboardList/>
                     Spezifikationen
                 </button>
 
-                <button className={""} onClick={() => showFunk()}>
-                    Funktion
+                <button className={"grid justify-items-center"} onClick={() => showFunk()}>
+                     <FaTable/>
+                     Tabelle
                 </button>
-                
-                <button className={""} onClick={() => showCode()}>
-                    Code
-                </button>
+
             </div>
         </div>
     );

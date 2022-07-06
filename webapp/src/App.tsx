@@ -6,7 +6,6 @@ import Control from "./components/Control/Control";
 import ConditionsList from "./components/Zustaende/List";
 import Bottomnav from "./components/Bottomnav/Bottomnav";
 
-
 function App() {             
         
     return (

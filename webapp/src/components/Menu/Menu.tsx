@@ -9,8 +9,6 @@ function Menu() {
                 Turingmaschinen-Simulator
             </h1>
         </div>
-
-
     );
 }
 
