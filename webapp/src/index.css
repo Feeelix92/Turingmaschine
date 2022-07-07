@@ -54,6 +54,7 @@
 .App-header {
     @apply flex flex-col items-center justify-start text-white;
 }
+
 .App-body {
     @apply flex flex-col items-center justify-start xl:grid xl:grid-cols-4 xl:items-start;
 }
@@ -118,7 +119,7 @@
     @apply bg-transparent;
 }
 
- /*********** BAND ***********/
+/*********** BAND ***********/
 .band-container {
     @apply overflow-x-scroll overflow-y-hidden whitespace-nowrap pb-5 pl-10 pr-10 pt-10 flex flex-row mb-5 justify-start max-w-max ml-auto mr-auto;
 }
@@ -181,28 +182,46 @@
 
 /* Toilet paper */
 
-.teepeeContainer {
+.teepeeContainerLeft {
     /*@apply bg-blue-200*/
     /*@apply animate-spin*/
-    @apply relative
+    @apply translate-x-[25%]
+}
+
+.teepeeContainerRight {
+    /*@apply bg-blue-200*/
+    /*@apply animate-spin*/
+    @apply -translate-x-[25%]
+}
+
+.teepeeBand-container {
+    @apply overflow-x-scroll overflow-y-hidden whitespace-nowrap pt-10 max-w-max ml-auto mr-auto flex shrink-0;
+}
+
+.teepeeBandItem {
+    @apply w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] border-2 border-dashed border-r-0 border-l-2 translate-y-[50%]
 }
 
 .teepeeHead {
-    @apply z-0 w-[20vh] h-[10vh] round translate-y-[50%] scale-50 bg-gradient-to-r from-white to-gray-100 border-t-2;
+    @apply z-0 w-[100px] h-[50px] sm:w-[200px] sm:h-[100px] round translate-y-[50%] scale-50 bg-gradient-to-r from-white to-gray-100 border-t-2;
 }
 
 .teepeeBody {
-    @apply z-10 w-[10vh] h-[10vh] translate-x-[50%] bg-gradient-to-r from-white to-gray-100 border-l-2 border-r-2 z-10;
+    @apply z-10 w-[50px] h-[50px] sm:w-[100px] sm:h-[100px]  translate-x-[50%] bg-gradient-to-r from-white to-gray-100 border-l-2 border-r-2 z-10;
 }
+
 .teepeePaper {
-    @apply w-[15vh] h-[10vh] border-2 border-dotted translate-x-[65%]
+    @apply w-[75px] h-[50px] sm:w-[150px] sm:h-[100px] border-2 border-dotted translate-x-[65%]
 }
+
 .teepeeBottom {
-    @apply z-20 w-[20vh] h-[10vh] round -translate-y-[50%] scale-50 bg-white border-2;
+    @apply z-20 w-[100px] h-[50px] sm:w-[200px] sm:h-[100px] round -translate-y-[50%] scale-50 bg-white border-2;
 }
-.teepeeCardboard{
-    @apply z-30 w-[10vh] h-[5vh] round translate-x-[50%] translate-y-[50%] bg-gradient-to-r from-gray-100 to-gray-300 border-2;
+
+.teepeeCardboard {
+    @apply z-30 w-[50px] h-[25px] sm:w-[100px] sm:h-[50px] round translate-x-[50%] translate-y-[50%] bg-gradient-to-t from-gray-100 to-gray-300 border-2;
 }
+
 .round {
     border-radius: 50%;
 }
