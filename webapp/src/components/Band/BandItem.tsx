@@ -18,6 +18,14 @@ export default function BandItem(props: BandItemProps) {
     setEditMode(!editMode);
   }
 
+  const [displayKeyboard, setKeyboard] = React.useState(false); // Damit Keyboard sich erst beim 2. Klick öffnet
+  function disableKeyboard() {
+    setKeyboard(false);
+  }
+  function enableKeyboard() {
+    setKeyboard(true);
+  }
+
   const currentBandSkin = useSelector(
     (state: RootState) => state.band.bandSkin
   );
@@ -111,9 +119,18 @@ export default function BandItem(props: BandItemProps) {
                     className={"bandInput bg-transparent"}
                     value={props.label}
                     onChange={(e) => checkValue(props.index, e.target.value)}
-                    onClick={toggleEditMode}
                     onDragOver={props.setPointerAt}
                     autoComplete="0" // Bringt das schon was gegen die Vorschläge vom Browser?
+                    inputMode={ displayKeyboard ? "text" : "none"}
+                    
+                    onClick={() => {
+                      disableKeyboard();
+                      toggleEditMode();
+                    }}
+
+                    onDoubleClick={() => {
+                      enableKeyboard();
+                    }}
 
                 />
                 {editMode && props.showEditField ? (
