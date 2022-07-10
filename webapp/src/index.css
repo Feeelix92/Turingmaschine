@@ -186,20 +186,22 @@
     /*@apply bg-blue-200*/
     /*@apply animate-spin*/
     /*@apply translate-x-[25%]*/
+    @apply animate-rollLeft
 }
 
 .teepeeContainerRight {
     /*@apply bg-blue-200*/
     /*@apply animate-spin*/
     /*@apply -translate-x-[25%]*/
+    @apply animate-rollRight
 }
 
 .teepeeBand-container {
-    @apply pt-10 flex shrink-0;
+    @apply overflow-x-scroll overflow-y-hidden whitespace-nowrap pt-10 flex flex-row mb-5 justify-start max-w-max;
 }
 
 .teepeeBandItem {
-    @apply w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] border-2 border-dashed border-r-0 border-l-2 translate-y-[15%]
+    @apply inline-block w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] border-2 border-dashed border-r-0 border-l-2 sm:translate-y-[15%]
 }
 
 .teepeeHead {
@@ -219,7 +221,7 @@
 }
 
 .teepeeCardboard {
-    @apply z-30 w-[25px] h-[12.5px] sm:w-[50px] sm:h-[25px] translate-x-[50%] round translate-y-[50%] bg-gradient-to-t from-gray-100 to-gray-300 border-2;
+    @apply z-30 w-[25px] h-[12.5px] sm:w-[50px] sm:h-[25px] round translate-y-[50%] translate-x-[45%] sm:translate-x-[50%] bg-gradient-to-t from-gray-100 to-gray-300 border-2;
 }
 
 .round {

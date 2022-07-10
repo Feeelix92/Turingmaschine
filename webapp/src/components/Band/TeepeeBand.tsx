@@ -41,76 +41,78 @@ export default function TeepeeBand() {
   };
 
     return (
-        <div className={"flex"}>
-            <div className={"teepeeContainerLeft"} onClick={() => dispatch(bandAddField('before'))}>
-                    <div className={"teepeeHead"}/>
-                    <div className={"teepeeBody"}/>
-                    <div className={"teepeeBottom"}>
-                        <div className={"teepeeCardboard"}/>
+        <div className={"w-screen"}>
+            <div className={"flex"}>
+                <div className={"teepeeContainerLeft"} onClick={() => dispatch(bandAddField('before'))}>
+                        <div className={"teepeeHead"}/>
+                        <div className={"teepeeBody"}/>
+                        <div className={"teepeeBottom"}>
+                            <div className={"teepeeCardboard"}/>
+                        </div>
                     </div>
-                </div>
-                <div className="teepeeBand-container overflow-x-auto ">
-                    {/*{currentBand.map((value, index) => (*/}
-                    {/*    <BandItem*/}
-                    {/*        value={value.value}*/}
-                    {/*        label={value.label}*/}
-                    {/*        index={index}*/}
-                    {/*        pointer={value.pointer!}*/}
-                    {/*        key={index}*/}
-                    {/*        alphabet={currentAlphabet.alphabet}*/}
-                    {/*        showEditField={true}*/}
-                    {/*        setPointerAt={() => setPointerAt(index)}*/}
-                    {/*    />*/}
-                    {/*))}*/}
-                    <div className={"teepeeBandItem"}/>
-                    <div className={"teepeeBandItem"}/>
-                    <div className={"teepeeBandItem"}/>
-                    <div className={"teepeeBandItem"}/>
-                    <div className={"teepeeBandItem"}/>
-                    <div className={"teepeeBandItem"}/>
-                    <div className={"teepeeBandItem"}/>
-                    <div className={"teepeeBandItem"}/>
-                    <div className={"teepeeBandItem"}/>
-                    <div className={"teepeeBandItem"}/>
-                    <div className={"teepeeBandItem"}/>
-                </div>
-                <div className={"teepeeContainerRight"} onClick={() => dispatch(bandAddField('after'))}>
-                    <div className={"teepeeHead"}/>
-                    <div className={"teepeeBody"}/>
-                    <div className={"teepeeBottom"}>
-                        <div className={"teepeeCardboard"}/>
+                    <div className="teepeeBand-container overflow-x-auto col-span-12">
+                        {/*{currentBand.map((value, index) => (*/}
+                        {/*    <BandItem*/}
+                        {/*        value={value.value}*/}
+                        {/*        label={value.label}*/}
+                        {/*        index={index}*/}
+                        {/*        pointer={value.pointer!}*/}
+                        {/*        key={index}*/}
+                        {/*        alphabet={currentAlphabet.alphabet}*/}
+                        {/*        showEditField={true}*/}
+                        {/*        setPointerAt={() => setPointerAt(index)}*/}
+                        {/*    />*/}
+                        {/*))}*/}
+                        <div className={"teepeeBandItem"}/>
+                        <div className={"teepeeBandItem"}/>
+                        <div className={"teepeeBandItem"}/>
+                        <div className={"teepeeBandItem"}/>
+                        <div className={"teepeeBandItem"}/>
+                        <div className={"teepeeBandItem"}/>
+                        <div className={"teepeeBandItem"}/>
+                        <div className={"teepeeBandItem"}/>
+                        <div className={"teepeeBandItem"}/>
+                        <div className={"teepeeBandItem"}/>
+                        <div className={"teepeeBandItem"}/>
                     </div>
-                </div>
-            {/*<div className={"hidden md:block"}>*/}
-            {/*    <div className={"flex justify-center gap-2"}>*/}
-            {/*        <button*/}
-            {/*            onClick={() => dispatch(bandDeleteAll())}*/}
-            {/*            className={"w-36 invertedButton"}>*/}
-            {/*            zurücksetzen*/}
-            {/*        </button>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            {/*<div className="flex">*/}
-            {/*    <div className={"w-3/4 text-left"}>*/}
-            {/*        <button className={"m-2 md:invisible secondaryButton"}*/}
-            {/*                onClick={() => setPointerLeft()}>*/}
-            {/*            <FaAngleLeft />*/}
-            {/*        </button>*/}
+                    <div className={"teepeeContainerRight"} onClick={() => dispatch(bandAddField('after'))}>
+                        <div className={"teepeeHead"}/>
+                        <div className={"teepeeBody"}/>
+                        <div className={"teepeeBottom"}>
+                            <div className={"teepeeCardboard"}/>
+                        </div>
+                    </div>
+                {/*<div className={"hidden md:block"}>*/}
+                {/*    <div className={"flex justify-center gap-2"}>*/}
+                {/*        <button*/}
+                {/*            onClick={() => dispatch(bandDeleteAll())}*/}
+                {/*            className={"w-36 invertedButton"}>*/}
+                {/*            zurücksetzen*/}
+                {/*        </button>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+                {/*<div className="flex">*/}
+                {/*    <div className={"w-3/4 text-left"}>*/}
+                {/*        <button className={"m-2 md:invisible secondaryButton"}*/}
+                {/*                onClick={() => setPointerLeft()}>*/}
+                {/*            <FaAngleLeft />*/}
+                {/*        </button>*/}
 
-            {/*        <button className={"md:invisible secondaryButton"}*/}
-            {/*                onClick={() => setPointerRight()}>*/}
-            {/*            <FaAngleRight />*/}
-            {/*        </button>*/}
-            {/*    </div>*/}
+                {/*        <button className={"md:invisible secondaryButton"}*/}
+                {/*                onClick={() => setPointerRight()}>*/}
+                {/*            <FaAngleRight />*/}
+                {/*        </button>*/}
+                {/*    </div>*/}
 
-            {/*    <div className={"w-1/4 text-right md:hidden"}>*/}
-            {/*        <button*/}
-            {/*            onClick={() => dispatch(bandDeleteAll())}*/}
-            {/*            className={"m-2"}>*/}
-            {/*            <FaRedo/>*/}
-            {/*        </button>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
+                {/*    <div className={"w-1/4 text-right md:hidden"}>*/}
+                {/*        <button*/}
+                {/*            onClick={() => dispatch(bandDeleteAll())}*/}
+                {/*            className={"m-2"}>*/}
+                {/*            <FaRedo/>*/}
+                {/*        </button>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+            </div>
         </div>
     );
 }

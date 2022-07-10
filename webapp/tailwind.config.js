@@ -5,7 +5,18 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        //'fade': '',
+        rollLeft: 'rollLeft 2s ease-in-out 2s',
+        rollRight: 'rollRight 2s ease-in-out 2s',
+      },
+      keyframes: {
+        'rollLeft': {
+          '0%': {transform: ['translateX(300px)']},
+          '100%': {transform: ['translateX(0px)']},
+        },
+        'rollRight': {
+          '0%': {transform: ['translateX(-300px)']},
+          '100%': {transform: ['translateX(0px)']},
+        },
       },
       colors: {
         // Configure your color palette here
