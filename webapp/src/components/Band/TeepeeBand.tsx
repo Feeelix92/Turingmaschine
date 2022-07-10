@@ -17,7 +17,7 @@ import {
 import { RootState } from "../../redux/store";
 import React from "react";
 
-export default function Band() {
+export default function TeepeeBand() {
   const defaultPointerPos = 1; // Feld, auf dem Pointer im Default stehen soll
 
   const currentBand = useSelector((state: RootState) => state.band.currentBand);
@@ -41,16 +41,15 @@ export default function Band() {
   };
 
     return (
-        <div className={"w-full"}>
-            <div className={"flex"}>
-                <div className={"teepeeContainerLeft"} onClick={() => dispatch(bandAddField('before'))}>
+        <div className={"flex"}>
+            <div className={"teepeeContainerLeft"} onClick={() => dispatch(bandAddField('before'))}>
                     <div className={"teepeeHead"}/>
                     <div className={"teepeeBody"}/>
                     <div className={"teepeeBottom"}>
                         <div className={"teepeeCardboard"}/>
                     </div>
                 </div>
-                <div className="teepeeBand-container">
+                <div className="teepeeBand-container overflow-x-auto ">
                     {/*{currentBand.map((value, index) => (*/}
                     {/*    <BandItem*/}
                     {/*        value={value.value}*/}
@@ -82,7 +81,6 @@ export default function Band() {
                         <div className={"teepeeCardboard"}/>
                     </div>
                 </div>
-            </div>
             {/*<div className={"hidden md:block"}>*/}
             {/*    <div className={"flex justify-center gap-2"}>*/}
             {/*        <button*/}
