@@ -13,23 +13,13 @@ function Bottomnav() {
     const [spez, setSpez] = React.useState(true);
     function showSpez() {
         setFunk(false);
-        setCode(false);
         setSpez(true);
     }
 
     const [funk, setFunk] = React.useState(false);
     function showFunk() {
         setSpez(false);
-        setCode(false);
         setFunk(true);
-    }
-
-    
-    const [code, setCode] = React.useState(false);
-    function showCode() {
-        setSpez(false);
-        setFunk(false);
-        setCode(true);
     }
 
     return (
@@ -37,10 +27,9 @@ function Bottomnav() {
             <div className={"mt-11 mb-36"}>
                 { spez ? (<ConditionsList/>) : "" }
                 { funk ? (<Table/>) : "" }                
-                { code ? ("") : "" }
             </div>
 
-            <div className={"bottomnav"}>
+            <div className={"bottomnav z-50"}>
                 <button className={"grid justify-items-center"}  onClick={() => showSpez()}>
                     <FaClipboardList/>
                     Spezifikationen

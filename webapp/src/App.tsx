@@ -16,7 +16,6 @@ function App() {
                 <Band/>
             </header>
 
-
             <div className={"App-body "}>
                 
                 <div className={" hidden md:grid md:grid-cols-4 md:items-start"}>
@@ -32,8 +31,7 @@ function App() {
 
         </div>
     );
-        
-        
+            
 }
 
 export default App;

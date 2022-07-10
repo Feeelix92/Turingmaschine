@@ -1,7 +1,5 @@
 import BandItem from "./BandItem";
 import {
-  FaArrowAltCircleLeft,
-  FaArrowAltCircleRight,
   FaAngleLeft,
   FaAngleRight,
   FaRedo,
@@ -9,7 +7,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
   bandAddField,
-  bandChangePointer,
   bandChangePointPos,
   bandDeleteAll,
   bandSetPointPos,
@@ -17,8 +14,7 @@ import {
 import { RootState } from "../../redux/store";
 
 export default function Band() {
-  const defaultPointerPos = 1; // Feld, auf dem Pointer im Default stehen soll
-
+    
   const currentBand = useSelector((state: RootState) => state.band.currentBand);
   const currentAlphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
