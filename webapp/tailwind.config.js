@@ -10,11 +10,11 @@ module.exports = {
       },
       keyframes: {
         'rollLeft': {
-          '0%': {transform: ['translateX(300px)']},
+          '0%': {transform: ['translateX(35vw)']},
           '100%': {transform: ['translateX(0px)']},
         },
         'rollRight': {
-          '0%': {transform: ['translateX(-300px)']},
+          '0%': {transform: ['translateX(-35vw)']},
           '100%': {transform: ['translateX(0px)']},
         },
       },
