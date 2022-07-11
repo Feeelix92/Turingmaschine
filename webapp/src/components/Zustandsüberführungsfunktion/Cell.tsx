@@ -27,7 +27,6 @@ export default function Cell(props: CellProps) {
   store.subscribe(
     wStates((newVal) => {
       states = newVal;
-      console.log(states);
     })
   );
 

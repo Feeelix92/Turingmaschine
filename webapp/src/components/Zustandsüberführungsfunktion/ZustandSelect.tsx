@@ -20,14 +20,13 @@ export default function ZustandSelect(props: ZustandSelectProps) {
         `q${props.states.length}`,
         `q${props.states.length}`,
         false,
+        false,
         false
       );
     }
 
     props.updateValue(state);
     dispatch(alphabetPushToZustand());
-
-    console.log(newValue);
   }
 
   return (

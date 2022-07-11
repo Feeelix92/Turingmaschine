@@ -22,17 +22,20 @@ export class Zustand {
   label: string;
   anfangszustand: boolean;
   endzustand: boolean;
+  warningModus: boolean;
 
   constructor(
     label: string,
     value: string,
     anfangszustand: boolean,
-    endzustand: boolean
+    endzustand: boolean,
+    warningModus: boolean
   ) {
     this.label = label;
     this.value = value;
     this.anfangszustand = anfangszustand;
     this.endzustand = endzustand;
+    this.warningModus = warningModus;
   }
 }
 
@@ -101,8 +104,3 @@ export interface ZustandSelectProps {
   updateValue: (arg: Zustand) => void;
 }
 
-// export const status: Zustand[] = [
-//   new Zustand("q1", "q1", false),
-//   new Zustand("q2", "q2", false),
-//   new Zustand("q3", "q3", true),
-// ];

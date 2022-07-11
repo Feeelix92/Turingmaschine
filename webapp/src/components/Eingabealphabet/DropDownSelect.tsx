@@ -8,6 +8,7 @@ import { bandDeleteAll } from "../../redux/bandStore";
 import {
   Alphabet,
   alphabetChangeCurrent,
+  alphabetChangeWarningModus,
   defaultAlphabetOption4,
   EingabeAlphabetDialogOptions,
   eingabeAlphabetDialogOptions,
@@ -50,7 +51,7 @@ export default function DropDownSelect() {
      */
     function handleChange(
         newValue: OnChangeValue<EingabeAlphabetDialogOptions, false>,
-        actionMeta: ActionMeta<EingabeAlphabetDialogOptions>
+        _actionMeta: ActionMeta<EingabeAlphabetDialogOptions>
     ) {
         console.group('Value Changed');
         console.log(newValue);
@@ -61,7 +62,7 @@ export default function DropDownSelect() {
             }else{
                 dispatch(alphabetChangeCurrent(newValue.alphabet))
                 setOpenDialog(true)
-            }
+            }           
             dispatch(bandDeleteAll())
         }
         console.groupEnd();

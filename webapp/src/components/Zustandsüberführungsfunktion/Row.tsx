@@ -45,7 +45,8 @@ export default function Row(props: RowProps) {
         value.label,
         value.value,
         value.anfangszustand,
-        value.endzustand
+        value.endzustand,
+        value.warningModus
       );
       dispatch(
         tableUpdateCell({

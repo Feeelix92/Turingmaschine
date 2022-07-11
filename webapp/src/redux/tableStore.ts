@@ -1,18 +1,11 @@
-import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   Direction,
   directions,
   Cell,
-  RowProps,
   Row,
   Zustand,
 } from "../interfaces/CommonInterfaces";
-import { alphabetChangeCurrent } from "./generalStore";
-
-interface updateRowType {
-  index: React.Key;
-  cells: Cell[];
-}
 
 interface updateCellType {
   cellIndex: React.Key;
@@ -46,13 +39,13 @@ interface updateCellType {
 //   },
 // ];
 
-export const initialZustand: Zustand = new Zustand("q1", "q1", true, false);
-export const initialZustand2: Zustand = new Zustand("q2", "q2", false, true);
+export const initialZustand: Zustand = new Zustand("q1", "q1", true, false, false);
+export const initialZustand2: Zustand = new Zustand("q2", "q2", false, true, false);
 export const initialZustand3: Zustand = new Zustand(
   "erstellen",
   "erstellen",
   false,
-  false
+  false, false
 );
 
 export const initialCell: Cell[] = [
@@ -139,11 +132,11 @@ const initialRow: Row[] = [
   },
 ];
 
-const activeRow: Row | undefined = undefined;
+const activeRow: Row | undefined = undefined
 
 const watchedRows: Row[] = [];
 
-const activeState: Zustand = new Zustand("q1", "q1", true, false);
+const activeState: Zustand = new Zustand("q1", "q1", true, false, false);
 
 export const tableSlice = createSlice({
   name: "table",

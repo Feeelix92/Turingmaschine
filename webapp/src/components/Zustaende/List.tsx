@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import Select, {OnChangeValue} from "react-select";
 import {Direction, Zustand} from '../../interfaces/CommonInterfaces';
-import {alphabetChangeAnfangszustand, alphabetChangeEndzustand, alphabetClearEndzustand, alphabetPushToZustand, alphabetDeleteZustand} from '../../redux/generalStore';
-import {RootState} from '../../redux/store';
+import {alphabetChangeAnfangszustand, alphabetChangeEndzustand, alphabetClearEndzustand, alphabetPushToZustand, alphabetDeleteZustand, alphabetChangeWarningModus} from '../../redux/generalStore';
+import {RootState, store} from '../../redux/store';
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
-import {BiCaretDown, BiCaretUp,} from "react-icons/all";
+import {BiCaretDown, BiCaretUp, IoIosWarning,} from "react-icons/all";
+import watch from 'redux-watch';
 
 function ConditionsList() {
     /**
@@ -20,10 +21,25 @@ function ConditionsList() {
 
     const bandAlphabet = useSelector((state: RootState) => state.general.bandAlphabet)
 
-    const zustandsmenge = useSelector((state: RootState) => state.general.zustandsmenge)
-    const anfangsZustand = useSelector((state: RootState) => state.general.anfangsZustand)
+    const initZustandsmenge = useSelector((state: RootState) => state.general.zustandsmenge)
+    const initAnfangsZustand = useSelector((state: RootState) => state.general.anfangsZustand)
     const endZustand = useSelector((state: RootState) => state.general.endZustand)
     const possibleEnd = useSelector((state: RootState) => state.general.zustandsmenge).filter(zustand => !zustand.anfangszustand)
+    
+    let zustandsmenge:Zustand[] = initZustandsmenge;
+    let wZustandsmenge = watch(store.getState, "general.zustandsmenge");
+    store.subscribe(
+        wZustandsmenge((newVal) => {
+            zustandsmenge = newVal;
+        })
+    );
+    let anfangsZustand:Zustand = initAnfangsZustand;
+    let wAnfangsZustand = watch(store.getState, "general.anfangsZustand");
+    store.subscribe(
+        wAnfangsZustand((newVal) => {
+            anfangsZustand = newVal;
+        })
+    );
 
     const dispatch = useDispatch()
 
@@ -44,10 +60,10 @@ function ConditionsList() {
     function handleChange(newValue: OnChangeValue<Zustand, false>) {
         if (newValue) {
             if (!newValue.endzustand) {
-                const newAnfangszustand = new Zustand(newValue.label, newValue.value, true, false)
+                const newAnfangszustand = new Zustand(newValue.label, newValue.value, true, false, false)
                 dispatch(alphabetChangeAnfangszustand(newAnfangszustand))
             } else {
-                const newAnfangszustand = new Zustand(newValue.label, newValue.value, true, false)
+                const newAnfangszustand = new Zustand(newValue.label, newValue.value, true, false, false)
                 dispatch(alphabetChangeAnfangszustand(newAnfangszustand))
                 dispatch(alphabetClearEndzustand())
                 alert("Bitt vergiss nicht deine Endzustandsmenge neu zu setzen!");
@@ -61,7 +77,7 @@ function ConditionsList() {
                 console.log('Anfang', anfangsZustand, 'Ende', endZustand, 'Menge', zustandsmenge, 'newValue', newValue)
                 let temp: Zustand[] = [];
                 newValue.forEach(zustand => {
-                    temp.push(new Zustand(zustand.value, zustand.label, zustand.anfangszustand, true))
+                    temp.push(new Zustand(zustand.value, zustand.label, zustand.anfangszustand, true, false))
                 });
                 dispatch(alphabetChangeEndzustand(temp))
             }
@@ -99,6 +115,24 @@ function ConditionsList() {
         setShowZustandsfunktion(!showZustandsfunktion)
     }
 
+    function changeZustandsmenge() {
+        dispatch(alphabetDeleteZustand())
+        let wrongAnfangszustand = false;
+        zustandsmenge.forEach(zustand => {
+            if (zustand.value === anfangsZustand.value) {
+                wrongAnfangszustand = false;
+            } else {
+                wrongAnfangszustand = true;
+            }
+        });
+        if(wrongAnfangszustand){
+            dispatch(alphabetChangeWarningModus({prop: "anfangsZustand",
+                value: true,
+                payload: anfangsZustand}))
+        }
+        console.log(anfangsZustand)
+    }
+
     return (
         <div className={"border-solid border rounded bg-white w-screen sm:w-3/4 lg:w-3/4 3xl:w-2/4 p-2 border rounded items-center hover:bg-gray-100 col-span-2 max-w-screen-sm"}>
             <div className={""} onClick={() => setIsActive(!isActive)}>
@@ -127,11 +161,11 @@ function ConditionsList() {
                                 <span key={index}>{value.value}, </span>
                             ))}{kZ}</div>
                         <div className={"flex justify-end gap-2 col-span-1"}>
-                            <button className={"w-10"} onClick={() => dispatch(alphabetDeleteZustand())}>-</button>
+                            <button className={"w-10"} onClick={() => changeZustandsmenge()}>-</button>
                             <button className={"w-10"} onClick={() => dispatch(alphabetPushToZustand())}>+</button>
                         </div>
                     </div>
-                    <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
+                    <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>  
                         <div className={"col-span-2"}>Anfangszustand q0 = {anfangsZustand.value} </div>
                         <Select
                             placeholder={anfangsZustand.value}
@@ -140,6 +174,9 @@ function ConditionsList() {
                             onChange={handleChange}
                             options={zustandsmenge}
                         />
+                        {anfangsZustand.warningModus ? ( 
+                        <IoIosWarning color="orange" title="Dieser Zustand ist nicht länger vorhanden!"/>    
+                        ) : null}
                     </div>
                     <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
                         <div className={"col-span-2"}>

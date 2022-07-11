@@ -15,19 +15,26 @@ export interface Alphabet {
 export interface EingabeAlphabet {
     label: string;
     value: string;
+    warningModus: boolean;
 }
 
-export const initialAnfangszustand: Zustand = {value: "q1",label: "q1", anfangszustand: true, endzustand: false}
+export interface ChangeWarningModus {
+    prop: string,
+    value: boolean,
+    payload?: Alphabet | Zustand | Zustand[] | EingabeAlphabet[] | EingabeAlphabetDialogOptions[] 
+}
+
+export const initialAnfangszustand: Zustand = {value: "q1",label: "q1", anfangszustand: true, endzustand: false, warningModus: false}
 const initialZustandsmenge: Zustand[] = [
-    {value: "q1", label: "q1", anfangszustand: true, endzustand: false},
-    {value: "q2", label: "q2", anfangszustand: false, endzustand: true},
+    {value: "q1", label: "q1", anfangszustand: true, endzustand: false, warningModus: false},
+    {value: "q2", label: "q2", anfangszustand: false, endzustand: true, warningModus: false},
 ]
 const initialEndZustandsmenge: Zustand[] = [
-    {value: "q2", label: "q2", anfangszustand: false, endzustand: true}
+    {value: "q2", label: "q2", anfangszustand: false, endzustand: true, warningModus: false}
 ]
 let initialBandAlphabet: EingabeAlphabet[] = [
-    {label: '1', value: '1'},
-    {label: 'B', value: 'B'}
+    {label: '1', value: '1', warningModus: false},
+    {label: 'B', value: 'B', warningModus: false}
 ]
 
 const defaultCustomAlphabet: Alphabet = {
@@ -37,28 +44,28 @@ const defaultCustomAlphabet: Alphabet = {
 
 const defaultAlphabetOption1: Alphabet = {
     key: 1,
-    alphabet: [{label: '1', value: '1'}]
+    alphabet: [{label: '1', value: '1', warningModus: false}]
 }
 const defaultAlphabetOption2: Alphabet = {
     key: 2,
     alphabet: [
-        {label: '1', value: '1'},
-        {label: '#', value: '#'}
+        {label: '1', value: '1', warningModus: false},
+        {label: '#', value: '#', warningModus: false}
     ]
 }
 const defaultAlphabetOption3: Alphabet = {
     key: 3,
     alphabet: [
-        {label: '1', value: '1'},
-        {label: '0', value: '0'}
+        {label: '1', value: '1', warningModus: false},
+        {label: '0', value: '0', warningModus: false}
     ]
 }
 export const defaultAlphabetOption4: Alphabet = {
     key: 4,
     alphabet: [
-        {label: '1', value: '1'},
-        {label: '0', value: '0'},
-        {label: '#', value: '#'}
+        {label: '1', value: '1', warningModus: false},
+        {label: '0', value: '0', warningModus: false},
+        {label: '#', value: '#', warningModus: false}
     ]
 }
 const initialDialogOption:EingabeAlphabetDialogOptions = {label: '{1}', alphabet: defaultAlphabetOption1}
@@ -99,7 +106,7 @@ export const generalSlice = createSlice({
             }
         });
         let tempAlphabet = Object.assign([], alphabet.payload.alphabet)
-        tempAlphabet.push({value: "B", label: "B"})
+        tempAlphabet.push({value: "B", label: "B", warningModus: false})
         state.bandAlphabet = tempAlphabet
         console.log("alphabetChangeCurrent",current(state))
     },
@@ -108,7 +115,7 @@ export const generalSlice = createSlice({
      * @param value
      */
     alphabetPushToCustom: (state, value: PayloadAction<string>) => {
-        state.customAlphabet.alphabet.push({value: value.payload, label: value.payload})
+        state.customAlphabet.alphabet.push({value: value.payload, label: value.payload, warningModus: false})
     },
     alphabetPushToDialogOptions: (state, optionName: PayloadAction<string>) => {
         state.customAlphabet.key = customKey;
@@ -135,8 +142,7 @@ export const generalSlice = createSlice({
      */
     alphabetPushToZustand: (state) => {
         let tempNumber = state.zustandsmenge.length + 1
-        state.zustandsmenge.push({value: "q" + tempNumber,label: "q" + tempNumber, anfangszustand: false, endzustand: false})
-        console.log( current(state.zustandsmenge))
+        state.zustandsmenge.push({value: "q" + tempNumber,label: "q" + tempNumber, anfangszustand: false, endzustand: false, warningModus: false})
     },
       alphabetDeleteZustand: (state) => {
         state.zustandsmenge.pop()
@@ -152,10 +158,8 @@ export const generalSlice = createSlice({
             }
         })
         state.anfangsZustand = zustand.payload
-        console.log(current(state.zustandsmenge))
     },
     alphabetChangeEndzustand: (state, zustand: PayloadAction<Zustand[]>) => {
-        console.log(zustand.payload)
         state.endZustand = zustand.payload
         state.zustandsmenge.forEach(option => {
             zustand.payload.forEach(innerzustand => {
@@ -166,7 +170,6 @@ export const generalSlice = createSlice({
                 }
             })
         })
-        console.log(current(state.zustandsmenge))
     },
     alphabetClearEndzustand: (state) => {
         state.zustandsmenge.forEach(option => {
@@ -179,6 +182,38 @@ export const generalSlice = createSlice({
     },
     alphabetChangeStoppMaschine: (state, value: PayloadAction<boolean>) => {
         state.stoppMaschine = value.payload;
+    },
+    alphabetChangeWarningModus: (state, warningValue: PayloadAction<ChangeWarningModus>) => {
+        console.log("hello", warningValue.payload)
+        switch (warningValue.payload.prop) {
+            case "currentAlphabet": 
+                state.currentAlphabet.alphabet[0].warningModus =  warningValue.payload.value
+                break;
+            case "dialogOptions":
+                state.dialogOptions = warningValue.payload.payload
+                break;
+            case "currentDialogOption":
+                state.currentDialogOption.alphabet.alphabet[0].warningModus = warningValue.payload.value
+                break;
+            case "customAlphabet":
+                state.customAlphabet.alphabet = warningValue.payload.payload
+                break;
+            case "bandAlphabet":
+                state.bandAlphabet = warningValue.payload.payload
+                break;
+            case "zustandsmenge":
+                state.zustandsmenge = warningValue.payload.payload
+                break;
+            case "anfangsZustand":
+                state.anfangsZustand.warningModus = warningValue.payload.value
+                break;
+            case "endZustand":
+                state.endZustand = warningValue.payload.payload
+                break;
+            default:
+                console.log("ERROR in alphabetChangeWarningModus")
+                break;
+        } 
     }
   },
 })
@@ -195,7 +230,8 @@ export const {
     alphabetClearEndzustand,
     alphabetDeleteZustand,
     alphabetChangePauseMaschine,
-    alphabetChangeStoppMaschine
+    alphabetChangeStoppMaschine,
+    alphabetChangeWarningModus
 } = generalSlice.actions
 
 export default generalSlice.reducer

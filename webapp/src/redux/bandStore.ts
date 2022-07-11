@@ -12,11 +12,11 @@ export interface PointerItemToChange {
 }
 
 const currentBand: EingabeAlphabetOption[] = [
-  { value: "B", label: "", pointer: false },
-  { value: "B", label: "", pointer: true },
-  { value: "B", label: "", pointer: false },
-  { value: "B", label: "", pointer: false },
-  { value: "B", label: "", pointer: false },
+  { value: "B", label: "", warningMode: false },
+  { value: "B", label: "", warningMode: false },
+  { value: "B", label: "", warningMode: false },
+  { value: "B", label: "", warningMode: false },
+  { value: "B", label: "", warningMode: false },
 ];
 
 export const bandSlice = createSlice({
@@ -41,14 +41,7 @@ export const bandSlice = createSlice({
       } else {
         state.currentBand[bandItem.payload.index].label = "";
       }
-    },
-    bandChangePointer: (
-      state,
-      pointerItem: PayloadAction<PointerItemToChange>
-    ) => {
-      state.currentBand[pointerItem.payload.index as number].pointer =
-        pointerItem.payload.value;
-    },
+    },    
     /**
      * function bandDeleteItemAt deletes the Band Values at the index
      * @param index
@@ -57,7 +50,7 @@ export const bandSlice = createSlice({
       state.currentBand[index.payload as number] = {
         value: "B",
         label: "",
-        pointer: state.currentBand[index.payload].pointer,
+        warningMode: state.currentBand[index.payload].warningMode,
       };
     },
     /**
@@ -67,21 +60,17 @@ export const bandSlice = createSlice({
      */
     bandAddField: (state, position: PayloadAction<string>) => {
       if (position.payload === "before") {
-        state.currentBand.unshift({ value: "B", label: "", pointer: false });
+        state.currentBand.unshift({ value: "B", label: "", warningMode: false });
       } else {
-        state.currentBand.push({ value: "B", label: "", pointer: false });
+        state.currentBand.push({ value: "B", label: "", warningMode: false });
       }
     },
     /**
      * setzt Band auf Default zurück & löscht Inhalt der BandItems
      */
     bandDeleteAll: (state) => {
-      for (let index = 0; index < state.currentBand.length; index++) {
-        if (index == 1) {
-          state.currentBand[index] = { value: "B", label: "", pointer: true };
-        } else {
-          state.currentBand[index] = { value: "B", label: "", pointer: false };
-        }
+      for (let index = 0; index < state.currentBand.length; index++) {        
+        state.currentBand[index] = { value: "B", label: "", warningMode: false };        
       }
       state.pointerPosition = 0;
     },
@@ -119,7 +108,6 @@ export const {
   bandAddField,
   bandDeleteAll,
   bandChangeSkin,
-  bandChangePointer,
   bandChangePointPos,
   bandSetPointPos,
   bandResetPointer,

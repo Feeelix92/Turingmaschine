@@ -53,7 +53,7 @@ export default function Band() {
                             value={value.value}
                             label={value.label}
                             index={index}
-                            pointer={value.pointer!}
+                            
                             key={index}
                             alphabet={currentAlphabet.alphabet}
                             showEditField={true}
