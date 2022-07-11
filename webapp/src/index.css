@@ -197,7 +197,7 @@
 }
 
 .teepeeBand-container {
-    @apply overflow-x-scroll overflow-y-hidden whitespace-nowrap pt-10 flex flex-row mb-5 justify-start max-w-max;
+    @apply animate-fadeIn overflow-x-scroll overflow-y-hidden whitespace-nowrap pt-10 flex flex-row mb-5 justify-start max-w-max;
 }
 
 .teepeeBandItem {

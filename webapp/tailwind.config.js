@@ -5,8 +5,9 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        rollLeft: 'rollLeft 2s ease-in-out 2s',
-        rollRight: 'rollRight 2s ease-in-out 2s',
+        rollLeft: 'rollLeft 2s ease-in-out',
+        rollRight: 'rollRight 2s ease-in-out',
+        fadeIn: 'fadeIn 4s ease-in-out',
       },
       keyframes: {
         'rollLeft': {
@@ -16,6 +17,11 @@ module.exports = {
         'rollRight': {
           '0%': {transform: ['translateX(-35vw)']},
           '100%': {transform: ['translateX(0px)']},
+        },
+        'fadeIn': {
+          '0%': {opacity: '0.0'},
+          '50%': {opacity: '0.5'},
+          '100%': {opacity: '1.0'},
         },
       },
       colors: {
