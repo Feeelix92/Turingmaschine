@@ -119,65 +119,57 @@ function Control() {
       return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
     });
 
-    console.log("Reihe:", item);
-
-        if (item !== undefined && typeof item.cells[3].value === "string" && item.isFinal === false) {
-            console.log("gelesener Wert:", item.cells[1].value);
-            if (
-                item.cells[0].value instanceof Zustand &&
-                item.cells[0].value.endzustand === false
-            ) {
-                console.log("Veränder mir das hier zu:", item.cells[3].value);
-                dispatch(
-                    bandChangeItemAt({
-                        index: idx,
-                        value: item.cells[3].value,
-                        label: item.cells[3].value,
-                    })
-                );
-            }
-            if (item.cells[4].value instanceof Direction) {
-                switch (item.cells[4].value.label) {
-                    case "Rechts": {
-                        // idx++;
-                        dispatch(bandChangePointPos(1));
-                        break;
-                    }
-                    case "Links": {
-                        // idx--;
-                        dispatch(bandChangePointPos(-1));
-                        break;
-                    }
-                    case "Neutral":
-                    default: {
-                        break;
-                    }
-                }
-            }
-            if (item.cells[0].value instanceof Zustand) {
-                if (item.cells[0].value != item.cells[2].value) {
-                    if (item.cells[0].value.endzustand === true) {
-                        console.log("Endzustand erreicht!");
-                        changePause(true);
-                        // await dispatch(bandResetPointer());
-                    } else {
-                        console.log("changeZustand");
-                        dispatch(tableSetActiveState(item.cells[2].value as Zustand));
-                        setSelectedRows();
-                    }
-                }
-            }
-        } else {
-            console.log("Else");
-            changePause(true);
-            // await dispatch(bandResetPointer());
-        }
+    if (item !== undefined && typeof item.cells[3].value === "string" && item.isFinal === false) {
+      console.log("gelesener Wert:", item.cells[1].value);
+      if (
+          item.cells[0].value instanceof Zustand &&
+          item.cells[0].value.endzustand === false
+      ) {
+          console.log("Veränder mir das hier zu:", item.cells[3].value);
+          dispatch(
+              bandChangeItemAt({
+                  index: idx,
+                  value: item.cells[3].value,
+                  label: item.cells[3].value,
+              })
+          );
+      }
+      if (item.cells[4].value instanceof Direction) {
+          switch (item.cells[4].value.label) {
+              case "Rechts": {
+                  // idx++;
+                  dispatch(bandChangePointPos(1));
+                  break;
+              }
+              case "Links": {
+                  // idx--;
+                  dispatch(bandChangePointPos(-1));
+                  break;
+              }
+              case "Neutral":
+              default: {
+                  break;
+              }
+          }
+      }
+      if (item.cells[0].value instanceof Zustand) {
+          if (item.cells[0].value != item.cells[2].value) {
+              if (item.cells[0].value.endzustand === true) {
+                  console.log("Endzustand erreicht!");
+                  changePause(true);
+                  // await dispatch(bandResetPointer());
+              } else {
+                  console.log("changeZustand");
+                  dispatch(tableSetActiveState(item.cells[2].value as Zustand));
+                  setSelectedRows();
+              }
+          }
       }
     } else {
-      console.log("Else");
-      changePause(true);
-      await dispatch(bandResetPointer());
-    }
+        console.log("Else");
+        changePause(true);
+        // await dispatch(bandResetPointer());
+    }        
   };
 
   const sleep = (milliseconds: number) => {
@@ -212,6 +204,7 @@ function Control() {
   };
 
     return (
+      <div>
         <div className={"control w-screen"}>
             <div className={"p-4 justify-center"}>
             <label htmlFor="velSlider" className="form-label text-black">Geschwindigkeit</label>
@@ -281,7 +274,6 @@ function Control() {
           </button>
         </div>
       </div>
-    </div>
   );
 }
 

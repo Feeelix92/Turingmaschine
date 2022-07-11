@@ -10,7 +10,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
   bandAddField,
-  bandChangePointer,
   bandChangePointPos,
   bandDeleteAll,
   bandSetPointPos,

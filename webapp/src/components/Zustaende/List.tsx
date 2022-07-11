@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import Select, {OnChangeValue} from "react-select";
 import {Direction, Zustand} from '../../interfaces/CommonInterfaces';
@@ -23,7 +23,7 @@ function ConditionsList() {
 
     const initZustandsmenge = useSelector((state: RootState) => state.general.zustandsmenge)
     const initAnfangsZustand = useSelector((state: RootState) => state.general.anfangsZustand)
-    const endZustand = useSelector((state: RootState) => state.general.endZustand)
+    const initEndZustand = useSelector((state: RootState) => state.general.endZustand)
     const possibleEnd = useSelector((state: RootState) => state.general.zustandsmenge)
     
     let zustandsmenge:Zustand[] = initZustandsmenge;
@@ -38,6 +38,13 @@ function ConditionsList() {
     store.subscribe(
         wAnfangsZustand((newVal) => {
             anfangsZustand = newVal;
+        })
+    );
+    let endZustand:Zustand[] = initEndZustand;
+    let wEndZustand = watch(store.getState, "general.endZustand");
+    store.subscribe(
+        wEndZustand((newVal) => {
+            endZustand = newVal;           
         })
     );
 
@@ -63,7 +70,7 @@ function ConditionsList() {
             //     const newAnfangszustand = new Zustand(newValue.label, newValue.value, true, false)
             //     dispatch(alphabetChangeAnfangszustand(newAnfangszustand))
             // } else {
-            const newAnfangszustand = new Zustand(newValue.label, newValue.value, true, false)
+            const newAnfangszustand = new Zustand(newValue.label, newValue.value, true, false, false)
             dispatch(alphabetChangeAnfangszustand(newAnfangszustand))
                 // dispatch(alphabetClearEndzustand())
                 // alert("Bitt vergiss nicht deine Endzustandsmenge neu zu setzen!");
@@ -77,7 +84,7 @@ function ConditionsList() {
             console.log('Anfang', anfangsZustand, 'Ende', endZustand, 'Menge', zustandsmenge, 'newValue', newValue)
             let temp: Zustand[] = [];
             newValue.forEach(zustand => {
-                temp.push(new Zustand(zustand.value, zustand.label, zustand.anfangszustand, true))
+                temp.push(new Zustand(zustand.value, zustand.label, zustand.anfangszustand, true, false))
             });
             dispatch(alphabetChangeEndzustand(temp))
             // }
@@ -118,20 +125,41 @@ function ConditionsList() {
     function changeZustandsmenge() {
         dispatch(alphabetDeleteZustand())
         let wrongAnfangszustand = false;
+        let wrongEndzustand = false;
         zustandsmenge.forEach(zustand => {
             if (zustand.value === anfangsZustand.value) {
                 wrongAnfangszustand = false;
             } else {
                 wrongAnfangszustand = true;
             }
+            endZustand.forEach(endZustand => {
+                if (zustand.value === endZustand.value) {
+                    endZustand.warningModus = false
+                    wrongEndzustand = false
+                } else {
+                    endZustand.warningModus = true
+                    wrongEndzustand = true
+                }                
+            })
+            
         });
         if(wrongAnfangszustand){
             dispatch(alphabetChangeWarningModus({prop: "anfangsZustand",
                 value: true,
                 payload: anfangsZustand}))
         }
-        console.log(anfangsZustand)
+        if(wrongEndzustand){
+            dispatch(alphabetChangeWarningModus({prop: "endZustand",
+                value: true,
+                payload: endZustand}))
+                setEndZustandWarningOn(true)
+                
+            console.log("endZustandWarningOn:", endZustandWarningOn)
+        }
+        console.log(endZustand)
     }
+
+    const [endZustandWarningOn, setEndZustandWarningOn] = useState(false); 
 
     return (
         <div className={"border-solid border rounded bg-white w-screen sm:w-3/4 lg:w-3/4 3xl:w-2/4 p-2 border rounded items-center hover:bg-gray-100 col-span-2 max-w-screen-sm"}>
@@ -195,6 +223,9 @@ function ConditionsList() {
                             options={possibleEnd}
                             isMulti={true}
                         />
+                        {endZustandWarningOn ? ( 
+                        <IoIosWarning color="orange" title="Einer der Endzustände ist nicht länger vorhanden!"/>    
+                        ) : null}
                     </div>
                     <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
                         <span className={"col-span-2"}>Zustandsüberführungsfunktion &delta; =</span>
