@@ -5,6 +5,7 @@ import {
   FaAngleLeft,
   FaAngleRight,
   FaRedo,
+  FaTrash,
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -15,10 +16,14 @@ import {
   bandSetPointPos,
 } from "../../redux/bandStore";
 import { RootState } from "../../redux/store";
+import { AiOutlineClear } from "react-icons/ai";
+import { GiBroom } from "react-icons/gi";
+import { RiDeleteBin2Fill, RiDeleteBin6Fill } from "react-icons/ri";
 
 export default function Band() {
   const defaultPointerPos = 1; // Feld, auf dem Pointer im Default stehen soll
 
+  const currentZustand = useSelector((state: RootState) => state.table.activeState);
   const currentBand = useSelector((state: RootState) => state.band.currentBand);
   const currentAlphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
@@ -41,10 +46,10 @@ export default function Band() {
 
     return (
         <div className={"w-screen"}>
-            <div className={"flex m-2 h-56"}>
+            <div className={"flex m-2 h-40"}>
                 <button
                     className={"mt-10 rounded-r-none md:rounded md:invisible"}
-                    onClick={() => dispatch(bandAddField('before'))}>
+                    onClick={() => dispatch(bandAddField('before')) && dispatch(bandChangePointPos(1))}>
                     +
                 </button>
                 <div className="band-container overflow-x-auto col-span-12">
@@ -67,17 +72,26 @@ export default function Band() {
                     +
                 </button>
             </div>
+            <div className={"currentZustand flex justify-center mb-8"}>
+            {/* <span className="relative">
+                <span className="block absolute -inset-1 w-12 rounded-full bg-thm-primary" aria-hidden="true"></span>
+                <span className="relative text-white text-center"> {currentZustand.value}</span>
+            </span>                */}
+            <div className={"rounded-full w-12 bg-thm-primary text-white h-8"}>
+                {currentZustand.value}
+            </div> 
+            </div>
             <div className={"hidden md:block"}>
                 <div className={"flex justify-center gap-2"}>
                     <button
                         className={"w-36 invertedButton"}
-                        onClick={() => dispatch(bandAddField('before'))}>
+                        onClick={() => dispatch(bandAddField('before')) && dispatch(bandChangePointPos(1))}>
                         + Feld links
                     </button>
                     <button
                         onClick={() => dispatch(bandDeleteAll())}
                         className={"w-36 invertedButton"}>
-                        zurücksetzen
+                        leeren
                     </button>
                     <button
                         className={"w-36 invertedButton"}
@@ -104,7 +118,8 @@ export default function Band() {
                         onClick={() => dispatch(bandDeleteAll())}
                         className={"m-2"}
                     >
-                        <FaRedo/>
+                        {/* <RiDeleteBin2Fill/> */}
+                        <FaTrash/>
                     </button>
                 </div>
             </div>

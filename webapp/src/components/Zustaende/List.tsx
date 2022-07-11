@@ -24,7 +24,7 @@ function ConditionsList() {
     const initZustandsmenge = useSelector((state: RootState) => state.general.zustandsmenge)
     const initAnfangsZustand = useSelector((state: RootState) => state.general.anfangsZustand)
     const endZustand = useSelector((state: RootState) => state.general.endZustand)
-    const possibleEnd = useSelector((state: RootState) => state.general.zustandsmenge).filter(zustand => !zustand.anfangszustand)
+    const possibleEnd = useSelector((state: RootState) => state.general.zustandsmenge)
     
     let zustandsmenge:Zustand[] = initZustandsmenge;
     let wZustandsmenge = watch(store.getState, "general.zustandsmenge");
@@ -59,28 +59,28 @@ function ConditionsList() {
 
     function handleChange(newValue: OnChangeValue<Zustand, false>) {
         if (newValue) {
-            if (!newValue.endzustand) {
-                const newAnfangszustand = new Zustand(newValue.label, newValue.value, true, false, false)
-                dispatch(alphabetChangeAnfangszustand(newAnfangszustand))
-            } else {
-                const newAnfangszustand = new Zustand(newValue.label, newValue.value, true, false, false)
-                dispatch(alphabetChangeAnfangszustand(newAnfangszustand))
-                dispatch(alphabetClearEndzustand())
-                alert("Bitt vergiss nicht deine Endzustandsmenge neu zu setzen!");
-            }
+            // if (!newValue.endzustand) {
+            //     const newAnfangszustand = new Zustand(newValue.label, newValue.value, true, false)
+            //     dispatch(alphabetChangeAnfangszustand(newAnfangszustand))
+            // } else {
+            const newAnfangszustand = new Zustand(newValue.label, newValue.value, true, false)
+            dispatch(alphabetChangeAnfangszustand(newAnfangszustand))
+                // dispatch(alphabetClearEndzustand())
+                // alert("Bitt vergiss nicht deine Endzustandsmenge neu zu setzen!");
+            // }
         }
     }
 
     function handleChangeMulti(newValue: OnChangeValue<Zustand[], false>) {
         if (newValue) {
-            if (newValue.filter(zustand => !zustand.anfangszustand)) {
-                console.log('Anfang', anfangsZustand, 'Ende', endZustand, 'Menge', zustandsmenge, 'newValue', newValue)
-                let temp: Zustand[] = [];
-                newValue.forEach(zustand => {
-                    temp.push(new Zustand(zustand.value, zustand.label, zustand.anfangszustand, true, false))
-                });
-                dispatch(alphabetChangeEndzustand(temp))
-            }
+            // if (newValue.filter(zustand => !zustand.anfangszustand)) {
+            console.log('Anfang', anfangsZustand, 'Ende', endZustand, 'Menge', zustandsmenge, 'newValue', newValue)
+            let temp: Zustand[] = [];
+            newValue.forEach(zustand => {
+                temp.push(new Zustand(zustand.value, zustand.label, zustand.anfangszustand, true))
+            });
+            dispatch(alphabetChangeEndzustand(temp))
+            // }
         }
     }
 
@@ -150,7 +150,8 @@ function ConditionsList() {
                         <div className={"col-span-2"}>Bandalphabet &Gamma; =</div>
                         <div className={"border border-solid bg-gray-100 rounded p-2 col-span-2"}>{kA}
                             {bandAlphabet.map((value, index) => (
-                                <span key={index}>{value.value},</span>
+                                <span key={index}>{value.value} 
+                                {(index === bandAlphabet.length-1)? "" : ","}</span>
                             ))}{kZ}
                         </div>
                     </div>
@@ -158,7 +159,8 @@ function ConditionsList() {
                         <div className={"col-span-2"}>Zustandsmenge Q =</div>
                         <div className={"border border-solid bg-gray-100 rounded p-2 break-all"}>{kA}
                             {zustandsmenge.map((value, index) => (
-                                <span key={index}>{value.value}, </span>
+                                <span key={index}>{value.value}
+                                {(index === zustandsmenge.length-1)? "" : ","}</span>
                             ))}{kZ}</div>
                         <div className={"flex justify-end gap-2 col-span-1"}>
                             <button className={"w-10"} onClick={() => changeZustandsmenge()}>-</button>

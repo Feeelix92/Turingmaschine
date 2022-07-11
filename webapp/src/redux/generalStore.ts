@@ -144,10 +144,9 @@ export const generalSlice = createSlice({
         let tempNumber = state.zustandsmenge.length + 1
         state.zustandsmenge.push({value: "q" + tempNumber,label: "q" + tempNumber, anfangszustand: false, endzustand: false, warningModus: false})
     },
-      alphabetDeleteZustand: (state) => {
-        state.zustandsmenge.pop()
-      },
-
+    alphabetDeleteZustand: (state) => {
+    state.zustandsmenge.pop()
+    },
     alphabetChangeAnfangszustand: (state, zustand: PayloadAction<Zustand>) => {
         state.zustandsmenge.forEach(option => {
             if(option.value === zustand.payload.value){
