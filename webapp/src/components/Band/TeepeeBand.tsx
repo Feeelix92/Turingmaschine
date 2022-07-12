@@ -42,7 +42,7 @@ export default function TeepeeBand() {
   };
 
     return (
-        <div className={"w-screen"}>
+        <div className={"w-full"}>
             <div className={"flex"}>
                 <div className={"teepeeContainerLeft"} onClick={() => dispatch(bandAddField('before'))}>
                         <div className={"teepeeHead"}/>

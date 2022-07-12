@@ -201,7 +201,7 @@
 }
 
 .teepeeBandItem {
-    @apply inline-block w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] border-2 border-dashed border-r-0 border-l-2 sm:translate-y-[15%]
+    @apply inline-block w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] border-2 border-dashed border-r-0 border-l-2 -translate-y-[15%] sm:translate-y-[15%]
 }
 
 .teepeeHead {
@@ -245,7 +245,7 @@
 }
 
 .teepeePointer::after {
-    @apply content-[''] absolute bg-thm-primary w-14 h-8 rounded-t-full bottom-10 -left-0.5 z-10;
+    @apply content-[''] absolute bg-thm-primary w-[50px] h-[25px] sm:w-[100px] sm:h-[50px] rounded-t-full bottom-[50px] sm:bottom-[100px] -left-0.5 z-10;
 }
 
 .teepeePointer:hover {
