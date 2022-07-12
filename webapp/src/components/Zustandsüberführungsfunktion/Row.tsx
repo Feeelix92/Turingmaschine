@@ -92,6 +92,7 @@ export default function Row(props: RowProps) {
                 index={key}
                 showEditField={value.editField}
                 updateCellValue={setCellValue}
+                warningModus={false}
               />
             ))
         : props.cells.map((value, key: React.Key) => (
@@ -101,6 +102,7 @@ export default function Row(props: RowProps) {
               index={key}
               showEditField={value.editField}
               updateCellValue={setCellValue}
+              warningModus={false}
             />
           ))}
       {visible ? (

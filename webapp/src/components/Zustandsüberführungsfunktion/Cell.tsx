@@ -1,5 +1,6 @@
 import React, { Key, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { IoIosWarning } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
 import Select, { OnChangeValue } from "react-select";
 import watch from "redux-watch";
 import {
@@ -8,6 +9,7 @@ import {
   directions,
   Zustand,
 } from "../../interfaces/CommonInterfaces";
+import { alphabetChangeWarningModus } from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import { initialZustand3 } from "../../redux/tableStore";
 import EditField from "./EditField";
@@ -18,6 +20,7 @@ export default function Cell(props: CellProps) {
   const zustandsmenge = useSelector(
     (state: RootState) => state.general.zustandsmenge
   );
+  const dispatch = useDispatch()
 
   const temp = [initialZustand3];
 
@@ -98,6 +101,20 @@ export default function Cell(props: CellProps) {
     }
   }
 
+  useEffect(() => {
+    checkWarningModus()
+  }, [props.value]);
+
+  function checkWarningModus() {
+    let tempBool = states.some( 
+      value => { return value.value === props.value } );
+      if(tempBool){
+        props.warningModus === false
+      } else{
+        props.warningModus === true
+      }
+  }
+
   return (
     <td
       ref={wrapperRef}
@@ -112,6 +129,9 @@ export default function Cell(props: CellProps) {
       ) : (
         ""
       )}
+      {props.warningModus ? ( 
+        <IoIosWarning color="orange" title="Dieser Zustand ist nicht länger verfügbar!"/>    
+        ) : null}
 
       {props.value instanceof Direction ? (
         <Select

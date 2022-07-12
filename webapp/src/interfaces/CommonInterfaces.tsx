@@ -61,6 +61,7 @@ export interface CellProps {
   index: Key;
   showEditField: boolean;
   updateCellValue: (index: Key, arg: string | Zustand | Direction) => void;
+  warningModus: boolean;
 }
 
 export interface EditProps {

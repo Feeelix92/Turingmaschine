@@ -75,6 +75,7 @@ function ConditionsList() {
                 // dispatch(alphabetClearEndzustand())
                 // alert("Bitt vergiss nicht deine Endzustandsmenge neu zu setzen!");
             // }
+            checkWarningModus()
         }
     }
 
@@ -87,6 +88,7 @@ function ConditionsList() {
                 temp.push(new Zustand(zustand.value, zustand.label, zustand.anfangszustand, true, false))
             });
             dispatch(alphabetChangeEndzustand(temp))
+            checkWarningModus()
             // }
         }
     }
@@ -122,41 +124,46 @@ function ConditionsList() {
         setShowZustandsfunktion(!showZustandsfunktion)
     }
 
-    function changeZustandsmenge() {
-        dispatch(alphabetDeleteZustand())
-        let wrongAnfangszustand = false;
-        let wrongEndzustand = false;
-        zustandsmenge.forEach(zustand => {
-            if (zustand.value === anfangsZustand.value) {
-                wrongAnfangszustand = false;
-            } else {
-                wrongAnfangszustand = true;
-            }
-            endZustand.forEach(endZustand => {
-                if (zustand.value === endZustand.value) {
-                    endZustand.warningModus = false
-                    wrongEndzustand = false
-                } else {
-                    endZustand.warningModus = true
-                    wrongEndzustand = true
-                }                
-            })
-            
-        });
-        if(wrongAnfangszustand){
+    function checkWarningModus() {
+        setEndZustandWarningOn(false)
+        let tempBool = zustandsmenge.some( 
+            value => { return value.value === anfangsZustand.value } );
+        if (tempBool) {
             dispatch(alphabetChangeWarningModus({prop: "anfangsZustand",
-                value: true,
-                payload: anfangsZustand}))
+            value: false,
+            payload: anfangsZustand}))
+        } else {
+            dispatch(alphabetChangeWarningModus({prop: "anfangsZustand",
+            value: true,
+            payload: anfangsZustand}))
         }
-        if(wrongEndzustand){
-            dispatch(alphabetChangeWarningModus({prop: "endZustand",
-                value: true,
-                payload: endZustand}))
+        endZustand.forEach(endZustand => {
+            let tempBool2 = zustandsmenge.some( 
+                value => { return value.value === endZustand.value } );   
+
+            if (tempBool2) {
+                endZustand.warningModus = false
+            } else {
+                endZustand.warningModus = true
+            } 
+        });        
+        dispatch(alphabetChangeWarningModus({prop: "endZustand",
+            value: true,
+            payload: endZustand}))
+        endZustand.forEach(endZustand => {
+            if(endZustand.warningModus === true){
                 setEndZustandWarningOn(true)
-                
-            console.log("endZustandWarningOn:", endZustandWarningOn)
+            }
+        }) 
+    }
+
+    function changeZustandsmenge(push: boolean) {
+        if(push === false){
+            dispatch(alphabetDeleteZustand())
+        } else {
+            dispatch(alphabetPushToZustand())
         }
-        console.log(endZustand)
+        checkWarningModus()
     }
 
     const [endZustandWarningOn, setEndZustandWarningOn] = useState(false); 
@@ -191,8 +198,8 @@ function ConditionsList() {
                                 {(index === zustandsmenge.length-1)? "" : ","}</span>
                             ))}{kZ}</div>
                         <div className={"flex justify-end gap-2 col-span-1"}>
-                            <button className={"w-10"} onClick={() => changeZustandsmenge()}>-</button>
-                            <button className={"w-10"} onClick={() => dispatch(alphabetPushToZustand())}>+</button>
+                            <button className={"w-10"} onClick={() => changeZustandsmenge(false)}>-</button>
+                            <button className={"w-10"} onClick={() => changeZustandsmenge(true)}>+</button>
                         </div>
                     </div>
                     <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>  
