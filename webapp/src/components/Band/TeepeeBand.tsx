@@ -1,4 +1,5 @@
 import BandItem from "./BandItem";
+import TeepeeBandItem from "./TeepeeBandItem";
 import {
   FaArrowAltCircleLeft,
   FaArrowAltCircleRight,
@@ -51,18 +52,19 @@ export default function TeepeeBand() {
                         </div>
                     </div>
                     <div className="teepeeBand-container overflow-x-auto col-span-12">
-                        {/*{currentBand.map((value, index) => (*/}
-                        {/*    <BandItem*/}
-                        {/*        value={value.value}*/}
-                        {/*        label={value.label}*/}
-                        {/*        index={index}*/}
-                        {/*        pointer={value.pointer!}*/}
-                        {/*        key={index}*/}
-                        {/*        alphabet={currentAlphabet.alphabet}*/}
-                        {/*        showEditField={true}*/}
-                        {/*        setPointerAt={() => setPointerAt(index)}*/}
-                        {/*    />*/}
-                        {/*))}*/}
+                        {currentBand.map((value, index) => (
+                            <TeepeeBandItem
+                               value={value.value}
+                               label={value.label}
+                               index={index}
+                               pointer={value.pointer!}
+                               key={index}
+                               alphabet={currentAlphabet.alphabet}
+                               showEditField={true}
+                               setPointerAt={() => setPointerAt(index)}
+                            />
+                        ))}
+                        {/*<div className={"teepeeBandItem"}/>
                         <div className={"teepeeBandItem"}/>
                         <div className={"teepeeBandItem"}/>
                         <div className={"teepeeBandItem"}/>
@@ -72,8 +74,7 @@ export default function TeepeeBand() {
                         <div className={"teepeeBandItem"}/>
                         <div className={"teepeeBandItem"}/>
                         <div className={"teepeeBandItem"}/>
-                        <div className={"teepeeBandItem"}/>
-                        <div className={"teepeeBandItem"}/>
+                        <div className={"teepeeBandItem"}/>*/}
                     </div>
                     <div className={"teepeeContainerRight"} onClick={() => dispatch(bandAddField('after'))}>
                         <div className={"teepeeHead"}/>
