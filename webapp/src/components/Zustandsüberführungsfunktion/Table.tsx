@@ -19,6 +19,7 @@ export default function Table() {
   store.subscribe(
     wRows((newVal) => {
       rows = newVal;
+      console.log(newVal, 'rows')
 
       let executable = true;
 

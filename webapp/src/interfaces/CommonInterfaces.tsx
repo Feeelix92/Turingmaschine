@@ -3,11 +3,11 @@ import { EingabeAlphabetOption } from "../data/Alphabet";
 
 export interface TableProps {
   header: string[];
-  rows: Row[];
+  rows: RowInterface[];
   alphabet: EingabeAlphabetOption[];
 }
 
-export interface Row {
+export interface RowInterface {
   cells: Cell[];
   isFinal: boolean;
 }

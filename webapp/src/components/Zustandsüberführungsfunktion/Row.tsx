@@ -3,6 +3,7 @@ import {
   Direction,
   RowProps,
   Zustand,
+    RowInterface
 } from "../../interfaces/CommonInterfaces";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,10 +17,26 @@ export default function Row(props: RowProps) {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(props.isFinal);
 
+    let rows: RowInterface[] = [];
+    let wRows = watch(store.getState, "general.rows");
+    store.subscribe(
+        wRows((newVal) => {
+            rows = newVal;
+            console.log(newVal, 'rows')
+
+            })
+)
   function setCellValue(index: React.Key, value: string | Zustand | Direction) {
     // pass new data to table to update its rows-array
+      let possibleRow = false
 
-    if (typeof value === "string") {
+      rows.forEach((value, idx) => {
+          if(idx === index ) {
+              possibleRow = true
+          }
+      });
+
+    if (typeof value === "string" && possibleRow) {
       dispatch(
         tableUpdateCell({
           cellIndex: index,
@@ -27,7 +44,7 @@ export default function Row(props: RowProps) {
           value: value,
         })
       );
-    } else if (value instanceof Direction) {
+    } else if (value instanceof Direction && possibleRow) {
       const tempDirection = new Direction(value.label, value.value);
       dispatch(
         tableUpdateCell({
@@ -36,7 +53,7 @@ export default function Row(props: RowProps) {
           value: tempDirection,
         })
       );
-    } else if (typeof value === "boolean") {
+    } else if (typeof value === "boolean" && possibleRow) {
       dispatch(
         tableUpdateCell({
           cellIndex: index,
@@ -44,7 +61,7 @@ export default function Row(props: RowProps) {
           value: value,
         })
       );
-    } else {
+    } else if (possibleRow) {
       const tempZustand = new Zustand(
         value.label,
         value.value,

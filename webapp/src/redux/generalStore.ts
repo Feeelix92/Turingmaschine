@@ -7,7 +7,7 @@ import {
   directions,
   EingabeAlphabet,
   EingabeAlphabetDialogOptions,
-  Row,
+  RowInterface,
   updateCellType,
   Zustand,
 } from "../interfaces/CommonInterfaces";
@@ -77,7 +77,7 @@ export const initialZustand3: Zustand = new Zustand(
   false
 );
 
-const watchedRows: Row[] = [];
+const watchedRows: RowInterface[] = [];
 
 export const initialCell: Cell[] = [
   {
@@ -98,29 +98,284 @@ export const initialCell: Cell[] = [
     warningMode: false,
   },
 ];
+
+/////////////ToPa//////////////////////
+const initialToiletPaperMode: Boolean = true
+
+//// Zustandsmenge
+const initialZustandsmengeTP: Zustand[] = [
+  new Zustand("1", "q1", true, false, false),
+  new Zustand("2", "q2", false, false, false),
+  new Zustand("3", "q3", false, false, false),
+  new Zustand("4", "q4", false, false, false),
+  new Zustand("5", "q5", false, true, false),
+];
+
+export const initialAnfangszustandTP: Zustand = initialZustandsmengeTP[0];
+const initialEndZustandsmengeTP: Zustand[] = [initialZustandsmengeTP[4]];
+
+//Zellen
+export const initialCellTP: Cell[] = [
+  //1
+  {
+    value: initialZustandsmengeTP[0],
+    editField: false,
+    warningMode: false,
+  },
+  { value: "1", editField: true, warningMode: false, },
+  {
+    value: initialZustandsmengeTP[0],
+    editField: false,
+    warningMode: false,
+  },
+  { value: "1", editField: true, warningMode: false, },
+  {
+    value: new Direction(directions[0].value, directions[0].label),
+    editField: false,
+    warningMode: false,
+  },
+];
+export const initialCellTP2: Cell[] = [
+  //2
+  {
+    value: initialZustandsmengeTP[0],
+    editField: false,
+    warningMode: false,
+  },
+  { value: "1", editField: true, warningMode: false, },
+  {
+    value: initialZustandsmengeTP[1],
+    editField: false,
+    warningMode: false,
+  },
+  { value: "1", editField: true, warningMode: false, },
+  {
+    value: new Direction(directions[0].value, directions[0].label),
+    editField: false,
+    warningMode: false
+  },
+];
+export const initialCellTP3: Cell[] = [
+  //3
+  {
+    value: initialZustandsmengeTP[1],
+    editField: false,
+    warningMode: false
+  },
+  { value: "1", editField: true, warningMode: false },
+  {
+    value: initialZustandsmengeTP[2],
+    editField: false,
+    warningMode: false
+  },
+  { value: "#", editField: true, warningMode: false },
+  {
+    value: new Direction(directions[1].value, directions[1].label),
+    editField: false,
+    warningMode: false
+  },
+];
+export const initialCellTP4: Cell[] = [
+  //4
+  {
+    value: initialZustandsmengeTP[1],
+    editField: false,
+    warningMode: false
+  },
+  { value: "B", editField: true, warningMode: false },
+  {
+    value: initialZustandsmengeTP[3],
+    editField: false,
+    warningMode: false
+  },
+  { value: "B", editField: true, warningMode: false },
+  {
+    value: new Direction(directions[1].value, directions[1].label),
+    editField: false,
+    warningMode: false
+  },
+];
+export const initialCellTP5: Cell[] = [
+  //5
+  {
+    value: initialZustandsmengeTP[2],
+    editField: false,
+    warningMode: false
+  },
+  { value: "#", editField: true, warningMode: false },
+  {
+    value: initialZustandsmengeTP[0],
+    editField: false,
+    warningMode: false
+  },
+  { value: "1", editField: true, warningMode: false },
+  {
+    value: new Direction(directions[0].value, directions[0].label),
+    editField: false,
+    warningMode: false
+  },
+];
+export const initialCellTP6: Cell[] = [
+  //6
+  {
+    value: initialZustandsmengeTP[3],
+    editField: false,
+    warningMode: false
+  },
+  { value: "1", editField: true, warningMode: false },
+  {
+    value: initialZustandsmengeTP[3],
+    editField: false,
+    warningMode: false
+  },
+  { value: "1", editField: true, warningMode: false },
+  {
+    value: new Direction(directions[1].value, directions[1].label),
+    editField: false,
+    warningMode: false
+  },
+];
+export const initialCellTP7: Cell[] = [
+  //7
+  {
+    value: initialZustandsmengeTP[3],
+    editField: false,
+    warningMode: false
+  },
+  { value: "#", editField: true,warningMode: false },
+  {
+    value: initialZustandsmengeTP[3],
+    editField: false,
+    warningMode: false
+  },
+  { value: "B", editField: true, warningMode: false },
+  {
+    value: new Direction(directions[1].value, directions[1].label),
+    editField: false,
+    warningMode: false
+  },
+];
+export const initialCellTP8: Cell[] = [
+  //8
+  {
+    value: initialZustandsmengeTP[3],
+    editField: false,
+    warningMode: false
+  },
+  { value: "B", editField: true, warningMode: false },
+  {
+    value: initialZustandsmengeTP[4],
+    editField: false,
+    warningMode: false
+  },
+  { value: "B", editField: true, warningMode: false },
+  {
+    value: new Direction(directions[0].value, directions[0].label),
+    editField: false,
+    warningMode: false
+  },
+];
+export const initialCellTP9: Cell[] = [
+  //9
+  {
+    value: initialZustandsmengeTP[4],
+    editField: false,
+    warningMode: false
+  },
+  { value: "B", editField: true, warningMode: false },
+  {
+    value: initialZustandsmengeTP[4],
+    editField: false,
+    warningMode: false
+  },
+  { value: "B", editField: true, warningMode: false },
+  {
+    value: new Direction(directions[0].value, directions[0].label),
+    editField: false,
+    warningMode: false
+  },
+];
+
+//Rows wechsel
+
+
+  const initialRowTP: RowInterface[] = [
+    {
+      cells: initialCellTP,
+      isFinal: false,
+    },
+    {
+      cells: initialCellTP2,
+      isFinal: false,
+    },
+    {
+      cells: initialCellTP3,
+      isFinal: false,
+    },
+    {
+      cells: initialCellTP4,
+      isFinal: false,
+    },
+    {
+      cells: initialCellTP5,
+      isFinal: false,
+    },
+    {
+      cells: initialCellTP6,
+      isFinal: false,
+    },
+    {
+      cells: initialCellTP7,
+      isFinal: false,
+    },
+    {
+      cells: initialCellTP8,
+      isFinal: false,
+    },
+    {
+      cells: initialCellTP9,
+      isFinal: false,
+    },
+  ];
+
+
+  const initialRow: RowInterface[] = [
+    {
+      cells: initialCell,
+      isFinal: false,
+    },
+  ];
+
+//Rows
+
+///////////
+/*
 const initialRow: Row[] = [
   {
     cells: initialCell,
     isFinal: false,
   },
 ];
-
-let activeRow: Row | undefined;
+*/
+let activeRow: RowInterface | undefined;
 
 const activeState: Zustand = initialZustandsmenge[0];
 
 ///////////////////// Other /////////////////////
 let customKey = 5;
 
-const initialToiletPaperMode: Boolean = true
-
 export const generalSlice = createSlice({
   name: "general",
   initialState: {
+    //// ZustandTP ////
+    zustandsmenge: initialZustandsmengeTP,
+    anfangsZustand: initialAnfangszustandTP,
+    endZustand: initialEndZustandsmengeTP,
     //// Zustand ////
-    zustandsmenge: initialZustandsmenge,
-    anfangsZustand: initialAnfangszustand,
-    endZustand: initialEndZustandsmenge,
+    //zustandsmenge: initialZustandsmenge,
+    //anfangsZustand: initialAnfangszustand,
+    //endZustand: initialEndZustandsmenge,
+
     //// Alphabet ////
     currentAlphabet: defaultAlphabetOption1,
     bandAlphabet: initialBandAlphabet,
@@ -134,10 +389,12 @@ export const generalSlice = createSlice({
     executable: true,
     //// Table ////
     header: ["Zustand", "Lese", "Neuer Zustand", "Schreibe", "Gehe nach"],
-    rows: initialRow,
+    rows: initialRowTP,
+    //rows: initialRow,
     activeRow: activeRow,
     watchedRows: watchedRows,
     activeState: activeState,
+    //// Toilettenpapier ////
       toiletPaperMode: initialToiletPaperMode
   },
   reducers: {
@@ -300,55 +557,62 @@ export const generalSlice = createSlice({
       state.rows = newRows;
     },
     tableUpdateCell: (state, updateCell: PayloadAction<updateCellType>) => {
-      const newCells: Cell[] = state.rows[
-        updateCell.payload.rowIndex as number
-      ].cells.slice(
-        0,
-        state.rows[updateCell.payload.rowIndex as number].cells.length
-      );
+      let newCells: Cell[] = []
+      console.log(updateCell.payload)
+      if(state.rows[updateCell.payload.rowIndex as number] !== undefined){
+        newCells = state.rows[
+            updateCell.payload.rowIndex as number
+            ].cells.slice(
+            0,
+            state.rows[updateCell.payload.rowIndex as number].cells.length
+        );
+      }
 
-      if (typeof updateCell.payload.value === "boolean") {
-        newCells[updateCell.payload.cellIndex as number].warningMode =
-          updateCell.payload.value;
-        // tableUpdateRow({index: updateCell.payload.index, cells: newCells})
+      if(newCells.length > 0){
+        if (typeof updateCell.payload.value === "boolean") {
+          newCells[updateCell.payload.cellIndex as number].warningMode =
+              updateCell.payload.value;
+          // tableUpdateRow({index: updateCell.payload.index, cells: newCells})
 
-        const newRows: Row[] = state.rows.slice(0, state.rows.length) as Row[];
-        // overwrite rows at certain index with new value
-        newRows[updateCell.payload.rowIndex as number].cells = newCells;
+          const newRows: RowInterface[] = state.rows.slice(0, state.rows.length) as RowInterface[];
+          // overwrite rows at certain index with new value
+          newRows[updateCell.payload.rowIndex as number].cells = newCells;
 
-        if (newCells[0].value instanceof Zustand) {
-          if (newCells[0].value.endzustand === true) {
-            newRows[updateCell.payload.rowIndex as number].isFinal = true;
-          } else {
-            newRows[updateCell.payload.rowIndex as number].isFinal = false;
+          if (newCells[0].value instanceof Zustand) {
+            if (newCells[0].value.endzustand === true) {
+              newRows[updateCell.payload.rowIndex as number].isFinal = true;
+            } else {
+              newRows[updateCell.payload.rowIndex as number].isFinal = false;
+            }
           }
-        }
-        //update the rows in state with our new rows-array
-        state.rows = newRows;
-      } else {
-        newCells[updateCell.payload.cellIndex as number].value =
-          updateCell.payload.value;
-        // tableUpdateRow({index: updateCell.payload.index, cells: newCells})
+          //update the rows in state with our new rows-array
+          state.rows = newRows;
+        } else {
+          newCells[updateCell.payload.cellIndex as number].value =
+              updateCell.payload.value;
 
-        const newRows: Row[] = state.rows.slice(0, state.rows.length) as Row[];
-        // overwrite rows at certain index with new value
-        newRows[updateCell.payload.rowIndex as number].cells = newCells;
+          // tableUpdateRow({index: updateCell.payload.index, cells: newCells})
 
-        if (newCells[0].value instanceof Zustand) {
-          if (newCells[0].value.endzustand === true) {
-            newRows[updateCell.payload.rowIndex as number].isFinal = true;
-          } else {
-            newRows[updateCell.payload.rowIndex as number].isFinal = false;
+          const newRows: RowInterface[] = state.rows.slice(0, state.rows.length) as RowInterface[];
+          // overwrite rows at certain index with new value
+          newRows[updateCell.payload.rowIndex as number].cells = newCells;
+
+          if (newCells[0].value instanceof Zustand) {
+            if (newCells[0].value.endzustand === true) {
+              newRows[updateCell.payload.rowIndex as number].isFinal = true;
+            } else {
+              newRows[updateCell.payload.rowIndex as number].isFinal = false;
+            }
           }
+          //update the rows in state with our new rows-array
+          state.rows = newRows;
         }
-        //update the rows in state with our new rows-array
-        state.rows = newRows;
       }
     },
-    tableSetActiveRow: (state, row: PayloadAction<Row | undefined>) => {
+    tableSetActiveRow: (state, row: PayloadAction<RowInterface | undefined>) => {
       state.activeRow = row.payload;
     },
-    tableSetWatchedRows: (state, rows: PayloadAction<Row[]>) => {
+    tableSetWatchedRows: (state, rows: PayloadAction<RowInterface[]>) => {
       state.watchedRows = rows.payload;
     },
     tableSetActiveState: (state, newVal: PayloadAction<Zustand>) => {
@@ -409,7 +673,23 @@ export const generalSlice = createSlice({
        */
       changeToiletPaperMode: (state) => {
           state.toiletPaperMode = !state.toiletPaperMode
+        console.log('1')
+        if (!state.toiletPaperMode){
+          console.log(initialRow)
+          state.rows = initialRow
+          state.zustandsmenge = initialZustandsmenge
+          state.anfangsZustand = initialAnfangszustand
+          state.endZustand = initialEndZustandsmenge
+
+        } else {
+          state.rows = initialRowTP
+          state.zustandsmenge = initialZustandsmengeTP
+          state.anfangsZustand = initialAnfangszustandTP
+          state.endZustand = initialEndZustandsmengeTP
+        }
+        console.log(current(state))
       }
+
   },
 });
 
