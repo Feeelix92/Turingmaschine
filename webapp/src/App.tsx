@@ -7,6 +7,7 @@ import ConditionsList from "./components/Zustaende/List";
 import ToPaTable from "./components/Zustandsüberführungsfunktion/ToPaTable"
 import {useSelector} from "react-redux";
 import {RootState} from "./redux/store";
+import Band from "./components/Band/Band";
 
 function App() {
     const toiletPaperMode = useSelector((state: RootState) => state.general.toiletPaperMode)
@@ -17,7 +18,12 @@ function App() {
                 <Menu/>
                 <Control/>
             </header>
-            <TeepeeBand/>
+            {!toiletPaperMode &&
+                <Band/>
+            }
+            {toiletPaperMode &&
+                <TeepeeBand/>
+            }
             <div className={"App-body"}>
                 {!toiletPaperMode &&
                     <ConditionsList/>
