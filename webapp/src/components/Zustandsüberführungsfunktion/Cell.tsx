@@ -52,7 +52,6 @@ export default function Cell(props: CellProps) {
   store.subscribe(
     wEingabeAlphabet((newVal) => {
       eALphabet = newVal;
-      console.log("Eingabealphabet changed!");
       checkWarningModus();
     })
   );

@@ -22,7 +22,7 @@ const initialEndZustandsmenge: Zustand[] = [];
 ///////////////////// BandAlphabet /////////////////////
 const initialBandAlphabet: EingabeAlphabet[] = [
   { label: "1", value: "1", warningModus: false },
-  { label: "B", value: "B", warningModus: false },
+  { label: "", value: "B", warningModus: false },
 ];
 const defaultCustomAlphabet: Alphabet = {
   key: 0,
@@ -150,9 +150,8 @@ export const generalSlice = createSlice({
         }
       });
       let tempAlphabet = Object.assign([], alphabet.payload.alphabet);
-      tempAlphabet.push({ value: "B", label: "B", warningModus: false });
+      tempAlphabet.push({ value: "B", label: "", warningModus: false });
       state.bandAlphabet = tempAlphabet;
-      console.log("alphabetChangeCurrent", current(state));
     },
     /**
      * function alphabetPushToCustom pushes a new Value to the customAlphabet
@@ -186,7 +185,6 @@ export const generalSlice = createSlice({
           state.currentDialogOption = option;
         }
       });
-      console.log("alphabetPushToDialogOptions", current(state));
       customKey++;
     },
 
@@ -256,8 +254,6 @@ export const generalSlice = createSlice({
     tableAddRow: (state) => {
       // create flat copy of all existing rows
       const newRows = state.rows.slice(0, state.rows.length);
-
-      console.log(state.zustandsmenge);
 
       // add new row to existing rows
       newRows.push({
@@ -351,22 +347,12 @@ export const generalSlice = createSlice({
     tableSetActiveState: (state, newVal: PayloadAction<Zustand>) => {
       state.activeState = newVal.payload;
     },
-    tableUpdateRows: (state) => {
-      state.rows.forEach((row) => {
-        state.endZustand.forEach((zustand) => {
-          console.log(row.cells[0], zustand);
-          // if (row.cells[0] as Zustand === zustand) {
-          // }
-        });
-      });
-    },
 
     ///////////////////// Other /////////////////////
     alphabetChangeWarningModus: (
       state,
       warningValue: PayloadAction<ChangeWarningModus>
     ) => {
-      console.log("hello", warningValue.payload);
       switch (warningValue.payload.prop) {
         case "currentAlphabet":
           state.currentAlphabet.alphabet[0].warningModus =

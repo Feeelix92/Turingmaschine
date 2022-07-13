@@ -19,9 +19,7 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
   // valuesString = current selected options as String to use it as label
   let valuesString = "";
 
-  const [placeholderText, setPlaceholderText] = useState(
-    "Erstellen sie "
-  );
+  const [placeholderText, setPlaceholderText] = useState("Erstellen sie ");
 
   /**
    * function handleChange checks if the selected option has changed
@@ -30,20 +28,12 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
    */
   function handleChange(
     newValues: OnChangeValue<EingabeAlphabet, true>,
-    actionMeta: ActionMeta<EingabeAlphabet>
+    _actionMeta: ActionMeta<EingabeAlphabet>
   ) {
-    console.group("Value Changed !!!!!!!!!!!");
-    console.log(newValues);
-
     // converting the object to an iteratable Array
     const optionsArray = Array.from(newValues.values());
     valuesArray = optionsArray.map(({ value }) => value);
     valuesString = valuesArray.toString();
-
-    console.log("valuesString: ", valuesString);
-    console.log("valuesArray: ", valuesArray);
-    console.log(`action: ${actionMeta.action}`);
-    console.groupEnd();
   }
 
   return (

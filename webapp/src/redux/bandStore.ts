@@ -25,6 +25,7 @@ export const bandSlice = createSlice({
     currentBand: currentBand,
     bandSkin: "paper",
     pointerPosition: 0,
+    showWarning: false,
   },
   reducers: {
     /**
@@ -41,7 +42,7 @@ export const bandSlice = createSlice({
       } else {
         state.currentBand[bandItem.payload.index].label = "";
       }
-    },    
+    },
     /**
      * function bandDeleteItemAt deletes the Band Values at the index
      * @param index
@@ -60,7 +61,11 @@ export const bandSlice = createSlice({
      */
     bandAddField: (state, position: PayloadAction<string>) => {
       if (position.payload === "before") {
-        state.currentBand.unshift({ value: "B", label: "", warningMode: false });
+        state.currentBand.unshift({
+          value: "B",
+          label: "",
+          warningMode: false,
+        });
       } else {
         state.currentBand.push({ value: "B", label: "", warningMode: false });
       }
@@ -69,8 +74,12 @@ export const bandSlice = createSlice({
      * setzt Band auf Default zurück & löscht Inhalt der BandItems
      */
     bandDeleteAll: (state) => {
-      for (let index = 0; index < state.currentBand.length; index++) {        
-        state.currentBand[index] = { value: "B", label: "", warningMode: false };        
+      for (let index = 0; index < state.currentBand.length; index++) {
+        state.currentBand[index] = {
+          value: "B",
+          label: "",
+          warningMode: false,
+        };
       }
       state.pointerPosition = 0;
     },
@@ -83,12 +92,15 @@ export const bandSlice = createSlice({
     },
     bandChangePointPos: (state, step: PayloadAction<number>) => {
       console.log("movePointer", step);
-      if((step.payload<0 && state.pointerPosition==0) || (step.payload>0 && state.pointerPosition>=state.currentBand.length-1) ) {
+      if (
+        (step.payload < 0 && state.pointerPosition == 0) ||
+        (step.payload > 0 &&
+          state.pointerPosition >= state.currentBand.length - 1)
+      ) {
         state.pointerPosition -= step.payload;
       } else {
         state.pointerPosition += step.payload;
       }
-
     },
     bandSetPointPos: (state, step: PayloadAction<number>) => {
       state.pointerPosition = step.payload;
@@ -97,6 +109,9 @@ export const bandSlice = createSlice({
       console.log("Reset!");
       state.pointerPosition = 0;
       console.log("state.PointerPosition: ", state.pointerPosition);
+    },
+    bandSetWarning: (state, value: PayloadAction<boolean>) => {
+      state.showWarning = value.payload;
     },
   },
 });
@@ -111,6 +126,7 @@ export const {
   bandChangePointPos,
   bandSetPointPos,
   bandResetPointer,
+  bandSetWarning,
 } = bandSlice.actions;
 
 export default bandSlice.reducer;

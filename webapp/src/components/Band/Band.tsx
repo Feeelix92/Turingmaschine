@@ -1,26 +1,21 @@
 import BandItem from "./BandItem";
-import {
-  FaArrowAltCircleLeft,
-  FaArrowAltCircleRight,
-  FaAngleLeft,
-  FaAngleRight,
-  FaRedo,
-  FaTrash,
-} from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight, FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
   bandAddField,
   bandChangePointPos,
   bandDeleteAll,
   bandSetPointPos,
+  bandSetWarning,
 } from "../../redux/bandStore";
-import { RootState } from "../../redux/store";
-import { AiOutlineClear } from "react-icons/ai";
-import { GiBroom } from "react-icons/gi";
-import { RiDeleteBin2Fill, RiDeleteBin6Fill } from "react-icons/ri";
+import { RootState, store } from "../../redux/store";
+import { IoIosWarning } from "react-icons/io";
+import watch from "redux-watch";
+import { useState } from "react";
+import { EingabeAlphabetOption } from "../../data/Alphabet";
 
 export default function Band() {
-  const defaultPointerPos = 1; // Feld, auf dem Pointer im Default stehen soll
+  const dispatch = useDispatch();
 
   const currentZustand = useSelector(
     (state: RootState) => state.general.activeState
@@ -29,7 +24,48 @@ export default function Band() {
   const currentAlphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
   );
-  const dispatch = useDispatch();
+  const bandAlphabet = useSelector(
+    (state: RootState) => state.general.bandAlphabet
+  );
+  const showWarning = useSelector((state: RootState) => state.band.showWarning);
+
+  /////////// Band from State ///////////
+  let cBand = currentBand;
+  let wBand = watch(store.getState, "general.currentBand");
+  store.subscribe(
+    wBand((newVal) => {
+      cBand = newVal;
+    })
+  );
+
+  /////////// Eingabealphabet from State ///////////
+  let bAlphabet = bandAlphabet;
+  let wEingabeAlphabet = watch(store.getState, "general.bandAlphabet");
+  store.subscribe(
+    wEingabeAlphabet((newVal) => {
+      bAlphabet = newVal;
+
+      let bandVal: string[] = [];
+      // wenn banditem nicht in Eingabealphabet vorhanden, dann warning auf true
+      bAlphabet.forEach((item) => {
+        bandVal.push(item.value);
+      });
+
+      let found = false;
+
+      cBand.forEach((bandItem) => {
+        if (!bandVal.includes(bandItem.value)) {
+          found = true;
+        }
+      });
+
+      if (found) {
+        dispatch(bandSetWarning(true));
+      } else {
+        dispatch(bandSetWarning(false));
+      }
+    })
+  );
 
   const setPointerAt = (index: number) => {
     dispatch(bandSetPointPos(index));
@@ -76,7 +112,17 @@ export default function Band() {
           +
         </button>
       </div>
-      <div className={"currentZustand flex justify-center mb-8"}>
+      <div
+        className={
+          "currentZustand flex flex-col content-center items-center justify-center mb-8"
+        }
+      >
+        {showWarning ? (
+          <IoIosWarning
+            color="orange"
+            title="Dieser Eingabewert ist nicht länger zulässig!"
+          />
+        ) : null}
         {/* <span className="relative">
                 <span className="block absolute -inset-1 w-12 rounded-full bg-thm-primary" aria-hidden="true"></span>
                 <span className="relative text-white text-center"> {currentZustand.value}</span>
