@@ -84,7 +84,7 @@ export default function Table() {
               </tbody>
             </table>
             <button
-              className={"w-full"}
+              className={"w-full disabled:opacity-50"}
               disabled={zustandsmenge.length === 0 ? true : false}
               onClick={() => dispatch(tableAddRow())}
             >

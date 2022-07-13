@@ -237,21 +237,21 @@ function Control() {
           </div>
           <div className={""}>
             <button
-              className={"invertedButton py-1 px-2 m-2"}
+              className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
               disabled={!executable}
               onClick={onPlay}
             >
               <FaPlay />
             </button>
             <button
-              className={"invertedButton py-1 px-2 m-2"}
+              className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
               disabled={!executable}
               onClick={stepByStep}
             >
               <FaStepForward />
             </button>
             <button
-              className={"invertedButton py-1 px-2 m-2"}
+              className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
               disabled={!executable}
               onClick={() => {
                 pauseMaschine ? changePause(false) : changePause(true);
@@ -260,7 +260,7 @@ function Control() {
               <FaPause />
             </button>
             <button
-              className={"invertedButton py-1 px-2 m-2"}
+              className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
               disabled={!executable}
               onClick={() => changeStopp(true)}
             >
