@@ -31,6 +31,7 @@ function Control() {
   store.subscribe(
     wPauseMaschine((newVal) => {
       pauseMaschine = newVal;
+      setMaschineRunning(false)
     })
   );
 
@@ -39,6 +40,7 @@ function Control() {
   store.subscribe(
     wStoppMaschine((newVal) => {
       stoppMaschine = newVal;
+      setMaschineRunning(false)
     })
   );
 
@@ -49,7 +51,6 @@ function Control() {
   };
   const changeStopp = (value: boolean) => {
     dispatch(alphabetChangeStoppMaschine(value));
-    // dispatch(bandResetPointer());
   };
 
   const initialZustand = useSelector(
@@ -146,12 +147,10 @@ function Control() {
       if (item.cells[4].value instanceof Direction) {
         switch (item.cells[4].value.label) {
           case "Rechts": {
-            // idx++;
             dispatch(bandChangePointPos(1));
             break;
           }
           case "Links": {
-            // idx--;
             dispatch(bandChangePointPos(-1));
             break;
           }
@@ -166,7 +165,6 @@ function Control() {
           if (item.cells[0].value.endzustand === true) {
             console.log("Endzustand erreicht!");
             changePause(true);
-            // await dispatch(bandResetPointer());
           } else {
             console.log("changeZustand");
             dispatch(tableSetActiveState(item.cells[2].value as Zustand));
@@ -177,7 +175,6 @@ function Control() {
     } else {
       console.log("Else");
       changePause(true);
-      // await dispatch(bandResetPointer());
     }
   };
 
@@ -185,14 +182,18 @@ function Control() {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
 
+  const [maschineRunning, setMaschineRunning] = useState(false);
+
   const onPlay = async () => {
+    setMaschineRunning(true)
     setSelectedRows();
     dispatch(alphabetChangeStoppMaschine(false));
     changePause(false);
-
+    
     //ToDo: Schleife hört nicht auf Änderungen von außerhalb...
     //...localCopyPause = true vom Pause Button wird nicht beachtet??
     while (stoppMaschine === false && pauseMaschine === false) {
+      setMaschineRunning(true)
       let tempSlider = 3000 / slider;
       console.log(tempSlider);
       await sleep(tempSlider);
@@ -203,6 +204,7 @@ function Control() {
     dispatch(tableSetActiveRow(undefined));
     dispatch(tableSetActiveState(initialZustand));
     changePause(false);
+    setMaschineRunning(false)
     dispatch(alphabetChangeStoppMaschine(false));
   };
 
@@ -238,21 +240,21 @@ function Control() {
           <div className={""}>
             <button
               className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
-              disabled={!executable}
+              disabled={!executable || maschineRunning}
               onClick={onPlay}
             >
               <FaPlay />
             </button>
             <button
               className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
-              disabled={!executable}
+              disabled={!executable || maschineRunning}
               onClick={stepByStep}
             >
               <FaStepForward />
             </button>
             <button
               className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
-              disabled={!executable}
+              disabled={!executable || !maschineRunning}
               onClick={() => {
                 pauseMaschine ? changePause(false) : changePause(true);
               }}
@@ -261,7 +263,7 @@ function Control() {
             </button>
             <button
               className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
-              disabled={!executable}
+              disabled={!executable || !maschineRunning}
               onClick={() => changeStopp(true)}
             >
               <FaStop />
