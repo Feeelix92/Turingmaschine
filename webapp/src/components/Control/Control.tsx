@@ -31,7 +31,7 @@ function Control() {
   store.subscribe(
     wPauseMaschine((newVal) => {
       pauseMaschine = newVal;
-      setMaschineRunning(false)
+      setMaschineRunning(false);
     })
   );
 
@@ -40,7 +40,7 @@ function Control() {
   store.subscribe(
     wStoppMaschine((newVal) => {
       stoppMaschine = newVal;
-      setMaschineRunning(false)
+      setMaschineRunning(false);
     })
   );
 
@@ -62,6 +62,7 @@ function Control() {
   const pointerIdx = useSelector(
     (state: RootState) => state.band.pointerPosition
   );
+  const bandWarning = useSelector((state: RootState) => state.band.showWarning);
 
   /////////// Rows from State ///////////
   let selectedRows: Row[] = [];
@@ -185,15 +186,15 @@ function Control() {
   const [maschineRunning, setMaschineRunning] = useState(false);
 
   const onPlay = async () => {
-    setMaschineRunning(true)
+    setMaschineRunning(true);
     setSelectedRows();
     dispatch(alphabetChangeStoppMaschine(false));
     changePause(false);
-    
+
     //ToDo: Schleife hört nicht auf Änderungen von außerhalb...
     //...localCopyPause = true vom Pause Button wird nicht beachtet??
     while (stoppMaschine === false && pauseMaschine === false) {
-      setMaschineRunning(true)
+      setMaschineRunning(true);
       let tempSlider = 3000 / slider;
       console.log(tempSlider);
       await sleep(tempSlider);
@@ -204,7 +205,7 @@ function Control() {
     dispatch(tableSetActiveRow(undefined));
     dispatch(tableSetActiveState(initialZustand));
     changePause(false);
-    setMaschineRunning(false)
+    setMaschineRunning(false);
     dispatch(alphabetChangeStoppMaschine(false));
   };
 
@@ -240,21 +241,21 @@ function Control() {
           <div className={""}>
             <button
               className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
-              disabled={!executable || maschineRunning}
+              disabled={!executable || maschineRunning || bandWarning}
               onClick={onPlay}
             >
               <FaPlay />
             </button>
             <button
               className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
-              disabled={!executable || maschineRunning}
+              disabled={!executable || maschineRunning || bandWarning}
               onClick={stepByStep}
             >
               <FaStepForward />
             </button>
             <button
               className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
-              disabled={!executable || !maschineRunning}
+              disabled={!executable || !maschineRunning || bandWarning}
               onClick={() => {
                 pauseMaschine ? changePause(false) : changePause(true);
               }}
@@ -263,7 +264,7 @@ function Control() {
             </button>
             <button
               className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
-              disabled={!executable || !maschineRunning}
+              disabled={!executable || !maschineRunning || bandWarning}
               onClick={() => changeStopp(true)}
             >
               <FaStop />
