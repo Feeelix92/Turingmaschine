@@ -98,7 +98,6 @@ export default function TeepeeBand() {
                                 onClick={() => setPointerLeft()}>
                             <FaAngleLeft />
                         </button>
-
                         <button className={"md:invisible secondaryButton"}
                                 onClick={() => setPointerRight()}>
                             <FaAngleRight />
