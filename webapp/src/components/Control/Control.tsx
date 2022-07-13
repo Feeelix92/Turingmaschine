@@ -6,14 +6,14 @@ import {
   tableSetActiveRow,
   tableSetActiveState,
   tableSetWatchedRows,
-} from "../../redux/tableStore";
+} from "../../redux/generalStore";
 import watch from "redux-watch";
 import {
   bandChangeItemAt,
   bandChangePointPos,
   bandResetPointer,
 } from "../../redux/bandStore";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   alphabetChangePauseMaschine,
   alphabetChangeStoppMaschine,
@@ -53,14 +53,14 @@ function Control() {
   );
 
   const currentBand = useSelector((state: RootState) => state.band.currentBand);
-  const currentTable = useSelector((state: RootState) => state.table.rows);
+  const currentTable = useSelector((state: RootState) => state.general.rows);
   const pointerIdx = useSelector(
     (state: RootState) => state.band.pointerPosition
   );
 
   /////////// Rows from State ///////////
   let selectedRows: Row[] = [];
-  let wSelectedRows = watch(store.getState, "table.watchedRows");
+  let wSelectedRows = watch(store.getState, "general.watchedRows");
   store.subscribe(
     wSelectedRows((newVal) => {
       selectedRows = newVal;
@@ -78,7 +78,7 @@ function Control() {
 
   /////////// ActiveState from State ///////////
   let activeState = initialZustand;
-  let wActiveState = watch(store.getState, "table.activeState");
+  let wActiveState = watch(store.getState, "general.activeState");
   store.subscribe(
     wActiveState((newVal) => {
       activeState = newVal;

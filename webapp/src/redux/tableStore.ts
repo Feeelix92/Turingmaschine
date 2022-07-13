@@ -39,104 +39,122 @@ interface updateCellType {
 //   },
 // ];
 
-export const initialZustand: Zustand = new Zustand("q1", "q1", true, false, false);
-export const initialZustand2: Zustand = new Zustand("q2", "q2", false, true, false);
+// export const initialZustand: Zustand = new Zustand(
+//   "q1",
+//   "q1",
+//   true,
+//   false,
+//   false
+// );
+// export const initialZustand2: Zustand = new Zustand(
+//   "q2",
+//   "q2",
+//   false,
+//   true,
+//   false
+// );
 export const initialZustand3: Zustand = new Zustand(
   "erstellen",
   "erstellen",
   false,
-  false, false
+  false,
+  false
 );
 
-export const initialCell: Cell[] = [
-  {
-    value: initialZustand,
-    editField: false,
-  },
-  { value: "1", editField: true },
-  {
-    value: initialZustand,
-    editField: false,
-  },
-  { value: "0", editField: true },
-  {
-    value: new Direction(directions[0].value, directions[0].label),
-    editField: false,
-  },
-];
-export const initialCell2: Cell[] = [
-  {
-    value: initialZustand,
-    editField: false,
-  },
-  { value: "0", editField: true },
-  {
-    value: initialZustand,
-    editField: false,
-  },
-  { value: "1", editField: true },
-  {
-    value: new Direction(directions[0].value, directions[0].label),
-    editField: false,
-  },
-];
-export const initialCell3: Cell[] = [
-  {
-    value: initialZustand,
-    editField: false,
-  },
-  { value: "B", editField: true },
-  {
-    value: initialZustand2,
-    editField: false,
-  },
-  { value: "B", editField: true },
-  {
-    value: new Direction(directions[2].value, directions[2].label),
-    editField: false,
-  },
-];
-export const initialCell4: Cell[] = [
-  {
-    value: initialZustand2,
-    editField: false,
-  },
-  { value: "B", editField: true },
-  {
-    value: initialZustand,
-    editField: false,
-  },
-  { value: "B", editField: true },
-  {
-    value: new Direction(directions[0].value, directions[0].label),
-    editField: false,
-  },
-];
+// export const initialCell: Cell[] = [
+//   {
+//     value: initialZustand,
+//     editField: false,
+//   },
+//   { value: "1", editField: true },
+//   {
+//     value: initialZustand,
+//     editField: false,
+//   },
+//   { value: "0", editField: true },
+//   {
+//     value: new Direction(directions[0].value, directions[0].label),
+//     editField: false,
+//   },
+// ];
+// export const initialCell2: Cell[] = [
+//   {
+//     value: initialZustand,
+//     editField: false,
+//   },
+//   { value: "0", editField: true },
+//   {
+//     value: initialZustand,
+//     editField: false,
+//   },
+//   { value: "1", editField: true },
+//   {
+//     value: new Direction(directions[0].value, directions[0].label),
+//     editField: false,
+//   },
+// ];
+// export const initialCell3: Cell[] = [
+//   {
+//     value: initialZustand,
+//     editField: false,
+//   },
+//   { value: "B", editField: true },
+//   {
+//     value: initialZustand2,
+//     editField: false,
+//   },
+//   { value: "B", editField: true },
+//   {
+//     value: new Direction(directions[2].value, directions[2].label),
+//     editField: false,
+//   },
+// ];
+// export const initialCell4: Cell[] = [
+//   {
+//     value: initialZustand2,
+//     editField: false,
+//   },
+//   { value: "B", editField: true },
+//   {
+//     value: initialZustand,
+//     editField: false,
+//   },
+//   { value: "B", editField: true },
+//   {
+//     value: new Direction(directions[0].value, directions[0].label),
+//     editField: false,
+//   },
+// ];
 
-const initialRow: Row[] = [
-  {
-    cells: initialCell,
-    isFinal: false,
-  },
-  {
-    cells: initialCell2,
-    isFinal: false,
-  },
-  {
-    cells: initialCell3,
-    isFinal: false,
-  },
-  {
-    cells: initialCell4,
-    isFinal: true,
-  },
-];
+// const initialRow: Row[] = [
+//   {
+//     cells: initialCell,
+//     isFinal: false,
+//   },
+//   {
+//     cells: initialCell2,
+//     isFinal: false,
+//   },
+//   {
+//     cells: initialCell3,
+//     isFinal: false,
+//   },
+//   {
+//     cells: initialCell4,
+//     isFinal: true,
+//   },
+// ];
 
-const activeRow: Row | undefined = undefined
+// const activeState: Zustand = new Zustand("q1", "q1", true, false, false);
+let activeRow: Row | undefined;
 
 const watchedRows: Row[] = [];
 
-const activeState: Zustand = new Zustand("q1", "q1", true, false, false);
+let activeState: Zustand | undefined;
+
+const actualStates: Zustand[] = [];
+
+let initialRow: Row | undefined;
 
 export const tableSlice = createSlice({
   name: "table",
@@ -146,6 +164,7 @@ export const tableSlice = createSlice({
     activeRow: activeRow,
     watchedRows: watchedRows,
     activeState: activeState,
+    actualStates: actualStates,
   },
   reducers: {
     tableAddRow: (state) => {
@@ -211,7 +230,7 @@ export const tableSlice = createSlice({
       //update the rows in state with our new rows-array
       state.rows = newRows;
     },
-    tableSetActiveRow: (state, row: PayloadAction<Row | undefined>) => {
+    tableSetActiveRow: (state, row: PayloadAction<Row>) => {
       state.activeRow = row.payload;
     },
     tableSetWatchedRows: (state, rows: PayloadAction<Row[]>) => {
@@ -219,6 +238,12 @@ export const tableSlice = createSlice({
     },
     tableSetActiveState: (state, newVal: PayloadAction<Zustand>) => {
       state.activeState = newVal.payload;
+    },
+    tableGetStates: (state, newVal: PayloadAction<Zustand[]>) => {
+      state.actualStates = newVal.payload;
+    },
+    tableSetInitialRow: (state, newVal: PayloadAction<Row>) => {
+      state.rows = newVal.payload;
     },
   },
 });
@@ -231,6 +256,8 @@ export const {
   tableSetActiveRow,
   tableSetWatchedRows,
   tableSetActiveState,
+  tableGetStates,
+  tableSetInitialRow,
 } = tableSlice.actions;
 
 export default tableSlice.reducer;

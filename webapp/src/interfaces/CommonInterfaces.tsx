@@ -104,3 +104,35 @@ export interface ZustandSelectProps {
   updateValue: (arg: Zustand) => void;
 }
 
+export interface EingabeAlphabetDialogOptions {
+  label: string;
+  alphabet: Alphabet;
+  icon?: boolean;
+}
+
+export interface Alphabet {
+  key: number;
+  alphabet: EingabeAlphabet[];
+}
+
+export interface EingabeAlphabet {
+  label: string;
+  value: string;
+  warningModus: boolean;
+}
+
+export interface ChangeWarningModus {
+  prop: string;
+  value: boolean;
+  payload?:
+    | Alphabet
+    | Zustand
+    | Zustand[]
+    | EingabeAlphabet[]
+    | EingabeAlphabetDialogOptions[];
+}
+export interface updateCellType {
+  cellIndex: React.Key;
+  rowIndex: React.Key;
+  value: string | Zustand | Direction;
+}

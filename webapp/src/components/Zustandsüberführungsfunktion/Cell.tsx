@@ -9,7 +9,7 @@ import {
   Zustand,
 } from "../../interfaces/CommonInterfaces";
 import { RootState, store } from "../../redux/store";
-import { initialZustand3 } from "../../redux/tableStore";
+import { initialZustand3 } from "../../redux/generalStore";
 import EditField from "./EditField";
 import ZustandSelect from "./ZustandSelect";
 
@@ -26,7 +26,21 @@ export default function Cell(props: CellProps) {
   let wStates = watch(store.getState, "general.zustandsmenge");
   store.subscribe(
     wStates((newVal) => {
+      console.log("watcher triggered");
+
       states = newVal;
+
+      console.log(states);
+
+      if (props.value instanceof Zustand) {
+        states.forEach((state) => {
+          if (props.value instanceof Zustand) {
+            if (state.value === props.value.value) {
+              handleChange(state);
+            }
+          }
+        });
+      }
     })
   );
 

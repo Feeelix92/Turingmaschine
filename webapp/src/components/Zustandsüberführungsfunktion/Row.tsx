@@ -10,7 +10,7 @@ import {
   initialZustand,
   tableDeleteRow,
   tableUpdateCell,
-} from "../../redux/tableStore";
+} from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import Cell from "./Cell";
 import watch from "redux-watch";
@@ -58,10 +58,10 @@ export default function Row(props: RowProps) {
     }
   }
 
-  const activeRow = useSelector((state: RootState) => state.table.activeRow);
+  const activeRow = useSelector((state: RootState) => state.general.activeRow);
   /////////// Active-Row from State ///////////
   let row = activeRow;
-  let wRow = watch(store.getState, "table.activeRow");
+  let wRow = watch(store.getState, "general.activeRow");
   store.subscribe(
     wRow((newVal) => {
       row = newVal;

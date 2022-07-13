@@ -1,17 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import watch from "redux-watch";
 import { RootState, store } from "../../redux/store";
-import { tableDeleteRow, tableAddRow } from "../../redux/tableStore";
+import { tableDeleteRow, tableAddRow } from "../../redux/generalStore";
 import Row from "./Row";
 
 export default function Table() {
-  const loadedRows = useSelector((state: RootState) => state.table.rows);
-  const header = useSelector((state: RootState) => state.table.header);
+  const loadedRows = useSelector((state: RootState) => state.general.rows);
+  const header = useSelector((state: RootState) => state.general.header);
   const dispatch = useDispatch();
 
   /////////// Rows from State ///////////
   let rows = loadedRows;
-  let wRows = watch(store.getState, "table.rows");
+  let wRows = watch(store.getState, "general.rows");
   store.subscribe(
     wRows((newVal) => {
       rows = newVal;
