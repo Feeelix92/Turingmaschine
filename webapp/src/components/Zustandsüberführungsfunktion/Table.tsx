@@ -1,7 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import watch from "redux-watch";
 import { RootState, store } from "../../redux/store";
-import { tableDeleteRow, tableAddRow } from "../../redux/generalStore";
+import {
+  tableDeleteRow,
+  tableAddRow,
+  maschineChangeExecutable,
+} from "../../redux/generalStore";
 import Row from "./Row";
 
 export default function Table() {
@@ -15,8 +19,33 @@ export default function Table() {
   store.subscribe(
     wRows((newVal) => {
       rows = newVal;
+
+      let executable = true;
+
+      rows.forEach((row) => {
+        row.cells.forEach((cell) => {
+          if (cell.warningMode === true) {
+            executable = false;
+          }
+        });
+      });
+
+      dispatch(maschineChangeExecutable(executable));
     })
   );
+
+  const zustandsmenge = useSelector(
+    (state: RootState) => state.general.zustandsmenge
+  );
+
+  // /////////// States from State ///////////
+  // let states = zustandsmenge;
+  // let wStates = watch(store.getState, "general.zustandsmenge");
+  // store.subscribe(
+  //   wStates((newVal) => {
+  //     states = newVal;
+  //   })
+  // );
 
   return (
     <div className="flex flex-col col-span-2 border rounded p-2">
@@ -56,6 +85,7 @@ export default function Table() {
             </table>
             <button
               className={"w-full"}
+              disabled={zustandsmenge.length === 0 ? true : false}
               onClick={() => dispatch(tableAddRow())}
             >
               +

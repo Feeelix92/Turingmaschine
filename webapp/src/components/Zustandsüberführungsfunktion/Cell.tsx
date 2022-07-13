@@ -20,7 +20,6 @@ export default function Cell(props: CellProps) {
   const zustandsmenge = useSelector(
     (state: RootState) => state.general.zustandsmenge
   );
-  const dispatch = useDispatch()
 
   const temp = [initialZustand3];
 
@@ -40,11 +39,22 @@ export default function Cell(props: CellProps) {
           }
         });
       }
+      checkWarningModus();
     })
   );
 
   const eingabeAlphabet = useSelector(
     (state: RootState) => state.general.bandAlphabet
+  );
+  /////////// Eingabealphabet from State ///////////
+  let eALphabet = eingabeAlphabet;
+  let wEingabeAlphabet = watch(store.getState, "general.bandAlphabet");
+  store.subscribe(
+    wEingabeAlphabet((newVal) => {
+      eALphabet = newVal;
+      console.log("Eingabealphabet changed!");
+      checkWarningModus();
+    })
   );
 
   const [editMode, setEditMode] = React.useState(false);
@@ -66,6 +76,10 @@ export default function Cell(props: CellProps) {
       // pass chosen options to the parent to update the cell
       props.updateCellValue(props.index, newValue);
     }
+  }
+
+  function setWarning(newValue: boolean) {
+    props.updateCellValue(props.index, newValue);
   }
 
   useEffect(() => {
@@ -111,18 +125,27 @@ export default function Cell(props: CellProps) {
     }
   }
 
-  useEffect(() => {
-    checkWarningModus()
-  }, [props.value]);
-
   function checkWarningModus() {
-    let tempBool = states.some( 
-      value => { return value.value === props.value } );
-      if(tempBool){
-        props.warningModus === false
-      } else{
-        props.warningModus === true
+    if (props.value instanceof Zustand) {
+      let tempBool = states.some((value) => {
+        let val = props.value as Zustand;
+        return value.value === val.value;
+      });
+      if (tempBool) {
+        setWarning(false);
+      } else {
+        setWarning(true);
       }
+    } else if (!(props.value instanceof Direction)) {
+      let tempBool = eALphabet.some((value) => {
+        return value.value === props.value;
+      });
+      if (tempBool) {
+        setWarning(false);
+      } else {
+        setWarning(true);
+      }
+    }
   }
 
   return (
@@ -139,9 +162,6 @@ export default function Cell(props: CellProps) {
       ) : (
         ""
       )}
-      {props.warningModus ? ( 
-        <IoIosWarning color="orange" title="Dieser Zustand ist nicht länger verfügbar!"/>    
-        ) : null}
 
       {props.value instanceof Direction ? (
         <Select
@@ -161,7 +181,7 @@ export default function Cell(props: CellProps) {
           name="value"
           id="tableValueInput"
           className={
-            "w-full min-w-full rounded text-gray-700 focus:outline-none items-center border rounded text-center"
+            "w-full rounded text-gray-700 focus:outline-none items-center border rounded text-center"
           }
           value={props.value}
           onChange={(e) => checkValue(props.index, e.target.value)}
@@ -170,6 +190,13 @@ export default function Cell(props: CellProps) {
       ) : (
         ""
       )}
+
+      {props.warningMode ? (
+        <IoIosWarning
+          color="orange"
+          title="Dieser Eingabewert ist nicht länger zulässig!"
+        />
+      ) : null}
 
       {editMode && props.showEditField ? (
         <EditField options={eingabeAlphabet} updateValue={chooseOption} />

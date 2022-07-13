@@ -83,16 +83,19 @@ export const initialCell: Cell[] = [
   {
     value: initialZustandsmenge[0],
     editField: false,
+    warningMode: false,
   },
-  { value: "1", editField: true },
+  { value: "1", editField: true, warningMode: false },
   {
     value: initialZustandsmenge[0],
     editField: false,
+    warningMode: false,
   },
-  { value: "0", editField: true },
+  { value: "1", editField: true, warningMode: false },
   {
     value: new Direction(directions[0].value, directions[0].label),
     editField: false,
+    warningMode: false,
   },
 ];
 const initialRow: Row[] = [
@@ -126,6 +129,7 @@ export const generalSlice = createSlice({
     //// Maschine ////
     pauseMaschine: false,
     stoppMaschine: false,
+    executable: true,
     //// Table ////
     header: ["Zustand", "Lese", "Neuer Zustand", "Schreibe", "Gehe nach"],
     rows: initialRow,
@@ -244,6 +248,9 @@ export const generalSlice = createSlice({
     alphabetChangeStoppMaschine: (state, value: PayloadAction<boolean>) => {
       state.stoppMaschine = value.payload;
     },
+    maschineChangeExecutable: (state, value: PayloadAction<boolean>) => {
+      state.executable = value.payload;
+    },
 
     ///////////////////// Table /////////////////////
     tableAddRow: (state) => {
@@ -258,16 +265,19 @@ export const generalSlice = createSlice({
           {
             value: state.zustandsmenge[0],
             editField: false,
+            warningMode: false,
           },
-          { value: "1", editField: true },
+          { value: "1", editField: true, warningMode: false },
           {
             value: state.zustandsmenge[0],
             editField: false,
+            warningMode: false,
           },
-          { value: "1", editField: true },
+          { value: "1", editField: true, warningMode: false },
           {
             value: new Direction(directions[0].value, directions[0].label),
             editField: false,
+            warningMode: false,
           },
         ],
         isFinal: false,
@@ -287,30 +297,50 @@ export const generalSlice = createSlice({
       state.rows = newRows;
     },
     tableUpdateCell: (state, updateCell: PayloadAction<updateCellType>) => {
-      // console.log(current(state));
       const newCells: Cell[] = state.rows[
         updateCell.payload.rowIndex as number
       ].cells.slice(
         0,
         state.rows[updateCell.payload.rowIndex as number].cells.length
       );
-      newCells[updateCell.payload.cellIndex as number].value =
-        updateCell.payload.value;
-      // tableUpdateRow({index: updateCell.payload.index, cells: newCells})
 
-      const newRows: Row[] = state.rows.slice(0, state.rows.length) as Row[];
-      // overwrite rows at certain index with new value
-      newRows[updateCell.payload.rowIndex as number].cells = newCells;
+      if (typeof updateCell.payload.value === "boolean") {
+        newCells[updateCell.payload.cellIndex as number].warningMode =
+          updateCell.payload.value;
+        // tableUpdateRow({index: updateCell.payload.index, cells: newCells})
 
-      if (newCells[0].value instanceof Zustand) {
-        if (newCells[0].value.endzustand === true) {
-          newRows[updateCell.payload.rowIndex as number].isFinal = true;
-        } else {
-          newRows[updateCell.payload.rowIndex as number].isFinal = false;
+        const newRows: Row[] = state.rows.slice(0, state.rows.length) as Row[];
+        // overwrite rows at certain index with new value
+        newRows[updateCell.payload.rowIndex as number].cells = newCells;
+
+        if (newCells[0].value instanceof Zustand) {
+          if (newCells[0].value.endzustand === true) {
+            newRows[updateCell.payload.rowIndex as number].isFinal = true;
+          } else {
+            newRows[updateCell.payload.rowIndex as number].isFinal = false;
+          }
         }
+        //update the rows in state with our new rows-array
+        state.rows = newRows;
+      } else {
+        newCells[updateCell.payload.cellIndex as number].value =
+          updateCell.payload.value;
+        // tableUpdateRow({index: updateCell.payload.index, cells: newCells})
+
+        const newRows: Row[] = state.rows.slice(0, state.rows.length) as Row[];
+        // overwrite rows at certain index with new value
+        newRows[updateCell.payload.rowIndex as number].cells = newCells;
+
+        if (newCells[0].value instanceof Zustand) {
+          if (newCells[0].value.endzustand === true) {
+            newRows[updateCell.payload.rowIndex as number].isFinal = true;
+          } else {
+            newRows[updateCell.payload.rowIndex as number].isFinal = false;
+          }
+        }
+        //update the rows in state with our new rows-array
+        state.rows = newRows;
       }
-      //update the rows in state with our new rows-array
-      state.rows = newRows;
     },
     tableSetActiveRow: (state, row: PayloadAction<Row | undefined>) => {
       state.activeRow = row.payload;
@@ -385,6 +415,7 @@ export const {
   alphabetDeleteZustand,
   alphabetChangePauseMaschine,
   alphabetChangeStoppMaschine,
+  maschineChangeExecutable,
   alphabetChangeWarningModus,
   tableAddRow,
   tableDeleteRow,

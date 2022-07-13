@@ -6,11 +6,7 @@ import {
 } from "../../interfaces/CommonInterfaces";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  initialZustand,
-  tableDeleteRow,
-  tableUpdateCell,
-} from "../../redux/generalStore";
+import { tableDeleteRow, tableUpdateCell } from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import Cell from "./Cell";
 import watch from "redux-watch";
@@ -38,6 +34,14 @@ export default function Row(props: RowProps) {
           cellIndex: index,
           rowIndex: props.index,
           value: tempDirection,
+        })
+      );
+    } else if (typeof value === "boolean") {
+      dispatch(
+        tableUpdateCell({
+          cellIndex: index,
+          rowIndex: props.index,
+          value: value,
         })
       );
     } else {
@@ -94,7 +98,7 @@ export default function Row(props: RowProps) {
                 index={key}
                 showEditField={value.editField}
                 updateCellValue={setCellValue}
-                warningModus={false}
+                warningMode={value.warningMode}
               />
             ))
         : props.cells.map((value, key: React.Key) => (
@@ -104,7 +108,7 @@ export default function Row(props: RowProps) {
               index={key}
               showEditField={value.editField}
               updateCellValue={setCellValue}
-              warningModus={false}
+              warningMode={value.warningMode}
             />
           ))}
       {visible ? (

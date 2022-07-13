@@ -22,6 +22,10 @@ import {
 function Control() {
   const dispatch = useDispatch();
 
+  const executable = useSelector(
+    (state: RootState) => state.general.executable
+  );
+
   let pauseMaschine: Boolean = false;
   let wPauseMaschine = watch(store.getState, "general.pauseMaschine");
   store.subscribe(
@@ -232,17 +236,23 @@ function Control() {
             <span> max</span>
           </div>
           <div className={""}>
-            <button className={"invertedButton py-1 px-2 m-2"} onClick={onPlay}>
+            <button
+              className={"invertedButton py-1 px-2 m-2"}
+              disabled={!executable}
+              onClick={onPlay}
+            >
               <FaPlay />
             </button>
             <button
               className={"invertedButton py-1 px-2 m-2"}
+              disabled={!executable}
               onClick={stepByStep}
             >
               <FaStepForward />
             </button>
             <button
               className={"invertedButton py-1 px-2 m-2"}
+              disabled={!executable}
               onClick={() => {
                 pauseMaschine ? changePause(false) : changePause(true);
               }}
@@ -251,6 +261,7 @@ function Control() {
             </button>
             <button
               className={"invertedButton py-1 px-2 m-2"}
+              disabled={!executable}
               onClick={() => changeStopp(true)}
             >
               <FaStop />
