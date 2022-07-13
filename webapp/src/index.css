@@ -187,15 +187,15 @@
 /* Toilet paper */
 
 .teepeeContainerLeft {
-    @apply animate-rollLeft
+    @apply animate-rollLeft pt-10;
 }
 
 .teepeeContainerRight {
-    @apply animate-rollRight
+    @apply animate-rollRight pt-10
 }
 
 .teepeeBand-container {
-    @apply animate-fadeIn overflow-x-scroll overflow-y-hidden whitespace-nowrap pt-10 flex flex-row mb-5 justify-start max-w-max;
+    @apply animate-fadeIn overflow-x-scroll overflow-y-hidden whitespace-nowrap pt-20 flex flex-row justify-start max-w-max;
 }
 
 .teepeeBandItem {
@@ -229,7 +229,7 @@
 }
 
 .teepeePointer::after {
-    @apply content-[''] animate-bounce rounded-b absolute bg-gradient-to-b from-white to-thm-primary w-[50px] h-[15px] sm:w-[100px] sm:h-[25px] bottom-[50px] sm:bottom-[100px] -left-0.5 z-10;
+    @apply content-[''] bg-[url('./assets/images/brick_black.svg')] bg-center bg-no-repeat animate-bounce rounded-b absolute w-[50px] h-[25px] sm:w-[100px] sm:h-[50px] bottom-[50px] sm:bottom-[100px] -left-0.5 z-10;
 }
 
 .teepeePointer:hover {
