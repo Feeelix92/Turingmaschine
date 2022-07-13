@@ -43,7 +43,7 @@ export default function TeepeeBand() {
 
     return (
         <div className={"w-full"}>
-            <div className={"flex"}>
+            <div className={"flex h-96"}>
                 <div className={"teepeeContainerLeft"} onClick={() => dispatch(bandAddField('before'))}>
                         <div className={"teepeeHead"}/>
                         <div className={"teepeeBody"}/>
@@ -64,17 +64,6 @@ export default function TeepeeBand() {
                                setPointerAt={() => setPointerAt(index)}
                             />
                         ))}
-                        {/*<div className={"teepeeBandItem"}/>
-                        <div className={"teepeeBandItem"}/>
-                        <div className={"teepeeBandItem"}/>
-                        <div className={"teepeeBandItem"}/>
-                        <div className={"teepeeBandItem"}/>
-                        <div className={"teepeeBandItem"}/>
-                        <div className={"teepeeBandItem"}/>
-                        <div className={"teepeeBandItem"}/>
-                        <div className={"teepeeBandItem"}/>
-                        <div className={"teepeeBandItem"}/>
-                        <div className={"teepeeBandItem"}/>*/}
                     </div>
                     <div className={"teepeeContainerRight"} onClick={() => dispatch(bandAddField('after'))}>
                         <div className={"teepeeHead"}/>

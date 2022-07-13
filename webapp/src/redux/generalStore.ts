@@ -15,6 +15,7 @@ export interface Alphabet {
 export interface EingabeAlphabet {
     label: string;
     value: string;
+    icon?: string;
 }
 
 export const initialAnfangszustand: Zustand = {value: "q1",label: "q1", anfangszustand: true, endzustand: false}
@@ -42,9 +43,9 @@ const defaultAlphabetOption1: Alphabet = {
 const defaultAlphabetOption2: Alphabet = {
     key: 2,
     alphabet: [
-        {label: '1', value: '1'},
-        {label: '#', value: '#'}
-    ]
+        {label: '1', value: '1', icon: "webapp/src/assets/images/brick_white.svg"},
+        {label: '#', value: '#', icon: "webapp/src/assets/images/brick_black.svg",}
+    ],
 }
 const defaultAlphabetOption3: Alphabet = {
     key: 3,

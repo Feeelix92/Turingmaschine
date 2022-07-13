@@ -116,10 +116,10 @@ export default function BandItem(props: BandItemProps) {
 
                 />
                 {editMode && props.showEditField ? (
-                    <div className={"teepeeEditBtnDiv"}>
+                    <div className={"editBtnDiv"}>
                         <EditField options={props.alphabet} updateValue={chooseOption}/>
                         <button
-                            className={"teepeeEditBtn"}
+                            className={"editBtn"}
                             onClick={() => deleteValue(props.index)}
                         >
                             <FaTrash/>
