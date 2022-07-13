@@ -79,7 +79,9 @@ export default function Row(props: RowProps) {
   return (
     <tr
       className={`border-b flex w-full hover:bg-gray-100 ${
-        row != undefined && row.cells === props.cells ? "bg-lime-300" : ""
+        activeRow != undefined && activeRow.cells === props.cells
+          ? "bg-lime-300"
+          : ""
       }`}
     >
       {visible
@@ -92,6 +94,7 @@ export default function Row(props: RowProps) {
                 index={key}
                 showEditField={value.editField}
                 updateCellValue={setCellValue}
+                warningModus={false}
               />
             ))
         : props.cells.map((value, key: React.Key) => (
@@ -101,6 +104,7 @@ export default function Row(props: RowProps) {
               index={key}
               showEditField={value.editField}
               updateCellValue={setCellValue}
+              warningModus={false}
             />
           ))}
       {visible ? (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Select, { OnChangeValue } from "react-select";
 import { Direction, Zustand } from "../../interfaces/CommonInterfaces";
@@ -36,12 +36,12 @@ function ConditionsList() {
   const initAnfangsZustand = useSelector(
     (state: RootState) => state.general.anfangsZustand
   );
-  const endZustand = useSelector(
+  const initEndZustand = useSelector(
     (state: RootState) => state.general.endZustand
   );
   const possibleEnd = useSelector(
     (state: RootState) => state.general.zustandsmenge
-  ).filter((zustand) => !zustand.anfangszustand);
+  );
 
   let zustandsmenge: Zustand[] = initZustandsmenge;
   let wZustandsmenge = watch(store.getState, "general.zustandsmenge");
@@ -55,6 +55,13 @@ function ConditionsList() {
   store.subscribe(
     wAnfangsZustand((newVal) => {
       anfangsZustand = newVal;
+    })
+  );
+  let endZustand: Zustand[] = initEndZustand;
+  let wEndZustand = watch(store.getState, "general.endZustand");
+  store.subscribe(
+    wEndZustand((newVal) => {
+      endZustand = newVal;
     })
   );
 
@@ -83,32 +90,28 @@ function ConditionsList() {
 
   function handleChange(newValue: OnChangeValue<Zustand, false>) {
     if (newValue) {
-      if (!newValue.endzustand) {
-        const newAnfangszustand = new Zustand(
-          newValue.label,
-          newValue.value,
-          true,
-          false,
-          false
-        );
-        dispatch(alphabetChangeAnfangszustand(newAnfangszustand));
-      } else {
-        const newAnfangszustand = new Zustand(
-          newValue.label,
-          newValue.value,
-          true,
-          false,
-          false
-        );
-        dispatch(alphabetChangeAnfangszustand(newAnfangszustand));
-        dispatch(alphabetClearEndzustand());
-        alert("Bitte vergiss nicht deine Endzustandsmenge neu zu setzen!");
-      }
+      // if (!newValue.endzustand) {
+      //     const newAnfangszustand = new Zustand(newValue.label, newValue.value, true, false)
+      //     dispatch(alphabetChangeAnfangszustand(newAnfangszustand))
+      // } else {
+      const newAnfangszustand = new Zustand(
+        newValue.label,
+        newValue.value,
+        true,
+        false,
+        false
+      );
+      dispatch(alphabetChangeAnfangszustand(newAnfangszustand));
+      // dispatch(alphabetClearEndzustand())
+      // alert("Bitt vergiss nicht deine Endzustandsmenge neu zu setzen!");
+      // }
+      checkWarningModus();
     }
   }
 
   function handleChangeMulti(newValue: OnChangeValue<Zustand[], false>) {
     if (newValue) {
+      // if (newValue.filter(zustand => !zustand.anfangszustand)) {
       console.log(
         "Anfang",
         anfangsZustand,
@@ -132,6 +135,8 @@ function ConditionsList() {
         );
       });
       dispatch(alphabetChangeEndzustand(temp));
+      checkWarningModus();
+      // }
     }
   }
 
@@ -167,17 +172,20 @@ function ConditionsList() {
     setShowZustandsfunktion(!showZustandsfunktion);
   }
 
-  function changeZustandsmenge() {
-    dispatch(alphabetDeleteZustand());
-    let wrongAnfangszustand = false;
-    zustandsmenge.forEach((zustand) => {
-      if (zustand.value === anfangsZustand.value) {
-        wrongAnfangszustand = false;
-      } else {
-        wrongAnfangszustand = true;
-      }
+  function checkWarningModus() {
+    setEndZustandWarningOn(false);
+    let tempBool = zustandsmenge.some((value) => {
+      return value.value === anfangsZustand.value;
     });
-    if (wrongAnfangszustand) {
+    if (tempBool) {
+      dispatch(
+        alphabetChangeWarningModus({
+          prop: "anfangsZustand",
+          value: false,
+          payload: anfangsZustand,
+        })
+      );
+    } else {
       dispatch(
         alphabetChangeWarningModus({
           prop: "anfangsZustand",
@@ -186,8 +194,41 @@ function ConditionsList() {
         })
       );
     }
-    console.log(anfangsZustand);
+    endZustand.forEach((endZustand) => {
+      let tempBool2 = zustandsmenge.some((value) => {
+        return value.value === endZustand.value;
+      });
+
+      if (tempBool2) {
+        endZustand.warningModus = false;
+      } else {
+        endZustand.warningModus = true;
+      }
+    });
+    dispatch(
+      alphabetChangeWarningModus({
+        prop: "endZustand",
+        value: true,
+        payload: endZustand,
+      })
+    );
+    endZustand.forEach((endZustand) => {
+      if (endZustand.warningModus === true) {
+        setEndZustandWarningOn(true);
+      }
+    });
   }
+
+  function changeZustandsmenge(push: boolean) {
+    if (push === false) {
+      dispatch(alphabetDeleteZustand());
+    } else {
+      dispatch(alphabetPushToZustand());
+    }
+    checkWarningModus();
+  }
+
+  const [endZustandWarningOn, setEndZustandWarningOn] = useState(false);
 
   return (
     <div
@@ -221,7 +262,10 @@ function ConditionsList() {
             >
               {kA}
               {bandAlphabet.map((value, index) => (
-                <span key={index}>{value.value},</span>
+                <span key={index}>
+                  {value.value}
+                  {index === bandAlphabet.length - 1 ? "" : ","}
+                </span>
               ))}
               {kZ}
             </div>
@@ -239,17 +283,23 @@ function ConditionsList() {
             >
               {kA}
               {zustandsmenge.map((value, index) => (
-                <span key={index}>{value.value}, </span>
+                <span key={index}>
+                  {value.value}
+                  {index === zustandsmenge.length - 1 ? "" : ","}
+                </span>
               ))}
               {kZ}
             </div>
             <div className={"flex justify-end gap-2 col-span-1"}>
-              <button className={"w-10"} onClick={() => changeZustandsmenge()}>
+              <button
+                className={"w-10"}
+                onClick={() => changeZustandsmenge(false)}
+              >
                 -
               </button>
               <button
                 className={"w-10"}
-                onClick={() => dispatch(alphabetPushToZustand())}
+                onClick={() => changeZustandsmenge(true)}
               >
                 +
               </button>
@@ -297,6 +347,12 @@ function ConditionsList() {
               options={possibleEnd}
               isMulti={true}
             />
+            {endZustandWarningOn ? (
+              <IoIosWarning
+                color="orange"
+                title="Einer der Endzustände ist nicht länger vorhanden!"
+              />
+            ) : null}
           </div>
           <div
             className={

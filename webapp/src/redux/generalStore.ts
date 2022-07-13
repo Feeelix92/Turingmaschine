@@ -15,10 +15,9 @@ import {
 ///////////////////// Zustandsmenge /////////////////////
 const initialZustandsmenge: Zustand[] = [
   new Zustand("q1", "q1", true, false, false),
-  new Zustand("q2", "q2", false, true, false),
 ];
 export const initialAnfangszustand: Zustand = initialZustandsmenge[0];
-const initialEndZustandsmenge: Zustand[] = [initialZustandsmenge[1]];
+const initialEndZustandsmenge: Zustand[] = [];
 
 ///////////////////// BandAlphabet /////////////////////
 const initialBandAlphabet: EingabeAlphabet[] = [
@@ -205,7 +204,6 @@ export const generalSlice = createSlice({
     alphabetDeleteZustand: (state) => {
       state.zustandsmenge.pop();
     },
-
     alphabetChangeAnfangszustand: (state, zustand: PayloadAction<Zustand>) => {
       state.zustandsmenge.forEach((option) => {
         if (option.value === zustand.payload.value) {
@@ -219,22 +217,17 @@ export const generalSlice = createSlice({
     },
     alphabetChangeEndzustand: (state, zustand: PayloadAction<Zustand[]>) => {
       state.endZustand = zustand.payload;
+
       state.zustandsmenge.forEach((option) => {
-        zustand.payload.forEach((innerzustand) => {
-          if (option.value === innerzustand.value) {
-            option.endzustand = true;
-          } else {
-            option.endzustand = false;
-          }
+        const result = state.endZustand.some((value) => {
+          return value.value === option.value;
         });
-      });
-      
-      state.rows.forEach((row) => {
-        state.endZustand.forEach((zustand) => {
-          console.log(row.cells, zustand);
-          // if (row.cells[0] as Zustand === zustand) {
-          // }
-        });
+
+        if (result) {
+          option.endzustand = true;
+        } else {
+          option.endzustand = false;
+        }
       });
     },
     alphabetClearEndzustand: (state) => {
@@ -294,6 +287,7 @@ export const generalSlice = createSlice({
       state.rows = newRows;
     },
     tableUpdateCell: (state, updateCell: PayloadAction<updateCellType>) => {
+      // console.log(current(state));
       const newCells: Cell[] = state.rows[
         updateCell.payload.rowIndex as number
       ].cells.slice(

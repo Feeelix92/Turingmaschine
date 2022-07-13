@@ -38,14 +38,14 @@ function Control() {
     })
   );
 
-  const [slider, setSlider] = useState(1000);
+  const [slider, setSlider] = useState(1);
 
   const changePause = (value: boolean) => {
     dispatch(alphabetChangePauseMaschine(value));
   };
   const changeStopp = (value: boolean) => {
     dispatch(alphabetChangeStoppMaschine(value));
-    dispatch(bandResetPointer());
+    // dispatch(bandResetPointer());
   };
 
   const initialZustand = useSelector(
@@ -119,9 +119,11 @@ function Control() {
       return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
     });
 
-    console.log("Reihe:", item);
-
-    if (item !== undefined && typeof item.cells[3].value === "string") {
+    if (
+      item !== undefined &&
+      typeof item.cells[3].value === "string" &&
+      item.isFinal === false
+    ) {
       store.dispatch(tableSetActiveRow(item));
       console.log("gelesener Wert:", item.cells[1].value);
       if (
@@ -160,7 +162,7 @@ function Control() {
           if (item.cells[0].value.endzustand === true) {
             console.log("Endzustand erreicht!");
             changePause(true);
-            await dispatch(bandResetPointer());
+            // await dispatch(bandResetPointer());
           } else {
             console.log("changeZustand");
             dispatch(tableSetActiveState(item.cells[2].value as Zustand));
@@ -171,7 +173,7 @@ function Control() {
     } else {
       console.log("Else");
       changePause(true);
-      await dispatch(bandResetPointer());
+      // await dispatch(bandResetPointer());
     }
   };
 
@@ -187,7 +189,9 @@ function Control() {
     //ToDo: Schleife hört nicht auf Änderungen von außerhalb...
     //...localCopyPause = true vom Pause Button wird nicht beachtet??
     while (stoppMaschine === false && pauseMaschine === false) {
-      await sleep(slider);
+      let tempSlider = 3000 / slider;
+      console.log(tempSlider);
+      await sleep(tempSlider);
       makeStep(activePointerPosition);
     }
 
@@ -205,47 +209,53 @@ function Control() {
   };
 
   return (
-    <div className={"control w-screen"}>
-      <div className={"p-4 justify-center"}>
-        <div className={"m-2 text-black"}>
-          {/*<label htmlFor="velSlider" className="form-label ">Geschwindigkeit</label>*/}
-          <input
-            id="velSlider"
-            className={
-              "w-5/6 sm:w-1/3 h-2 bg-gray-500 rounded-lg appearance-none cursor-pointer"
-            }
-            type="range"
-            min={0}
-            max={3000}
-            value={slider}
-            onChange={(e) => setSlider(e.target.valueAsNumber)}
-            step={500}
-          />
-        </div>
-        <div className={""}>
-          <button className={"invertedButton py-1 px-2 m-2"} onClick={onPlay}>
-            <FaPlay />
-          </button>
-          <button
-            className={"invertedButton py-1 px-2 m-2"}
-            onClick={stepByStep}
-          >
-            <FaStepForward />
-          </button>
-          <button
-            className={"invertedButton py-1 px-2 m-2"}
-            onClick={() => {
-              pauseMaschine ? changePause(false) : changePause(true);
-            }}
-          >
-            <FaPause />
-          </button>
-          <button
-            className={"invertedButton py-1 px-2 m-2"}
-            onClick={() => changeStopp(true)}
-          >
-            <FaStop />
-          </button>
+    <div>
+      <div className={"control w-screen"}>
+        <div className={"p-4 justify-center"}>
+          <label htmlFor="velSlider" className="form-label text-black">
+            Geschwindigkeit
+          </label>
+          <div className={"m-2 text-black"}>
+            <span>min </span>
+            <input
+              id="velSlider"
+              className={
+                "w-5/6 sm:w-1/3 h-2 bg-gray-500 rounded-lg appearance-none cursor-pointer"
+              }
+              type="range"
+              min={1}
+              max={10}
+              value={slider}
+              onChange={(e) => setSlider(e.target.valueAsNumber)}
+              step={1}
+            />
+            <span> max</span>
+          </div>
+          <div className={""}>
+            <button className={"invertedButton py-1 px-2 m-2"} onClick={onPlay}>
+              <FaPlay />
+            </button>
+            <button
+              className={"invertedButton py-1 px-2 m-2"}
+              onClick={stepByStep}
+            >
+              <FaStepForward />
+            </button>
+            <button
+              className={"invertedButton py-1 px-2 m-2"}
+              onClick={() => {
+                pauseMaschine ? changePause(false) : changePause(true);
+              }}
+            >
+              <FaPause />
+            </button>
+            <button
+              className={"invertedButton py-1 px-2 m-2"}
+              onClick={() => changeStopp(true)}
+            >
+              <FaStop />
+            </button>
+          </div>
         </div>
       </div>
     </div>

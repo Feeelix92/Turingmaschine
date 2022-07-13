@@ -57,9 +57,11 @@ export default function DropDownSelect() {
         console.log(newValue);
         if(newValue){
             if (newValue.alphabet.key !== 0) {
+              console.log("if",newValue.alphabet)
                 dispatch(alphabetChangeCurrent(newValue.alphabet))
                 setOpenDialog(false)
             }else{
+              console.log("else",newValue.alphabet)
                 dispatch(alphabetChangeCurrent(newValue.alphabet))
                 setOpenDialog(true)
             }           

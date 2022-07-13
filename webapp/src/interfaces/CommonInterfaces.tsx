@@ -61,6 +61,7 @@ export interface CellProps {
   index: Key;
   showEditField: boolean;
   updateCellValue: (index: Key, arg: string | Zustand | Direction) => void;
+  warningModus: boolean;
 }
 
 export interface EditProps {
@@ -73,7 +74,7 @@ export interface BandItemProps {
   label: string;
   index: number;
   //skin: string;
-  pointer: boolean;
+  //pointer: boolean;
   alphabet: EingabeAlphabetOption[];
   showEditField: boolean;
   //setPointer: (index: Key, e: any) => void;
