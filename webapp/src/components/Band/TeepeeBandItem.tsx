@@ -4,11 +4,14 @@ import { BandItemProps } from "../../interfaces/CommonInterfaces";
 import { FaTimes, FaTrash } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
+import brickWhite from "../../assets/images/brick_white.svg"
+import brickBlack from "../../assets/images/brick_black.svg"
 import {
   BandItemToChange,
   bandChangeItemAt,
   bandDeleteItemAt,
 } from "../../redux/bandStore";
+import {icons} from "react-icons";
 
 export default function BandItem(props: BandItemProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -113,13 +116,19 @@ export default function BandItem(props: BandItemProps) {
                 />
                 {editMode && props.showEditField ? (
                     <div className={"editBtnDiv"}>
+                      {/*<button className={""}>*/}
+                      {/*  <img className={"w-[100px] h-[100px]"} src={brickWhite} alt={"SVG brick white"}/>*/}
+                      {/*</button>*/}
+                      {/*<button className={""}>*/}
+                      {/*  <img className={"w-[100px] h-[100px]"} src={brickBlack} alt={"SVG brick black"}/>*/}
+                      {/*</button>*/}
                         <EditField options={props.alphabet} updateValue={chooseOption}/>
-                        <button
-                            className={"editBtn"}
-                            onClick={() => deleteValue(props.index)}
-                        >
-                            <FaTrash/>
-                        </button>
+                      <button
+                          className={"brickEditBtn"}
+                          onClick={() => deleteValue(props.index)}
+                      >
+                          <FaTrash/>
+                      </button>
                     </div>
                 ) : (
                     ""
