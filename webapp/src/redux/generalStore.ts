@@ -74,6 +74,8 @@ export const eingabeAlphabetDialogOptions: EingabeAlphabetDialogOptions[] = [
 
 let customKey = 5;
 
+const initialToiletPaperMode: Boolean = true
+
 export const generalSlice = createSlice({
   name: 'general',
   initialState:{
@@ -87,6 +89,7 @@ export const generalSlice = createSlice({
     endZustand: initialEndZustandsmenge,
     pauseMaschine: false,
     stoppMaschine: false,
+      toiletPaperMode: initialToiletPaperMode
   },
   reducers: {    
     /**
@@ -180,7 +183,14 @@ export const generalSlice = createSlice({
     },
     alphabetChangeStoppMaschine: (state, value: PayloadAction<boolean>) => {
         state.stoppMaschine = value.payload;
-    }
+    },
+      /**
+       * This function switches from or to the toilet paper views
+       * @param state
+       */
+      changeToiletPaperMode: (state) => {
+        state.toiletPaperMode = !state.toiletPaperMode
+      }
   },
 })
 
@@ -196,7 +206,8 @@ export const {
     alphabetClearEndzustand,
     alphabetDeleteZustand,
     alphabetChangePauseMaschine,
-    alphabetChangeStoppMaschine
+    alphabetChangeStoppMaschine,
+    changeToiletPaperMode
 } = generalSlice.actions
 
 export default generalSlice.reducer
