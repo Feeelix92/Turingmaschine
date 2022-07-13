@@ -45,9 +45,7 @@ export default function BandItem(props: BandItemProps) {
     function handleClickOutside(event: MouseEvent) {
       if (wrapperRef) {
         if (
-          wrapperRef != null &&
-          wrapperRef.current != null &&
-          event.target != null &&
+          wrapperRef.current != null && event.target != null &&
           event.target instanceof Node
         ) {
           if (!wrapperRef.current.contains(event.target)) {
