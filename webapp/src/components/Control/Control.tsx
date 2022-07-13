@@ -17,6 +17,8 @@ import {
     alphabetChangePauseMaschine,
     alphabetChangeStoppMaschine,
 } from "../../redux/generalStore";
+import anime from 'animejs';
+
 
 function Control() {
     const dispatch = useDispatch();
@@ -36,6 +38,27 @@ function Control() {
             stoppMaschine = newVal;
         })
     );
+
+    //TODO: anime.js
+    const animateButton = (el) => {
+        anime({
+            targets: el,
+            scale: '1.1',
+            duration: 800,
+            elasticity: 400
+          });
+    }
+
+    const animateBack = async () => {
+        console.log("animateBack");
+        anime({
+            targets: '.invertedButton',
+            scale: '1.0',
+            duration: 800,
+            elasticity: 400
+          });
+    }
+
 
     const [slider, setSlider] = useState(1000);
 
@@ -241,24 +264,43 @@ function Control() {
                 <div className={""}>
                     <button
                         className={"invertedButton py-1 px-2 m-2"}
-                        onClick={onPlay}>
+                        onClick={onPlay}
+                        onMouseEnter={(e) => {
+                            animateButton(e.target);
+                        }}
+                        onMouseLeave={animateBack}
+                        >
                         <FaPlay/>
                     </button>
                     <button
                         className={"invertedButton py-1 px-2 m-2"}
-                        onClick={stepByStep}>
+                        onClick={stepByStep}
+                        onMouseEnter={(e) => {
+                            animateButton(e.target);
+                        }}
+                        onMouseLeave={animateBack}
+                        >
+                            
                         <FaStepForward/>
                     </button>
                     <button
                         className={"invertedButton py-1 px-2 m-2"}
                         onClick={() => {
                             pauseMaschine ? changePause(false) : changePause(true);
-                        }}>
+                        }}
+                        onMouseEnter={(e) => {
+                            animateButton(e.target);
+                        }}
+                        onMouseLeave={animateBack}>
                         <FaPause/>
                     </button>
                     <button
                         className={"invertedButton py-1 px-2 m-2"}
-                        onClick={() => changeStopp(true)}>
+                        onClick={() => changeStopp(true)}
+                        onMouseEnter={(e) => {
+                            animateButton(e.target);
+                        }}
+                        onMouseLeave={animateBack}>
                         <FaStop/>
                     </button>
                 </div>
