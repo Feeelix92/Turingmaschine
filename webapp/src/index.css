@@ -183,16 +183,10 @@
 /* Toilet paper */
 
 .teepeeContainerLeft {
-    /*@apply bg-blue-200*/
-    /*@apply animate-spin*/
-    /*@apply translate-x-[25%]*/
     @apply animate-rollLeft
 }
 
 .teepeeContainerRight {
-    /*@apply bg-blue-200*/
-    /*@apply animate-spin*/
-    /*@apply -translate-x-[25%]*/
     @apply animate-rollRight
 }
 
