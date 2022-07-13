@@ -72,36 +72,46 @@ export default function TeepeeBand() {
                             <div className={"teepeeCardboard"}/>
                         </div>
                     </div>
-                {/*<div className={"hidden md:block"}>*/}
-                {/*    <div className={"flex justify-center gap-2"}>*/}
-                {/*        <button*/}
-                {/*            onClick={() => dispatch(bandDeleteAll())}*/}
-                {/*            className={"w-36 invertedButton"}>*/}
-                {/*            zurücksetzen*/}
-                {/*        </button>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-                {/*<div className="flex">*/}
-                {/*    <div className={"w-3/4 text-left"}>*/}
-                {/*        <button className={"m-2 md:invisible secondaryButton"}*/}
-                {/*                onClick={() => setPointerLeft()}>*/}
-                {/*            <FaAngleLeft />*/}
-                {/*        </button>*/}
+            </div>
+            <div className={"hidden md:block"}>
+                    <div className={"flex justify-center gap-2"}>
+                        <button
+                            className={"w-36 invertedButton"}
+                            onClick={() => dispatch(bandAddField('before'))}>
+                            + Feld links
+                        </button>
+                        <button
+                            onClick={() => dispatch(bandDeleteAll())}
+                            className={"w-36 invertedButton"}>
+                            zurücksetzen
+                        </button>
+                        <button
+                            className={"w-36 invertedButton"}
+                            onClick={() => dispatch(bandAddField('after'))}>
+                            Feld rechts +
+                        </button>
+                    </div>
+                </div>
+                <div className="flex">
+                    <div className={"w-3/4 text-left"}>
+                        <button className={"m-2 md:invisible secondaryButton"}
+                                onClick={() => setPointerLeft()}>
+                            <FaAngleLeft />
+                        </button>
 
-                {/*        <button className={"md:invisible secondaryButton"}*/}
-                {/*                onClick={() => setPointerRight()}>*/}
-                {/*            <FaAngleRight />*/}
-                {/*        </button>*/}
-                {/*    </div>*/}
-
-                {/*    <div className={"w-1/4 text-right md:hidden"}>*/}
-                {/*        <button*/}
-                {/*            onClick={() => dispatch(bandDeleteAll())}*/}
-                {/*            className={"m-2"}>*/}
-                {/*            <FaRedo/>*/}
-                {/*        </button>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+                        <button className={"md:invisible secondaryButton"}
+                                onClick={() => setPointerRight()}>
+                            <FaAngleRight />
+                        </button>
+                    </div>
+                    <div className={"w-1/4 text-right md:hidden"}>
+                        <button
+                            onClick={() => dispatch(bandDeleteAll())}
+                            className={"m-2"}
+                        >
+                            <FaRedo/>
+                        </button>
+                    </div>
             </div>
         </div>
     );

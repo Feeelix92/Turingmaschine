@@ -98,9 +98,7 @@ export default function BandItem(props: BandItemProps) {
             ref={wrapperRef}>
             <div>
                 {pointerIdx===props.index ? (
-                    <div className="teepeePointer"
-                         draggable
-                    ></div>
+                    <div className="teepeePointer"  draggable/>
                 ) : (
                     ""
                 )}

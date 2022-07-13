@@ -206,14 +206,9 @@
     @apply z-10 w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] bg-gradient-to-r from-white to-gray-100 border-l-2 border-r-2;
 }
 
-.teepeePaper {
-    @apply w-[75px] h-[50px] sm:w-[150px] sm:h-[100px] border-2 border-dotted
-}
-
 .teepeeBottom {
     @apply z-20 w-[50px] h-[25px] sm:w-[100px] sm:h-[50px] round -translate-y-[50%] bg-white border-2;
 }
-
 .teepeeCardboard {
     @apply z-30 w-[25px] h-[12.5px] sm:w-[50px] sm:h-[25px] round translate-y-[50%] translate-x-[45%] sm:translate-x-[50%] bg-gradient-to-t from-gray-100 to-gray-300 border-2;
 }
