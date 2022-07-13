@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import anime from 'animejs';
 import { EingabeAlphabetOption } from "../../data/Alphabet";
-import {BandItemProps, EditProps} from "../../interfaces/CommonInterfaces";
+import {EditProps} from "../../interfaces/CommonInterfaces";
 import {FaTrash} from "react-icons/fa";
 
-export default function EditField(props: EditProps, BandItemProps) {
+export default function EditField(props: EditProps) {
   
   useEffect(() => {
     let tl =  anime.timeline({
