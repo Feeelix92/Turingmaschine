@@ -99,12 +99,13 @@ export const initialCell: Cell[] = [
     warningMode: false,
   },
 ];
-const initialRow: Row[] = [
-  {
-    cells: initialCell,
-    isFinal: false,
-  },
-];
+// const initialRow: Row[] = [
+//   {
+//     cells: initialCell,
+//     isFinal: false,
+//   },
+// ];
+const initialRow: Row[] = [];
 
 let activeRow: Row | undefined;
 
@@ -133,7 +134,7 @@ export const generalSlice = createSlice({
     executable: true,
     //// Table ////
     header: ["Zustand", "Lese", "Neuer Zustand", "Schreibe", "Gehe nach"],
-    rows: [],
+    rows: initialRow,
     activeRow: activeRow,
     watchedRows: watchedRows,
     activeState: activeState,

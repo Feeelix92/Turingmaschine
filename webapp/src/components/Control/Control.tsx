@@ -8,11 +8,7 @@ import {
   tableSetWatchedRows,
 } from "../../redux/generalStore";
 import watch from "redux-watch";
-import {
-  bandChangeItemAt,
-  bandChangePointPos,
-  bandResetPointer,
-} from "../../redux/bandStore";
+import { bandChangeItemAt, bandChangePointPos } from "../../redux/bandStore";
 import { useState } from "react";
 import {
   alphabetChangePauseMaschine,
