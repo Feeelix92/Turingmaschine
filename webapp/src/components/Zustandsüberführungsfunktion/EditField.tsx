@@ -47,10 +47,10 @@ export default function EditField(props: EditProps) {
                   onClick={() => props.updateValue(value.label)}
               >
                 {value.label == "1" &&
-                    <img src={BrickWhite} className="" alt="brick black" />
+                    <img draggable={false} src={BrickWhite} className="" alt="brick black" />
                 }
                 {value.label == "#" &&
-                    <img src={BrickBlack} className="" alt="brick white" />
+                    <img draggable={false} src={BrickBlack} className="" alt="brick white" />
                 }
               </button>
           ))
