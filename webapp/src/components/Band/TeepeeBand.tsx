@@ -43,14 +43,14 @@ export default function TeepeeBand() {
 
     return (
         <div className={"w-full"}>
-            <div className={"flex gap-5 justify-center"}>
-                <img className={"h-[45px] sm:h-[90px]"} src={"/src/assets/images/brick_white.svg"} alt={"brick white"}/>
-                <img className={"h-[45px] sm:h-[90px]"} src={"/src/assets/images/brick_black.svg"} alt={"brick black"}/>
-            </div>
-            <div className={"flex h-60 sm:h-80 justify-center"}>
-                <div className={"teepeeContainerLeft"} onClick={() => dispatch(bandAddField('before'))}>
+            {/*<div className={"flex gap-5 justify-center"}>*/}
+            {/*    <img className={"h-[45px] sm:h-[90px]"} src={"/src/assets/images/brick_white.svg"} alt={"brick white"}/>*/}
+            {/*    <img className={"h-[45px] sm:h-[90px]"} src={"/src/assets/images/brick_black.svg"} alt={"brick black"}/>*/}
+            {/*</div>*/}
+            <div className={"flex h-60 sm:h-96 justify-center"}>
+                <div className={"teepeeContainerLeft"}>
                         <div className={"teepeeHead"}/>
-                        <div className={"teepeeBody"}/>
+                        <div className={"teepeeBody"} onClick={() => dispatch(bandAddField('before'))}/>
                         <div className={"teepeeBottom"}>
                             <div className={"teepeeCardboard"}/>
                         </div>
@@ -69,9 +69,9 @@ export default function TeepeeBand() {
                             />
                         ))}
                     </div>
-                    <div className={"teepeeContainerRight"} onClick={() => dispatch(bandAddField('after'))}>
+                    <div className={"teepeeContainerRight"}>
                         <div className={"teepeeHead"}/>
-                        <div className={"teepeeBody"}/>
+                        <div className={"teepeeBody"} onClick={() => dispatch(bandAddField('after'))}/>
                         <div className={"teepeeBottom"}>
                             <div className={"teepeeCardboard"}/>
                         </div>

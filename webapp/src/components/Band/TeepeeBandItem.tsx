@@ -12,6 +12,9 @@ import {
   bandDeleteItemAt,
 } from "../../redux/bandStore";
 import {icons} from "react-icons";
+import {BsFillEraserFill} from "react-icons/bs";
+import BrickWhite from "../../assets/images/brick_white.svg";
+import BrickBlack from "../../assets/images/brick_black.svg";
 
 export default function BandItem(props: BandItemProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -97,7 +100,7 @@ export default function BandItem(props: BandItemProps) {
             className={`teepeeBandItem flex justify-center ${(pointerIdx===props.index) ? 'teepeePointerBorder' : ''}`}
             key={props.index}
             ref={wrapperRef}>
-            <div>
+            <div className={""}>
                 {pointerIdx===props.index ? (
                     <div className="teepeePointer"  draggable/>
                 ) : (
@@ -112,8 +115,13 @@ export default function BandItem(props: BandItemProps) {
                     onChange={(e) => checkValue(props.index, e.target.value)}
                     onClick={toggleEditMode}
                     onDragOver={props.setPointerAt}
-
                 />
+                {props.label == "1" &&
+                    <img className={"brick"} src={BrickWhite} alt="brick black" />
+                }
+                {props.label == "#" &&
+                    <img className={"brick"} src={BrickBlack} alt="brick white" />
+                }
                 {editMode && props.showEditField ? (
                     <div className={"editBtnDiv"}>
                       {/*<button className={""}>*/}
@@ -122,12 +130,12 @@ export default function BandItem(props: BandItemProps) {
                       {/*<button className={""}>*/}
                       {/*  <img className={"w-[100px] h-[100px]"} src={brickBlack} alt={"SVG brick black"}/>*/}
                       {/*</button>*/}
-                        <EditField options={props.alphabet} updateValue={chooseOption}/>
+                      <EditField options={props.alphabet} updateValue={chooseOption}/>
                       <button
-                          className={"brickEditBtn"}
+                          className={"editBtn delete"}
                           onClick={() => deleteValue(props.index)}
                       >
-                          <FaTrash/>
+                        <BsFillEraserFill/>
                       </button>
                     </div>
                 ) : (

@@ -6,6 +6,8 @@ import {FaTrash} from "react-icons/fa";
 import {useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
 import Band from "../Band/Band";
+import BrickBlack from "../../assets/images/brick_black.svg";
+import BrickWhite from "../../assets/images/brick_white.svg";
 
 export default function EditField(props: EditProps) {
   const toiletPaperMode = useSelector((state: RootState) => state.general.toiletPaperMode)
@@ -21,7 +23,6 @@ export default function EditField(props: EditProps) {
       delay: anime.stagger(100)
     })    
   });
-  
 
   return (
     <div className="flex gap-2 z-10" role="group">
@@ -45,7 +46,12 @@ export default function EditField(props: EditProps) {
                   className={"brickEditBtn"}
                   onClick={() => props.updateValue(value.label)}
               >
-                {value.label}
+                {value.label == "1" &&
+                    <img src={BrickWhite} className="" alt="brick black" />
+                }
+                {value.label == "#" &&
+                    <img src={BrickBlack} className="" alt="brick white" />
+                }
               </button>
           ))
       }
