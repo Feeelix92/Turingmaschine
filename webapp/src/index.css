@@ -196,7 +196,7 @@
 }
 
 .brick {
-    @apply absolute z-10 h-[40px] sm:h-[90px] translate-x-[12.5px] sm:translate-x-[20px] -translate-y-[45px] sm:-translate-y-[95px];
+    @apply absolute z-10 h-[40px] sm:h-[90px] translate-x-[10px] sm:translate-x-[20px] -translate-y-[45px] sm:-translate-y-[95px];
 }
 /* Toilet paper */
 
@@ -242,7 +242,7 @@
 }
 
 .teepeePointer::after {
-    @apply content-[''] bg-[url('./assets/images/brick_black.svg')] bg-center bg-no-repeat animate-bounce rounded-b absolute w-[50px] h-[25px] sm:w-[100px] sm:h-[50px] bottom-[50px] sm:bottom-[100px] -left-0.5 z-10;
+    @apply content-[''] bg-[url('./assets/images/brick_black.svg')] bg-center bg-no-repeat animate-bounce rounded-b absolute w-[50px] h-[40px] sm:w-[100px] sm:h-[50px] bottom-[50px] sm:bottom-[100px] -left-0.5 z-10;
 }
 
 .teepeePointer:hover {

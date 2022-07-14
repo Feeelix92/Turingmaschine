@@ -432,7 +432,7 @@ export const generalSlice = createSlice({
     },
     /**
      * function alphabetDeleteCustom deletes the customAlphabet
-     * @param value
+     * @param state
      */
     alphabetDeleteCustom: (state) => {
       state.customAlphabet.alphabet = [];
@@ -458,7 +458,7 @@ export const generalSlice = createSlice({
     ///////////////////// Zustand /////////////////////
     /**
      * function alphabetDeleteCustom deletes the customAlphabet
-     * @param value
+     * @param state
      */
     alphabetPushToZustand: (state) => {
       let tempNumber = state.zustandsmenge.length + 1;
