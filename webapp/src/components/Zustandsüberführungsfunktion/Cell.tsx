@@ -22,8 +22,11 @@ export default function Cell(props: CellProps) {
   const endzustandsMenge = useSelector(
     (state: RootState) => state.general.endZustand
   );
+  const initialRows = useSelector((state: RootState) => state.general.rows);
 
   const temp = [initialZustand3];
+
+  const [warningMode, setWarningMode] = React.useState(false);
 
   /////////// States from State ///////////
   let states = zustandsmenge.concat(temp);
@@ -36,12 +39,22 @@ export default function Cell(props: CellProps) {
   );
 
   /////////// States from State ///////////
+  let rows = initialRows;
+  let wRows = watch(store.getState, "general.rows");
+  store.subscribe(
+    wRows((newVal) => {
+      rows = newVal;
+    })
+  );
+
+  /////////// States from State ///////////
   let finalStates = endzustandsMenge;
   let wFinalStates = watch(store.getState, "general.endZustand");
   store.subscribe(
     wFinalStates((newVal) => {
       finalStates = newVal;
-      console.log("watched state change");
+
+      checkWarningModus();
 
       if (props.value instanceof Zustand) {
         let found = false;
@@ -65,7 +78,6 @@ export default function Cell(props: CellProps) {
           });
         }
       }
-      checkWarningModus();
     })
   );
 
@@ -98,14 +110,14 @@ export default function Cell(props: CellProps) {
 
   function handleChange(newValue: OnChangeValue<Direction | Zustand, false>) {
     if (newValue) {
-      console.log(props.index, newValue);
       // pass chosen options to the parent to update the cell
       props.updateCellValue(props.index, newValue);
     }
   }
 
   function setWarning(newValue: boolean) {
-    props.updateCellValue(props.index, newValue);
+    setWarningMode(newValue);
+    // props.updateCellValue(props.index, newValue);
   }
 
   useEffect(() => {
@@ -217,11 +229,11 @@ export default function Cell(props: CellProps) {
         ""
       )}
 
-      {props.warningMode ? (
+      {warningMode ? (
         <IoIosWarning
           color="orange"
           title="Dieser Eingabewert ist nicht länger zulässig!"
-          size = '32'
+          size="32"
         />
       ) : null}
 

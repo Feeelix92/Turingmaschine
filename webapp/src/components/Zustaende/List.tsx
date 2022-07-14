@@ -315,23 +315,22 @@ function ConditionsList() {
             <div className={"flex col-span-2 justify-between"}>
               Anfangszustand q0 = {anfangsZustand.value}{" "}
               {anfangsZustand.warningMode ? (
-              <IoIosWarning
-                color="orange"
-                title="Dieser Zustand ist nicht länger vorhanden!"
-                size = '32'
+                <IoIosWarning
+                  color="orange"
+                  title="Dieser Zustand ist nicht länger vorhanden!"
+                  size="32"
+                />
+              ) : null}
+            </div>
+            <div className="flex col-span-2">
+              <Select
+                placeholder={anfangsZustand.value}
+                blurInputOnSelect={false}
+                className={"col-span-2"}
+                onChange={handleChange}
+                options={zustandsmenge}
               />
-            ) : null}
             </div>
-            <div className="flex col-span-2">            
-            <Select
-              placeholder={anfangsZustand.value}
-              blurInputOnSelect={false}
-              className={"col-span-2"}
-              onChange={handleChange}
-              options={zustandsmenge}
-            />
-            </div>
-            
           </div>
           <div
             className={
@@ -340,34 +339,33 @@ function ConditionsList() {
           >
             <div className={"flex col-span-2 justify-between"}>
               <div>
-              Endzustand F = {kA}
-              {endZustand.map((value, index) => (
-                <span key={index}>
-                  {value.value}
-                  {index === endZustand.length - 1 ? "" : ","}
-                </span>
-              ))}
-              {kZ}
+                Endzustand F = {kA}
+                {endZustand.map((value, index) => (
+                  <span key={index}>
+                    {value.value}
+                    {index === endZustand.length - 1 ? "" : ","}
+                  </span>
+                ))}
+                {kZ}
               </div>
               {endZustandWarningOn ? (
-              <IoIosWarning
-                color="orange"
-                title="Einer der Endzustände ist nicht länger vorhanden!"
-                size = '32'
+                <IoIosWarning
+                  color="orange"
+                  title="Einer der Endzustände ist nicht länger vorhanden!"
+                  size="32"
+                />
+              ) : null}
+            </div>
+            <div className="flex col-span-2">
+              <Select
+                value={endZustand}
+                blurInputOnSelect={false}
+                className={"col-span-2"}
+                onChange={handleChangeMulti}
+                options={possibleEnd}
+                isMulti={true}
               />
-            ) : null}
             </div>
-            <div className="flex col-span-2">            
-            <Select
-              value={endZustand}
-              blurInputOnSelect={false}
-              className={"col-span-2"}
-              onChange={handleChangeMulti}
-              options={possibleEnd}
-              isMulti={true}
-            />
-            </div>
-            
           </div>
           <div
             className={

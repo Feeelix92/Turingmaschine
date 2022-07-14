@@ -52,6 +52,7 @@ export default function Row(props: RowProps) {
         value.endzustand,
         value.warningMode
       );
+
       dispatch(
         tableUpdateCell({
           cellIndex: index,
@@ -80,13 +81,17 @@ export default function Row(props: RowProps) {
     }
   }, [props.isFinal]);
 
+  const toiletPaperMode = useSelector(
+    (state: RootState) => state.general.toiletPaperMode
+  );
+
   return (
     <tr
       className={`border-b flex w-full hover:bg-gray-100 ${
         activeRow != undefined && activeRow.cells === props.cells
           ? "bg-lime-300"
           : ""
-      }`}
+      } ${toiletPaperMode ? "disableTableRow" : ""} `}
     >
       {visible
         ? props.cells
@@ -98,7 +103,6 @@ export default function Row(props: RowProps) {
                 index={key}
                 showEditField={value.editField}
                 updateCellValue={setCellValue}
-                warningMode={value.warningMode}
               />
             ))
         : props.cells.map((value, key: React.Key) => (
@@ -108,7 +112,6 @@ export default function Row(props: RowProps) {
               index={key}
               showEditField={value.editField}
               updateCellValue={setCellValue}
-              warningMode={value.warningMode}
             />
           ))}
       {visible ? (

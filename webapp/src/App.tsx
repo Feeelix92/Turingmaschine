@@ -1,22 +1,39 @@
 import React from 'react'
-import Band from "./components/Band/Band";
+import TeepeeBand from "./components/Band/TeepeeBand";
 import Table from "./components/Zustandsüberführungsfunktion/Table";
 import Menu from "./components/Menu/Menu";
 import Control from "./components/Control/Control";
 import ConditionsList from "./components/Zustaende/List";
+import ToPaTable from "./components/Zustandsüberführungsfunktion/ToPaTable"
+import {useSelector} from "react-redux";
+import {RootState} from "./redux/store";
+import Band from "./components/Band/Band";
 
-function App() {             
+function App() {
+    const toiletPaperMode = useSelector((state: RootState) => state.general.toiletPaperMode)
         
     return (
         <div className="App">
             <header className="App-header">
                 <Menu/>
-                <Control />
-                <Band/>
+                <Control/>
             </header>
+            {!toiletPaperMode &&
+                <Band/>
+            }
+            {toiletPaperMode &&
+                <TeepeeBand/>
+            }
             <div className={"App-body"}>
-                <ConditionsList/>
-                <Table/>
+                {!toiletPaperMode &&
+                    <ConditionsList/>
+                }
+                {!toiletPaperMode &&
+                    <Table />
+                }
+                {toiletPaperMode &&
+                    <ToPaTable/>
+                }
             </div>
         </div>
     );

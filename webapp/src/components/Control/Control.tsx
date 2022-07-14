@@ -1,6 +1,10 @@
 import { FaPlay, FaPause, FaStop, FaStepForward } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { Direction, Row, Zustand } from "../../interfaces/CommonInterfaces";
+import {
+  Direction,
+  RowInterface,
+  Zustand,
+} from "../../interfaces/CommonInterfaces";
 import { RootState, store } from "../../redux/store";
 import {
   tableSetActiveRow,
@@ -62,7 +66,7 @@ function Control() {
   const [maschineRunning, setMaschineRunning] = useState(false);
 
   /////////// Rows from State ///////////
-  let selectedRows: Row[] = [];
+  let selectedRows: RowInterface[] = [];
   let wSelectedRows = watch(store.getState, "general.watchedRows");
   store.subscribe(
     wSelectedRows((newVal) => {
@@ -102,7 +106,7 @@ function Control() {
 
   const setSelectedRows = () => {
     // get all rows, that match our current Zustand and which are therefore relevant
-    let rows: Row[] = [];
+    let rows: RowInterface[] = [];
 
     if (currentBand.length > 0) {
       currentTable.forEach((row) => {
@@ -128,12 +132,10 @@ function Control() {
       item.isFinal === false
     ) {
       store.dispatch(tableSetActiveRow(item));
-      console.log("gelesener Wert:", item.cells[1].value);
       if (
         item.cells[0].value instanceof Zustand &&
         item.cells[0].value.endzustand === false
       ) {
-        console.log("Veränder mir das hier zu:", item.cells[3].value);
         dispatch(
           bandChangeItemAt({
             index: idx,
@@ -161,17 +163,14 @@ function Control() {
       if (item.cells[0].value instanceof Zustand) {
         if (item.cells[0].value != item.cells[2].value) {
           if (item.cells[0].value.endzustand === true) {
-            console.log("Endzustand erreicht!");
             changePause(true);
           } else {
-            console.log("changeZustand");
             dispatch(tableSetActiveState(item.cells[2].value as Zustand));
             setSelectedRows();
           }
         }
       }
     } else {
-      console.log("Else");
       changePause(true);
     }
   };
@@ -195,8 +194,6 @@ function Control() {
       await sleep(tempSlider);
       makeStep(activePointerPosition);
     }
-
-    console.log("Schleife durchbrochen!");
     dispatch(tableSetActiveRow(undefined));
     dispatch(tableSetActiveState(initialZustand));
     changePause(false);
@@ -259,7 +256,7 @@ function Control() {
             </button>
             <button
               className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
-              disabled={!executable || !maschineRunning || bandWarning }
+              disabled={!executable || !maschineRunning || bandWarning}
               onClick={() => changeStopp(true)}
             >
               <FaStop />

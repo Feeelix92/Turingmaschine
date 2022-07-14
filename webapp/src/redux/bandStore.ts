@@ -17,6 +17,9 @@ const currentBand: EingabeAlphabetOption[] = [
   { value: "B", label: "", warningMode: false },
   { value: "B", label: "", warningMode: false },
   { value: "B", label: "", warningMode: false },
+  { value: "B", label: "", warningMode: false },
+  { value: "B", label: "", warningMode: false },
+  { value: "B", label: "", warningMode: false },
 ];
 
 export const bandSlice = createSlice({
@@ -91,7 +94,6 @@ export const bandSlice = createSlice({
       }
     },
     bandChangePointPos: (state, step: PayloadAction<number>) => {
-      console.log("movePointer", step);
       if (
         (step.payload < 0 && state.pointerPosition == 0) ||
         (step.payload > 0 &&
@@ -106,9 +108,7 @@ export const bandSlice = createSlice({
       state.pointerPosition = step.payload;
     },
     bandResetPointer: (state) => {
-      console.log("Reset!");
       state.pointerPosition = 0;
-      console.log("state.PointerPosition: ", state.pointerPosition);
     },
     bandSetWarning: (state, value: PayloadAction<boolean>) => {
       state.showWarning = value.payload;

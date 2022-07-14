@@ -8,7 +8,7 @@ import {
   directions,
   EingabeAlphabet,
   EingabeAlphabetDialogOptions,
-  Row,
+  RowInterface,
   updateCellType,
   Zustand,
 } from "../interfaces/CommonInterfaces";
@@ -21,8 +21,13 @@ export const initialAnfangszustand: Zustand = initialZustandsmenge[0];
 const initialEndZustandsmenge: Zustand[] = [];
 
 ///////////////////// BandAlphabet /////////////////////
-const initialBandAlphabet: EingabeAlphabetOption[] = [
+const initialBandAlphabet: EingabeAlphabet[] = [
   { label: "1", value: "1", warningMode: false },
+  { label: "", value: "B", warningMode: false },
+];
+const initialTeepeeBandAlphabet: EingabeAlphabet[] = [
+  { label: "1", value: "1", warningMode: false },
+  { label: "#", value: "#", warningMode: false },
   { label: "", value: "B", warningMode: false },
 ];
 const defaultCustomAlphabet: Alphabet = {
@@ -78,36 +83,255 @@ export const initialZustand3: Zustand = new Zustand(
   false
 );
 
-const watchedRows: Row[] = [];
+const watchedRows: RowInterface[] = [];
 
 export const initialCell: Cell[] = [
   {
     value: initialZustandsmenge[0],
     editField: false,
-    warningMode: false,
   },
-  { value: "1", editField: true, warningMode: false },
+  { value: "1", editField: true },
   {
     value: initialZustandsmenge[0],
     editField: false,
-    warningMode: false,
   },
-  { value: "1", editField: true, warningMode: false },
+  { value: "1", editField: true },
   {
     value: new Direction(directions[0].value, directions[0].label),
     editField: false,
-    warningMode: false,
   },
 ];
-// const initialRow: Row[] = [
+
+/////////////ToPa//////////////////////
+const initialToiletPaperMode: Boolean = true;
+
+//// Zustandsmenge
+const initialZustandsmengeTP: Zustand[] = [
+  new Zustand("1", "q1", true, false, false),
+  new Zustand("2", "q2", false, false, false),
+  new Zustand("3", "q3", false, false, false),
+  new Zustand("4", "q4", false, false, false),
+  new Zustand("5", "q5", false, true, false),
+];
+
+export const initialAnfangszustandTP: Zustand = initialZustandsmengeTP[0];
+const initialEndZustandsmengeTP: Zustand[] = [initialZustandsmengeTP[4]];
+
+//Zellen
+export const initialCellTP: Cell[] = [
+  //1
+  {
+    value: initialZustandsmengeTP[0],
+    editField: false,
+  },
+  { value: "1", editField: true },
+  {
+    value: initialZustandsmengeTP[0],
+    editField: false,
+  },
+  { value: "1", editField: true },
+  {
+    value: new Direction(directions[0].value, directions[0].label),
+    editField: false,
+  },
+];
+export const initialCellTP2: Cell[] = [
+  //2
+  {
+    value: initialZustandsmengeTP[0],
+    editField: false,
+  },
+  { value: "1", editField: true },
+  {
+    value: initialZustandsmengeTP[1],
+    editField: false,
+  },
+  { value: "1", editField: true },
+  {
+    value: new Direction(directions[0].value, directions[0].label),
+    editField: false,
+  },
+];
+export const initialCellTP3: Cell[] = [
+  //3
+  {
+    value: initialZustandsmengeTP[1],
+    editField: false,
+  },
+  { value: "1", editField: true },
+  {
+    value: initialZustandsmengeTP[2],
+    editField: false,
+  },
+  { value: "#", editField: true },
+  {
+    value: new Direction(directions[1].value, directions[1].label),
+    editField: false,
+  },
+];
+export const initialCellTP4: Cell[] = [
+  //4
+  {
+    value: initialZustandsmengeTP[1],
+    editField: false,
+  },
+  { value: "B", editField: true },
+  {
+    value: initialZustandsmengeTP[3],
+    editField: false,
+  },
+  { value: "B", editField: true },
+  {
+    value: new Direction(directions[1].value, directions[1].label),
+    editField: false,
+  },
+];
+export const initialCellTP5: Cell[] = [
+  //5
+  {
+    value: initialZustandsmengeTP[2],
+    editField: false,
+  },
+  { value: "#", editField: true },
+  {
+    value: initialZustandsmengeTP[0],
+    editField: false,
+  },
+  { value: "1", editField: true },
+  {
+    value: new Direction(directions[0].value, directions[0].label),
+    editField: false,
+  },
+];
+export const initialCellTP6: Cell[] = [
+  //6
+  {
+    value: initialZustandsmengeTP[3],
+    editField: false,
+  },
+  { value: "1", editField: true },
+  {
+    value: initialZustandsmengeTP[3],
+    editField: false,
+  },
+  { value: "1", editField: true },
+  {
+    value: new Direction(directions[1].value, directions[1].label),
+    editField: false,
+  },
+];
+export const initialCellTP7: Cell[] = [
+  //7
+  {
+    value: initialZustandsmengeTP[3],
+    editField: false,
+  },
+  { value: "#", editField: true },
+  {
+    value: initialZustandsmengeTP[3],
+    editField: false,
+  },
+  { value: "B", editField: true },
+  {
+    value: new Direction(directions[1].value, directions[1].label),
+    editField: false,
+  },
+];
+export const initialCellTP8: Cell[] = [
+  //8
+  {
+    value: initialZustandsmengeTP[3],
+    editField: false,
+  },
+  { value: "B", editField: true },
+  {
+    value: initialZustandsmengeTP[4],
+    editField: false,
+  },
+  { value: "B", editField: true },
+  {
+    value: new Direction(directions[0].value, directions[0].label),
+    editField: false,
+  },
+];
+export const initialCellTP9: Cell[] = [
+  //9
+  {
+    value: initialZustandsmengeTP[4],
+    editField: false,
+  },
+  { value: "B", editField: true },
+  {
+    value: initialZustandsmengeTP[4],
+    editField: false,
+  },
+  { value: "B", editField: true },
+  {
+    value: new Direction(directions[0].value, directions[0].label),
+    editField: false,
+  },
+];
+
+//Rows wechsel
+
+const initialRowTP: RowInterface[] = [
+  {
+    cells: initialCellTP,
+    isFinal: false,
+  },
+  {
+    cells: initialCellTP2,
+    isFinal: false,
+  },
+  {
+    cells: initialCellTP3,
+    isFinal: false,
+  },
+  {
+    cells: initialCellTP4,
+    isFinal: false,
+  },
+  {
+    cells: initialCellTP5,
+    isFinal: false,
+  },
+  {
+    cells: initialCellTP6,
+    isFinal: false,
+  },
+  {
+    cells: initialCellTP7,
+    isFinal: false,
+  },
+  {
+    cells: initialCellTP8,
+    isFinal: false,
+  },
+  {
+    cells: initialCellTP9,
+    isFinal: false,
+  },
+];
+
+//Rows
+
+///////////
+/*
+const initialRow: RowInterface[] = [
+  {
+    cells: initialCell,
+    isFinal: false,
+  },
+];
+*/
+// const initialRow: RowInterface[] = [
 //   {
 //     cells: initialCell,
 //     isFinal: false,
 //   },
 // ];
-const initialRow: Row[] = [];
-
-let activeRow: Row | undefined;
+const initialRow: RowInterface[] = [];
+let activeRow: RowInterface | undefined;
 
 const activeState: Zustand | undefined = initialZustandsmenge[0];
 
@@ -117,13 +341,18 @@ let customKey = 5;
 export const generalSlice = createSlice({
   name: "general",
   initialState: {
+    //// ZustandTP ////
+    zustandsmenge: initialZustandsmengeTP,
+    anfangsZustand: initialAnfangszustandTP,
+    endZustand: initialEndZustandsmengeTP,
     //// Zustand ////
-    zustandsmenge: initialZustandsmenge,
-    anfangsZustand: initialAnfangszustand,
-    endZustand: initialEndZustandsmenge,
+    //zustandsmenge: initialZustandsmenge,
+    //anfangsZustand: initialAnfangszustand,
+    //endZustand: initialEndZustandsmenge,
+
     //// Alphabet ////
-    currentAlphabet: defaultAlphabetOption1,
-    bandAlphabet: initialBandAlphabet,
+    currentAlphabet: defaultAlphabetOption2,
+    bandAlphabet: initialTeepeeBandAlphabet,
     customAlphabet: defaultCustomAlphabet,
     //// Dialog ////
     dialogOptions: eingabeAlphabetDialogOptions,
@@ -134,10 +363,13 @@ export const generalSlice = createSlice({
     executable: false,
     //// Table ////
     header: ["Zustand", "Lese", "Neuer Zustand", "Schreibe", "Gehe nach"],
-    rows: initialRow,
+    rows: initialRowTP,
+    //rows: initialRow,
     activeRow: activeRow,
     watchedRows: watchedRows,
     activeState: activeState,
+    //// Toilettenpapier ////
+    toiletPaperMode: initialToiletPaperMode,
   },
   reducers: {
     ///////////////////// Alphabet /////////////////////
@@ -168,7 +400,7 @@ export const generalSlice = createSlice({
     },
     /**
      * function alphabetDeleteCustom deletes the customAlphabet
-     * @param value
+     * @param state
      */
     alphabetDeleteCustom: (state) => {
       state.customAlphabet.alphabet = [];
@@ -193,7 +425,7 @@ export const generalSlice = createSlice({
     ///////////////////// Zustand /////////////////////
     /**
      * function alphabetDeleteCustom deletes the customAlphabet
-     * @param value
+     * @param state
      */
     alphabetPushToZustand: (state) => {
       let tempNumber = state.zustandsmenge.length + 1;
@@ -225,7 +457,6 @@ export const generalSlice = createSlice({
       state.activeState = zustand.payload;
     },
     alphabetChangeEndzustand: (state, zustand: PayloadAction<Zustand[]>) => {
-      console.log(zustand.payload);
       state.endZustand = zustand.payload;
 
       state.zustandsmenge.forEach((option) => {
@@ -239,8 +470,6 @@ export const generalSlice = createSlice({
           option.endzustand = false;
         }
       });
-
-      console.log(current(state));
     },
     alphabetClearEndzustand: (state) => {
       state.zustandsmenge.forEach((option) => {
@@ -257,24 +486,20 @@ export const generalSlice = createSlice({
       state.stoppMaschine = value.payload;
     },
     maschineChangeExecutable: (state, value: PayloadAction<boolean>) => {
-      console.log(value.payload)
       state.executable = value.payload;
     },
     maschineCheckExecutable: (state) => {
-      if(state.rows.length === 0 || state.endZustand.length === 0 ){
-        state.executable = false
-      } else{
-        state.executable = true
+      if (state.rows.length === 0 || state.endZustand.length === 0) {
+        state.executable = false;
+      } else {
+        state.executable = true;
       }
-      
     },
 
     ///////////////////// Table /////////////////////
     tableAddRow: (state) => {
       // create flat copy of all existing rows
       const newRows = state.rows.slice(0, state.rows.length);
-
-      console.log(current(state));
 
       // add new row to existing rows
       newRows.push({
@@ -312,8 +537,6 @@ export const generalSlice = createSlice({
         isFinal: false,
       });
 
-      console.log(newRows);
-
       // update the rows in state with our new rows-array
       state.rows = newRows;
     },
@@ -340,7 +563,10 @@ export const generalSlice = createSlice({
           updateCell.payload.value;
         // tableUpdateRow({index: updateCell.payload.index, cells: newCells})
 
-        const newRows: Row[] = state.rows.slice(0, state.rows.length) as Row[];
+        const newRows: RowInterface[] = state.rows.slice(
+          0,
+          state.rows.length
+        ) as RowInterface[];
         // overwrite rows at certain index with new value
         newRows[updateCell.payload.rowIndex as number].cells = newCells;
 
@@ -356,9 +582,13 @@ export const generalSlice = createSlice({
       } else {
         newCells[updateCell.payload.cellIndex as number].value =
           updateCell.payload.value;
+
         // tableUpdateRow({index: updateCell.payload.index, cells: newCells})
 
-        const newRows: Row[] = state.rows.slice(0, state.rows.length) as Row[];
+        const newRows: RowInterface[] = state.rows.slice(
+          0,
+          state.rows.length
+        ) as RowInterface[];
         // overwrite rows at certain index with new value
         newRows[updateCell.payload.rowIndex as number].cells = newCells;
 
@@ -373,10 +603,13 @@ export const generalSlice = createSlice({
         state.rows = newRows;
       }
     },
-    tableSetActiveRow: (state, row: PayloadAction<Row | undefined>) => {
+    tableSetActiveRow: (
+      state,
+      row: PayloadAction<RowInterface | undefined>
+    ) => {
       state.activeRow = row.payload;
     },
-    tableSetWatchedRows: (state, rows: PayloadAction<Row[]>) => {
+    tableSetWatchedRows: (state, rows: PayloadAction<RowInterface[]>) => {
       state.watchedRows = rows.payload;
     },
     tableSetActiveState: (state, newVal: PayloadAction<Zustand>) => {
@@ -388,7 +621,7 @@ export const generalSlice = createSlice({
       state,
       warningValue: PayloadAction<ChangeWarningModus>
     ) => {
-      switch (warningValue.payload.prop) {        
+      switch (warningValue.payload.prop) {
         case "anfangsZustand":
           state.anfangsZustand.warningMode = warningValue.payload.value;
           break;
@@ -398,6 +631,29 @@ export const generalSlice = createSlice({
         default:
           console.log("ERROR in alphabetChangeWarningMode");
           break;
+      }
+    },
+
+    /**
+     * This function switches from or to the toilet paper views
+     * @param state
+     */
+    changeToiletPaperMode: (state) => {
+      state.toiletPaperMode = !state.toiletPaperMode;
+      if (!state.toiletPaperMode) {
+        state.rows = initialRow;
+        state.zustandsmenge = initialZustandsmenge;
+        state.anfangsZustand = initialAnfangszustand;
+        state.endZustand = initialEndZustandsmenge;
+        state.currentAlphabet = defaultAlphabetOption1;
+        state.bandAlphabet = initialBandAlphabet;
+      } else {
+        state.rows = initialRowTP;
+        state.zustandsmenge = initialZustandsmengeTP;
+        state.anfangsZustand = initialAnfangszustandTP;
+        state.endZustand = initialEndZustandsmengeTP;
+        state.currentAlphabet = defaultAlphabetOption2;
+        state.bandAlphabet = initialTeepeeBandAlphabet;
       }
     },
   },
@@ -425,6 +681,7 @@ export const {
   tableSetActiveRow,
   tableSetWatchedRows,
   tableSetActiveState,
+  changeToiletPaperMode,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

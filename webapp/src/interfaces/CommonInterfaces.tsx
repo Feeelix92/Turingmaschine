@@ -3,11 +3,11 @@ import { EingabeAlphabetOption } from "../data/Alphabet";
 
 export interface TableProps {
   header: string[];
-  rows: Row[];
+  rows: RowInterface[];
   alphabet: EingabeAlphabetOption[];
 }
 
-export interface Row {
+export interface RowInterface {
   cells: Cell[];
   isFinal: boolean;
 }
@@ -15,7 +15,6 @@ export interface Row {
 export interface Cell {
   value: string | Zustand | Direction;
   editField: boolean;
-  warningMode: boolean;
 }
 
 export class Zustand {
@@ -61,7 +60,6 @@ export interface CellProps {
   value: string | Zustand | Direction;
   index: Key;
   showEditField: boolean;
-  warningMode: boolean;
   updateCellValue: (
     index: Key,
     arg: string | boolean | Zustand | Direction
