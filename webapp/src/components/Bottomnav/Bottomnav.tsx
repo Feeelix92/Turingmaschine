@@ -22,6 +22,34 @@ function Bottomnav() {
         setFunk(true);
     }
 
+    const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false);
+
+    const [windowHeight, setWindowHeight] = React.useState(window.innerHeight);
+    function updateWindowHeight(height: React.SetStateAction<number>) {
+        setWindowHeight(height);
+    }
+
+    
+    useEffect(() => {
+
+        function handleResize() {
+            var y = window.innerHeight;
+
+            if(windowHeight > y) {
+                setKeyboardIsOpen(true);
+            } else {
+                setKeyboardIsOpen(false);
+            }
+           
+            updateWindowHeight(y);
+        }
+
+        window.addEventListener('resize', handleResize);
+
+    })
+    
+
+
     return (
         <div>
             <div className={"mt-11 mb-36"}>
@@ -29,7 +57,7 @@ function Bottomnav() {
                 { funk ? (<Table/>) : "" }                
             </div>
 
-            <div className={"bottomnav z-50"}>
+            <div className={`bottomnav z-50 ${(keyboardIsOpen) ? 'hidden' : 'flex'}`}>
                 <button className={"grid justify-items-center"}  onClick={() => showSpez()}>
                     <FaClipboardList/>
                     Spezifikationen

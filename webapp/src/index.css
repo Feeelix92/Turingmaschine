@@ -68,7 +68,7 @@
 }
 
 .bottomnav {
-    @apply bg-thm-primary  w-screen p-5 flex justify-around  fixed bottom-0 left-0;
+    @apply bg-thm-primary  w-screen p-5 justify-around  fixed bottom-0 left-0;
 }
 
 /* Position and sizing of burger button */
