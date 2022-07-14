@@ -15,6 +15,7 @@ import {
   bandSetPointPos,
 } from "../../redux/bandStore";
 import { RootState } from "../../redux/store";
+import party from "party-js";
 
 export default function Band() {
   const defaultPointerPos = 1; // Feld, auf dem Pointer im Default stehen soll
@@ -38,6 +39,16 @@ export default function Band() {
   const setPointerRight = () => {
     dispatch(bandChangePointPos(1));
   };
+
+  const handleClick = (e) => {
+    party.confetti(e.target, {
+        count: party.variation.range(20, 40),
+        size: party.variation.range(0.8, 1),
+        spread: party.variation.range(10, 14),
+        shapes: ["star", "roundedSquare"]
+    });
+  };
+
 
     return (
         <div className={"w-screen"}>
@@ -75,7 +86,12 @@ export default function Band() {
                         + Feld links
                     </button>
                     <button
-                        onClick={() => dispatch(bandDeleteAll())}
+                        onClick={(e) => {
+                            dispatch(bandDeleteAll());
+                            handleClick(e);
+                        }
+                        
+                        }
                         className={"w-36 invertedButton"}>
                         zurücksetzen
                     </button>
