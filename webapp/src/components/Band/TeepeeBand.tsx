@@ -77,7 +77,7 @@ export default function TeepeeBand() {
                         </div>
                     </div>
             </div>
-            <div className={"hidden md:block"}>
+            <div className={"hidden md:block mt-4"}>
                     <div className={"flex justify-center gap-2"}>
                         <button
                             className={"w-36 invertedButton"}
