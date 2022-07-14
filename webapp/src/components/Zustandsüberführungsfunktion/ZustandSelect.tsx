@@ -31,7 +31,7 @@ export default function ZustandSelect(props: ZustandSelectProps) {
 
   return (
     <div>
-      <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2"}>
+      <div className={"flex gap-5 items-center mt-2"}>
         <Select
           value={props.current}
           blurInputOnSelect={false}
