@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import anime from 'animejs';
 import { EingabeAlphabetOption } from "../../data/Alphabet";
-import {BandItemProps, EditProps} from "../../interfaces/CommonInterfaces";
+import {EditProps} from "../../interfaces/CommonInterfaces";
 import {FaTrash} from "react-icons/fa";
 import {useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
 import Band from "../Band/Band";
 
-export default function EditField(props: EditProps, BandItemProps) {
+export default function EditField(props: EditProps) {
   const toiletPaperMode = useSelector((state: RootState) => state.general.toiletPaperMode)
-
 
   useEffect(() => {
     let tl =  anime.timeline({
