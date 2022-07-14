@@ -24,7 +24,7 @@ function Sidebar() {
             </div>
             <div className={""}>
                 <a className={"menu-item text-white text-lg no-underline"}>
-                    <button className={"w-50"} onClick={() => dispatch(changeToiletPaperMode())}>Toiletenpapiermodus { toiletPaperMode ? 'an' : 'aus'}</button>
+                    <button className={"w-50"} onClick={() => dispatch(changeToiletPaperMode())}>Toiletenpapiermodus { toiletPaperMode ? 'aus' : 'an'}</button>
                 </a>
             </div>
         </Menu>

@@ -17,6 +17,9 @@ const currentBand: EingabeAlphabetOption[] = [
   { value: "B", label: "", warningMode: false },
   { value: "B", label: "", warningMode: false },
   { value: "B", label: "", warningMode: false },
+  { value: "B", label: "", warningMode: false },
+  { value: "B", label: "", warningMode: false },
+  { value: "B", label: "", warningMode: false },
 ];
 
 export const bandSlice = createSlice({
@@ -24,7 +27,7 @@ export const bandSlice = createSlice({
   initialState: {
     currentBand: currentBand,
     bandSkin: "paper",
-    pointerPosition: 0,
+    pointerPosition: 1,
   },
   reducers: {
     /**

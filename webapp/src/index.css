@@ -177,16 +177,80 @@
 /* ********** TABLE ********** */
 
 .editBtnDiv {
-    @apply flex gap-2 justify-center mt-8;
-    position: absolute;
+    @apply flex gap-2 justify-center mt-8 absolute ;
 }
 
 .editBtn {
-    @apply w-10 h-10 rounded-full text-sm font-medium text-gray-900 bg-white hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white; 
+    @apply w-10 h-10 text-sm round font-medium text-gray-900 bg-white hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white;
 }
 
 .editBtn.delete{
-    @apply flex items-center    
+    @apply flex items-center
+}
+
+.brickEditBtn {
+    @apply w-12 h-16 sm:w-16 sm:h-20 text-sm font-medium bg-gray-600 text-sm font-medium text-gray-900 bg-white hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white;
+}
+.brickDeleteBtn {
+    @apply flex w-16 h-20 bg-thm-primary text-white border border-thm-primary;
+}
+
+.brick {
+    @apply absolute z-10 h-[40px] sm:h-[90px] translate-x-[10px] sm:translate-x-[20px] -translate-y-[45px] sm:-translate-y-[95px];
+}
+/* Toilet paper */
+
+.teepeeContainerLeft {
+    @apply animate-rollLeft pt-10;
+}
+
+.teepeeContainerRight {
+    @apply animate-rollRight pt-10
+}
+
+.teepeeBand-container {
+    @apply relative z-0 animate-fadeIn overflow-x-scroll overflow-y-hidden whitespace-nowrap pt-20 flex flex-row justify-start max-w-max;
+}
+
+.teepeeBandItem {
+    @apply inline-block w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] border-2 border-dashed border-r-0 border-l-2 -translate-y-[15%] sm:translate-y-[15%]
+}
+.teepeeHead {
+    @apply w-[50px] h-[25px] sm:w-[100px] sm:h-[50px] round translate-y-[50%] bg-gradient-to-r from-white to-gray-100 border-t-2;
+}
+
+.teepeeBody {
+    @apply w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] bg-gradient-to-r from-white to-gray-100 border-l-2 border-r-2;
+}
+
+.teepeeBottom {
+    @apply w-[50px] h-[25px] sm:w-[100px] sm:h-[50px] round -translate-y-[50%] bg-white border-2;
+}
+.teepeeCardboard {
+    @apply w-[25px] h-[12.5px] sm:w-[50px] sm:h-[25px] round translate-y-[50%] translate-x-[45%] sm:translate-x-[50%] bg-gradient-to-t from-gray-100 to-gray-300 border-2;
+}
+.teepeeBandInput {
+    @apply animate-fadeIn w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] text-center bg-transparent;
+}
+
+.teepeePointerBorder {
+    @apply border border-2 border-thm-primary relative cursor-move;
+}
+
+.teepeePointer {
+    @apply cursor-move;
+}
+
+.teepeePointer::after {
+    @apply content-[''] bg-[url('./assets/images/brick_black.svg')] bg-center bg-no-repeat animate-bounce rounded-b absolute w-[50px] h-[40px] sm:w-[100px] sm:h-[50px] bottom-[50px] sm:bottom-[100px] -left-0.5 z-10;
+}
+
+.teepeePointer:hover {
+    @apply bg-thm-hover;
+}
+
+.round {
+    border-radius: 50%;
 }
 
 .disableTableRow{
