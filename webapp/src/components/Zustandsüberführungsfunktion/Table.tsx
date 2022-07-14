@@ -5,6 +5,7 @@ import {
   tableDeleteRow,
   tableAddRow,
   maschineChangeExecutable,
+  maschineCheckExecutable,
 } from "../../redux/generalStore";
 import Row from "./Row";
 
@@ -29,8 +30,8 @@ export default function Table() {
           }
         });
       });
-
       dispatch(maschineChangeExecutable(executable));
+      dispatch(maschineCheckExecutable());
     })
   );
 

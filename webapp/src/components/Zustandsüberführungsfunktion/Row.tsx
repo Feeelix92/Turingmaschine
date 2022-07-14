@@ -112,7 +112,7 @@ export default function Row(props: RowProps) {
             />
           ))}
       {visible ? (
-        <td className="w-3/6 whitespace-nowrap text-gray-900 border-r">
+        <td className="w-3/6 whitespace-nowrap text-gray-900 border-r items-center flex justify-center">
           STOPP
         </td>
       ) : null}

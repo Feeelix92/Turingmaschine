@@ -8,6 +8,8 @@ import {
   alphabetPushToZustand,
   alphabetDeleteZustand,
   alphabetChangeWarningMode,
+  maschineChangeExecutable,
+  maschineCheckExecutable,
 } from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
@@ -61,6 +63,7 @@ function ConditionsList() {
   store.subscribe(
     wEndZustand((newVal) => {
       endZustand = newVal;
+      dispatch(maschineCheckExecutable());
     })
   );
 
@@ -309,9 +312,17 @@ function ConditionsList() {
               "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
             }
           >
-            <div className={"col-span-2"}>
+            <div className={"flex col-span-2 justify-between"}>
               Anfangszustand q0 = {anfangsZustand.value}{" "}
+              {anfangsZustand.warningMode ? (
+              <IoIosWarning
+                color="orange"
+                title="Dieser Zustand ist nicht länger vorhanden!"
+                size = '32'
+              />
+            ) : null}
             </div>
+            <div className="flex col-span-2">            
             <Select
               placeholder={anfangsZustand.value}
               blurInputOnSelect={false}
@@ -319,25 +330,34 @@ function ConditionsList() {
               onChange={handleChange}
               options={zustandsmenge}
             />
-            {anfangsZustand.warningMode ? (
-              <IoIosWarning
-                color="orange"
-                title="Dieser Zustand ist nicht länger vorhanden!"
-              />
-            ) : null}
+            </div>
+            
           </div>
           <div
             className={
               "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
             }
           >
-            <div className={"col-span-2"}>
+            <div className={"flex col-span-2 justify-between"}>
+              <div>
               Endzustand F = {kA}
               {endZustand.map((value, index) => (
-                <span key={index}>{value.value},</span>
+                <span key={index}>
+                  {value.value}
+                  {index === endZustand.length - 1 ? "" : ","}
+                </span>
               ))}
               {kZ}
+              </div>
+              {endZustandWarningOn ? (
+              <IoIosWarning
+                color="orange"
+                title="Einer der Endzustände ist nicht länger vorhanden!"
+                size = '32'
+              />
+            ) : null}
             </div>
+            <div className="flex col-span-2">            
             <Select
               value={endZustand}
               blurInputOnSelect={false}
@@ -346,12 +366,8 @@ function ConditionsList() {
               options={possibleEnd}
               isMulti={true}
             />
-            {endZustandWarningOn ? (
-              <IoIosWarning
-                color="orange"
-                title="Einer der Endzustände ist nicht länger vorhanden!"
-              />
-            ) : null}
+            </div>
+            
           </div>
           <div
             className={

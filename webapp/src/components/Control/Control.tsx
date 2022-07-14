@@ -59,6 +59,7 @@ function Control() {
     (state: RootState) => state.band.pointerPosition
   );
   const bandWarning = useSelector((state: RootState) => state.band.showWarning);
+  const [maschineRunning, setMaschineRunning] = useState(false);
 
   /////////// Rows from State ///////////
   let selectedRows: Row[] = [];
@@ -179,8 +180,6 @@ function Control() {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
 
-  const [maschineRunning, setMaschineRunning] = useState(false);
-
   const onPlay = async () => {
     setMaschineRunning(true);
     setSelectedRows();
@@ -260,7 +259,7 @@ function Control() {
             </button>
             <button
               className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
-              disabled={!executable || !maschineRunning || bandWarning}
+              disabled={!executable || !maschineRunning || bandWarning }
               onClick={() => changeStopp(true)}
             >
               <FaStop />

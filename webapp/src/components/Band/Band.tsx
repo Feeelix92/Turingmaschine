@@ -112,17 +112,20 @@ export default function Band() {
           +
         </button>
       </div>
+      {showWarning ? (
+        <div className="flex justify-center">
+          <IoIosWarning          
+            color="orange"
+            title="Dieser Eingabewert ist nicht länger zulässig!"
+            size = '48'
+          />
+          </div>
+        ) : null}
       <div
         className={
           "currentZustand flex flex-col content-center items-center justify-center mb-8"
         }
-      >
-        {showWarning ? (
-          <IoIosWarning
-            color="orange"
-            title="Dieser Eingabewert ist nicht länger zulässig!"
-          />
-        ) : null}
+      >        
         {/* <span className="relative">
                 <span className="block absolute -inset-1 w-12 rounded-full bg-thm-primary" aria-hidden="true"></span>
                 <span className="relative text-white text-center"> {currentZustand.value}</span>

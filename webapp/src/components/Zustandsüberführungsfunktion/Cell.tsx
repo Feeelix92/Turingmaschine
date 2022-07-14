@@ -177,7 +177,7 @@ export default function Cell(props: CellProps) {
   return (
     <td
       ref={wrapperRef}
-      className="px-2 py-4 w-1/6 whitespace-nowrap text-sm font-medium text-gray-900 border-r flex justify-center"
+      className="px-2 py-4 w-1/6 whitespace-nowrap text-sm font-medium text-gray-900 border-r flex justify-center items-center"
     >
       {props.value instanceof Zustand ? (
         <ZustandSelect
@@ -221,6 +221,7 @@ export default function Cell(props: CellProps) {
         <IoIosWarning
           color="orange"
           title="Dieser Eingabewert ist nicht länger zulässig!"
+          size = '32'
         />
       ) : null}
 

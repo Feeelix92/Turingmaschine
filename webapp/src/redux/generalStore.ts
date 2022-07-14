@@ -109,7 +109,7 @@ const initialRow: Row[] = [];
 
 let activeRow: Row | undefined;
 
-const activeState: Zustand = initialZustandsmenge[0];
+const activeState: Zustand | undefined = initialZustandsmenge[0];
 
 ///////////////////// Other /////////////////////
 let customKey = 5;
@@ -131,7 +131,7 @@ export const generalSlice = createSlice({
     //// Maschine ////
     pauseMaschine: false,
     stoppMaschine: false,
-    executable: true,
+    executable: false,
     //// Table ////
     header: ["Zustand", "Lese", "Neuer Zustand", "Schreibe", "Gehe nach"],
     rows: initialRow,
@@ -257,7 +257,16 @@ export const generalSlice = createSlice({
       state.stoppMaschine = value.payload;
     },
     maschineChangeExecutable: (state, value: PayloadAction<boolean>) => {
+      console.log(value.payload)
       state.executable = value.payload;
+    },
+    maschineCheckExecutable: (state) => {
+      if(state.rows.length === 0 || state.endZustand.length === 0 ){
+        state.executable = false
+      } else{
+        state.executable = true
+      }
+      
     },
 
     ///////////////////// Table /////////////////////
@@ -379,32 +388,12 @@ export const generalSlice = createSlice({
       state,
       warningValue: PayloadAction<ChangeWarningModus>
     ) => {
-      switch (warningValue.payload.prop) {
-        case "currentAlphabet":
-          state.currentAlphabet.alphabet[0].warningMode =
-            warningValue.payload.value;
-          break;
-        case "dialogOptions":
-          state.dialogOptions = warningValue.payload.payload;
-          break;
-        case "currentDialogOption":
-          state.currentDialogOption.alphabet.alphabet[0].warningMode =
-            warningValue.payload.value;
-          break;
-        case "customAlphabet":
-          state.customAlphabet.alphabet = warningValue.payload.payload;
-          break;
-        case "bandAlphabet":
-          state.bandAlphabet = warningValue.payload.payload;
-          break;
-        case "zustandsmenge":
-          state.zustandsmenge = warningValue.payload.payload;
-          break;
+      switch (warningValue.payload.prop) {        
         case "anfangsZustand":
           state.anfangsZustand.warningMode = warningValue.payload.value;
           break;
         case "endZustand":
-          state.endZustand = warningValue.payload.payload;
+          state.endZustand = warningValue.payload.payload as Zustand[];
           break;
         default:
           console.log("ERROR in alphabetChangeWarningMode");
@@ -428,6 +417,7 @@ export const {
   alphabetChangePauseMaschine,
   alphabetChangeStoppMaschine,
   maschineChangeExecutable,
+  maschineCheckExecutable,
   alphabetChangeWarningMode,
   tableAddRow,
   tableDeleteRow,
