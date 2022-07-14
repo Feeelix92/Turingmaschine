@@ -24,6 +24,11 @@ const initialBandAlphabet: EingabeAlphabet[] = [
   { label: "1", value: "1", warningModus: false },
   { label: "B", value: "B", warningModus: false },
 ];
+const initialTeepeeBandAlphabet: EingabeAlphabet[] = [
+  { label: "1", value: "1", warningModus: false },
+  { label: "#", value: "#", warningModus: false },
+  { label: "B", value: "B", warningModus: false },
+];
 const defaultCustomAlphabet: Alphabet = {
   key: 0,
   alphabet: [],
@@ -377,8 +382,8 @@ export const generalSlice = createSlice({
     //endZustand: initialEndZustandsmenge,
 
     //// Alphabet ////
-    currentAlphabet: defaultAlphabetOption1,
-    bandAlphabet: initialBandAlphabet,
+    currentAlphabet: defaultAlphabetOption2,
+    bandAlphabet: initialTeepeeBandAlphabet,
     customAlphabet: defaultCustomAlphabet,
     //// Dialog ////
     dialogOptions: eingabeAlphabetDialogOptions,
@@ -395,7 +400,7 @@ export const generalSlice = createSlice({
     watchedRows: watchedRows,
     activeState: activeState,
     //// Toilettenpapier ////
-      toiletPaperMode: initialToiletPaperMode
+    toiletPaperMode: initialToiletPaperMode
   },
   reducers: {
     ///////////////////// Alphabet /////////////////////
@@ -680,12 +685,16 @@ export const generalSlice = createSlice({
           state.zustandsmenge = initialZustandsmenge
           state.anfangsZustand = initialAnfangszustand
           state.endZustand = initialEndZustandsmenge
+          state.currentAlphabet = defaultAlphabetOption1
+          state.bandAlphabet = initialBandAlphabet
 
         } else {
           state.rows = initialRowTP
           state.zustandsmenge = initialZustandsmengeTP
           state.anfangsZustand = initialAnfangszustandTP
           state.endZustand = initialEndZustandsmengeTP
+          state.currentAlphabet = defaultAlphabetOption2
+          state.bandAlphabet = initialTeepeeBandAlphabet
         }
         console.log(current(state))
       }

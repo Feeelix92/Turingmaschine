@@ -177,7 +177,7 @@
 /* ********** TABLE ********** */
 
 .editBtnDiv {
-    @apply flex gap-2 justify-center mt-8 absolute;
+    @apply flex gap-2 justify-center mt-8 absolute ;
 }
 
 .editBtn {
@@ -189,7 +189,7 @@
 }
 
 .brickEditBtn {
-    @apply w-10 h-10 round bg-thm-primary2 font-medium text-white hover:to-thm-hover hover:text-white;
+    @apply w-20 h-20 bg-thm-primary2 font-medium text-white hover:to-thm-hover hover:text-white;
 }
 
 /* Toilet paper */
