@@ -1,7 +1,5 @@
 import BandItem from "./BandItem";
 import {
-  FaArrowAltCircleLeft,
-  FaArrowAltCircleRight,
   FaAngleLeft,
   FaAngleRight,
   FaRedo,
@@ -9,7 +7,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
   bandAddField,
-  bandChangePointer,
   bandChangePointPos,
   bandDeleteAll,
   bandSetPointPos,
@@ -18,8 +15,7 @@ import { RootState } from "../../redux/store";
 import party from "party-js";
 
 export default function Band() {
-  const defaultPointerPos = 1; // Feld, auf dem Pointer im Default stehen soll
-
+    
   const currentBand = useSelector((state: RootState) => state.band.currentBand);
   const currentAlphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
@@ -52,7 +48,7 @@ export default function Band() {
 
     return (
         <div className={"w-screen"}>
-            <div className={"flex m-2 h-56"}>
+            <div className={"flex m-2 h-36"}>
                 <button
                     className={"mt-10 rounded-r-none md:rounded md:invisible"}
                     onClick={() => dispatch(bandAddField('before'))}>

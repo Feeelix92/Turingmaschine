@@ -4,6 +4,7 @@ import Table from "./components/Zustandsüberführungsfunktion/Table";
 import Menu from "./components/Menu/Menu";
 import Control from "./components/Control/Control";
 import ConditionsList from "./components/Zustaende/List";
+import Bottomnav from "./components/Bottomnav/Bottomnav";
 
 function App() {             
         
@@ -14,14 +15,23 @@ function App() {
                 <Control />
                 <Band/>
             </header>
-            <div className={"App-body"}>
-                <ConditionsList/>
-                <Table/>
+
+            <div className={"App-body "}>
+                
+                <div className={" hidden md:grid md:grid-cols-4 md:items-start"}>
+                    <ConditionsList/>
+                    <Table/>
+                </div>
+
+                <div className={"md:hidden"}>
+                    <Bottomnav/>
+                </div> 
+
             </div>
+
         </div>
     );
-        
-        
+            
 }
 
 export default App;

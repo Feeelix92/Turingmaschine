@@ -55,7 +55,7 @@
     @apply flex flex-col items-center justify-start text-white;
 }
 .App-body {
-    @apply flex flex-col items-center justify-start xl:grid xl:grid-cols-4 xl:items-start;
+    @apply flex flex-col items-center justify-start ;
 }
 
 .App-link {
@@ -65,6 +65,10 @@
 /* ********** MENU ********** */
 .menu {
     @apply bg-thm-primary text-left;
+}
+
+.bottomnav {
+    @apply bg-thm-primary  w-screen p-5 justify-around  fixed bottom-0 left-0;
 }
 
 /* Position and sizing of burger button */
@@ -120,7 +124,7 @@
 
  /*********** BAND ***********/
 .band-container {
-    @apply overflow-x-scroll overflow-y-hidden whitespace-nowrap pb-5 pl-10 pr-10 pt-10 flex flex-row mb-5 justify-start max-w-max ml-auto mr-auto;
+    @apply overflow-x-auto overflow-y-hidden whitespace-nowrap pb-5 pl-10 pr-10 pt-10 flex flex-row justify-start max-w-max ml-auto mr-auto;
 }
 
 .band-container__band {
@@ -172,7 +176,7 @@
 /* ********** TABLE ********** */
 
 .editBtnDiv {
-    @apply flex gap-2 justify-center mt-8;
+    @apply flex gap-2 justify-center mt-2;
 }
 
 .editBtn {
