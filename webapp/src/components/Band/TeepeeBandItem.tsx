@@ -107,7 +107,7 @@ export default function BandItem(props: BandItemProps) {
                     type="text"
                     name="value"
                     id="teepeeValueInput"
-                    className={"teepeeBandInput bg-transparent"}
+                    className={"teepeeBandInput"}
                     value={props.label}
                     onChange={(e) => checkValue(props.index, e.target.value)}
                     onClick={toggleEditMode}
