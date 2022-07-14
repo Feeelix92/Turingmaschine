@@ -5,10 +5,9 @@ import { Direction, Zustand } from "../../interfaces/CommonInterfaces";
 import {
   alphabetChangeAnfangszustand,
   alphabetChangeEndzustand,
-  alphabetClearEndzustand,
   alphabetPushToZustand,
   alphabetDeleteZustand,
-  alphabetChangeWarningModus,
+  alphabetChangeWarningMode,
 } from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
@@ -179,7 +178,7 @@ function ConditionsList() {
     });
     if (tempBool) {
       dispatch(
-        alphabetChangeWarningModus({
+        alphabetChangeWarningMode({
           prop: "anfangsZustand",
           value: false,
           payload: anfangsZustand,
@@ -187,7 +186,7 @@ function ConditionsList() {
       );
     } else {
       dispatch(
-        alphabetChangeWarningModus({
+        alphabetChangeWarningMode({
           prop: "anfangsZustand",
           value: true,
           payload: anfangsZustand,
@@ -200,20 +199,20 @@ function ConditionsList() {
       });
 
       if (tempBool2) {
-        endZustand.warningModus = false;
+        endZustand.warningMode = false;
       } else {
-        endZustand.warningModus = true;
+        endZustand.warningMode = true;
       }
     });
     dispatch(
-      alphabetChangeWarningModus({
+      alphabetChangeWarningMode({
         prop: "endZustand",
         value: true,
         payload: endZustand,
       })
     );
     endZustand.forEach((endZustand) => {
-      if (endZustand.warningModus === true) {
+      if (endZustand.warningMode === true) {
         setEndZustandWarningOn(true);
       }
     });
@@ -320,7 +319,7 @@ function ConditionsList() {
               onChange={handleChange}
               options={zustandsmenge}
             />
-            {anfangsZustand.warningModus ? (
+            {anfangsZustand.warningMode ? (
               <IoIosWarning
                 color="orange"
                 title="Dieser Zustand ist nicht länger vorhanden!"

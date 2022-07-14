@@ -23,20 +23,20 @@ export class Zustand {
   label: string;
   anfangszustand: boolean;
   endzustand: boolean;
-  warningModus: boolean;
+  warningMode: boolean;
 
   constructor(
     label: string,
     value: string,
     anfangszustand: boolean,
     endzustand: boolean,
-    warningModus: boolean
+    warningMode: boolean
   ) {
     this.label = label;
     this.value = value;
     this.anfangszustand = anfangszustand;
     this.endzustand = endzustand;
-    this.warningModus = warningModus;
+    this.warningMode = warningMode;
   }
 }
 
@@ -123,7 +123,7 @@ export interface Alphabet {
 export interface EingabeAlphabet {
   label: string;
   value: string;
-  warningModus: boolean;
+  warningMode: boolean;
 }
 
 export interface ChangeWarningModus {

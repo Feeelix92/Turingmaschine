@@ -127,9 +127,15 @@ export default function Band() {
                 <span className="block absolute -inset-1 w-12 rounded-full bg-thm-primary" aria-hidden="true"></span>
                 <span className="relative text-white text-center"> {currentZustand.value}</span>
             </span>                */}
-        <div className={"rounded-full w-12 bg-thm-primary text-white h-8"}>
-          {currentZustand.value}
-        </div>
+        {currentZustand ? (
+          <div className={"rounded-full w-12 bg-thm-primary text-white h-8"}>
+            {currentZustand.value}
+          </div>
+        ) : (
+          <div className={"rounded-full bg-thm-primary text-white h-8"}>
+            Kein Zustand vorhanden!
+          </div>
+        )}
       </div>
       <div className={"hidden md:block"}>
         <div className={"flex justify-center gap-2"}>

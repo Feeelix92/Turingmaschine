@@ -1,14 +1,16 @@
 import { useState } from "react";
 import CreatableSelect from "react-select/creatable";
 import { ActionMeta, OnChangeValue } from "react-select";
-import { ZustandCustomProp } from "../../interfaces/CommonInterfaces";
+import {
+  EingabeAlphabet,
+  ZustandCustomProp,
+} from "../../interfaces/CommonInterfaces";
 import { useDispatch } from "react-redux";
 import {
   alphabetDeleteCustom,
   alphabetPushToCustom,
   alphabetPushToDialogOptions,
   defaultAlphabetOption4,
-  EingabeAlphabet,
 } from "../../redux/generalStore";
 
 export default function MultiselectDropDown(props: ZustandCustomProp) {

@@ -9,7 +9,6 @@ import {
   directions,
   Zustand,
 } from "../../interfaces/CommonInterfaces";
-import { alphabetChangeWarningModus } from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import { initialZustand3 } from "../../redux/generalStore";
 import EditField from "./EditField";
@@ -20,6 +19,9 @@ export default function Cell(props: CellProps) {
   const zustandsmenge = useSelector(
     (state: RootState) => state.general.zustandsmenge
   );
+  const endzustandsMenge = useSelector(
+    (state: RootState) => state.general.endZustand
+  );
 
   const temp = [initialZustand3];
 
@@ -29,15 +31,39 @@ export default function Cell(props: CellProps) {
   store.subscribe(
     wStates((newVal) => {
       states = newVal;
+      checkWarningModus();
+    })
+  );
+
+  /////////// States from State ///////////
+  let finalStates = endzustandsMenge;
+  let wFinalStates = watch(store.getState, "general.endZustand");
+  store.subscribe(
+    wFinalStates((newVal) => {
+      finalStates = newVal;
+      console.log("watched state change");
 
       if (props.value instanceof Zustand) {
-        states.forEach((state) => {
+        let found = false;
+
+        finalStates.forEach((state) => {
           if (props.value instanceof Zustand) {
             if (state.value === props.value.value) {
+              found = true;
               handleChange(state);
             }
           }
         });
+
+        if (!found) {
+          states.forEach((state) => {
+            if (props.value instanceof Zustand) {
+              if (state.value === props.value.value) {
+                handleChange(state);
+              }
+            }
+          });
+        }
       }
       checkWarningModus();
     })
@@ -72,6 +98,7 @@ export default function Cell(props: CellProps) {
 
   function handleChange(newValue: OnChangeValue<Direction | Zustand, false>) {
     if (newValue) {
+      console.log(props.index, newValue);
       // pass chosen options to the parent to update the cell
       props.updateCellValue(props.index, newValue);
     }

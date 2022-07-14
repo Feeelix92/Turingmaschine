@@ -1,4 +1,5 @@
 import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
+import { EingabeAlphabetOption } from "../data/Alphabet";
 import {
   Alphabet,
   Cell,
@@ -20,9 +21,9 @@ export const initialAnfangszustand: Zustand = initialZustandsmenge[0];
 const initialEndZustandsmenge: Zustand[] = [];
 
 ///////////////////// BandAlphabet /////////////////////
-const initialBandAlphabet: EingabeAlphabet[] = [
-  { label: "1", value: "1", warningModus: false },
-  { label: "", value: "B", warningModus: false },
+const initialBandAlphabet: EingabeAlphabetOption[] = [
+  { label: "1", value: "1", warningMode: false },
+  { label: "", value: "B", warningMode: false },
 ];
 const defaultCustomAlphabet: Alphabet = {
   key: 0,
@@ -30,28 +31,28 @@ const defaultCustomAlphabet: Alphabet = {
 };
 const defaultAlphabetOption1: Alphabet = {
   key: 1,
-  alphabet: [{ label: "1", value: "1", warningModus: false }],
+  alphabet: [{ label: "1", value: "1", warningMode: false }],
 };
 const defaultAlphabetOption2: Alphabet = {
   key: 2,
   alphabet: [
-    { label: "1", value: "1", warningModus: false },
-    { label: "#", value: "#", warningModus: false },
+    { label: "1", value: "1", warningMode: false },
+    { label: "#", value: "#", warningMode: false },
   ],
 };
 const defaultAlphabetOption3: Alphabet = {
   key: 3,
   alphabet: [
-    { label: "1", value: "1", warningModus: false },
-    { label: "0", value: "0", warningModus: false },
+    { label: "1", value: "1", warningMode: false },
+    { label: "0", value: "0", warningMode: false },
   ],
 };
 export const defaultAlphabetOption4: Alphabet = {
   key: 4,
   alphabet: [
-    { label: "1", value: "1", warningModus: false },
-    { label: "0", value: "0", warningModus: false },
-    { label: "#", value: "#", warningModus: false },
+    { label: "1", value: "1", warningMode: false },
+    { label: "0", value: "0", warningMode: false },
+    { label: "#", value: "#", warningMode: false },
   ],
 };
 
@@ -132,7 +133,7 @@ export const generalSlice = createSlice({
     executable: true,
     //// Table ////
     header: ["Zustand", "Lese", "Neuer Zustand", "Schreibe", "Gehe nach"],
-    rows: initialRow,
+    rows: [],
     activeRow: activeRow,
     watchedRows: watchedRows,
     activeState: activeState,
@@ -150,7 +151,7 @@ export const generalSlice = createSlice({
         }
       });
       let tempAlphabet = Object.assign([], alphabet.payload.alphabet);
-      tempAlphabet.push({ value: "B", label: "", warningModus: false });
+      tempAlphabet.push({ value: "B", label: "", warningMode: false });
       state.bandAlphabet = tempAlphabet;
     },
     /**
@@ -161,7 +162,7 @@ export const generalSlice = createSlice({
       state.customAlphabet.alphabet.push({
         value: value.payload,
         label: value.payload,
-        warningModus: false,
+        warningMode: false,
       });
     },
     /**
@@ -195,16 +196,20 @@ export const generalSlice = createSlice({
      */
     alphabetPushToZustand: (state) => {
       let tempNumber = state.zustandsmenge.length + 1;
-      state.zustandsmenge.push({
-        value: "q" + tempNumber,
-        label: "q" + tempNumber,
-        anfangszustand: false,
-        endzustand: false,
-        warningModus: false,
-      });
+      state.zustandsmenge.push(
+        new Zustand("q" + tempNumber, "q" + tempNumber, false, false, false)
+      );
+
+      if (state.zustandsmenge.length === 1) {
+        state.activeState = state.zustandsmenge[0];
+      }
     },
     alphabetDeleteZustand: (state) => {
       state.zustandsmenge.pop();
+
+      if (state.zustandsmenge.length <= 0) {
+        state.activeState = undefined;
+      }
     },
     alphabetChangeAnfangszustand: (state, zustand: PayloadAction<Zustand>) => {
       state.zustandsmenge.forEach((option) => {
@@ -216,8 +221,10 @@ export const generalSlice = createSlice({
         }
       });
       state.anfangsZustand = zustand.payload;
+      state.activeState = zustand.payload;
     },
     alphabetChangeEndzustand: (state, zustand: PayloadAction<Zustand[]>) => {
+      console.log(zustand.payload);
       state.endZustand = zustand.payload;
 
       state.zustandsmenge.forEach((option) => {
@@ -231,6 +238,8 @@ export const generalSlice = createSlice({
           option.endzustand = false;
         }
       });
+
+      console.log(current(state));
     },
     alphabetClearEndzustand: (state) => {
       state.zustandsmenge.forEach((option) => {
@@ -255,17 +264,31 @@ export const generalSlice = createSlice({
       // create flat copy of all existing rows
       const newRows = state.rows.slice(0, state.rows.length);
 
+      console.log(current(state));
+
       // add new row to existing rows
       newRows.push({
         cells: [
           {
-            value: state.zustandsmenge[0],
+            value: new Zustand(
+              state.zustandsmenge[0].label,
+              state.zustandsmenge[0].value,
+              state.zustandsmenge[0].anfangszustand,
+              state.zustandsmenge[0].endzustand,
+              state.zustandsmenge[0].warningMode
+            ),
             editField: false,
             warningMode: false,
           },
           { value: "1", editField: true, warningMode: false },
           {
-            value: state.zustandsmenge[0],
+            value: new Zustand(
+              state.zustandsmenge[0].label,
+              state.zustandsmenge[0].value,
+              state.zustandsmenge[0].anfangszustand,
+              state.zustandsmenge[0].endzustand,
+              state.zustandsmenge[0].warningMode
+            ),
             editField: false,
             warningMode: false,
           },
@@ -278,6 +301,8 @@ export const generalSlice = createSlice({
         ],
         isFinal: false,
       });
+
+      console.log(newRows);
 
       // update the rows in state with our new rows-array
       state.rows = newRows;
@@ -349,20 +374,20 @@ export const generalSlice = createSlice({
     },
 
     ///////////////////// Other /////////////////////
-    alphabetChangeWarningModus: (
+    alphabetChangeWarningMode: (
       state,
       warningValue: PayloadAction<ChangeWarningModus>
     ) => {
       switch (warningValue.payload.prop) {
         case "currentAlphabet":
-          state.currentAlphabet.alphabet[0].warningModus =
+          state.currentAlphabet.alphabet[0].warningMode =
             warningValue.payload.value;
           break;
         case "dialogOptions":
           state.dialogOptions = warningValue.payload.payload;
           break;
         case "currentDialogOption":
-          state.currentDialogOption.alphabet.alphabet[0].warningModus =
+          state.currentDialogOption.alphabet.alphabet[0].warningMode =
             warningValue.payload.value;
           break;
         case "customAlphabet":
@@ -375,13 +400,13 @@ export const generalSlice = createSlice({
           state.zustandsmenge = warningValue.payload.payload;
           break;
         case "anfangsZustand":
-          state.anfangsZustand.warningModus = warningValue.payload.value;
+          state.anfangsZustand.warningMode = warningValue.payload.value;
           break;
         case "endZustand":
           state.endZustand = warningValue.payload.payload;
           break;
         default:
-          console.log("ERROR in alphabetChangeWarningModus");
+          console.log("ERROR in alphabetChangeWarningMode");
           break;
       }
     },
@@ -402,7 +427,7 @@ export const {
   alphabetChangePauseMaschine,
   alphabetChangeStoppMaschine,
   maschineChangeExecutable,
-  alphabetChangeWarningModus,
+  alphabetChangeWarningMode,
   tableAddRow,
   tableDeleteRow,
   tableUpdateCell,
