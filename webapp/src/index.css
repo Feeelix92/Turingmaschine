@@ -198,6 +198,25 @@
 .brick {
     @apply absolute z-10 h-[40px] sm:h-[90px] translate-x-[10px] sm:translate-x-[20px] -translate-y-[45px] sm:-translate-y-[95px];
 }
+
+/*toiletpaper mode*/
+.disableTableRow{
+    pointer-events: none;
+
+}
+
+button.disableTableRow{
+    opacity: 0.4;
+}
+
+.disableTableRow button{
+    opacity: 0.4;
+}
+
+.disableTableRow .css-4xgw5l-IndicatorsContainer2{
+    opacity: 0.4;
+}
+
 /* Toilet paper */
 
 .teepeeContainerLeft {
@@ -251,21 +270,4 @@
 
 .round {
     border-radius: 50%;
-}
-
-.disableTableRow{
-    pointer-events: none;
-
-}
-
-button.disableTableRow{
-    opacity: 0.4;
-}
-
-.disableTableRow button{
-    opacity: 0.4;
-}
-
-.disableTableRow .css-4xgw5l-IndicatorsContainer2{
-    opacity: 0.4;
 }
