@@ -15,11 +15,12 @@ export default function ToPaTable() {
         closeAccordion: <button className={"float-left"}><BiCaretUp/></button>,
     };
     const {title, openAccordion, closeAccordion} = accordionData;
+   // const toiletPaperMode = useSelector((state: RootState) => state.general.toiletPaperMode)
 
     /**
      * To check if Accordion opened or closed
      */
-    const [isActive, setIsActive] = useState(true);
+    const [isActive, setIsActive] = useState(false);
 
         return (
             <div className={"border-solid border rounded bg-white w-full p-2 border rounded items-center hover:bg-gray-100 col-span-12"}>

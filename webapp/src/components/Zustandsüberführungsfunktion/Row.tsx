@@ -97,13 +97,15 @@ export default function Row(props: RowProps) {
     }
   }, [props.isFinal]);
 
+    const toiletPaperMode = useSelector((state: RootState) => state.general.toiletPaperMode)
+
   return (
     <tr
       className={`border-b flex w-full hover:bg-gray-100 ${
         activeRow != undefined && activeRow.cells === props.cells
           ? "bg-lime-300"
           : ""
-      }`}
+      } ${toiletPaperMode ? "disableTableRow" : ""} `}
     >
       {visible
         ? props.cells
