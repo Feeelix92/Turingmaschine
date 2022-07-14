@@ -52,6 +52,9 @@ export default function EditField(props: EditProps) {
                 {value.label == "#" &&
                     <img draggable={false} src={BrickBlack} className="" alt="brick white" />
                 }
+                {value.label == "B" &&
+                    <p className={"text-white text-2xl"}>B</p>
+                }
               </button>
           ))
       }

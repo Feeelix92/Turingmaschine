@@ -112,7 +112,7 @@ export default function TeepeeBand() {
                             onClick={() => dispatch(bandDeleteAll())}
                             className={"m-2"}
                         >
-                            <FaRedo/>
+                            <p className={"text-white"}><FaRedo/></p>
                         </button>
                     </div>
             </div>

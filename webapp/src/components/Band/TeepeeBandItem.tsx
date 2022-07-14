@@ -1,7 +1,7 @@
 import React, {Key, useEffect, useRef} from "react";
 import EditField from "../Zustandsüberführungsfunktion/EditField";
 import { BandItemProps } from "../../interfaces/CommonInterfaces";
-import { FaTimes, FaTrash } from "react-icons/fa";
+import {FaRedo, FaTimes, FaTrash} from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
 import brickWhite from "../../assets/images/brick_white.svg"
@@ -132,10 +132,10 @@ export default function BandItem(props: BandItemProps) {
                       {/*</button>*/}
                       <EditField options={props.alphabet} updateValue={chooseOption}/>
                       <button
-                          className={"editBtn delete"}
+                          className={"brickEditBtn delete"}
                           onClick={() => deleteValue(props.index)}
                       >
-                        <BsFillEraserFill/>
+                        <p className={"text-white"}><BsFillEraserFill/></p>
                       </button>
                     </div>
                 ) : (
