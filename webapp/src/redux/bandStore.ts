@@ -12,11 +12,14 @@ export interface PointerItemToChange {
 }
 
 const currentBand: EingabeAlphabetOption[] = [
-  { value: "B", label: "", pointer: false },
-  { value: "B", label: "", pointer: true },
-  { value: "B", label: "", pointer: false },
-  { value: "B", label: "", pointer: false },
-  { value: "B", label: "", pointer: false },
+  { value: "B", label: "", warningMode: false },
+  { value: "B", label: "", warningMode: false },
+  { value: "B", label: "", warningMode: false },
+  { value: "B", label: "", warningMode: false },
+  { value: "B", label: "", warningMode: false },
+  { value: "B", label: "", warningMode: false },
+  { value: "B", label: "", warningMode: false },
+  { value: "B", label: "", warningMode: false },
 ];
 
 export const bandSlice = createSlice({
@@ -25,6 +28,7 @@ export const bandSlice = createSlice({
     currentBand: currentBand,
     bandSkin: "paper",
     pointerPosition: 0,
+    showWarning: false,
   },
   reducers: {
     /**
@@ -42,13 +46,6 @@ export const bandSlice = createSlice({
         state.currentBand[bandItem.payload.index].label = "";
       }
     },
-    bandChangePointer: (
-      state,
-      pointerItem: PayloadAction<PointerItemToChange>
-    ) => {
-      state.currentBand[pointerItem.payload.index as number].pointer =
-        pointerItem.payload.value;
-    },
     /**
      * function bandDeleteItemAt deletes the Band Values at the index
      * @param index
@@ -57,7 +54,7 @@ export const bandSlice = createSlice({
       state.currentBand[index.payload as number] = {
         value: "B",
         label: "",
-        pointer: state.currentBand[index.payload].pointer,
+        warningMode: state.currentBand[index.payload].warningMode,
       };
     },
     /**
@@ -67,9 +64,13 @@ export const bandSlice = createSlice({
      */
     bandAddField: (state, position: PayloadAction<string>) => {
       if (position.payload === "before") {
-        state.currentBand.unshift({ value: "B", label: "", pointer: false });
+        state.currentBand.unshift({
+          value: "B",
+          label: "",
+          warningMode: false,
+        });
       } else {
-        state.currentBand.push({ value: "B", label: "", pointer: false });
+        state.currentBand.push({ value: "B", label: "", warningMode: false });
       }
     },
     /**
@@ -77,11 +78,11 @@ export const bandSlice = createSlice({
      */
     bandDeleteAll: (state) => {
       for (let index = 0; index < state.currentBand.length; index++) {
-        if (index == 1) {
-          state.currentBand[index] = { value: "B", label: "", pointer: true };
-        } else {
-          state.currentBand[index] = { value: "B", label: "", pointer: false };
-        }
+        state.currentBand[index] = {
+          value: "B",
+          label: "",
+          warningMode: false,
+        };
       }
       state.pointerPosition = 0;
     },
@@ -93,21 +94,24 @@ export const bandSlice = createSlice({
       }
     },
     bandChangePointPos: (state, step: PayloadAction<number>) => {
-      console.log("movePointer");
-      if((step.payload<0 && state.pointerPosition==0) || (step.payload>0 && state.pointerPosition>=state.currentBand.length-1) ) {
-
+      if (
+        (step.payload < 0 && state.pointerPosition == 0) ||
+        (step.payload > 0 &&
+          state.pointerPosition >= state.currentBand.length - 1)
+      ) {
+        state.pointerPosition -= step.payload;
       } else {
         state.pointerPosition += step.payload;
       }
-
     },
     bandSetPointPos: (state, step: PayloadAction<number>) => {
       state.pointerPosition = step.payload;
     },
     bandResetPointer: (state) => {
-      console.log("Reset!");
       state.pointerPosition = 0;
-      console.log("state.PointerPosition: ", state.pointerPosition);
+    },
+    bandSetWarning: (state, value: PayloadAction<boolean>) => {
+      state.showWarning = value.payload;
     },
   },
 });
@@ -119,10 +123,10 @@ export const {
   bandAddField,
   bandDeleteAll,
   bandChangeSkin,
-  bandChangePointer,
   bandChangePointPos,
   bandSetPointPos,
   bandResetPointer,
+  bandSetWarning,
 } = bandSlice.actions;
 
 export default bandSlice.reducer;

@@ -1,312 +1,294 @@
-import {FaPlay, FaPause, FaStop, FaStepForward} from "react-icons/fa";
-import {useDispatch, useSelector} from "react-redux";
-import {Direction, Row, Zustand} from "../../interfaces/CommonInterfaces";
-import {RootState, store} from "../../redux/store";
+import { FaPlay, FaPause, FaStop, FaStepForward } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import {
-    tableSetActiveState,
-    tableSetWatchedRows,
-} from "../../redux/tableStore";
-import watch from "redux-watch";
+  Direction,
+  RowInterface,
+  Zustand,
+} from "../../interfaces/CommonInterfaces";
+import { RootState, store } from "../../redux/store";
 import {
-    bandChangeItemAt,
-    bandChangePointPos,
-    bandResetPointer,
-} from "../../redux/bandStore";
-import {useEffect, useState} from "react";
-import {
-    alphabetChangePauseMaschine,
-    alphabetChangeStoppMaschine,
+  tableSetActiveRow,
+  tableSetActiveState,
+  tableSetWatchedRows,
 } from "../../redux/generalStore";
-import anime from 'animejs';
-
+import watch from "redux-watch";
+import { bandChangeItemAt, bandChangePointPos } from "../../redux/bandStore";
+import { useState } from "react";
+import {
+  alphabetChangePauseMaschine,
+  alphabetChangeStoppMaschine,
+} from "../../redux/generalStore";
+import anime from "animejs";
 
 function Control() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    let pauseMaschine: Boolean = false;
-    let wPauseMaschine = watch(store.getState, "general.pauseMaschine");
-    store.subscribe(
-        wPauseMaschine((newVal) => {
-            pauseMaschine = newVal;
-        })
-    );
+  const executable = useSelector(
+    (state: RootState) => state.general.executable
+  );
 
-    let stoppMaschine: Boolean = false;
-    let wStoppMaschine = watch(store.getState, "general.stoppMaschine");
-    store.subscribe(
-        wStoppMaschine((newVal) => {
-            stoppMaschine = newVal;
-        })
-    );
+  let pauseMaschine: Boolean = false;
+  let wPauseMaschine = watch(store.getState, "general.pauseMaschine");
+  store.subscribe(
+    wPauseMaschine((newVal) => {
+      pauseMaschine = newVal;
+      setMaschineRunning(false);
+    })
+  );
 
-    //TODO: anime.js
-    const animateButton = (el) => {
-        anime({
-            targets: el,
-            scale: '1.1',
-            duration: 800,
-            elasticity: 400
-          });
-    }
+  const [slider, setSlider] = useState(1);
+  //TODO: anime.js
+  const animateButton = (el) => {
+    anime({
+      targets: el,
+      scale: "1.1",
+      duration: 800,
+      elasticity: 400,
+    });
+  };
 
-    const animateBack = async () => {
-        console.log("animateBack");
-        anime({
-            targets: '.invertedButton',
-            scale: '1.0',
-            duration: 800,
-            elasticity: 400
-          });
-    }
+  const animateBack = async () => {
+    console.log("animateBack");
+    anime({
+      targets: ".invertedButton",
+      scale: "1.0",
+      duration: 800,
+      elasticity: 400,
+    });
+  };
 
+  const changePause = (value: boolean) => {
+    dispatch(alphabetChangePauseMaschine(value));
+  };
+  const changeStopp = (value: boolean) => {
+    dispatch(alphabetChangeStoppMaschine(value));
+  };
 
-    const [slider, setSlider] = useState(1000);
+  const initialZustand = useSelector(
+    (state: RootState) => state.general.anfangsZustand
+  );
 
-    const changePause = (value: boolean) => {
-        dispatch(alphabetChangePauseMaschine(value));
-    };
-    const changeStopp = (value: boolean) => {
-        dispatch(alphabetChangeStoppMaschine(value));
-        dispatch(bandResetPointer());
-    };
+  const currentBand = useSelector((state: RootState) => state.band.currentBand);
+  const currentTable = useSelector((state: RootState) => state.general.rows);
+  const pointerIdx = useSelector(
+    (state: RootState) => state.band.pointerPosition
+  );
+  const bandWarning = useSelector((state: RootState) => state.band.showWarning);
+  const [maschineRunning, setMaschineRunning] = useState(false);
 
-    // useEffect(() => {
-    //   console.log("pause--------------->", pause);
-    //   if (pause === true) {
-    //     localCopyPause = true;
-    //   } else {
-    //     localCopyPause = false;
-    //   }
-    //   console.log("localCopyPause--------------->", localCopyPause);
-    // }, [pause]);
+  /////////// Rows from State ///////////
+  let selectedRows: RowInterface[] = [];
+  let wSelectedRows = watch(store.getState, "general.watchedRows");
+  store.subscribe(
+    wSelectedRows((newVal) => {
+      selectedRows = newVal;
+    })
+  );
 
-    // const handlePauseOn = async () => {
-    //   await setPause(true);
-    //   localCopyPause = true;
-    //   console.log("MOIIIN",localCopyPause)
-    // };
+  /////////// Band from State ///////////
+  let selectedBand = currentBand;
+  let wSelectedBand = watch(store.getState, "band.currentBand");
+  store.subscribe(
+    wSelectedBand((newVal) => {
+      selectedBand = newVal;
+    })
+  );
 
-    // const handlePauseOff = async () => {
-    //   await setPause(false);
-    //   localCopyPause = false;
-    // };
+  /////////// ActiveState from State ///////////
+  let activeState = initialZustand;
+  let wActiveState = watch(store.getState, "general.activeState");
+  store.subscribe(
+    wActiveState((newVal) => {
+      activeState = newVal;
+    })
+  );
 
-    const initialZustand = useSelector(
-        (state: RootState) => state.general.anfangsZustand
-    );
+  /////////// PointerPosition from State ///////////
+  let activePointerPosition = pointerIdx;
+  let wActivePointerPosition = watch(store.getState, "band.pointerPosition");
+  store.subscribe(
+    wActivePointerPosition((newVal) => {
+      activePointerPosition = newVal;
+      if (newVal != undefined) {
+        console.log("Pointer verschoben nach: ", newVal);
+      }
+    })
+  );
 
-    const currentBand = useSelector((state: RootState) => state.band.currentBand);
-    const currentTable = useSelector((state: RootState) => state.table.rows);
-    const pointerIdx = useSelector(
-        (state: RootState) => state.band.pointerPosition
-    );
+  const setSelectedRows = () => {
+    // get all rows, that match our current Zustand and which are therefore relevant
+    let rows: RowInterface[] = [];
 
-    /////////// Rows from State ///////////
-    let selectedRows: Row[] = [];
-    let wSelectedRows = watch(store.getState, "table.watchedRows");
-    store.subscribe(
-        wSelectedRows((newVal) => {
-            selectedRows = newVal;
-        })
-    );
-
-    /////////// Band from State ///////////
-    let selectedBand = currentBand;
-    let wSelectedBand = watch(store.getState, "band.currentBand");
-    store.subscribe(
-        wSelectedBand((newVal) => {
-            selectedBand = newVal;
-        })
-    );
-
-    /////////// ActiveState from State ///////////
-    let activeState = initialZustand;
-    let wActiveState = watch(store.getState, "table.activeState");
-    store.subscribe(
-        wActiveState((newVal) => {
-            activeState = newVal;
-        })
-    );
-
-    /////////// PointerPosition from State ///////////
-    let activePointerPosition = pointerIdx;
-    let wActivePointerPosition = watch(store.getState, "band.pointerPosition");
-    store.subscribe(
-        wActivePointerPosition((newVal) => {
-            activePointerPosition = newVal;
-            if (newVal != undefined) {
-                console.log("Pointer verschoben nach: ", newVal);
-            }
-        })
-    );
-
-    const setSelectedRows = () => {
-        // get all rows, that match our current Zustand and which are therefore relevant
-        let rows: Row[] = [];
-
-        if (currentBand.length > 0) {
-            currentTable.forEach((row) => {
-                if (row.cells[0].value instanceof Zustand) {
-                    if (row.cells[0].value.value === activeState.value) {
-                        rows.push(row);
-                    }
-                }
-            });
+    if (currentBand.length > 0) {
+      currentTable.forEach((row) => {
+        if (row.cells[0].value instanceof Zustand) {
+          if (row.cells[0].value.value === activeState.value) {
+            rows.push(row);
+          }
         }
-        dispatch(tableSetWatchedRows(rows));
-    };
+      });
+    }
+    dispatch(tableSetWatchedRows(rows));
+  };
 
-    const makeStep = async (idx: number) => {
-        // get the row, which matches with the symbol we read on band
-        const item = selectedRows.find((elem) => {
-            return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
-        });
+  const makeStep = async (idx: number) => {
+    // get the row, which matches with the symbol we read on band
+    const item = selectedRows.find((elem) => {
+      return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
+    });
 
-        console.log("Reihe:", item);
-
-        if (item !== undefined && typeof item.cells[3].value === "string") {
-            console.log("gelesener Wert:", item.cells[1].value);
-            if (
-                item.cells[0].value instanceof Zustand &&
-                item.cells[0].value.endzustand === false
-            ) {
-                console.log("Veränder mir das hier zu:", item.cells[3].value);
-                dispatch(
-                    bandChangeItemAt({
-                        index: idx,
-                        value: item.cells[3].value,
-                        label: item.cells[3].value,
-                    })
-                );
-            }
-            if (item.cells[4].value instanceof Direction) {
-                switch (item.cells[4].value.label) {
-                    case "Rechts": {
-                        // idx++;
-                        dispatch(bandChangePointPos(1));
-                        break;
-                    }
-                    case "Links": {
-                        // idx--;
-                        dispatch(bandChangePointPos(-1));
-                        break;
-                    }
-                    case "Neutral":
-                    default: {
-                        break;
-                    }
-                }
-            }
-            if (item.cells[0].value instanceof Zustand) {
-                if (item.cells[0].value != item.cells[2].value) {
-                    if (item.cells[0].value.endzustand === true) {
-                        console.log("Endzustand erreicht!");
-                        changePause(true);
-                        await dispatch(bandResetPointer());
-                    } else {
-                        console.log("changeZustand");
-                        dispatch(tableSetActiveState(item.cells[2].value as Zustand));
-                        setSelectedRows();
-                    }
-                }
-            }
-        } else {
-            console.log("Else");
+    if (
+      item !== undefined &&
+      typeof item.cells[3].value === "string" &&
+      item.isFinal === false
+    ) {
+      store.dispatch(tableSetActiveRow(item));
+      if (
+        item.cells[0].value instanceof Zustand &&
+        item.cells[0].value.endzustand === false
+      ) {
+        dispatch(
+          bandChangeItemAt({
+            index: idx,
+            value: item.cells[3].value,
+            label: item.cells[3].value,
+          })
+        );
+      }
+      if (item.cells[4].value instanceof Direction) {
+        switch (item.cells[4].value.label) {
+          case "Rechts": {
+            dispatch(bandChangePointPos(1));
+            break;
+          }
+          case "Links": {
+            dispatch(bandChangePointPos(-1));
+            break;
+          }
+          case "Neutral":
+          default: {
+            break;
+          }
+        }
+      }
+      if (item.cells[0].value instanceof Zustand) {
+        if (item.cells[0].value != item.cells[2].value) {
+          if (item.cells[0].value.endzustand === true) {
             changePause(true);
-            await dispatch(bandResetPointer());
+          } else {
+            dispatch(tableSetActiveState(item.cells[2].value as Zustand));
+            setSelectedRows();
+          }
         }
-    };
+      }
+    } else {
+      changePause(true);
+    }
+  };
 
-    const sleep = (milliseconds: number) => {
-        return new Promise((resolve) => setTimeout(resolve, milliseconds));
-    };
+  const sleep = (milliseconds: number) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
 
-    const onPlay = async () => {
-        setSelectedRows();
-        dispatch(alphabetChangeStoppMaschine(false));
-        changePause(false);
+  const onPlay = async () => {
+    setMaschineRunning(true);
+    setSelectedRows();
+    dispatch(alphabetChangeStoppMaschine(false));
+    changePause(false);
 
-        //ToDo: Schleife hört nicht auf Änderungen von außerhalb...
-        //...localCopyPause = true vom Pause Button wird nicht beachtet??
-        while (stoppMaschine === false && pauseMaschine === false) {
-            await sleep(slider);
-            makeStep(activePointerPosition);
-        }
+    //ToDo: Schleife hört nicht auf Änderungen von außerhalb...
+    //...localCopyPause = true vom Pause Button wird nicht beachtet??
+    while (stoppMaschine === false && pauseMaschine === false) {
+      setMaschineRunning(true);
+      let tempSlider = 3000 / slider;
+      console.log(tempSlider);
+      await sleep(tempSlider);
+      makeStep(activePointerPosition);
+    }
+    dispatch(tableSetActiveRow(undefined));
+    dispatch(tableSetActiveState(initialZustand));
+    changePause(false);
+    setMaschineRunning(false);
+    dispatch(alphabetChangeStoppMaschine(false));
+  };
 
-        console.log("Schleife durchbrochen!");
-        dispatch(tableSetActiveState(initialZustand));
-        changePause(false);
-        dispatch(alphabetChangeStoppMaschine(false));
-    };
+  const stepByStep = () => {
+    setSelectedRows();
 
-    const stepByStep = () => {
-        setSelectedRows();
+    makeStep(activePointerPosition);
+  };
 
-        makeStep(activePointerPosition);
-    };
-
-    return (
-        <div className={"control w-screen"}>
-            <div className={"p-4 justify-center"}>
-                <div className={"m-2 text-black"}>
-                    {/*<label htmlFor="velSlider" className="form-label ">Geschwindigkeit</label>*/}
-                    <input
-                        id="velSlider"
-                        className={"w-5/6 sm:w-1/3 h-2 bg-gray-500 rounded-lg appearance-none cursor-pointer"}
-                        type="range"
-                        min={0}
-                        max={3000}
-                        value={slider}
-                        onChange={(e) => setSlider(e.target.valueAsNumber)}
-                        step={500}
-                    />
-                </div>
-                <div className={""}>
-                    <button
-                        className={"invertedButton py-1 px-2 m-2"}
-                        onClick={onPlay}
-                        onMouseEnter={(e) => {
-                            animateButton(e.target);
-                        }}
-                        onMouseLeave={animateBack}
-                        >
-                        <FaPlay/>
-                    </button>
-                    <button
-                        className={"invertedButton py-1 px-2 m-2"}
-                        onClick={stepByStep}
-                        onMouseEnter={(e) => {
-                            animateButton(e.target);
-                        }}
-                        onMouseLeave={animateBack}
-                        >
-                            
-                        <FaStepForward/>
-                    </button>
-                    <button
-                        className={"invertedButton py-1 px-2 m-2"}
-                        onClick={() => {
-                            pauseMaschine ? changePause(false) : changePause(true);
-                        }}
-                        onMouseEnter={(e) => {
-                            animateButton(e.target);
-                        }}
-                        onMouseLeave={animateBack}>
-                        <FaPause/>
-                    </button>
-                    <button
-                        className={"invertedButton py-1 px-2 m-2"}
-                        onClick={() => changeStopp(true)}
-                        onMouseEnter={(e) => {
-                            animateButton(e.target);
-                        }}
-                        onMouseLeave={animateBack}>
-                        <FaStop/>
-                    </button>
-                </div>
-            </div>
+  return (
+    <div className={"control w-screen"}>
+      <div className={"p-4 justify-center"}>
+        <div className={"m-2 text-black"}>
+          <label htmlFor="velSlider" className="form-label text-black">
+            Geschwindigkeit
+          </label>
+          <input
+            id="velSlider"
+            className={
+              "w-5/6 sm:w-1/3 h-2 bg-gray-500 rounded-lg appearance-none cursor-pointer"
+            }
+            type="range"
+            min={0}
+            max={10}
+            value={slider}
+            onChange={(e) => setSlider(e.target.valueAsNumber)}
+            step={1}
+          />
         </div>
-    );
+        <div className={""}>
+          <button
+            className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
+            onClick={onPlay}
+            onMouseEnter={(e) => {
+              animateButton(e.target);
+            }}
+            onMouseLeave={animateBack}
+            disabled={!executable || maschineRunning || bandWarning}
+          >
+            <FaPlay />
+          </button>
+          <button
+            className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
+            onClick={stepByStep}
+            onMouseEnter={(e) => {
+              animateButton(e.target);
+            }}
+            onMouseLeave={animateBack}
+            disabled={!executable || maschineRunning || bandWarning}
+          >
+            <FaStepForward />
+          </button>
+          <button
+            className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
+            onClick={() => {
+              pauseMaschine ? changePause(false) : changePause(true);
+            }}
+            onMouseEnter={(e) => {
+              animateButton(e.target);
+            }}
+            onMouseLeave={animateBack}
+            disabled={!executable || !maschineRunning || bandWarning}
+          >
+            <FaPause />
+          </button>
+          <button
+            className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
+            onClick={() => changeStopp(true)}
+            onMouseEnter={(e) => {
+              animateButton(e.target);
+            }}
+            onMouseLeave={animateBack}
+            disabled={!executable || !maschineRunning || bandWarning}
+          >
+            <FaStop />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Control;

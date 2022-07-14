@@ -1,22 +1,97 @@
 import React, { Key, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { IoIosWarning } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
 import Select, { OnChangeValue } from "react-select";
+import watch from "redux-watch";
 import {
   CellProps,
   Direction,
   directions,
   Zustand,
 } from "../../interfaces/CommonInterfaces";
-import { RootState } from "../../redux/store";
+import { RootState, store } from "../../redux/store";
+import { initialZustand3 } from "../../redux/generalStore";
 import EditField from "./EditField";
+import ZustandSelect from "./ZustandSelect";
 
 export default function Cell(props: CellProps) {
   const wrapperRef: React.RefObject<HTMLTableCellElement> = React.createRef();
   const zustandsmenge = useSelector(
     (state: RootState) => state.general.zustandsmenge
   );
+  const endzustandsMenge = useSelector(
+    (state: RootState) => state.general.endZustand
+  );
+  const initialRows = useSelector((state: RootState) => state.general.rows);
+
+  const temp = [initialZustand3];
+
+  const [warningMode, setWarningMode] = React.useState(false);
+
+  /////////// States from State ///////////
+  let states = zustandsmenge.concat(temp);
+  let wStates = watch(store.getState, "general.zustandsmenge");
+  store.subscribe(
+    wStates((newVal) => {
+      states = newVal;
+      checkWarningModus();
+    })
+  );
+
+  /////////// States from State ///////////
+  let rows = initialRows;
+  let wRows = watch(store.getState, "general.rows");
+  store.subscribe(
+    wRows((newVal) => {
+      rows = newVal;
+    })
+  );
+
+  /////////// States from State ///////////
+  let finalStates = endzustandsMenge;
+  let wFinalStates = watch(store.getState, "general.endZustand");
+  store.subscribe(
+    wFinalStates((newVal) => {
+      finalStates = newVal;
+
+      checkWarningModus();
+
+      if (props.value instanceof Zustand) {
+        let found = false;
+
+        finalStates.forEach((state) => {
+          if (props.value instanceof Zustand) {
+            if (state.value === props.value.value) {
+              found = true;
+              handleChange(state);
+            }
+          }
+        });
+
+        if (!found) {
+          states.forEach((state) => {
+            if (props.value instanceof Zustand) {
+              if (state.value === props.value.value) {
+                handleChange(state);
+              }
+            }
+          });
+        }
+      }
+    })
+  );
+
   const eingabeAlphabet = useSelector(
     (state: RootState) => state.general.bandAlphabet
+  );
+  /////////// Eingabealphabet from State ///////////
+  let eALphabet = eingabeAlphabet;
+  let wEingabeAlphabet = watch(store.getState, "general.bandAlphabet");
+  store.subscribe(
+    wEingabeAlphabet((newVal) => {
+      eALphabet = newVal;
+      checkWarningModus();
+    })
   );
 
   const [editMode, setEditMode] = React.useState(false);
@@ -40,12 +115,18 @@ export default function Cell(props: CellProps) {
     }
   }
 
+  function setWarning(newValue: boolean) {
+    setWarningMode(newValue);
+    // props.updateCellValue(props.index, newValue);
+  }
+
   useEffect(() => {
     // event to handle click outside to hide the edit-buttons
     function handleClickOutside(event: MouseEvent) {
       if (wrapperRef) {
         if (
-          wrapperRef.current != null && event.target != null &&
+          wrapperRef.current != null &&
+          event.target != null &&
           event.target instanceof Node
         ) {
           if (!wrapperRef.current.contains(event.target)) {
@@ -82,18 +163,39 @@ export default function Cell(props: CellProps) {
     }
   }
 
+  function checkWarningModus() {
+    if (props.value instanceof Zustand) {
+      let tempBool = states.some((value) => {
+        let val = props.value as Zustand;
+        return value.value === val.value;
+      });
+      if (tempBool) {
+        setWarning(false);
+      } else {
+        setWarning(true);
+      }
+    } else if (!(props.value instanceof Direction)) {
+      let tempBool = eALphabet.some((value) => {
+        return value.value === props.value;
+      });
+      if (tempBool) {
+        setWarning(false);
+      } else {
+        setWarning(true);
+      }
+    }
+  }
+
   return (
     <td
       ref={wrapperRef}
-      className="px-2 py-4 w-1/6 whitespace-nowrap text-sm font-medium text-gray-900 border-r flex justify-center"
+      className="px-2 py-4 w-1/6 whitespace-nowrap text-sm font-medium text-gray-900 border-r flex justify-center items-center"
     >
       {props.value instanceof Zustand ? (
-        <Select
-          placeholder={props.value.value}
-          blurInputOnSelect={false}
-          className={"text-black p-3 text-base"}
-          onChange={handleChange}
-          options={zustandsmenge}
+        <ZustandSelect
+          states={states}
+          current={props.value}
+          updateValue={handleChange}
         />
       ) : (
         ""
@@ -116,7 +218,9 @@ export default function Cell(props: CellProps) {
           type="text"
           name="value"
           id="tableValueInput"
-          className={"w-full min-w-full rounded text-gray-700 focus:outline-none items-center border rounded text-center"}
+          className={
+            "w-full rounded text-gray-700 focus:outline-none items-center border rounded text-center"
+          }
           value={props.value}
           onChange={(e) => checkValue(props.index, e.target.value)}
           onClick={toggleEditMode}
@@ -125,11 +229,16 @@ export default function Cell(props: CellProps) {
         ""
       )}
 
-      {editMode && props.showEditField ? (
-        <EditField
-          options={eingabeAlphabet}
-          updateValue={chooseOption}
+      {warningMode ? (
+        <IoIosWarning
+          color="orange"
+          title="Dieser Eingabewert ist nicht länger zulässig!"
+          size="32"
         />
+      ) : null}
+
+      {editMode && props.showEditField ? (
+        <EditField options={eingabeAlphabet} updateValue={chooseOption} />
       ) : (
         ""
       )}

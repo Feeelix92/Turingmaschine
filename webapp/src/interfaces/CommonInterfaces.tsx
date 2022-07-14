@@ -3,11 +3,11 @@ import { EingabeAlphabetOption } from "../data/Alphabet";
 
 export interface TableProps {
   header: string[];
-  rows: Row[];
+  rows: RowInterface[];
   alphabet: EingabeAlphabetOption[];
 }
 
-export interface Row {
+export interface RowInterface {
   cells: Cell[];
   isFinal: boolean;
 }
@@ -22,17 +22,20 @@ export class Zustand {
   label: string;
   anfangszustand: boolean;
   endzustand: boolean;
+  warningMode: boolean;
 
   constructor(
     label: string,
     value: string,
     anfangszustand: boolean,
-    endzustand: boolean
+    endzustand: boolean,
+    warningMode: boolean
   ) {
     this.label = label;
     this.value = value;
     this.anfangszustand = anfangszustand;
     this.endzustand = endzustand;
+    this.warningMode = warningMode;
   }
 }
 
@@ -57,7 +60,10 @@ export interface CellProps {
   value: string | Zustand | Direction;
   index: Key;
   showEditField: boolean;
-  updateCellValue: (index: Key, arg: string | Zustand | Direction) => void;
+  updateCellValue: (
+    index: Key,
+    arg: string | boolean | Zustand | Direction
+  ) => void;
 }
 
 export interface EditProps {
@@ -70,7 +76,7 @@ export interface BandItemProps {
   label: string;
   index: number;
   //skin: string;
-  pointer: boolean;
+  //pointer: boolean;
   alphabet: EingabeAlphabetOption[];
   showEditField: boolean;
   //setPointer: (index: Key, e: any) => void;
@@ -95,8 +101,41 @@ export const directions: Direction[] = [
   new Direction("N", "Neutral"),
 ];
 
-// export const status: Zustand[] = [
-//   new Zustand("q1", "q1", false),
-//   new Zustand("q2", "q2", false),
-//   new Zustand("q3", "q3", true),
-// ];
+export interface ZustandSelectProps {
+  states: Zustand[];
+  current: Zustand;
+  updateValue: (arg: Zustand) => void;
+}
+
+export interface EingabeAlphabetDialogOptions {
+  label: string;
+  alphabet: Alphabet;
+  icon?: boolean;
+}
+
+export interface Alphabet {
+  key: number;
+  alphabet: EingabeAlphabet[];
+}
+
+export interface EingabeAlphabet {
+  label: string;
+  value: string;
+  warningMode: boolean;
+}
+
+export interface ChangeWarningModus {
+  prop: string;
+  value: boolean;
+  payload?:
+    | Alphabet
+    | Zustand
+    | Zustand[]
+    | EingabeAlphabet[]
+    | EingabeAlphabetDialogOptions[];
+}
+export interface updateCellType {
+  cellIndex: React.Key;
+  rowIndex: React.Key;
+  value: string | boolean | Zustand | Direction;
+}
