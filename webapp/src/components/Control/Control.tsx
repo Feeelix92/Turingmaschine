@@ -36,6 +36,15 @@ function Control() {
     })
   );
 
+  let stoppMaschine: Boolean = false;
+  let wStoppMaschine = watch(store.getState, "general.stoppMaschine");
+  store.subscribe(
+    wStoppMaschine((newVal) => {
+      stoppMaschine = newVal;
+      setMaschineRunning(false);
+    })
+  );
+
   const [slider, setSlider] = useState(1);
   //TODO: anime.js
   const animateButton = (el) => {
