@@ -10,12 +10,15 @@ import {
   Zustand,
 } from "../../interfaces/CommonInterfaces";
 import { RootState, store } from "../../redux/store";
-import { initialZustand3 } from "../../redux/generalStore";
+import { initialZustand3, maschineChangeExecutable } from "../../redux/generalStore";
 import EditField from "./EditField";
 import ZustandSelect from "./ZustandSelect";
 
 export default function Cell(props: CellProps) {
   const wrapperRef: React.RefObject<HTMLTableCellElement> = React.createRef();
+
+  const dispatch = useDispatch();
+
   const zustandsmenge = useSelector(
     (state: RootState) => state.general.zustandsmenge
   );
@@ -173,6 +176,7 @@ export default function Cell(props: CellProps) {
         setWarning(false);
       } else {
         setWarning(true);
+        dispatch(maschineChangeExecutable(false));
       }
     } else if (!(props.value instanceof Direction)) {
       let tempBool = eALphabet.some((value) => {
@@ -182,6 +186,7 @@ export default function Cell(props: CellProps) {
         setWarning(false);
       } else {
         setWarning(true);
+        dispatch(maschineChangeExecutable(false));
       }
     }
   }

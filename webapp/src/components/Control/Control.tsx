@@ -255,7 +255,6 @@ function Control() {
               animateButton(e.target);
             }}
             onMouseLeave={animateBack}
-            disabled={!executable || maschineRunning || bandWarning}
           >
             <FaPlay />
           </button>

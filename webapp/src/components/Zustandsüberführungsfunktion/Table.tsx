@@ -8,6 +8,7 @@ import {
   maschineCheckExecutable,
 } from "../../redux/generalStore";
 import Row from "./Row";
+import { Zustand } from "../../interfaces/CommonInterfaces";
 
 export default function Table() {
   const loadedRows = useSelector((state: RootState) => state.general.rows);
@@ -21,16 +22,16 @@ export default function Table() {
     wRows((newVal) => {
       rows = newVal;
 
-      let executable = true;
+      // let executable = true;
 
-      rows.forEach((row) => {
-        row.cells.forEach((cell) => {
-          if (cell.warningMode === true) {
-            executable = false;
-          }
-        });
-      });
-      dispatch(maschineChangeExecutable(executable));
+      // rows.forEach((row) => {
+      //   row.cells.forEach((cell) => {
+      //     if (cell.warningMode === true) {
+      //       executable = false;
+      //     }
+      //   });
+      // });
+      // dispatch(maschineChangeExecutable(executable))      
       dispatch(maschineCheckExecutable());
     })
   );

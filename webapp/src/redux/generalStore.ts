@@ -103,7 +103,7 @@ export const initialCell: Cell[] = [
 ];
 
 /////////////ToPa//////////////////////
-const initialToiletPaperMode: Boolean = true;
+const initialToiletPaperMode: boolean = true;
 
 //// Zustandsmenge
 const initialZustandsmengeTP: Zustand[] = [
@@ -141,12 +141,12 @@ export const initialCellTP2: Cell[] = [
     value: initialZustandsmengeTP[0],
     editField: false,
   },
-  { value: "1", editField: true },
+  { value: "#", editField: true },
   {
     value: initialZustandsmengeTP[1],
     editField: false,
   },
-  { value: "1", editField: true },
+  { value: "#", editField: true },
   {
     value: new Direction(directions[0].value, directions[0].label),
     editField: false,
@@ -309,7 +309,7 @@ const initialRowTP: RowInterface[] = [
   },
   {
     cells: initialCellTP9,
-    isFinal: false,
+    isFinal: true,
   },
 ];
 
@@ -513,9 +513,8 @@ export const generalSlice = createSlice({
               state.zustandsmenge[0].warningMode
             ),
             editField: false,
-            warningMode: false,
           },
-          { value: "1", editField: true, warningMode: false },
+          { value: "1", editField: true },
           {
             value: new Zustand(
               state.zustandsmenge[0].label,
@@ -525,13 +524,11 @@ export const generalSlice = createSlice({
               state.zustandsmenge[0].warningMode
             ),
             editField: false,
-            warningMode: false,
           },
-          { value: "1", editField: true, warningMode: false },
+          { value: "1", editField: true},
           {
             value: new Direction(directions[0].value, directions[0].label),
             editField: false,
-            warningMode: false,
           },
         ],
         isFinal: false,
@@ -558,9 +555,7 @@ export const generalSlice = createSlice({
         state.rows[updateCell.payload.rowIndex as number].cells.length
       );
 
-      if (typeof updateCell.payload.value === "boolean") {
-        newCells[updateCell.payload.cellIndex as number].warningMode =
-          updateCell.payload.value;
+      if (typeof updateCell.payload.value === "boolean") {        
         // tableUpdateRow({index: updateCell.payload.index, cells: newCells})
 
         const newRows: RowInterface[] = state.rows.slice(
