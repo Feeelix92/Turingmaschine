@@ -47,7 +47,7 @@ export default function EditField(props: EditProps) {
             className={"brickEditBtn"}
             onClick={() => props.updateValue(value.value)}
           >
-            {value.label == "1" && (
+            {value.label == "weiß" && (
               <img
                 draggable={false}
                 src={BrickWhite}
@@ -55,7 +55,7 @@ export default function EditField(props: EditProps) {
                 alt="brick black"
               />
             )}
-            {value.label == "#" && (
+            {value.label == "schwarz" && (
               <img
                 draggable={false}
                 src={BrickBlack}
@@ -63,7 +63,7 @@ export default function EditField(props: EditProps) {
                 alt="brick white"
               />
             )}
-            {value.label == "B" && <p className={"text-white text-2xl"}>B</p>}
+            {value.label == "leer" && <p className={"text-white text-2xl"}>B</p>}
           </button>
         ))}
     </div>
