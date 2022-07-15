@@ -19,6 +19,7 @@ import {
   alphabetChangeStoppMaschine,
 } from "../../redux/generalStore";
 import anime from "animejs";
+import party from "party-js";
 
 function Control() {
   const dispatch = useDispatch();
@@ -26,6 +27,15 @@ function Control() {
   const executable = useSelector(
     (state: RootState) => state.general.executable
   );
+
+  const endConfetti = () => {
+    party.confetti(document.body, {
+        count: party.variation.range(50, 120),
+        size: party.variation.range(1, 2),
+        spread: party.variation.range(10, 14),
+        shapes: ["star", "roundedSquare"]
+    });
+  };
 
   let pauseMaschine: Boolean = false;
   let wPauseMaschine = watch(store.getState, "general.pauseMaschine");
@@ -46,7 +56,6 @@ function Control() {
   );
 
   const [slider, setSlider] = useState(1);
-  //TODO: anime.js
   const animateButton = (el) => {
     anime({
       targets: el,
@@ -191,7 +200,7 @@ function Control() {
         }
       }
     } else {
-      changePause(true);
+        changePause(true);
     }
   };
 
@@ -214,6 +223,8 @@ function Control() {
       await sleep(tempSlider);
       makeStep(activePointerPosition);
     }
+    endConfetti();
+    
     dispatch(tableSetActiveRow(undefined));
     dispatch(tableSetActiveState(initialZustand));
     changePause(false);
