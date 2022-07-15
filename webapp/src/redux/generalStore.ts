@@ -28,7 +28,7 @@ const initialBandAlphabet: EingabeAlphabet[] = [
 const initialTeepeeBandAlphabet: EingabeAlphabet[] = [
   { label: "weiß", value: "weiß", warningMode: false },
   { label: "schwarz", value: "schwarz", warningMode: false },
-  { label: "", value: "leer", warningMode: false },
+  { label: "", value: "B", warningMode: false },
 ];
 const defaultCustomAlphabet: Alphabet = {
   key: 0,
@@ -183,12 +183,12 @@ export const initialCellTP4: Cell[] = [
     value: initialZustandsmengeTP[1],
     editField: false,
   },
-  { value: "leer", editField: true },
+  { value: "B", editField: true },
   {
     value: initialZustandsmengeTP[3],
     editField: false,
   },
-  { value: "leer", editField: true },
+  { value: "B", editField: true },
   {
     value: new Direction(directions[1].value, directions[1].label),
     editField: false,
@@ -239,7 +239,7 @@ export const initialCellTP7: Cell[] = [
     value: initialZustandsmengeTP[3],
     editField: false,
   },
-  { value: "leer", editField: true },
+  { value: "B", editField: true },
   {
     value: new Direction(directions[1].value, directions[1].label),
     editField: false,
@@ -251,12 +251,12 @@ export const initialCellTP8: Cell[] = [
     value: initialZustandsmengeTP[3],
     editField: false,
   },
-  { value: "leer", editField: true },
+  { value: "B", editField: true },
   {
     value: initialZustandsmengeTP[4],
     editField: false,
   },
-  { value: "leer", editField: true },
+  { value: "B", editField: true },
   {
     value: new Direction(directions[0].value, directions[0].label),
     editField: false,
@@ -268,12 +268,12 @@ export const initialCellTP9: Cell[] = [
     value: initialZustandsmengeTP[4],
     editField: false,
   },
-  { value: "leer", editField: true },
+  { value: "B", editField: true },
   {
     value: initialZustandsmengeTP[4],
     editField: false,
   },
-  { value: "leer", editField: true },
+  { value: "B", editField: true },
   {
     value: new Direction(directions[0].value, directions[0].label),
     editField: false,
@@ -392,11 +392,7 @@ export const generalSlice = createSlice({
         }
       });
       let tempAlphabet = Object.assign([], alphabet.payload.alphabet);
-      if (!state.toiletPaperMode){
-        tempAlphabet.push({ value: "B", label: "", warningMode: false });
-      }else {
-        tempAlphabet.push({ value: "leer", label: "", warningMode: false })
-      }
+      tempAlphabet.push({ value: "B", label: "", warningMode: false });
       state.bandAlphabet = tempAlphabet;
     },
     /**
