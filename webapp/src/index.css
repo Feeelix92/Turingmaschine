@@ -204,20 +204,19 @@
 
 /*toiletpaper mode*/
 .disableTableRow{
-    pointer-events: none;
-
+    @apply pointer-events-none;
 }
 
 button.disableTableRow{
-    opacity: 0.4;
+    @apply opacity-[0.4]
 }
 
 .disableTableRow button{
-    opacity: 0.4;
+    @apply opacity-[0.4]
 }
 
 .disableTableRow .css-4xgw5l-IndicatorsContainer2{
-    opacity: 0.4;
+    @apply opacity-[0.4]
 }
 
 /* Toilet paper */
