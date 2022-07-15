@@ -124,12 +124,6 @@ export default function BandItem(props: BandItemProps) {
                 }
                 {editMode && props.showEditField ? (
                     <div className={"editBtnDiv"}>
-                      {/*<button className={""}>*/}
-                      {/*  <img className={"w-[100px] h-[100px]"} src={brickWhite} alt={"SVG brick white"}/>*/}
-                      {/*</button>*/}
-                      {/*<button className={""}>*/}
-                      {/*  <img className={"w-[100px] h-[100px]"} src={brickBlack} alt={"SVG brick black"}/>*/}
-                      {/*</button>*/}
                       <EditField options={props.alphabet} updateValue={chooseOption}/>
                       <button
                           className={"brickEditBtn delete"}
