@@ -115,6 +115,7 @@ export default function BandItem(props: BandItemProps) {
                     onChange={(e) => checkValue(props.index, e.target.value)}
                     onClick={toggleEditMode}
                     onDragOver={props.setPointerAt}
+                    inputMode='none'
                 />
                 {props.label == "1" &&
                     <img draggable={false} className={"brick"} src={BrickWhite} alt="brick black" onClick={toggleEditMode}/>
