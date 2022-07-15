@@ -8,7 +8,7 @@ module.exports = {
         rollLeft: 'rollLeft 2s ease-in-out',
         rollRight: 'rollRight 2s ease-in-out',
         fadeIn: 'fadeIn 4s ease-in-out',
-        fade: 'fade 4s ease-in-out',
+        fadeOut: 'fadeOut 4s ease-in-out',
       },
       keyframes: {
         'rollLeft': {
