@@ -136,11 +136,11 @@
 }
 
 .pointer {
-    @apply cursor-move;
+    @apply animate-pulse cursor-move;
 }
 
 .pointer::after {
-    @apply content-[''] absolute bg-thm-primary w-14 h-8 rounded-t-full bottom-10 -left-0.5 z-10;
+    @apply content-[''] absolute bg-gradient-to-t from-thm-primary to-thm-hover w-14 h-8 rounded-t-full bottom-10 -left-0.5 z-10;
 }
 
 .pointer:hover {
