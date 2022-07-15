@@ -8,6 +8,7 @@ module.exports = {
         rollLeft: 'rollLeft 2s ease-in-out',
         rollRight: 'rollRight 2s ease-in-out',
         fadeIn: 'fadeIn 4s ease-in-out',
+        fade: 'fade 4s ease-in-out',
       },
       keyframes: {
         'rollLeft': {
@@ -22,6 +23,11 @@ module.exports = {
           '0%': {opacity: '0.0'},
           '50%': {opacity: '0.2'},
           '100%': {opacity: '1.0'},
+        },
+        'fadeOut': {
+          '0%': {opacity: '1.0'},
+          '50%': {opacity: '0.5'},
+          '100%': {opacity: '0.0'},
         },
       },
       colors: {
