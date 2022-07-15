@@ -126,7 +126,7 @@ export default function BandItem(props: BandItemProps) {
                     <div className={"editBtnDiv"}>
                       <EditField options={props.alphabet} updateValue={chooseOption}/>
                       <button
-                          className={"brickEditBtn delete"}
+                          className={"brickDeleteBtn"}
                           onClick={() => deleteValue(props.index)}
                       >
                         <p className={"text-white"}><BsFillEraserFill/></p>

@@ -51,7 +51,7 @@ export default function EditField(props: EditProps) {
               <img
                 draggable={false}
                 src={BrickWhite}
-                className=""
+                className={""}
                 alt="brick black"
               />
             )}
@@ -59,7 +59,7 @@ export default function EditField(props: EditProps) {
               <img
                 draggable={false}
                 src={BrickBlack}
-                className=""
+                className={""}
                 alt="brick white"
               />
             )}

@@ -195,7 +195,6 @@ export default function Band() {
 
         <div className={"w-1/4 text-right md:hidden"}>
           <button onClick={() => dispatch(bandDeleteAll())} className={"m-2"}>
-            {/* <RiDeleteBin2Fill/> */}
             <FaTrash />
           </button>
         </div>

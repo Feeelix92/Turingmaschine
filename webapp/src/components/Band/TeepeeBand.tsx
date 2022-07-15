@@ -1,11 +1,11 @@
 import BandItem from "./BandItem";
 import TeepeeBandItem from "./TeepeeBandItem";
 import {
-  FaArrowAltCircleLeft,
-  FaArrowAltCircleRight,
-  FaAngleLeft,
-  FaAngleRight,
-  FaRedo,
+    FaArrowAltCircleLeft,
+    FaArrowAltCircleRight,
+    FaAngleLeft,
+    FaAngleRight,
+    FaRedo, FaTrash,
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -108,7 +108,7 @@ export default function TeepeeBand() {
                             onClick={() => dispatch(bandDeleteAll())}
                             className={"m-2"}
                         >
-                            <p className={"text-white"}><FaRedo/></p>
+                            <p className={"text-white"}><FaTrash/></p>
                         </button>
                     </div>
             </div>
