@@ -79,6 +79,7 @@ export const eingabeAlphabetDialogOptions: EingabeAlphabetDialogOptions[] = [
   { label: "{1,#}", alphabet: defaultAlphabetOption2 },
   { label: "{0,1}", alphabet: defaultAlphabetOption3 },
   { label: "{0,1,#}", alphabet: defaultAlphabetOption4 },
+  { label: "{weiß,schwarz}", alphabet: defaultAlphabetOption5 },
 ];
 
 ///////////////////// Table /////////////////////
