@@ -26,8 +26,8 @@ const initialBandAlphabet: EingabeAlphabet[] = [
   { label: "", value: "B", warningMode: false },
 ];
 const initialTeepeeBandAlphabet: EingabeAlphabet[] = [
-  { label: "weiß", value: "weiß", warningMode: false },
-  { label: "schwarz", value: "schwarz", warningMode: false },
+  { label: "1", value: "1", warningMode: false },
+  { label: "#", value: "#", warningMode: false },
   { label: "", value: "B", warningMode: false },
 ];
 const defaultCustomAlphabet: Alphabet = {
@@ -60,13 +60,6 @@ export const defaultAlphabetOption4: Alphabet = {
     { label: "#", value: "#", warningMode: false },
   ],
 };
-export const defaultAlphabetOption5: Alphabet = {
-  key: 5,
-  alphabet: [
-    { label: "weiß", value: "weiß", warningMode: false },
-    { label: "schwarz", value: "schwarz", warningMode: false },
-  ],
-};
 
 ///////////////////// DialogOption /////////////////////
 const initialDialogOption: EingabeAlphabetDialogOptions = {
@@ -79,7 +72,6 @@ export const eingabeAlphabetDialogOptions: EingabeAlphabetDialogOptions[] = [
   { label: "{1,#}", alphabet: defaultAlphabetOption2 },
   { label: "{0,1}", alphabet: defaultAlphabetOption3 },
   { label: "{0,1,#}", alphabet: defaultAlphabetOption4 },
-  { label: "{weiß,schwarz}", alphabet: defaultAlphabetOption5 },
 ];
 
 ///////////////////// Table /////////////////////
@@ -132,12 +124,12 @@ export const initialCellTP: Cell[] = [
     value: initialZustandsmengeTP[0],
     editField: false,
   },
-  { value: "weiß", editField: true },
+  { value: "1", editField: true },
   {
     value: initialZustandsmengeTP[0],
     editField: false,
   },
-  { value: "weiß", editField: true },
+  { value: "1", editField: true },
   {
     value: new Direction(directions[0].value, directions[0].label),
     editField: false,
@@ -149,12 +141,12 @@ export const initialCellTP2: Cell[] = [
     value: initialZustandsmengeTP[0],
     editField: false,
   },
-  { value: "schwarz", editField: true },
+  { value: "#", editField: true },
   {
     value: initialZustandsmengeTP[1],
     editField: false,
   },
-  { value: "schwarz", editField: true },
+  { value: "#", editField: true },
   {
     value: new Direction(directions[0].value, directions[0].label),
     editField: false,
@@ -166,12 +158,12 @@ export const initialCellTP3: Cell[] = [
     value: initialZustandsmengeTP[1],
     editField: false,
   },
-  { value: "weiß", editField: true },
+  { value: "1", editField: true },
   {
     value: initialZustandsmengeTP[2],
     editField: false,
   },
-  { value: "schwarz", editField: true },
+  { value: "#", editField: true },
   {
     value: new Direction(directions[1].value, directions[1].label),
     editField: false,
@@ -200,12 +192,12 @@ export const initialCellTP5: Cell[] = [
     value: initialZustandsmengeTP[2],
     editField: false,
   },
-  { value: "schwarz", editField: true },
+  { value: "#", editField: true },
   {
     value: initialZustandsmengeTP[0],
     editField: false,
   },
-  { value: "weiß", editField: true },
+  { value: "1", editField: true },
   {
     value: new Direction(directions[0].value, directions[0].label),
     editField: false,
@@ -217,12 +209,12 @@ export const initialCellTP6: Cell[] = [
     value: initialZustandsmengeTP[3],
     editField: false,
   },
-  { value: "weiß", editField: true },
+  { value: "1", editField: true },
   {
     value: initialZustandsmengeTP[3],
     editField: false,
   },
-  { value: "weiß", editField: true },
+  { value: "1", editField: true },
   {
     value: new Direction(directions[1].value, directions[1].label),
     editField: false,
@@ -234,7 +226,7 @@ export const initialCellTP7: Cell[] = [
     value: initialZustandsmengeTP[3],
     editField: false,
   },
-  { value: "schwarz", editField: true },
+  { value: "#", editField: true },
   {
     value: initialZustandsmengeTP[3],
     editField: false,
@@ -359,7 +351,7 @@ export const generalSlice = createSlice({
     //endZustand: initialEndZustandsmenge,
 
     //// Alphabet ////
-    currentAlphabet: defaultAlphabetOption5,
+    currentAlphabet: defaultAlphabetOption2,
     bandAlphabet: initialTeepeeBandAlphabet,
     customAlphabet: defaultCustomAlphabet,
     //// Dialog ////
@@ -655,7 +647,7 @@ export const generalSlice = createSlice({
         state.zustandsmenge = initialZustandsmengeTP;
         state.anfangsZustand = initialAnfangszustandTP;
         state.endZustand = initialEndZustandsmengeTP;
-        state.currentAlphabet = defaultAlphabetOption5;
+        state.currentAlphabet = defaultAlphabetOption2;
         state.bandAlphabet = initialTeepeeBandAlphabet;
       }
     },

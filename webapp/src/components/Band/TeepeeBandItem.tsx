@@ -117,10 +117,10 @@ export default function BandItem(props: BandItemProps) {
                     onDragOver={props.setPointerAt}
                     inputMode='none'
                 />
-                {props.label == "weiß" &&
+                {props.label == "1" &&
                     <img draggable={false} className={"brick"} src={BrickWhite} alt="brick black" onClick={toggleEditMode}/>
                 }
-                {props.label == "schwarz" &&
+                {props.label == "#" &&
                     <img draggable={false} className={"brick"} src={BrickBlack} alt="brick white" onClick={toggleEditMode}/>
                 }
                 {editMode && props.showEditField ? (
