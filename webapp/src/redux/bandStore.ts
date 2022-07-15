@@ -10,21 +10,23 @@ export interface PointerItemToChange {
   index: number;
   value: boolean;
 }
+let emptyBandValue = "B";
 
 const currentBand: EingabeAlphabetOption[] = [
-  { value: "B", label: "", warningMode: false },
-  { value: "B", label: "", warningMode: false },
-  { value: "B", label: "", warningMode: false },
-  { value: "B", label: "", warningMode: false },
-  { value: "B", label: "", warningMode: false },
-  { value: "B", label: "", warningMode: false },
-  { value: "B", label: "", warningMode: false },
-  { value: "B", label: "", warningMode: false },
+  { value: emptyBandValue, label: "", warningMode: false },
+  { value: emptyBandValue, label: "", warningMode: false },
+  { value: emptyBandValue, label: "", warningMode: false },
+  { value: emptyBandValue, label: "", warningMode: false },
+  { value: emptyBandValue, label: "", warningMode: false },
+  { value: emptyBandValue, label: "", warningMode: false },
+  { value: emptyBandValue, label: "", warningMode: false },
+  { value: emptyBandValue, label: "", warningMode: false },
 ];
 
 export const bandSlice = createSlice({
   name: "band",
   initialState: {
+    emptyBandValue: emptyBandValue,
     currentBand: currentBand,
     bandSkin: "paper",
     pointerPosition: 0,
@@ -39,7 +41,7 @@ export const bandSlice = createSlice({
     bandChangeItemAt: (state, bandItem: PayloadAction<BandItemToChange>) => {
       state.currentBand[bandItem.payload.index].value = bandItem.payload.value;
 
-      if (bandItem.payload.label != "B") {
+      if (bandItem.payload.label != state.emptyBandValue) {
         state.currentBand[bandItem.payload.index].label =
           bandItem.payload.label;
       } else {
@@ -52,7 +54,7 @@ export const bandSlice = createSlice({
      */
     bandDeleteItemAt: (state, index: PayloadAction<number>) => {
       state.currentBand[index.payload as number] = {
-        value: "B",
+        value: state.emptyBandValue,
         label: "",
         warningMode: state.currentBand[index.payload].warningMode,
       };
@@ -65,12 +67,12 @@ export const bandSlice = createSlice({
     bandAddField: (state, position: PayloadAction<string>) => {
       if (position.payload === "before") {
         state.currentBand.unshift({
-          value: "B",
+          value: state.emptyBandValue,
           label: "",
           warningMode: false,
         });
       } else {
-        state.currentBand.push({ value: "B", label: "", warningMode: false });
+        state.currentBand.push({ value: state.emptyBandValue, label: "", warningMode: false });
       }
     },
     /**
@@ -79,7 +81,7 @@ export const bandSlice = createSlice({
     bandDeleteAll: (state) => {
       for (let index = 0; index < state.currentBand.length; index++) {
         state.currentBand[index] = {
-          value: "B",
+          value: state.emptyBandValue,
           label: "",
           warningMode: false,
         };
