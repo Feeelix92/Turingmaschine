@@ -17,6 +17,7 @@ import {
 } from "../../redux/bandStore";
 import { RootState } from "../../redux/store";
 import React from "react";
+import Dice from "./Dice";
 
 export default function TeepeeBand() {
   const defaultPointerPos = 1; // Feld, auf dem Pointer im Default stehen soll
@@ -43,6 +44,7 @@ export default function TeepeeBand() {
 
     return (
         <div className={"w-full"}>
+            <Dice />
             <div className={"flex h-60 sm:h-96 justify-center"}>
                 <div className={"teepeeContainerLeft"}>
                         <div className={"teepeeHead"}/>
