@@ -13,7 +13,7 @@ export default function Dice() {
 
     return (
         <div className={`dice face face${currentZustand.value.slice(1,2)}`}>
-            <div className={`dot-container justify-items-center items-center`}>
+            <div className={`dot-container`}>
                 <div className="dot dot1"/>
                 <div className="dot dot2"/>
                 <div className="dot dot3"/>
