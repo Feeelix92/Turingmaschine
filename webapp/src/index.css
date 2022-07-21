@@ -271,12 +271,13 @@ button.disableTableRow{
 }
 
 .round {
-
     border-radius: 50%;
 }
 
+/* Dice */
+
 .dice{
-    @apply h-[50px] w-[50px] sm:h-[100px] sm:w-[100px] bg-white p-2 border-2 ml-auto mr-auto;
+    @apply h-[50px] w-[50px] bg-white p-2 border-2 ml-auto mr-auto;
 }
 
 .dot-container {
@@ -284,7 +285,7 @@ button.disableTableRow{
 }
 
 .dot {
-    @apply bg-black round w-[10px] h-[10px] sm:w-[20px] sm:h-[20px];
+    @apply bg-black round w-[10px] h-[10px];
 }
 .dot1{
     @apply col-start-1 invisible;
