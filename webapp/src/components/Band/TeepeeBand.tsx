@@ -45,11 +45,11 @@ export default function TeepeeBand() {
     return (
         <div className={"w-full"}>
             <Dice />
-            <div className={"flex h-60 sm:h-96 justify-center"}>
+            <div className={"flex h-60 sm:h-80 justify-center"}>
                 <div className={"teepeeContainerLeft"}>
-                        <div className={"teepeeHead"}/>
+                        <div className={"teepeeHead"} onClick={() => dispatch(bandAddField('before'))}/>
                         <div className={"teepeeBody"} onClick={() => dispatch(bandAddField('before'))}/>
-                        <div className={"teepeeBottom"}>
+                        <div className={"teepeeBottom"} onClick={() => dispatch(bandAddField('before'))}>
                             <div className={"teepeeCardboard"}/>
                         </div>
                     </div>
@@ -68,51 +68,32 @@ export default function TeepeeBand() {
                         ))}
                     </div>
                     <div className={"teepeeContainerRight"}>
-                        <div className={"teepeeHead"}/>
+                        <div className={"teepeeHead"} onClick={() => dispatch(bandAddField('after'))}/>
                         <div className={"teepeeBody"} onClick={() => dispatch(bandAddField('after'))}/>
-                        <div className={"teepeeBottom"}>
+                        <div className={"teepeeBottom"} onClick={() => dispatch(bandAddField('after'))}>
                             <div className={"teepeeCardboard"}/>
                         </div>
                     </div>
             </div>
-            <div className={"hidden md:block mt-4"}>
-                    <div className={"flex justify-center gap-2"}>
-                        <button
-                            className={"w-36 invertedButton"}
-                            onClick={() => dispatch(bandAddField('before'))}>
-                            + Feld links
-                        </button>
-                        <button
-                            onClick={() => dispatch(bandDeleteAll())}
-                            className={"w-36 invertedButton"}>
-                            zurücksetzen
-                        </button>
-                        <button
-                            className={"w-36 invertedButton"}
-                            onClick={() => dispatch(bandAddField('after'))}>
-                            Feld rechts +
-                        </button>
-                    </div>
+            <div className="flex md:invisible">
+                <div className={"w-3/4 text-left"}>
+                    <button className={"m-2 secondaryButton"}
+                            onClick={() => setPointerLeft()}>
+                        <FaAngleLeft />
+                    </button>
+                    <button className={"md:invisible secondaryButton"}
+                            onClick={() => setPointerRight()}>
+                        <FaAngleRight />
+                    </button>
                 </div>
-                <div className="flex">
-                    <div className={"w-3/4 text-left"}>
-                        <button className={"m-2 md:invisible secondaryButton"}
-                                onClick={() => setPointerLeft()}>
-                            <FaAngleLeft />
-                        </button>
-                        <button className={"md:invisible secondaryButton"}
-                                onClick={() => setPointerRight()}>
-                            <FaAngleRight />
-                        </button>
-                    </div>
-                    <div className={"w-1/4 text-right md:hidden"}>
-                        <button
-                            onClick={() => dispatch(bandDeleteAll())}
-                            className={"m-2"}
-                        >
-                            <p className={"text-white"}><FaTrash/></p>
-                        </button>
-                    </div>
+                <div className={"w-1/4 text-right md:hidden"}>
+                    <button
+                        onClick={() => dispatch(bandDeleteAll())}
+                        className={"m-2"}
+                    >
+                        <p className={"text-white"}><FaTrash/></p>
+                    </button>
+                </div>
             </div>
         </div>
     );

@@ -192,10 +192,10 @@
 }
 
 .brickEditBtn {
-    @apply rounded-none w-8 h-12 sm:w-16 sm:h-20 bg-gray-300 hover:bg-gray-100;
+    @apply rounded-none w-12 h-16 sm:w-16 sm:h-20 bg-gray-300 hover:bg-gray-100;
 }
 .brickDeleteBtn {
-    @apply rounded-none w-8 h-12 sm:w-16 sm:h-20 items-center bg-gray-300 hover:bg-gray-100;
+    @apply rounded-none w-12 h-16 sm:w-16 sm:h-20 items-center bg-gray-300 hover:bg-gray-100;
 }
 
 .brick {
