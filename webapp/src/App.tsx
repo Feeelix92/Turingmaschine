@@ -23,14 +23,20 @@ function App() {
         {toiletPaperMode && <TeepeeBand />}
       </header>
       <div className={"App-body"}>
-        <div className={" hidden md:grid md:grid-cols-4 md:items-start"}>
-          {!toiletPaperMode && <ConditionsList />}
-          {!toiletPaperMode && <Table />}
-          {toiletPaperMode && <ToPaTable />}
-        </div>
-        <div className={"md:hidden"}>
-          <Bottomnav />
-        </div>
+          {!toiletPaperMode &&
+              <div className={"hidden md:grid md:grid-cols-4 md:items-start"}>
+                  <ConditionsList/>
+                  <Table/>
+              </div>
+          }
+          {toiletPaperMode &&
+              <ToPaTable />
+          }
+          {!toiletPaperMode &&
+              <div className={"md:hidden"}>
+                  <Bottomnav/>
+              </div>
+          }
       </div>
     </div>
   );
