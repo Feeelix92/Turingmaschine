@@ -198,7 +198,7 @@
     @apply rounded-none w-12 h-16 sm:w-16 sm:h-20 rounded bg-thm-primary hover:bg-thm-hover;
 }
 .brickDeleteBtn {
-    @apply w-12 h-16 sm:w-16 sm:h-20 rounded bg-thm-primary hover:bg-thm-hover;
+    @apply w-12 h-16 sm:w-16 sm:h-20 rounded bg-thm-primary hover:bg-thm-hover px-4 sm:px-6;
 }
 
 .brick {
