@@ -276,7 +276,7 @@ button.disableTableRow{
 }
 
 .dice{
-    @apply h-[50px] w-[50px] sm:h-[100px] sm:w-[100px] bg-white p-2 border-2 mr-auto ml-auto;
+    @apply h-[50px] w-[50px] sm:h-[100px] sm:w-[100px] bg-white p-2 border-2 ml-auto mr-auto;
 }
 
 .dot-container {
@@ -284,7 +284,7 @@ button.disableTableRow{
 }
 
 .dot {
-    @apply bg-black border round w-[10px] h-[10px] sm:w-[20px] sm:h-[20px];
+    @apply bg-black round w-[10px] h-[10px] sm:w-[20px] sm:h-[20px];
 }
 .dot1{
     @apply col-start-1 invisible;
@@ -308,7 +308,7 @@ button.disableTableRow{
     @apply col-start-3 invisible;
 }
 .face .dot {
-    @apply animate-pulse
+    @apply animate-fade
 }
 .face1 .dot4 {
     @apply visible;
