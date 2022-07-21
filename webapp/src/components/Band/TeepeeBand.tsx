@@ -75,8 +75,8 @@ export default function TeepeeBand() {
                         </div>
                     </div>
             </div>
-            <div className="flex md:invisible">
-                <div className={"w-3/4 text-left"}>
+            <div className="flex">
+                <div className={"w-3/4 text-left md:invisible"}>
                     <button className={"m-2 secondaryButton"}
                             onClick={() => setPointerLeft()}>
                         <FaAngleLeft />
@@ -86,12 +86,12 @@ export default function TeepeeBand() {
                         <FaAngleRight />
                     </button>
                 </div>
-                <div className={"w-1/4 text-right md:hidden"}>
+                <div className={"w-1/4 text-right"}>
                     <button
                         onClick={() => dispatch(bandDeleteAll())}
                         className={"m-2"}
                     >
-                        <p className={"text-white"}><FaTrash/></p>
+                        <FaTrash/>
                     </button>
                 </div>
             </div>
