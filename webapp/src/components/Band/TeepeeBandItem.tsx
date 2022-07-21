@@ -124,13 +124,13 @@ export default function BandItem(props: BandItemProps) {
                     <img draggable={false} className={"brick"} src={BrickBlack} alt="brick white" onClick={toggleEditMode}/>
                 }
                 {editMode && props.showEditField ? (
-                    <div className={"editBtnDiv"}>
+                    <div className={"brickEditBtnDiv"}>
                       <EditField options={props.alphabet} updateValue={chooseOption}/>
                       <button
                           className={"brickDeleteBtn"}
                           onClick={() => deleteValue(props.index)}
                       >
-                        <p className={"text-white"}><BsFillEraserFill/></p>
+                        <BsFillEraserFill/>
                       </button>
                     </div>
                 ) : (

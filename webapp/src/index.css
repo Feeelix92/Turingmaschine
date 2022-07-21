@@ -190,12 +190,15 @@
 .editBtn.delete{
     @apply flex items-center
 }
+.brickEditBtnDiv{
+    @apply flex gap-2 justify-center mt-2;
+}
 
 .brickEditBtn {
-    @apply rounded-none w-12 h-16 sm:w-16 sm:h-20 bg-gray-300 hover:bg-gray-100;
+    @apply rounded-none w-12 h-16 sm:w-16 sm:h-20 rounded bg-thm-primary hover:bg-thm-hover;
 }
 .brickDeleteBtn {
-    @apply rounded-none w-12 h-16 sm:w-16 sm:h-20 items-center bg-gray-300 hover:bg-gray-100;
+    @apply w-12 h-16 sm:w-16 sm:h-20 rounded bg-thm-primary hover:bg-thm-hover;
 }
 
 .brick {
@@ -234,7 +237,7 @@ button.disableTableRow{
 }
 
 .teepeeBandItem {
-    @apply inline-block w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] border-2 border-dashed border-r-0 border-l-2 -translate-y-[15%] sm:translate-y-[15%]
+    @apply bg-white inline-block w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] border-2 border-dashed border-r-0 border-l-2 -translate-y-[15%] sm:translate-y-[15%]
 }
 .teepeeHead {
     @apply w-[50px] h-[25px] sm:w-[100px] sm:h-[50px] round translate-y-[50%] bg-gradient-to-r from-white to-gray-100 border-t-2;
@@ -277,7 +280,7 @@ button.disableTableRow{
 /* Dice */
 
 .dice{
-    @apply h-[50px] w-[50px] bg-white p-2 border-2 ml-auto mr-auto;
+    @apply h-[50px] w-[50px] bg-white p-2 border border-gray-400 ml-auto mr-auto rounded-md;
 }
 
 .dot-container {
