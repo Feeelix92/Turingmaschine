@@ -55,7 +55,7 @@ function Control() {
     })
   );
 
-  const [slider, setSlider] = useState(1);
+  const [slider, setSlider] = useState(4);
   const animateButton = (el) => {
     anime({
       targets: el,
@@ -251,7 +251,7 @@ function Control() {
               "w-5/6 sm:w-1/3 h-2 bg-gray-500 rounded-lg appearance-none cursor-pointer"
             }
             type="range"
-            min={0}
+            min={1}
             max={10}
             value={slider}
             onChange={(e) => setSlider(e.target.valueAsNumber)}
