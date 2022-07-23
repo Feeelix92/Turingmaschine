@@ -93,7 +93,7 @@ export default function Band() {
 
   return (
     <div className={"w-screen"}>
-      <div className={"flex m-2 h-36"}>
+      <div className={"flex m-2 h-32"}>
         <button
           className={"mt-10 rounded-r-none md:rounded md:invisible"}
           onClick={() => dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))}
@@ -177,16 +177,16 @@ export default function Band() {
           </button>
         </div>
       </div>
-      <div className="flex">
+      <div className="flex md:pb-10">
         <div className={"w-3/4 text-left"}>
           <button
-            className={"m-2 md:invisible secondaryButton"}
+            className={"m-2 md:hidden secondaryButton"}
             onClick={() => setPointerLeft()}
           >
             <FaAngleLeft />
           </button>
           <button
-            className={"md:invisible secondaryButton"}
+            className={"md:hidden secondaryButton"}
             onClick={() => setPointerRight()}
           >
             <FaAngleRight />

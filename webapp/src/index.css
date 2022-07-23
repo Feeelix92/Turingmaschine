@@ -168,7 +168,7 @@
 }
 
 .currentZustand{
-    @apply min-w-fit max-w-full h-10 text-slate-900
+    @apply min-w-fit max-w-full h-5 text-slate-900
 }
 
 /* ********** BAND ITEM ********** */
@@ -180,7 +180,7 @@
 /* ********** TABLE ********** */
 
 .editBtnDiv {
-    @apply flex gap-2 justify-center mt-2;
+    @apply flex gap-2 justify-center mt-1;
 }
 
 .editBtn {
