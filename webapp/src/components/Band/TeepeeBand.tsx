@@ -46,7 +46,7 @@ export default function TeepeeBand() {
             <div className={"flex h-60 sm:h-96 justify-center"}>
                 <div className={"teepeeContainerLeft"}>
                         <div className={"teepeeHead"}/>
-                        <div className={"teepeeBody"} onClick={() => dispatch(bandAddField('before'))}/>
+                        <div className={"teepeeBody"} onClick={() => dispatch(bandAddField('before')) && dispatch(bandChangePointPos(1))}/>
                         <div className={"teepeeBottom"}>
                             <div className={"teepeeCardboard"}/>
                         </div>
@@ -77,13 +77,13 @@ export default function TeepeeBand() {
                     <div className={"flex justify-center gap-2"}>
                         <button
                             className={"w-36 invertedButton"}
-                            onClick={() => dispatch(bandAddField('before'))}>
+                            onClick={() => dispatch(bandAddField('before')) && dispatch(bandChangePointPos(1))}>
                             + Feld links
                         </button>
                         <button
                             onClick={() => dispatch(bandDeleteAll())}
                             className={"w-36 invertedButton"}>
-                            zurücksetzen
+                            leeren
                         </button>
                         <button
                             className={"w-36 invertedButton"}

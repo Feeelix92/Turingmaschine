@@ -96,7 +96,7 @@ export default function Band() {
       <div className={"flex m-2 h-36"}>
         <button
           className={"mt-10 rounded-r-none md:rounded md:invisible"}
-          onClick={() => dispatch(bandAddField("before"))}
+          onClick={() => dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))}
         >
           +
         </button>
@@ -156,7 +156,7 @@ export default function Band() {
         <div className={"flex justify-center gap-2"}>
           <button
             className={"w-36 invertedButton"}
-            onClick={() => dispatch(bandAddField("before"))}
+            onClick={() => dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))}
           >
             + Feld links
           </button>
@@ -167,7 +167,7 @@ export default function Band() {
             }}
             className={"w-36 invertedButton"}
           >
-            zurücksetzen
+            leeren
           </button>
           <button
             className={"w-36 invertedButton"}

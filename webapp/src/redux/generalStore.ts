@@ -48,15 +48,15 @@ const defaultAlphabetOption2: Alphabet = {
 const defaultAlphabetOption3: Alphabet = {
   key: 3,
   alphabet: [
-    { label: "1", value: "1", warningMode: false },
     { label: "0", value: "0", warningMode: false },
+    { label: "1", value: "1", warningMode: false },
   ],
 };
 export const defaultAlphabetOption4: Alphabet = {
   key: 4,
   alphabet: [
-    { label: "1", value: "1", warningMode: false },
     { label: "0", value: "0", warningMode: false },
+    { label: "1", value: "1", warningMode: false },
     { label: "#", value: "#", warningMode: false },
   ],
 };
