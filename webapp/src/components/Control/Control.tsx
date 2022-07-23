@@ -155,6 +155,10 @@ function Control() {
       return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
     });
 
+    if(item?.isFinal == true) {
+      endConfetti();
+    }
+
     if (
       item !== undefined &&
       typeof item.cells[3].value === "string" &&
@@ -223,7 +227,6 @@ function Control() {
       await sleep(tempSlider);
       makeStep(activePointerPosition);
     }
-    endConfetti();
     
     dispatch(tableSetActiveRow(undefined));
     dispatch(tableSetActiveState(initialZustand));
