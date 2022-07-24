@@ -168,7 +168,7 @@
 }
 
 .currentZustand{
-    @apply min-w-fit max-w-full h-5 text-slate-900
+    @apply min-w-fit max-w-full h-1 text-slate-900
 }
 
 /* ********** BAND ITEM ********** */
