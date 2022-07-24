@@ -122,9 +122,11 @@ export default function Band() {
           />
         </div>
       ) : null}
+
+
       <div
         className={
-          "currentZustand flex flex-col content-center items-center justify-center mb-8"
+          "currentZustand flex-col content-center items-center justify-center mb-8 flex md:hidden"
         }
       >
         {/* <span className="relative">
@@ -140,6 +142,8 @@ export default function Band() {
           </div>
         )}
       </div>
+
+
       <div className={"hidden md:block"}>
         <div className={"flex justify-center gap-2"}>
           <button
