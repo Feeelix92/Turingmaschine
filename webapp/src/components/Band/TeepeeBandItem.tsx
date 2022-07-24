@@ -24,6 +24,14 @@ export default function BandItem(props: BandItemProps) {
     setEditMode(!editMode);
   }
 
+  // Zum Pointer scrollen:
+  const fieldRef = React.useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if(fieldRef.current) {
+      fieldRef.current.scrollIntoView();
+    }
+  });
+
   const currentBandSkin = useSelector(
     (state: RootState) => state.band.bandSkin
   );
@@ -102,7 +110,7 @@ export default function BandItem(props: BandItemProps) {
             ref={wrapperRef}>
             <div className={""}>
                 {pointerIdx===props.index ? (
-                    <div className="teepeePointer"  draggable/>
+                    <div className="teepeePointer scroll-m-16" ref={fieldRef}  draggable/>
                 ) : (
                     ""
                 )}
