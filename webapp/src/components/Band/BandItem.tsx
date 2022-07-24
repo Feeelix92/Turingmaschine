@@ -13,6 +13,15 @@ import { BandItemProps } from "../../interfaces/CommonInterfaces";
 export default function BandItem(props: BandItemProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
 
+  // Zum Pointer scrollen:
+  const fieldRef = React.useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if(fieldRef.current) {
+      fieldRef.current.scrollIntoView();
+    }
+  });
+
+
   const [editMode, setEditMode] = React.useState(false);
   function toggleEditMode() {
     setEditMode(!editMode);
@@ -107,8 +116,8 @@ export default function BandItem(props: BandItemProps) {
       ref={wrapperRef}
     >
       <div>
-        {pointerIdx === props.index ? (
-          <div className="pointer" draggable></div>
+        {pointerIdx === props.index ? ( 
+          <div className="pointer scroll-m-16" ref={fieldRef} draggable></div>
         ) : (
           ""
         )}
