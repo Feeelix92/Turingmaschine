@@ -44,7 +44,7 @@
 }
 
 .App {
-    @apply text-center w-auto sm:pr-10 sm:pl-10 sm:pb-10 content-center;
+    @apply text-center w-auto sm:pr-0 sm:pl-0 sm:pb-10 content-center;
 }
 
 .App-logo {
