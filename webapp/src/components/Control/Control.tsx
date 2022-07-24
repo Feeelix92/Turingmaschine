@@ -243,9 +243,9 @@ function Control() {
 
   return (
     <div className={"control w-screen"}>
-      <div className={"p-4 justify-center"}>
-        <div className={"m-2 text-black"}>
-          <label htmlFor="velSlider" className="form-label text-black">
+      <div className={"p-0 justify-center"}>
+        <div className={"m-0"}>
+          {/* <label htmlFor="velSlider" className="form-label text-black">
             Geschwindigkeit
           </label>
           <input
@@ -259,7 +259,7 @@ function Control() {
             value={slider}
             onChange={(e) => setSlider(e.target.valueAsNumber)}
             step={1}
-          />
+          /> */}
         </div>
         <div className={""}>
           <button
@@ -307,6 +307,22 @@ function Control() {
           >
             <FaStop />
           </button>
+
+          <label htmlFor="velSlider" className="form-label text-white pr-4 pl-8 hidden md:inline-block ">
+            Geschwindigkeit
+          </label>
+          <input
+            id="velSlider"
+            className={
+              "w-5/6 sm:w-1/3 h-2 bg-gray-500 rounded-lg appearance-none cursor-pointer  hidden md:inline-block"
+            }
+            type="range"
+            min={1}
+            max={10}
+            value={slider}
+            onChange={(e) => setSlider(e.target.valueAsNumber)}
+            step={1}
+          />
         </div>
       </div>
     </div>

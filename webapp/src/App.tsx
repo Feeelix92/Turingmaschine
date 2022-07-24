@@ -18,7 +18,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Menu />
-        <Control />
+        {/* <Control /> */}
         {!toiletPaperMode && <Band />}
         {toiletPaperMode && <TeepeeBand />}
       </header>

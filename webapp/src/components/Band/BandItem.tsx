@@ -117,7 +117,7 @@ export default function BandItem(props: BandItemProps) {
     >
       <div>
         {pointerIdx === props.index ? ( 
-          <div className="pointer scroll-m-16" ref={fieldRef} draggable></div>
+          <div className="pointer scroll-mx-16" ref={fieldRef} draggable></div>
         ) : (
           ""
         )}

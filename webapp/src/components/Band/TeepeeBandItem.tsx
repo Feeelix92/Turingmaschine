@@ -110,7 +110,7 @@ export default function BandItem(props: BandItemProps) {
             ref={wrapperRef}>
             <div className={""}>
                 {pointerIdx===props.index ? (
-                    <div className="teepeePointer scroll-m-16" ref={fieldRef}  draggable/>
+                    <div className="teepeePointer scroll-mx-16" ref={fieldRef}  draggable/>
                 ) : (
                     ""
                 )}
