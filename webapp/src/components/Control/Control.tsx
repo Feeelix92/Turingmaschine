@@ -308,13 +308,13 @@ function Control() {
             <FaStop />
           </button>
 
-          <label htmlFor="velSlider" className="form-label text-white pr-4 pl-8 hidden md:inline-block ">
+          <label htmlFor="velSlider" className="form-label text-white pr-0 md:pr-1 xl:pr-4 pl-1 md:pl-2 xl:pl-8 hidden md:inline-block ">
             Geschwindigkeit
           </label>
           <input
             id="velSlider"
             className={
-              "w-5/6 sm:w-1/3 h-2 bg-gray-500 rounded-lg appearance-none cursor-pointer  hidden md:inline-block"
+              "xl:w-2/5 md:w-1/5 h-2 bg-gray-500 rounded-lg appearance-none cursor-pointer  hidden md:inline-block"
             }
             type="range"
             min={1}

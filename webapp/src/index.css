@@ -64,7 +64,7 @@
 
 /* ********** MENU ********** */
 .menu {
-    @apply bg-thm-primary text-left h-16 pl-3;
+    @apply bg-thm-primary text-left h-16 pl-0;
 }
 
 .bottomnav {
