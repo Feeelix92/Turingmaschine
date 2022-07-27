@@ -244,14 +244,16 @@ function Control() {
   return (
     <div className={"control w-screen"}>
       <div className={"p-0 justify-center"}>
-        <div className={"m-0"}>
-          {/* <label htmlFor="velSlider" className="form-label text-black">
+
+        <div className={""}>
+
+        <label htmlFor="velSlider" className="form-label text-white pr-0 md:pr-1 xl:pr-1 pl-2 md:pl-4 xl:pl-5 hidden md:inline-block ">
             Geschwindigkeit
           </label>
           <input
             id="velSlider"
             className={
-              "w-5/6 sm:w-1/3 h-2 bg-gray-500 rounded-lg appearance-none cursor-pointer"
+              "xl:w-3/12 md:w-1/5 h-2 mr-4 xl:mr-8 bg-gray-500 rounded-lg appearance-none cursor-pointer  hidden md:inline-block"
             }
             type="range"
             min={1}
@@ -259,9 +261,8 @@ function Control() {
             value={slider}
             onChange={(e) => setSlider(e.target.valueAsNumber)}
             step={1}
-          /> */}
-        </div>
-        <div className={""}>
+          />
+          
           <button
             className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
             onClick={onPlay}
@@ -308,21 +309,7 @@ function Control() {
             <FaStop />
           </button>
 
-          <label htmlFor="velSlider" className="form-label text-white pr-0 md:pr-1 xl:pr-4 pl-1 md:pl-2 xl:pl-8 hidden md:inline-block ">
-            Geschwindigkeit
-          </label>
-          <input
-            id="velSlider"
-            className={
-              "xl:w-2/5 md:w-1/5 h-2 bg-gray-500 rounded-lg appearance-none cursor-pointer  hidden md:inline-block"
-            }
-            type="range"
-            min={1}
-            max={10}
-            value={slider}
-            onChange={(e) => setSlider(e.target.valueAsNumber)}
-            step={1}
-          />
+          
         </div>
       </div>
     </div>
