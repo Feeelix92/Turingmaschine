@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {slide as Menu} from "react-burger-menu"
 import {useDispatch, useSelector} from "react-redux";
 import { bandChangeSkin } from "../../redux/bandStore";
-import {alphabetDeleteZustand, changeToiletPaperMode} from "../../redux/generalStore";
+import {activateToiletPaperMode, alphabetDeleteZustand, changeToiletPaperMode, deactivateToiletPaperMode} from "../../redux/generalStore";
 import {RootState} from "../../redux/store";
 import { Routes, Route, Link } from "react-router-dom";
 

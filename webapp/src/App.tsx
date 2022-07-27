@@ -62,6 +62,8 @@ function Home() {
         dispatch(deactivateToiletPaperMode()) ;dispatch(changeToiletPaperMode()); console.log('ac', toiletPaperMode)
     })
 
+    dispatch(deactivateToiletPaperMode()) ;dispatch(changeToiletPaperMode()); console.log('without Dispatch', toiletPaperMode)
+
     return (
         <>
             <header className="App-header">
@@ -92,6 +94,7 @@ function Papier() {
     useEffect(() => {
         dispatch(activateToiletPaperMode()) ;dispatch(changeToiletPaperMode()); console.log('paper', toiletPaperMode)
     })
+     dispatch(activateToiletPaperMode()) ;dispatch(changeToiletPaperMode()); console.log('paper without dispatch', toiletPaperMode)
 
     return (
         <>
