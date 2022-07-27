@@ -11,7 +11,7 @@ function Menu() {
       );
       
     return (
-        <div className={"menu w-screen sm:pl-0 sm:pr-0 flex"}>
+        <div className={"menu w-screen flex"}>
             <h1 className="text-white text-xl p-3 md:pl-2 pr-2 2xl:pr-32 min-w-max self-center float-left hidden xl:block">
                 Turingmaschinen-Simulator
             </h1>
