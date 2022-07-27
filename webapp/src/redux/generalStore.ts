@@ -103,7 +103,7 @@ export const initialCell: Cell[] = [
 ];
 
 /////////////ToPa//////////////////////
-const initialToiletPaperMode: boolean = true;
+const initialToiletPaperMode: boolean = false;
 
 //// Zustandsmenge
 const initialZustandsmengeTP: Zustand[] = [
@@ -342,13 +342,13 @@ export const generalSlice = createSlice({
   name: "general",
   initialState: {
     //// ZustandTP ////
-    zustandsmenge: initialZustandsmengeTP,
-    anfangsZustand: initialAnfangszustandTP,
-    endZustand: initialEndZustandsmengeTP,
+    //zustandsmenge: initialZustandsmengeTP,
+    //anfangsZustand: initialAnfangszustandTP,
+    //endZustand: initialEndZustandsmengeTP,
     //// Zustand ////
-    //zustandsmenge: initialZustandsmenge,
-    //anfangsZustand: initialAnfangszustand,
-    //endZustand: initialEndZustandsmenge,
+    zustandsmenge: initialZustandsmenge,
+    anfangsZustand: initialAnfangszustand,
+    endZustand: initialEndZustandsmenge,
 
     //// Alphabet ////
     currentAlphabet: defaultAlphabetOption2,
@@ -363,8 +363,8 @@ export const generalSlice = createSlice({
     executable: false,
     //// Table ////
     header: ["Zustand", "Lese", "Neuer Zustand", "Schreibe", "Gehe nach"],
-    rows: initialRowTP,
-    //rows: initialRow,
+    //rows: initialRowTP,
+    rows: initialRow,
     activeRow: activeRow,
     watchedRows: watchedRows,
     activeState: activeState,
@@ -548,6 +548,7 @@ export const generalSlice = createSlice({
       state.rows = newRows;
     },
     tableUpdateCell: (state, updateCell: PayloadAction<updateCellType>) => {
+      console.log('rows', state.rows)
       const newCells: Cell[] = state.rows[
         updateCell.payload.rowIndex as number
       ].cells.slice(
@@ -629,12 +630,18 @@ export const generalSlice = createSlice({
       }
     },
 
+    activateToiletPaperMode: (state) => {
+      state.toiletPaperMode = true;
+    },
+    deactivateToiletPaperMode: (state) => {
+      state.toiletPaperMode = false
+    },
+
     /**
      * This function switches from or to the toilet paper views
      * @param state
      */
     changeToiletPaperMode: (state) => {
-      state.toiletPaperMode = !state.toiletPaperMode;
       if (!state.toiletPaperMode) {
         state.rows = initialRow;
         state.zustandsmenge = initialZustandsmenge;
@@ -677,6 +684,8 @@ export const {
   tableSetWatchedRows,
   tableSetActiveState,
   changeToiletPaperMode,
+  activateToiletPaperMode,
+  deactivateToiletPaperMode
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

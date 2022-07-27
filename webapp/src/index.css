@@ -206,6 +206,7 @@
 }
 
 /*toiletpaper mode*/
+/*
 .disableTableRow{
     @apply pointer-events-none;
 }
@@ -221,6 +222,7 @@ button.disableTableRow{
 .disableTableRow .css-4xgw5l-IndicatorsContainer2{
     @apply opacity-[0.4]
 }
+*/
 
 /* Toilet paper */
 

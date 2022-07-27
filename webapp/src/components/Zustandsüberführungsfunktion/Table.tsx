@@ -39,9 +39,6 @@ export default function Table() {
   const zustandsmenge = useSelector(
     (state: RootState) => state.general.zustandsmenge
   );
-  const toiletPaperMode = useSelector(
-    (state: RootState) => state.general.toiletPaperMode
-  );
 
   // /////////// States from State ///////////
   // let states = zustandsmenge;
@@ -89,9 +86,7 @@ export default function Table() {
               </tbody>
             </table>
             <button
-              className={`w-full addRow ${
-                toiletPaperMode ? "disableTableRow" : ""
-              } `}
+              className={`w-full addRow `}
               disabled={zustandsmenge.length === 0 ? true : false}
               onClick={() => dispatch(tableAddRow())}
             >
