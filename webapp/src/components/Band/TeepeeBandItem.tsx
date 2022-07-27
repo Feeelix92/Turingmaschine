@@ -28,7 +28,11 @@ export default function BandItem(props: BandItemProps) {
   const fieldRef = React.useRef<HTMLInputElement>(null);
   useEffect(() => {
     if(fieldRef.current) {
-      fieldRef.current.scrollIntoView();
+      fieldRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'start'
+      });
     }
   });
 
