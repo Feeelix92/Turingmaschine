@@ -8,11 +8,20 @@ import ToPaTable from "./components/Zustandsüberführungsfunktion/ToPaTable";
 import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import Band from "./components/Band/Band";
+import Tiptap from "./components/codeEditor/CodeEditor";
+import { useState } from "react";
 
 function App() {
   const toiletPaperMode = useSelector(
     (state: RootState) => state.general.toiletPaperMode
   );
+
+  const [showModal, setShowModal] = useState(false);
+
+  function toggleModal() {
+    console.log("toggle");
+    setShowModal(!showModal);
+  }
 
   return (
     <div className="App">
@@ -22,6 +31,8 @@ function App() {
         {!toiletPaperMode && <Band />}
         {toiletPaperMode && <TeepeeBand />}
       </header>
+      <button onClick={toggleModal}>Show Code-Editor</button>
+      {showModal ? <Tiptap /> : null}
       <div className={"App-body"}>
         <div className={" hidden md:grid md:grid-cols-4 md:items-start"}>
           {!toiletPaperMode && <ConditionsList />}
