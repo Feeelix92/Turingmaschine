@@ -26,7 +26,7 @@ const Tiptap = () => {
 
   return (
     <div
-      className="modal fade fixed top-40 left-0 w-96 h-full outline-none overflow-x-hidden overflow-y-auto"
+      className="modal fade fixed top-40 left-0 w-4/12 h-full outline-none overflow-x-hidden overflow-y-auto"
       id="exampleModalCenteredScrollable"
       tabIndex={-1}
       aria-labelledby="exampleModalCenteredScrollable"
