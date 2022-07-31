@@ -139,3 +139,7 @@ export interface updateCellType {
   rowIndex: React.Key;
   value: string | boolean | Zustand | Direction;
 }
+
+export interface CodeEditorProps {
+  toggleEditor: () => void;
+}

@@ -32,7 +32,7 @@ function App() {
         {toiletPaperMode && <TeepeeBand />}
       </header>
       <button onClick={toggleModal}>Show Code-Editor</button>
-      {showModal ? <Tiptap /> : null}
+      {showModal ? <Tiptap toggleEditor={toggleModal} /> : null}
       <div className={"App-body"}>
         <div className={" hidden md:grid md:grid-cols-4 md:items-start"}>
           {!toiletPaperMode && <ConditionsList />}
