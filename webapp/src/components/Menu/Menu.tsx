@@ -9,6 +9,10 @@ function Menu() {
     const currentZustand = useSelector(
         (state: RootState) => state.general.activeState
       );
+
+      const toiletPaperMode = useSelector(
+        (state: RootState) => state.general.toiletPaperMode
+      );
       
     return (
         <div className={"menu w-screen flex"}>
@@ -19,16 +23,18 @@ function Menu() {
             <Control />
 
             <div className={"currentZustand flex-col content-center items-center justify-center mb-8 hidden md:flex pr-0" } >
-                {currentZustand ? (
+                { !toiletPaperMode && currentZustand ? (
                 <div className={"rounded-full w-32 bg-white text-thm-primary h-8 pl-5 mt-14 ml-0 mr-8 xl:mr-32"}>
                     Zustand: {currentZustand.value}
                 </div>
-                ) : (
+                ) : ("")}
+
+                { !toiletPaperMode && !currentZustand ? (
                 <div className={"rounded-full bg-white text-thm-primary h-8"}>
                     Kein Zustand vorhanden!
                 </div>
-                )}
-            </div>
+                    ) : ("")}
+                </div>
 
             <Sidebar/>
             {/* TODO: Wenn Sidebar nicht ganz am Anfang steht, ist Overlay nicht zu sehen (das ist immer rechts von Burgermenu-Icon?) */}
