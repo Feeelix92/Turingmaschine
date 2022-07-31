@@ -18,8 +18,8 @@ const Tiptap = (props: CodeEditorProps) => {
         ////// Tabelle //////
         table:
           q1: {
-            1: {q1, R, 0}
-            0: {q1, R}
+            1: {q1, R, 0},
+            0: {q1, R},
             B: {q2, N}
           }
       </code></pre>`,
