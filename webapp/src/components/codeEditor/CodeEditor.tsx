@@ -9,19 +9,18 @@ const Tiptap = (props: CodeEditorProps) => {
     extensions: [StarterKit],
     content: `<pre><code classNameName="language-json">
         ////// Band //////
-        1B1B0
+        input: 1,B,1,B,0
         ////// Spezifikationen //////
-        input: „1101“
         alphabet: {0,1}
         states: {q1, q2}
-        start state: q1
-        end state: q2
+        startState: q1
+        endState: q2
         ////// Tabelle //////
         table:
           q1:
-            1: {q1 : R, write:0}
-            0: {q1: R}
-            B: {q2 : N}
+            1: {q1, R, 0}
+            0: {q1, R}
+            B: {q2, N}
       </code></pre>`,
   });
 
