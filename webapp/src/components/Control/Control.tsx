@@ -56,6 +56,19 @@ function Control() {
   );
 
   const [slider, setSlider] = useState(4);
+
+  const increaseSlider = () => {
+    let val = slider;
+    setSlider(++val);
+  }
+  const decreaseSlider = () => {
+    let val = slider;
+    if(val > 1) {
+      setSlider(--val);
+    }
+  }
+
+
   const animateButton = (el) => {
     anime({
       targets: el,
@@ -247,8 +260,8 @@ function Control() {
 
         <div className={""}>
 
-        <label htmlFor="velSlider" className="form-label text-white pr-0 md:pr-1 xl:pr-1 pl-2 md:pl-4 xl:pl-5 hidden md:inline-block ">
-            Geschwindigkeit
+          <label htmlFor="velSlider" className="form-label text-white pr-0 md:pr-1 xl:pr-1 pl-2 md:pl-4 xl:pl-5 hidden md:inline-block ">
+              Geschwindigkeit
           </label>
           <input
             id="velSlider"
@@ -264,7 +277,7 @@ function Control() {
           />
           
           <button
-            className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
+            className={"invertedButton py-1 px-2 m-2 ml-3 mr-1 disabled:opacity-50"}
             onClick={onPlay}
             onMouseEnter={(e) => {
               animateButton(e.target);
@@ -274,7 +287,7 @@ function Control() {
             <FaPlay />
           </button>
           <button
-            className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
+            className={"invertedButton py-1 px-2 m-2 mx-1 disabled:opacity-50"}
             onClick={stepByStep}
             onMouseEnter={(e) => {
               animateButton(e.target);
@@ -285,7 +298,7 @@ function Control() {
             <FaStepForward />
           </button>
           <button
-            className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
+            className={"invertedButton py-1 px-2 m-2 mx-1 disabled:opacity-50"}
             onClick={() => {
               pauseMaschine ? changePause(false) : changePause(true);
             }}
@@ -298,7 +311,7 @@ function Control() {
             <FaPause />
           </button>
           <button
-            className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
+            className={"invertedButton py-1 px-2 m-2 mx-1 disabled:opacity-50"}
             onClick={() => changeStopp(true)}
             onMouseEnter={(e) => {
               animateButton(e.target);
@@ -309,6 +322,12 @@ function Control() {
             <FaStop />
           </button>
 
+          {/* Geschwindigkeit im mobile  */}
+          <div className={"inline-block md:hidden px-0 bg-white text-thm-primary rounded ml-3"}>
+            <button className={"inline-block bg-white text-thm-primary pl-2 pr-3"} onClick={decreaseSlider}>-</button>
+            {slider}
+            <button className={"inline-block bg-white text-thm-primary pl-3 pr-2"} onClick={increaseSlider}>+</button>
+          </div>
           
         </div>
       </div>
