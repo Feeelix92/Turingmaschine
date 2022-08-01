@@ -4,41 +4,17 @@ import {useEditor, EditorContent, Editor} from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import {CodeEditorProps, Zustand} from "../../interfaces/CommonInterfaces";
 import {useDispatch, useSelector} from "react-redux";
-import {useState} from "react";
-import {RootState} from "../../redux/store";
+import {useEffect, useState} from "react";
+import {RootState, store} from "../../redux/store";
 import {OnChangeValue} from "react-select";
 import {alphabetChangeAnfangszustand} from "../../redux/generalStore";
+import {set} from "animejs";
+import watch from "redux-watch";
 
 export default function Tiptap(props: CodeEditorProps) {
     const dispatch = useDispatch();
-    const zustandsmenge = useSelector(
-        (state: RootState) => state.general.zustandsmenge
-    );
-
-    // let tempEditorContent: string;
     const [tempEditorContent, setTempEditorContent] = useState("");
-
-    function toggleEditor() {
-        props.toggleEditor();
-    }
-
-    function parseToJSON() {
-        if (tempEditorContent){
-            console.log(tempEditorContent);
-            try {
-                let json = JSON.parse(tempEditorContent);
-                console.log(json)
-                toggleEditor();
-            } catch (e){
-                // alert(e);
-                alert("Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen! \n" + e);
-            }
-        }
-    }
-
-    const editor = useEditor({
-        extensions: [StarterKit],
-        content: `<pre><code className={"language-json"}>
+    const [codeEditor, setCodeEditor] = useState(`
          {
            "band":{
               "input":["1","B","1","B","0"]
@@ -56,12 +32,40 @@ export default function Tiptap(props: CodeEditorProps) {
                  "B":["q2","N"]
               }
            }
-         }
+         }`,
+    );
+
+    function toggleEditor() {
+        props.toggleEditor();
+    }
+
+    function parseToJSON() {
+        if (tempEditorContent){
+            // console.log(tempEditorContent);
+            try {
+                let json = JSON.parse(tempEditorContent);
+                console.log(json)
+                toggleEditor();
+                setCodeEditor(tempEditorContent)
+            } catch (e){
+                // alert(e);
+                alert("Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen! \n" + e);
+            }
+        }
+    }
+
+    const editor = useEditor({
+        extensions: [StarterKit],
+        content: `<pre><code className={"language-json"}>
+         ${codeEditor}
       </code></pre>`,
         // triggered on every change
         onUpdate: ({editor}) => {
             setTempEditorContent(editor.getText());
-        }
+        },
+        onCreate: ({editor}) => {
+            setTempEditorContent(editor.getText());
+        },
     });
 
     return (
