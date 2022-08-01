@@ -39,7 +39,7 @@ const Tiptap = (props: CodeEditorProps) => {
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
               <div className="flex items-start p-4 rounded-t border-b dark:border-gray-600">
                 <h3 className="font-semibold text-gray-900 dark:text-white">
-                  Codeeditor
+                  Code-Editor
                 </h3>
                 <button type="button"
                         className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -61,7 +61,7 @@ const Tiptap = (props: CodeEditorProps) => {
                         className="bg-thm-primary">speichern
                 </button>
                 <button data-modal-toggle="defaultModal" type="button" onClick={props.toggleEditor}
-                        className="bg-thm-secondary">abrechen
+                        className="bg-thm-secondary hover:bg-thm-primary2">abrechen
                 </button>
               </div>
             </div>
