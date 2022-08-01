@@ -1,6 +1,6 @@
 // src/Tiptap.jsx
 import "./styles.css";
-import { useEditor, EditorContent } from "@tiptap/react";
+import {useEditor, EditorContent, Editor} from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { CodeEditorProps } from "../../interfaces/CommonInterfaces";
 
@@ -10,23 +10,29 @@ const Tiptap = (props: CodeEditorProps) => {
     content: `<pre><code className={"language-json"}>
        {
          "band":{
-            "input":[1,"B",1,"B",0]
+            "input":["1","B","1","B","0"]
          },
          "spezifikationen":{
-            "alphabet":[0,1],
+            "alphabet":["0","1""],
             "states":["q1","q2"],
             "startState":["q1"],
             "endState":["q2"]
          },
          "table":{
             "q1":{
-               "1":["q1","R",0],
+               "1":["q1","R","0"],
                "0":["q1","R"],
                "B":["q2","N"]
             }
          }
        }
       </code></pre>`,
+    // triggered on every change
+    onUpdate: ({ editor }) => {
+      const json = editor.getJSON();
+      // send the content to an API here
+      console.log(json.content);
+    },
   });
 
   return (
