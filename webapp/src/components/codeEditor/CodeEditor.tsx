@@ -8,7 +8,7 @@ const Tiptap = (props: CodeEditorProps) => {
   const editor = useEditor({
     extensions: [StarterKit],
     content: `<pre><code className={"language-json"}>
-        {
+       {
          "band":{
             "input":[1,"B",1,"B",0]
          },
@@ -25,7 +25,7 @@ const Tiptap = (props: CodeEditorProps) => {
                "B":["q2","N"]
             }
          }
-      }
+       }
       </code></pre>`,
   });
 
