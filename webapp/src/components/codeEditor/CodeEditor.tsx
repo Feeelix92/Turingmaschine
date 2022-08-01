@@ -8,30 +8,32 @@ const Tiptap = (props: CodeEditorProps) => {
   const editor = useEditor({
     extensions: [StarterKit],
     content: `<pre><code className={"language-json"}>
-       {
-         "band":{
-            "input":["1","B","1","B","0"]
-         },
-         "spezifikationen":{
-            "alphabet":["0","1""],
-            "states":["q1","q2"],
-            "startState":["q1"],
-            "endState":["q2"]
-         },
-         "table":{
-            "q1":{
-               "1":["q1","R","0"],
-               "0":["q1","R"],
-               "B":["q2","N"]
-            }
+       [
+         {
+           "band":{
+              "input":["1","B","1","B","0"]
+           },
+           "spezifikationen":{
+              "alphabet":["0","1"],
+              "states":["q1","q2"],
+              "startState":["q1"],
+              "endState":["q2"]
+           },
+           "table":{
+              "q1":{
+                 "1":["q1","R","0"],
+                 "0":["q1","R"],
+                 "B":["q2","N"]
+              }
+           }
          }
-       }
+       ]
       </code></pre>`,
     // triggered on every change
     onUpdate: ({ editor }) => {
-      const json = editor.getJSON();
-      // send the content to an API here
-      console.log(json.content);
+      const temp = editor.getText();
+      const json = JSON.parse(temp);
+      console.log(json);
     },
   });
 
@@ -52,9 +54,9 @@ const Tiptap = (props: CodeEditorProps) => {
                         data-modal-toggle="defaultModal" onClick={props.toggleEditor}>
                   <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                        xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
+                    <path fillRule={"evenodd"}
                           d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                          clip-rule="evenodd"></path>
+                          clipRule={"evenodd"}/>
                   </svg>
                   <span className="sr-only">Close modal</span>
                 </button>
