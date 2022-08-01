@@ -8,12 +8,11 @@ const Tiptap = (props: CodeEditorProps) => {
   const editor = useEditor({
     extensions: [StarterKit],
     content: `<pre><code className={"language-json"}>
-       [
          {
            "band":{
               "input":["1","B","1","B","0"]
            },
-           "spezifikationen":{
+           "specifications":{
               "alphabet":["0","1"],
               "states":["q1","q2"],
               "startState":["q1"],
@@ -27,7 +26,6 @@ const Tiptap = (props: CodeEditorProps) => {
               }
            }
          }
-       ]
       </code></pre>`,
     // triggered on every change
     onUpdate: ({ editor }) => {
