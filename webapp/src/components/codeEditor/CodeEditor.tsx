@@ -13,8 +13,7 @@ import watch from "redux-watch";
 
 export default function Tiptap(props: CodeEditorProps) {
     const dispatch = useDispatch();
-    const [tempEditorContent, setTempEditorContent] = useState("");
-    const [codeEditor, setCodeEditor] = useState(`
+    const [tempEditorContent, setTempEditorContent] = useState(`
          {
            "band":{
               "input":["1","B","1","B","0"]
@@ -43,10 +42,10 @@ export default function Tiptap(props: CodeEditorProps) {
         if (tempEditorContent){
             // console.log(tempEditorContent);
             try {
+                console.log(tempEditorContent);
                 let json = JSON.parse(tempEditorContent);
                 console.log(json)
                 toggleEditor();
-                setCodeEditor(tempEditorContent)
             } catch (e){
                 // alert(e);
                 alert("Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen! \n" + e);
@@ -57,7 +56,7 @@ export default function Tiptap(props: CodeEditorProps) {
     const editor = useEditor({
         extensions: [StarterKit],
         content: `<pre><code className={"language-json"}>
-         ${codeEditor}
+         ${tempEditorContent}
       </code></pre>`,
         // triggered on every change
         onUpdate: ({editor}) => {
