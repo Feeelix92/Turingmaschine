@@ -5,7 +5,9 @@ import StarterKit from "@tiptap/starter-kit";
 import {CodeEditorProps, Zustand} from "../../interfaces/CommonInterfaces";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {RootState} from "../../redux/store";
+import {RootState, store} from "../../redux/store";
+import watch from "redux-watch";
+import {alphabetChangeAnfangszustand} from "../../redux/generalStore";
 
 export default function Tiptap(props: CodeEditorProps) {
     const dispatch = useDispatch();
@@ -13,7 +15,16 @@ export default function Tiptap(props: CodeEditorProps) {
     const currentAlphabet = useSelector(
         (state: RootState) => state.general.currentAlphabet
     );
-    // @TODO set tempEditor to global
+    const initZustandsmenge = useSelector(
+        (state: RootState) => state.general.zustandsmenge
+    );
+    const initAnfangsZustand = useSelector(
+        (state: RootState) => state.general.anfangsZustand
+    );
+    const initEndZustand = useSelector(
+        (state: RootState) => state.general.endZustand
+    );
+    // @TODO insert current Table
     const [tempEditorText, setTempEditorText] = useState(`
          {
            "band":{
@@ -21,9 +32,9 @@ export default function Tiptap(props: CodeEditorProps) {
            },
            "specifications":{
               "alphabet":[`+convertCurrentAlphabet()+`],
-              "states":["q1","q2"],
-              "startState":["q1"],
-              "endState":["q2"]
+              "states":[`+convertZustandsmenge()+`],
+              "startState":[`+convertAnfangsZustand()+`],
+              "endState":[`+convertEndZustand()+`]
            },
            "table":{
               "q1":{
@@ -33,25 +44,6 @@ export default function Tiptap(props: CodeEditorProps) {
               }
            }
          }`,
-        // `
-        //  {
-        //    "band":{
-        //       "input":["1","B","1","B","0"]
-        //    },
-        //    "specifications":{
-        //       "alphabet":["0","1"],
-        //       "states":["q1","q2"],
-        //       "startState":["q1"],
-        //       "endState":["q2"]
-        //    },
-        //    "table":{
-        //       "q1":{
-        //          "1":["q1","R","0"],
-        //          "0":["q1","R"],
-        //          "B":["q2","N"]
-        //       }
-        //    }
-        //  }`,
     );
 
     function convertCurrentBand(){
@@ -62,8 +54,16 @@ export default function Tiptap(props: CodeEditorProps) {
         return currentAlphabet.alphabet.map(({value}) => `"${value}"`).join(',');
     }
 
-    function convertCurrentStates(){
-        return currentAlphabet.alphabet.map(({value}) => `"${value}"`).join(',');
+    function convertZustandsmenge(){
+        return initZustandsmenge.map(({value}) => `"${value}"`).join(',');
+    }
+
+    function convertAnfangsZustand(){
+        return `"${initAnfangsZustand.value}"`;
+    }
+
+    function convertEndZustand(){
+        return initEndZustand.map(({value}) => `"${value}"`).join(',');
     }
 
     function toggleEditor() {
@@ -72,13 +72,26 @@ export default function Tiptap(props: CodeEditorProps) {
 
     function parseToJSON() {
         if (tempEditorText){
-            // console.log(tempEditorText);
             try {
-                console.log(currentBand)
-                console.log(currentAlphabet)
-                // console.log(tempEditorText);
                 let json = JSON.parse(tempEditorText);
-                console.log(json)
+                // @TODO save Band to store
+                // json.band.input
+
+                // save Anfangszustand from editor to store
+                const newAnfangszustand = new Zustand(
+                    json.specifications.startState[0],
+                    json.specifications.startState[0],
+                    true,
+                    false,
+                    false
+                );
+                dispatch(alphabetChangeAnfangszustand(newAnfangszustand));
+                // @TODO save Endzustand to store
+                // json.specifications.endState...
+
+                // @TODO save table store
+                // json.table...
+
                 toggleEditor();
             } catch (e){
                 // alert(e);
