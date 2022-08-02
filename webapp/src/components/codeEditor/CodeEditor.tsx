@@ -5,21 +5,22 @@ import StarterKit from "@tiptap/starter-kit";
 import {CodeEditorProps, Zustand} from "../../interfaces/CommonInterfaces";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {RootState, store} from "../../redux/store";
-import {OnChangeValue} from "react-select";
-import {alphabetChangeAnfangszustand} from "../../redux/generalStore";
-import {set} from "animejs";
-import watch from "redux-watch";
+import {RootState} from "../../redux/store";
 
 export default function Tiptap(props: CodeEditorProps) {
     const dispatch = useDispatch();
-    const [tempEditorContent, setTempEditorContent] = useState(`
+    const currentBand = useSelector((state: RootState) => state.band.currentBand);
+    const currentAlphabet = useSelector(
+        (state: RootState) => state.general.currentAlphabet
+    );
+    // @TODO set tempEditor to global
+    const [tempEditorText, setTempEditorText] = useState(`
          {
            "band":{
-              "input":["1","B","1","B","0"]
+              "input":[`+convertCurrentBand()+`]
            },
            "specifications":{
-              "alphabet":["0","1"],
+              "alphabet":[`+convertCurrentAlphabet()+`],
               "states":["q1","q2"],
               "startState":["q1"],
               "endState":["q2"]
@@ -32,18 +33,51 @@ export default function Tiptap(props: CodeEditorProps) {
               }
            }
          }`,
+        // `
+        //  {
+        //    "band":{
+        //       "input":["1","B","1","B","0"]
+        //    },
+        //    "specifications":{
+        //       "alphabet":["0","1"],
+        //       "states":["q1","q2"],
+        //       "startState":["q1"],
+        //       "endState":["q2"]
+        //    },
+        //    "table":{
+        //       "q1":{
+        //          "1":["q1","R","0"],
+        //          "0":["q1","R"],
+        //          "B":["q2","N"]
+        //       }
+        //    }
+        //  }`,
     );
+
+    function convertCurrentBand(){
+        return currentBand.map(({value}) => `"${value}"`).join(',');
+    }
+
+    function convertCurrentAlphabet(){
+        return currentAlphabet.alphabet.map(({value}) => `"${value}"`).join(',');
+    }
+
+    function convertCurrentStates(){
+        return currentAlphabet.alphabet.map(({value}) => `"${value}"`).join(',');
+    }
 
     function toggleEditor() {
         props.toggleEditor();
     }
 
     function parseToJSON() {
-        if (tempEditorContent){
-            // console.log(tempEditorContent);
+        if (tempEditorText){
+            // console.log(tempEditorText);
             try {
-                console.log(tempEditorContent);
-                let json = JSON.parse(tempEditorContent);
+                console.log(currentBand)
+                console.log(currentAlphabet)
+                // console.log(tempEditorText);
+                let json = JSON.parse(tempEditorText);
                 console.log(json)
                 toggleEditor();
             } catch (e){
@@ -56,14 +90,14 @@ export default function Tiptap(props: CodeEditorProps) {
     const editor = useEditor({
         extensions: [StarterKit],
         content: `<pre><code className={"language-json"}>
-         ${tempEditorContent}
+         ${tempEditorText}
       </code></pre>`,
         // triggered on every change
         onUpdate: ({editor}) => {
-            setTempEditorContent(editor.getText());
+            setTempEditorText(editor.getText());
         },
         onCreate: ({editor}) => {
-            setTempEditorContent(editor.getText());
+            setTempEditorText(editor.getText());
         },
     });
 
