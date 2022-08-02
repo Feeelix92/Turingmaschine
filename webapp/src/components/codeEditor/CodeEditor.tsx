@@ -46,7 +46,7 @@ export default function Tiptap(props: CodeEditorProps) {
          }`,
     );
 
-    // following function are used to convert stored Data, to use in Editor
+    // following functions are used to convert stored Data, to use in Editor
     function convertCurrentBand(){
         return currentBand.map(({value}) => `"${value}"`).join(',');
     }
