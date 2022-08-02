@@ -8,6 +8,7 @@ import {useEffect, useState} from "react";
 import {RootState, store} from "../../redux/store";
 import watch from "redux-watch";
 import {alphabetChangeAnfangszustand} from "../../redux/generalStore";
+import {bandChangeItemAt, bandDeleteAll, BandItemToChange} from "../../redux/bandStore";
 
 export default function Tiptap(props: CodeEditorProps) {
     const dispatch = useDispatch();
@@ -77,9 +78,17 @@ export default function Tiptap(props: CodeEditorProps) {
         if (tempEditorText){
             try {
                 let json = JSON.parse(tempEditorText);
-                // @TODO save Band to store
+                dispatch(bandDeleteAll());
                 // json.band.input...
-                console.log(json.band.input)
+                const bandItems = json.band.input;
+                for (let index = 0; index < bandItems.length; index++) {
+                    const temp: BandItemToChange = {
+                        index: index,
+                        value: bandItems[index],
+                        label: bandItems[index],
+                    };
+                    dispatch(bandChangeItemAt(temp));
+                }
 
                 // save Anfangszustand from editor to store
                 const newAnfangszustand = new Zustand(
@@ -92,7 +101,7 @@ export default function Tiptap(props: CodeEditorProps) {
                 dispatch(alphabetChangeAnfangszustand(newAnfangszustand));
                 // @TODO save Endzustand to store
                 // json.specifications.endState...
-                //console.log(json.specifications.endState);
+                // console.log(json.specifications.endState);
 
                 // @TODO save table store
                 // json.table...
