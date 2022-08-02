@@ -7,7 +7,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {RootState, store} from "../../redux/store";
 import watch from "redux-watch";
-import {alphabetChangeAnfangszustand, alphabetChangeEndzustand} from "../../redux/generalStore";
+import {
+    alphabetChangeAnfangszustand,
+    alphabetChangeEndzustand,
+    alphabetDeleteCustom,
+    alphabetPushToCustom, alphabetPushToDialogOptions
+} from "../../redux/generalStore";
 import {bandChangeItemAt, bandDeleteAll, BandItemToChange} from "../../redux/bandStore";
 
 export default function Tiptap(props: CodeEditorProps) {
@@ -90,8 +95,19 @@ export default function Tiptap(props: CodeEditorProps) {
                     };
                     dispatch(bandChangeItemAt(temp));
                 }
-                // @TODO save alphabet from editor to store
+                // save alphabet from editor to store
                 // json.specifications.alphabet...
+                const alphabet = json.specifications.alphabet;
+                console.log(alphabet);
+                if (alphabet.length > 0) {
+                    dispatch(alphabetDeleteCustom());
+                    alphabet.forEach((value: string) => {
+                        dispatch(alphabetPushToCustom(value));
+                    });
+                    dispatch(alphabetPushToDialogOptions(alphabet.toString()));
+                } else {
+                    alert("Ein leeres Alphabet ist nicht erlaubt!");
+                }
 
                 // @TODO save states from editor to store
                 // json.specifications.states...
