@@ -110,14 +110,14 @@ export default function Tiptap(props: CodeEditorProps) {
 
                 // @TODO save states from editor to store
                 // json.specifications.states...
-                initZustandsmenge.forEach((value) => {
-                    // delete store states
-                    dispatch(alphabetDeleteZustand());
-                });
-                const states = json.specifications.states;
-                states.forEach((value: string) => {
-                    // @TODO push new states to store
-                });
+                // initZustandsmenge.forEach((value) => {
+                //     // delete store states
+                //     dispatch(alphabetDeleteZustand());
+                // });
+                // const states = json.specifications.states;
+                // states.forEach((value: string) => {
+                //     // @TODO push new states to store
+                // });
 
                 // save Anfangszustand from editor to store
                 const newAnfangszustand = new Zustand(
