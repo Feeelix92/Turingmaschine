@@ -78,12 +78,13 @@ export default function Tiptap(props: CodeEditorProps) {
             try {
                 let json = JSON.parse(tempEditorText);
                 // @TODO save Band to store
-                // json.band.input
+                // json.band.input...
+                console.log(json.band.input)
 
                 // save Anfangszustand from editor to store
                 const newAnfangszustand = new Zustand(
-                    json.specifications.startState[0],
-                    json.specifications.startState[0],
+                    json.specifications.startState,
+                    json.specifications.startState,
                     true,
                     false,
                     false
@@ -91,9 +92,11 @@ export default function Tiptap(props: CodeEditorProps) {
                 dispatch(alphabetChangeAnfangszustand(newAnfangszustand));
                 // @TODO save Endzustand to store
                 // json.specifications.endState...
+                //console.log(json.specifications.endState);
 
                 // @TODO save table store
                 // json.table...
+                // console.log(json.table);
 
                 toggleEditor();
             } catch (e){
