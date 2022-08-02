@@ -10,7 +10,7 @@ import watch from "redux-watch";
 import {
     alphabetChangeAnfangszustand,
     alphabetChangeEndzustand,
-    alphabetDeleteCustom,
+    alphabetDeleteCustom, alphabetDeleteZustand,
     alphabetPushToCustom, alphabetPushToDialogOptions
 } from "../../redux/generalStore";
 import {bandChangeItemAt, bandDeleteAll, BandItemToChange} from "../../redux/bandStore";
@@ -98,7 +98,6 @@ export default function Tiptap(props: CodeEditorProps) {
                 // save alphabet from editor to store
                 // json.specifications.alphabet...
                 const alphabet = json.specifications.alphabet;
-                console.log(alphabet);
                 if (alphabet.length > 0) {
                     dispatch(alphabetDeleteCustom());
                     alphabet.forEach((value: string) => {
@@ -111,6 +110,14 @@ export default function Tiptap(props: CodeEditorProps) {
 
                 // @TODO save states from editor to store
                 // json.specifications.states...
+                initZustandsmenge.forEach((value) => {
+                    // delete store states
+                    dispatch(alphabetDeleteZustand());
+                });
+                const states = json.specifications.states;
+                states.forEach((value: string) => {
+                    // @TODO push new states to store
+                });
 
                 // save Anfangszustand from editor to store
                 const newAnfangszustand = new Zustand(
