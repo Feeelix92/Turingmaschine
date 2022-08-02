@@ -24,7 +24,7 @@ export default function Tiptap(props: CodeEditorProps) {
     const initEndZustand = useSelector(
         (state: RootState) => state.general.endZustand
     );
-    // @TODO insert current Table
+    // @TODO convert and insert current Table
     const [tempEditorText, setTempEditorText] = useState(`
          {
            "band":{
@@ -46,6 +46,7 @@ export default function Tiptap(props: CodeEditorProps) {
          }`,
     );
 
+    // following function are used to convert stored Data, to use in Editor
     function convertCurrentBand(){
         return currentBand.map(({value}) => `"${value}"`).join(',');
     }
@@ -66,10 +67,12 @@ export default function Tiptap(props: CodeEditorProps) {
         return initEndZustand.map(({value}) => `"${value}"`).join(',');
     }
 
+    // function to close the Editor
     function toggleEditor() {
         props.toggleEditor();
     }
 
+    // function to convert Editor content to JSON and save entries to store
     function parseToJSON() {
         if (tempEditorText){
             try {
@@ -94,12 +97,12 @@ export default function Tiptap(props: CodeEditorProps) {
 
                 toggleEditor();
             } catch (e){
-                // alert(e);
+                // Error message is shown, if the entered code in editor is no valid JSON
                 alert("Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen! \n" + e);
             }
         }
     }
-
+    // Editor 
     const editor = useEditor({
         extensions: [StarterKit],
         content: `<pre><code className={"language-json"}>
@@ -109,6 +112,7 @@ export default function Tiptap(props: CodeEditorProps) {
         onUpdate: ({editor}) => {
             setTempEditorText(editor.getText());
         },
+        // triggered on create
         onCreate: ({editor}) => {
             setTempEditorText(editor.getText());
         },
