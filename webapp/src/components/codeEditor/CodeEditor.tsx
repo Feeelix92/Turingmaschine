@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {RootState, store} from "../../redux/store";
 import watch from "redux-watch";
-import {alphabetChangeAnfangszustand} from "../../redux/generalStore";
+import {alphabetChangeAnfangszustand, alphabetChangeEndzustand} from "../../redux/generalStore";
 import {bandChangeItemAt, bandDeleteAll, BandItemToChange} from "../../redux/bandStore";
 
 export default function Tiptap(props: CodeEditorProps) {
@@ -79,6 +79,7 @@ export default function Tiptap(props: CodeEditorProps) {
             try {
                 let json = JSON.parse(tempEditorText);
                 dispatch(bandDeleteAll());
+                // save Band to store
                 // json.band.input...
                 const bandItems = json.band.input;
                 for (let index = 0; index < bandItems.length; index++) {
@@ -89,6 +90,11 @@ export default function Tiptap(props: CodeEditorProps) {
                     };
                     dispatch(bandChangeItemAt(temp));
                 }
+                // @TODO save alphabet from editor to store
+                // json.specifications.alphabet...
+
+                // @TODO save states from editor to store
+                // json.specifications.states...
 
                 // save Anfangszustand from editor to store
                 const newAnfangszustand = new Zustand(
@@ -99,9 +105,28 @@ export default function Tiptap(props: CodeEditorProps) {
                     false
                 );
                 dispatch(alphabetChangeAnfangszustand(newAnfangszustand));
-                // @TODO save Endzustand to store
+
+                // save Endzustand to store
                 // json.specifications.endState...
                 // console.log(json.specifications.endState);
+                const endStates = json.specifications.endState;
+                let temp: Zustand[] = [];
+                for (let index = 0; index < endStates.length; index++) {
+                    let startState = false;
+                    if(endStates[index] == json.specifications.startState){
+                        startState = true;
+                    }
+                    temp.push(
+                        new Zustand(
+                            endStates[index],
+                            endStates[index],
+                            startState,
+                            true,
+                            false
+                        )
+                    );
+                }
+                dispatch(alphabetChangeEndzustand(temp));
 
                 // @TODO save table store
                 // json.table...
