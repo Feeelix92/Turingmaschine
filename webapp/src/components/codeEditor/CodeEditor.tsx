@@ -151,7 +151,7 @@ export default function Tiptap(props: CodeEditorProps) {
                 }
                 dispatch(alphabetChangeEndzustand(temp));
 
-                // @TODO save table store
+                // @TODO save table to store
                 // json.table...
                 // console.log(json.table);
 
