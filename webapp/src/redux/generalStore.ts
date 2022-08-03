@@ -104,7 +104,7 @@ export const initialCell: Cell[] = [
 ];
 
 /////////////ToPa//////////////////////
-const initialToiletPaperMode: boolean = false;
+const initialToiletPaperMode: boolean = true;
 
 //// Zustandsmenge
 const initialZustandsmengeTP: Zustand[] = [

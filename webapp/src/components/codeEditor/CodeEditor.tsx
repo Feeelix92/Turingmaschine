@@ -84,6 +84,7 @@ export default function Tiptap(props: CodeEditorProps) {
     function convertCurrentTable(){
         //ToDo richtig einrücken
         let lastZustand = "q1"
+        //der muss eingerückt werden jaja
         let finalString = `"q1":{}`
         if(initTable.length > 0){
             initTable.forEach(row => {
