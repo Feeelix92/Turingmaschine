@@ -1,4 +1,4 @@
-import { FaPlay, FaPause, FaStop, FaStepForward } from "react-icons/fa";
+import { FaPlay, FaPause, FaStop, FaStepForward, FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Direction,
@@ -59,7 +59,9 @@ function Control() {
 
   const increaseSlider = () => {
     let val = slider;
-    setSlider(++val);
+    if(val < 10) {
+      setSlider(++val);
+    }
   }
   const decreaseSlider = () => {
     let val = slider;
@@ -323,10 +325,14 @@ function Control() {
           </button>
 
           {/* Geschwindigkeit im mobile  */}
-          <div className={"inline-block md:hidden px-0 bg-white text-thm-primary rounded ml-3"}>
-            <button className={"inline-block bg-white text-thm-primary pl-2 pr-3"} onClick={decreaseSlider}>-</button>
+          <div className={"inline-block md:hidden px-0 bg-white text-thm-primary rounded ml-2 "}>
+            <button className={"inline-block bg-white text-thm-primary pl-2 pr-1.5"} onClick={decreaseSlider}>
+              <FaAngleDoubleLeft/>
+              </button>
             {slider}
-            <button className={"inline-block bg-white text-thm-primary pl-3 pr-2"} onClick={increaseSlider}>+</button>
+            <button className={"inline-block bg-white text-thm-primary pl-1.5 pr-2"} onClick={increaseSlider}>
+              <FaAngleDoubleRight/>
+              </button>
           </div>
           
         </div>
