@@ -23,7 +23,7 @@ export default function ToPaTable() {
     const [isActive, setIsActive] = useState(false);
 
         return (
-            <div className={"border-solid border rounded bg-white w-full p-2 border rounded items-center hover:bg-gray-100 col-span-12"}>
+            <div className={"border-solid border rounded bg-white w-full p-2 border rounded items-center col-span-12"}>
                 <div className={""} onClick={() => setIsActive(!isActive)}>
                     <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center"}>
                         <span className={""}>{isActive ? closeAccordion : openAccordion}</span>

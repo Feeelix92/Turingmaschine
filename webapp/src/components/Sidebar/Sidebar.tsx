@@ -28,7 +28,7 @@ function Sidebar() {
                 <a className={"menu-item text-white text-lg no-underline"}>
                     <Link to="/">
                         <button type="button">
-                            normal
+                            Standard
                         </button>
                     </Link>
                 </a>

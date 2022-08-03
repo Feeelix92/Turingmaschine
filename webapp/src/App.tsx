@@ -58,10 +58,6 @@ function Home() {
     const toiletPaperMode = useSelector((state: RootState) => state.general.toiletPaperMode)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(deactivateToiletPaperMode()) ;dispatch(changeToiletPaperMode()); console.log('ac', toiletPaperMode)
-    })
-
     dispatch(deactivateToiletPaperMode()) ;dispatch(changeToiletPaperMode()); console.log('without Dispatch', toiletPaperMode)
 
     return (
@@ -91,9 +87,7 @@ function Papier() {
     const toiletPaperMode = useSelector((state: RootState) => state.general.toiletPaperMode)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(activateToiletPaperMode()) ;dispatch(changeToiletPaperMode()); console.log('paper', toiletPaperMode)
-    })
+
      dispatch(activateToiletPaperMode()) ;dispatch(changeToiletPaperMode()); console.log('paper without dispatch', toiletPaperMode)
 
     return (
