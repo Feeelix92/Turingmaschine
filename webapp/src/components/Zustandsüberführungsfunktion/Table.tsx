@@ -53,7 +53,7 @@ export default function Table() {
   // );
 
   return (
-    <div className="flex flex-col col-span-2 border rounded p-2 w-screen md:w-auto">
+    <div className="flex flex-col col-span-2 border rounded p-0 w-screen md:w-auto">
       <div className="sm:-mx-0 lg:-mx-0">
         <div className=" sm:px-6 lg:px-8">
           <div className="overflow-x-auto items-center">
@@ -75,7 +75,7 @@ export default function Table() {
                   ))}
                 </tr>
               </thead>
-              <tbody className="flex flex-col items-center justify-between overflow-y-auto md:max-h-48 xl:max-h-full">
+              <tbody className="flex flex-col items-center justify-between overflow-y-auto md:max-h-48 xl:max-h-96">
                 {rows.map((value, key: React.Key) => (
                   // TODO functions still not working
                   <Row
