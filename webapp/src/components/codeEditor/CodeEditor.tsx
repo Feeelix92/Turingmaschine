@@ -2,7 +2,7 @@
 import "./styles.css";
 import {useEditor, EditorContent, Editor} from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import {CodeEditorProps, Zustand} from "../../interfaces/CommonInterfaces";
+import {CodeEditorProps, Direction, tableRowToAdd, Zustand} from "../../interfaces/CommonInterfaces";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {RootState, store} from "../../redux/store";
@@ -11,9 +11,18 @@ import {
     alphabetChangeAnfangszustand,
     alphabetChangeEndzustand,
     alphabetDeleteCustom, alphabetDeleteZustand,
-    alphabetPushToCustom, alphabetPushToDialogOptions
+    alphabetPushToCustom, alphabetPushToDialogOptions, alphabetPushToIdxZustand, alphabetPushToZustand, storeResetAll, tableAddEditorRow, tableDeleteAll, tableDeleteRow
 } from "../../redux/generalStore";
 import {bandChangeItemAt, bandDeleteAll, BandItemToChange} from "../../redux/bandStore";
+import Row from "../Zustandsüberführungsfunktion/Row";
+
+interface tableZustand {
+    [key:string]: tableZeichen
+}
+interface tableZeichen {
+    [key:string]: string[]
+}
+
 
 export default function Tiptap(props: CodeEditorProps) {
     const dispatch = useDispatch();
@@ -30,6 +39,9 @@ export default function Tiptap(props: CodeEditorProps) {
     const initEndZustand = useSelector(
         (state: RootState) => state.general.endZustand
     );
+    const initTable = useSelector(
+        (state: RootState) => state.general.rows
+    );
     // @TODO convert and insert current Table
     const [tempEditorText, setTempEditorText] = useState(`
          {
@@ -42,12 +54,8 @@ export default function Tiptap(props: CodeEditorProps) {
               "startState":[`+convertAnfangsZustand()+`],
               "endState":[`+convertEndZustand()+`]
            },
-           "table":{
-              "q1":{
-                 "1":["q1","R","0"],
-                 "0":["q1","R"],
-                 "B":["q2","N"]
-              }
+           "table":{             
+              `+convertCurrentTable()+`
            }
          }`,
     );
@@ -72,6 +80,48 @@ export default function Tiptap(props: CodeEditorProps) {
     function convertEndZustand(){
         return initEndZustand.map(({value}) => `"${value}"`).join(',');
     }
+
+    function convertCurrentTable(){
+        //ToDo richtig einrücken
+        let lastZustand = "q1"
+        let finalString = `"q1":{}`
+        if(initTable.length > 0){
+            initTable.forEach(row => {
+                let tempZustand = row.cells[0].value as Zustand
+                let tempToBeZustand = row.cells[2].value as Zustand
+                let tempDirection = row.cells[4].value as Direction
+                //wenn es Zustand schon gibt
+                if(lastZustand === tempZustand.value){
+                    let tempIdx = finalString.search(`"${lastZustand}":{`) + 6
+                    let tempString = `\n"${row.cells[1].value}":["${tempToBeZustand.value}", "${row.cells[3].value}", "${tempDirection.label}"],`
+                    finalString = finalString.slice(0, tempIdx) + tempString + finalString.slice(tempIdx);
+                    lastZustand = tempZustand.value     
+                    //TODO richtige Reihenfolge
+                    // let tempIdx = finalString.search(`"${lastZustand}":{}`) 
+                    // let tempString = `\n"${row.cells[1].value}":["${tempToBeZustand.value}, ${row.cells[3].value}"", "${tempDirection.label}""],`
+                    // if(tempIdx !== undefined){
+                    //     tempIdx = tempIdx + 6
+                    //     finalString = finalString.slice(0, tempIdx) + tempString + finalString.slice(tempIdx);                         
+                    // } else{
+                    //    tempIdx = finalString.search(`"${lastZustand}":{`) + 6
+                    //    let lastIdx = finalString.indexOf('],}', tempIdx) + 2;                      
+                    //    finalString = finalString.slice(0, lastIdx) + tempString + finalString.slice(lastIdx);
+                    // }
+                } 
+                //wenn Zustand neu hinzugefügt werden muss
+                else {
+                    finalString = finalString + `,\n"${tempZustand.value}":{\n"${row.cells[1].value}":["${tempToBeZustand.value}", "${row.cells[3].value}", "${tempDirection.label}"],}`
+                    lastZustand = tempZustand.value            
+                } 
+                finalString = finalString.replace('],}',']\n}');
+            })
+        } else {
+            finalString = ""
+        }
+        finalString = finalString.replace('],}',']\n}');
+        return finalString
+    }
+    
 
     // function to close the Editor
     function toggleEditor() {
@@ -108,16 +158,20 @@ export default function Tiptap(props: CodeEditorProps) {
                     alert("Ein leeres Alphabet ist nicht erlaubt!");
                 }
 
-                // @TODO save states from editor to store
-                // json.specifications.states...
-                // initZustandsmenge.forEach((value) => {
-                //     // delete store states
-                //     dispatch(alphabetDeleteZustand());
-                // });
-                // const states = json.specifications.states;
-                // states.forEach((value: string) => {
-                //     // @TODO push new states to store
-                // });
+
+                //save states from editor to store
+                //json.specifications.states...
+                initZustandsmenge.forEach((value) => {
+                    // delete old store states
+                    dispatch(alphabetDeleteZustand());
+                });
+
+                const states = json.specifications.states;
+               
+                states.forEach((value: string) => {
+                    //push new states to store
+                    dispatch(alphabetPushToIdxZustand(value));
+                });
 
                 // save Anfangszustand from editor to store
                 const newAnfangszustand = new Zustand(
@@ -151,9 +205,29 @@ export default function Tiptap(props: CodeEditorProps) {
                 }
                 dispatch(alphabetChangeEndzustand(temp));
 
-                // @TODO save table to store
+                // save table to store
+                // first step -> delete oldTable
+                dispatch(tableDeleteAll());              
                 // json.table...
-                // console.log(json.table);
+                Object.entries(json.table).forEach(([zustandName, zustandArray]) => {                    
+                    let tempZustandArray = zustandArray as tableZeichen                    
+                    Object.entries(tempZustandArray).forEach(([zeichenName, zeichenArray]) => {
+                        let tempTableRowToAdd: tableRowToAdd = {
+                            zustand: "",
+                            lese: "",
+                            neuerZustand: "",
+                            schreibe: "",
+                            gehe: ""
+                        }
+                        tempTableRowToAdd.zustand = zustandName
+                        tempTableRowToAdd.lese = zeichenName
+                        tempTableRowToAdd.neuerZustand = zeichenArray[0]
+                        tempTableRowToAdd.schreibe = zeichenArray[1]
+                        tempTableRowToAdd.gehe = zeichenArray[2]   
+                        
+                        dispatch(tableAddEditorRow(tempTableRowToAdd))                   
+                    });
+                });
 
                 toggleEditor();
             } catch (e){

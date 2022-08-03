@@ -28,7 +28,7 @@ export default function Row(props: RowProps) {
         })
       );
     } else if (value instanceof Direction) {
-      const tempDirection = new Direction(value.label, value.value);
+      const tempDirection = new Direction(value.value, value.label);
       dispatch(
         tableUpdateCell({
           cellIndex: index,

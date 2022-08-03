@@ -9,6 +9,7 @@ import {
   EingabeAlphabet,
   EingabeAlphabetDialogOptions,
   RowInterface,
+  tableRowToAdd,
   updateCellType,
   Zustand,
 } from "../interfaces/CommonInterfaces";
@@ -103,7 +104,7 @@ export const initialCell: Cell[] = [
 ];
 
 /////////////ToPa//////////////////////
-const initialToiletPaperMode: boolean = true;
+const initialToiletPaperMode: boolean = false;
 
 //// Zustandsmenge
 const initialZustandsmengeTP: Zustand[] = [
@@ -427,7 +428,7 @@ export const generalSlice = createSlice({
      * function alphabetDeleteCustom deletes the customAlphabet
      * @param state
      */
-    alphabetPushToZustand: (state) => {
+    alphabetPushToZustand: (state) => {    
       let tempNumber = state.zustandsmenge.length + 1;
       state.zustandsmenge.push(
         new Zustand("q" + tempNumber, "q" + tempNumber, false, false, false)
@@ -435,7 +436,16 @@ export const generalSlice = createSlice({
 
       if (state.zustandsmenge.length === 1) {
         state.activeState = state.zustandsmenge[0];
-      }
+      }        
+    },
+     alphabetPushToIdxZustand: (state, zustandsName:PayloadAction<string>) => {            
+      state.zustandsmenge.push(
+        new Zustand(zustandsName.payload, zustandsName.payload, false, false, false)
+      );
+
+      if (state.zustandsmenge.length === 1) {
+        state.activeState = state.zustandsmenge[0];
+      }    
     },
     alphabetDeleteZustand: (state) => {
       state.zustandsmenge.pop();
@@ -537,6 +547,66 @@ export const generalSlice = createSlice({
       // update the rows in state with our new rows-array
       state.rows = newRows;
     },
+    tableAddEditorRow: (state, zustandToAdd: PayloadAction<tableRowToAdd>) => {
+      // create flat copy of all existing rows
+      const newRows = state.rows.slice(0, state.rows.length);
+
+      // add new row to existing rows
+
+      let tempAnfangszustand = false
+      let tempEndzustand = false
+
+      let newTempAnfangszustand = false
+      let newTempEndzustand= false
+
+      if(zustandToAdd.payload.zustand === state.anfangsZustand.value){
+        tempAnfangszustand = true
+      }
+      if(zustandToAdd.payload.neuerZustand === state.anfangsZustand.value){
+        newTempAnfangszustand = true
+      }
+      if(state.endZustand.find(element => element.value === zustandToAdd.payload.zustand) !== undefined){
+        tempEndzustand = true
+      }
+      if(state.endZustand.find(element => element.value === zustandToAdd.payload.neuerZustand) !== undefined){
+        newTempEndzustand = true
+      }
+      
+      newRows.push({
+        cells: [
+          {
+            value: new Zustand(
+              zustandToAdd.payload.zustand,
+              zustandToAdd.payload.zustand,
+              tempAnfangszustand,
+              tempEndzustand,
+              false
+            ),
+            editField: false,
+          },
+          { value: zustandToAdd.payload.lese, editField: true },
+          {
+            value: new Zustand(
+              zustandToAdd.payload.neuerZustand,
+              zustandToAdd.payload.neuerZustand,
+              newTempAnfangszustand,
+              newTempEndzustand,
+              false
+            ),
+            editField: false,
+          },
+          { value: zustandToAdd.payload.schreibe, editField: true},
+          {
+            value: new Direction(zustandToAdd.payload.gehe, zustandToAdd.payload.gehe),
+            editField: false,
+          },
+        ],
+        isFinal: tempEndzustand,
+      });
+
+      // update the rows in state with our new rows-array
+      state.rows = newRows;
+    },
     tableDeleteRow: (state, i: PayloadAction<React.Key>) => {
       // create flat copy of all existing rows
       const newRows = state.rows.slice(0, state.rows.length);
@@ -546,6 +616,9 @@ export const generalSlice = createSlice({
 
       // update the rows in state with our new rows-array
       state.rows = newRows;
+    },
+    tableDeleteAll: (state) => {     
+      state.rows = initialRow
     },
     tableUpdateCell: (state, updateCell: PayloadAction<updateCellType>) => {
       const newCells: Cell[] = state.rows[
@@ -661,6 +734,7 @@ export const {
   alphabetPushToDialogOptions,
   alphabetDeleteCustom,
   alphabetPushToZustand,
+  alphabetPushToIdxZustand,
   alphabetChangeAnfangszustand,
   alphabetChangeEndzustand,
   alphabetClearEndzustand,
@@ -671,7 +745,9 @@ export const {
   maschineCheckExecutable,
   alphabetChangeWarningMode,
   tableAddRow,
+  tableAddEditorRow,
   tableDeleteRow,
+  tableDeleteAll,
   tableUpdateCell,
   tableSetActiveRow,
   tableSetWatchedRows,

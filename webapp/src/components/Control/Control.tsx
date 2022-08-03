@@ -166,15 +166,15 @@ function Control() {
       }
       if (item.cells[4].value instanceof Direction) {
         switch (item.cells[4].value.label) {
-          case "Rechts": {
+          case "R": {
             dispatch(bandChangePointPos(1));
             break;
           }
-          case "Links": {
+          case "L": {
             dispatch(bandChangePointPos(-1));
             break;
           }
-          case "Neutral":
+          case "N":
           default: {
             break;
           }
