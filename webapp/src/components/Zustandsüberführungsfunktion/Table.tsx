@@ -51,7 +51,7 @@ export default function Table() {
   //     states = newVal;
   //   })
   // );
-
+  
   return (
     <div className="flex flex-col col-span-2 border rounded p-0 w-screen md:w-auto">
       <div className="sm:-mx-0 lg:-mx-0">
@@ -75,17 +75,17 @@ export default function Table() {
                   ))}
                 </tr>
               </thead>
-              <tbody className="flex flex-col items-center justify-between overflow-y-auto md:max-h-48 xl:max-h-96">
-                {rows.map((value, key: React.Key) => (
-                  // TODO functions still not working
-                  <Row
-                    key={key}
-                    index={key}
-                    cells={value.cells}
-                    isFinal={value.isFinal}
-                    deleteRow={() => dispatch(tableDeleteRow(key))}
-                  />
-                ))}
+              <tbody className="flex flex-col items-center justify-between overflow-y-auto md:max-h-48 xl:max-h-96">                      
+                 {rows.map((value, key: React.Key) => (
+                    // TODO functions still not working                                
+                    <Row
+                      key={key}
+                      index={key}
+                      cells={value.cells}
+                      isFinal={value.isFinal}
+                      deleteRow={() => dispatch(tableDeleteRow(key))}
+                    />                                  
+                  ))}                  
               </tbody>
             </table>
             <button

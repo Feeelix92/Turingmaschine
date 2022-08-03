@@ -88,6 +88,9 @@ export const bandSlice = createSlice({
       }
       state.pointerPosition = 0;
     },
+    bandResetAll: (state) => {
+      state.currentBand = currentBand
+    },
     bandChangeSkin: (state) => {
       if (state.bandSkin === "paper") {
         state.bandSkin = "tech";
@@ -124,6 +127,7 @@ export const {
   bandDeleteItemAt,
   bandAddField,
   bandDeleteAll,
+  bandResetAll,
   bandChangeSkin,
   bandChangePointPos,
   bandSetPointPos,
