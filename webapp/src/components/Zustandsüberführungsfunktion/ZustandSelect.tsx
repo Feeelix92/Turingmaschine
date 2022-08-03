@@ -15,7 +15,7 @@ export default function ZustandSelect(props: ZustandSelectProps) {
   function handleChange(newValue: OnChangeValue<Zustand, false>) {
     let state = newValue as Zustand;
 
-    if (newValue?.label === "erstellen") {
+    if (newValue?.label === "+") {
       state = new Zustand(
         `q${props.states.length}`,
         `q${props.states.length}`,

@@ -67,7 +67,7 @@ const initialDialogOption: EingabeAlphabetDialogOptions = {
   alphabet: defaultAlphabetOption1,
 };
 export const eingabeAlphabetDialogOptions: EingabeAlphabetDialogOptions[] = [
-  { label: "erstellen", alphabet: defaultCustomAlphabet, icon: true },
+  { label: "", alphabet: defaultCustomAlphabet, icon: true },
   { label: "{1}", alphabet: defaultAlphabetOption1 },
   { label: "{1,#}", alphabet: defaultAlphabetOption2 },
   { label: "{0,1}", alphabet: defaultAlphabetOption3 },
@@ -76,8 +76,8 @@ export const eingabeAlphabetDialogOptions: EingabeAlphabetDialogOptions[] = [
 
 ///////////////////// Table /////////////////////
 export const initialZustand3: Zustand = new Zustand(
-  "erstellen",
-  "erstellen",
+  "+",
+  "+",
   false,
   false,
   false
