@@ -15,6 +15,7 @@ export default function Row(props: RowProps) {
   // create flat copy of all existing cells
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(props.isFinal);
+  const tpActive = useSelector((state: RootState) => state.general.toiletPaperMode);
 
   function setCellValue(index: React.Key, value: string | Zustand | Direction) {
     // pass new data to table to update its rows-array
@@ -85,6 +86,7 @@ export default function Row(props: RowProps) {
     (state: RootState) => state.general.toiletPaperMode
   );
 
+  //TODO wie gewünscht?
   return (
     <tr
       className={`border-b flex w-full hover:bg-gray-100 ${
@@ -93,7 +95,8 @@ export default function Row(props: RowProps) {
           : ""
       } ${toiletPaperMode ? "disableTableRow" : ""} `}
     >
-      {visible
+      
+      {visible && tpActive
         ? props.cells
             .slice(0, 2)
             .map((value, key: React.Key) => (
@@ -114,7 +117,7 @@ export default function Row(props: RowProps) {
               updateCellValue={setCellValue}
             />
           ))}
-      {visible ? (
+      {visible && tpActive ? (
         <td className="w-3/6 whitespace-nowrap text-gray-900 border-r items-center flex justify-center">
           STOPP
         </td>

@@ -12,7 +12,7 @@ import {
   tableSetWatchedRows,
 } from "../../redux/generalStore";
 import watch from "redux-watch";
-import { bandChangeItemAt, bandChangePointPos } from "../../redux/bandStore";
+import { bandChangeItemAt, bandChangePointPos, bandResetPointer, bandSetPointPos } from "../../redux/bandStore";
 import { useState } from "react";
 import {
   alphabetChangePauseMaschine,
@@ -91,8 +91,11 @@ function Control() {
   const changePause = (value: boolean) => {
     dispatch(alphabetChangePauseMaschine(value));
   };
+
+  const [oldPointerPos, setOldPointerPos] = useState(0);
   const changeStopp = (value: boolean) => {
     dispatch(alphabetChangeStoppMaschine(value));
+    dispatch(bandSetPointPos(oldPointerPos))
   };
 
   const initialZustand = useSelector(
@@ -162,7 +165,7 @@ function Control() {
     dispatch(tableSetWatchedRows(rows));
   };
 
-  const makeStep = async (idx: number) => {
+  const makeStep = async (idx: number) => {   
     // get the row, which matches with the symbol we read on band
     const item = selectedRows.find((elem) => {
       return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
@@ -225,11 +228,16 @@ function Control() {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
 
+  console.log("executable",executable)
+  console.log("maschineRunning",maschineRunning)
+  console.log("bandWarning",bandWarning)
+
   const onPlay = async () => {
     setMaschineRunning(true);
     setSelectedRows();
     dispatch(alphabetChangeStoppMaschine(false));
     changePause(false);
+    setOldPointerPos(activePointerPosition);
 
     //ToDo: Schleife hört nicht auf Änderungen von außerhalb...
     //...localCopyPause = true vom Pause Button wird nicht beachtet??
@@ -283,6 +291,7 @@ function Control() {
               animateButton(e.target);
             }}
             onMouseLeave={animateBack}
+            disabled={!executable || maschineRunning || bandWarning}
           >
             <FaPlay />
           </button>
