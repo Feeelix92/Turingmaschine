@@ -25,7 +25,7 @@
     }
 
     button {
-        @apply bg-thm-primary text-white font-bold px-3 rounded text-center h-10 hover:bg-thm-hover;
+        @apply bg-thm-primary text-white font-bold px-3 rounded text-center h-12 hover:bg-thm-hover;
     }
 
     Select{
@@ -190,12 +190,15 @@
 .editBtn.delete{
     @apply flex items-center
 }
+.brickEditBtnDiv{
+    @apply flex gap-2 justify-center mt-2;
+}
 
 .brickEditBtn {
-    @apply rounded-none w-8 h-12 sm:w-16 sm:h-20 bg-gray-300 hover:bg-gray-100;
+    @apply rounded-none w-12 h-16 sm:w-16 sm:h-20 rounded bg-thm-primary hover:bg-thm-hover;
 }
 .brickDeleteBtn {
-    @apply rounded-none w-8 h-12 sm:w-16 sm:h-20 items-center bg-gray-300 hover:bg-gray-100;
+    @apply w-12 h-16 sm:w-16 sm:h-20 rounded bg-thm-primary hover:bg-thm-hover px-4 sm:px-6;
 }
 
 .brick {
@@ -234,7 +237,7 @@ button.disableTableRow{
 }
 
 .teepeeBandItem {
-    @apply inline-block w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] border-2 border-dashed border-r-0 border-l-2 -translate-y-[15%] sm:translate-y-[15%]
+    @apply bg-white inline-block w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] border-2 border-dashed border-r-0 border-l-2 -translate-y-[15%] sm:translate-y-[15%]
 }
 .teepeeHead {
     @apply w-[50px] h-[25px] sm:w-[100px] sm:h-[50px] round translate-y-[50%] bg-gradient-to-r from-white to-gray-100 border-t-2;
@@ -273,3 +276,59 @@ button.disableTableRow{
 .round {
     border-radius: 50%;
 }
+
+/* Dice */
+
+.dice{
+    @apply h-[50px] w-[50px] bg-white p-2 border border-gray-400 ml-auto mr-auto rounded-md mt-5;
+}
+
+.dot-container {
+    @apply grid grid-cols-3 grid-rows-3 w-full h-full justify-items-center items-center;
+}
+
+.dot {
+    @apply bg-black round w-[10px] h-[10px];
+}
+.dot1{
+    @apply col-start-1 invisible;
+}
+.dot2{
+    @apply col-start-3 invisible;
+}
+.dot3{
+    @apply col-start-1 invisible;
+}
+.dot4{
+    @apply col-start-2 invisible;
+}
+.dot5 {
+    @apply col-start-3 invisible;
+}
+.dot6{
+    @apply col-start-1 invisible;
+}
+.dot7{
+    @apply col-start-3 invisible;
+}
+.face .dot {
+    @apply animate-fade
+}
+.face1 .dot4 {
+    @apply visible;
+}
+.face2 .dot1, .face2 .dot7 {
+    @apply visible;
+}
+.face3 .dot1, .face3 .dot4, .face3 .dot7 {
+    @apply visible;
+}
+.face4 .dot1, .face4 .dot2, .face4 .dot6, .face4 .dot7 {
+    @apply visible ;
+}
+.face5 .dot1, .face5 .dot2, .face5 .dot4, .face5 .dot6, .face5 .dot7 {
+     @apply visible;
+ }
+.face6 .dot1, .face6 .dot2, .face6 .dot3, .face6 .dot5, .face6 .dot6, .face6 .dot7 {
+      @apply visible;
+  }
