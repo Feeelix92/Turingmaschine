@@ -280,7 +280,7 @@ button.disableTableRow{
 /* Dice */
 
 .dice{
-    @apply h-[50px] w-[50px] bg-white p-2 border border-gray-400 ml-auto mr-auto rounded-md;
+    @apply h-[50px] w-[50px] bg-white p-2 border border-gray-400 ml-auto mr-auto rounded-md mt-5;
 }
 
 .dot-container {
