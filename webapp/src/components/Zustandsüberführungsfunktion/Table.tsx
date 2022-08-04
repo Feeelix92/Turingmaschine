@@ -53,8 +53,8 @@ export default function Table() {
   // );
 
   return (
-    <div className="flex flex-col col-span-2 border rounded p-2 w-screen md:w-auto">
-      <div className="sm:-mx-6 lg:-mx-8">
+    <div className="flex flex-col col-span-2 border rounded p-0 w-screen md:w-auto">
+      <div className="sm:-mx-0 lg:-mx-0">
         <div className=" sm:px-6 lg:px-8">
           <div className="overflow-x-auto items-center">
             <div className="flex w-full text-left text-sm font-medium text-gray-900">

@@ -1,4 +1,4 @@
-import { FaPlay, FaPause, FaStop, FaStepForward } from "react-icons/fa";
+import { FaPlay, FaPause, FaStop, FaStepForward, FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Direction,
@@ -55,7 +55,22 @@ function Control() {
     })
   );
 
-  const [slider, setSlider] = useState(1);
+  const [slider, setSlider] = useState(4);
+
+  const increaseSlider = () => {
+    let val = slider;
+    if(val < 10) {
+      setSlider(++val);
+    }
+  }
+  const decreaseSlider = () => {
+    let val = slider;
+    if(val > 1) {
+      setSlider(--val);
+    }
+  }
+
+
   const animateButton = (el) => {
     anime({
       targets: el,
@@ -155,6 +170,10 @@ function Control() {
       return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
     });
 
+    if(item?.isFinal == true) {
+      endConfetti();
+    }
+
     if (
       item !== undefined &&
       typeof item.cells[3].value === "string" &&
@@ -223,7 +242,6 @@ function Control() {
       await sleep(tempSlider);
       makeStep(activePointerPosition);
     }
-    endConfetti();
     
     dispatch(tableSetActiveRow(undefined));
     dispatch(tableSetActiveState(initialZustand));
@@ -240,27 +258,28 @@ function Control() {
 
   return (
     <div className={"control w-screen"}>
-      <div className={"p-4 justify-center"}>
-        <div className={"m-2 text-black"}>
-          <label htmlFor="velSlider" className="form-label text-black">
-            Geschwindigkeit
+      <div className={"p-0 justify-center"}>
+
+        <div className={""}>
+
+          <label htmlFor="velSlider" className="form-label text-white pr-0 md:pr-1 xl:pr-1 pl-2 md:pl-4 xl:pl-5 hidden md:inline-block ">
+              Geschwindigkeit
           </label>
           <input
             id="velSlider"
             className={
-              "w-5/6 sm:w-1/3 h-2 bg-gray-500 rounded-lg appearance-none cursor-pointer"
+              "xl:w-3/12 md:w-1/5 h-2 mr-4 xl:mr-8 bg-gray-500 rounded-lg appearance-none cursor-pointer  hidden md:inline-block"
             }
             type="range"
-            min={0}
+            min={1}
             max={10}
             value={slider}
             onChange={(e) => setSlider(e.target.valueAsNumber)}
             step={1}
           />
-        </div>
-        <div className={""}>
+          
           <button
-            className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
+            className={"invertedButton py-1 px-2 m-2 ml-3 mr-1 disabled:opacity-50"}
             onClick={onPlay}
             onMouseEnter={(e) => {
               animateButton(e.target);
@@ -270,7 +289,7 @@ function Control() {
             <FaPlay />
           </button>
           <button
-            className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
+            className={"invertedButton py-1 px-2 m-2 mx-1 disabled:opacity-50"}
             onClick={stepByStep}
             onMouseEnter={(e) => {
               animateButton(e.target);
@@ -281,7 +300,7 @@ function Control() {
             <FaStepForward />
           </button>
           <button
-            className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
+            className={"invertedButton py-1 px-2 m-2 mx-1 disabled:opacity-50"}
             onClick={() => {
               pauseMaschine ? changePause(false) : changePause(true);
             }}
@@ -294,7 +313,7 @@ function Control() {
             <FaPause />
           </button>
           <button
-            className={"invertedButton py-1 px-2 m-2 disabled:opacity-50"}
+            className={"invertedButton py-1 px-2 m-2 mx-1 disabled:opacity-50"}
             onClick={() => changeStopp(true)}
             onMouseEnter={(e) => {
               animateButton(e.target);
@@ -304,6 +323,18 @@ function Control() {
           >
             <FaStop />
           </button>
+
+          {/* Geschwindigkeit im mobile  */}
+          <div className={"inline-block md:hidden px-0 bg-white text-thm-primary rounded ml-2 "}>
+            <button className={"inline-block bg-white text-thm-primary pl-2 pr-1.5"} onClick={decreaseSlider}>
+              <FaAngleDoubleLeft/>
+              </button>
+            {slider}
+            <button className={"inline-block bg-white text-thm-primary pl-1.5 pr-2"} onClick={increaseSlider}>
+              <FaAngleDoubleRight/>
+              </button>
+          </div>
+          
         </div>
       </div>
     </div>

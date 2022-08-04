@@ -18,12 +18,12 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Menu />
-        <Control />
+        {/* <Control /> */}
         {!toiletPaperMode && <Band />}
         {toiletPaperMode && <TeepeeBand />}
       </header>
       <div className={"App-body"}>
-        <div className={" hidden md:grid md:grid-cols-4 md:items-start"}>
+        <div className={" hidden md:grid md:grid-cols-4 md:items-start px-2"}>
           {!toiletPaperMode && <ConditionsList />}
           {!toiletPaperMode && <Table />}
           {toiletPaperMode && <ToPaTable />}

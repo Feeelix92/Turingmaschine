@@ -125,7 +125,7 @@ export default function Row(props: RowProps) {
           className="w-full min-w-full text-gray-700 focus:outline-none"
           onClick={() => dispatch(tableDeleteRow(props.index))}
         >
-          <div className={"p-7"}>
+          <div className={"p-7 px-1 xl:px-7"}>
             <button className={"invertedButton"}>
               <FaTrash />
             </button>

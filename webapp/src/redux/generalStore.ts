@@ -48,15 +48,15 @@ const defaultAlphabetOption2: Alphabet = {
 const defaultAlphabetOption3: Alphabet = {
   key: 3,
   alphabet: [
-    { label: "1", value: "1", warningMode: false },
     { label: "0", value: "0", warningMode: false },
+    { label: "1", value: "1", warningMode: false },
   ],
 };
 export const defaultAlphabetOption4: Alphabet = {
   key: 4,
   alphabet: [
-    { label: "1", value: "1", warningMode: false },
     { label: "0", value: "0", warningMode: false },
+    { label: "1", value: "1", warningMode: false },
     { label: "#", value: "#", warningMode: false },
   ],
 };
@@ -67,7 +67,7 @@ const initialDialogOption: EingabeAlphabetDialogOptions = {
   alphabet: defaultAlphabetOption1,
 };
 export const eingabeAlphabetDialogOptions: EingabeAlphabetDialogOptions[] = [
-  { label: "erstellen", alphabet: defaultCustomAlphabet, icon: true },
+  { label: "", alphabet: defaultCustomAlphabet, icon: true },
   { label: "{1}", alphabet: defaultAlphabetOption1 },
   { label: "{1,#}", alphabet: defaultAlphabetOption2 },
   { label: "{0,1}", alphabet: defaultAlphabetOption3 },
@@ -76,8 +76,8 @@ export const eingabeAlphabetDialogOptions: EingabeAlphabetDialogOptions[] = [
 
 ///////////////////// Table /////////////////////
 export const initialZustand3: Zustand = new Zustand(
-  "erstellen",
-  "erstellen",
+  "+",
+  "+",
   false,
   false,
   false

@@ -44,7 +44,7 @@
 }
 
 .App {
-    @apply text-center w-auto sm:pr-10 sm:pl-10 sm:pb-10 content-center;
+    @apply text-center w-auto sm:pr-0 sm:pl-0 sm:pb-10 content-center;
 }
 
 .App-logo {
@@ -64,7 +64,7 @@
 
 /* ********** MENU ********** */
 .menu {
-    @apply bg-thm-primary text-left;
+    @apply bg-thm-primary text-left h-16 pl-0;
 }
 
 .bottomnav {
@@ -168,7 +168,7 @@
 }
 
 .currentZustand{
-    @apply min-w-fit max-w-full h-10 text-slate-900
+    @apply min-w-fit max-w-full h-1 text-slate-900
 }
 
 /* ********** BAND ITEM ********** */
@@ -180,7 +180,7 @@
 /* ********** TABLE ********** */
 
 .editBtnDiv {
-    @apply flex gap-2 justify-center mt-2;
+    @apply flex gap-2 justify-center mt-1;
 }
 
 .editBtn {

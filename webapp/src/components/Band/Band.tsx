@@ -82,21 +82,13 @@ export default function Band() {
     dispatch(bandChangePointPos(1));
   };
 
-  const handleClick = (e) => {
-    party.confetti(e.target, {
-      count: party.variation.range(20, 40),
-      size: party.variation.range(0.8, 1),
-      spread: party.variation.range(10, 14),
-      shapes: ["star", "roundedSquare"],
-    });
-  };
 
   return (
     <div className={"w-screen"}>
-      <div className={"flex m-2 h-36"}>
+      <div className={"flex m-2 h-32"}>
         <button
           className={"mt-10 rounded-r-none md:rounded md:invisible"}
-          onClick={() => dispatch(bandAddField("before"))}
+          onClick={() => dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))}
         >
           +
         </button>
@@ -130,20 +122,18 @@ export default function Band() {
           />
         </div>
       ) : null}
+
+
       <div
         className={
-          "currentZustand flex flex-col content-center items-center justify-center mb-8"
+          "currentZustand flex-col content-center items-center justify-center mb-8 flex md:hidden"
         }
       >
         {/* <span className="relative">
                 <span className="block absolute -inset-1 w-12 rounded-full bg-thm-primary" aria-hidden="true"></span>
             </span>                */}
-        <span className="relative text-white text-center">
-          {" "}
-          {currentZustand.value}
-        </span>
         {currentZustand ? (
-          <div className={"rounded-full w-12 bg-thm-primary text-white h-8"}>
+          <div className={"rounded-full w-12 bg-thm-primary text-white h-8 mt-3"}>
             {currentZustand.value}
           </div>
         ) : (
@@ -152,22 +142,23 @@ export default function Band() {
           </div>
         )}
       </div>
+
+
       <div className={"hidden md:block"}>
         <div className={"flex justify-center gap-2"}>
           <button
             className={"w-36 invertedButton"}
-            onClick={() => dispatch(bandAddField("before"))}
+            onClick={() => dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))}
           >
             + Feld links
           </button>
           <button
             onClick={(e) => {
               dispatch(bandDeleteAll());
-              handleClick(e);
             }}
             className={"w-36 invertedButton"}
           >
-            zurücksetzen
+            leeren
           </button>
           <button
             className={"w-36 invertedButton"}
@@ -177,16 +168,16 @@ export default function Band() {
           </button>
         </div>
       </div>
-      <div className="flex">
+      <div className="flex md:pb-10">
         <div className={"w-3/4 text-left"}>
           <button
-            className={"m-2 md:invisible secondaryButton"}
+            className={"m-2 md:hidden secondaryButton"}
             onClick={() => setPointerLeft()}
           >
             <FaAngleLeft />
           </button>
           <button
-            className={"md:invisible secondaryButton"}
+            className={"md:hidden secondaryButton"}
             onClick={() => setPointerRight()}
           >
             <FaAngleRight />
