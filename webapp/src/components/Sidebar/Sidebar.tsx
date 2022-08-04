@@ -1,14 +1,19 @@
-import React, {useState} from "react";
-import {slide as Menu} from "react-burger-menu"
-import {useDispatch, useSelector} from "react-redux";
+import React, { useState } from "react";
+import { slide as Menu } from "react-burger-menu";
+import { useDispatch, useSelector } from "react-redux";
 import { bandChangeSkin } from "../../redux/bandStore";
-import {alphabetDeleteZustand, changeToiletPaperMode} from "../../redux/generalStore";
-import {RootState} from "../../redux/store";
-
+import {
+  alphabetDeleteZustand,
+  changeToiletPaperMode,
+} from "../../redux/generalStore";
+import { RootState } from "../../redux/store";
+import Tiptap from "../codeEditor/CodeEditor";
 
 function Sidebar() {
-    const dispatch = useDispatch()
-    const toiletPaperMode = useSelector((state: RootState) => state.general.toiletPaperMode)
+  const dispatch = useDispatch();
+  const toiletPaperMode = useSelector(
+    (state: RootState) => state.general.toiletPaperMode
+  );
 
     return (
         <Menu right>

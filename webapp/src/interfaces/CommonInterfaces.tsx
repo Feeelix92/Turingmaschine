@@ -40,12 +40,12 @@ export class Zustand {
 }
 
 export class Direction {
-  label: string;
   value: string;
+  label: string;
 
-  constructor(label: string, value: string) {
-    this.label = label;
+  constructor(value: string, label: string) {
     this.value = value;
+    this.label = label;
   }
 }
 
@@ -54,6 +54,14 @@ export interface RowProps {
   cells: Cell[];
   isFinal: boolean;
   deleteRow: () => void;
+}
+
+export interface tableRowToAdd {
+  zustand: string,
+  lese: string,
+  neuerZustand: string,
+  schreibe: string,
+  gehe: string
 }
 
 export interface CellProps {
@@ -96,9 +104,9 @@ export interface EingabeAlphabetCustomProp {
 }
 
 export const directions: Direction[] = [
-  new Direction("R", "Rechts"),
-  new Direction("L", "Links"),
-  new Direction("N", "Neutral"),
+  new Direction("R", "R"),
+  new Direction("L", "L"),
+  new Direction("N", "N"),
 ];
 
 export interface ZustandSelectProps {
@@ -138,4 +146,8 @@ export interface updateCellType {
   cellIndex: React.Key;
   rowIndex: React.Key;
   value: string | boolean | Zustand | Direction;
+}
+
+export interface CodeEditorProps {
+  toggleEditor: () => void;
 }
