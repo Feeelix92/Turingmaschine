@@ -12,7 +12,7 @@ import {
   tableSetWatchedRows,
 } from "../../redux/generalStore";
 import watch from "redux-watch";
-import { bandChangeItemAt, bandChangePointPos } from "../../redux/bandStore";
+import { bandChangeItemAt, bandChangePointPos, bandResetPointer, bandSetPointPos } from "../../redux/bandStore";
 import { useState } from "react";
 import {
   alphabetChangePauseMaschine,
@@ -37,7 +37,7 @@ function Control() {
     });
   };
 
-  let pauseMaschine: Boolean = false;
+  let pauseMaschine: boolean = false;
   let wPauseMaschine = watch(store.getState, "general.pauseMaschine");
   store.subscribe(
     wPauseMaschine((newVal) => {
@@ -46,7 +46,7 @@ function Control() {
     })
   );
 
-  let stoppMaschine: Boolean = false;
+  let stoppMaschine: boolean = false;
   let wStoppMaschine = watch(store.getState, "general.stoppMaschine");
   store.subscribe(
     wStoppMaschine((newVal) => {
@@ -70,7 +70,6 @@ function Control() {
     }
   }
 
-
   const animateButton = (el) => {
     anime({
       targets: el,
@@ -93,8 +92,11 @@ function Control() {
   const changePause = (value: boolean) => {
     dispatch(alphabetChangePauseMaschine(value));
   };
+
+  const [oldPointerPos, setOldPointerPos] = useState(0);
   const changeStopp = (value: boolean) => {
     dispatch(alphabetChangeStoppMaschine(value));
+    dispatch(bandSetPointPos(oldPointerPos))
   };
 
   const initialZustand = useSelector(
@@ -164,20 +166,21 @@ function Control() {
     dispatch(tableSetWatchedRows(rows));
   };
 
-  const makeStep = async (idx: number) => {
+  const makeStep = async (idx: number) => {   
     // get the row, which matches with the symbol we read on band
     const item = selectedRows.find((elem) => {
       return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
     });
-
-    if(item?.isFinal == true) {
+    let tempFirstZustandVar = item?.cells[0].value as Zustand
+    let tempLastZustandVar = item?.cells[2].value as Zustand
+    if(tempLastZustandVar.endzustand == true) {
       endConfetti();
     }
 
     if (
       item !== undefined &&
       typeof item.cells[3].value === "string" &&
-      item.isFinal === false
+      tempLastZustandVar.endzustand === false
     ) {
       store.dispatch(tableSetActiveRow(item));
       if (
@@ -210,7 +213,7 @@ function Control() {
       }
       if (item.cells[0].value instanceof Zustand) {
         if (item.cells[0].value != item.cells[2].value) {
-          if (item.cells[0].value.endzustand === true) {
+          if (tempLastZustandVar.endzustand !== false) {
             changePause(true);
           } else {
             dispatch(tableSetActiveState(item.cells[2].value as Zustand));
@@ -227,11 +230,16 @@ function Control() {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
 
+  console.log("executable",executable)
+  console.log("maschineRunning",maschineRunning)
+  console.log("bandWarning",bandWarning)
+
   const onPlay = async () => {
     setMaschineRunning(true);
     setSelectedRows();
     dispatch(alphabetChangeStoppMaschine(false));
     changePause(false);
+    setOldPointerPos(activePointerPosition);
 
     //ToDo: Schleife hört nicht auf Änderungen von außerhalb...
     //...localCopyPause = true vom Pause Button wird nicht beachtet??
@@ -285,6 +293,7 @@ function Control() {
               animateButton(e.target);
             }}
             onMouseLeave={animateBack}
+            disabled={!executable || maschineRunning || bandWarning}
           >
             <FaPlay />
           </button>
@@ -319,7 +328,7 @@ function Control() {
               animateButton(e.target);
             }}
             onMouseLeave={animateBack}
-            disabled={!executable || !maschineRunning || bandWarning}
+            disabled={!executable || bandWarning || pauseMaschine}
           >
             <FaStop />
           </button>

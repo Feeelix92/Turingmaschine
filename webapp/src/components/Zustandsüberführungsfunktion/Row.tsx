@@ -85,53 +85,62 @@ export default function Row(props: RowProps) {
     (state: RootState) => state.general.toiletPaperMode
   );
 
-  return (
-    <tr
-      className={`border-b flex w-full hover:bg-gray-100 ${
-        activeRow != undefined && activeRow.cells === props.cells
-          ? "bg-lime-300"
-          : ""
-      } ${toiletPaperMode ? "disableTableRow" : ""} `}
-    >
-      {visible
-        ? props.cells
-            .slice(0, 2)
-            .map((value, key: React.Key) => (
-              <Cell
-                key={key}
-                value={value.value}
-                index={key}
-                showEditField={value.editField}
-                updateCellValue={setCellValue}
-              />
-            ))
-        : props.cells.map((value, key: React.Key) => (
-            <Cell
-              key={key}
-              value={value.value}
-              index={key}
-              showEditField={value.editField}
-              updateCellValue={setCellValue}
-            />
-          ))}
-      {visible ? (
-        <td className="w-3/6 whitespace-nowrap text-gray-900 border-r items-center flex justify-center">
-          STOPP
-        </td>
-      ) : null}
-      <td className="w-1/6 text-gray-900 items-center ">
-        <a
-          href="#"
-          className="w-full min-w-full text-gray-700 focus:outline-none"
-          onClick={() => dispatch(tableDeleteRow(props.index))}
+  const tpActive = useSelector((state: RootState) => state.general.toiletPaperMode);
+
+  //TODO wie gewünscht?
+  return (   
+    <div>
+     {(tpActive || !visible) ?(
+       <tr
+          className={`border-b flex w-full hover:bg-gray-100 ${
+            activeRow != undefined && activeRow.cells === props.cells
+              ? "bg-lime-300"
+              : ""
+          } ${toiletPaperMode ? "disableTableRow" : ""} `}
         >
-          <div className={"p-7 px-1 xl:px-7"}>
-            <button className={"invertedButton"}>
-              <FaTrash />
-            </button>
-          </div>
-        </a>
-      </td>
-    </tr>
+          {visible
+            ? props.cells
+                .slice(0, 2)
+                .map((value, key: React.Key) => (
+                  <Cell
+                    key={key}
+                    value={value.value}
+                    index={key}
+                    showEditField={value.editField}
+                    updateCellValue={setCellValue}
+                  />
+                ))
+            : props.cells.map((value, key: React.Key) => (
+                <Cell
+                  key={key}
+                  value={value.value}
+                  index={key}
+                  showEditField={value.editField}
+                  updateCellValue={setCellValue}
+                />
+              ))}
+          {visible ? (
+            <td className="w-3/6 whitespace-nowrap text-gray-900 border-r items-center flex justify-center">
+              STOPP
+            </td>
+          ) : null}
+          <td className="w-1/6 text-gray-900 items-center ">
+            <a
+              href="#"
+              className="w-full min-w-full text-gray-700 focus:outline-none"
+              onClick={() => dispatch(tableDeleteRow(props.index))}
+            >
+              <div className={"p-7 px-1 xl:px-7"}>
+                <button className={"invertedButton"}>
+                  <FaTrash />
+                </button>
+              </div>
+            </a>
+          </td>
+        </tr>
+     ): 
+     null
+    }   
+    </div>
   );
 }
