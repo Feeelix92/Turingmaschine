@@ -19,6 +19,12 @@ function Sidebar() {
         dispatch(changeToiletPaperMode())
         dispatch(bandResetAll())
     }
+    const [showModal, setShowModal] = useState(false);
+
+    function toggleModal() {
+        console.log("toggle");
+        setShowModal(!showModal);
+    }
 
     return (
         <Menu right>
@@ -29,12 +35,13 @@ function Sidebar() {
             </div>
             <div className={""}>
                 <a className={"menu-item text-white text-lg no-underline"}>
-                    Skin ändern
+                    <button className={"w-50"} onClick={() => changeTpMode()}>Toilettenpapiermodus { toiletPaperMode ? 'aus' : 'an'}</button>
                 </a>
             </div>
             <div className={""}>
                 <a className={"menu-item text-white text-lg no-underline"}>
-                    <button className={"w-50"} onClick={() => changeTpMode()}>Toilettenpapiermodus { toiletPaperMode ? 'aus' : 'an'}</button>
+                    <button onClick={toggleModal}>Show Code-Editor</button>
+                    {showModal ? <Tiptap toggleEditor={toggleModal} /> : null}
                 </a>
             </div>
         </Menu>

@@ -1,4 +1,3 @@
-// src/Tiptap.jsx
 import "./styles.css";
 import {useEditor, EditorContent, Editor} from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -44,20 +43,20 @@ export default function Tiptap(props: CodeEditorProps) {
     );
     // @TODO convert and insert current Table
     const [tempEditorText, setTempEditorText] = useState(`
-         {
-           "band":{
-              "input":[`+convertCurrentBand()+`]
-           },
-           "specifications":{
-              "alphabet":[`+convertCurrentAlphabet()+`],
-              "states":[`+convertZustandsmenge()+`],
-              "startState":[`+convertAnfangsZustand()+`],
-              "endState":[`+convertEndZustand()+`]
-           },
-           "table":{             
-              `+convertCurrentTable()+`
-           }
-         }`,
+{
+    "band":{
+      "input":[`+convertCurrentBand()+`]
+    },
+    "specifications":{
+      "alphabet":[`+convertCurrentAlphabet()+`],
+      "states":[`+convertZustandsmenge()+`],
+      "startState":[`+convertAnfangsZustand()+`],
+      "endState":[`+convertEndZustand()+`]
+    },
+    "table":{             
+      `+convertCurrentTable()+`
+    }
+}`,
     );
 
     // following functions are used to convert stored Data, to use in Editor
@@ -239,7 +238,9 @@ export default function Tiptap(props: CodeEditorProps) {
     }
     // Editor 
     const editor = useEditor({
-        extensions: [StarterKit],
+        extensions: [
+            StarterKit
+        ],
         content: `<pre><code className={"language-json"}>
          ${tempEditorText}
       </code></pre>`,
@@ -254,7 +255,6 @@ export default function Tiptap(props: CodeEditorProps) {
     });
 
     return (
-
         <div>
             <div id="defaultModal"
                  className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex"
