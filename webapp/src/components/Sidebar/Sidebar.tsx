@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   alphabetDeleteZustand,
   changeToiletPaperMode,
+  changeMespumaMode
 } from "../../redux/generalStore";
 import { RootState } from "../../redux/store";
 import Tiptap from "../codeEditor/CodeEditor";
@@ -15,8 +16,17 @@ function Sidebar() {
     (state: RootState) => state.general.toiletPaperMode
   );
 
+  const mespumaMode = useSelector(
+    (state: RootState) => state.general.mespumaMode
+  );
+
     const changeTpMode = () => {
         dispatch(changeToiletPaperMode())
+        dispatch(bandResetAll())
+    }
+
+    const changeMSMMode = () => {
+        dispatch(changeMespumaMode())
         dispatch(bandResetAll())
     }
 
@@ -32,9 +42,16 @@ function Sidebar() {
                     Skin ändern
                 </a>
             </div>
+
             <div className={""}>
                 <a className={"menu-item text-white text-lg no-underline"}>
                     <button className={"w-50"} onClick={() => changeTpMode()}>Toilettenpapiermodus { toiletPaperMode ? 'aus' : 'an'}</button>
+                </a>
+            </div>
+
+            <div className={""}>
+                <a className={"menu-item text-white text-lg no-underline"}>
+                    <button className={"w-50"} onClick={() => changeMSMMode()}>Mehrspurenmaschine { mespumaMode ? 'aus' : 'an'}</button>
                 </a>
             </div>
         </Menu>

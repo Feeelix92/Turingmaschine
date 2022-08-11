@@ -106,6 +106,9 @@ export const initialCell: Cell[] = [
 /////////////ToPa//////////////////////
 const initialToiletPaperMode: boolean = false;
 
+///////////// Mehrspurenmaschinen //////////////////////
+const initialMespumaMode: boolean = false;
+
 //// Zustandsmenge
 const initialZustandsmengeTP: Zustand[] = [
   new Zustand("1", "q1", true, false, false),
@@ -371,6 +374,7 @@ export const generalSlice = createSlice({
     activeState: activeState,
     //// Toilettenpapier ////
     toiletPaperMode: initialToiletPaperMode,
+    mespumaMode: initialMespumaMode,
   },
   reducers: {
     ///////////////////// Alphabet /////////////////////
@@ -725,6 +729,31 @@ export const generalSlice = createSlice({
         state.bandAlphabet = initialTeepeeBandAlphabet;
       }
     },
+
+
+        /**
+     * This function switches from or to the Mespuma views
+     * @param state
+     */
+         changeMespumaMode: (state) => {
+          state.mespumaMode = !state.mespumaMode;
+          if (!state.mespumaMode) {
+            state.rows = initialRow;
+            state.zustandsmenge = initialZustandsmenge;
+            state.anfangsZustand = initialAnfangszustand;
+            state.endZustand = initialEndZustandsmenge;
+            state.currentAlphabet = defaultAlphabetOption1;
+            state.bandAlphabet = initialBandAlphabet;
+          } else {
+            // TODO: else für Mespuma befüllen:
+            state.rows = initialRow;
+            state.zustandsmenge = initialZustandsmenge;
+            state.anfangsZustand = initialAnfangszustand;
+            state.endZustand = initialEndZustandsmenge;
+            state.currentAlphabet = defaultAlphabetOption1;
+            state.bandAlphabet = initialBandAlphabet;
+          }
+        },
   },
 });
 
@@ -754,6 +783,7 @@ export const {
   tableSetWatchedRows,
   tableSetActiveState,
   changeToiletPaperMode,
+  changeMespumaMode,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;
