@@ -112,6 +112,11 @@ const initialToiletPaperMode: boolean = false;
 ///////////// Mehrspurenmaschinen //////////////////////
 const initialMespumaMode: boolean = false;
 
+// Anzahl Spuren:
+const initialSpurenmenge: Zustand[] = [
+  new Zustand("2", "2", true, false, false),
+];
+
 //// Zustandsmenge
 const initialZustandsmengeTP: Zustand[] = [
   new Zustand("1", "q1", true, false, false),
@@ -380,6 +385,7 @@ export const generalSlice = createSlice({
     //// Toilettenpapier ////
     toiletPaperMode: initialToiletPaperMode,
     //// Mehrspurenmaschine ////
+    spurenmenge: initialSpurenmenge,
   },
   reducers: {
     ///////////////////// Alphabet /////////////////////

@@ -44,6 +44,12 @@ function ConditionsList() {
     (state: RootState) => state.general.zustandsmenge
   );
 
+  
+  // TODO: Spuren-Anzahl:
+  const spurenMenge = useSelector(
+    (state: RootState) => state.general.spurenmenge
+  );
+
   let zustandsmenge: Zustand[] = initZustandsmenge;
   let wZustandsmenge = watch(store.getState, "general.zustandsmenge");
   store.subscribe(
@@ -89,6 +95,7 @@ function ConditionsList() {
     ),
   };
   const { title, openAccordion, closeAccordion } = accordionData;
+
 
   function handleChange(newValue: OnChangeValue<Zustand, false>) {
     if (newValue) {
@@ -235,7 +242,7 @@ function ConditionsList() {
   return (
     <div
       className={
-        "border-solid border rounded bg-white w-screen sm:w-3/4 lg:w-3/4 3xl:w-2/4 p-2 border rounded items-center hover:bg-gray-100 col-span-2 max-w-screen-sm"
+        "border-solid border rounded bg-white w-screen sm:w-3/4 lg:w-3/4 3xl:w-2/4 p-2 items-center hover:bg-gray-100 col-span-2 max-w-screen-sm"
       }
     >
       <div className={""} onClick={() => setIsActive(!isActive)}>
@@ -248,6 +255,29 @@ function ConditionsList() {
       </div>
       {isActive && (
         <div className={""}>
+
+        {/* TODO: Auswahl für Anzahl Spuren: */}
+        <div
+            className={
+              "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
+            }
+          >
+            <div className={"flex col-span-2 justify-between"}>
+              <div>
+                Anzahl Spuren = 
+              </div>
+            </div>
+
+            <div className="flex col-span-2">
+              <Select
+                blurInputOnSelect={false}
+                className={"col-span-2"}
+                options={spurenMenge}
+              />
+            </div>
+          </div>
+
+
           <div>
             <DropDownSelect />
           </div>
