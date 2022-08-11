@@ -10,8 +10,8 @@ function Menu() {
         (state: RootState) => state.general.activeState
       );
 
-      const toiletPaperMode = useSelector(
-        (state: RootState) => state.general.toiletPaperMode
+      const mode = useSelector(
+        (state: RootState) => state.general.mode
       );
       
     return (
@@ -23,13 +23,13 @@ function Menu() {
             <Control />
 
             <div className={"currentZustand flex-col content-center items-center justify-center mb-8 hidden md:flex pr-0" } >
-                { !toiletPaperMode && currentZustand ? (
+                { mode != "toiletpaper" && currentZustand ? (
                 <div className={"rounded-full w-32 bg-white text-thm-primary h-8 pl-5 mt-14 ml-0 mr-8 xl:mr-32"}>
                     Zustand: {currentZustand.value}
                 </div>
                 ) : ("")}
 
-                { !toiletPaperMode && !currentZustand ? (
+                { mode != "toiletpaper" && !currentZustand ? (
                 <div className={"rounded-full bg-white text-thm-primary h-8"}>
                     Kein Zustand vorhanden!
                 </div>

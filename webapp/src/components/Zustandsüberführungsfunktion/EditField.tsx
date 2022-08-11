@@ -10,8 +10,9 @@ import BrickBlack from "../../assets/images/brick_black.svg";
 import BrickWhite from "../../assets/images/brick_white.svg";
 
 export default function EditField(props: EditProps) {
-  const toiletPaperMode = useSelector(
-    (state: RootState) => state.general.toiletPaperMode
+
+  const mode = useSelector(
+    (state: RootState) => state.general.mode
   );
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function EditField(props: EditProps) {
 
   return (
     <div className="flex gap-2 z-10" role="group">
-      {!toiletPaperMode &&
+      {mode == "default" &&
         props.options.map((value: EingabeAlphabetOption, key: React.Key) => (
           <button
             key={key}
@@ -39,7 +40,7 @@ export default function EditField(props: EditProps) {
             {value.value}
           </button>
         ))}
-      {toiletPaperMode &&
+      {mode == "toiletpaper" &&
         props.options.map((value: EingabeAlphabetOption, key: React.Key) => (
           <button
             key={key}
@@ -64,6 +65,18 @@ export default function EditField(props: EditProps) {
               />
             )}
             {value.label == "leer" && <p className={"text-white text-2xl"}>B</p>}
+          </button>
+        ))}
+
+      {mode == "mespuba" &&
+        props.options.map((value: EingabeAlphabetOption, key: React.Key) => (
+          <button
+            key={key}
+            type="button"
+            className={"editBtn"}
+            onClick={() => props.updateValue(value.value)}
+          >
+            {value.value}
           </button>
         ))}
     </div>

@@ -81,11 +81,11 @@ export default function Row(props: RowProps) {
     }
   }, [props.isFinal]);
 
-  const toiletPaperMode = useSelector(
-    (state: RootState) => state.general.toiletPaperMode
+  const mode = useSelector(
+    (state: RootState) => state.general.mode
   );
 
-  const tpActive = useSelector((state: RootState) => state.general.toiletPaperMode);
+  const tpActive = useSelector((state: RootState) => state.general.toiletPaperMode); //TODO: ändern?
 
   //TODO wie gewünscht?
   return (   
@@ -96,7 +96,7 @@ export default function Row(props: RowProps) {
             activeRow != undefined && activeRow.cells === props.cells
               ? "bg-lime-300"
               : ""
-          } ${toiletPaperMode ? "disableTableRow" : ""} `}
+          } ${mode=="toiletpaper" ? "disableTableRow" : ""} `}
         >
           {visible
             ? props.cells

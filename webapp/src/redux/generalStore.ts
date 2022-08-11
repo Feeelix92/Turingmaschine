@@ -103,6 +103,9 @@ export const initialCell: Cell[] = [
   },
 ];
 
+// eine Variable für alle modu:
+const initialMode: String = "default";
+
 /////////////ToPa//////////////////////
 const initialToiletPaperMode: boolean = false;
 
@@ -372,9 +375,11 @@ export const generalSlice = createSlice({
     activeRow: activeRow,
     watchedRows: watchedRows,
     activeState: activeState,
+    // Mode für alle:
+    mode: initialMode,
     //// Toilettenpapier ////
     toiletPaperMode: initialToiletPaperMode,
-    mespumaMode: initialMespumaMode,
+    //// Mehrspurenmaschine ////
   },
   reducers: {
     ///////////////////// Alphabet /////////////////////
@@ -713,6 +718,13 @@ export const generalSlice = createSlice({
      */
     changeToiletPaperMode: (state) => {
       state.toiletPaperMode = !state.toiletPaperMode;
+      // mode für alle:
+      if(state.mode != "toiletpaper") {
+        state.mode = "toiletpaper";
+      } else {
+        state.mode = "default";
+      }
+
       if (!state.toiletPaperMode) {
         state.rows = initialRow;
         state.zustandsmenge = initialZustandsmenge;
@@ -736,8 +748,14 @@ export const generalSlice = createSlice({
      * @param state
      */
          changeMespumaMode: (state) => {
-          state.mespumaMode = !state.mespumaMode;
-          if (!state.mespumaMode) {
+
+          if(state.mode != "mespuma") {
+            state.mode = "mespuma";
+          } else {
+            state.mode = "default";
+          }
+
+          if (state.mode != "mespuma") {
             state.rows = initialRow;
             state.zustandsmenge = initialZustandsmenge;
             state.anfangsZustand = initialAnfangszustand;

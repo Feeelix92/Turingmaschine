@@ -12,12 +12,9 @@ import { bandChangeSkin, bandResetAll } from "../../redux/bandStore";
 
 function Sidebar() {
   const dispatch = useDispatch();
-  const toiletPaperMode = useSelector(
-    (state: RootState) => state.general.toiletPaperMode
-  );
 
-  const mespumaMode = useSelector(
-    (state: RootState) => state.general.mespumaMode
+  const mode = useSelector(
+    (state: RootState) => state.general.mode
   );
 
     const changeTpMode = () => {
@@ -45,13 +42,13 @@ function Sidebar() {
 
             <div className={""}>
                 <a className={"menu-item text-white text-lg no-underline"}>
-                    <button className={"w-50"} onClick={() => changeTpMode()}>Toilettenpapiermodus { toiletPaperMode ? 'aus' : 'an'}</button>
+                    <button className={"w-50"/*  + mode=="toiletpaper" ? 'bg-thm-primary' : 'bg-white text-thm-primary2'*/} onClick={() => changeTpMode()}>Toilettenpapiermodus { mode=="toiletpaper" ? 'aus' : 'an'}</button>
                 </a>
             </div>
 
             <div className={""}>
                 <a className={"menu-item text-white text-lg no-underline"}>
-                    <button className={"w-50"} onClick={() => changeMSMMode()}>Mehrspurenmaschine { mespumaMode ? 'aus' : 'an'}</button>
+                    <button className={"w-50"} onClick={() => changeMSMMode()}>Mehrspurenmaschine { mode=="mespuma" ? 'aus' : 'an'}</button>
                 </a>
             </div>
         </Menu>
