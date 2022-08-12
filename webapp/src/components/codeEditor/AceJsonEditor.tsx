@@ -45,18 +45,18 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     // @TODO convert and insert current Table
     const [tempEditorText, setTempEditorText] = useState(`
 {
-    "band":{
-      "input":[`+convertCurrentBand()+`]
-    },
-    "specifications":{
-      "alphabet":[`+convertCurrentAlphabet()+`],
-      "states":[`+convertZustandsmenge()+`],
-      "startState":[`+convertAnfangsZustand()+`],
-      "endState":[`+convertEndZustand()+`]
-    },
-    "table":{             
-      `+convertCurrentTable()+`
-    }
+  "band":{
+    "input":[`+convertCurrentBand()+`]
+  },
+  "specifications":{
+    "alphabet":[`+convertCurrentAlphabet()+`],
+    "states":[`+convertZustandsmenge()+`],
+    "startState":[`+convertAnfangsZustand()+`],
+    "endState":[`+convertEndZustand()+`]
+  },
+  "table":{             
+    `+convertCurrentTable()+`
+  }
 }`,
     );
 
@@ -94,7 +94,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                 //wenn es Zustand schon gibt
                 if(lastZustand === tempZustand.value){
                     let tempIdx = finalString.search(`"${lastZustand}":{`) + 6
-                    let tempString = `\n"${row.cells[1].value}":["${tempToBeZustand.value}", "${row.cells[3].value}", "${tempDirection.label}"],`
+                    let tempString = `\n\t\t\t"${row.cells[1].value}":["${tempToBeZustand.value}", "${row.cells[3].value}", "${tempDirection.label}"],`
                     finalString = finalString.slice(0, tempIdx) + tempString + finalString.slice(tempIdx);
                     lastZustand = tempZustand.value     
                     //TODO richtige Reihenfolge
@@ -111,16 +111,16 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                 } 
                 //wenn Zustand neu hinzugefügt werden muss
                 else {
-                    finalString = finalString + `,\n"${tempZustand.value}":{\n"${row.cells[1].value}":["${tempToBeZustand.value}", "${row.cells[3].value}", "${tempDirection.label}"],}`
+                    finalString = finalString + `,\n\t\t"${tempZustand.value}":{\n\t\t\t"${row.cells[1].value}":["${tempToBeZustand.value}", "${row.cells[3].value}", "${tempDirection.label}"]\n\t\t}`
                     lastZustand = tempZustand.value            
                 } 
-                finalString = finalString.replace('],}',']\n}');
+                finalString = finalString.replace('],}',']\n\t\t}');
             })
         } else {
             finalString = ""
         }
         finalString = finalString.replace('],}',']\n}');
-        return finalString
+        return finalString;
     }
     
 
