@@ -1,6 +1,6 @@
 import {CodeEditorProps, Direction, tableRowToAdd, Zustand} from "../../interfaces/CommonInterfaces";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {RootState} from "../../redux/store";
 import AceEditor from "react-ace";
 import { setCompleters } from "ace-builds/src-noconflict/ext-language_tools";
@@ -15,6 +15,7 @@ import {
 } from "../../redux/generalStore";
 import {bandChangeItemAt, bandDeleteAll, BandItemToChange} from "../../redux/bandStore";
 import Row from "../Zustandsüberführungsfunktion/Row";
+import {FiDownload, FiSave, FiUpload} from "react-icons/all";
 
 interface tableZustand {
     [key:string]: tableZeichen
@@ -26,6 +27,8 @@ interface tableZeichen {
 
 export default function AceJsonEditor(props: CodeEditorProps) {
     const dispatch = useDispatch();
+
+    // Editor content
     const currentBand = useSelector((state: RootState) => state.band.currentBand);
     const currentAlphabet = useSelector(
         (state: RootState) => state.general.currentAlphabet
@@ -365,6 +368,28 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         setCompleters([completer]);
     }, []);
 
+    // file download
+    const exportData = () => {
+        const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+            JSON.stringify(JSON.parse(tempEditorText))
+        )}`;
+        const link = document.createElement("a");
+        link.href = jsonString;
+        link.download = "turingmachine.json";
+        link.click();
+    };
+
+    // file upload
+    const inputRef = useRef(null);
+    const onFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        // @ts-ignore
+        console.log(event.target.files[0]);
+    };
+    const fileUpload = () => {
+        console.log(inputRef.current);
+        // @ts-ignore
+        inputRef.current.click();
+    };
 
     return (
     <div>
@@ -373,7 +398,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
              aria-modal="true" role="dialog">
             <div className="relative p-4 w-full max-w-7xl h-full md:h-auto">
                 <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <div className="flex items-start p-4 rounded-t border-b dark:border-gray-600">
+                    <div className="flex items-center p-4 rounded-t border-b dark:border-gray-600">
                         <h3 className="font-semibold text-gray-900 dark:text-white">
                             Code-Editor
                         </h3>
@@ -416,6 +441,16 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                         <button data-modal-toggle="defaultModal" type="button" onClick={toggleEditor}
                                 className="bg-thm-secondary hover:bg-thm-primary2">abrechen
                         </button>
+                        <button data-modal-toggle="defaultModal" type="button" onClick={exportData}
+                                className="bg-thm-primary"><FiDownload/>
+                        </button>
+                        <button onClick={fileUpload}><FiUpload/></button>
+                        <input
+                            hidden
+                            ref={inputRef}
+                            type="file"
+                            onChange={onFileInputChange}
+                        />
                     </div>
                 </div>
             </div>
