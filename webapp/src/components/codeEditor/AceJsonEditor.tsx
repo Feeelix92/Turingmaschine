@@ -383,10 +383,18 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     const inputRef = useRef(null);
     const onFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         // @ts-ignore
-        console.log(event.target.files[0]);
+        const jsonFile = event.target.files[0];
+
+        const fileReader = new FileReader();
+        fileReader.onload = function (e){
+            const fileContent = fileReader.result;
+            if (fileContent){
+                setTempEditorText(fileContent.toString());
+            }
+        }
+        fileReader.readAsText(jsonFile);
     };
     const fileUpload = () => {
-        console.log(inputRef.current);
         // @ts-ignore
         inputRef.current.click();
     };
