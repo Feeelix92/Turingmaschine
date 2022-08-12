@@ -180,7 +180,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                     false
                 );
                 dispatch(alphabetChangeAnfangszustand(newAnfangszustand));
-                dispatch(tableSetActiveState(newAnfangszustand));
+                dispatch(tableSetActiveState(initAnfangsZustand));
 
                 // save Endzustand to store
                 // json.specifications.endState...
