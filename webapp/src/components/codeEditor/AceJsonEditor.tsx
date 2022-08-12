@@ -449,6 +449,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                             hidden
                             ref={inputRef}
                             type="file"
+                            accept={".json"}
                             onChange={onFileInputChange}
                         />
                     </div>
