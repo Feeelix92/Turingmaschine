@@ -43,8 +43,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         (state: RootState) => state.general.rows
     );
     // @TODO convert and insert current Table
-    const [tempEditorText, setTempEditorText] = useState(`
-{
+    const [tempEditorText, setTempEditorText] = useState(`{
   "band":{
     "input":[`+convertCurrentBand()+`]
   },
