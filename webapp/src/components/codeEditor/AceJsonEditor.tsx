@@ -1,4 +1,3 @@
-import "./styles.css";
 import {CodeEditorProps, Direction, tableRowToAdd, Zustand} from "../../interfaces/CommonInterfaces";
 import {useDispatch, useSelector} from "react-redux";
 import {useState} from "react";

@@ -6,8 +6,7 @@ import {
   changeToiletPaperMode,
 } from "../../redux/generalStore";
 import { RootState } from "../../redux/store";
-import Tiptap from "../codeEditor/CodeEditor";
-import { bandChangeSkin, bandResetAll } from "../../redux/bandStore";
+import { bandResetAll } from "../../redux/bandStore";
 import AceJsonEditor from "../codeEditor/AceJsonEditor";
 
 function Sidebar() {
@@ -41,7 +40,7 @@ function Sidebar() {
             </div>
             <div className={""}>
                 <a className={"menu-item text-white text-lg no-underline"}>
-                    <button onClick={toggleModal}>Show Code-Editor</button>
+                    <button onClick={toggleModal}>Code-Editor</button>
                     {showModal ? <AceJsonEditor toggleEditor={toggleModal} /> : null}
                 </a>
             </div>
