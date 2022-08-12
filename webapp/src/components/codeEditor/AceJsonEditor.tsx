@@ -1,8 +1,9 @@
 import {CodeEditorProps, Direction, tableRowToAdd, Zustand} from "../../interfaces/CommonInterfaces";
 import {useDispatch, useSelector} from "react-redux";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {RootState} from "../../redux/store";
 import AceEditor from "react-ace";
+import { setCompleters } from "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-json5";
 import "ace-builds/src-noconflict/theme-twilight";
 import "ace-builds/src-noconflict/ext-language_tools";
@@ -50,7 +51,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     "alphabet":[`+convertCurrentAlphabet()+`],
     "states":[`+convertZustandsmenge()+`],
     "startState":[`+convertAnfangsZustand()+`],
-    "endState":[`+convertEndZustand()+`]
+    "endStates":[`+convertEndZustand()+`]
   },
   "table":{             
     `+convertCurrentTable()+`
@@ -183,9 +184,9 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                 dispatch(tableSetActiveState(initAnfangsZustand));
 
                 // save Endzustand to store
-                // json.specifications.endState...
-                // console.log(json.specifications.endState);
-                const endStates = json.specifications.endState;
+                // json.specifications.endStates...
+                // console.log(json.specifications.endStates);
+                const endStates = json.specifications.endStates;
                 let temp: Zustand[] = [];
                 for (let index = 0; index < endStates.length; index++) {
                     let startState = false;
@@ -241,6 +242,129 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         console.log("change", newValue);
         setTempEditorText(newValue);
     }
+
+    useEffect(() => {
+        const completer = {
+            getCompletions: function(editor: any, session: any, pos: any, prefix: any, callback: (arg0: null, arg1: { caption: string; snippet: string; type: string; }[]) => void) {
+                const completions = [
+                    {
+                        caption: "q1",
+                        snippet: `"q1":{}`,
+                        type: "snippet"
+                    },
+                    {
+                        caption: "band",
+                        snippet: `"band":{
+    "input":["B","B","B","B","B","B","B","B"]
+  },`,
+                        type: "snippet"
+                    },
+                    {
+                        caption: "emptyBandInput",
+                        snippet: `"input":["B","B","B","B","B","B","B","B"]`,
+                        type: "snippet"
+                    },
+                    {
+                        caption: "specifications",
+                        snippet: `"specifications":{
+    "alphabet":[],
+    "states":[],
+    "startState":[],
+    "endStates":[]
+  },`,
+                        type: "snippet"
+                    },
+                    {
+                        caption: "alphabet",
+                        snippet: `"alphabet":[],`,
+                        type: "snippet"
+                    },
+                    {
+                        caption: "alphabet_1_#",
+                        snippet: `"alphabet":["1","#"],`,
+                        type: "snippet"
+                    },
+                    {
+                        caption: "states",
+                        snippet: `"states":[],`,
+                        type: "snippet"
+                    },
+                    {
+                        caption: "states",
+                        snippet: `"states":["q1", "q2"],`,
+                        type: "snippet"
+                    },
+                    {
+                        caption: "startState",
+                        snippet: `"startState":[],`,
+                        type: "snippet"
+                    },
+                    {
+                        caption: "startState_q1",
+                        snippet: `"startState":["q1"],`,
+                        type: "snippet"
+                    },
+                    {
+                        caption: "endStates",
+                        snippet: `"endStates":[],`,
+                        type: "snippet"
+                    },
+                    {
+                        caption: "endStates_q2",
+                        snippet: `"endStates":["q2"],`,
+                        type: "snippet"
+                    },
+                    {
+                        caption: "example",
+                        snippet: `{
+  "band":{
+    "input":["B","B","1","#","1","B","B","B"]
+  },
+  "specifications":{
+    "alphabet":["1","#"],
+    "states":["q1","q2","q3","q4","q5"],
+    "startState":["q1"],
+    "endStates":["q5"]
+  },
+  "table":{             
+    "q1":{
+      "#":["q2", "#", "R"],
+      "1":["q1", "1", "R"]
+    },
+    "q2":{
+      "B":["q4", "B", "L"],
+      "1":["q3", "#", "L"]
+    },
+    "q3":{
+      "#":["q1", "1", "R"]
+    },
+    "q4":{
+      "B":["q5", "B", "R"],
+      "#":["q4", "B", "L"],
+      "1":["q4", "1", "L"]
+    },
+    "q5":{
+      "B":["q5", "B", "R"]
+    }
+  }
+}`,
+                        type: "snippet"
+                    },
+                ];
+
+                completions.forEach(i => {
+                    completions.push({
+                        caption: i.caption,
+                        snippet: i.snippet,
+                        type: i.type
+                    });
+                });
+                callback(null, completions);
+            }
+        };
+        setCompleters([completer]);
+    }, []);
+
 
     return (
     <div>
