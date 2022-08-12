@@ -6,11 +6,6 @@ export default function Dice() {
     const currentZustand = useSelector(
         (state: RootState) => state.general.activeState
     );
-    /*const [diceFace, setDiceFace] = useState(currentZustand.value.slice(1,2));
-    const rollDice = () => {
-        setDiceFace(currentZustand.value.slice(1,2));
-    }*/
-
     return (
         <div className={`dice face face${currentZustand.value.slice(1,2)}`}>
             <div className={`dot-container`}>

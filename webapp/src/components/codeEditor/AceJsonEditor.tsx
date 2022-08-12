@@ -10,7 +10,7 @@ import {
     alphabetChangeAnfangszustand,
     alphabetChangeEndzustand,
     alphabetDeleteCustom, alphabetDeleteZustand,
-    alphabetPushToCustom, alphabetPushToDialogOptions, alphabetPushToIdxZustand, tableAddEditorRow, tableDeleteAll,
+    alphabetPushToCustom, alphabetPushToDialogOptions, alphabetPushToIdxZustand, tableAddEditorRow, tableDeleteAll, tableSetActiveState,
 } from "../../redux/generalStore";
 import {bandChangeItemAt, bandDeleteAll, BandItemToChange} from "../../redux/bandStore";
 import Row from "../Zustandsüberführungsfunktion/Row";
@@ -120,7 +120,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         finalString = finalString.replace('],}',']\n}');
         return finalString;
     }
-    
 
     // function to close the Editor
     function toggleEditor() {
@@ -181,6 +180,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                     false
                 );
                 dispatch(alphabetChangeAnfangszustand(newAnfangszustand));
+                dispatch(tableSetActiveState(newAnfangszustand));
 
                 // save Endzustand to store
                 // json.specifications.endState...
