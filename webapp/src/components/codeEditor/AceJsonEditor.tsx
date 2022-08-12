@@ -260,7 +260,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                         type: "snippet"
                     },
                     {
-                        caption: "emptyBandInput",
+                        caption: "band_empty",
                         snippet: `"input":["B","B","B","B","B","B","B","B"]`,
                         type: "snippet"
                     },
