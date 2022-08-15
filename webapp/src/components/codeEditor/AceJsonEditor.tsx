@@ -371,7 +371,8 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     // file download
     const exportData = () => {
         const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
-            JSON.stringify(JSON.parse(tempEditorText))
+            // JSON.stringify(JSON.parse(tempEditorText))
+            tempEditorText
         )}`;
         const link = document.createElement("a");
         link.href = jsonString;
