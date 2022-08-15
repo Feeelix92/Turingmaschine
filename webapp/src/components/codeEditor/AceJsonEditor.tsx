@@ -444,7 +444,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                     </div>
                     <div className="flex items-center justify-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
                         <button data-modal-toggle="defaultModal" type="button" onClick={parseToJSON}
-                                className="bg-thm-primary">speichern
+                                className="bg-thm-primary">konfigurieren
                         </button>
                         <button data-modal-toggle="defaultModal" type="button" onClick={toggleEditor}
                                 className="bg-thm-secondary hover:bg-thm-primary2">abrechen
