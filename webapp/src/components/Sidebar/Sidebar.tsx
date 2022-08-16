@@ -39,7 +39,7 @@ function Sidebar() {
                 </a>
             </div>
             <div className={""}>
-                <a className={"menu-item text-white text-lg no-underline"}>
+                <a className={"hidden md:block menu-item text-white text-lg no-underline"}>
                     <button onClick={toggleModal}>Code-Editor</button>
                     {showModal ? <AceJsonEditor toggleEditor={toggleModal} /> : null}
                 </a>
