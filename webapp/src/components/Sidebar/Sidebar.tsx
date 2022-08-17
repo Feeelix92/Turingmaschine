@@ -10,6 +10,8 @@ import {
 import { RootState } from "../../redux/store";
 import Tiptap from "../codeEditor/CodeEditor";
 import { bandChangeSkin, bandResetAll } from "../../redux/bandStore";
+import { eingabeAlphabetOptionen } from "../../data/Alphabet";
+import { EingabeAlphabet } from "../../interfaces/CommonInterfaces";
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -17,6 +19,9 @@ function Sidebar() {
   const mode = useSelector((state: RootState) => state.general.mode);
   const currentAlphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
+  );
+  const anzahlSpuren = useSelector(
+    (state: RootState) => state.general.anzahlSpuren
   );
 
   const changeTpMode = () => {
@@ -27,8 +32,75 @@ function Sidebar() {
   const changeMSMMode = () => {
     dispatch(changeMespumaMode());
     dispatch(bandResetAll());
+
+    let nArray: EingabeAlphabet[] = [];
+
+    let finalString = "";
+
+    finalString =
+      finalString + alphabetRecursiveFunction(anzahlSpuren, finalString);
+
+    console.log("!!!!!!!!!!!", finalString);
+
+    // let array = nArray.push({
+    //   value: `(${firstAlphabetItem.value},${secondAlphabetItem.value})`,
+    //   label: `(${firstAlphabetItem.value},${secondAlphabetItem.value})`,
+    //   warningMode: false,
+    // });
+
     dispatch(alphabetChangeCurrent(currentAlphabet));
   };
+
+  function alphabetRecursiveFunction(
+    counter: number,
+    finalString: string
+  ): string {
+    if (counter > 1) {
+      let tempAlphabet = Object.assign(
+        [],
+        currentAlphabet.alphabet
+      ) as EingabeAlphabet[];
+      tempAlphabet.push({ value: "B", label: "", warningMode: false });
+
+      tempAlphabet.forEach((item) => {
+        finalString += item.value;
+        counter -= 1;
+        alphabetRecursiveFunction(counter, finalString);
+      });
+    }
+
+    console.log(counter, finalString);
+    return finalString;
+  }
+
+  // if (state.mode === "mespuma") {
+  //   let tupelArray: EingabeAlphabet[] = [];
+  //   finalArray = [];
+  //   tempAlphabet.forEach((firstAlphabetItem) => {
+  //     tempAlphabet.forEach((secondAlphabetItem) => {
+  //       tupelArray.push({
+  //         value: `(${firstAlphabetItem.value},${secondAlphabetItem.value})`,
+  //         label: `(${firstAlphabetItem.value},${secondAlphabetItem.value})`,
+  //         warningMode: false,
+  //       });
+  //     });
+  //   });
+  //   finalArray = tupelArray.concat(tempAlphabet);
+  // }
+
+  // function alphabetRecursiveFunction(arr: string[][]) {
+  //   return arr.reduce(function (a: string[], b: string[]) {
+  //     return a
+  //       .map(function (x: string) {
+  //         return b.map(function (y: string) {
+  //           return x.concat(y);
+  //         });
+  //       })
+  //       .reduce(function (a: string[], b: string[]) {
+  //         return a.concat(b);
+  //       }, []);
+  //   }, []);
+  // }
 
   return (
     <Menu right>

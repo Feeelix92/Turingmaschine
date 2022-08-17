@@ -355,7 +355,7 @@ export const generalSlice = createSlice({
     endZustand: initialEndZustandsmenge,
 
     //// Alphabet ////
-    currentAlphabet: defaultAlphabetOption2,
+    currentAlphabet: defaultAlphabetOption1,
     bandAlphabet: initialBandAlphabet,
     customAlphabet: defaultCustomAlphabet,
     //// Dialog ////
