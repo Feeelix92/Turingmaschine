@@ -353,7 +353,7 @@ export const generalSlice = createSlice({
 
     //// Alphabet ////
     currentAlphabet: defaultAlphabetOption2,
-    bandAlphabet: initialTeepeeBandAlphabet,
+    bandAlphabet: initialBandAlphabet,
     customAlphabet: defaultCustomAlphabet,
     //// Dialog ////
     dialogOptions: eingabeAlphabetDialogOptions,
@@ -428,7 +428,7 @@ export const generalSlice = createSlice({
      * function alphabetDeleteCustom deletes the customAlphabet
      * @param state
      */
-    alphabetPushToZustand: (state) => {    
+    alphabetPushToZustand: (state) => {
       let tempNumber = state.zustandsmenge.length + 1;
       state.zustandsmenge.push(
         new Zustand("q" + tempNumber, "q" + tempNumber, false, false, false)
@@ -436,16 +436,22 @@ export const generalSlice = createSlice({
 
       if (state.zustandsmenge.length === 1) {
         state.activeState = state.zustandsmenge[0];
-      }        
+      }
     },
-     alphabetPushToIdxZustand: (state, zustandsName:PayloadAction<string>) => {            
+    alphabetPushToIdxZustand: (state, zustandsName: PayloadAction<string>) => {
       state.zustandsmenge.push(
-        new Zustand(zustandsName.payload, zustandsName.payload, false, false, false)
+        new Zustand(
+          zustandsName.payload,
+          zustandsName.payload,
+          false,
+          false,
+          false
+        )
       );
 
       if (state.zustandsmenge.length === 1) {
         state.activeState = state.zustandsmenge[0];
-      }    
+      }
     },
     alphabetDeleteZustand: (state) => {
       state.zustandsmenge.pop();
@@ -494,7 +500,7 @@ export const generalSlice = createSlice({
     },
     alphabetChangeStoppMaschine: (state, value: PayloadAction<boolean>) => {
       state.stoppMaschine = value.payload;
-      state.activeRow = activeRow
+      state.activeRow = activeRow;
     },
     maschineChangeExecutable: (state, value: PayloadAction<boolean>) => {
       state.executable = value.payload;
@@ -536,7 +542,7 @@ export const generalSlice = createSlice({
             ),
             editField: false,
           },
-          { value: "1", editField: true},
+          { value: "1", editField: true },
           {
             value: new Direction(directions[0].value, directions[0].label),
             editField: false,
@@ -554,25 +560,33 @@ export const generalSlice = createSlice({
 
       // add new row to existing rows
 
-      let tempAnfangszustand = false
-      let tempEndzustand = false
+      let tempAnfangszustand = false;
+      let tempEndzustand = false;
 
-      let newTempAnfangszustand = false
-      let newTempEndzustand= false
+      let newTempAnfangszustand = false;
+      let newTempEndzustand = false;
 
-      if(zustandToAdd.payload.zustand === state.anfangsZustand.value){
-        tempAnfangszustand = true
+      if (zustandToAdd.payload.zustand === state.anfangsZustand.value) {
+        tempAnfangszustand = true;
       }
-      if(zustandToAdd.payload.neuerZustand === state.anfangsZustand.value){
-        newTempAnfangszustand = true
+      if (zustandToAdd.payload.neuerZustand === state.anfangsZustand.value) {
+        newTempAnfangszustand = true;
       }
-      if(state.endZustand.find(element => element.value === zustandToAdd.payload.zustand) !== undefined){
-        tempEndzustand = true
+      if (
+        state.endZustand.find(
+          (element) => element.value === zustandToAdd.payload.zustand
+        ) !== undefined
+      ) {
+        tempEndzustand = true;
       }
-      if(state.endZustand.find(element => element.value === zustandToAdd.payload.neuerZustand) !== undefined){
-        newTempEndzustand = true
+      if (
+        state.endZustand.find(
+          (element) => element.value === zustandToAdd.payload.neuerZustand
+        ) !== undefined
+      ) {
+        newTempEndzustand = true;
       }
-      
+
       newRows.push({
         cells: [
           {
@@ -596,9 +610,12 @@ export const generalSlice = createSlice({
             ),
             editField: false,
           },
-          { value: zustandToAdd.payload.schreibe, editField: true},
+          { value: zustandToAdd.payload.schreibe, editField: true },
           {
-            value: new Direction(zustandToAdd.payload.gehe, zustandToAdd.payload.gehe),
+            value: new Direction(
+              zustandToAdd.payload.gehe,
+              zustandToAdd.payload.gehe
+            ),
             editField: false,
           },
         ],
@@ -618,8 +635,8 @@ export const generalSlice = createSlice({
       // update the rows in state with our new rows-array
       state.rows = newRows;
     },
-    tableDeleteAll: (state) => {     
-      state.rows = initialRow
+    tableDeleteAll: (state) => {
+      state.rows = initialRow;
     },
     tableUpdateCell: (state, updateCell: PayloadAction<updateCellType>) => {
       const newCells: Cell[] = state.rows[
@@ -629,7 +646,7 @@ export const generalSlice = createSlice({
         state.rows[updateCell.payload.rowIndex as number].cells.length
       );
 
-      if (typeof updateCell.payload.value === "boolean") {        
+      if (typeof updateCell.payload.value === "boolean") {
         // tableUpdateRow({index: updateCell.payload.index, cells: newCells})
 
         const newRows: RowInterface[] = state.rows.slice(

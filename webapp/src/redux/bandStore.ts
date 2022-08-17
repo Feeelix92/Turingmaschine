@@ -72,7 +72,11 @@ export const bandSlice = createSlice({
           warningMode: false,
         });
       } else {
-        state.currentBand.push({ value: state.emptyBandValue, label: "", warningMode: false });
+        state.currentBand.push({
+          value: state.emptyBandValue,
+          label: "",
+          warningMode: false,
+        });
       }
     },
     /**
@@ -89,8 +93,7 @@ export const bandSlice = createSlice({
       state.pointerPosition = 0;
     },
     bandResetAll: (state) => {
-      console.log("yohoo?")
-      state.currentBand = currentBand
+      state.currentBand = currentBand;
     },
     bandChangeSkin: (state) => {
       if (state.bandSkin === "paper") {

@@ -1,4 +1,11 @@
-import { FaPlay, FaPause, FaStop, FaStepForward, FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
+import {
+  FaPlay,
+  FaPause,
+  FaStop,
+  FaStepForward,
+  FaAngleDoubleLeft,
+  FaAngleDoubleRight,
+} from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Direction,
@@ -12,7 +19,12 @@ import {
   tableSetWatchedRows,
 } from "../../redux/generalStore";
 import watch from "redux-watch";
-import { bandChangeItemAt, bandChangePointPos, bandResetPointer, bandSetPointPos } from "../../redux/bandStore";
+import {
+  bandChangeItemAt,
+  bandChangePointPos,
+  bandResetPointer,
+  bandSetPointPos,
+} from "../../redux/bandStore";
 import { useState } from "react";
 import {
   alphabetChangePauseMaschine,
@@ -30,10 +42,10 @@ function Control() {
 
   const endConfetti = () => {
     party.confetti(document.body, {
-        count: party.variation.range(50, 120),
-        size: party.variation.range(1, 2),
-        spread: party.variation.range(10, 14),
-        shapes: ["star", "roundedSquare"]
+      count: party.variation.range(50, 120),
+      size: party.variation.range(1, 2),
+      spread: party.variation.range(10, 14),
+      shapes: ["star", "roundedSquare"],
     });
   };
 
@@ -59,16 +71,16 @@ function Control() {
 
   const increaseSlider = () => {
     let val = slider;
-    if(val < 25) {
+    if (val < 25) {
       setSlider(++val);
     }
-  }
+  };
   const decreaseSlider = () => {
     let val = slider;
-    if(val > 1) {
+    if (val > 1) {
       setSlider(--val);
     }
-  }
+  };
 
   const animateButton = (el) => {
     anime({
@@ -96,7 +108,7 @@ function Control() {
   const [oldPointerPos, setOldPointerPos] = useState(0);
   const changeStopp = (value: boolean) => {
     dispatch(alphabetChangeStoppMaschine(value));
-    dispatch(bandSetPointPos(oldPointerPos))
+    dispatch(bandSetPointPos(oldPointerPos));
   };
 
   const initialZustand = useSelector(
@@ -166,14 +178,14 @@ function Control() {
     dispatch(tableSetWatchedRows(rows));
   };
 
-  const makeStep = async (idx: number) => {   
+  const makeStep = async (idx: number) => {
     // get the row, which matches with the symbol we read on band
     const item = selectedRows.find((elem) => {
       return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
     });
-    let tempFirstZustandVar = item?.cells[0].value as Zustand
-    let tempLastZustandVar = item?.cells[2].value as Zustand
-    if(tempLastZustandVar.endzustand == true) {
+    let tempFirstZustandVar = item?.cells[0].value as Zustand;
+    let tempLastZustandVar = item?.cells[2].value as Zustand;
+    if (tempLastZustandVar.endzustand == true) {
       endConfetti();
     }
 
@@ -222,7 +234,7 @@ function Control() {
         }
       }
     } else {
-        changePause(true);
+      changePause(true);
     }
   };
 
@@ -230,9 +242,9 @@ function Control() {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
 
-  console.log("executable",executable)
-  console.log("maschineRunning",maschineRunning)
-  console.log("bandWarning",bandWarning)
+  console.log("executable", executable);
+  console.log("maschineRunning", maschineRunning);
+  console.log("bandWarning", bandWarning);
 
   const onPlay = async () => {
     setMaschineRunning(true);
@@ -248,9 +260,11 @@ function Control() {
       let tempSlider = 3000 / slider;
       console.log(tempSlider);
       await sleep(tempSlider);
-      makeStep(activePointerPosition);
+      if (stoppMaschine === false && pauseMaschine === false) {
+        makeStep(activePointerPosition);
+      }
     }
-    
+
     dispatch(tableSetActiveRow(undefined));
     dispatch(tableSetActiveState(initialZustand));
     changePause(false);
@@ -267,11 +281,12 @@ function Control() {
   return (
     <div className={"control w-screen"}>
       <div className={"p-0 justify-center"}>
-
         <div className={""}>
-
-          <label htmlFor="velSlider" className="form-label text-white pr-0 md:pr-1 xl:pr-1 pl-2 md:pl-4 xl:pl-5 hidden md:inline-block ">
-              Geschwindigkeit
+          <label
+            htmlFor="velSlider"
+            className="form-label text-white pr-0 md:pr-1 xl:pr-1 pl-2 md:pl-4 xl:pl-5 hidden md:inline-block "
+          >
+            Geschwindigkeit
           </label>
           <input
             id="velSlider"
@@ -285,9 +300,11 @@ function Control() {
             onChange={(e) => setSlider(e.target.valueAsNumber)}
             step={1}
           />
-          
+
           <button
-            className={"invertedButton py-1 px-2 m-2 ml-3 mr-1 disabled:opacity-50"}
+            className={
+              "invertedButton py-1 px-2 m-2 ml-3 mr-1 disabled:opacity-50"
+            }
             onClick={onPlay}
             onMouseEnter={(e) => {
               animateButton(e.target);
@@ -334,16 +351,25 @@ function Control() {
           </button>
 
           {/* Geschwindigkeit im mobile  */}
-          <div className={"inline-block md:hidden px-0 bg-white text-thm-primary rounded ml-2 "}>
-            <button className={"inline-block bg-white text-thm-primary pl-2 pr-1.5"} onClick={decreaseSlider}>
-              <FaAngleDoubleLeft/>
-              </button>
+          <div
+            className={
+              "inline-block md:hidden px-0 bg-white text-thm-primary rounded ml-2 "
+            }
+          >
+            <button
+              className={"inline-block bg-white text-thm-primary pl-2 pr-1.5"}
+              onClick={decreaseSlider}
+            >
+              <FaAngleDoubleLeft />
+            </button>
             {slider}
-            <button className={"inline-block bg-white text-thm-primary pl-1.5 pr-2"} onClick={increaseSlider}>
-              <FaAngleDoubleRight/>
-              </button>
+            <button
+              className={"inline-block bg-white text-thm-primary pl-1.5 pr-2"}
+              onClick={increaseSlider}
+            >
+              <FaAngleDoubleRight />
+            </button>
           </div>
-          
         </div>
       </div>
     </div>
