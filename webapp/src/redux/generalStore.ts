@@ -397,21 +397,43 @@ export const generalSlice = createSlice({
 
       let finalArray = tempAlphabet;
 
-      if (state.mode === "mespuma") {
-        let tupelArray: EingabeAlphabet[] = [];
-        finalArray = [];
-        tempAlphabet.forEach((firstAlphabetItem) => {
-          tempAlphabet.forEach((secondAlphabetItem) => {
-            tupelArray.push({
-              value: `(${firstAlphabetItem.value},${secondAlphabetItem.value})`,
-              label: `(${firstAlphabetItem.value},${secondAlphabetItem.value})`,
-              warningMode: false,
-            });
-          });
-        });
-        finalArray = tupelArray.concat(tempAlphabet);
-      }
+      // if (state.mode === "mespuma") {
+      //   let tupelArray: EingabeAlphabet[] = [];
+      //   finalArray = [];
+      //   tempAlphabet.forEach((firstAlphabetItem) => {
+      //     tempAlphabet.forEach((secondAlphabetItem) => {
+      //       tupelArray.push({
+      //         value: `(${firstAlphabetItem.value},${secondAlphabetItem.value})`,
+      //         label: `(${firstAlphabetItem.value},${secondAlphabetItem.value})`,
+      //         warningMode: false,
+      //       });
+      //     });
+      //   });
+      //   finalArray = tupelArray.concat(tempAlphabet);
+      // }
       state.bandAlphabet = finalArray;
+    },
+    alphabetChangeCurrentMespuma: (
+      state,
+      cartesian: PayloadAction<string[]>
+    ) => {
+      let tupelArray: EingabeAlphabet[] = [];
+
+      cartesian.payload.forEach((literal) => {
+        tupelArray.push({
+          value: literal,
+          label: literal,
+          warningMode: false,
+        });
+      });
+
+      state.currentAlphabet.alphabet.forEach((element) => {
+        tupelArray.push(element);
+      });
+
+      tupelArray.push({ value: "B", label: "", warningMode: false });
+
+      state.bandAlphabet = tupelArray;
     },
     /**
      * function alphabetPushToCustom pushes a new Value to the customAlphabet
@@ -852,6 +874,7 @@ export const generalSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   alphabetChangeCurrent,
+  alphabetChangeCurrentMespuma,
   alphabetPushToCustom,
   alphabetPushToDialogOptions,
   alphabetDeleteCustom,

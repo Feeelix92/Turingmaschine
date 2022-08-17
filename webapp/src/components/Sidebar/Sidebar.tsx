@@ -1,16 +1,12 @@
-import React, { useState } from "react";
 import { slide as Menu } from "react-burger-menu";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  alphabetDeleteZustand,
   changeToiletPaperMode,
   changeMespumaMode,
-  alphabetChangeCurrent,
+  alphabetChangeCurrentMespuma,
 } from "../../redux/generalStore";
 import { RootState } from "../../redux/store";
-import Tiptap from "../codeEditor/CodeEditor";
-import { bandChangeSkin, bandResetAll } from "../../redux/bandStore";
-import { eingabeAlphabetOptionen } from "../../data/Alphabet";
+import { bandResetAll } from "../../redux/bandStore";
 import { EingabeAlphabet } from "../../interfaces/CommonInterfaces";
 
 function Sidebar() {
@@ -41,8 +37,6 @@ function Sidebar() {
     ) as EingabeAlphabet[];
     tempAlphabet.push({ value: "B", label: "", warningMode: false });
 
-    console.log(tempAlphabet);
-
     tempAlphabet.forEach((literal) => {
       literalArr.push(literal.value);
     });
@@ -62,9 +56,7 @@ function Sidebar() {
       finalBandAlphabet.push(el);
     });
 
-    console.log(finalBandAlphabet);
-
-    dispatch(alphabetChangeCurrent(currentAlphabet));
+    dispatch(alphabetChangeCurrentMespuma(finalBandAlphabet));
   };
 
   function cartesianProduct(arr: any[]) {
