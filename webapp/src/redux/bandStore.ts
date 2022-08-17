@@ -6,13 +6,19 @@ export interface BandItemToChange {
   value: string;
   label: string;
 }
+export interface BandItemToChangeMespuma {
+  bandIndex: number;
+  index: number;
+  value: string;
+  label: string;
+}
 export interface PointerItemToChange {
   index: number;
   value: boolean;
 }
 let emptyBandValue = "B";
 
-const currentBand: EingabeAlphabetOption[] = [
+const initBand: EingabeAlphabetOption[] = [
   { value: emptyBandValue, label: "", warningMode: false },
   { value: emptyBandValue, label: "", warningMode: false },
   { value: emptyBandValue, label: "", warningMode: false },
@@ -23,11 +29,14 @@ const currentBand: EingabeAlphabetOption[] = [
   { value: emptyBandValue, label: "", warningMode: false },
 ];
 
+const initMespumaBand: EingabeAlphabetOption[][] = [initBand, initBand];
+
 export const bandSlice = createSlice({
   name: "band",
   initialState: {
     emptyBandValue: emptyBandValue,
-    currentBand: currentBand,
+    currentBand: initBand,
+    mespumaBand: initMespumaBand,
     bandSkin: "paper",
     pointerPosition: 0,
     showWarning: false,
@@ -72,7 +81,11 @@ export const bandSlice = createSlice({
           warningMode: false,
         });
       } else {
-        state.currentBand.push({ value: state.emptyBandValue, label: "", warningMode: false });
+        state.currentBand.push({
+          value: state.emptyBandValue,
+          label: "",
+          warningMode: false,
+        });
       }
     },
     /**
@@ -89,8 +102,7 @@ export const bandSlice = createSlice({
       state.pointerPosition = 0;
     },
     bandResetAll: (state) => {
-      console.log("yohoo?")
-      state.currentBand = currentBand
+      state.currentBand = initBand;
     },
     bandChangeSkin: (state) => {
       if (state.bandSkin === "paper") {
@@ -119,6 +131,43 @@ export const bandSlice = createSlice({
     bandSetWarning: (state, value: PayloadAction<boolean>) => {
       state.showWarning = value.payload;
     },
+    ///////////// MeSpuMa //////////////////
+    /**
+     * function bandChangeItemAtMespuma changes the Band at the index and the BandIndex, at MeSpuMa
+     * @param state
+     * @param bandItem
+     */
+    bandChangeItemAtMespuma: (
+      state,
+      bandItem: PayloadAction<BandItemToChangeMespuma>
+    ) => {
+      state.mespumaBand[bandItem.payload.bandIndex][
+        bandItem.payload.index
+      ].value = bandItem.payload.value;
+
+      if (bandItem.payload.label != state.emptyBandValue) {
+        state.mespumaBand[bandItem.payload.bandIndex][
+          bandItem.payload.index
+        ].label = bandItem.payload.label;
+      } else {
+        state.mespumaBand[bandItem.payload.bandIndex][
+          bandItem.payload.index
+        ].label = "";
+      }
+    },
+    /**
+     * function bandChangeItemAtMespuma changes the Band at the index and the BandIndex, at MeSpuMa
+     * @param state
+     * @param bandItem
+     */
+    bandAddBandMespuma: (state) => {
+      state.mespumaBand.push(initBand);
+    },
+    bandDeleteBandMespuma: (state) => {
+      if (state.mespumaBand.length > 2) {
+        state.mespumaBand.pop();
+      }
+    },
   },
 });
 
@@ -134,6 +183,9 @@ export const {
   bandSetPointPos,
   bandResetPointer,
   bandSetWarning,
+  bandChangeItemAtMespuma,
+  bandAddBandMespuma,
+  bandDeleteBandMespuma,
 } = bandSlice.actions;
 
 export default bandSlice.reducer;

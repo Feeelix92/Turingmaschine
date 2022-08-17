@@ -1,334 +1,351 @@
 @tailwind base;
 @layer base {
-    h1 {
-        @apply text-3xl font-bold text-black;
-    }
+  h1 {
+    @apply text-3xl font-bold text-black;
+  }
 
-    h2 {
-        @apply text-2xl font-bold text-black;
-    }
+  h2 {
+    @apply text-2xl font-bold text-black;
+  }
 
-    h3 {
-        @apply text-xl font-bold text-black;
-    }
+  h3 {
+    @apply text-xl font-bold text-black;
+  }
 
-    h4 {
-        @apply text-lg font-bold text-black;
-    }
+  h4 {
+    @apply text-lg font-bold text-black;
+  }
 
-    p {
-        @apply text-base text-black;
-    }
+  p {
+    @apply text-base text-black;
+  }
 
-    a {
-        @apply text-blue-600 underline;
-    }
+  a {
+    @apply text-blue-600 underline;
+  }
 
-    button {
-        @apply bg-thm-primary text-white font-bold px-3 rounded text-center h-12 hover:bg-thm-hover;
-    }
+  button {
+    @apply bg-thm-primary text-white font-bold px-3 rounded text-center h-12 hover:bg-thm-hover;
+  }
 
-    Select{
-        @apply text-black text-base;
-    }
+  Select {
+    @apply text-black text-base;
+  }
 }
 @tailwind components;
 @tailwind utilities;
 
 .invertedButton {
-    @apply text-thm-primary bg-white font-bold px-3 text-center h-12 hover:bg-thm-hover hover:text-white border border-solid border-thm-primary;
+  @apply text-thm-primary bg-white font-bold px-3 text-center h-12 hover:bg-thm-hover hover:text-white border border-solid border-thm-primary;
 }
 
 .secondaryButton {
-    @apply text-thm-primary2 bg-white font-bold px-3 text-center h-12 hover:bg-thm-primary2 hover:text-white border border-solid border-thm-primary2;
+  @apply text-thm-primary2 bg-white font-bold px-3 text-center h-12 hover:bg-thm-primary2 hover:text-white border border-solid border-thm-primary2;
 }
 
 .App {
-    @apply text-center w-auto sm:pr-0 sm:pl-0 sm:pb-10 content-center;
+  @apply text-center w-auto sm:pr-0 sm:pl-0 sm:pb-10 content-center;
 }
 
 .App-logo {
-    @apply h-2 pointer-events-none;
+  @apply h-2 pointer-events-none;
 }
 
 .App-header {
-    @apply flex flex-col items-center justify-start text-white;
+  @apply flex flex-col items-center justify-start text-white;
 }
 .App-body {
-    @apply flex flex-col items-center justify-start ;
+  @apply flex flex-col items-center justify-start;
 }
 
 .App-link {
-    @apply text-thm-link;
+  @apply text-thm-link;
 }
 
 /* ********** MENU ********** */
 .menu {
-    @apply bg-thm-primary text-left h-16 pl-0;
+  @apply bg-thm-primary text-left h-16 pl-0;
 }
 
 .bottomnav {
-    @apply bg-thm-primary  w-screen p-5 justify-around  fixed bottom-0 left-0;
+  @apply bg-thm-primary  w-screen p-5 justify-around  fixed bottom-0 left-0;
 }
 
 /* Position and sizing of burger button */
 .bm-burger-button {
-    @apply relative float-right self-center w-12 h-8 m-2;
+  @apply relative float-right self-center w-12 h-8 m-2;
 }
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-    @apply bg-white;
+  @apply bg-white;
 }
 
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
-    @apply bg-thm-hover;
+  @apply bg-thm-hover;
 }
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-    @apply h-10 w-10;
+  @apply h-10 w-10;
 }
 
 /* Color/shape of close button cross */
 .bm-cross {
-    @apply bg-white;
-    /*background: white;*/
+  @apply bg-white;
+  /*background: white;*/
 }
 
 /* Sidebar wrapper styles Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases */
 .bm-menu-wrap {
-    @apply fixed h-max right-0;
+  @apply fixed h-max right-0;
 }
 
 /* General sidebar styles */
 .bm-menu {
-    @apply bg-thm-primary2;
+  @apply bg-thm-primary2;
 }
 
 /* Wrapper for item list */
 .bm-item-list {
-    @apply text-white p-2.5 text-left;
+  @apply text-white p-2.5 text-left;
 }
 
 /* Individual item */
 .bm-item {
-    @apply inline-block p-2.5;
+  @apply inline-block p-2.5;
 }
 
 /* Styling of overlay */
 .bm-overlay {
-    @apply bg-transparent;
+  @apply bg-transparent;
 }
 
- /*********** BAND ***********/
+/*********** BAND ***********/
 .band-container {
-    @apply overflow-x-auto overflow-y-hidden whitespace-nowrap pb-5 pl-10 pr-10 pt-10 flex flex-row justify-start max-w-max ml-auto mr-auto;
+  @apply overflow-x-auto overflow-y-hidden whitespace-nowrap pb-5 pl-10 pr-10 pt-10 flex flex-row justify-start max-w-max ml-auto mr-auto;
 }
 
 .band-container__band {
-    @apply inline-block w-14 h-10 text-black border border-solid border-thm-primary2;
+  @apply inline-block w-14 h-10 text-black border border-solid border-thm-primary2;
 }
 
 .pointerBorder {
-    @apply border border-2 border-thm-primary relative cursor-move outline outline-2 outline-thm-hover;
+  @apply border border-2 border-thm-primary relative cursor-move outline outline-2 outline-thm-hover;
 }
 
 .pointer {
-    @apply animate-pulse cursor-move;
+  @apply animate-pulse cursor-move;
 }
 
 .pointer::after {
-    @apply content-[''] absolute bg-gradient-to-t from-thm-primary to-thm-hover w-14 h-8 rounded-t-full bottom-10 -left-0.5 z-10;
+  @apply content-[''] absolute bg-gradient-to-t from-thm-primary to-thm-hover w-14 h-8 rounded-t-full bottom-10 -left-0.5 z-10;
 }
 
 .pointer:hover {
-    @apply bg-thm-hover;
+  @apply bg-thm-hover;
 }
 
 .bandInput {
-    @apply w-14 h-10 text-center ;
+  @apply w-14 h-10 text-center;
 }
 
-.bandInput:active, .bandInput:focus, .bandInput:hover {
-    @apply border border-4 relative cursor-move outline outline-4 outline-thm-primary2;
+.bandInput:active,
+.bandInput:focus,
+.bandInput:hover {
+  @apply border border-4 relative cursor-move outline outline-4 outline-thm-primary2;
 }
 
-.paper, .tech {
-    @apply bg-[url('./assets/images/spritesheet2.png')] bg-no-repeat;
+.paper,
+.tech {
+  @apply bg-[url('./assets/images/spritesheet2.png')] bg-no-repeat;
 }
 
 .paper {
-    @apply bg-left-top;
+  @apply bg-left-top;
 }
 
 .tech {
-    @apply bg-left-top;
+  @apply bg-left-top;
 }
 
-.currentZustand{
-    @apply min-w-fit max-w-full h-1 text-slate-900
+.currentZustand {
+  @apply min-w-fit max-w-full h-1 text-slate-900;
 }
 
 /* ********** BAND ITEM ********** */
 .delete-value-button {
-    @apply min-w-fit max-w-full h-10 w-full focus:outline-none flex justify-center pt-3;
+  @apply min-w-fit max-w-full h-10 w-full focus:outline-none flex justify-center pt-3;
 }
-
 
 /* ********** TABLE ********** */
 
 .editBtnDiv {
-    @apply flex gap-2 justify-center mt-1;
+  @apply flex gap-2 justify-center mt-1;
 }
 
 .editBtn {
-    @apply w-10 h-10 text-sm round font-medium text-gray-900 bg-white hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white;
+  @apply w-10 h-10 text-sm round font-medium text-gray-900 bg-white hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white;
 }
 
-.editBtn.delete{
-    @apply flex items-center
+.editBtn.delete {
+  @apply flex items-center;
 }
-.brickEditBtnDiv{
-    @apply flex gap-2 justify-center mt-2;
+.brickEditBtnDiv {
+  @apply flex gap-2 justify-center mt-2;
 }
 
 .brickEditBtn {
-    @apply rounded-none w-12 h-16 sm:w-16 sm:h-20 rounded bg-thm-primary hover:bg-thm-hover;
+  @apply rounded-none w-12 h-16 sm:w-16 sm:h-20 rounded bg-thm-primary hover:bg-thm-hover;
 }
 .brickDeleteBtn {
-    @apply w-12 h-16 sm:w-16 sm:h-20 rounded bg-thm-primary hover:bg-thm-hover px-4 sm:px-6;
+  @apply w-12 h-16 sm:w-16 sm:h-20 rounded bg-thm-primary hover:bg-thm-hover px-4 sm:px-6;
 }
 
 .brick {
-    @apply absolute z-10 h-[40px] sm:h-[90px] translate-x-[10px] sm:translate-x-[20px] -translate-y-[45px] sm:-translate-y-[95px];
+  @apply absolute z-10 h-[40px] sm:h-[90px] translate-x-[10px] sm:translate-x-[20px] -translate-y-[45px] sm:-translate-y-[95px];
 }
 
 /*toiletpaper mode*/
-.disableTableRow{
-    @apply pointer-events-none;
+.disableTableRow {
+  @apply pointer-events-none;
 }
 
-button.disableTableRow{
-    @apply opacity-[0.4]
+button.disableTableRow {
+  @apply opacity-[0.4];
 }
 
-.disableTableRow button{
-    @apply opacity-[0.4]
+.disableTableRow button {
+  @apply opacity-[0.4];
 }
 
-.disableTableRow .css-4xgw5l-IndicatorsContainer2{
-    @apply opacity-[0.4]
+.disableTableRow .css-4xgw5l-IndicatorsContainer2 {
+  @apply opacity-[0.4];
 }
 
 /* Toilet paper */
 
 .teepeeContainerLeft {
-    @apply animate-rollLeft pt-10;
+  @apply animate-rollLeft pt-10;
 }
 
 .teepeeContainerRight {
-    @apply animate-rollRight pt-10
+  @apply animate-rollRight pt-10;
 }
 
 .teepeeBand-container {
-    @apply relative z-0 animate-fadeIn overflow-x-scroll overflow-y-hidden whitespace-nowrap pt-20 flex flex-row justify-start max-w-max;
+  @apply relative z-0 animate-fadeIn overflow-x-scroll overflow-y-hidden whitespace-nowrap pt-20 flex flex-row justify-start max-w-max;
 }
 
 .teepeeBandItem {
-    @apply bg-white inline-block w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] border-2 border-dashed border-r-0 border-l-2 -translate-y-[15%] sm:translate-y-[15%]
+  @apply bg-white inline-block w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] border-2 border-dashed border-r-0 border-l-2 -translate-y-[15%] sm:translate-y-[15%];
 }
 .teepeeHead {
-    @apply w-[50px] h-[25px] sm:w-[100px] sm:h-[50px] round translate-y-[50%] bg-gradient-to-r from-white to-gray-100 border-t-2;
+  @apply w-[50px] h-[25px] sm:w-[100px] sm:h-[50px] round translate-y-[50%] bg-gradient-to-r from-white to-gray-100 border-t-2;
 }
 
 .teepeeBody {
-    @apply w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] bg-gradient-to-r from-white to-gray-100 border-l-2 border-r-2;
+  @apply w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] bg-gradient-to-r from-white to-gray-100 border-l-2 border-r-2;
 }
 
 .teepeeBottom {
-    @apply w-[50px] h-[25px] sm:w-[100px] sm:h-[50px] round -translate-y-[50%] bg-white border-2;
+  @apply w-[50px] h-[25px] sm:w-[100px] sm:h-[50px] round -translate-y-[50%] bg-white border-2;
 }
 .teepeeCardboard {
-    @apply w-[25px] h-[12.5px] sm:w-[50px] sm:h-[25px] round translate-y-[50%] translate-x-[45%] sm:translate-x-[50%] bg-gradient-to-t from-gray-100 to-gray-300 border-2;
+  @apply w-[25px] h-[12.5px] sm:w-[50px] sm:h-[25px] round translate-y-[50%] translate-x-[45%] sm:translate-x-[50%] bg-gradient-to-t from-gray-100 to-gray-300 border-2;
 }
 .teepeeBandInput {
-    @apply animate-fadeIn w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] text-center bg-transparent;
+  @apply animate-fadeIn w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] text-center bg-transparent;
 }
 
 .teepeePointerBorder {
-    @apply border border-2 border-thm-primary relative cursor-move;
+  @apply border border-2 border-thm-primary relative cursor-move;
 }
 
 .teepeePointer {
-    @apply cursor-move;
+  @apply cursor-move;
 }
 
 .teepeePointer::after {
-    @apply content-[''] bg-[url('./assets/images/brick_black.svg')] bg-center bg-no-repeat animate-bounce rounded-b absolute w-[50px] h-[40px] sm:w-[100px] sm:h-[50px] bottom-[50px] sm:bottom-[100px] -left-0.5 z-10;
+  @apply content-[''] bg-[url('./assets/images/brick_black.svg')] bg-center bg-no-repeat animate-bounce rounded-b absolute w-[50px] h-[40px] sm:w-[100px] sm:h-[50px] bottom-[50px] sm:bottom-[100px] -left-0.5 z-10;
 }
 
 .teepeePointer:hover {
-    @apply bg-thm-hover;
+  @apply bg-thm-hover;
 }
 
 .round {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 /* Dice */
 
-.dice{
-    @apply h-[50px] w-[50px] bg-white p-2 border border-gray-400 ml-auto mr-auto rounded-md mt-5;
+.dice {
+  @apply h-[50px] w-[50px] bg-white p-2 border border-gray-400 ml-auto mr-auto rounded-md mt-5;
 }
 
 .dot-container {
-    @apply grid grid-cols-3 grid-rows-3 w-full h-full justify-items-center items-center;
+  @apply grid grid-cols-3 grid-rows-3 w-full h-full justify-items-center items-center;
 }
 
 .dot {
-    @apply bg-black round w-[10px] h-[10px];
+  @apply bg-black round w-[10px] h-[10px];
 }
-.dot1{
-    @apply col-start-1 invisible;
+.dot1 {
+  @apply col-start-1 invisible;
 }
-.dot2{
-    @apply col-start-3 invisible;
+.dot2 {
+  @apply col-start-3 invisible;
 }
-.dot3{
-    @apply col-start-1 invisible;
+.dot3 {
+  @apply col-start-1 invisible;
 }
-.dot4{
-    @apply col-start-2 invisible;
+.dot4 {
+  @apply col-start-2 invisible;
 }
 .dot5 {
-    @apply col-start-3 invisible;
+  @apply col-start-3 invisible;
 }
-.dot6{
-    @apply col-start-1 invisible;
+.dot6 {
+  @apply col-start-1 invisible;
 }
-.dot7{
-    @apply col-start-3 invisible;
+.dot7 {
+  @apply col-start-3 invisible;
 }
 .face .dot {
-    @apply animate-fade
+  @apply animate-fade;
 }
 .face1 .dot4 {
-    @apply visible;
+  @apply visible;
 }
-.face2 .dot1, .face2 .dot7 {
-    @apply visible;
+.face2 .dot1,
+.face2 .dot7 {
+  @apply visible;
 }
-.face3 .dot1, .face3 .dot4, .face3 .dot7 {
-    @apply visible;
+.face3 .dot1,
+.face3 .dot4,
+.face3 .dot7 {
+  @apply visible;
 }
-.face4 .dot1, .face4 .dot2, .face4 .dot6, .face4 .dot7 {
-    @apply visible ;
+.face4 .dot1,
+.face4 .dot2,
+.face4 .dot6,
+.face4 .dot7 {
+  @apply visible;
 }
-.face5 .dot1, .face5 .dot2, .face5 .dot4, .face5 .dot6, .face5 .dot7 {
-     @apply visible;
- }
-.face6 .dot1, .face6 .dot2, .face6 .dot3, .face6 .dot5, .face6 .dot6, .face6 .dot7 {
-      @apply visible;
-  }
+.face5 .dot1,
+.face5 .dot2,
+.face5 .dot4,
+.face5 .dot6,
+.face5 .dot7 {
+  @apply visible;
+}
+.face6 .dot1,
+.face6 .dot2,
+.face6 .dot3,
+.face6 .dot5,
+.face6 .dot6,
+.face6 .dot7 {
+  @apply visible;
+}

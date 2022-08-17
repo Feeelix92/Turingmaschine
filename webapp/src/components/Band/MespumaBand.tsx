@@ -21,7 +21,7 @@ export default function Band() {
   const currentZustand = useSelector(
     (state: RootState) => state.general.activeState
   );
-  const currentBand = useSelector((state: RootState) => state.band.currentBand);
+  const mespumaBand = useSelector((state: RootState) => state.band.mespumaBand);
   const currentAlphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
   );
@@ -31,11 +31,11 @@ export default function Band() {
   const showWarning = useSelector((state: RootState) => state.band.showWarning);
 
   /////////// Band from State ///////////
-  let cBand = currentBand;
-  let wBand = watch(store.getState, "general.currentBand");
+  let mBand = mespumaBand;
+  let wBand = watch(store.getState, "general.mespumaBand");
   store.subscribe(
     wBand((newVal) => {
-      cBand = newVal;
+      mBand = newVal;
     })
   );
 
@@ -54,10 +54,12 @@ export default function Band() {
 
       let found = false;
 
-      cBand.forEach((bandItem) => {
-        if (!bandVal.includes(bandItem.value)) {
-          found = true;
-        }
+      mBand.forEach((band) => {
+        band.forEach((bandItem) => {
+          if (!bandVal.includes(bandItem.value)) {
+            found = true;
+          }
+        });
       });
 
       if (found) {
@@ -82,32 +84,36 @@ export default function Band() {
     dispatch(bandChangePointPos(1));
   };
 
-
   return (
     <div className={"w-screen"}>
-        <h4 className="pb-3 pt-5">Mehrspuren-Maschine</h4>
+      <h4 className="pb-3 pt-5">Mehrspuren-Maschine</h4>
 
-      <div className={"flex m-2 h-32"}>
+      <div className={"flex flex-col"}>
         <button
           className={"mt-10 rounded-r-none md:rounded md:invisible"}
-          onClick={() => dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))}
+          onClick={() =>
+            dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))
+          }
         >
           +
         </button>
-        <div className="band-container overflow-x-auto col-span-12">
-          {currentBand.map((value, index) => (
-            <BandItem
-              value={value.value}
-              label={value.label}
-              index={index}
-              pointer={value.pointer!}
-              key={index}
-              alphabet={currentAlphabet.alphabet}
-              showEditField={true}
-              setPointerAt={() => setPointerAt(index)}
-            />
-          ))}
-        </div>
+        {mBand.map((band, bandIndex) => (
+          <div className="band-container overflow-x-auto col-span-12">
+            {band.map((value, index) => (
+              <BandItem
+                value={value.value}
+                label={value.label}
+                index={index}
+                bandIndex={bandIndex}
+                pointer={value.pointer!}
+                key={bandIndex + index}
+                alphabet={currentAlphabet.alphabet}
+                showEditField={true}
+                setPointerAt={() => setPointerAt(index)}
+              />
+            ))}
+          </div>
+        ))}
         <button
           className={"mt-10 rounded-l-none md:rounded md:invisible"}
           onClick={() => dispatch(bandAddField("after"))}
@@ -125,7 +131,6 @@ export default function Band() {
         </div>
       ) : null}
 
-
       <div
         className={
           "currentZustand flex-col content-center items-center justify-center mb-8 flex md:hidden"
@@ -135,7 +140,9 @@ export default function Band() {
                 <span className="block absolute -inset-1 w-12 rounded-full bg-thm-primary" aria-hidden="true"></span>
             </span>                */}
         {currentZustand ? (
-          <div className={"rounded-full w-12 bg-thm-primary text-white h-8 mt-3"}>
+          <div
+            className={"rounded-full w-12 bg-thm-primary text-white h-8 mt-3"}
+          >
             {currentZustand.value}
           </div>
         ) : (
@@ -145,12 +152,14 @@ export default function Band() {
         )}
       </div>
 
-
       <div className={"hidden md:block"}>
         <div className={"flex justify-center gap-2"}>
           <button
             className={"w-36 invertedButton"}
-            onClick={() => dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))}
+            onClick={() =>
+              dispatch(bandAddField("before")) &&
+              dispatch(bandChangePointPos(1))
+            }
           >
             + Feld links
           </button>

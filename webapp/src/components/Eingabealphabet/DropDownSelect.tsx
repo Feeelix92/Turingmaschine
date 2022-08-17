@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { CgAddR } from "react-icons/cg";
 import { useSelector, useDispatch } from "react-redux";
 import Select, { ActionMeta, OnChangeValue } from "react-select";
+import watch from "redux-watch";
 import { EingabeAlphabetDialogOptions } from "../../interfaces/CommonInterfaces";
 import { bandDeleteAll } from "../../redux/bandStore";
 import { alphabetChangeCurrent } from "../../redux/generalStore";
-import { RootState } from "../../redux/store";
+import { RootState, store } from "../../redux/store";
 import MultiselectDropDown from "./DropDownMultiselect";
 
 export default function DropDownSelect() {
@@ -16,10 +17,25 @@ export default function DropDownSelect() {
     (state: RootState) => state.general.currentDialogOption
   );
   const dispatch = useDispatch();
+  const currentAlphabet = useSelector(
+    (state: RootState) => state.general.currentAlphabet
+  );
+  let cAlphabet = currentAlphabet;
+  let wAlphabet = watch(store.getState, "general.currentAlphabet");
+  store.subscribe(
+    wAlphabet((newVal) => {
+      cAlphabet = newVal;
+    })
+  );
   /**
    * checks if Dialog opened or closed
    */
   const [openDialog, setOpenDialog] = useState(false);
+
+  const onCloseDialog = () => {
+    setOpenDialog(false);
+    dispatch(alphabetChangeCurrent(cAlphabet));
+  };
 
   /**
    * copy of the currentDialogOption from state, to get the correct labels in Select
@@ -79,7 +95,7 @@ export default function DropDownSelect() {
           <div className={"text-white text-lg col-span-2"}>
             <MultiselectDropDown
               customSelect={true}
-              onCloseDialog={() => setOpenDialog(false)}
+              onCloseDialog={() => onCloseDialog()}
             />
           </div>
         )}

@@ -63,6 +63,8 @@ export default function Row(props: RowProps) {
     }
   }
 
+  console.log(props.cells);
+
   const activeRow = useSelector((state: RootState) => state.general.activeRow);
   /////////// Active-Row from State ///////////
   let row = activeRow;
@@ -81,22 +83,18 @@ export default function Row(props: RowProps) {
     }
   }, [props.isFinal]);
 
-  const mode = useSelector(
-    (state: RootState) => state.general.mode
-  );
-
-  const tpActive = useSelector((state: RootState) => state.general.toiletPaperMode); //TODO: ändern?
+  const mode = useSelector((state: RootState) => state.general.mode);
 
   //TODO wie gewünscht?
-  return (   
+  return (
     <div>
-     {(tpActive || !visible) ?(
-       <tr
+      {mode === "toiletpaper" || !visible ? (
+        <tr
           className={`border-b flex w-full hover:bg-gray-100 ${
             activeRow != undefined && activeRow.cells === props.cells
               ? "bg-lime-300"
               : ""
-          } ${mode=="toiletpaper" ? "disableTableRow" : ""} `}
+          } ${mode == "toiletpaper" ? "disableTableRow" : ""} `}
         >
           {visible
             ? props.cells
@@ -138,9 +136,7 @@ export default function Row(props: RowProps) {
             </a>
           </td>
         </tr>
-     ): 
-     null
-    }   
+      ) : null}
     </div>
   );
 }

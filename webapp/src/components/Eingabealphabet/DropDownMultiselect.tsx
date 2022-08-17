@@ -5,13 +5,15 @@ import {
   EingabeAlphabet,
   ZustandCustomProp,
 } from "../../interfaces/CommonInterfaces";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  alphabetChangeCurrent,
   alphabetDeleteCustom,
   alphabetPushToCustom,
   alphabetPushToDialogOptions,
   defaultAlphabetOption4,
 } from "../../redux/generalStore";
+import { RootState } from "../../redux/store";
 
 export default function MultiselectDropDown(props: ZustandCustomProp) {
   const dispatch = useDispatch();

@@ -106,16 +106,8 @@ export const initialCell: Cell[] = [
 // eine Variable für alle modu:
 const initialMode: String = "default";
 
-/////////////ToPa//////////////////////
-const initialToiletPaperMode: boolean = false;
-
-///////////// Mehrspurenmaschinen //////////////////////
-const initialMespumaMode: boolean = false;
-
 // Anzahl Spuren:
-const initialSpurenmenge: Zustand[] = [
-  new Zustand("2", "2", true, false, false),
-];
+const initialanzahlSpuren: number = 2;
 
 //// Zustandsmenge
 const initialZustandsmengeTP: Zustand[] = [
@@ -364,7 +356,7 @@ export const generalSlice = createSlice({
 
     //// Alphabet ////
     currentAlphabet: defaultAlphabetOption2,
-    bandAlphabet: initialTeepeeBandAlphabet,
+    bandAlphabet: initialBandAlphabet,
     customAlphabet: defaultCustomAlphabet,
     //// Dialog ////
     dialogOptions: eingabeAlphabetDialogOptions,
@@ -382,10 +374,8 @@ export const generalSlice = createSlice({
     activeState: activeState,
     // Mode für alle:
     mode: initialMode,
-    //// Toilettenpapier ////
-    toiletPaperMode: initialToiletPaperMode,
     //// Mehrspurenmaschine ////
-    spurenmenge: initialSpurenmenge,
+    anzahlSpuren: initialanzahlSpuren,
   },
   reducers: {
     ///////////////////// Alphabet /////////////////////
@@ -399,9 +389,29 @@ export const generalSlice = createSlice({
           state.currentDialogOption = option;
         }
       });
-      let tempAlphabet = Object.assign([], alphabet.payload.alphabet);
+      let tempAlphabet = Object.assign(
+        [],
+        alphabet.payload.alphabet
+      ) as EingabeAlphabet[];
       tempAlphabet.push({ value: "B", label: "", warningMode: false });
-      state.bandAlphabet = tempAlphabet;
+
+      let finalArray = tempAlphabet;
+
+      if (state.mode === "mespuma") {
+        let tupelArray: EingabeAlphabet[] = [];
+        finalArray = [];
+        tempAlphabet.forEach((firstAlphabetItem) => {
+          tempAlphabet.forEach((secondAlphabetItem) => {
+            tupelArray.push({
+              value: `(${firstAlphabetItem.value},${secondAlphabetItem.value})`,
+              label: `(${firstAlphabetItem.value},${secondAlphabetItem.value})`,
+              warningMode: false,
+            });
+          });
+        });
+        finalArray = tupelArray.concat(tempAlphabet);
+      }
+      state.bandAlphabet = finalArray;
     },
     /**
      * function alphabetPushToCustom pushes a new Value to the customAlphabet
@@ -443,7 +453,7 @@ export const generalSlice = createSlice({
      * function alphabetDeleteCustom deletes the customAlphabet
      * @param state
      */
-    alphabetPushToZustand: (state) => {    
+    alphabetPushToZustand: (state) => {
       let tempNumber = state.zustandsmenge.length + 1;
       state.zustandsmenge.push(
         new Zustand("q" + tempNumber, "q" + tempNumber, false, false, false)
@@ -451,16 +461,22 @@ export const generalSlice = createSlice({
 
       if (state.zustandsmenge.length === 1) {
         state.activeState = state.zustandsmenge[0];
-      }        
+      }
     },
-     alphabetPushToIdxZustand: (state, zustandsName:PayloadAction<string>) => {            
+    alphabetPushToIdxZustand: (state, zustandsName: PayloadAction<string>) => {
       state.zustandsmenge.push(
-        new Zustand(zustandsName.payload, zustandsName.payload, false, false, false)
+        new Zustand(
+          zustandsName.payload,
+          zustandsName.payload,
+          false,
+          false,
+          false
+        )
       );
 
       if (state.zustandsmenge.length === 1) {
         state.activeState = state.zustandsmenge[0];
-      }    
+      }
     },
     alphabetDeleteZustand: (state) => {
       state.zustandsmenge.pop();
@@ -509,7 +525,7 @@ export const generalSlice = createSlice({
     },
     alphabetChangeStoppMaschine: (state, value: PayloadAction<boolean>) => {
       state.stoppMaschine = value.payload;
-      state.activeRow = activeRow
+      state.activeRow = activeRow;
     },
     maschineChangeExecutable: (state, value: PayloadAction<boolean>) => {
       state.executable = value.payload;
@@ -528,37 +544,71 @@ export const generalSlice = createSlice({
       const newRows = state.rows.slice(0, state.rows.length);
 
       // add new row to existing rows
-      newRows.push({
-        cells: [
-          {
-            value: new Zustand(
-              state.zustandsmenge[0].label,
-              state.zustandsmenge[0].value,
-              state.zustandsmenge[0].anfangszustand,
-              state.zustandsmenge[0].endzustand,
-              state.zustandsmenge[0].warningMode
-            ),
-            editField: false,
-          },
-          { value: "1", editField: true },
-          {
-            value: new Zustand(
-              state.zustandsmenge[0].label,
-              state.zustandsmenge[0].value,
-              state.zustandsmenge[0].anfangszustand,
-              state.zustandsmenge[0].endzustand,
-              state.zustandsmenge[0].warningMode
-            ),
-            editField: false,
-          },
-          { value: "1", editField: true},
-          {
-            value: new Direction(directions[0].value, directions[0].label),
-            editField: false,
-          },
-        ],
-        isFinal: false,
-      });
+      if (state.mode === "mespuma") {
+        newRows.push({
+          cells: [
+            {
+              value: new Zustand(
+                state.zustandsmenge[0].label,
+                state.zustandsmenge[0].value,
+                state.zustandsmenge[0].anfangszustand,
+                state.zustandsmenge[0].endzustand,
+                state.zustandsmenge[0].warningMode
+              ),
+              editField: false,
+            },
+            { value: "(1,1)", editField: true },
+            {
+              value: new Zustand(
+                state.zustandsmenge[0].label,
+                state.zustandsmenge[0].value,
+                state.zustandsmenge[0].anfangszustand,
+                state.zustandsmenge[0].endzustand,
+                state.zustandsmenge[0].warningMode
+              ),
+              editField: false,
+            },
+            { value: "(1,1)", editField: true },
+            {
+              value: new Direction(directions[0].value, directions[0].label),
+              editField: false,
+            },
+          ],
+          isFinal: false,
+        });
+      } else {
+        newRows.push({
+          cells: [
+            {
+              value: new Zustand(
+                state.zustandsmenge[0].label,
+                state.zustandsmenge[0].value,
+                state.zustandsmenge[0].anfangszustand,
+                state.zustandsmenge[0].endzustand,
+                state.zustandsmenge[0].warningMode
+              ),
+              editField: false,
+            },
+            { value: "1", editField: true },
+            {
+              value: new Zustand(
+                state.zustandsmenge[0].label,
+                state.zustandsmenge[0].value,
+                state.zustandsmenge[0].anfangszustand,
+                state.zustandsmenge[0].endzustand,
+                state.zustandsmenge[0].warningMode
+              ),
+              editField: false,
+            },
+            { value: "1", editField: true },
+            {
+              value: new Direction(directions[0].value, directions[0].label),
+              editField: false,
+            },
+          ],
+          isFinal: false,
+        });
+      }
 
       // update the rows in state with our new rows-array
       state.rows = newRows;
@@ -569,25 +619,33 @@ export const generalSlice = createSlice({
 
       // add new row to existing rows
 
-      let tempAnfangszustand = false
-      let tempEndzustand = false
+      let tempAnfangszustand = false;
+      let tempEndzustand = false;
 
-      let newTempAnfangszustand = false
-      let newTempEndzustand= false
+      let newTempAnfangszustand = false;
+      let newTempEndzustand = false;
 
-      if(zustandToAdd.payload.zustand === state.anfangsZustand.value){
-        tempAnfangszustand = true
+      if (zustandToAdd.payload.zustand === state.anfangsZustand.value) {
+        tempAnfangszustand = true;
       }
-      if(zustandToAdd.payload.neuerZustand === state.anfangsZustand.value){
-        newTempAnfangszustand = true
+      if (zustandToAdd.payload.neuerZustand === state.anfangsZustand.value) {
+        newTempAnfangszustand = true;
       }
-      if(state.endZustand.find(element => element.value === zustandToAdd.payload.zustand) !== undefined){
-        tempEndzustand = true
+      if (
+        state.endZustand.find(
+          (element) => element.value === zustandToAdd.payload.zustand
+        ) !== undefined
+      ) {
+        tempEndzustand = true;
       }
-      if(state.endZustand.find(element => element.value === zustandToAdd.payload.neuerZustand) !== undefined){
-        newTempEndzustand = true
+      if (
+        state.endZustand.find(
+          (element) => element.value === zustandToAdd.payload.neuerZustand
+        ) !== undefined
+      ) {
+        newTempEndzustand = true;
       }
-      
+
       newRows.push({
         cells: [
           {
@@ -611,9 +669,12 @@ export const generalSlice = createSlice({
             ),
             editField: false,
           },
-          { value: zustandToAdd.payload.schreibe, editField: true},
+          { value: zustandToAdd.payload.schreibe, editField: true },
           {
-            value: new Direction(zustandToAdd.payload.gehe, zustandToAdd.payload.gehe),
+            value: new Direction(
+              zustandToAdd.payload.gehe,
+              zustandToAdd.payload.gehe
+            ),
             editField: false,
           },
         ],
@@ -633,8 +694,8 @@ export const generalSlice = createSlice({
       // update the rows in state with our new rows-array
       state.rows = newRows;
     },
-    tableDeleteAll: (state) => {     
-      state.rows = initialRow
+    tableDeleteAll: (state) => {
+      state.rows = initialRow;
     },
     tableUpdateCell: (state, updateCell: PayloadAction<updateCellType>) => {
       const newCells: Cell[] = state.rows[
@@ -644,7 +705,7 @@ export const generalSlice = createSlice({
         state.rows[updateCell.payload.rowIndex as number].cells.length
       );
 
-      if (typeof updateCell.payload.value === "boolean") {        
+      if (typeof updateCell.payload.value === "boolean") {
         // tableUpdateRow({index: updateCell.payload.index, cells: newCells})
 
         const newRows: RowInterface[] = state.rows.slice(
@@ -723,15 +784,52 @@ export const generalSlice = createSlice({
      * @param state
      */
     changeToiletPaperMode: (state) => {
-      state.toiletPaperMode = !state.toiletPaperMode;
       // mode für alle:
-      if(state.mode != "toiletpaper") {
+      if (state.mode != "toiletpaper") {
         state.mode = "toiletpaper";
       } else {
         state.mode = "default";
       }
 
-      if (!state.toiletPaperMode) {
+      if (state.mode === "toiletpaper") {
+        state.rows = initialRowTP;
+        state.zustandsmenge = initialZustandsmengeTP;
+        state.anfangsZustand = initialAnfangszustandTP;
+        state.endZustand = initialEndZustandsmengeTP;
+        state.currentAlphabet = defaultAlphabetOption2;
+        state.bandAlphabet = initialTeepeeBandAlphabet;
+      } else {
+        state.rows = initialRow;
+        state.zustandsmenge = initialZustandsmenge;
+        state.anfangsZustand = initialAnfangszustand;
+        state.endZustand = initialEndZustandsmenge;
+        state.currentAlphabet = defaultAlphabetOption1;
+        state.bandAlphabet = initialBandAlphabet;
+      }
+    },
+
+    ///////// MeSpuMa //////////////
+    mespumaPushToSpuren: (state) => {
+      state.anzahlSpuren += 1;
+    },
+
+    mespumaDeleteSpuren: (state) => {
+      if (state.anzahlSpuren > 2) {
+        state.anzahlSpuren -= 1;
+      }
+    },
+
+    /**
+     * This function switches from or to the Mespuma views
+     * @param state
+     */
+    changeMespumaMode: (state) => {
+      if (state.mode != "mespuma") {
+        state.mode = "mespuma";
+      } else {
+        state.mode = "default";
+      }
+      if (state.mode != "mespuma") {
         state.rows = initialRow;
         state.zustandsmenge = initialZustandsmenge;
         state.anfangsZustand = initialAnfangszustand;
@@ -739,45 +837,15 @@ export const generalSlice = createSlice({
         state.currentAlphabet = defaultAlphabetOption1;
         state.bandAlphabet = initialBandAlphabet;
       } else {
-        state.rows = initialRowTP;
-        state.zustandsmenge = initialZustandsmengeTP;
-        state.anfangsZustand = initialAnfangszustandTP;
-        state.endZustand = initialEndZustandsmengeTP;
-        state.currentAlphabet = defaultAlphabetOption2;
-        state.bandAlphabet = initialTeepeeBandAlphabet;
+        // TODO: else für Mespuma befüllen:
+        state.rows = initialRow;
+        state.zustandsmenge = initialZustandsmenge;
+        state.anfangsZustand = initialAnfangszustand;
+        state.endZustand = initialEndZustandsmenge;
+        state.currentAlphabet = defaultAlphabetOption1;
+        state.bandAlphabet = initialBandAlphabet;
       }
     },
-
-
-        /**
-     * This function switches from or to the Mespuma views
-     * @param state
-     */
-         changeMespumaMode: (state) => {
-
-          if(state.mode != "mespuma") {
-            state.mode = "mespuma";
-          } else {
-            state.mode = "default";
-          }
-
-          if (state.mode != "mespuma") {
-            state.rows = initialRow;
-            state.zustandsmenge = initialZustandsmenge;
-            state.anfangsZustand = initialAnfangszustand;
-            state.endZustand = initialEndZustandsmenge;
-            state.currentAlphabet = defaultAlphabetOption1;
-            state.bandAlphabet = initialBandAlphabet;
-          } else {
-            // TODO: else für Mespuma befüllen:
-            state.rows = initialRow;
-            state.zustandsmenge = initialZustandsmenge;
-            state.anfangsZustand = initialAnfangszustand;
-            state.endZustand = initialEndZustandsmenge;
-            state.currentAlphabet = defaultAlphabetOption1;
-            state.bandAlphabet = initialBandAlphabet;
-          }
-        },
   },
 });
 
@@ -808,6 +876,8 @@ export const {
   tableSetActiveState,
   changeToiletPaperMode,
   changeMespumaMode,
+  mespumaPushToSpuren,
+  mespumaDeleteSpuren,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

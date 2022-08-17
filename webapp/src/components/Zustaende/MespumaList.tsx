@@ -10,11 +10,17 @@ import {
   alphabetChangeWarningMode,
   maschineChangeExecutable,
   maschineCheckExecutable,
+  mespumaPushToSpuren,
+  mespumaDeleteSpuren,
 } from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
 import { BiCaretDown, BiCaretUp, IoIosWarning } from "react-icons/all";
 import watch from "redux-watch";
+import {
+  bandAddBandMespuma,
+  bandDeleteBandMespuma,
+} from "../../redux/bandStore";
 
 function ConditionsList() {
   /**
@@ -44,10 +50,9 @@ function ConditionsList() {
     (state: RootState) => state.general.zustandsmenge
   );
 
-  
   // TODO: Spuren-Anzahl:
-  const spurenMenge = useSelector(
-    (state: RootState) => state.general.spurenmenge
+  const anzahlSpuren = useSelector(
+    (state: RootState) => state.general.anzahlSpuren
   );
 
   let zustandsmenge: Zustand[] = initZustandsmenge;
@@ -95,7 +100,6 @@ function ConditionsList() {
     ),
   };
   const { title, openAccordion, closeAccordion } = accordionData;
-
 
   function handleChange(newValue: OnChangeValue<Zustand, false>) {
     if (newValue) {
@@ -237,6 +241,16 @@ function ConditionsList() {
     checkWarningModus();
   }
 
+  function addSpur() {
+    dispatch(bandAddBandMespuma());
+    dispatch(mespumaPushToSpuren());
+  }
+
+  function deleteSpur() {
+    dispatch(bandDeleteBandMespuma());
+    dispatch(mespumaDeleteSpuren());
+  }
+
   const [endZustandWarningOn, setEndZustandWarningOn] = useState(false);
 
   return (
@@ -255,28 +269,32 @@ function ConditionsList() {
       </div>
       {isActive && (
         <div className={""}>
-
-        {/* TODO: Auswahl für Anzahl Spuren: */}
-        <div
+          {/* TODO: Auswahl für Anzahl Spuren: */}
+          <div
             className={
               "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
             }
           >
             <div className={"flex col-span-2 justify-between"}>
-              <div>
-                Anzahl Spuren = 
-              </div>
+              <div>Anzahl Spuren =</div>
             </div>
 
-            <div className="flex col-span-2">
-              <Select
-                blurInputOnSelect={false}
-                className={"col-span-2"}
-                options={spurenMenge}
-              />
+            <div
+              className={
+                "border border-solid bg-gray-100 rounded p-2 break-all"
+              }
+            >
+              {anzahlSpuren}
+            </div>
+            <div className={"flex justify-end gap-2 col-span-1"}>
+              <button className={"w-10"} onClick={() => deleteSpur()}>
+                -
+              </button>
+              <button className={"w-10"} onClick={() => addSpur()}>
+                +
+              </button>
             </div>
           </div>
-
 
           <div>
             <DropDownSelect />
