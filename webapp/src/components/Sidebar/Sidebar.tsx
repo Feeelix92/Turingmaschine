@@ -33,74 +33,56 @@ function Sidebar() {
     dispatch(changeMespumaMode());
     dispatch(bandResetAll());
 
-    let nArray: EingabeAlphabet[] = [];
+    let literalArr: string[] = [];
 
-    let finalString = "";
+    let tempAlphabet = Object.assign(
+      [],
+      currentAlphabet.alphabet
+    ) as EingabeAlphabet[];
+    tempAlphabet.push({ value: "B", label: "", warningMode: false });
 
-    finalString =
-      finalString + alphabetRecursiveFunction(anzahlSpuren, finalString);
+    console.log(tempAlphabet);
 
-    console.log("!!!!!!!!!!!", finalString);
+    tempAlphabet.forEach((literal) => {
+      literalArr.push(literal.value);
+    });
 
-    // let array = nArray.push({
-    //   value: `(${firstAlphabetItem.value},${secondAlphabetItem.value})`,
-    //   label: `(${firstAlphabetItem.value},${secondAlphabetItem.value})`,
-    //   warningMode: false,
-    // });
+    let combinationArr: string[][] = [];
+
+    for (let i = 0; i < anzahlSpuren; i++) {
+      combinationArr.push(literalArr);
+    }
+
+    let cartesianArr = cartesianProduct(combinationArr);
+
+    let finalBandAlphabet: string[] = [];
+
+    cartesianArr.forEach((element: any[]) => {
+      let el = "(" + element.join() + ")";
+      finalBandAlphabet.push(el);
+    });
+
+    console.log(finalBandAlphabet);
 
     dispatch(alphabetChangeCurrent(currentAlphabet));
   };
 
-  function alphabetRecursiveFunction(
-    counter: number,
-    finalString: string
-  ): string {
-    if (counter > 1) {
-      let tempAlphabet = Object.assign(
-        [],
-        currentAlphabet.alphabet
-      ) as EingabeAlphabet[];
-      tempAlphabet.push({ value: "B", label: "", warningMode: false });
-
-      tempAlphabet.forEach((item) => {
-        finalString += item.value;
-        counter -= 1;
-        alphabetRecursiveFunction(counter, finalString);
-      });
-    }
-
-    console.log(counter, finalString);
-    return finalString;
+  function cartesianProduct(arr: any[]) {
+    return arr.reduce(
+      function (a: any[], b: any[]) {
+        return a
+          .map(function (x: any[]) {
+            return b.map(function (y: any) {
+              return x.concat([y]);
+            });
+          })
+          .reduce(function (a: string | any[], b: any) {
+            return a.concat(b);
+          }, []);
+      },
+      [[]]
+    );
   }
-
-  // if (state.mode === "mespuma") {
-  //   let tupelArray: EingabeAlphabet[] = [];
-  //   finalArray = [];
-  //   tempAlphabet.forEach((firstAlphabetItem) => {
-  //     tempAlphabet.forEach((secondAlphabetItem) => {
-  //       tupelArray.push({
-  //         value: `(${firstAlphabetItem.value},${secondAlphabetItem.value})`,
-  //         label: `(${firstAlphabetItem.value},${secondAlphabetItem.value})`,
-  //         warningMode: false,
-  //       });
-  //     });
-  //   });
-  //   finalArray = tupelArray.concat(tempAlphabet);
-  // }
-
-  // function alphabetRecursiveFunction(arr: string[][]) {
-  //   return arr.reduce(function (a: string[], b: string[]) {
-  //     return a
-  //       .map(function (x: string) {
-  //         return b.map(function (y: string) {
-  //           return x.concat(y);
-  //         });
-  //       })
-  //       .reduce(function (a: string[], b: string[]) {
-  //         return a.concat(b);
-  //       }, []);
-  //   }, []);
-  // }
 
   return (
     <Menu right>
