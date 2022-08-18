@@ -8,6 +8,7 @@ import {
   directions,
   EingabeAlphabet,
   EingabeAlphabetDialogOptions,
+  MespumaChangeAlphabet,
   RowInterface,
   tableRowToAdd,
   updateCellType,
@@ -397,29 +398,26 @@ export const generalSlice = createSlice({
 
       let finalArray = tempAlphabet;
 
-      // if (state.mode === "mespuma") {
-      //   let tupelArray: EingabeAlphabet[] = [];
-      //   finalArray = [];
-      //   tempAlphabet.forEach((firstAlphabetItem) => {
-      //     tempAlphabet.forEach((secondAlphabetItem) => {
-      //       tupelArray.push({
-      //         value: `(${firstAlphabetItem.value},${secondAlphabetItem.value})`,
-      //         label: `(${firstAlphabetItem.value},${secondAlphabetItem.value})`,
-      //         warningMode: false,
-      //       });
-      //     });
-      //   });
-      //   finalArray = tupelArray.concat(tempAlphabet);
-      // }
       state.bandAlphabet = finalArray;
     },
     alphabetChangeCurrentMespuma: (
       state,
-      cartesian: PayloadAction<string[]>
+      data: PayloadAction<MespumaChangeAlphabet>
     ) => {
+      if (data.payload.alphabet) {
+        state.dialogOptions.forEach((option) => {
+          if (data.payload.alphabet) {
+            if (option.alphabet.key === data.payload.alphabet.key) {
+              state.currentAlphabet.alphabet = option.alphabet.alphabet;
+              state.currentDialogOption = option;
+            }
+          }
+        });
+      }
+
       let tupelArray: EingabeAlphabet[] = [];
 
-      cartesian.payload.forEach((literal) => {
+      data.payload.cartesian.forEach((literal) => {
         tupelArray.push({
           value: literal,
           label: literal,

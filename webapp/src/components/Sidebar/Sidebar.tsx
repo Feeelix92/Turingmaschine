@@ -8,6 +8,7 @@ import {
 import { RootState } from "../../redux/store";
 import { bandResetAll } from "../../redux/bandStore";
 import { EingabeAlphabet } from "../../interfaces/CommonInterfaces";
+import { cartesianProduct } from "../../interfaces/CommonFunctions";
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -56,25 +57,13 @@ function Sidebar() {
       finalBandAlphabet.push(el);
     });
 
-    dispatch(alphabetChangeCurrentMespuma(finalBandAlphabet));
-  };
-
-  function cartesianProduct(arr: any[]) {
-    return arr.reduce(
-      function (a: any[], b: any[]) {
-        return a
-          .map(function (x: any[]) {
-            return b.map(function (y: any) {
-              return x.concat([y]);
-            });
-          })
-          .reduce(function (a: string | any[], b: any) {
-            return a.concat(b);
-          }, []);
-      },
-      [[]]
+    dispatch(
+      alphabetChangeCurrentMespuma({
+        cartesian: finalBandAlphabet,
+        alphabet: currentAlphabet,
+      })
     );
-  }
+  };
 
   return (
     <Menu right>

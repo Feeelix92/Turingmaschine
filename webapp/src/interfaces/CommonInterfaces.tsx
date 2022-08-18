@@ -152,3 +152,8 @@ export interface updateCellType {
 export interface CodeEditorProps {
   toggleEditor: () => void;
 }
+
+export interface MespumaChangeAlphabet {
+  cartesian: string[];
+  alphabet?: Alphabet;
+}

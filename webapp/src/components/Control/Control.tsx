@@ -184,7 +184,6 @@ function Control() {
     if (mode === "mespuma") {
       if (mespumaBand.length > 0) {
         currentTable.forEach((row) => {
-          console.log(row);
           if (row.cells[0].value instanceof Zustand) {
             if (row.cells[0].value.value === activeState.value) {
               rows.push(row);
@@ -314,7 +313,6 @@ function Control() {
             })
           );
         });
-        console.log("mespumaBand", mespumaBand);
       }
       if (item.cells[4].value instanceof Direction) {
         switch (item.cells[4].value.label) {

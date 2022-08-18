@@ -3,13 +3,27 @@ import { CgAddR } from "react-icons/cg";
 import { useSelector, useDispatch } from "react-redux";
 import Select, { ActionMeta, OnChangeValue } from "react-select";
 import watch from "redux-watch";
-import { EingabeAlphabetDialogOptions } from "../../interfaces/CommonInterfaces";
+import { cartesianProduct } from "../../interfaces/CommonFunctions";
+import {
+  EingabeAlphabet,
+  EingabeAlphabetDialogOptions,
+} from "../../interfaces/CommonInterfaces";
 import { bandDeleteAll } from "../../redux/bandStore";
-import { alphabetChangeCurrent } from "../../redux/generalStore";
+import {
+  alphabetChangeCurrent,
+  alphabetChangeCurrentMespuma,
+} from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import MultiselectDropDown from "./DropDownMultiselect";
 
 export default function DropDownSelect() {
+  // mode für alle:
+  const mode = useSelector((state: RootState) => state.general.mode);
+
+  const anzahlSpuren = useSelector(
+    (state: RootState) => state.general.anzahlSpuren
+  );
+
   const dialogOptions = useSelector(
     (state: RootState) => state.general.dialogOptions
   );
@@ -34,7 +48,44 @@ export default function DropDownSelect() {
 
   const onCloseDialog = () => {
     setOpenDialog(false);
-    dispatch(alphabetChangeCurrent(cAlphabet));
+
+    if (mode === "mespuma") {
+      let literalArr: string[] = [];
+
+      let tempAlphabet = Object.assign(
+        [],
+        cAlphabet.alphabet
+      ) as EingabeAlphabet[];
+      tempAlphabet.push({ value: "B", label: "", warningMode: false });
+
+      tempAlphabet.forEach((literal) => {
+        literalArr.push(literal.value);
+      });
+
+      let combinationArr: string[][] = [];
+
+      for (let i = 0; i < anzahlSpuren; i++) {
+        combinationArr.push(literalArr);
+      }
+
+      let cartesianArr = cartesianProduct(combinationArr);
+
+      let finalBandAlphabet: string[] = [];
+
+      cartesianArr.forEach((element: any[]) => {
+        let el = "(" + element.join() + ")";
+        finalBandAlphabet.push(el);
+      });
+
+      dispatch(
+        alphabetChangeCurrentMespuma({
+          cartesian: finalBandAlphabet,
+          alphabet: cAlphabet,
+        })
+      );
+    } else {
+      dispatch(alphabetChangeCurrent(cAlphabet));
+    }
   };
 
   /**
@@ -60,9 +111,46 @@ export default function DropDownSelect() {
     newValue: OnChangeValue<EingabeAlphabetDialogOptions, false>,
     _actionMeta: ActionMeta<EingabeAlphabetDialogOptions>
   ) {
+
     if (newValue) {
       if (newValue.alphabet.key !== 0) {
-        dispatch(alphabetChangeCurrent(newValue.alphabet));
+        if (mode === "mespuma") {
+          let literalArr: string[] = [];
+
+          let tempAlphabet = Object.assign(
+            [],
+            newValue.alphabet.alphabet
+          ) as EingabeAlphabet[];
+          tempAlphabet.push({ value: "B", label: "", warningMode: false });
+
+          tempAlphabet.forEach((literal) => {
+            literalArr.push(literal.value);
+          });
+
+          let combinationArr: string[][] = [];
+
+          for (let i = 0; i < anzahlSpuren; i++) {
+            combinationArr.push(literalArr);
+          }
+
+          let cartesianArr = cartesianProduct(combinationArr);
+
+          let finalBandAlphabet: string[] = [];
+
+          cartesianArr.forEach((element: any[]) => {
+            let el = "(" + element.join() + ")";
+            finalBandAlphabet.push(el);
+          });
+
+          dispatch(
+            alphabetChangeCurrentMespuma({
+              cartesian: finalBandAlphabet,
+              alphabet: newValue.alphabet,
+            })
+          );
+        } else {
+          dispatch(alphabetChangeCurrent(cAlphabet));
+        }
         setOpenDialog(false);
       } else {
         dispatch(alphabetChangeCurrent(newValue.alphabet));

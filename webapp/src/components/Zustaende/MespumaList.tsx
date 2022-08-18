@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Select, { OnChangeValue } from "react-select";
-import { Direction, Zustand } from "../../interfaces/CommonInterfaces";
+import {
+  Direction,
+  EingabeAlphabet,
+  Zustand,
+} from "../../interfaces/CommonInterfaces";
 import {
   alphabetChangeAnfangszustand,
   alphabetChangeEndzustand,
@@ -12,6 +16,7 @@ import {
   maschineCheckExecutable,
   mespumaPushToSpuren,
   mespumaDeleteSpuren,
+  alphabetChangeCurrentMespuma,
 } from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
@@ -21,6 +26,7 @@ import {
   bandAddBandMespuma,
   bandDeleteBandMespuma,
 } from "../../redux/bandStore";
+import { cartesianProduct } from "../../interfaces/CommonFunctions";
 
 function ConditionsList() {
   /**
@@ -54,6 +60,13 @@ function ConditionsList() {
   const anzahlSpuren = useSelector(
     (state: RootState) => state.general.anzahlSpuren
   );
+  let spuren = anzahlSpuren;
+  let wSpuren = watch(store.getState, "general.anzahlSpuren");
+  store.subscribe(
+    wSpuren((newVal) => {
+      spuren = newVal;
+    })
+  );
 
   let zustandsmenge: Zustand[] = initZustandsmenge;
   let wZustandsmenge = watch(store.getState, "general.zustandsmenge");
@@ -76,6 +89,10 @@ function ConditionsList() {
       endZustand = newVal;
       dispatch(maschineCheckExecutable());
     })
+  );
+
+  const currentAlphabet = useSelector(
+    (state: RootState) => state.general.currentAlphabet
   );
 
   const dispatch = useDispatch();
@@ -243,12 +260,80 @@ function ConditionsList() {
 
   function addSpur() {
     dispatch(bandAddBandMespuma());
+
     dispatch(mespumaPushToSpuren());
+
+    let literalArr: string[] = [];
+
+    let tempAlphabet = Object.assign(
+      [],
+      currentAlphabet.alphabet
+    ) as EingabeAlphabet[];
+    tempAlphabet.push({ value: "B", label: "", warningMode: false });
+
+    tempAlphabet.forEach((literal) => {
+      literalArr.push(literal.value);
+    });
+
+    let combinationArr: string[][] = [];
+
+    for (let i = 0; i < spuren; i++) {
+      combinationArr.push(literalArr);
+    }
+
+    let cartesianArr = cartesianProduct(combinationArr);
+
+    let finalBandAlphabet: string[] = [];
+
+    cartesianArr.forEach((element: any[]) => {
+      let el = "(" + element.join() + ")";
+      finalBandAlphabet.push(el);
+    });
+
+    dispatch(
+      alphabetChangeCurrentMespuma({
+        cartesian: finalBandAlphabet,
+      })
+    );
   }
 
   function deleteSpur() {
     dispatch(bandDeleteBandMespuma());
+
     dispatch(mespumaDeleteSpuren());
+
+    let literalArr: string[] = [];
+
+    let tempAlphabet = Object.assign(
+      [],
+      currentAlphabet.alphabet
+    ) as EingabeAlphabet[];
+    tempAlphabet.push({ value: "B", label: "", warningMode: false });
+
+    tempAlphabet.forEach((literal) => {
+      literalArr.push(literal.value);
+    });
+
+    let combinationArr: string[][] = [];
+
+    for (let i = 0; i < spuren; i++) {
+      combinationArr.push(literalArr);
+    }
+
+    let cartesianArr = cartesianProduct(combinationArr);
+
+    let finalBandAlphabet: string[] = [];
+
+    cartesianArr.forEach((element: any[]) => {
+      let el = "(" + element.join() + ")";
+      finalBandAlphabet.push(el);
+    });
+
+    dispatch(
+      alphabetChangeCurrentMespuma({
+        cartesian: finalBandAlphabet,
+      })
+    );
   }
 
   const [endZustandWarningOn, setEndZustandWarningOn] = useState(false);
