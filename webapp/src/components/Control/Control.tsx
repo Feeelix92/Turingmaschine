@@ -21,6 +21,7 @@ import {
 import watch from "redux-watch";
 import {
   bandChangeItemAt,
+  bandChangeItemAtMespuma,
   bandChangePointPos,
   bandResetPointer,
   bandSetPointPos,
@@ -115,12 +116,17 @@ function Control() {
   );
 
   const currentBand = useSelector((state: RootState) => state.band.currentBand);
+  const currentMespumaBand = useSelector(
+    (state: RootState) => state.band.mespumaBand
+  );
   const currentTable = useSelector((state: RootState) => state.general.rows);
   const pointerIdx = useSelector(
     (state: RootState) => state.band.pointerPosition
   );
   const bandWarning = useSelector((state: RootState) => state.band.showWarning);
   const [maschineRunning, setMaschineRunning] = useState(false);
+
+  const mode = useSelector((state: RootState) => state.general.mode);
 
   /////////// Rows from State ///////////
   let selectedRows: RowInterface[] = [];
@@ -137,6 +143,15 @@ function Control() {
   store.subscribe(
     wSelectedBand((newVal) => {
       selectedBand = newVal;
+    })
+  );
+
+  /////////// Band from State MeSpuMa ///////////
+  let mespumaBand = currentMespumaBand;
+  let wmespumaBand = watch(store.getState, "band.mespumaBand");
+  store.subscribe(
+    wmespumaBand((newVal) => {
+      mespumaBand = newVal;
     })
   );
 
@@ -164,15 +179,28 @@ function Control() {
     // get all rows, that match our current Zustand and which are therefore relevant
     let rows: RowInterface[] = [];
 
-    if (currentBand.length > 0) {
-      currentTable.forEach((row) => {
-        if (row.cells[0].value instanceof Zustand) {
-          if (row.cells[0].value.value === activeState.value) {
-            rows.push(row);
+    if (mode === "mespuma") {
+      if (mespumaBand.length > 0) {
+        currentTable.forEach((row) => {
+          if (row.cells[0].value instanceof Zustand) {
+            if (row.cells[0].value.value === activeState.value) {
+              rows.push(row);
+            }
           }
-        }
-      });
+        });
+      }
+    } else {
+      if (currentBand.length > 0) {
+        currentTable.forEach((row) => {
+          if (row.cells[0].value instanceof Zustand) {
+            if (row.cells[0].value.value === activeState.value) {
+              rows.push(row);
+            }
+          }
+        });
+      }
     }
+
     dispatch(tableSetWatchedRows(rows));
   };
 
@@ -236,6 +264,86 @@ function Control() {
     }
   };
 
+  const makeStepMespuma = async (idx: number) => {
+    // get the row, which matches with the symbol we read on band
+    let finalBandArray: string[] = [];
+    mespumaBand.forEach((band) => {
+      finalBandArray.push(band[idx].value);
+    });
+
+    let finalString = "(";
+    finalBandArray.forEach((elem) => {
+      finalString += elem + ",";
+    });
+    finalString = finalString.slice(0, -1);
+    finalString += ")";
+
+    const item = selectedRows.find((elem) => {
+      return elem.cells[1].value === finalString ? elem : undefined;
+    });
+
+    let tempLastZustandVar = item?.cells[2].value as Zustand;
+    if (tempLastZustandVar.endzustand == true) {
+      endConfetti();
+    }
+
+    if (
+      item !== undefined &&
+      typeof item.cells[3].value === "string" &&
+      tempLastZustandVar.endzustand === false
+    ) {
+      store.dispatch(tableSetActiveRow(item));
+      if (
+        item.cells[0].value instanceof Zustand &&
+        item.cells[0].value.endzustand === false
+      ) {
+        let tempString = item.cells[3].value.slice(0, -1);
+        tempString = tempString.substring(1);
+
+        var array = tempString.split(",");
+
+        mespumaBand.forEach((_band, bandIndex) => {
+          dispatch(
+            bandChangeItemAtMespuma({
+              bandIndex: bandIndex,
+              index: idx,
+              value: array[bandIndex],
+              label: array[bandIndex],
+            })
+          );
+        });
+      }
+      if (item.cells[4].value instanceof Direction) {
+        switch (item.cells[4].value.label) {
+          case "R": {
+            dispatch(bandChangePointPos(1));
+            break;
+          }
+          case "L": {
+            dispatch(bandChangePointPos(-1));
+            break;
+          }
+          case "N":
+          default: {
+            break;
+          }
+        }
+      }
+      if (item.cells[0].value instanceof Zustand) {
+        if (item.cells[0].value != item.cells[2].value) {
+          if (tempLastZustandVar.endzustand !== false) {
+            changePause(true);
+          } else {
+            dispatch(tableSetActiveState(item.cells[2].value as Zustand));
+            setSelectedRows();
+          }
+        }
+      }
+    } else {
+      changePause(true);
+    }
+  };
+
   const sleep = (milliseconds: number) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
@@ -253,7 +361,9 @@ function Control() {
       setMaschineRunning(true);
       let tempSlider = 3000 / slider;
       await sleep(tempSlider);
-      if (stoppMaschine === false && pauseMaschine === false) {
+      if (mode === "mespuma") {
+        makeStepMespuma(activePointerPosition);
+      } else {
         makeStep(activePointerPosition);
       }
     }
@@ -268,7 +378,11 @@ function Control() {
   const stepByStep = () => {
     setSelectedRows();
 
-    makeStep(activePointerPosition);
+    if (mode === "mespuma") {
+      makeStepMespuma(activePointerPosition);
+    } else {
+      makeStep(activePointerPosition);
+    }
   };
 
   return (

@@ -10,15 +10,16 @@ import {
   Zustand,
 } from "../../interfaces/CommonInterfaces";
 import { RootState, store } from "../../redux/store";
-import { initialZustand3, maschineChangeExecutable } from "../../redux/generalStore";
+import {
+  initialZustand3,
+  maschineChangeExecutable,
+} from "../../redux/generalStore";
 import EditField from "./EditField";
 import ZustandSelect from "./ZustandSelect";
 import BrickWhite from "../../assets/images/brick_white.svg";
 
 export default function Cell(props: CellProps) {
-  const toiletPaperMode = useSelector(
-      (state: RootState) => state.general.toiletPaperMode
-  );
+  const mode = useSelector((state: RootState) => state.general.mode);
   const wrapperRef: React.RefObject<HTMLTableCellElement> = React.createRef();
 
   const dispatch = useDispatch();
@@ -118,7 +119,11 @@ export default function Cell(props: CellProps) {
   function handleChange(newValue: OnChangeValue<Direction | Zustand, false>) {
     if (newValue) {
       // pass chosen options to the parent to update the cell
-      props.updateCellValue(props.index, newValue);
+      if (mode == "mespuma" && (props.index === 1 || props.index === 3)) {
+        props.updateCellValue(props.index, newValue.value);
+      } else {
+        props.updateCellValue(props.index, newValue);
+      }
     }
   }
 
@@ -221,41 +226,58 @@ export default function Cell(props: CellProps) {
       ) : (
         ""
       )}
-      {!toiletPaperMode &&
-        typeof props.value === "string" ? (
-          <input
-            type="text"
-            name="value"
-            id="tableValueInput"
-            className={
-              "w-full rounded text-gray-700 focus:outline-none items-center border rounded text-center"
-            }
-            value={props.value}
-            onChange={(e) => checkValue(props.index, e.target.value)}
-            onClick={toggleEditMode}
-          />
-        ) : (
-          ""
-        )
-      }
-      {toiletPaperMode &&
-        props.value == "B" &&
-          <input value={"leer"} className={
+      {mode == "default" && typeof props.value === "string" ? (
+        <input
+          type="text"
+          name="value"
+          id="tableValueInput"
+          className={
             "w-full rounded text-gray-700 focus:outline-none items-center border rounded text-center"
-          }/>
-      }
-      {toiletPaperMode &&
-          props.value == "1" &&
-          <input value={"weiß"} className={
+          }
+          value={props.value}
+          onChange={(e) => checkValue(props.index, e.target.value)}
+          onClick={toggleEditMode}
+        />
+      ) : (
+        ""
+      )}
+      {mode == "toiletpaper" && props.value == "B" && (
+        <input
+          value={"leer"}
+          className={
             "w-full rounded text-gray-700 focus:outline-none items-center border rounded text-center"
-          }/>
-      }
-      {toiletPaperMode &&
-          props.value == "#" &&
-          <input value={"schwarz"} className={
+          }
+        />
+      )}
+      {mode == "toiletpaper" && props.value == "1" && (
+        <input
+          value={"weiß"}
+          className={
             "w-full rounded text-gray-700 focus:outline-none items-center border rounded text-center"
-          }/>
-      }
+          }
+        />
+      )}
+      {mode == "toiletpaper" && props.value == "#" && (
+        <input
+          value={"schwarz"}
+          className={
+            "w-full rounded text-gray-700 focus:outline-none items-center border rounded text-center"
+          }
+        />
+      )}
+
+      {/* TODO: Mehrspurenmaschine:  */}
+      {mode == "mespuma" && typeof props.value === "string" ? (
+        <Select
+          placeholder={props.value}
+          blurInputOnSelect={false}
+          className={"text-black p-3 text-base"}
+          onChange={handleChange}
+          options={eALphabet}
+        />
+      ) : (
+        ""
+      )}
 
       {warningMode ? (
         <IoIosWarning

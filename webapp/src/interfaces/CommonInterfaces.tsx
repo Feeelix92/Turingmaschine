@@ -57,11 +57,11 @@ export interface RowProps {
 }
 
 export interface tableRowToAdd {
-  zustand: string,
-  lese: string,
-  neuerZustand: string,
-  schreibe: string,
-  gehe: string
+  zustand: string;
+  lese: string;
+  neuerZustand: string;
+  schreibe: string;
+  gehe: string;
 }
 
 export interface CellProps {
@@ -83,6 +83,7 @@ export interface BandItemProps {
   value: string;
   label: string;
   index: number;
+  bandIndex: number;
   //skin: string;
   //pointer: boolean;
   alphabet: EingabeAlphabetOption[];
@@ -150,4 +151,9 @@ export interface updateCellType {
 
 export interface CodeEditorProps {
   toggleEditor: () => void;
+}
+
+export interface MespumaChangeAlphabet {
+  cartesian: string[];
+  alphabet?: Alphabet;
 }

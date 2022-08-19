@@ -1,14 +1,17 @@
 import React, { Key, useEffect } from "react";
 import EditField from "../Zustandsüberführungsfunktion/EditField";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../redux/store";
+import { RootState, store } from "../../redux/store";
 import {
   BandItemToChange,
   bandChangeItemAt,
   bandDeleteItemAt,
+  bandChangeItemAtMespuma,
+  BandItemToChangeMespuma,
 } from "../../redux/bandStore";
 import { BsFillEraserFill } from "react-icons/bs";
 import { BandItemProps } from "../../interfaces/CommonInterfaces";
+import watch from "redux-watch";
 
 export default function BandItem(props: BandItemProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -16,15 +19,14 @@ export default function BandItem(props: BandItemProps) {
   // Zum Pointer scrollen:
   const fieldRef = React.useRef<HTMLInputElement>(null);
   useEffect(() => {
-    if(fieldRef.current) {
+    if (fieldRef.current) {
       fieldRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'start'
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
       });
     }
   });
-
 
   const [editMode, setEditMode] = React.useState(false);
   function toggleEditMode() {
@@ -42,6 +44,14 @@ export default function BandItem(props: BandItemProps) {
   const currentBandSkin = useSelector(
     (state: RootState) => state.band.bandSkin
   );
+  const currentMode = useSelector((state: RootState) => state.general.mode);
+  let cMode = currentMode;
+  let wMode = watch(store.getState, "general.mode");
+  store.subscribe(
+    wMode((newVal) => {
+      cMode = newVal;
+    })
+  );
   const dispatch = useDispatch();
 
   const pointerIdx = useSelector(
@@ -49,12 +59,22 @@ export default function BandItem(props: BandItemProps) {
   );
 
   function chooseOption(option: string) {
-    const temp: BandItemToChange = {
-      index: props.index,
-      value: option,
-      label: option,
-    };
-    dispatch(bandChangeItemAt(temp));
+    if (cMode === "mespuma") {
+      const tempMespuma: BandItemToChangeMespuma = {
+        bandIndex: props.bandIndex,
+        index: props.index,
+        value: option,
+        label: option,
+      };
+      dispatch(bandChangeItemAtMespuma(tempMespuma));
+    } else {
+      const temp: BandItemToChange = {
+        index: props.index,
+        value: option,
+        label: option,
+      };
+      dispatch(bandChangeItemAt(temp));
+    }
     setEditMode(false);
   }
 
@@ -88,12 +108,22 @@ export default function BandItem(props: BandItemProps) {
 
     props.alphabet.map((entry) => {
       if (entry.value === value || value === "") {
-        const temp: BandItemToChange = {
-          index: index as number,
-          value: value,
-          label: value,
-        };
-        dispatch(bandChangeItemAt(temp));
+        if (cMode === "mespuma") {
+          const tempMespuma: BandItemToChangeMespuma = {
+            bandIndex: props.bandIndex,
+            index: index as number,
+            value: value,
+            label: value,
+          };
+          dispatch(bandChangeItemAtMespuma(tempMespuma));
+        } else {
+          const temp: BandItemToChange = {
+            index: index as number,
+            value: value,
+            label: value,
+          };
+          dispatch(bandChangeItemAt(temp));
+        }
         allowed = true;
       } else if (value === "") {
         const temp: BandItemToChange = {
@@ -101,7 +131,22 @@ export default function BandItem(props: BandItemProps) {
           value: value,
           label: "",
         };
-        dispatch(bandChangeItemAt(temp));
+        if (cMode === "mespuma") {
+          const tempMespuma: BandItemToChangeMespuma = {
+            bandIndex: props.bandIndex,
+            index: index as number,
+            value: value,
+            label: "",
+          };
+          dispatch(bandChangeItemAtMespuma(tempMespuma));
+        } else {
+          const temp: BandItemToChange = {
+            index: index as number,
+            value: value,
+            label: "",
+          };
+          dispatch(bandChangeItemAt(temp));
+        }
         allowed = true;
       }
     });
@@ -120,7 +165,7 @@ export default function BandItem(props: BandItemProps) {
       ref={wrapperRef}
     >
       <div>
-        {pointerIdx === props.index ? ( 
+        {pointerIdx === props.index ? (
           <div className="pointer scroll-mx-16" ref={fieldRef} draggable></div>
         ) : (
           ""

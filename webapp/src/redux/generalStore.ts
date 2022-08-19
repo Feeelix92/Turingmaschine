@@ -8,6 +8,7 @@ import {
   directions,
   EingabeAlphabet,
   EingabeAlphabetDialogOptions,
+  MespumaChangeAlphabet,
   RowInterface,
   tableRowToAdd,
   updateCellType,
@@ -103,8 +104,11 @@ export const initialCell: Cell[] = [
   },
 ];
 
-/////////////ToPa//////////////////////
-const initialToiletPaperMode: boolean = false;
+// eine Variable für alle modu:
+const initialMode: String = "default";
+
+// Anzahl Spuren:
+const initialanzahlSpuren: number = 2;
 
 //// Zustandsmenge
 const initialZustandsmengeTP: Zustand[] = [
@@ -353,6 +357,7 @@ export const generalSlice = createSlice({
 
     //// Alphabet ////
     currentAlphabet: defaultAlphabetOption2,
+    //currentAlphabet: defaultAlphabetOption1,
     bandAlphabet: initialBandAlphabet,
     customAlphabet: defaultCustomAlphabet,
     //// Dialog ////
@@ -369,8 +374,10 @@ export const generalSlice = createSlice({
     activeRow: activeRow,
     watchedRows: watchedRows,
     activeState: activeState,
-    //// Toilettenpapier ////
-    toiletPaperMode: initialToiletPaperMode,
+    // Mode für alle:
+    mode: initialMode,
+    //// Mehrspurenmaschine ////
+    anzahlSpuren: initialanzahlSpuren,
   },
   reducers: {
     ///////////////////// Alphabet /////////////////////
@@ -384,9 +391,48 @@ export const generalSlice = createSlice({
           state.currentDialogOption = option;
         }
       });
-      let tempAlphabet = Object.assign([], alphabet.payload.alphabet);
+      let tempAlphabet = Object.assign(
+        [],
+        alphabet.payload.alphabet
+      ) as EingabeAlphabet[];
       tempAlphabet.push({ value: "B", label: "", warningMode: false });
-      state.bandAlphabet = tempAlphabet;
+
+      let finalArray = tempAlphabet;
+
+      state.bandAlphabet = finalArray;
+    },
+    alphabetChangeCurrentMespuma: (
+      state,
+      data: PayloadAction<MespumaChangeAlphabet>
+    ) => {
+      if (data.payload.alphabet) {
+        state.dialogOptions.forEach((option) => {
+          if (data.payload.alphabet) {
+            if (option.alphabet.key === data.payload.alphabet.key) {
+              state.currentAlphabet.alphabet = option.alphabet.alphabet;
+              state.currentDialogOption = option;
+            }
+          }
+        });
+      }
+
+      let tupelArray: EingabeAlphabet[] = [];
+
+      data.payload.cartesian.forEach((literal) => {
+        tupelArray.push({
+          value: literal,
+          label: literal,
+          warningMode: false,
+        });
+      });
+
+      state.currentAlphabet.alphabet.forEach((element) => {
+        tupelArray.push(element);
+      });
+
+      tupelArray.push({ value: "B", label: "", warningMode: false });
+
+      state.bandAlphabet = tupelArray;
     },
     /**
      * function alphabetPushToCustom pushes a new Value to the customAlphabet
@@ -415,7 +461,7 @@ export const generalSlice = createSlice({
         alphabet: state.customAlphabet,
       });
       state.currentAlphabet = state.customAlphabet;
-  
+
       state.dialogOptions.forEach((option) => {
         if (option.alphabet.key === state.customAlphabet.key) {
           state.currentDialogOption = option;
@@ -520,37 +566,71 @@ export const generalSlice = createSlice({
       const newRows = state.rows.slice(0, state.rows.length);
 
       // add new row to existing rows
-      newRows.push({
-        cells: [
-          {
-            value: new Zustand(
-              state.zustandsmenge[0].label,
-              state.zustandsmenge[0].value,
-              state.zustandsmenge[0].anfangszustand,
-              state.zustandsmenge[0].endzustand,
-              state.zustandsmenge[0].warningMode
-            ),
-            editField: false,
-          },
-          { value: "1", editField: true },
-          {
-            value: new Zustand(
-              state.zustandsmenge[0].label,
-              state.zustandsmenge[0].value,
-              state.zustandsmenge[0].anfangszustand,
-              state.zustandsmenge[0].endzustand,
-              state.zustandsmenge[0].warningMode
-            ),
-            editField: false,
-          },
-          { value: "1", editField: true },
-          {
-            value: new Direction(directions[0].value, directions[0].label),
-            editField: false,
-          },
-        ],
-        isFinal: false,
-      });
+      if (state.mode === "mespuma") {
+        newRows.push({
+          cells: [
+            {
+              value: new Zustand(
+                state.zustandsmenge[0].label,
+                state.zustandsmenge[0].value,
+                state.zustandsmenge[0].anfangszustand,
+                state.zustandsmenge[0].endzustand,
+                state.zustandsmenge[0].warningMode
+              ),
+              editField: false,
+            },
+            { value: "(1,1)", editField: true },
+            {
+              value: new Zustand(
+                state.zustandsmenge[0].label,
+                state.zustandsmenge[0].value,
+                state.zustandsmenge[0].anfangszustand,
+                state.zustandsmenge[0].endzustand,
+                state.zustandsmenge[0].warningMode
+              ),
+              editField: false,
+            },
+            { value: "(1,1)", editField: true },
+            {
+              value: new Direction(directions[0].value, directions[0].label),
+              editField: false,
+            },
+          ],
+          isFinal: false,
+        });
+      } else {
+        newRows.push({
+          cells: [
+            {
+              value: new Zustand(
+                state.zustandsmenge[0].label,
+                state.zustandsmenge[0].value,
+                state.zustandsmenge[0].anfangszustand,
+                state.zustandsmenge[0].endzustand,
+                state.zustandsmenge[0].warningMode
+              ),
+              editField: false,
+            },
+            { value: "1", editField: true },
+            {
+              value: new Zustand(
+                state.zustandsmenge[0].label,
+                state.zustandsmenge[0].value,
+                state.zustandsmenge[0].anfangszustand,
+                state.zustandsmenge[0].endzustand,
+                state.zustandsmenge[0].warningMode
+              ),
+              editField: false,
+            },
+            { value: "1", editField: true },
+            {
+              value: new Direction(directions[0].value, directions[0].label),
+              editField: false,
+            },
+          ],
+          isFinal: false,
+        });
+      }
 
       // update the rows in state with our new rows-array
       state.rows = newRows;
@@ -726,8 +806,52 @@ export const generalSlice = createSlice({
      * @param state
      */
     changeToiletPaperMode: (state) => {
-      state.toiletPaperMode = !state.toiletPaperMode;
-      if (!state.toiletPaperMode) {
+      // mode für alle:
+      if (state.mode != "toiletpaper") {
+        state.mode = "toiletpaper";
+      } else {
+        state.mode = "default";
+      }
+
+      if (state.mode === "toiletpaper") {
+        state.rows = initialRowTP;
+        state.zustandsmenge = initialZustandsmengeTP;
+        state.anfangsZustand = initialAnfangszustandTP;
+        state.endZustand = initialEndZustandsmengeTP;
+        state.currentAlphabet = defaultAlphabetOption2;
+        state.bandAlphabet = initialTeepeeBandAlphabet;
+      } else {
+        state.rows = initialRow;
+        state.zustandsmenge = initialZustandsmenge;
+        state.anfangsZustand = initialAnfangszustand;
+        state.endZustand = initialEndZustandsmenge;
+        state.currentAlphabet = defaultAlphabetOption1;
+        state.bandAlphabet = initialBandAlphabet;
+      }
+    },
+
+    ///////// MeSpuMa //////////////
+    mespumaPushToSpuren: (state) => {
+      state.anzahlSpuren += 1;
+    },
+
+    mespumaDeleteSpuren: (state) => {
+      if (state.anzahlSpuren > 2) {
+        state.anzahlSpuren -= 1;
+      }
+    },
+
+    /**
+     * This function switches from or to the Mespuma views
+     * @param state
+     */
+    changeMespumaMode: (state) => {
+      if (state.mode != "mespuma") {
+        state.mode = "mespuma";
+      } else {
+        state.mode = "default";
+      }
+      if (state.mode != "mespuma") {
         state.rows = initialRow;
         state.zustandsmenge = initialZustandsmenge;
         state.anfangsZustand = initialAnfangszustand;
@@ -735,12 +859,13 @@ export const generalSlice = createSlice({
         state.currentAlphabet = defaultAlphabetOption1;
         state.bandAlphabet = initialBandAlphabet;
       } else {
-        state.rows = initialRowTP;
-        state.zustandsmenge = initialZustandsmengeTP;
-        state.anfangsZustand = initialAnfangszustandTP;
-        state.endZustand = initialEndZustandsmengeTP;
-        state.currentAlphabet = defaultAlphabetOption2;
-        state.bandAlphabet = initialTeepeeBandAlphabet;
+        // TODO: else für Mespuma befüllen:
+        state.rows = initialRow;
+        state.zustandsmenge = initialZustandsmenge;
+        state.anfangsZustand = initialAnfangszustand;
+        state.endZustand = initialEndZustandsmenge;
+        state.currentAlphabet = defaultAlphabetOption1;
+        state.bandAlphabet = initialBandAlphabet;
       }
     },
   },
@@ -749,6 +874,7 @@ export const generalSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   alphabetChangeCurrent,
+  alphabetChangeCurrentMespuma,
   alphabetPushToCustom,
   alphabetPushToDialogOptions,
   alphabetDeleteCustom,
@@ -772,6 +898,9 @@ export const {
   tableSetWatchedRows,
   tableSetActiveState,
   changeToiletPaperMode,
+  changeMespumaMode,
+  mespumaPushToSpuren,
+  mespumaDeleteSpuren,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;
