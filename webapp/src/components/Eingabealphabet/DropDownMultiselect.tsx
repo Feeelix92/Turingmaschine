@@ -5,16 +5,28 @@ import {
   EingabeAlphabet,
   ZustandCustomProp,
 } from "../../interfaces/CommonInterfaces";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  alphabetChangeCurrent,
   alphabetDeleteCustom,
   alphabetPushToCustom,
   alphabetPushToDialogOptions,
   defaultAlphabetOption4,
 } from "../../redux/generalStore";
+import { RootState, store } from "../../redux/store";
+import watch from "redux-watch";
 
 export default function MultiselectDropDown(props: ZustandCustomProp) {
   const dispatch = useDispatch();
+  let currentAlphabet = useSelector(
+    (state: RootState) => state.general.currentAlphabet
+  );
+  let wAlphabet = watch(store.getState, "general.currentAlphabet");
+  store.subscribe(
+    wAlphabet((newVal) => {
+      currentAlphabet = newVal;
+    })
+  );
 
   // valuesArray = current selected options as Array
   let valuesArray: string[] = [];
@@ -72,6 +84,7 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
                   dispatch(alphabetPushToCustom(value));
                 });
                 dispatch(alphabetPushToDialogOptions(valuesArray.toString()));
+                dispatch(alphabetChangeCurrent(currentAlphabet))
               } else {
                 alert("Ein leeres Alphabet ist nicht erlaubt!");
               }

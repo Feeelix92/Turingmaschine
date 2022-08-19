@@ -22,7 +22,6 @@ function Sidebar() {
     const [showModal, setShowModal] = useState(false);
 
     function toggleModal() {
-        console.log("toggle");
         setShowModal(!showModal);
     }
 

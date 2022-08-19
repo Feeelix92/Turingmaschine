@@ -415,6 +415,7 @@ export const generalSlice = createSlice({
         alphabet: state.customAlphabet,
       });
       state.currentAlphabet = state.customAlphabet;
+  
       state.dialogOptions.forEach((option) => {
         if (option.alphabet.key === state.customAlphabet.key) {
           state.currentDialogOption = option;

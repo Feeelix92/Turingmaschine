@@ -92,7 +92,6 @@ function Control() {
   };
 
   const animateBack = async () => {
-    console.log("animateBack");
     anime({
       targets: ".invertedButton",
       scale: "1.0",
@@ -157,7 +156,6 @@ function Control() {
     wActivePointerPosition((newVal) => {
       activePointerPosition = newVal;
       if (newVal != undefined) {
-        console.log("Pointer verschoben nach: ", newVal);
       }
     })
   );
@@ -242,10 +240,6 @@ function Control() {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
 
-  console.log("executable", executable);
-  console.log("maschineRunning", maschineRunning);
-  console.log("bandWarning", bandWarning);
-
   const onPlay = async () => {
     setMaschineRunning(true);
     setSelectedRows();
@@ -258,7 +252,6 @@ function Control() {
     while (stoppMaschine === false && pauseMaschine === false) {
       setMaschineRunning(true);
       let tempSlider = 3000 / slider;
-      console.log(tempSlider);
       await sleep(tempSlider);
       if (stoppMaschine === false && pauseMaschine === false) {
         makeStep(activePointerPosition);
