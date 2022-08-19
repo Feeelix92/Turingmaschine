@@ -88,9 +88,7 @@ export default function Table() {
               </tbody>
             </table>
             <button
-              className={`w-full addRow ${
-                mode == "toiletpaper" ? "disableTableRow" : ""
-              } `}
+              className={`w-full addRow`}
               disabled={zustandsmenge.length === 0 ? true : false}
               onClick={() => dispatch(tableAddRow())}
             >

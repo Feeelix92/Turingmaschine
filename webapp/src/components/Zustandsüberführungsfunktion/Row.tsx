@@ -94,7 +94,7 @@ export default function Row(props: RowProps) {
             activeRow != undefined && activeRow.cells === props.cells
               ? "bg-lime-300"
               : ""
-          } ${mode == "toiletpaper" ? "disableTableRow" : ""} `}
+          }`}
         >
           {visible
             ? props.cells
