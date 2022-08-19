@@ -10,20 +10,97 @@ import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import Band from "./components/Band/Band";
 import { useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
 
 function App() {
-  // mode für alle:
-  const mode = useSelector((state: RootState) => state.general.mode);
-
-  const [showModal, setShowModal] = useState(false);
-
-  function toggleModal() {
-    setShowModal(!showModal);
-  }
-
   return (
     <div className="App">
-      <header className="App-header">
+        <Routes>
+            <Route
+                path="/"
+                element={<Home />}
+
+            />
+            <Route
+                path="/papier"
+                element={<Papier />}
+            />
+            <Route
+                path="/mehrspuren"
+                element={<Mesuba />}
+            />
+        </Routes>
+    </div>
+  );
+}
+
+function Home(){
+    return(
+        <>
+            <header className="App-header">
+                <Menu />
+
+                 <Band />
+            </header>
+
+            <div className={"App-body"}>
+                <div className={" hidden md:grid md:grid-cols-4 md:items-start px-2"}>
+                    <ConditionsList />
+                    <Table />
+                </div>
+                <div className={"md:hidden"}>
+                    <Bottomnav />
+                </div>
+            </div>
+        </>
+    )
+}
+
+function Papier() {
+    return (
+        <>
+            <header className="App-header">
+                <Menu/>
+                <TeepeeBand/>
+            </header>
+
+            <div className={"App-body"}>
+                <div className={" hidden md:grid md:grid-cols-4 md:items-start px-2"}>
+                    <ToPaTable/>
+                </div>
+                <div className={"md:hidden"}>
+                    <Bottomnav/>
+                </div>
+            </div>
+        </>
+    )
+}
+
+function Mesuba() {
+    return (
+        <>
+            <header className="App-header">
+                <Menu/>
+                <MespumaBand/>
+            </header>
+
+            <div className={"App-body"}>
+                <div className={" hidden md:grid md:grid-cols-4 md:items-start px-2"}>
+                    <MespumaList/>
+                    <Table/>
+                </div>
+                <div className={"md:hidden"}>
+                    <Bottomnav/>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default App;
+
+/*
+<header className="App-header">
         <Menu />
 
         {mode == "default" && <Band />}
@@ -50,8 +127,4 @@ function App() {
           <Bottomnav />
         </div>
       </div>
-    </div>
-  );
-}
-
-export default App;
+ */

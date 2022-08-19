@@ -12,6 +12,7 @@ import { bandResetAll } from "../../redux/bandStore";
 import { EingabeAlphabet } from "../../interfaces/CommonInterfaces";
 import { cartesianProduct } from "../../interfaces/CommonFunctions";
 import AceJsonEditor from "../codeEditor/AceJsonEditor";
+import { Routes, Route, Link } from "react-router-dom";
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -28,6 +29,12 @@ function Sidebar() {
     dispatch(changeToiletPaperMode());
     dispatch(bandResetAll());
   };
+
+    const [showModal, setShowModal] = useState(false);
+
+    function toggleModal() {
+        setShowModal(!showModal);
+    }
 
   const changeMSMMode = () => {
     dispatch(changeMespumaMode());
@@ -49,11 +56,6 @@ function Sidebar() {
 
     for (let i = 0; i < anzahlSpuren; i++) {
       combinationArr.push(literalArr);
-    }
-    const [showModal, setShowModal] = useState(false);
-
-    function toggleModal() {
-        setShowModal(!showModal);
     }
 
     let cartesianArr = cartesianProduct(combinationArr);
@@ -88,22 +90,26 @@ function Sidebar() {
 
             <div className={""}>
                 <a className={"menu-item text-white text-lg no-underline"}>
-                    <button
-                        className={
-                            "w-50" /*  + mode=="toiletpaper" ? 'bg-thm-primary' : 'bg-white text-thm-primary2'*/
-                        }
-                        onClick={() => changeTpMode()}
-                    >
-                        Toilettenpapiermodus {mode == "toiletpaper" ? "aus" : "an"}
-                    </button>
+                    <Link to="/papier">
+                        <button
+                            className={
+                                "w-50" /*  + mode=="toiletpaper" ? 'bg-thm-primary' : 'bg-white text-thm-primary2'*/
+                            }
+                            onClick={() => changeTpMode()}
+                        >
+                            Toilettenpapiermodus
+                        </button>
+                    </Link>
                 </a>
             </div>
 
             <div className={""}>
                 <a className={"menu-item text-white text-lg no-underline"}>
-                    <button className={"w-50"} onClick={() => changeMSMMode()}>
-                        Mehrspurenmaschine {mode == "mespuma" ? "aus" : "an"}
-                    </button>
+                    <Link to="/mehrspuren">
+                        <button className={"w-50"} onClick={() => changeMSMMode()}>
+                            Mehrspurenmaschine
+                        </button>
+                    </Link>
                 </a>
             </div>
             <div className={""}>
