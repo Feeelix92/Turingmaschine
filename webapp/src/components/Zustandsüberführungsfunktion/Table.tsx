@@ -4,11 +4,9 @@ import { RootState, store } from "../../redux/store";
 import {
   tableDeleteRow,
   tableAddRow,
-  maschineChangeExecutable,
   maschineCheckExecutable,
 } from "../../redux/generalStore";
 import Row from "./Row";
-import { Zustand } from "../../interfaces/CommonInterfaces";
 
 export default function Table() {
   const loadedRows = useSelector((state: RootState) => state.general.rows);
@@ -21,7 +19,6 @@ export default function Table() {
   store.subscribe(
     wRows((newVal) => {
       rows = newVal;
-
       // let executable = true;
 
       // rows.forEach((row) => {
@@ -39,8 +36,6 @@ export default function Table() {
   const zustandsmenge = useSelector(
     (state: RootState) => state.general.zustandsmenge
   );
-
-  const mode = useSelector((state: RootState) => state.general.mode);
 
   // /////////// States from State ///////////
   // let states = zustandsmenge;

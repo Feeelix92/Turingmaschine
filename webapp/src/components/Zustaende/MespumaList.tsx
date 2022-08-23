@@ -142,16 +142,6 @@ function ConditionsList() {
   function handleChangeMulti(newValue: OnChangeValue<Zustand[], false>) {
     if (newValue) {
       // if (newValue.filter(zustand => !zustand.anfangszustand)) {
-      console.log(
-        "Anfang",
-        anfangsZustand,
-        "Ende",
-        endZustand,
-        "Menge",
-        zustandsmenge,
-        "newValue",
-        newValue
-      );
       let temp: Zustand[] = [];
       newValue.forEach((zustand) => {
         temp.push(

@@ -1,4 +1,4 @@
-import React, { Key, useEffect } from "react";
+import { createRef, Key, RefObject, useEffect, useState } from "react";
 import { IoIosWarning } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import Select, { OnChangeValue } from "react-select";
@@ -16,11 +16,10 @@ import {
 } from "../../redux/generalStore";
 import EditField from "./EditField";
 import ZustandSelect from "./ZustandSelect";
-import BrickWhite from "../../assets/images/brick_white.svg";
 
 export default function Cell(props: CellProps) {
   const mode = useSelector((state: RootState) => state.general.mode);
-  const wrapperRef: React.RefObject<HTMLTableCellElement> = React.createRef();
+  const wrapperRef: RefObject<HTMLTableCellElement> = createRef();
 
   const dispatch = useDispatch();
 
@@ -34,7 +33,7 @@ export default function Cell(props: CellProps) {
 
   const temp = [initialZustand3];
 
-  const [warningMode, setWarningMode] = React.useState(false);
+  const [warningMode, setWarningMode] = useState(false);
 
   /////////// States from State ///////////
   let states = zustandsmenge.concat(temp);
@@ -52,6 +51,8 @@ export default function Cell(props: CellProps) {
   store.subscribe(
     wRows((newVal) => {
       rows = newVal;
+
+      checkWarningModus();
     })
   );
 
@@ -65,25 +66,19 @@ export default function Cell(props: CellProps) {
       checkWarningModus();
 
       if (props.value instanceof Zustand) {
-        let found = false;
+        let foundInFinal = false;
 
         finalStates.forEach((state) => {
           if (props.value instanceof Zustand) {
             if (state.value === props.value.value) {
-              found = true;
-              handleChange(state);
+              foundInFinal = true;
+              setFinal(true);
             }
           }
         });
 
-        if (!found) {
-          states.forEach((state) => {
-            if (props.value instanceof Zustand) {
-              if (state.value === props.value.value) {
-                handleChange(state);
-              }
-            }
-          });
+        if (!foundInFinal) {
+          setFinal(false);
         }
       }
     })
@@ -102,7 +97,7 @@ export default function Cell(props: CellProps) {
     })
   );
 
-  const [editMode, setEditMode] = React.useState(false);
+  const [editMode, setEditMode] = useState(false);
 
   function toggleEditMode() {
     // hide/show the edit-buttons
@@ -127,9 +122,14 @@ export default function Cell(props: CellProps) {
     }
   }
 
+  function setFinal(newValue: boolean) {
+    props.updateCellValueIsFinal(props.index, newValue);
+  }
+
   function setWarning(newValue: boolean) {
+    console.log("setWarning: ", newValue, props.value);
     setWarningMode(newValue);
-    // props.updateCellValue(props.index, newValue);
+    console.log("warning: ", warningMode);
   }
 
   useEffect(() => {

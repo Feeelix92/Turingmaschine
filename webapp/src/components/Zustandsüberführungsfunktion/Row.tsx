@@ -6,7 +6,11 @@ import {
 } from "../../interfaces/CommonInterfaces";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { tableDeleteRow, tableUpdateCell } from "../../redux/generalStore";
+import {
+  tableDeleteRow,
+  tableUpdateCell,
+  tableUpdateRowIsFinal,
+} from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import Cell from "./Cell";
 import watch from "redux-watch";
@@ -63,7 +67,15 @@ export default function Row(props: RowProps) {
     }
   }
 
-  console.log(props.cells);
+  function setCellValueIsFinal(index: React.Key, value: boolean) {
+    dispatch(
+      tableUpdateRowIsFinal({
+        cellIndex: index,
+        rowIndex: props.index,
+        value: value,
+      })
+    );
+  }
 
   const activeRow = useSelector((state: RootState) => state.general.activeRow);
   /////////// Active-Row from State ///////////
@@ -106,6 +118,7 @@ export default function Row(props: RowProps) {
                     index={key}
                     showEditField={value.editField}
                     updateCellValue={setCellValue}
+                    updateCellValueIsFinal={setCellValueIsFinal}
                   />
                 ))
             : props.cells.map((value, key: React.Key) => (
@@ -115,6 +128,7 @@ export default function Row(props: RowProps) {
                   index={key}
                   showEditField={value.editField}
                   updateCellValue={setCellValue}
+                  updateCellValueIsFinal={setCellValueIsFinal}
                 />
               ))}
           {visible ? (

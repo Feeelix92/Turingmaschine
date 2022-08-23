@@ -72,6 +72,7 @@ export interface CellProps {
     index: Key,
     arg: string | boolean | Zustand | Direction
   ) => void;
+  updateCellValueIsFinal: (index: Key, arg: boolean) => void;
 }
 
 export interface EditProps {

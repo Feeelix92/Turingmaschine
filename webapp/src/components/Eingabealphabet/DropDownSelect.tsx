@@ -111,7 +111,6 @@ export default function DropDownSelect() {
     newValue: OnChangeValue<EingabeAlphabetDialogOptions, false>,
     _actionMeta: ActionMeta<EingabeAlphabetDialogOptions>
   ) {
-
     if (newValue) {
       if (newValue.alphabet.key !== 0) {
         if (mode === "mespuma") {
@@ -149,7 +148,7 @@ export default function DropDownSelect() {
             })
           );
         } else {
-          dispatch(alphabetChangeCurrent(cAlphabet));
+          dispatch(alphabetChangeCurrent(newValue.alphabet));
         }
         setOpenDialog(false);
       } else {

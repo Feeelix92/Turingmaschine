@@ -770,6 +770,17 @@ export const generalSlice = createSlice({
         state.rows = newRows;
       }
     },
+    tableUpdateRowIsFinal: (state, newValue: PayloadAction<updateCellType>) => {
+      const newRows: RowInterface[] = state.rows.slice(
+        0,
+        state.rows.length
+      ) as RowInterface[];
+
+      if (newValue.payload.cellIndex === 0) {
+        newRows[newValue.payload.rowIndex as number].isFinal = newValue.payload
+          .value as boolean;
+      }
+    },
     tableSetActiveRow: (
       state,
       row: PayloadAction<RowInterface | undefined>
@@ -894,6 +905,7 @@ export const {
   tableDeleteRow,
   tableDeleteAll,
   tableUpdateCell,
+  tableUpdateRowIsFinal,
   tableSetActiveRow,
   tableSetWatchedRows,
   tableSetActiveState,
