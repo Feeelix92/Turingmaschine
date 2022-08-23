@@ -192,7 +192,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
 
         //save states from editor to store
         //json.specifications.states...
-        initZustandsmenge.forEach((value) => {
+        initZustandsmenge.forEach((_value) => {
           // delete old store states
           dispatch(alphabetDeleteZustand());
         });
@@ -206,8 +206,8 @@ export default function AceJsonEditor(props: CodeEditorProps) {
 
         // save Anfangszustand from editor to store
         const newAnfangszustand = new Zustand(
-          json.specifications.startState,
-          json.specifications.startState,
+          json.specifications.startState[0],
+          json.specifications.startState[0],
           true,
           false,
           false
