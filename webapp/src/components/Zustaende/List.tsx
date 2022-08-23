@@ -172,12 +172,10 @@ function ConditionsList() {
 
   function checkWarningModus() {
     setEndZustandWarningOn(false);
-    console.log(zustandsmenge, anfangsZustand);
     let tempBool = zustandsmenge.some((value) => {
       return value.value === anfangsZustand.value;
     });
     if (tempBool) {
-      console.log("setWarning for start: false");
       dispatch(
         alphabetChangeWarningMode({
           prop: "anfangsZustand",
@@ -186,7 +184,6 @@ function ConditionsList() {
         })
       );
     } else {
-      console.log("setWarning for start: true");
       dispatch(
         alphabetChangeWarningMode({
           prop: "anfangsZustand",
