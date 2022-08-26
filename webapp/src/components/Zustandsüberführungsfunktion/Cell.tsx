@@ -127,10 +127,13 @@ export default function Cell(props: CellProps) {
   }
 
   function setWarning(newValue: boolean) {
-    console.log("setWarning: ", newValue, props.value);
     setWarningMode(newValue);
-    console.log("warning: ", warningMode);
   }
+
+  useEffect(() => {
+    // action on update of warningMode
+    checkWarningModus();
+  }, [warningMode]);
 
   useEffect(() => {
     // event to handle click outside to hide the edit-buttons
