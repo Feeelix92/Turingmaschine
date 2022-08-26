@@ -89,37 +89,45 @@ export default function Band() {
       <h4 className="pb-3 pt-5">Mehrspuren-Maschine</h4>
 
       <div className={"flex flex-col"}>
-        <button
+
+        {/* TODO: Button für Felderhinzufügen - mobile: */}
+
+        {/* <button
           className={"mt-10 rounded-r-none md:rounded md:invisible"}
           onClick={() =>
             dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))
           }
         >
           +
-        </button>
-        {mBand.map((band, bandIndex) => (
-          <div className="band-container overflow-x-auto col-span-12">
-            {band.map((value, index) => (
-              <BandItem
-                value={value.value}
-                label={value.label}
-                index={index}
-                bandIndex={bandIndex}
-                pointer={value.pointer!}
-                key={bandIndex + index}
-                alphabet={currentAlphabet.alphabet}
-                showEditField={true}
-                setPointerAt={() => setPointerAt(index)}
-              />
-            ))}
-          </div>
-        ))}
-        <button
+        </button> */}
+        <div className="pb-0 my-10">
+          {mBand.map((band, bandIndex) => (
+            <div className={"band-container-mespuma col-span-12 overflow-auto z-" + (mBand.length*10-bandIndex*10)}>
+              {band.map((value, index) => (
+                <BandItem
+                  value={value.value}
+                  label={value.label}
+                  index={index}
+                  bandIndex={bandIndex}
+                  pointer={value.pointer!}
+                  key={bandIndex + index}
+                  alphabet={currentAlphabet.alphabet}
+                  showEditField={true}
+                  setPointerAt={() => setPointerAt(index)}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
+
+{/* TODO: Button für Felderhinzufügen - mobile: */}
+        {/* <button
           className={"mt-10 rounded-l-none md:rounded md:invisible"}
           onClick={() => dispatch(bandAddField("after"))}
         >
           +
-        </button>
+        </button> */}
+
       </div>
       {showWarning ? (
         <div className="flex justify-center">

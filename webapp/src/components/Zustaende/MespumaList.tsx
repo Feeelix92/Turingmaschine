@@ -382,7 +382,7 @@ function ConditionsList() {
             <div className={"col-span-2"}>Bandalphabet &Gamma; =</div>
             <div
               className={
-                "border border-solid bg-gray-100 rounded p-2 col-span-2"
+                "border border-solid bg-gray-100 rounded p-2 col-span-2 max-h-60 overflow-y-scroll"
               }
             >
               {kA}

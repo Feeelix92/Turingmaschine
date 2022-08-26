@@ -127,12 +127,16 @@
   @apply overflow-x-auto overflow-y-hidden whitespace-nowrap pb-5 pl-10 pr-10 pt-10 flex flex-row justify-start max-w-max ml-auto mr-auto;
 }
 
+.band-container-mespuma {
+  @apply  overflow-visible whitespace-nowrap pb-0 pl-10 pr-10 pt-0 flex flex-row justify-start max-w-max ml-auto mr-auto;
+}
+
 .band-container__band {
   @apply inline-block w-14 h-10 text-black border border-solid border-thm-primary2;
 }
 
 .pointerBorder {
-  @apply border border-2 border-thm-primary relative cursor-move outline outline-2 outline-thm-hover;
+  @apply border-2 border-thm-primary relative cursor-move outline outline-2 outline-thm-hover;
 }
 
 .pointer {

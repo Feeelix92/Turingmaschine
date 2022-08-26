@@ -98,6 +98,7 @@ export default function Band() {
               value={value.value}
               label={value.label}
               index={index}
+              bandIndex={0}
               pointer={value.pointer!}
               key={index}
               alphabet={currentAlphabet.alphabet}
