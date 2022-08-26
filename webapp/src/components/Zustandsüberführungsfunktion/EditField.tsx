@@ -2,18 +2,13 @@ import React, { useEffect } from "react";
 import anime from "animejs";
 import { EingabeAlphabetOption } from "../../data/Alphabet";
 import { EditProps } from "../../interfaces/CommonInterfaces";
-import { FaTrash } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import Band from "../Band/Band";
 import BrickBlack from "../../assets/images/brick_black.svg";
 import BrickWhite from "../../assets/images/brick_white.svg";
 
 export default function EditField(props: EditProps) {
-
-  const mode = useSelector(
-    (state: RootState) => state.general.mode
-  );
+  const mode = useSelector((state: RootState) => state.general.mode);
 
   useEffect(() => {
     let tl = anime.timeline({
@@ -64,11 +59,13 @@ export default function EditField(props: EditProps) {
                 alt="brick white"
               />
             )}
-            {value.label == "leer" && <p className={"text-white text-2xl"}>B</p>}
+            {value.label == "leer" && (
+              <p className={"text-white text-2xl"}>B</p>
+            )}
           </button>
         ))}
 
-      {mode == "mespuba" &&
+      {mode == "mespuma" &&
         props.options.map((value: EingabeAlphabetOption, key: React.Key) => (
           <button
             key={key}
