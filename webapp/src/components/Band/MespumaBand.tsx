@@ -88,21 +88,25 @@ export default function Band() {
     <div className={"w-screen"}>
       <h4 className="pb-3 pt-5">Mehrspuren-Maschine</h4>
 
-      <div className={"flex flex-col"}>
-
-        {/* TODO: Button für Felderhinzufügen - mobile: */}
-
-        {/* <button
+      <div className="flex ">
+        <div className="flex-none mx-1 ">
+          
+        <button
           className={"mt-10 rounded-r-none md:rounded md:invisible"}
           onClick={() =>
             dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))
           }
         >
           +
-        </button> */}
-        <div className="pb-0 my-10">
+        </button>
+          
+        </div>
+
+        <div className="flex-1 w-64 overflow-x-auto mx-2">
+          
+        <div className="pb-0 my-10 ">
           {mBand.map((band, bandIndex) => (
-            <div className={"band-container-mespuma col-span-12 overflow-auto z-" + (mBand.length*10-bandIndex*10)}>
+            <div className={"band-container-mespuma overflow-auto col-span-12  z-" + (mBand.length*10-bandIndex*10)}>
               {band.map((value, index) => (
                 <BandItem
                   value={value.value}
@@ -120,7 +124,53 @@ export default function Band() {
           ))}
         </div>
 
-{/* TODO: Button für Felderhinzufügen - mobile: */}
+        </div>
+
+        <div className="flex-none  mx-1">
+          
+        <button
+          className={"mt-10 rounded-l-none md:rounded md:invisible"}
+          onClick={() => dispatch(bandAddField("after"))}
+        >
+          +
+        </button>
+
+        </div>
+      </div>
+
+      {/* <div className={"flex flex-col overflow-x-auto"}> */}
+
+        {/*  Button für Felderhinzufügen - mobile: */}
+
+        {/* <button
+          className={"mt-10 rounded-r-none md:rounded md:invisible"}
+          onClick={() =>
+            dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))
+          }
+        >
+          +
+        </button> */}
+        {/* <div className="pb-0 my-10 ">
+          {mBand.map((band, bandIndex) => (
+            <div className={"band-container-mespuma col-span-12 overflow-auto z-" + (mBand.length*10-bandIndex*10)}>
+              {band.map((value, index) => (
+                <BandItem
+                  value={value.value}
+                  label={value.label}
+                  index={index}
+                  bandIndex={bandIndex}
+                  pointer={value.pointer!}
+                  key={bandIndex + index}
+                  alphabet={currentAlphabet.alphabet}
+                  showEditField={true}
+                  setPointerAt={() => setPointerAt(index)}
+                />
+              ))}
+            </div>
+          ))}
+        </div> */}
+
+{/* Button für Felderhinzufügen - mobile: */}
         {/* <button
           className={"mt-10 rounded-l-none md:rounded md:invisible"}
           onClick={() => dispatch(bandAddField("after"))}
@@ -128,7 +178,8 @@ export default function Band() {
           +
         </button> */}
 
-      </div>
+      {/* </div> */}
+
       {showWarning ? (
         <div className="flex justify-center">
           <IoIosWarning
