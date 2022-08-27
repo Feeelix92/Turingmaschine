@@ -856,28 +856,19 @@ export const generalSlice = createSlice({
      * This function switches from or to the Mespuma views
      * @param state
      */
-    changeMespumaMode: (state) => {
-      if (state.mode != "mespuma") {
+    changeMespumaMode: (state, mespuma: PayloadAction<boolean>) => {
+      if (mespuma.payload) {
         state.mode = "mespuma";
       } else {
         state.mode = "default";
       }
-      if (state.mode != "mespuma") {
-        state.rows = initialRow;
-        state.zustandsmenge = initialZustandsmenge;
-        state.anfangsZustand = initialAnfangszustand;
-        state.endZustand = initialEndZustandsmenge;
-        state.currentAlphabet = defaultAlphabetOption1;
-        state.bandAlphabet = initialBandAlphabet;
-      } else {
-        // TODO: else für Mespuma befüllen:
-        state.rows = initialRow;
-        state.zustandsmenge = initialZustandsmenge;
-        state.anfangsZustand = initialAnfangszustand;
-        state.endZustand = initialEndZustandsmenge;
-        state.currentAlphabet = defaultAlphabetOption1;
-        state.bandAlphabet = initialBandAlphabet;
-      }
+
+      state.rows = initialRow;
+      state.zustandsmenge = initialZustandsmenge;
+      state.anfangsZustand = initialAnfangszustand;
+      state.endZustand = initialEndZustandsmenge;
+      state.currentAlphabet = defaultAlphabetOption1;
+      state.bandAlphabet = initialBandAlphabet;
     },
   },
 });

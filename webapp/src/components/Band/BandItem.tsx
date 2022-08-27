@@ -158,16 +158,23 @@ export default function BandItem(props: BandItemProps) {
 
   return (
     <div
-        className={`band-container__band ${currentBandSkin} flex justify-center ${
+      className={`band-container__band ${currentBandSkin} flex justify-center ${
         pointerIdx === props.index ? "pointerBorder" : ""
       }`}
       key={props.index}
       ref={wrapperRef}
     >
       <div>
-      
         {pointerIdx === props.index ? (
-          <div className={' scroll-mx-16' + ((props.bandIndex==0) ? ' pointer' : '')} ref={fieldRef} draggable> </div>
+          <div
+            className={
+              " scroll-mx-16" + (props.bandIndex == 0 ? " pointer" : "")
+            }
+            ref={fieldRef}
+            draggable
+          >
+            {" "}
+          </div>
         ) : (
           ""
         )}
@@ -192,7 +199,10 @@ export default function BandItem(props: BandItemProps) {
         {editMode && props.showEditField ? (
           <div className={"editBtnDiv"}>
             <EditField options={props.alphabet} updateValue={chooseOption} />
-            <button className={"editBtn delete z-50"} onClick={() => deleteValue()}>
+            <button
+              className={"editBtn delete z-50"}
+              onClick={() => deleteValue()}
+            >
               <BsFillEraserFill />
             </button>
           </div>
