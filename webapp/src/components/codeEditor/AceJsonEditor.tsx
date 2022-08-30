@@ -436,6 +436,9 @@ export default function AceJsonEditor(props: CodeEditorProps) {
       }
     };
     fileReader.readAsText(jsonFile);
+    // clear fileinput
+    // @ts-ignore
+    event.target.value = null;
   };
   const fileUpload = () => {
     // @ts-ignore
