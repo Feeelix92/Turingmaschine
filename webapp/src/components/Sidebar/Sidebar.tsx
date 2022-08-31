@@ -13,6 +13,9 @@ import { EingabeAlphabet } from "../../interfaces/CommonInterfaces";
 import { cartesianProduct } from "../../interfaces/CommonFunctions";
 import AceJsonEditor from "../codeEditor/AceJsonEditor";
 import { Routes, Route, Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useTranslation, Trans} from "react-i18next";
+import i18next from "i18next";
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -77,17 +80,37 @@ function Sidebar() {
     }
   };
 
+  const { i18n, t} = useTranslation(["general"])
+
+  /*useEffect(() => {
+    if (localStorage.getItem("i18nextLng")?.length > 2) {
+      i18next.changeLanguage("de")
+    }
+  }, []);*/
+
+  ///Wechselt die Sprache///
+  const handleLanguageChange = (language: { target: { value: string }; }) => {
+    i18n.changeLanguage(language.target.value)
+  }
+
+    const lngs = {
+        de: { nativeName: 'Deutsch' },
+        en: { nativeName: 'English' }
+    };
+
+
+
   return (
     <Menu right>
       <div className={"mt-0"}>
         <a className={"menu-item text-white text-lg no-underline"} href="/">
-          Startseite
+          {t("sidebar.homePage")}
         </a>
       </div>
 
       <hr className="mt-5" />
 
-      <div className="">Modus</div>
+      <div className="">{t("sidebar.mode")}</div>
 
       {/* <div className="inline-flex rounded-md shadow-sm">
 
@@ -113,7 +136,7 @@ function Sidebar() {
         <a className={"menu-item text-white text-lg no-underline"}>
           <Link to="/">
             <button className={"w-50"} onClick={() => changeMSMMode(false)}>
-              Normaler Modus
+              {t("sidebar.normalMode")}
             </button>
           </Link>
         </a>
@@ -128,7 +151,7 @@ function Sidebar() {
               }
               onClick={() => changeTpMode()}
             >
-              Toilettenpapiermodus
+              {t("sidebar.toiletPaperMode")}
             </button>
           </Link>
         </a>
@@ -138,7 +161,7 @@ function Sidebar() {
         <a className={"menu-item text-white text-lg no-underline"}>
           <Link to="/mehrspuren">
             <button className={"w-50"} onClick={() => changeMSMMode(true)}>
-              Mehrspurenmaschine
+                {t("sidebar.multiTrackMachine")}
             </button>
           </Link>
         </a>
@@ -161,11 +184,19 @@ function Sidebar() {
           }
         >
           <a className="text-white text-lg no-underline" onClick={toggleModal}>
-            Code-Editor
+              {t("sidebar.codeEditor")}
           </a>
           {showModal ? <AceJsonEditor toggleEditor={toggleModal} /> : null}
         </a>
       </div>
+
+        <div>
+            {Object.keys(lngs).map((lng) => (
+                <button key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
+                    {lngs[lng].nativeName}
+                </button>
+            ))}
+        </div>
     </Menu>
   );
 }

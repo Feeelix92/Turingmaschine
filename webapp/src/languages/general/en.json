@@ -1,0 +1,21 @@
+{
+  "menu": {
+    "currentState": "State",
+    "control": {
+      "actualSpeed": "Speed"
+    }
+  },
+  "sidebar": {
+    "homePage": "Home",
+    "mode": "Mode",
+    "normalMode": "normal Mode",
+    "toiletPaperMode": "Toilet Paper Mode",
+    "multiTrackMachine": "Multi-Track-Machine",
+    "codeEditor": "Code-Editor"
+  },
+  "band": {
+    "addLeft": "Field left",
+    "addRight": "Field right",
+    "clearBand": "clear"
+  }
+}

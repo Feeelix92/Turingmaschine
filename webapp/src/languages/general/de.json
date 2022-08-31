@@ -1,0 +1,21 @@
+{
+  "menu": {
+    "currentState": "Zustand",
+    "control": {
+      "actualSpeed": "Geschwindigkeit"
+    }
+  },
+  "sidebar": {
+    "homePage": "Startseite",
+    "mode": "Modus",
+    "normalMode": "Normaler Modus",
+    "toiletPaperMode": "Toilettenpapiermodus",
+    "multiTrackMachine": "Mehrspurenmaschine",
+    "codeEditor": "Code-Editor"
+  },
+  "band": {
+    "addLeft": "Feld links",
+    "addRight": "Feld rechts",
+    "clearBand": "leeren"
+  }
+}

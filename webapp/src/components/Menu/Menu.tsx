@@ -2,9 +2,12 @@ import Sidebar from "../Sidebar/Sidebar";
 import Control from "../Control/Control";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { initReactI18next, useTranslation} from "react-i18next";
 
 
 function Menu() {
+
+    const { t } = useTranslation(["general"])
 
     const currentZustand = useSelector(
         (state: RootState) => state.general.activeState
@@ -25,7 +28,7 @@ function Menu() {
             <div className={"currentZustand flex-col content-center items-center justify-center mb-8 hidden md:flex pr-0" } >
                 { mode != "toiletpaper" && currentZustand ? (
                 <div className={"rounded-full w-32 bg-white text-thm-primary h-8 pl-5 mt-14 ml-0 mr-8 xl:mr-32"}>
-                    Zustand: {currentZustand.value}
+                    {t("menu.currentState")}: {currentZustand.value}
                 </div>
                 ) : ("")}
 
