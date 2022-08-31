@@ -1,6 +1,7 @@
 {
   "menu": {
     "currentState": "Zustand",
+    "currentStateWarning": "Kein Zustand vorhanden!",
     "control": {
       "actualSpeed": "Geschwindigkeit"
     }
@@ -17,5 +18,20 @@
     "addLeft": "Feld links",
     "addRight": "Feld rechts",
     "clearBand": "leeren"
+  },
+  "table": {
+    "when": "Wenn",
+    "then": "Dann",
+    "currentState": "Zustand",
+    "read": "Lese",
+    "newState": "neuer Zustand",
+    "write": "Schreibe",
+    "direction": "Gehe nach"
+  },
+  "list": {
+    "warningInitialState": "Dieser Zustand ist nicht länger vorhanden!",
+    "warningFinalState": "Einer der Endzustände ist nicht länger vorhanden!",
+    "finalStates": "Endzustand",
+    "initialState": "Anfangszustand"
   }
 }

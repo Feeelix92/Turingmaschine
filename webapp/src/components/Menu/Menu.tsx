@@ -34,7 +34,7 @@ function Menu() {
 
                 { mode != "toiletpaper" && !currentZustand ? (
                 <div className={"rounded-full bg-white text-thm-primary h-8"}>
-                    Kein Zustand vorhanden!
+                    {t("menu.currentStateWarning")}
                 </div>
                     ) : ("")}
                 </div>

@@ -1,6 +1,7 @@
 {
   "menu": {
     "currentState": "State",
+    "currentStateWarning": "No state available!",
     "control": {
       "actualSpeed": "Speed"
     }
@@ -8,14 +9,29 @@
   "sidebar": {
     "homePage": "Home",
     "mode": "Mode",
-    "normalMode": "normal Mode",
+    "normalMode": "Normal Mode",
     "toiletPaperMode": "Toilet Paper Mode",
     "multiTrackMachine": "Multi-Track-Machine",
-    "codeEditor": "Code-Editor"
+    "codeEditor": "Code Editor"
   },
   "band": {
     "addLeft": "Field left",
     "addRight": "Field right",
     "clearBand": "clear"
+  },
+  "table": {
+    "when": "When",
+    "then": "Then",
+    "currentState": "Current State",
+    "read": "Read",
+    "newState": "New State",
+    "write": "Write",
+    "direction": "Direction"
+  },
+  "list": {
+    "warningInitialState": "This state is no longer present!",
+    "warningFinalState": "One of the final states is no longer present!",
+    "finalStates": "Final States",
+    "initialState": "Initial State"
   }
 }

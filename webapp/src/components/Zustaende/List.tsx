@@ -15,6 +15,7 @@ import { RootState, store } from "../../redux/store";
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
 import { BiCaretDown, BiCaretUp, IoIosWarning } from "react-icons/all";
 import watch from "redux-watch";
+import { initReactI18next, useTranslation} from "react-i18next";
 
 function ConditionsList() {
   /**
@@ -228,6 +229,9 @@ function ConditionsList() {
 
   const [endZustandWarningOn, setEndZustandWarningOn] = useState(false);
 
+  ///internationalization
+  const { t } = useTranslation(["general"])
+
   return (
     <div
       className={
@@ -309,11 +313,11 @@ function ConditionsList() {
             }
           >
             <div className={"flex col-span-2 justify-between"}>
-              Anfangszustand q0 = {anfangsZustand.value}{" "}
+              {t("list.initialState")} q0 = {anfangsZustand.value}{" "}
               {anfangsZustand.warningMode ? (
                 <IoIosWarning
                   color="orange"
-                  title="Dieser Zustand ist nicht länger vorhanden!"
+                  title={t("list.warningInitialState")}
                   size="32"
                 />
               ) : null}
@@ -335,7 +339,7 @@ function ConditionsList() {
           >
             <div className={"flex col-span-2 justify-between"}>
               <div>
-                Endzustand F = {kA}
+                {t("list.finalStates")} F = {kA}
                 {endZustand.map((value, index) => (
                   <span key={index}>
                     {value.value}
@@ -347,7 +351,7 @@ function ConditionsList() {
               {endZustandWarningOn ? (
                 <IoIosWarning
                   color="orange"
-                  title="Einer der Endzustände ist nicht länger vorhanden!"
+                  title={t("list.warningFinalState")}
                   size="32"
                 />
               ) : null}

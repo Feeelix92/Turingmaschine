@@ -7,6 +7,7 @@ import {
   maschineCheckExecutable,
 } from "../../redux/generalStore";
 import Row from "./Row";
+import { initReactI18next, useTranslation} from "react-i18next";
 
 export default function Table() {
   const loadedRows = useSelector((state: RootState) => state.general.rows);
@@ -46,14 +47,17 @@ export default function Table() {
   //   })
   // );
 
+  ///internationalization
+  const { t } = useTranslation(["general"])
+
   return (
     <div className="flex flex-col col-span-2 border rounded p-0 w-screen md:w-auto">
       <div className="sm:-mx-0 lg:-mx-0">
         <div className=" sm:px-6 lg:px-8">
           <div className="overflow-x-auto items-center">
             <div className="flex w-full text-left text-sm font-medium text-gray-900">
-              <div className="w-1/2 pl-2">Wenn...</div>
-              <div className="w-1/2 pl-2">Dann...</div>
+              <div className="w-1/2 pl-2">{t("table.when")}...</div>
+              <div className="w-1/2 pl-2">{t("table.then")}...</div>
             </div>
             <table className="min-w-full w-full">
               <thead className="flex border-b w-full">
