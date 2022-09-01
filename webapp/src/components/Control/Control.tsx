@@ -72,7 +72,7 @@ function Control() {
 
   const increaseSlider = () => {
     let val = slider;
-    if (val < 25) {
+    if (val < 100) {
       setSlider(++val);
     }
   };
@@ -402,7 +402,7 @@ function Control() {
             }
             type="range"
             min={1}
-            max={25}
+            max={100}
             value={slider}
             onChange={(e) => setSlider(e.target.valueAsNumber)}
             step={1}
