@@ -13,6 +13,7 @@ import { EingabeAlphabet } from "../../interfaces/CommonInterfaces";
 import { cartesianProduct } from "../../interfaces/CommonFunctions";
 import AceJsonEditor from "../codeEditor/AceJsonEditor";
 import { Routes, Route, Link } from "react-router-dom";
+import { FaLaptopCode } from "react-icons/fa";
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -146,13 +147,13 @@ function Sidebar() {
 
       <hr className="mt-5" />
 
-      <div className={""}>
+      {/* <div className={""}>
         <a
           className={"menu-item text-white text-lg no-underline cursor-pointer"}
         >
           Skin ändern
         </a>
-      </div>
+      </div> */}
 
       <div className={""}>
         <a
@@ -160,8 +161,12 @@ function Sidebar() {
             "hidden md:block menu-item text-white text-lg no-underline cursor-pointer"
           }
         >
-          <a className="text-white text-lg no-underline" onClick={toggleModal}>
-            Code-Editor
+          <a className="text-white text-lg no-underline flex items-center" onClick={toggleModal}>
+            Code-Editor 
+            <div className="pl-2">
+            <FaLaptopCode/>
+            </div>
+            
           </a>
           {showModal ? <AceJsonEditor toggleEditor={toggleModal} /> : null}
         </a>
