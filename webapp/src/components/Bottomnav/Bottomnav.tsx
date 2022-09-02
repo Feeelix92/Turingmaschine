@@ -6,6 +6,7 @@ import {
     FaTable,
     FaClipboardList
   } from "react-icons/fa";
+import {useTranslation} from "react-i18next";
 
 
 function Bottomnav() {
@@ -47,8 +48,9 @@ function Bottomnav() {
         window.addEventListener('resize', handleResize);
 
     })
-    
 
+    ///internationalization
+    const { t } = useTranslation(["general"])
 
     return (
         <div>
@@ -60,12 +62,12 @@ function Bottomnav() {
             <div className={`bottomnav z-50 ${(keyboardIsOpen) ? 'hidden' : 'flex'}`}>
                 <button className={"grid justify-items-center"}  onClick={() => showSpez()}>
                     <FaClipboardList/>
-                    Spezifikationen
+                    {t("bottomNavBar.configurations")}
                 </button>
 
                 <button className={"grid justify-items-center"} onClick={() => showFunk()}>
                      <FaTable/>
-                     Tabelle
+                    {t("bottomNavBar.table")}
                 </button>
 
             </div>

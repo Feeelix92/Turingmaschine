@@ -17,6 +17,11 @@
     "codeEditor": "Code Editor"
   },
 
+  "bottomNavBar": {
+    "configurations": "Configurations",
+    "table": "Table"
+  },
+
   "band": {
     "addLeft": "Field left",
     "addRight": "Field right",
