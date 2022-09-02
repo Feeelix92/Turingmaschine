@@ -1,5 +1,6 @@
 {
   "menu": {
+    "name": "Turing Machine Simulator",
     "currentState": "State",
     "currentStateWarning": "No state available!",
     "control": {

@@ -20,7 +20,7 @@ function Menu() {
     return (
         <div className={"menu w-full flex"}>
             <h1 className="text-white text-xl p-3 md:pl-2 pr-2 2xl:pr-16 min-w-max self-center float-left hidden xl:block">
-                Turingmaschinen-Simulator
+                {t("menu.name")}
             </h1>
             
             <Control />

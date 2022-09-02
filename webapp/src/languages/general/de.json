@@ -1,5 +1,6 @@
 {
   "menu": {
+    "name": "Turingmaschinen-Simulator",
     "currentState": "Zustand",
     "currentStateWarning": "Kein Zustand vorhanden!",
     "control": {
