@@ -12,6 +12,7 @@ import {
 import { BsFillEraserFill } from "react-icons/bs";
 import { BandItemProps } from "../../interfaces/CommonInterfaces";
 import watch from "redux-watch";
+import i18next from "i18next";
 
 export default function BandItem(props: BandItemProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -152,7 +153,7 @@ export default function BandItem(props: BandItemProps) {
     });
 
     if (!allowed) {
-      alert("Wert ist nicht im Alphabet enthalten!");
+      alert(i18next.t("bandItem.warningValueNotIncluded"));
     }
   }
 

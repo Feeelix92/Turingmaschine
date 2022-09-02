@@ -29,6 +29,13 @@
     }
   },
 
+  "bandItem": {
+    "warningValueNotIncluded": "Value is not included in the alphabet!"
+  },
+  "teePeeBandItem": {
+    "warningValueNotIncluded": "Value is not included in the alphabet!"
+  },
+
   "table": {
     "when": "When",
     "then": "Then",

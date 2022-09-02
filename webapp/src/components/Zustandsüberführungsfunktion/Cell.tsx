@@ -17,6 +17,7 @@ import {
 import EditField from "./EditField";
 import ZustandSelect from "./ZustandSelect";
 import {useTranslation} from "react-i18next";
+import i18next from "i18next";
 
 export default function Cell(props: CellProps) {
   const mode = useSelector((state: RootState) => state.general.mode);
@@ -35,6 +36,9 @@ export default function Cell(props: CellProps) {
   const temp = [initialZustand3];
 
   const [warningMode, setWarningMode] = useState(false);
+
+  //Internationalization
+  const { t } = useTranslation(["general"])
 
   /////////// States from State ///////////
   let states = zustandsmenge.concat(temp);
@@ -175,7 +179,7 @@ export default function Cell(props: CellProps) {
     });
 
     if (!allowed) {
-      alert("Wert ist nicht im Alphabet enthalten!");
+      alert(i18next.t("cell.warningValueNotIncluded"));
     }
   }
 
@@ -203,8 +207,6 @@ export default function Cell(props: CellProps) {
       }
     }
   }
-  //Internationalization
-  const { t } = useTranslation(["general"])
 
   return (
     <td

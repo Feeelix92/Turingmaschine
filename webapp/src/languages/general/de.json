@@ -28,6 +28,12 @@
       "headline": "Mehrspuren-Maschine"
     }
   },
+  "bandItem": {
+    "warningValueNotIncluded": "Wert ist nicht im Alphabet enthalten!"
+  },
+  "teePeeBandItem": {
+    "warningValueNotIncluded": "Wert ist nicht im Alphabet enthalten!"
+  },
 
   "table": {
     "when": "Wenn",

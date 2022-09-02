@@ -15,6 +15,7 @@ import {icons} from "react-icons";
 import {BsFillEraserFill} from "react-icons/bs";
 import BrickWhite from "../../assets/images/brick_white.svg";
 import BrickBlack from "../../assets/images/brick_black.svg";
+import i18next from "i18next";
 
 export default function BandItem(props: BandItemProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -102,7 +103,7 @@ export default function BandItem(props: BandItemProps) {
       });
 
       if (!allowed) {
-          alert("Wert ist nicht im Alphabet enthalten!");
+          alert(i18next.t("teePeeBandItem.warningValueNotIncluded"));
       }
   }
 
