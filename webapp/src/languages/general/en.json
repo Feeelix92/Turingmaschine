@@ -41,11 +41,16 @@
 
   "cell": {
     "warningInputValueNotAllowed": "This input value is no longer allowed!",
+    "warningValueNotIncluded": "Value is not included in the alphabet!",
     "toiletPaperMode": {
       "empty": "empty",
       "white": "white",
       "black": "black"
     }
+  },
+
+  "row":{
+    "stop": "STOP"
   },
 
   "list": {
@@ -74,5 +79,14 @@
 
   "toiletPaperMode": {
     "stateTable": "State table"
+  },
+
+  "codeEditor": {
+    "name": "Code Editor",
+    "warningEmptyIsNotAllowed": "An empty alphabet is not allowed!",
+    "warningNoValidJSON": "No valid JSON! Your input must be in JSON format!",
+    "saveButton": "config",
+    "cancelButton": "cancel"
+
   }
 }

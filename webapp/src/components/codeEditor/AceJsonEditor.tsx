@@ -31,6 +31,8 @@ import {
 } from "../../redux/bandStore";
 import Row from "../Zustandsüberführungsfunktion/Row";
 import { FiDownload, FiSave, FiUpload } from "react-icons/all";
+import i18next from "i18next";
+import {useTranslation} from "react-i18next";
 
 interface tableZustand {
   [key: string]: tableZeichen;
@@ -180,6 +182,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         // save alphabet from editor to store
         // json.specifications.alphabet...
         const alphabet = json.specifications.alphabet;
+
         if (alphabet.length > 0) {
           dispatch(alphabetDeleteCustom());
           alphabet.forEach((value: string) => {
@@ -187,7 +190,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
           });
           dispatch(alphabetPushToDialogOptions(alphabet.toString()));
         } else {
-          alert("Ein leeres Alphabet ist nicht erlaubt!");
+          alert(i18next.t("codeEditor.warningEmptyIsNotAllowed"));
         }
 
         //save states from editor to store
@@ -267,7 +270,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
       } catch (e) {
         // Error message is shown, if the entered code in editor is no valid JSON
         alert(
-          "Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen! \n" +
+            i18next.t("codeEditor.warningNoValidJSON") + " \n" +
             e
         );
       }
@@ -445,6 +448,9 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     inputRef.current.click();
   };
 
+  //Internationalization
+  const { t } = useTranslation(["general"])
+
   return (
     <div>
       <div
@@ -457,7 +463,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <div className="flex items-center p-4 rounded-t border-b dark:border-gray-600">
               <h3 className="font-semibold text-gray-900 dark:text-white">
-                Code-Editor
+                {t("codeEditor.name")}
               </h3>
               <button
                 type="button"
@@ -509,7 +515,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                 onClick={parseToJSON}
                 className="bg-thm-primary"
               >
-                konfigurieren
+                {t("codeEditor.saveButton")}
               </button>
               <button
                 data-modal-toggle="defaultModal"
@@ -517,7 +523,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                 onClick={toggleEditor}
                 className="bg-thm-secondary hover:bg-thm-primary2"
               >
-                abbrechen
+                {t("codeEditor.cancelButton")}
               </button>
               <button
                 data-modal-toggle="defaultModal"
