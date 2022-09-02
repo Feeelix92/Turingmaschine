@@ -65,6 +65,7 @@
     "warningInitialState": "Dieser Zustand ist nicht länger vorhanden!",
     "warningFinalState": "Einer der Endzustände ist nicht länger vorhanden!",
     "finalStates": "Endzustand",
+    "finalStatesSelection": "Wähle",
     "initialState": "Anfangszustand",
     "tapeAlphabetSymbols": "Bandalphabet",
     "states": "Zustandsmenge",

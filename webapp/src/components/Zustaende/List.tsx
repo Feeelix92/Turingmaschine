@@ -364,6 +364,7 @@ function ConditionsList() {
                 onChange={handleChangeMulti}
                 options={possibleEnd}
                 isMulti={true}
+                placeholder={t("list.finalStatesSelection")}
               />
             </div>
           </div>

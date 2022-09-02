@@ -65,6 +65,7 @@
     "warningInitialState": "This state is no longer present!",
     "warningFinalState": "One of the final states is no longer present!",
     "finalStates": "Final States",
+    "finalStatesSelection": "Select",
     "initialState": "Initial State",
     "tapeAlphabetSymbols": "Tape Alphabet Symbols",
     "states": "States",
