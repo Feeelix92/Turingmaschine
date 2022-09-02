@@ -47,5 +47,8 @@
       "addNewValue": "hinzufügen",
       "emptyIsNotAllowed": "Ein leeres Alphabet ist nicht erlaubt!"
     }
+  },
+  "toiletPaperMode": {
+    "stateTable": "Zustandstabelle"
   }
 }

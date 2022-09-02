@@ -47,5 +47,8 @@
       "addNewValue": "add",
       "emptyIsNotAllowed": "An empty set of input symbols is not allowed!"
     }
+  },
+  "toiletPaperMode": {
+    "stateTable": "State table"
   }
 }
