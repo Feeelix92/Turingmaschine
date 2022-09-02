@@ -14,6 +14,7 @@ import { IoIosWarning } from "react-icons/io";
 import watch from "redux-watch";
 import { useState } from "react";
 import { EingabeAlphabetOption } from "../../data/Alphabet";
+import {useTranslation} from "react-i18next";
 
 export default function Band() {
   const dispatch = useDispatch();
@@ -84,9 +85,12 @@ export default function Band() {
     dispatch(bandChangePointPos(1));
   };
 
+  //Für Internationalisierung
+  const { t } = useTranslation(["general"])
+
   return (
     <div className={"w-screen"}>
-      <h4 className="pb-3 pt-5">Mehrspuren-Maschine</h4>
+      <h4 className="pb-3 pt-5">{t("band.mespumaExtension.headline")}</h4>
 
       <div className="flex ">
         <div className="flex-none mx-1 ">
@@ -220,7 +224,7 @@ export default function Band() {
               dispatch(bandChangePointPos(1))
             }
           >
-            + Feld links
+            + {t("band.addLeft")}
           </button>
           <button
             onClick={(e) => {
@@ -228,13 +232,13 @@ export default function Band() {
             }}
             className={"w-36 invertedButton"}
           >
-            leeren
+            {t("band.clearBand")}
           </button>
           <button
             className={"w-36 invertedButton"}
             onClick={() => dispatch(bandAddField("after"))}
           >
-            Feld rechts +
+            {t("band.addRight")} +
           </button>
         </div>
       </div>

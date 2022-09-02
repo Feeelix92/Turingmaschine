@@ -17,7 +17,10 @@
   "band": {
     "addLeft": "Feld links",
     "addRight": "Feld rechts",
-    "clearBand": "leeren"
+    "clearBand": "leeren",
+    "mespumaExtension": {
+      "headline": "Mehrspuren-Maschine"
+    }
   },
   "table": {
     "when": "Wenn",
@@ -46,6 +49,9 @@
       "noOptionsMessage": "Geben Sie neues Zeichen ein!",
       "addNewValue": "hinzufügen",
       "emptyIsNotAllowed": "Ein leeres Alphabet ist nicht erlaubt!"
+    },
+    "mespumaExtension": {
+      "NumberOfTracks": "Anzahl Spuren"
     }
   },
   "toiletPaperMode": {

@@ -17,7 +17,10 @@
   "band": {
     "addLeft": "Field left",
     "addRight": "Field right",
-    "clearBand": "clear"
+    "clearBand": "clear",
+    "mespumaExtension": {
+      "headline": "Multi-Track-Machine"
+    }
   },
   "table": {
     "when": "When",
@@ -46,6 +49,9 @@
       "noOptionsMessage": "Type new character!",
       "addNewValue": "add",
       "emptyIsNotAllowed": "An empty set of input symbols is not allowed!"
+    },
+    "mespumaExtension": {
+      "NumberOfTracks": "Number of Tracks"
     }
   },
   "toiletPaperMode": {
