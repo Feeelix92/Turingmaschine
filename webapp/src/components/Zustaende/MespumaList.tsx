@@ -444,7 +444,7 @@ function ConditionsList() {
               {anfangsZustand.warningMode ? (
                 <IoIosWarning
                   color="orange"
-                  title="Dieser Zustand ist nicht länger vorhanden!"
+                  title={t("list.warningInitialState")}
                   size="32"
                 />
               ) : null}
@@ -478,7 +478,7 @@ function ConditionsList() {
               {endZustandWarningOn ? (
                 <IoIosWarning
                   color="orange"
-                  title="Einer der Endzustände ist nicht länger vorhanden!"
+                  title={t("list.warningFinalState")}
                   size="32"
                 />
               ) : null}
@@ -491,6 +491,7 @@ function ConditionsList() {
                 onChange={handleChangeMulti}
                 options={possibleEnd}
                 isMulti={true}
+                placeholder={t("list.finalStatesSelection")}
               />
             </div>
           </div>
