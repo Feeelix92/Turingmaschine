@@ -29,9 +29,23 @@
     "direction": "Gehe nach"
   },
   "list": {
+    "headline": "Spezifikationen",
     "warningInitialState": "Dieser Zustand ist nicht länger vorhanden!",
     "warningFinalState": "Einer der Endzustände ist nicht länger vorhanden!",
     "finalStates": "Endzustand",
-    "initialState": "Anfangszustand"
+    "initialState": "Anfangszustand",
+    "tapeAlphabetSymbols": "Bandalphabet",
+    "states": "Zustandsmenge",
+    "transitionFunction": "Zustandsüberführungsfunktion",
+    "dropdown": {
+      "inputSymbols": "Eingabealphabet",
+      "addInputSymbols": "Eingabealphabet hinzufügen",
+      "description": "Sie können Zeichen eingeben oder Zeichen aus den Standard-Eingabealphabeten auswählen!",
+      "inputPlaceholder": "Erstellen Sie",
+      "saveAdding": "speichern",
+      "noOptionsMessage": "Geben Sie neues Zeichen ein!",
+      "addNewValue": "hinzufügen",
+      "emptyIsNotAllowed": "Ein leeres Alphabet ist nicht erlaubt!"
+    }
   }
 }

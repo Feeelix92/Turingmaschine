@@ -29,9 +29,23 @@
     "direction": "Direction"
   },
   "list": {
+    "headline": "Configurations",
     "warningInitialState": "This state is no longer present!",
     "warningFinalState": "One of the final states is no longer present!",
     "finalStates": "Final States",
-    "initialState": "Initial State"
+    "initialState": "Initial State",
+    "tapeAlphabetSymbols": "Tape Alphabet Symbols",
+    "states": "States",
+    "transitionFunction": "Transition Function",
+    "dropdown": {
+      "inputSymbols": "Input Symbols",
+      "addInputSymbols": "Add Input Symbols",
+      "description": "You can enter characters or select characters from the standard Input Symbols!",
+      "inputPlaceholder": "Create",
+      "saveAdding": "save",
+      "noOptionsMessage": "Type new character!",
+      "addNewValue": "add",
+      "emptyIsNotAllowed": "An empty set of input symbols is not allowed!"
+    }
   }
 }

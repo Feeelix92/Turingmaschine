@@ -45,6 +45,9 @@ function ConditionsList() {
     (state: RootState) => state.general.zustandsmenge
   );
 
+  ///internationalization
+  const { t } = useTranslation(["general"])
+
   let zustandsmenge: Zustand[] = initZustandsmenge;
   let wZustandsmenge = watch(store.getState, "general.zustandsmenge");
   store.subscribe(
@@ -83,7 +86,7 @@ function ConditionsList() {
    * Accordion data (Title, Icons)
    */
   const accordionData = {
-    title: <h2>Spezifikationen</h2>,
+    title: <h2> {t("list.headline")}</h2>,
     openAccordion: (
       <button className={"float-left"}>
         <BiCaretDown />
@@ -229,9 +232,6 @@ function ConditionsList() {
 
   const [endZustandWarningOn, setEndZustandWarningOn] = useState(false);
 
-  ///internationalization
-  const { t } = useTranslation(["general"])
-
   return (
     <div
       className={
@@ -256,7 +256,7 @@ function ConditionsList() {
               "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
             }
           >
-            <div className={"col-span-2"}>Bandalphabet &Gamma; =</div>
+            <div className={"col-span-2"}>{t("list.tapeAlphabetSymbols")} &Gamma; =</div>
             <div
               className={
                 "border border-solid bg-gray-100 rounded p-2 col-span-2"
@@ -277,7 +277,7 @@ function ConditionsList() {
               "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
             }
           >
-            <div className={"col-span-2"}>Zustandsmenge Q =</div>
+            <div className={"col-span-2"}>{t("list.states")} Q =</div>
             <div
               className={
                 "border border-solid bg-gray-100 rounded p-2 break-all"
@@ -373,7 +373,7 @@ function ConditionsList() {
             }
           >
             <span className={"col-span-2"}>
-              Zustandsüberführungsfunktion &delta; =
+              {t("list.transitionFunction")} &delta; =
             </span>
             <button
               className={
