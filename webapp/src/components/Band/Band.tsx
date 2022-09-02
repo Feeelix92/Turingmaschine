@@ -84,7 +84,7 @@ export default function Band() {
     dispatch(bandChangePointPos(1));
   };
 
-    //Für Internationalisierung
+    //Internationalization
     const { t } = useTranslation(["general"])
 
   return (
@@ -122,7 +122,7 @@ export default function Band() {
         <div className="flex justify-center">
           <IoIosWarning
             color="orange"
-            title="Dieser Eingabewert ist nicht länger zulässig!"
+            title={t("band.warningInputValueNotAllowed")}
             size="48"
           />
         </div>
@@ -143,7 +143,7 @@ export default function Band() {
           </div>
         ) : (
           <div className={"rounded-full bg-thm-primary text-white h-8"}>
-            Kein Zustand vorhanden!
+              {t("band.warningNoStateAvailable")}
           </div>
         )}
       </div>

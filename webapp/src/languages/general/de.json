@@ -7,6 +7,7 @@
       "actualSpeed": "Geschwindigkeit"
     }
   },
+
   "sidebar": {
     "homePage": "Startseite",
     "mode": "Modus",
@@ -15,14 +16,19 @@
     "multiTrackMachine": "Mehrspurenmaschine",
     "codeEditor": "Code-Editor"
   },
+
   "band": {
     "addLeft": "Feld links",
     "addRight": "Feld rechts",
     "clearBand": "leeren",
+    "warningInputValueNotAllowed": "Dieser Eingabewert ist nicht länger zulässig!",
+    "warningNoStateAvailable": "Kein Zustand vorhanden!",
+
     "mespumaExtension": {
       "headline": "Mehrspuren-Maschine"
     }
   },
+
   "table": {
     "when": "Wenn",
     "then": "Dann",
@@ -32,6 +38,16 @@
     "write": "Schreibe",
     "direction": "Gehe nach"
   },
+  "cell": {
+    "warningInputValueNotAllowed": "Dieser Eingabewert ist nicht länger zulässig!",
+
+    "toiletPaperModeExtension": {
+      "empty": "leer",
+      "white": "weiß",
+      "black": "schwarz"
+    }
+  },
+
   "list": {
     "headline": "Spezifikationen",
     "warningInitialState": "Dieser Zustand ist nicht länger vorhanden!",

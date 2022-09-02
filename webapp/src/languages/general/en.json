@@ -7,6 +7,7 @@
       "actualSpeed": "Speed"
     }
   },
+
   "sidebar": {
     "homePage": "Home",
     "mode": "Mode",
@@ -15,14 +16,19 @@
     "multiTrackMachine": "Multi-Track-Machine",
     "codeEditor": "Code Editor"
   },
+
   "band": {
     "addLeft": "Field left",
     "addRight": "Field right",
     "clearBand": "clear",
+    "warningInputValueNotAllowed": "This input value is no longer allowed!",
+    "warningNoStateAvailable": "No state available!",
+
     "mespumaExtension": {
       "headline": "Multi-Track-Machine"
     }
   },
+
   "table": {
     "when": "When",
     "then": "Then",
@@ -32,6 +38,16 @@
     "write": "Write",
     "direction": "Direction"
   },
+
+  "cell": {
+    "warningInputValueNotAllowed": "This input value is no longer allowed!",
+    "toiletPaperMode": {
+      "empty": "empty",
+      "white": "white",
+      "black": "black"
+    }
+  },
+
   "list": {
     "headline": "Configurations",
     "warningInitialState": "This state is no longer present!",
@@ -55,6 +71,7 @@
       "NumberOfTracks": "Number of Tracks"
     }
   },
+
   "toiletPaperMode": {
     "stateTable": "State table"
   }
