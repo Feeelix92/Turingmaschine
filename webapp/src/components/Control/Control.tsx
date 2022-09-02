@@ -362,9 +362,13 @@ function Control() {
       let tempSlider = 3000 / slider;
       await sleep(tempSlider);
       if (mode === "mespuma") {
-        makeStepMespuma(activePointerPosition);
+        if (stoppMaschine === false && pauseMaschine === false) {
+          makeStepMespuma(activePointerPosition);
+        }
       } else {
-        makeStep(activePointerPosition);
+        if (stoppMaschine === false && pauseMaschine === false) {
+          makeStep(activePointerPosition);
+        }
       }
     }
 
