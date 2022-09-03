@@ -16,6 +16,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useTranslation, Trans} from "react-i18next";
 import i18next from "i18next";
+import {FlagIcon} from "react-flag-kit";
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -94,8 +95,8 @@ function Sidebar() {
   }
 
     const lngs = {
-        de: { nativeName: 'Deutsch' },
-        en: { nativeName: 'English' }
+        de: { nativeName: 'DE' },
+        en: { nativeName: 'GB' }
     };
 
 
@@ -192,8 +193,8 @@ function Sidebar() {
 
         <div>
             {Object.keys(lngs).map((lng) => (
-                <button key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
-                    {lngs[lng].nativeName}
+                <button key={lng} className={ i18n.resolvedLanguage === lng ? 'activeLng' : 'notActiveLng'} type="submit" onClick={() => i18n.changeLanguage(lng)}>
+                  <FlagIcon code={lngs[lng].nativeName} size={32} />
                 </button>
             ))}
         </div>
