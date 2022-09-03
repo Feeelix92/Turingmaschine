@@ -58,7 +58,7 @@
     "warningInputValueNotAllowed": "Dieser Eingabewert ist nicht länger zulässig!",
     "warningValueNotIncluded": "Wert ist nicht im Alphabet enthalten!",
 
-    "toiletPaperModeExtension": {
+    "toiletPaperMode": {
       "empty": "leer",
       "white": "weiß",
       "black": "schwarz"
