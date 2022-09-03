@@ -7,12 +7,20 @@ import {
   maschineCheckExecutable,
 } from "../../redux/generalStore";
 import Row from "./Row";
-import { initReactI18next, useTranslation} from "react-i18next";
+import {useTranslation} from "react-i18next";
+import i18next from "i18next";
 
 export default function Table() {
   const loadedRows = useSelector((state: RootState) => state.general.rows);
-  const header = useSelector((state: RootState) => state.general.header);
   const dispatch = useDispatch();
+
+  const headerArray = [
+      i18next.t("table.currentState"),
+      i18next.t("table.read"),
+      i18next.t("table.newState"),
+      i18next.t("table.write"),
+      i18next.t("table.direction"),
+  ]
 
   /////////// Rows from State ///////////
   let rows = loadedRows;
@@ -62,7 +70,7 @@ export default function Table() {
             <table className="min-w-full w-full">
               <thead className="flex border-b w-full">
                 <tr className="flex w-full">
-                  {header.map((value, key: React.Key) => (
+                  {headerArray.map((value, key: React.Key) => (
                     <th
                       key={key}
                       scope="col"
