@@ -142,8 +142,10 @@ function ConditionsList() {
   const [zustandsFunktion] = useState([""]);
 
   function getZustandsFunktion() {
-    if (zustandsFunktion.length <= 1) {
-      zustandsFunktion.pop();
+    let tempLenght = zustandsFunktion.length
+    for(let i=0; i <= tempLenght; i++){
+      zustandsFunktion.pop()
+    }
       let tempCellsString = "δ(";
       let tempHelper = true;
       loadedRows.forEach((row) => {
@@ -166,7 +168,7 @@ function ConditionsList() {
         zustandsFunktion.push(tempCellsString);
         tempCellsString = "δ(";
       });
-    }
+      console.log("after", zustandsFunktion)
     setShowZustandsfunktion(!showZustandsfunktion);
   }
 
