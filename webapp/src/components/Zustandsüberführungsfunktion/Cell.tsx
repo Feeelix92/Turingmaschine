@@ -94,6 +94,7 @@ export default function Cell(props: CellProps) {
     wEingabeAlphabet((newVal) => {
       eALphabet = newVal;
       checkWarningModus();
+      props.updateCellValue(props.index, props.value, warningMode);
     })
   );
 
@@ -106,18 +107,19 @@ export default function Cell(props: CellProps) {
 
   function chooseOption(option: string) {
     // pass chosen options to the parent to update the cell
-    props.updateCellValue(props.index, option);
+    props.updateCellValue(props.index, option, warningMode);
     // close the edit-buttons
     setEditMode(false);
   }
 
   function handleChange(newValue: OnChangeValue<Direction | Zustand, false>) {
     if (newValue) {
+      checkWarningModus(newValue);
       // pass chosen options to the parent to update the cell
       if (mode == "mespuma" && (props.index === 1 || props.index === 3)) {
-        props.updateCellValue(props.index, newValue.value);
+        props.updateCellValue(props.index, newValue.value, warningMode);
       } else {
-        props.updateCellValue(props.index, newValue);
+        props.updateCellValue(props.index, newValue, warningMode);
       }
     }
   }
@@ -133,6 +135,7 @@ export default function Cell(props: CellProps) {
   useEffect(() => {
     // action on update of warningMode
     checkWarningModus();
+    props.updateCellValue(props.index, props.value, warningMode);
   }, [warningMode]);
 
   useEffect(() => {
@@ -168,7 +171,7 @@ export default function Cell(props: CellProps) {
         value === "B"
       ) {
         // if its allowed, we pass the new value to the parent to update the cell value
-        props.updateCellValue(index, value);
+        props.updateCellValue(index, value, warningMode);
         allowed = true;
       }
     });
@@ -178,10 +181,11 @@ export default function Cell(props: CellProps) {
     }
   }
 
-  function checkWarningModus() {
-    if (props.value instanceof Zustand) {
+  function checkWarningModus(newValue?: Direction | Zustand | String) {
+    let tempVar = newValue ? newValue : props.value;
+    if (tempVar instanceof Zustand) {
       let tempBool = states.some((value) => {
-        let val = props.value as Zustand;
+        let val = tempVar as Zustand;
         return value.value === val.value;
       });
       if (tempBool) {
@@ -190,9 +194,9 @@ export default function Cell(props: CellProps) {
         setWarning(true);
         dispatch(maschineChangeExecutable(false));
       }
-    } else if (!(props.value instanceof Direction)) {
+    } else if (!(tempVar instanceof Direction)) {
       let tempBool = eALphabet.some((value) => {
-        return value.value === props.value;
+        return value.value === tempVar;
       });
       if (tempBool) {
         setWarning(false);
@@ -282,7 +286,7 @@ export default function Cell(props: CellProps) {
         ""
       )}
 
-      {warningMode ? (
+      {props.warningMode ? (
         <IoIosWarning
           color="orange"
           title="Dieser Eingabewert ist nicht länger zulässig!"

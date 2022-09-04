@@ -15,6 +15,7 @@ export interface RowInterface {
 export interface Cell {
   value: string | Zustand | Direction;
   editField: boolean;
+  warningMode: boolean;
 }
 
 export class Zustand {
@@ -68,9 +69,11 @@ export interface CellProps {
   value: string | Zustand | Direction;
   index: Key;
   showEditField: boolean;
+  warningMode: boolean;
   updateCellValue: (
     index: Key,
-    arg: string | boolean | Zustand | Direction
+    arg: string | boolean | Zustand | Direction,
+    warningMode: boolean
   ) => void;
   updateCellValueIsFinal: (index: Key, arg: boolean) => void;
 }
@@ -148,6 +151,7 @@ export interface updateCellType {
   cellIndex: React.Key;
   rowIndex: React.Key;
   value: string | boolean | Zustand | Direction;
+  warningMode?: boolean;
 }
 
 export interface CodeEditorProps {
