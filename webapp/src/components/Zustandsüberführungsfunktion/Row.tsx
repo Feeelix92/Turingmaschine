@@ -39,6 +39,12 @@ export default function Row(props: RowProps) {
   ) {
     // pass new data to table to update its rows-array
     if (typeof value === "string") {
+      console.log({
+        cellIndex: index,
+        rowIndex: props.index,
+        value: value,
+        warningMode: warningMode,
+      });
       dispatch(
         tableUpdateCell({
           cellIndex: index,

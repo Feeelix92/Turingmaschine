@@ -818,6 +818,8 @@ export const generalSlice = createSlice({
             updateCell.payload.warningMode;
         }
 
+        console.log("newCells___:", newCells);
+
         // tableUpdateRow({index: updateCell.payload.index, cells: newCells})
 
         const newRows: RowInterface[] = state.rows.slice(

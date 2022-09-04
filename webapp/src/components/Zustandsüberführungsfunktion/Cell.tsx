@@ -41,7 +41,10 @@ export default function Cell(props: CellProps) {
   store.subscribe(
     wStates((newVal) => {
       states = newVal;
-      checkWarningModus();
+
+      let warning = checkWarningModus();
+
+      props.updateCellValue(props.index, props.value, warning);
     })
   );
 
@@ -52,7 +55,9 @@ export default function Cell(props: CellProps) {
     wRows((newVal) => {
       rows = newVal;
 
-      checkWarningModus();
+      let warning = checkWarningModus();
+
+      props.updateCellValue(props.index, props.value, warning);
     })
   );
 
@@ -63,7 +68,9 @@ export default function Cell(props: CellProps) {
     wFinalStates((newVal) => {
       finalStates = newVal;
 
-      checkWarningModus();
+      let warning = checkWarningModus();
+
+      props.updateCellValue(props.index, props.value, warning);
 
       if (props.value instanceof Zustand) {
         let foundInFinal = false;
@@ -87,14 +94,16 @@ export default function Cell(props: CellProps) {
   const eingabeAlphabet = useSelector(
     (state: RootState) => state.general.bandAlphabet
   );
+
   /////////// Eingabealphabet from State ///////////
   let eALphabet = eingabeAlphabet;
   let wEingabeAlphabet = watch(store.getState, "general.bandAlphabet");
   store.subscribe(
     wEingabeAlphabet((newVal) => {
       eALphabet = newVal;
-      checkWarningModus();
-      props.updateCellValue(props.index, props.value, warningMode);
+      console.log("_______>", props.index);
+      let warning = checkWarningModus();
+      props.updateCellValue(props.index, props.value, warning);
     })
   );
 
@@ -106,20 +115,23 @@ export default function Cell(props: CellProps) {
   }
 
   function chooseOption(option: string) {
+    let warning = checkWarningModus(option);
     // pass chosen options to the parent to update the cell
-    props.updateCellValue(props.index, option, warningMode);
+    props.updateCellValue(props.index, option, warning);
     // close the edit-buttons
     setEditMode(false);
   }
 
   function handleChange(newValue: OnChangeValue<Direction | Zustand, false>) {
     if (newValue) {
-      checkWarningModus(newValue);
+      let warning = checkWarningModus(newValue);
+
       // pass chosen options to the parent to update the cell
       if (mode == "mespuma" && (props.index === 1 || props.index === 3)) {
-        props.updateCellValue(props.index, newValue.value, warningMode);
+        console.log("__________3", props.index, newValue.value, warning);
+        props.updateCellValue(props.index, newValue.value, warning);
       } else {
-        props.updateCellValue(props.index, newValue, warningMode);
+        props.updateCellValue(props.index, newValue, warning);
       }
     }
   }
@@ -132,11 +144,11 @@ export default function Cell(props: CellProps) {
     setWarningMode(newValue);
   }
 
-  useEffect(() => {
-    // action on update of warningMode
-    checkWarningModus();
-    props.updateCellValue(props.index, props.value, warningMode);
-  }, [warningMode]);
+  // useEffect(() => {
+  //   // action on update of warningMode
+  //   checkWarningModus();
+  //   // props.updateCellValue(props.index, props.value, warningMode);
+  // }, [warningMode]);
 
   useEffect(() => {
     // event to handle click outside to hide the edit-buttons
@@ -171,7 +183,8 @@ export default function Cell(props: CellProps) {
         value === "B"
       ) {
         // if its allowed, we pass the new value to the parent to update the cell value
-        props.updateCellValue(index, value, warningMode);
+        let warning = checkWarningModus(value);
+        props.updateCellValue(index, value, warning);
         allowed = true;
       }
     });
@@ -181,29 +194,46 @@ export default function Cell(props: CellProps) {
     }
   }
 
-  function checkWarningModus(newValue?: Direction | Zustand | String) {
+  function checkWarningModus(newValue?: Direction | Zustand | string): boolean {
     let tempVar = newValue ? newValue : props.value;
+    console.log(props.index, tempVar);
     if (tempVar instanceof Zustand) {
       let tempBool = states.some((value) => {
         let val = tempVar as Zustand;
         return value.value === val.value;
       });
       if (tempBool) {
-        setWarning(false);
+        // props.updateCellValue(props.index, tempVar, false);
+        return false;
+        // setWarning(false);
       } else {
-        setWarning(true);
+        // props.updateCellValue(props.index, tempVar, true);
+        // setWarning(true);
         dispatch(maschineChangeExecutable(false));
+        return true;
       }
     } else if (!(tempVar instanceof Direction)) {
       let tempBool = eALphabet.some((value) => {
-        return value.value === tempVar;
+        if (typeof tempVar === "string") {
+          return value.value === tempVar;
+        } else {
+          console.log("else");
+          return value.value === tempVar.value;
+        }
       });
+      console.log("tempBool", tempBool);
       if (tempBool) {
-        setWarning(false);
+        // props.updateCellValue(props.index, tempVar, false);
+        // setWarning(false);
+        return false;
       } else {
-        setWarning(true);
+        // props.updateCellValue(props.index, tempVar, true);
+        // setWarning(true);
         dispatch(maschineChangeExecutable(false));
+        return true;
       }
+    } else {
+      return false;
     }
   }
 
