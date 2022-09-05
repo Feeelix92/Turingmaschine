@@ -32,7 +32,7 @@ import {
 import Row from "../Zustandsüberführungsfunktion/Row";
 import { FiDownload, FiSave, FiUpload } from "react-icons/all";
 import { Tab } from "@headlessui/react";
-import Documentation from "./Documentation";
+import Tutorial from "./Tutorial";
 
 interface tableZustand {
   [key: string]: tableZeichen;
@@ -499,13 +499,13 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                             selected ? 'bg-thm-primary text-white' : 'bg-thm-primary2 text-white'
                           }
                       >
-                        Dokumentation
+                        Tutorial
                       </button>
                   )}</Tab>
               </Tab.List>
               <Tab.Panels>
                 <Tab.Panel>
-                  <div className="p-6 space-y-6 text-left min-h-[600px]">
+                  <div className="space-y-6 text-left min-h-[600px]">
                     <AceEditor
                         mode="json5"
                         theme="twilight"
@@ -530,7 +530,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                 </Tab.Panel>
                 <Tab.Panel>
                   <div className="p-6 space-y-6 text-left bg-white min-h-[600px] max-h-[600px] overflow-y-auto">
-                    <Documentation/>
+                    <Tutorial/>
                   </div>
                 </Tab.Panel>
               </Tab.Panels>

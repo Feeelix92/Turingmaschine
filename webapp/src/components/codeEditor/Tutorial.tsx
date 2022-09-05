@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export default function Documentation() {
+export default function Tutorial() {
 
     return (
         <div className={""}>
