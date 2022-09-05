@@ -82,7 +82,7 @@ function Sidebar() {
   };
 
   return (
-    <Menu right>
+    <Menu right width={450}>
       <div className={"mt-0"}>
       <Link className="no-underline" to="/">
         <a className={`text-white text-lg no-underline `} href="/">
@@ -95,27 +95,35 @@ function Sidebar() {
 
       <div className="">Modus</div>
 
-      {/* <div className="inline-flex rounded-md shadow-sm">
+      <div className="inline-flex rounded-md shadow-sm text-center">
 
-              <a href="/" aria-current="page" 
-              className="no-underline py-2 px-4 text-sm font-medium text-blue-700 active:bg-thm-primary bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+              <a 
+              className={`no-underline py-2 px-4 text-sm font-medium rounded-l-lg text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
+              ${(location.pathname==='/') ? 'bg-thm-primary' : 'bg-gray-700 '}`}>
+                 <Link to="/" className="no-underline text-white">
                 Normal
+                </Link>
               </a>
 
-              <a className="no-underline py-2 px-4 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
-                 <Link to="/papier" className="no-underline py-2 px-4 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
-                  TP
+              <a 
+              className={`no-underline py-2 px-4 text-sm font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
+              ${(location.pathname==='/papier') ? 'bg-thm-primary' : 'bg-gray-700 '}`}>
+                 <Link to="/papier" className="no-underline text-white ">
+                  Toilettenpapier
                  </Link>
               </a>
 
-              <a href="/mehrspuren" 
-              className="no-underline py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-r-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
-                Mehrspuren
+              <a 
+              className={`no-underline py-2 px-4 text-sm rounded-r-md font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
+              ${(location.pathname==='/mehrspuren') ? 'bg-thm-primary' : 'bg-gray-700 '}`}>
+                 <Link to="/mehrspuren" className="no-underline text-white ">
+                Mehrspuren-Maschine
+                </Link>
               </a>
               
-            </div> */}
+            </div>
 
-      <div className={""}>
+      {/* <div className={""}>
         <a className={"menu-item text-white text-lg no-underline"}>
           <Link to="/">
             <button className={`w-50 ${(location.pathname==='/') ? 'bg-thm-primary' : 'bg-gray-400 '}`} onClick={() => changeMSMMode(false)}>
@@ -146,17 +154,9 @@ function Sidebar() {
             </button>
           </Link>
         </a>
-      </div>
+      </div> */}
 
       <hr className="mt-5" />
-
-      {/* <div className={""}>
-        <a
-          className={"menu-item text-white text-lg no-underline cursor-pointer"}
-        >
-          Skin ändern
-        </a>
-      </div> */}
 
       <div className={""}>
         <a
