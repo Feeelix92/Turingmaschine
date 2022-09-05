@@ -529,7 +529,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                 </div>
                 </Tab.Panel>
                 <Tab.Panel>
-                  <div className="p-6 space-y-6 text-left bg-white min-h-[600px]">
+                  <div className="p-6 space-y-6 text-left bg-white min-h-[600px] max-h-[600px] overflow-y-auto">
                     <Documentation/>
                   </div>
                 </Tab.Panel>
