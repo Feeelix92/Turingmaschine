@@ -112,11 +112,18 @@ export const bandSlice = createSlice({
       }
     },
     bandChangePointPos: (state, step: PayloadAction<number>) => {
-      if (
+      if(step.payload > 0 && state.pointerPosition >= state.currentBand.length - 1) {
+        //TODO: BandItem rechts hinzufügen
+        console.log("BandItem rechts hinzufügen");
+      } else if(step.payload < 0 && state.pointerPosition == 0) {
+        //TODO: BandItem links hinzufügen
+        console.log("BandItem links hinzufügen");
+      }
+      else if (
         (step.payload < 0 && state.pointerPosition == 0) ||
-        (step.payload > 0 &&
-          state.pointerPosition >= state.currentBand.length - 1)
-      ) {
+        (step.payload > 0 && state.pointerPosition >= state.currentBand.length - 1)
+        ) 
+      {
         state.pointerPosition -= step.payload;
       } else {
         state.pointerPosition += step.payload;
