@@ -5,7 +5,7 @@ import {
   Zustand,
 } from "../../interfaces/CommonInterfaces";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect, useRef, useState } from "react";
+import React, {Fragment, useEffect, useRef, useState} from "react";
 import { RootState } from "../../redux/store";
 import AceEditor from "react-ace";
 import { setCompleters } from "ace-builds/src-noconflict/ext-language_tools";
@@ -31,6 +31,7 @@ import {
 } from "../../redux/bandStore";
 import Row from "../Zustandsüberführungsfunktion/Row";
 import { FiDownload, FiSave, FiUpload } from "react-icons/all";
+import { Tab } from "@headlessui/react";
 
 interface tableZustand {
   [key: string]: tableZeichen;
@@ -449,16 +450,13 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     <div>
       <div
         id="defaultModal"
-        className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex"
+        className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex bg-thm-primary2 dark:bg-gray-500"
         aria-modal="true"
         role="dialog"
       >
         <div className="relative p-4 w-full max-w-7xl h-full md:h-auto">
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <div className="flex items-center p-4 rounded-t border-b dark:border-gray-600">
-              <h3 className="font-semibold text-gray-900 dark:text-white">
-                Code-Editor
-              </h3>
               <button
                 type="button"
                 className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -481,27 +479,59 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                 <span className="sr-only">Close modal</span>
               </button>
             </div>
-            <div className="p-6 space-y-6 text-left">
-              <AceEditor
-                mode="json5"
-                theme="twilight"
-                onChange={onChange}
-                name="json-editor"
-                fontSize={16}
-                width={"100%"}
-                showPrintMargin={true}
-                showGutter={true}
-                editorProps={{ $blockScrolling: true }}
-                value={tempEditorText}
-                setOptions={{
-                  enableBasicAutocompletion: true,
-                  enableLiveAutocompletion: true,
-                  enableSnippets: true,
-                  showLineNumbers: true,
-                  tabSize: 2,
-                }}
-              />
-            </div>
+            <Tab.Group>
+              <Tab.List>
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                      <button
+                          className={
+                            selected ? 'bg-thm-primary text-white' : 'bg-thm-primary2 text-white'
+                          }
+                      >
+                        Code-Editor
+                      </button>
+                  )}</Tab>
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                      <button
+                          className={
+                            selected ? 'bg-thm-primary text-white' : 'bg-thm-primary2 text-white'
+                          }
+                      >
+                        Dokumentation
+                      </button>
+                  )}</Tab>
+              </Tab.List>
+              <Tab.Panels>
+                <Tab.Panel>
+                  <div className="p-6 space-y-6 text-left min-h-[600px]">
+                    <AceEditor
+                        mode="json5"
+                        theme="twilight"
+                        onChange={onChange}
+                        name="json-editor"
+                        fontSize={16}
+                        width={"100%"}
+                        height={"550px"}
+                        showPrintMargin={true}
+                        showGutter={true}
+                        editorProps={{ $blockScrolling: true }}
+                        value={tempEditorText}
+                        setOptions={{
+                          enableBasicAutocompletion: true,
+                          enableLiveAutocompletion: true,
+                          enableSnippets: true,
+                          showLineNumbers: true,
+                          tabSize: 2,
+                        }}
+                    />
+                </div>
+                </Tab.Panel>
+                <Tab.Panel>
+                  <div className="p-6 space-y-6 text-left bg-white min-h-[600px]">TEST</div>
+                </Tab.Panel>
+              </Tab.Panels>
+            </Tab.Group>
             <div className="flex items-center justify-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
               <button
                 data-modal-toggle="defaultModal"
