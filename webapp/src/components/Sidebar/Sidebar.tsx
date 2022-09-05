@@ -12,7 +12,7 @@ import { bandResetAll } from "../../redux/bandStore";
 import { EingabeAlphabet } from "../../interfaces/CommonInterfaces";
 import { cartesianProduct } from "../../interfaces/CommonFunctions";
 import AceJsonEditor from "../codeEditor/AceJsonEditor";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
 import { FaLaptopCode } from "react-icons/fa";
 
 function Sidebar() {
@@ -76,14 +76,19 @@ function Sidebar() {
         })
       );
     }
+
+    // Current Router Location:
+    const location = useLocation(); // Current Pathname = location.pathname
   };
 
   return (
     <Menu right>
       <div className={"mt-0"}>
-        <a className={"menu-item text-white text-lg no-underline"} href="/">
+      <Link className="no-underline" to="/">
+        <a className={`text-white text-lg no-underline `} href="/">
           Startseite
         </a>
+        </Link>
       </div>
 
       <hr className="mt-5" />
@@ -113,7 +118,7 @@ function Sidebar() {
       <div className={""}>
         <a className={"menu-item text-white text-lg no-underline"}>
           <Link to="/">
-            <button className={"w-50"} onClick={() => changeMSMMode(false)}>
+            <button className={`w-50 ${(location.pathname==='/') ? 'bg-thm-primary' : 'bg-gray-400 '}`} onClick={() => changeMSMMode(false)}>
               Normaler Modus
             </button>
           </Link>
@@ -124,9 +129,7 @@ function Sidebar() {
         <a className={"menu-item text-white text-lg no-underline"}>
           <Link to="/papier">
             <button
-              className={
-                "w-50" /*  + mode=="toiletpaper" ? 'bg-thm-primary' : 'bg-white text-thm-primary2'*/
-              }
+              className={`w-50 ${(location.pathname==='/papier') ? 'bg-thm-primary' : 'bg-gray-400 '}`}
               onClick={() => changeTpMode()}
             >
               Toilettenpapiermodus
@@ -138,7 +141,7 @@ function Sidebar() {
       <div className={""}>
         <a className={"menu-item text-white text-lg no-underline"}>
           <Link to="/mehrspuren">
-            <button className={"w-50"} onClick={() => changeMSMMode(true)}>
+            <button className={`w-50 ${(location.pathname==='/mehrspuren') ? 'bg-thm-primary' : 'bg-gray-400 '}`} onClick={() => changeMSMMode(true)}>
               Mehrspurenmaschine
             </button>
           </Link>
