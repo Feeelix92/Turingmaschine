@@ -32,6 +32,7 @@ import {
 import Row from "../Zustandsüberführungsfunktion/Row";
 import { FiDownload, FiSave, FiUpload } from "react-icons/all";
 import { Tab } from "@headlessui/react";
+import Documentation from "./Documentation";
 
 interface tableZustand {
   [key: string]: tableZeichen;
@@ -528,7 +529,9 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                 </div>
                 </Tab.Panel>
                 <Tab.Panel>
-                  <div className="p-6 space-y-6 text-left bg-white min-h-[600px]">TEST</div>
+                  <div className="p-6 space-y-6 text-left bg-white min-h-[600px]">
+                    <Documentation/>
+                  </div>
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
