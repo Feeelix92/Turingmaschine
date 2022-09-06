@@ -6,11 +6,8 @@ import ConditionsList from "./components/Zustaende/List";
 import MespumaList from "./components/Zustaende/MespumaList";
 import Bottomnav from "./components/Bottomnav/Bottomnav";
 import ToPaTable from "./components/Zustandsüberführungsfunktion/ToPaTable";
-import { useSelector } from "react-redux";
-import { RootState } from "./redux/store";
 import Band from "./components/Band/Band";
-import { useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (

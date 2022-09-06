@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { slide as Menu } from "react-burger-menu";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  alphabetDeleteZustand,
   changeToiletPaperMode,
   changeMespumaMode,
   alphabetChangeCurrentMespuma,
@@ -12,7 +11,7 @@ import { bandResetAll } from "../../redux/bandStore";
 import { EingabeAlphabet } from "../../interfaces/CommonInterfaces";
 import { cartesianProduct } from "../../interfaces/CommonFunctions";
 import AceJsonEditor from "../codeEditor/AceJsonEditor";
-import { Routes, Route, Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaLaptopCode } from "react-icons/fa";
 
 function Sidebar() {
@@ -84,10 +83,10 @@ function Sidebar() {
   return (
     <Menu right width={450}>
       <div className={"mt-0"}>
-      <Link className="no-underline" to="/">
-        <a className={`text-white text-lg no-underline `} href="/">
-          Startseite
-        </a>
+        <Link className="no-underline" to="/">
+          <a className={`text-white text-lg no-underline `} href="/">
+            Startseite
+          </a>
         </Link>
       </div>
 
@@ -96,32 +95,44 @@ function Sidebar() {
       <div className="">Modus</div>
 
       <div className="inline-flex rounded-md shadow-sm text-center">
+        <a
+          className={`no-underline py-2 px-4 text-sm font-medium rounded-l-lg text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
+              ${location.pathname === "/" ? "bg-thm-primary" : "bg-gray-700 "}`}
+          onClick={() => changeMSMMode(false)}
+        >
+          <Link to="/" className="no-underline text-white">
+            Normal
+          </Link>
+        </a>
 
-              <a 
-              className={`no-underline py-2 px-4 text-sm font-medium rounded-l-lg text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
-              ${(location.pathname==='/') ? 'bg-thm-primary' : 'bg-gray-700 '}`}>
-                 <Link to="/" className="no-underline text-white">
-                Normal
-                </Link>
-              </a>
+        <a
+          className={`no-underline py-2 px-4 text-sm font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
+              ${
+                location.pathname === "/papier"
+                  ? "bg-thm-primary"
+                  : "bg-gray-700 "
+              }`}
+          onClick={() => changeTpMode}
+        >
+          <Link to="/papier" className="no-underline text-white ">
+            Toilettenpapier
+          </Link>
+        </a>
 
-              <a 
-              className={`no-underline py-2 px-4 text-sm font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
-              ${(location.pathname==='/papier') ? 'bg-thm-primary' : 'bg-gray-700 '}`}>
-                 <Link to="/papier" className="no-underline text-white ">
-                  Toilettenpapier
-                 </Link>
-              </a>
-
-              <a 
-              className={`no-underline py-2 px-4 text-sm rounded-r-md font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
-              ${(location.pathname==='/mehrspuren') ? 'bg-thm-primary' : 'bg-gray-700 '}`}>
-                 <Link to="/mehrspuren" className="no-underline text-white ">
-                Mehrspuren-Maschine
-                </Link>
-              </a>
-              
-            </div>
+        <a
+          className={`no-underline py-2 px-4 text-sm rounded-r-md font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
+              ${
+                location.pathname === "/mehrspuren"
+                  ? "bg-thm-primary"
+                  : "bg-gray-700 "
+              }`}
+          onClick={() => changeMSMMode(true)}
+        >
+          <Link to="/mehrspuren" className="no-underline text-white ">
+            Mehrspuren-Maschine
+          </Link>
+        </a>
+      </div>
 
       {/* <div className={""}>
         <a className={"menu-item text-white text-lg no-underline"}>
@@ -164,12 +175,14 @@ function Sidebar() {
             "hidden md:block menu-item text-white text-lg no-underline cursor-pointer"
           }
         >
-          <a className="text-white text-lg no-underline flex items-center" onClick={toggleModal}>
-            Code-Editor 
+          <a
+            className="text-white text-lg no-underline flex items-center"
+            onClick={toggleModal}
+          >
+            Code-Editor
             <div className="pl-2">
-            <FaLaptopCode/>
+              <FaLaptopCode />
             </div>
-            
           </a>
           {showModal ? <AceJsonEditor toggleEditor={toggleModal} /> : null}
         </a>

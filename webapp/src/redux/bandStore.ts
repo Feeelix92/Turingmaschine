@@ -112,27 +112,28 @@ export const bandSlice = createSlice({
       }
     },
     bandChangePointPos: (state, step: PayloadAction<number>) => {
-      if(step.payload > 0 && state.pointerPosition >= state.currentBand.length - 1) {
+      if (
+        step.payload > 0 &&
+        state.pointerPosition >= state.currentBand.length - 1
+      ) {
         // BandItem rechts hinzufügen
         state.currentBand.push({
           value: state.emptyBandValue,
           label: "",
           warningMode: false,
         });
-        
-      } else if(step.payload < 0 && state.pointerPosition == 0) {
+      } else if (step.payload < 0 && state.pointerPosition == 0) {
         // BandItem links hinzufügen
         state.currentBand.unshift({
           value: state.emptyBandValue,
           label: "",
           warningMode: false,
         });
-      }
-      else if (
+      } else if (
         (step.payload < 0 && state.pointerPosition == 0) ||
-        (step.payload > 0 && state.pointerPosition >= state.currentBand.length - 1)
-        ) 
-      {
+        (step.payload > 0 &&
+          state.pointerPosition >= state.currentBand.length - 1)
+      ) {
         state.pointerPosition -= step.payload;
       } else {
         state.pointerPosition += step.payload;
@@ -184,6 +185,21 @@ export const bandSlice = createSlice({
         state.mespumaBand.pop();
       }
     },
+    bandDeleteAllMespuma: (state) => {
+      state.mespumaBand.forEach((band) => {
+        for (let index = 0; index < band.length; index++) {
+          band[index] = {
+            value: state.emptyBandValue,
+            label: "",
+            warningMode: false,
+          };
+        }
+      });
+      state.pointerPosition = 0;
+    },
+    bandResetAllMespuma: (state) => {
+      state.mespumaBand = initMespumaBand;
+    },
   },
 });
 
@@ -202,6 +218,8 @@ export const {
   bandChangeItemAtMespuma,
   bandAddBandMespuma,
   bandDeleteBandMespuma,
+  bandDeleteAllMespuma,
+  bandResetAllMespuma,
 } = bandSlice.actions;
 
 export default bandSlice.reducer;

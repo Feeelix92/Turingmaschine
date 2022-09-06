@@ -32,7 +32,7 @@ export default function Band() {
 
   /////////// Band from State ///////////
   let mBand = mespumaBand;
-  let wBand = watch(store.getState, "general.mespumaBand");
+  let wBand = watch(store.getState, "band.mespumaBand");
   store.subscribe(
     wBand((newVal) => {
       mBand = newVal;
@@ -90,59 +90,59 @@ export default function Band() {
 
       <div className="flex ">
         <div className="flex-none mx-1 ">
-          
-        <button
-          className={"mt-10 rounded-r-none md:rounded md:invisible"}
-          onClick={() =>
-            dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))
-          }
-        >
-          +
-        </button>
-          
+          <button
+            className={"mt-10 rounded-r-none md:rounded md:invisible"}
+            onClick={() =>
+              dispatch(bandAddField("before")) &&
+              dispatch(bandChangePointPos(1))
+            }
+          >
+            +
+          </button>
         </div>
 
         <div className="flex-1 w-64 overflow-x-auto mx-2">
-          
-        <div className="pb-0 my-10 ">
-          {mBand.map((band, bandIndex) => (
-            <div className={"band-container-mespuma overflow-auto col-span-12  z-" + (mBand.length*10-bandIndex*10)}>
-              {band.map((value, index) => (
-                <BandItem
-                  value={value.value}
-                  label={value.label}
-                  index={index}
-                  bandIndex={bandIndex}
-                  pointer={value.pointer!}
-                  key={bandIndex + index}
-                  alphabet={currentAlphabet.alphabet}
-                  showEditField={true}
-                  setPointerAt={() => setPointerAt(index)}
-                />
-              ))}
-            </div>
-          ))}
-        </div>
-
+          <div className="pb-0 my-10 ">
+            {mBand.map((band, bandIndex) => (
+              <div
+                className={
+                  "band-container-mespuma overflow-auto col-span-12  z-" +
+                  (mBand.length * 10 - bandIndex * 10)
+                }
+              >
+                {band.map((value, index) => (
+                  <BandItem
+                    value={value.value}
+                    label={value.label}
+                    index={index}
+                    bandIndex={bandIndex}
+                    pointer={value.pointer!}
+                    key={bandIndex + index}
+                    alphabet={currentAlphabet.alphabet}
+                    showEditField={true}
+                    setPointerAt={() => setPointerAt(index)}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="flex-none  mx-1">
-          
-        <button
-          className={"mt-10 rounded-l-none md:rounded md:invisible"}
-          onClick={() => dispatch(bandAddField("after"))}
-        >
-          +
-        </button>
-
+          <button
+            className={"mt-10 rounded-l-none md:rounded md:invisible"}
+            onClick={() => dispatch(bandAddField("after"))}
+          >
+            +
+          </button>
         </div>
       </div>
 
       {/* <div className={"flex flex-col overflow-x-auto"}> */}
 
-        {/*  Button für Felderhinzufügen - mobile: */}
+      {/*  Button für Felderhinzufügen - mobile: */}
 
-        {/* <button
+      {/* <button
           className={"mt-10 rounded-r-none md:rounded md:invisible"}
           onClick={() =>
             dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))
@@ -150,7 +150,7 @@ export default function Band() {
         >
           +
         </button> */}
-        {/* <div className="pb-0 my-10 ">
+      {/* <div className="pb-0 my-10 ">
           {mBand.map((band, bandIndex) => (
             <div className={"band-container-mespuma col-span-12 overflow-auto z-" + (mBand.length*10-bandIndex*10)}>
               {band.map((value, index) => (
@@ -170,8 +170,8 @@ export default function Band() {
           ))}
         </div> */}
 
-{/* Button für Felderhinzufügen - mobile: */}
-        {/* <button
+      {/* Button für Felderhinzufügen - mobile: */}
+      {/* <button
           className={"mt-10 rounded-l-none md:rounded md:invisible"}
           onClick={() => dispatch(bandAddField("after"))}
         >

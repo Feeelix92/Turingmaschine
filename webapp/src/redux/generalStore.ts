@@ -354,7 +354,6 @@ export const generalSlice = createSlice({
     zustandsmenge: initialZustandsmenge,
     anfangsZustand: initialAnfangszustand,
     endZustand: initialEndZustandsmenge,
-
     //// Alphabet ////
     currentAlphabet: defaultAlphabetOption2,
     //currentAlphabet: defaultAlphabetOption1,

@@ -1,6 +1,7 @@
 import {
   CodeEditorProps,
   Direction,
+  EingabeAlphabet,
   tableRowToAdd,
   Zustand,
 } from "../../interfaces/CommonInterfaces";
@@ -14,6 +15,7 @@ import "ace-builds/src-noconflict/theme-twilight";
 import "ace-builds/src-noconflict/ext-language_tools";
 import {
   alphabetChangeAnfangszustand,
+  alphabetChangeCurrentMespuma,
   alphabetChangeEndzustand,
   alphabetDeleteCustom,
   alphabetDeleteZustand,
@@ -26,11 +28,15 @@ import {
 } from "../../redux/generalStore";
 import {
   bandChangeItemAt,
+  bandChangeItemAtMespuma,
   bandDeleteAll,
+  bandDeleteAllMespuma,
   BandItemToChange,
+  BandItemToChangeMespuma,
 } from "../../redux/bandStore";
 import Row from "../Zustandsüberführungsfunktion/Row";
 import { FiDownload, FiSave, FiUpload } from "react-icons/all";
+import { cartesianProduct } from "../../interfaces/CommonFunctions";
 
 interface tableZustand {
   [key: string]: tableZeichen;
@@ -42,8 +48,16 @@ interface tableZeichen {
 export default function AceJsonEditor(props: CodeEditorProps) {
   const dispatch = useDispatch();
 
+  const currentMode = useSelector((state: RootState) => state.general.mode);
+
   // Editor content
   const currentBand = useSelector((state: RootState) => state.band.currentBand);
+  const currentMespumaBand = useSelector(
+    (state: RootState) => state.band.mespumaBand
+  );
+  const anzahlSpuren = useSelector(
+    (state: RootState) => state.general.anzahlSpuren
+  );
   const currentAlphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
   );
@@ -89,7 +103,16 @@ export default function AceJsonEditor(props: CodeEditorProps) {
 
   // following functions are used to convert stored Data, to use in Editor
   function convertCurrentBand() {
-    return currentBand.map(({ value }) => `"${value}"`).join(",");
+    if (currentMode === "mespuma") {
+      let mBand = "";
+      currentMespumaBand.forEach((band, idx) => {
+        mBand += "[" + band.map(({ value }) => `"${value}"`).join(",");
+        mBand += currentMespumaBand.length - 1 === idx ? "]" : "],";
+      });
+      return mBand;
+    } else {
+      return currentBand.map(({ value }) => `"${value}"`).join(",");
+    }
   }
 
   function convertCurrentAlphabet() {
@@ -165,29 +188,93 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     if (tempEditorText) {
       try {
         let json = JSON.parse(tempEditorText);
-        dispatch(bandDeleteAll());
-        // save Band to store
-        // json.band.input...
-        const bandItems = json.band.input;
-        for (let index = 0; index < bandItems.length; index++) {
-          const temp: BandItemToChange = {
-            index: index,
-            value: bandItems[index],
-            label: bandItems[index],
-          };
-          dispatch(bandChangeItemAt(temp));
-        }
-        // save alphabet from editor to store
-        // json.specifications.alphabet...
-        const alphabet = json.specifications.alphabet;
-        if (alphabet.length > 0) {
-          dispatch(alphabetDeleteCustom());
-          alphabet.forEach((value: string) => {
-            dispatch(alphabetPushToCustom(value));
+
+        if (currentMode === "mespuma") {
+          dispatch(bandDeleteAllMespuma());
+          // save Band to store
+          // json.band.input...
+          const bands = json.band.input;
+
+          bands.forEach((bandItems: string[], bandIndex: number) => {
+            for (let index = 0; index < bandItems.length; index++) {
+              const temp: BandItemToChangeMespuma = {
+                bandIndex: bandIndex,
+                index: index,
+                value: bandItems[index],
+                label: bandItems[index],
+              };
+              dispatch(bandChangeItemAtMespuma(temp));
+            }
           });
-          dispatch(alphabetPushToDialogOptions(alphabet.toString()));
+
+          // save alphabet from editor to store
+          // json.specifications.alphabet...
+          const alphabet = json.specifications.alphabet;
+
+          if (alphabet.length > 0) {
+            dispatch(alphabetDeleteCustom());
+            alphabet.forEach((value: string) => {
+              dispatch(alphabetPushToCustom(value));
+            });
+            dispatch(alphabetPushToDialogOptions(alphabet.toString()));
+
+            let literalArr: string[] = [];
+
+            alphabet.forEach((literal: string) => {
+              literalArr.push(literal);
+            });
+
+            literalArr.push("B");
+
+            let combinationArr: string[][] = [];
+
+            for (let i = 0; i < anzahlSpuren; i++) {
+              combinationArr.push(literalArr);
+            }
+
+            let cartesianArr = cartesianProduct(combinationArr);
+
+            let finalBandAlphabet: string[] = [];
+
+            cartesianArr.forEach((element: any[]) => {
+              let el = "(" + element.join() + ")";
+              finalBandAlphabet.push(el);
+            });
+
+            dispatch(
+              alphabetChangeCurrentMespuma({
+                cartesian: finalBandAlphabet,
+                alphabet: alphabet,
+              })
+            );
+          } else {
+            alert("Ein leeres Alphabet ist nicht erlaubt!");
+          }
         } else {
-          alert("Ein leeres Alphabet ist nicht erlaubt!");
+          dispatch(bandDeleteAll());
+          // save Band to store
+          // json.band.input...
+          const bandItems = json.band.input;
+          for (let index = 0; index < bandItems.length; index++) {
+            const temp: BandItemToChange = {
+              index: index,
+              value: bandItems[index],
+              label: bandItems[index],
+            };
+            dispatch(bandChangeItemAt(temp));
+          }
+          // save alphabet from editor to store
+          // json.specifications.alphabet...
+          const alphabet = json.specifications.alphabet;
+          if (alphabet.length > 0) {
+            dispatch(alphabetDeleteCustom());
+            alphabet.forEach((value: string) => {
+              dispatch(alphabetPushToCustom(value));
+            });
+            dispatch(alphabetPushToDialogOptions(alphabet.toString()));
+          } else {
+            alert("Ein leeres Alphabet ist nicht erlaubt!");
+          }
         }
 
         //save states from editor to store
