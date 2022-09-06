@@ -308,11 +308,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             type: "snippet",
           },
           {
-            caption: "band_empty",
-            snippet: `"input":["B","B","B","B","B","B","B","B"]`,
-            type: "snippet",
-          },
-          {
             caption: "specifications",
             snippet: `"specifications":{
     "alphabet":[],
@@ -333,12 +328,17 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             type: "snippet",
           },
           {
+            caption: "alphabet_1_0",
+            snippet: `"alphabet":["1","0"],`,
+            type: "snippet",
+          },
+          {
             caption: "states",
             snippet: `"states":[],`,
             type: "snippet",
           },
           {
-            caption: "states",
+            caption: "states_q1_q2",
             snippet: `"states":["q1", "q2"],`,
             type: "snippet",
           },
