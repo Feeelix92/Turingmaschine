@@ -276,7 +276,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
 
   // Editor value
   function onChange(newValue: any) {
-    console.log("change", newValue);
     setTempEditorText(newValue);
   }
 

@@ -29,11 +29,10 @@ export default function Cell(props: CellProps) {
   const endzustandsMenge = useSelector(
     (state: RootState) => state.general.endZustand
   );
-  const initialRows = useSelector((state: RootState) => state.general.rows);
+
+  // const initialRows = useSelector((state: RootState) => state.general.rows);
 
   const temp = [initialZustand3];
-
-  const [warningMode, setWarningMode] = useState(false);
 
   /////////// States from State ///////////
   let states = zustandsmenge.concat(temp);
@@ -41,29 +40,39 @@ export default function Cell(props: CellProps) {
   store.subscribe(
     wStates((newVal) => {
       states = newVal;
-      checkWarningModus();
+
+      const failure = checkWarningModus();
+
+      props.updateCellValue(props.index, props.value, failure);
     })
   );
 
+  // check in store after codeEditor push
   /////////// States from State ///////////
-  let rows = initialRows;
-  let wRows = watch(store.getState, "general.rows");
-  store.subscribe(
-    wRows((newVal) => {
-      rows = newVal;
+  // let rows = initialRows;
+  // let wRows = watch(store.getState, "general.rows");
+  // store.subscribe(
+  //   wRows((newVal) => {
+  //     rows = newVal;
 
-      checkWarningModus();
-    })
-  );
+  // const failure = checkWarningModus();
 
-  /////////// States from State ///////////
+  // console.log("rows watcher");
+
+  // props.updateCellValue(props.index, props.value, failure);
+  //   })
+  // );
+
+  /////////// finalStates from State ///////////
   let finalStates = endzustandsMenge;
   let wFinalStates = watch(store.getState, "general.endZustand");
   store.subscribe(
     wFinalStates((newVal) => {
       finalStates = newVal;
 
-      checkWarningModus();
+      const failure = checkWarningModus();
+
+      props.updateCellValue(props.index, props.value, failure);
 
       if (props.value instanceof Zustand) {
         let foundInFinal = false;
@@ -93,8 +102,10 @@ export default function Cell(props: CellProps) {
   store.subscribe(
     wEingabeAlphabet((newVal) => {
       eALphabet = newVal;
-      checkWarningModus();
-      props.updateCellValue(props.index, props.value, warningMode);
+
+      const failure = checkWarningModus();
+
+      props.updateCellValue(props.index, props.value, failure);
     })
   );
 
@@ -107,19 +118,18 @@ export default function Cell(props: CellProps) {
 
   function chooseOption(option: string) {
     // pass chosen options to the parent to update the cell
-    props.updateCellValue(props.index, option, warningMode);
+    props.updateCellValue(props.index, option, props.warningMode);
     // close the edit-buttons
     setEditMode(false);
   }
 
   function handleChange(newValue: OnChangeValue<Direction | Zustand, false>) {
     if (newValue) {
-      checkWarningModus(newValue);
       // pass chosen options to the parent to update the cell
       if (mode == "mespuma" && (props.index === 1 || props.index === 3)) {
-        props.updateCellValue(props.index, newValue.value, warningMode);
+        props.updateCellValue(props.index, newValue.value, props.warningMode);
       } else {
-        props.updateCellValue(props.index, newValue, warningMode);
+        props.updateCellValue(props.index, newValue, props.warningMode);
       }
     }
   }
@@ -127,16 +137,6 @@ export default function Cell(props: CellProps) {
   function setFinal(newValue: boolean) {
     props.updateCellValueIsFinal(props.index, newValue);
   }
-
-  function setWarning(newValue: boolean) {
-    setWarningMode(newValue);
-  }
-
-  useEffect(() => {
-    // action on update of warningMode
-    checkWarningModus();
-    props.updateCellValue(props.index, props.value, warningMode);
-  }, [warningMode]);
 
   useEffect(() => {
     // event to handle click outside to hide the edit-buttons
@@ -171,7 +171,7 @@ export default function Cell(props: CellProps) {
         value === "B"
       ) {
         // if its allowed, we pass the new value to the parent to update the cell value
-        props.updateCellValue(index, value, warningMode);
+        props.updateCellValue(index, value, props.warningMode);
         allowed = true;
       }
     });
@@ -189,21 +189,23 @@ export default function Cell(props: CellProps) {
         return value.value === val.value;
       });
       if (tempBool) {
-        setWarning(false);
+        return false;
       } else {
-        setWarning(true);
         dispatch(maschineChangeExecutable(false));
+        return true;
       }
     } else if (!(tempVar instanceof Direction)) {
       let tempBool = eALphabet.some((value) => {
         return value.value === tempVar;
       });
       if (tempBool) {
-        setWarning(false);
+        return false;
       } else {
-        setWarning(true);
         dispatch(maschineChangeExecutable(false));
+        return true;
       }
+    } else {
+      return false;
     }
   }
 
