@@ -505,7 +505,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               </Tab.List>
               <Tab.Panels>
                 <Tab.Panel>
-                  <div className="space-y-6 text-left min-h-[600px]">
+                  <div className="space-y-6 text-left min-h-[300px]">
                     <AceEditor
                         mode="json5"
                         theme="twilight"
@@ -513,7 +513,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                         name="json-editor"
                         fontSize={16}
                         width={"100%"}
-                        height={"550px"}
                         showPrintMargin={true}
                         showGutter={true}
                         editorProps={{ $blockScrolling: true }}
@@ -529,7 +528,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                 </div>
                 </Tab.Panel>
                 <Tab.Panel>
-                  <div className="p-6 space-y-6 text-left bg-white min-h-[600px] max-h-[600px] overflow-y-auto">
+                  <div className="p-6 space-y-6 text-left bg-white max-h-[600px] overflow-y-auto">
                     <Tutorial/>
                   </div>
                 </Tab.Panel>
