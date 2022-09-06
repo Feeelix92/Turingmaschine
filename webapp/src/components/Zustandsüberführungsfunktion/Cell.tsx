@@ -16,6 +16,7 @@ import {
 } from "../../redux/generalStore";
 import EditField from "./EditField";
 import ZustandSelect from "./ZustandSelect";
+import { useAlert } from 'react-alert';
 
 export default function Cell(props: CellProps) {
   const mode = useSelector((state: RootState) => state.general.mode);
@@ -174,7 +175,8 @@ export default function Cell(props: CellProps) {
     });
 
     if (!allowed) {
-      alert("Wert ist nicht im Alphabet enthalten!");
+      // alert("Wert ist nicht im Alphabet enthalten!");
+      alert.show("Wert ist nicht im Alphabet enthalten!");
     }
   }
 
@@ -202,6 +204,8 @@ export default function Cell(props: CellProps) {
       }
     }
   }
+
+  const alert = useAlert();
 
   return (
     <td

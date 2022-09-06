@@ -15,6 +15,7 @@ import {
 } from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import watch from "redux-watch";
+import { useAlert } from 'react-alert';
 
 export default function MultiselectDropDown(props: ZustandCustomProp) {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
     valuesString = valuesArray.toString();
   }
 
+  const alert = useAlert();
   return (
     <div className={""}>
       <div className={""}>
@@ -86,7 +88,8 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
                 dispatch(alphabetPushToDialogOptions(valuesArray.toString()));
                 dispatch(alphabetChangeCurrent(currentAlphabet))
               } else {
-                alert("Ein leeres Alphabet ist nicht erlaubt!");
+                // alert("Ein leeres Alphabet ist nicht erlaubt!");
+                alert.show("Ein leeres Alphabet ist nicht erlaubt!");
               }
               props.onCloseDialog();
             }}

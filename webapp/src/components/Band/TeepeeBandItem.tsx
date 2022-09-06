@@ -15,6 +15,7 @@ import {icons} from "react-icons";
 import {BsFillEraserFill} from "react-icons/bs";
 import BrickWhite from "../../assets/images/brick_white.svg";
 import BrickBlack from "../../assets/images/brick_black.svg";
+import { useAlert } from 'react-alert';
 
 export default function BandItem(props: BandItemProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -102,9 +103,12 @@ export default function BandItem(props: BandItemProps) {
       });
 
       if (!allowed) {
-          alert("Wert ist nicht im Alphabet enthalten!");
+          // alert("Wert ist nicht im Alphabet enthalten!");
+          alert.show("Wert ist nicht im Alphabet enthalten!");
       }
   }
+
+  const alert = useAlert();
 
 
     return (

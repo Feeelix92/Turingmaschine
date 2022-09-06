@@ -31,6 +31,7 @@ import {
 } from "../../redux/bandStore";
 import Row from "../Zustandsüberführungsfunktion/Row";
 import { FiDownload, FiSave, FiUpload } from "react-icons/all";
+import { useAlert } from 'react-alert';
 
 interface tableZustand {
   [key: string]: tableZeichen;
@@ -187,7 +188,8 @@ export default function AceJsonEditor(props: CodeEditorProps) {
           });
           dispatch(alphabetPushToDialogOptions(alphabet.toString()));
         } else {
-          alert("Ein leeres Alphabet ist nicht erlaubt!");
+          // alert("Ein leeres Alphabet ist nicht erlaubt!");
+          alert.show("Ein leeres Alphabet ist nicht erlaubt!");
         }
 
         //save states from editor to store
@@ -266,10 +268,11 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         toggleEditor();
       } catch (e) {
         // Error message is shown, if the entered code in editor is no valid JSON
-        alert(
-          "Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen! \n" +
-            e
-        );
+        // alert(
+        //   "Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen! \n" +
+        //     e
+        // );
+        alert.show("Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen! \n" + e); //TODO: Wird immer hinter Code-Editor angezeigt!
       }
     }
   }
@@ -444,6 +447,8 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     // @ts-ignore
     inputRef.current.click();
   };
+
+   const alert = useAlert();
 
   return (
     <div>
