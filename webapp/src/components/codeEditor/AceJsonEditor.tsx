@@ -21,6 +21,7 @@ import {
   alphabetPushToDialogOptions,
   alphabetPushToIdxZustand,
   tableAddEditorRow,
+  tableCheckWarning,
   tableDeleteAll,
   tableSetActiveState,
 } from "../../redux/generalStore";
@@ -57,6 +58,9 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     (state: RootState) => state.general.endZustand
   );
   const initTable = useSelector((state: RootState) => state.general.rows);
+
+  const initRows = useSelector((state: RootState) => state.general.rows);
+
   // @TODO convert and insert current Table
   const [tempEditorText, setTempEditorText] = useState(
     `{
@@ -263,6 +267,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
           );
         });
 
+        dispatch(tableCheckWarning(initRows));
         toggleEditor();
       } catch (e) {
         // Error message is shown, if the entered code in editor is no valid JSON

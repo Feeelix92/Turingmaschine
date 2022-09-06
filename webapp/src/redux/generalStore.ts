@@ -861,6 +861,36 @@ export const generalSlice = createSlice({
     tableSetActiveState: (state, newVal: PayloadAction<Zustand>) => {
       state.activeState = newVal.payload;
     },
+    tableCheckWarning: (state, checkVal: PayloadAction<RowInterface[]>) => {
+      // create flat copy of all existing rows
+      const newRows = checkVal.payload;
+      const copy = state.rows.slice(0, state.rows.length);
+
+      newRows.forEach((row, rowIndex) => {
+        row.cells.forEach((cell, cellIndex) => {
+          if (cell.value instanceof Zustand) {
+            let tempBool = state.zustandsmenge.some((value) => {
+              let newState = cell.value as Zustand;
+              return value.value === newState.value;
+            });
+            if (!tempBool) {
+              maschineChangeExecutable(false);
+              copy[rowIndex].cells[cellIndex].warningMode = true;
+            }
+          } else if (!(cell.value instanceof Direction)) {
+            let tempBool = state.currentAlphabet.alphabet.some((value) => {
+              return value.value === cell.value;
+            });
+            if (!tempBool) {
+              maschineChangeExecutable(false);
+              copy[rowIndex].cells[cellIndex].warningMode = !tempBool;
+            }
+          }
+        });
+      });
+
+      state.rows = copy;
+    },
 
     ///////////////////// Other /////////////////////
     alphabetChangeWarningMode: (
@@ -968,6 +998,7 @@ export const {
   tableSetActiveRow,
   tableSetWatchedRows,
   tableSetActiveState,
+  tableCheckWarning,
   changeToiletPaperMode,
   changeMespumaMode,
   mespumaPushToSpuren,
