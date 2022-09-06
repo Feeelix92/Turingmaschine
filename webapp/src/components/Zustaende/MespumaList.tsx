@@ -135,6 +135,7 @@ function ConditionsList() {
       // alert("Bitt vergiss nicht deine Endzustandsmenge neu zu setzen!");
       // }
       checkWarningModus();
+      setShowZustandsfunktion(false)
     }
   }
 
@@ -155,6 +156,7 @@ function ConditionsList() {
       });
       dispatch(alphabetChangeEndzustand(temp));
       checkWarningModus();
+      setShowZustandsfunktion(false)
       // }
     }
   }
@@ -163,8 +165,10 @@ function ConditionsList() {
   const [zustandsFunktion] = useState([""]);
 
   function getZustandsFunktion() {
-    if (zustandsFunktion.length <= 1) {
-      zustandsFunktion.pop();
+    let tempLenght = zustandsFunktion.length
+    for(let i=0; i <= tempLenght; i++){
+      zustandsFunktion.pop()
+    }
       let tempCellsString = "δ(";
       let tempHelper = true;
       loadedRows.forEach((row) => {
@@ -187,7 +191,7 @@ function ConditionsList() {
         zustandsFunktion.push(tempCellsString);
         tempCellsString = "δ(";
       });
-    }
+    
     setShowZustandsfunktion(!showZustandsfunktion);
   }
 
@@ -236,6 +240,7 @@ function ConditionsList() {
         setEndZustandWarningOn(true);
       }
     });
+    setShowZustandsfunktion(false)
   }
 
   function changeZustandsmenge(push: boolean) {
@@ -245,12 +250,14 @@ function ConditionsList() {
       dispatch(alphabetPushToZustand());
     }
     checkWarningModus();
+    setShowZustandsfunktion(false)
   }
 
   function addSpur() {
     dispatch(bandAddBandMespuma());
 
     dispatch(mespumaPushToSpuren());
+   
 
     let literalArr: string[] = [];
 
@@ -284,6 +291,7 @@ function ConditionsList() {
         cartesian: finalBandAlphabet,
       })
     );
+    setShowZustandsfunktion(false)
   }
 
   function deleteSpur() {
@@ -323,6 +331,7 @@ function ConditionsList() {
         cartesian: finalBandAlphabet,
       })
     );
+    setShowZustandsfunktion(false)
   }
 
   const [endZustandWarningOn, setEndZustandWarningOn] = useState(false);
@@ -370,7 +379,7 @@ function ConditionsList() {
             </div>
           </div>
 
-          <div>
+          <div onClick={() => setShowZustandsfunktion(false)}>
             <DropDownSelect />
           </div>
           <div

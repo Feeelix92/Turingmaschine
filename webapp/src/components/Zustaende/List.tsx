@@ -142,31 +142,31 @@ function ConditionsList() {
   const [zustandsFunktion] = useState([""]);
 
   function getZustandsFunktion() {
-    if (zustandsFunktion.length <= 1) {
+    let tempLenght = zustandsFunktion.length;
+    for (let i = 0; i <= tempLenght; i++) {
       zustandsFunktion.pop();
-      let tempCellsString = "δ(";
-      let tempHelper = true;
-      loadedRows.forEach((row) => {
-        row.cells.forEach((cell) => {
-          if (cell.value instanceof Zustand) {
-            tempCellsString = tempCellsString + cell.value.value + ",";
-          } else if (cell.value instanceof Direction) {
-            tempCellsString = tempCellsString + cell.value.value + ")";
-          } else {
-            if (tempHelper === true) {
-              tempCellsString =
-                tempCellsString + cell.value.toString() + ") = (";
-              tempHelper = false;
-            } else {
-              tempCellsString = tempCellsString + cell.value.toString() + ",";
-              tempHelper = true;
-            }
-          }
-        });
-        zustandsFunktion.push(tempCellsString);
-        tempCellsString = "δ(";
-      });
     }
+    let tempCellsString = "δ(";
+    let tempHelper = true;
+    loadedRows.forEach((row) => {
+      row.cells.forEach((cell) => {
+        if (cell.value instanceof Zustand) {
+          tempCellsString = tempCellsString + cell.value.value + ",";
+        } else if (cell.value instanceof Direction) {
+          tempCellsString = tempCellsString + cell.value.value + ")";
+        } else {
+          if (tempHelper === true) {
+            tempCellsString = tempCellsString + cell.value.toString() + ") = (";
+            tempHelper = false;
+          } else {
+            tempCellsString = tempCellsString + cell.value.toString() + ",";
+            tempHelper = true;
+          }
+        }
+      });
+      zustandsFunktion.push(tempCellsString);
+      tempCellsString = "δ(";
+    });
     setShowZustandsfunktion(!showZustandsfunktion);
   }
 

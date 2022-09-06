@@ -355,16 +355,18 @@ function Control() {
     changePause(false);
     setOldPointerPos(activePointerPosition);
 
-    //ToDo: Schleife hört nicht auf Änderungen von außerhalb...
-    //...localCopyPause = true vom Pause Button wird nicht beachtet??
     while (stoppMaschine === false && pauseMaschine === false) {
       setMaschineRunning(true);
       let tempSlider = 3000 / slider;
       await sleep(tempSlider);
       if (mode === "mespuma") {
-        makeStepMespuma(activePointerPosition);
+        if (stoppMaschine === false && pauseMaschine === false) {
+          makeStepMespuma(activePointerPosition);
+        }
       } else {
-        makeStep(activePointerPosition);
+        if (stoppMaschine === false && pauseMaschine === false) {
+          makeStep(activePointerPosition);
+        }
       }
     }
 

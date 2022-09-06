@@ -20,15 +20,31 @@ export default function Row(props: RowProps) {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(props.isFinal);
 
-  function setCellValue(index: React.Key, value: string | Zustand | Direction) {
-    // pass new data to table to update its rows-array
+  /////////// States from State ///////////
+  const zustandsmenge = useSelector(
+    (state: RootState) => state.general.zustandsmenge
+  );
+  let states = zustandsmenge;
+  let wStates = watch(store.getState, "general.zustandsmenge");
+  store.subscribe(
+    wStates((newVal) => {
+      states = newVal;
+    })
+  );
 
+  function setCellValue(
+    index: React.Key,
+    value: string | boolean | Zustand | Direction,
+    warningMode: boolean
+  ) {
+    // pass new data to table to update its rows-array
     if (typeof value === "string") {
       dispatch(
         tableUpdateCell({
           cellIndex: index,
           rowIndex: props.index,
           value: value,
+          warningMode: warningMode,
         })
       );
     } else if (value instanceof Direction) {
@@ -38,6 +54,7 @@ export default function Row(props: RowProps) {
           cellIndex: index,
           rowIndex: props.index,
           value: tempDirection,
+          warningMode: warningMode,
         })
       );
     } else if (typeof value === "boolean") {
@@ -46,6 +63,7 @@ export default function Row(props: RowProps) {
           cellIndex: index,
           rowIndex: props.index,
           value: value,
+          warningMode: warningMode,
         })
       );
     } else {
@@ -62,6 +80,7 @@ export default function Row(props: RowProps) {
           cellIndex: index,
           rowIndex: props.index,
           value: tempZustand,
+          warningMode: warningMode,
         })
       );
     }
@@ -117,6 +136,7 @@ export default function Row(props: RowProps) {
                     value={value.value}
                     index={key}
                     showEditField={value.editField}
+                    warningMode={value.warningMode}
                     updateCellValue={setCellValue}
                     updateCellValueIsFinal={setCellValueIsFinal}
                   />
@@ -127,6 +147,7 @@ export default function Row(props: RowProps) {
                   value={value.value}
                   index={key}
                   showEditField={value.editField}
+                  warningMode={value.warningMode}
                   updateCellValue={setCellValue}
                   updateCellValueIsFinal={setCellValueIsFinal}
                 />

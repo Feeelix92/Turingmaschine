@@ -91,16 +91,19 @@ export const initialCell: Cell[] = [
   {
     value: initialZustandsmenge[0],
     editField: false,
+    warningMode: false,
   },
-  { value: "1", editField: true },
+  { value: "1", editField: true, warningMode: false },
   {
     value: initialZustandsmenge[0],
     editField: false,
+    warningMode: false,
   },
-  { value: "1", editField: true },
+  { value: "1", editField: true, warningMode: false },
   {
     value: new Direction(directions[0].value, directions[0].label),
     editField: false,
+    warningMode: false,
   },
 ];
 
@@ -128,16 +131,20 @@ export const initialCellTP: Cell[] = [
   {
     value: initialZustandsmengeTP[0],
     editField: false,
+
+    warningMode: false,
   },
-  { value: "1", editField: true },
+  { value: "1", editField: true, warningMode: false },
   {
     value: initialZustandsmengeTP[0],
     editField: false,
+    warningMode: false,
   },
-  { value: "1", editField: true },
+  { value: "1", editField: true, warningMode: false },
   {
     value: new Direction(directions[0].value, directions[0].label),
     editField: false,
+    warningMode: false,
   },
 ];
 export const initialCellTP2: Cell[] = [
@@ -145,16 +152,19 @@ export const initialCellTP2: Cell[] = [
   {
     value: initialZustandsmengeTP[0],
     editField: false,
+    warningMode: false,
   },
-  { value: "#", editField: true },
+  { value: "#", editField: true, warningMode: false },
   {
     value: initialZustandsmengeTP[1],
     editField: false,
+    warningMode: false,
   },
-  { value: "#", editField: true },
+  { value: "#", editField: true, warningMode: false },
   {
     value: new Direction(directions[0].value, directions[0].label),
     editField: false,
+    warningMode: false,
   },
 ];
 export const initialCellTP3: Cell[] = [
@@ -162,16 +172,19 @@ export const initialCellTP3: Cell[] = [
   {
     value: initialZustandsmengeTP[1],
     editField: false,
+    warningMode: false,
   },
-  { value: "1", editField: true },
+  { value: "1", editField: true, warningMode: false },
   {
     value: initialZustandsmengeTP[2],
     editField: false,
+    warningMode: false,
   },
-  { value: "#", editField: true },
+  { value: "#", editField: true, warningMode: false },
   {
     value: new Direction(directions[1].value, directions[1].label),
     editField: false,
+    warningMode: false,
   },
 ];
 export const initialCellTP4: Cell[] = [
@@ -179,16 +192,19 @@ export const initialCellTP4: Cell[] = [
   {
     value: initialZustandsmengeTP[1],
     editField: false,
+    warningMode: false,
   },
-  { value: "B", editField: true },
+  { value: "B", editField: true, warningMode: false },
   {
     value: initialZustandsmengeTP[3],
     editField: false,
+    warningMode: false,
   },
-  { value: "B", editField: true },
+  { value: "B", editField: true, warningMode: false },
   {
     value: new Direction(directions[1].value, directions[1].label),
     editField: false,
+    warningMode: false,
   },
 ];
 export const initialCellTP5: Cell[] = [
@@ -196,16 +212,19 @@ export const initialCellTP5: Cell[] = [
   {
     value: initialZustandsmengeTP[2],
     editField: false,
+    warningMode: false,
   },
-  { value: "#", editField: true },
+  { value: "#", editField: true, warningMode: false },
   {
     value: initialZustandsmengeTP[0],
     editField: false,
+    warningMode: false,
   },
-  { value: "1", editField: true },
+  { value: "1", editField: true, warningMode: false },
   {
     value: new Direction(directions[0].value, directions[0].label),
     editField: false,
+    warningMode: false,
   },
 ];
 export const initialCellTP6: Cell[] = [
@@ -213,16 +232,19 @@ export const initialCellTP6: Cell[] = [
   {
     value: initialZustandsmengeTP[3],
     editField: false,
+    warningMode: false,
   },
-  { value: "1", editField: true },
+  { value: "1", editField: true, warningMode: false },
   {
     value: initialZustandsmengeTP[3],
     editField: false,
+    warningMode: false,
   },
-  { value: "1", editField: true },
+  { value: "1", editField: true, warningMode: false },
   {
     value: new Direction(directions[1].value, directions[1].label),
     editField: false,
+    warningMode: false,
   },
 ];
 export const initialCellTP7: Cell[] = [
@@ -230,16 +252,19 @@ export const initialCellTP7: Cell[] = [
   {
     value: initialZustandsmengeTP[3],
     editField: false,
+    warningMode: false,
   },
-  { value: "#", editField: true },
+  { value: "#", editField: true, warningMode: false },
   {
     value: initialZustandsmengeTP[3],
     editField: false,
+    warningMode: false,
   },
-  { value: "B", editField: true },
+  { value: "B", editField: true, warningMode: false },
   {
     value: new Direction(directions[1].value, directions[1].label),
     editField: false,
+    warningMode: false,
   },
 ];
 export const initialCellTP8: Cell[] = [
@@ -247,16 +272,19 @@ export const initialCellTP8: Cell[] = [
   {
     value: initialZustandsmengeTP[3],
     editField: false,
+    warningMode: false,
   },
-  { value: "B", editField: true },
+  { value: "B", editField: true, warningMode: false },
   {
     value: initialZustandsmengeTP[4],
     editField: false,
+    warningMode: false,
   },
-  { value: "B", editField: true },
+  { value: "B", editField: true, warningMode: false },
   {
     value: new Direction(directions[0].value, directions[0].label),
     editField: false,
+    warningMode: false,
   },
 ];
 export const initialCellTP9: Cell[] = [
@@ -264,16 +292,19 @@ export const initialCellTP9: Cell[] = [
   {
     value: initialZustandsmengeTP[4],
     editField: false,
+    warningMode: false,
   },
-  { value: "B", editField: true },
+  { value: "B", editField: true, warningMode: false },
   {
     value: initialZustandsmengeTP[4],
     editField: false,
+    warningMode: false,
   },
-  { value: "B", editField: true },
+  { value: "B", editField: true, warningMode: false },
   {
     value: new Direction(directions[0].value, directions[0].label),
     editField: false,
+    warningMode: false,
   },
 ];
 
@@ -577,8 +608,13 @@ export const generalSlice = createSlice({
                 state.zustandsmenge[0].warningMode
               ),
               editField: false,
+              warningMode: false,
             },
-            { value: "(1,1)", editField: true },
+            {
+              value: state.bandAlphabet[0].value,
+              editField: false,
+              warningMode: false,
+            },
             {
               value: new Zustand(
                 state.zustandsmenge[0].label,
@@ -588,11 +624,17 @@ export const generalSlice = createSlice({
                 state.zustandsmenge[0].warningMode
               ),
               editField: false,
+              warningMode: false,
             },
-            { value: "(1,1)", editField: true },
+            {
+              value: state.bandAlphabet[0].value,
+              editField: false,
+              warningMode: false,
+            },
             {
               value: new Direction(directions[0].value, directions[0].label),
               editField: false,
+              warningMode: false,
             },
           ],
           isFinal: false,
@@ -609,8 +651,13 @@ export const generalSlice = createSlice({
                 state.zustandsmenge[0].warningMode
               ),
               editField: false,
+              warningMode: false,
             },
-            { value: "1", editField: true },
+            {
+              value: state.bandAlphabet[0].value,
+              editField: true,
+              warningMode: false,
+            },
             {
               value: new Zustand(
                 state.zustandsmenge[0].label,
@@ -620,11 +667,17 @@ export const generalSlice = createSlice({
                 state.zustandsmenge[0].warningMode
               ),
               editField: false,
+              warningMode: false,
             },
-            { value: "1", editField: true },
+            {
+              value: state.bandAlphabet[0].value,
+              editField: true,
+              warningMode: false,
+            },
             {
               value: new Direction(directions[0].value, directions[0].label),
               editField: false,
+              warningMode: false,
             },
           ],
           isFinal: false,
@@ -678,8 +731,13 @@ export const generalSlice = createSlice({
               false
             ),
             editField: false,
+            warningMode: false,
           },
-          { value: zustandToAdd.payload.lese, editField: true },
+          {
+            value: zustandToAdd.payload.lese,
+            editField: true,
+            warningMode: false,
+          },
           {
             value: new Zustand(
               zustandToAdd.payload.neuerZustand,
@@ -689,14 +747,20 @@ export const generalSlice = createSlice({
               false
             ),
             editField: false,
+            warningMode: false,
           },
-          { value: zustandToAdd.payload.schreibe, editField: true },
+          {
+            value: zustandToAdd.payload.schreibe,
+            editField: true,
+            warningMode: false,
+          },
           {
             value: new Direction(
               zustandToAdd.payload.gehe,
               zustandToAdd.payload.gehe
             ),
             editField: false,
+            warningMode: false,
           },
         ],
         isFinal: tempEndzustand,
@@ -748,6 +812,10 @@ export const generalSlice = createSlice({
       } else {
         newCells[updateCell.payload.cellIndex as number].value =
           updateCell.payload.value;
+        if (updateCell.payload.warningMode !== undefined) {
+          newCells[updateCell.payload.cellIndex as number].warningMode =
+            updateCell.payload.warningMode;
+        }
 
         // tableUpdateRow({index: updateCell.payload.index, cells: newCells})
 
@@ -791,6 +859,36 @@ export const generalSlice = createSlice({
     },
     tableSetActiveState: (state, newVal: PayloadAction<Zustand>) => {
       state.activeState = newVal.payload;
+    },
+    tableCheckWarning: (state, checkVal: PayloadAction<RowInterface[]>) => {
+      // create flat copy of all existing rows
+      const newRows = checkVal.payload;
+      const copy = state.rows.slice(0, state.rows.length);
+
+      newRows.forEach((row, rowIndex) => {
+        row.cells.forEach((cell, cellIndex) => {
+          if (cell.value instanceof Zustand) {
+            let tempBool = state.zustandsmenge.some((value) => {
+              let newState = cell.value as Zustand;
+              return value.value === newState.value;
+            });
+            if (!tempBool) {
+              maschineChangeExecutable(false);
+              copy[rowIndex].cells[cellIndex].warningMode = true;
+            }
+          } else if (!(cell.value instanceof Direction)) {
+            let tempBool = state.currentAlphabet.alphabet.some((value) => {
+              return value.value === cell.value;
+            });
+            if (!tempBool) {
+              maschineChangeExecutable(false);
+              copy[rowIndex].cells[cellIndex].warningMode = !tempBool;
+            }
+          }
+        });
+      });
+
+      state.rows = copy;
     },
 
     ///////////////////// Other /////////////////////
@@ -899,6 +997,7 @@ export const {
   tableSetActiveRow,
   tableSetWatchedRows,
   tableSetActiveState,
+  tableCheckWarning,
   changeToiletPaperMode,
   changeMespumaMode,
   mespumaPushToSpuren,
