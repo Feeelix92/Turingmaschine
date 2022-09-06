@@ -24,7 +24,8 @@ export default function Tutorial() {
             <p>Im Editor können Shortcuts verwendet werden, mit denen der entsprechende Code erzeugt wird.</p>
             <p>Innerhalb des Editors können die folgenden Shortcuts verwendet werden:</p>
             <ul className={"text-black list-disc pl-5 text-base"}>
-                <li><p>band - erzeugt ein leeres Band.</p></li>
+                <li>band - erzeugt ein leeres Band.</li>
+                <li>specifications - erzeugt das Codegerüst für die Eingabe der Spezifikationen.</li>
                 <li>alphabet - erzeugt das Codegerüst für das Eingabealphabet.</li>
                 <li>alphabet_#_1 - erzeugt Code für ein Eingabealphabet mit "#" und "1".</li>
                 <li>alphabet_0_1 - erzeugt Code für ein Eingabealphabet mit "0" und "1".</li>
@@ -34,6 +35,7 @@ export default function Tutorial() {
                 <li>startState_q1 - erzeugt Code für Anfangszustand "q1".</li>
                 <li>endStates - erzeugt das Codegerüst für die Eingabe des Endzustand.</li>
                 <li>endStates_q2 - erzeugt Code für Endzustand "q2".</li>
+                <li>specifications - erzeugt das Codegerüst für die Eingabe der Tabelle.</li>
                 <li>example - erzeugt den kompletten Code, um die Turingmaschine für die Addition von zwei unär kodierten Zahlen zu programmieren, zusehen im nachfolgenden Abschnitt</li>
             </ul>
             <br/>

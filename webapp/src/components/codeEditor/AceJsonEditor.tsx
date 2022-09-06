@@ -363,6 +363,13 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             type: "snippet",
           },
           {
+            caption: "table",
+            snippet: `"table":{
+            
+}`,
+            type: "snippet",
+          },
+          {
             caption: "example",
             snippet: `{
   "band":{
