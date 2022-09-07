@@ -512,7 +512,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               </Tab.List>
               <Tab.Panels>
                 <Tab.Panel>
-                  <div className="text-left min-h-[300px]">
+                  <div className="text-left min-h-[400px]">
                     <AceEditor
                         mode="json5"
                         theme="twilight"
