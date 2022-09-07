@@ -493,7 +493,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                   {({ selected }) => (
                       <button
                           className={
-                            selected ? 'bg-thm-primary text-white' : 'bg-thm-primary2 text-white'
+                            selected ? 'bg-thm-primary2 text-white hover:bg-thm-primary2 rounded-b-none' : 'bg-thm-primary text-white rounded-b-none'
                           }
                       >
                         Code-Editor
@@ -503,7 +503,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                   {({ selected }) => (
                       <button
                           className={
-                            selected ? 'bg-thm-primary text-white' : 'bg-thm-primary2 text-white'
+                            selected ? 'bg-thm-primary2 text-white hover:bg-thm-primary2 rounded-b-none' : 'bg-thm-primary text-white rounded-b-none'
                           }
                       >
                         Tutorial
@@ -512,7 +512,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               </Tab.List>
               <Tab.Panels>
                 <Tab.Panel>
-                  <div className="space-y-6 text-left min-h-[300px]">
+                  <div className="text-left min-h-[300px]">
                     <AceEditor
                         mode="json5"
                         theme="twilight"
@@ -532,51 +532,54 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                           tabSize: 2,
                         }}
                     />
+                    <div className="flex items-center justify-center p-2 space-x-2 rounded-b border-gray-200 dark:border-gray-600">
+                      <button
+                          data-modal-toggle="defaultModal"
+                          type="button"
+                          onClick={parseToJSON}
+                          className="bg-thm-primary"
+                      >
+                        konfigurieren
+                      </button>
+                      <button
+                          data-modal-toggle="defaultModal"
+                          type="button"
+                          onClick={toggleEditor}
+                          className="bg-thm-secondary hover:bg-thm-primary2"
+                      >
+                        abbrechen
+                      </button>
+                      <button
+                          data-modal-toggle="defaultModal"
+                          type="button"
+                          onClick={exportData}
+                          className="bg-thm-primary"
+                      >
+                        <FiDownload />
+                      </button>
+                      <button onClick={fileUpload}>
+                        <FiUpload />
+                      </button>
+                      <input
+                          hidden
+                          ref={inputRef}
+                          type="file"
+                          accept={".json"}
+                          onChange={onFileInputChange}
+                      />
+                    </div>
                 </div>
                 </Tab.Panel>
                 <Tab.Panel>
                   <div className="p-6 space-y-6 text-left bg-white max-h-[600px] overflow-y-auto">
                     <Tutorial/>
                   </div>
+                  <div className="flex items-center justify-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                  </div>
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
-            <div className="flex items-center justify-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-              <button
-                data-modal-toggle="defaultModal"
-                type="button"
-                onClick={parseToJSON}
-                className="bg-thm-primary"
-              >
-                konfigurieren
-              </button>
-              <button
-                data-modal-toggle="defaultModal"
-                type="button"
-                onClick={toggleEditor}
-                className="bg-thm-secondary hover:bg-thm-primary2"
-              >
-                abbrechen
-              </button>
-              <button
-                data-modal-toggle="defaultModal"
-                type="button"
-                onClick={exportData}
-                className="bg-thm-primary"
-              >
-                <FiDownload />
-              </button>
-              <button onClick={fileUpload}>
-                <FiUpload />
-              </button>
-              <input
-                hidden
-                ref={inputRef}
-                type="file"
-                accept={".json"}
-                onChange={onFileInputChange}
-              />
-            </div>
+
           </div>
         </div>
       </div>

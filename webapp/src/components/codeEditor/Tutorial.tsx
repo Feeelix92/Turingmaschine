@@ -11,13 +11,15 @@ export default function Tutorial() {
             <p>Hierfür ist standardmäßig ein leeres Band, Spezifikationen und eine leere Tabelle vorhanden.</p>
             <br/>
             <h3>Download</h3>
-            <div className={"flex"}>
-                <p>Sie können Ihre Turingmaschine als JSON Datei speichern, klicken Sie dazu auf den Download Button.<FiDownload /></p>
+            <div className={"flex text-black"}>
+                <p>Sie können Ihre Turingmaschine als JSON Datei speichern, klicken Sie dazu auf den Download Button &#160;</p>
+                <FiDownload />.
             </div>
             <br/>
             <h3>Upload</h3>
-            <div className={"flex"}>
-                <p>Sie können Ihre programmierte Turingmaschine auch wieder in den Editor laden, indem Sie auf Upload-Button klicken.<FiUpload /></p>
+            <div className={"flex text-black"}>
+                <p>Sie können Ihre programmierte Turingmaschine auch wieder in den Editor laden, indem Sie auf Upload-Button klicken &#160;</p>
+                <FiUpload />.
             </div>
             <br/>
             <h3>Shortcuts</h3>
