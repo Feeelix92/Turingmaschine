@@ -462,9 +462,9 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         aria-modal="true"
         role="dialog"
       >
-        <div className="relative p-4 w-full max-w-7xl h-full md:h-auto">
+        <div className="relative w-full max-w-7xl h-full md:h-auto">
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <div className="flex items-center p-4 rounded-t border-b dark:border-gray-600">
+            <div className="flex items-center p-2 rounded-t dark:border-gray-600">
               <button
                 type="button"
                 className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
