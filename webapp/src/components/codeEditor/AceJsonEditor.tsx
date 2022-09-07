@@ -458,12 +458,12 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     <div>
       <div
         id="defaultModal"
-        className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex bg-thm-primary2 dark:bg-gray-500"
+        className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex bg-gray-400 dark:bg-gray-500"
         aria-modal="true"
         role="dialog"
       >
         <div className="relative w-full max-w-7xl h-full md:h-auto">
-          <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <div className="relative bg-gray-700 rounded-lg shadow">
             <div className="flex items-center p-2 rounded-t dark:border-gray-600">
               <button
                 type="button"
@@ -512,7 +512,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               </Tab.List>
               <Tab.Panels>
                 <Tab.Panel>
-                  <div className="text-left min-h-[400px]">
+                  <div className="text-left min-h-[300px]">
                     <AceEditor
                         mode="json5"
                         theme="twilight"
@@ -571,7 +571,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                 </div>
                 </Tab.Panel>
                 <Tab.Panel>
-                  <div className="p-6 space-y-6 text-left bg-white max-h-[600px] overflow-y-auto">
+                  <div className="p-6 space-y-6 text-left bg-white max-h-[500px] overflow-y-auto">
                     <Tutorial/>
                   </div>
                   <div className="flex items-center justify-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
