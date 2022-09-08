@@ -917,11 +917,6 @@ export const generalSlice = createSlice({
       // mode für alle:
       if (state.mode != "toiletpaper") {
         state.mode = "toiletpaper";
-      } else {
-        state.mode = "default";
-      }
-
-      if (state.mode === "toiletpaper") {
         state.rows = initialRowTP;
         state.zustandsmenge = initialZustandsmengeTP;
         state.anfangsZustand = initialAnfangszustandTP;
@@ -929,6 +924,7 @@ export const generalSlice = createSlice({
         state.currentAlphabet = defaultAlphabetOption2;
         state.bandAlphabet = initialTeepeeBandAlphabet;
       } else {
+        state.mode = "default";
         state.rows = initialRow;
         state.zustandsmenge = initialZustandsmenge;
         state.anfangsZustand = initialAnfangszustand;

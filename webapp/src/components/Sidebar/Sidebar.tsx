@@ -112,7 +112,7 @@ function Sidebar() {
                   ? "bg-thm-primary"
                   : "bg-gray-700 "
               }`}
-          onClick={() => changeTpMode}
+          onClick={() => changeTpMode()}
         >
           <Link to="/papier" className="no-underline text-white ">
             Toilettenpapier
