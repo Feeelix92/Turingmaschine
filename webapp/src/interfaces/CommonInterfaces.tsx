@@ -162,3 +162,8 @@ export interface MespumaChangeAlphabet {
   cartesian: string[];
   alphabet?: Alphabet;
 }
+
+export interface checkWarning {
+  rows: RowInterface[];
+  alphabet: string[];
+}

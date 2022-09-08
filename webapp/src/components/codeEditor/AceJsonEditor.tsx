@@ -195,6 +195,10 @@ export default function AceJsonEditor(props: CodeEditorProps) {
       try {
         let json = JSON.parse(tempEditorText);
 
+        // save alphabet from editor to store
+        // json.specifications.alphabet...
+        const alphabet = json.specifications.alphabet;
+
         if (currentMode === "mespuma") {
           dispatch(bandDeleteAllMespuma());
           // save Band to store
@@ -212,10 +216,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               dispatch(bandChangeItemAtMespuma(temp));
             }
           });
-
-          // save alphabet from editor to store
-          // json.specifications.alphabet...
-          const alphabet = json.specifications.alphabet;
 
           if (alphabet.length > 0) {
             dispatch(alphabetDeleteCustom());
@@ -269,9 +269,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             };
             dispatch(bandChangeItemAt(temp));
           }
-          // save alphabet from editor to store
-          // json.specifications.alphabet...
-          const alphabet = json.specifications.alphabet;
           if (alphabet.length > 0) {
             dispatch(alphabetDeleteCustom());
             alphabet.forEach((value: string) => {
@@ -357,7 +354,37 @@ export default function AceJsonEditor(props: CodeEditorProps) {
           );
         });
 
-        dispatch(tableCheckWarning(initRows));
+        if (currentMode === "mespuma") {
+          let literalArr: string[] = [];
+
+          alphabet.forEach((literal: string) => {
+            literalArr.push(literal);
+          });
+
+          literalArr.push("B");
+
+          let combinationArr: string[][] = [];
+
+          for (let i = 0; i < anzahlSpuren; i++) {
+            combinationArr.push(literalArr);
+          }
+
+          let cartesianArr = cartesianProduct(combinationArr);
+          dispatch(
+            tableCheckWarning({
+              rows: initRows,
+              alphabet: cartesianArr,
+            })
+          );
+        } else {
+          dispatch(
+            tableCheckWarning({
+              rows: initRows,
+              alphabet: alphabet,
+            })
+          );
+        }
+
         toggleEditor();
       } catch (e) {
         // Error message is shown, if the entered code in editor is no valid JSON

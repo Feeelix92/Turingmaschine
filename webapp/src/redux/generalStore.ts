@@ -4,6 +4,7 @@ import {
   Alphabet,
   Cell,
   ChangeWarningModus,
+  checkWarning,
   Direction,
   directions,
   EingabeAlphabet,
@@ -873,9 +874,9 @@ export const generalSlice = createSlice({
     tableSetActiveState: (state, newVal: PayloadAction<Zustand>) => {
       state.activeState = newVal.payload;
     },
-    tableCheckWarning: (state, checkVal: PayloadAction<RowInterface[]>) => {
+    tableCheckWarning: (state, checkVal: PayloadAction<checkWarning>) => {
       // create flat copy of all existing rows
-      const newRows = checkVal.payload;
+      const newRows = checkVal.payload.rows;
       const copy = state.rows.slice(0, state.rows.length);
 
       newRows.forEach((row, rowIndex) => {
@@ -890,9 +891,23 @@ export const generalSlice = createSlice({
               copy[rowIndex].cells[cellIndex].warningMode = true;
             }
           } else if (!(cell.value instanceof Direction)) {
-            let tempBool = state.currentAlphabet.alphabet.some((value) => {
-              return value.value === cell.value;
-            });
+            let tempBool: boolean;
+            if (state.mode === "mespuma") {
+              let checkCellValue: string | string[];
+              let temp = cell.value.substring(1, cell.value.length - 1);
+              checkCellValue = temp.split(",");
+              tempBool = checkVal.payload.alphabet.some((value) => {
+                return (
+                  value[0] === checkCellValue[0] &&
+                  value[1] === checkCellValue[1]
+                );
+              });
+            } else {
+              tempBool = checkVal.payload.alphabet.some((value) => {
+                return value === cell.value;
+              });
+            }
+
             if (!tempBool) {
               maschineChangeExecutable(false);
               copy[rowIndex].cells[cellIndex].warningMode = !tempBool;

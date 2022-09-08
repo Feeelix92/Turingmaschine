@@ -48,22 +48,6 @@ export default function Cell(props: CellProps) {
     })
   );
 
-  // check in store after codeEditor push
-  /////////// States from State ///////////
-  // let rows = initialRows;
-  // let wRows = watch(store.getState, "general.rows");
-  // store.subscribe(
-  //   wRows((newVal) => {
-  //     rows = newVal;
-
-  // const failure = checkWarningModus();
-
-  // console.log("rows watcher");
-
-  // props.updateCellValue(props.index, props.value, failure);
-  //   })
-  // );
-
   /////////// finalStates from State ///////////
   let finalStates = endzustandsMenge;
   let wFinalStates = watch(store.getState, "general.endZustand");
@@ -118,8 +102,9 @@ export default function Cell(props: CellProps) {
   }
 
   function chooseOption(option: string) {
+    const failure = checkWarningModus(option);
     // pass chosen options to the parent to update the cell
-    props.updateCellValue(props.index, option, props.warningMode);
+    props.updateCellValue(props.index, option, failure);
     // close the edit-buttons
     setEditMode(false);
   }
@@ -172,7 +157,8 @@ export default function Cell(props: CellProps) {
         value === "B"
       ) {
         // if its allowed, we pass the new value to the parent to update the cell value
-        props.updateCellValue(index, value, props.warningMode);
+        const failure = checkWarningModus(value);
+        props.updateCellValue(index, value, failure);
         allowed = true;
       }
     });
@@ -289,7 +275,7 @@ export default function Cell(props: CellProps) {
         ""
       )}
 
-      {props.warningMode ? (
+      {props.warningMode === true ? (
         <IoIosWarning
           color="orange"
           title="Dieser Eingabewert ist nicht länger zulässig!"
