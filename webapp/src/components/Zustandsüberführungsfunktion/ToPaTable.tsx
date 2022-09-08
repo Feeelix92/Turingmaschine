@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { BiCaretDown, BiCaretUp } from "react-icons/all";
 import Table from "../Zustandsüberführungsfunktion/Table";
+import {useTranslation} from "react-i18next";
 
 export default function ToPaTable() {
+  ///internationalization
+  const { t } = useTranslation(["general"])
+
   /**
    * Accordion data (Title, Icons)
    */
   const accordionData = {
-    title: <h2>Zustandstabelle</h2>,
+    title: <h2>{t("toiletPaperMode.stateTable")}</h2>,
     openAccordion: (
       <button className={"float-left"}>
         <BiCaretDown />

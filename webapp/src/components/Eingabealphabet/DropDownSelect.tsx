@@ -15,6 +15,7 @@ import {
 } from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import MultiselectDropDown from "./DropDownMultiselect";
+import {useTranslation} from "react-i18next";
 
 export default function DropDownSelect() {
   // mode für alle:
@@ -158,10 +159,14 @@ export default function DropDownSelect() {
       // dispatch(bandDeleteAll());
     }
   }
+
+  ///internationalization
+  const { t } = useTranslation(["general"])
+
   return (
     <div>
       <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2"}>
-        <p className={"col-span-2 text-left"}>Eingabealphabet ∑ =</p>
+        <p className={"col-span-2 text-left"}> {t("list.dropdown.inputSymbols")} ∑ =</p>
         <Select
           value={copiedCurrentDialogOption}
           blurInputOnSelect={false}

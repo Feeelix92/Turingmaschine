@@ -26,6 +26,7 @@ import {
   bandDeleteBandMespuma,
 } from "../../redux/bandStore";
 import { cartesianProduct } from "../../interfaces/CommonFunctions";
+import {useTranslation} from "react-i18next";
 
 function ConditionsList() {
   /**
@@ -99,11 +100,14 @@ function ConditionsList() {
   const kA = "{";
   const kZ = "}";
 
+  ///internationalization
+  const { t } = useTranslation(["general"])
+
   /**
    * Accordion data (Title, Icons)
    */
   const accordionData = {
-    title: <h2>Spezifikationen</h2>,
+    title: <h2>{t("list.headline")}</h2>,
     openAccordion: (
       <button className={"float-left"}>
         <BiCaretDown />
@@ -359,7 +363,7 @@ function ConditionsList() {
             }
           >
             <div className={"flex col-span-2 justify-between"}>
-              <div>Anzahl Spuren =</div>
+              <div>{t("list.mespumaExtension.NumberOfTracks")} =</div>
             </div>
 
             <div
@@ -387,7 +391,7 @@ function ConditionsList() {
               "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
             }
           >
-            <div className={"col-span-2"}>Bandalphabet &Gamma; =</div>
+            <div className={"col-span-2"}>{t("list.tapeAlphabetSymbols")} &Gamma; =</div>
             <div
               className={
                 "border border-solid bg-gray-100 rounded p-2 col-span-2 max-h-60 overflow-y-scroll"
@@ -408,7 +412,7 @@ function ConditionsList() {
               "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
             }
           >
-            <div className={"col-span-2"}>Zustandsmenge Q =</div>
+            <div className={"col-span-2"}>{t("list.states")} Q =</div>
             <div
               className={
                 "border border-solid bg-gray-100 rounded p-2 break-all"
@@ -444,11 +448,11 @@ function ConditionsList() {
             }
           >
             <div className={"flex col-span-2 justify-between"}>
-              Anfangszustand q0 = {anfangsZustand.value}{" "}
+              {t("list.initialState")} q0 = {anfangsZustand.value}{" "}
               {anfangsZustand.warningMode ? (
                 <IoIosWarning
                   color="orange"
-                  title="Dieser Zustand ist nicht länger vorhanden!"
+                  title={t("list.warningInitialState")}
                   size="32"
                 />
               ) : null}
@@ -470,7 +474,7 @@ function ConditionsList() {
           >
             <div className={"flex col-span-2 justify-between"}>
               <div>
-                Endzustand F = {kA}
+                {t("list.finalStates")} F = {kA}
                 {endZustand.map((value, index) => (
                   <span key={index}>
                     {value.value}
@@ -482,7 +486,7 @@ function ConditionsList() {
               {endZustandWarningOn ? (
                 <IoIosWarning
                   color="orange"
-                  title="Einer der Endzustände ist nicht länger vorhanden!"
+                  title={t("list.warningFinalState")}
                   size="32"
                 />
               ) : null}
@@ -495,6 +499,7 @@ function ConditionsList() {
                 onChange={handleChangeMulti}
                 options={possibleEnd}
                 isMulti={true}
+                placeholder={t("list.finalStatesSelection")}
               />
             </div>
           </div>
@@ -504,7 +509,7 @@ function ConditionsList() {
             }
           >
             <span className={"col-span-2"}>
-              Zustandsüberführungsfunktion &delta; =
+              {t("list.transitionFunction")} &delta; =
             </span>
             <button
               className={

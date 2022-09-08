@@ -1,0 +1,105 @@
+{
+  "menu": {
+    "name": "Turing Machine Simulator",
+    "currentState": "State",
+    "currentStateWarning": "No state available!",
+    "control": {
+      "actualSpeed": "Speed"
+    }
+  },
+
+  "sidebar": {
+    "homePage": "Home",
+    "mode": "Mode",
+    "normalMode": "Normal Mode",
+    "toiletPaperMode": "Toilet Paper Mode",
+    "multiTrackMachine": "Multi-Track-Machine",
+    "codeEditor": "Code Editor"
+  },
+
+  "bottomNavBar": {
+    "configurations": "Configurations",
+    "table": "Table"
+  },
+
+  "band": {
+    "addLeft": "Field left",
+    "addRight": "Field right",
+    "clearBand": "clear",
+    "warningInputValueNotAllowed": "This input value is no longer allowed!",
+    "warningNoStateAvailable": "No state available!",
+
+    "mespumaExtension": {
+      "headline": "Multi-Track-Machine"
+    }
+  },
+
+  "bandItem": {
+    "warningValueNotIncluded": "Value is not included in the alphabet!"
+  },
+  "teePeeBandItem": {
+    "warningValueNotIncluded": "Value is not included in the alphabet!"
+  },
+
+  "table": {
+    "when": "When",
+    "then": "Then",
+    "currentState": "Current State",
+    "read": "Read",
+    "newState": "New State",
+    "write": "Write",
+    "direction": "Direction"
+  },
+
+  "cell": {
+    "warningInputValueNotAllowed": "This input value is no longer allowed!",
+    "warningValueNotIncluded": "Value is not included in the alphabet!",
+    "toiletPaperMode": {
+      "empty": "empty",
+      "white": "white",
+      "black": "black"
+    }
+  },
+
+  "row":{
+    "stop": "STOP"
+  },
+
+  "list": {
+    "headline": "Configurations",
+    "warningInitialState": "This state is no longer present!",
+    "warningFinalState": "One of the final states is no longer present!",
+    "finalStates": "Final States",
+    "finalStatesSelection": "Select",
+    "initialState": "Initial State",
+    "tapeAlphabetSymbols": "Tape Alphabet Symbols",
+    "states": "States",
+    "transitionFunction": "Transition Function",
+    "dropdown": {
+      "inputSymbols": "Input Symbols",
+      "addInputSymbols": "Add Input Symbols",
+      "description": "You can enter characters or select characters from the standard Input Symbols!",
+      "inputPlaceholder": "Create",
+      "saveAdding": "save",
+      "noOptionsMessage": "Type new character!",
+      "addNewValue": "add",
+      "emptyIsNotAllowed": "An empty set of input symbols is not allowed!"
+    },
+    "mespumaExtension": {
+      "NumberOfTracks": "Number of Tracks"
+    }
+  },
+
+  "toiletPaperMode": {
+    "stateTable": "State table"
+  },
+
+  "codeEditor": {
+    "name": "Code Editor",
+    "warningEmptyIsNotAllowed": "An empty alphabet is not allowed!",
+    "warningNoValidJSON": "No valid JSON! Your input must be in JSON format!",
+    "saveButton": "config",
+    "cancelButton": "cancel"
+
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "menu": {
+    "name": "Turingmaschinen-Simulator",
+    "currentState": "Zustand",
+    "currentStateWarning": "Kein Zustand vorhanden!",
+    "control": {
+      "actualSpeed": "Geschwindigkeit"
+    }
+  },
+
+  "sidebar": {
+    "homePage": "Startseite",
+    "mode": "Modus",
+    "normalMode": "Normaler Modus",
+    "toiletPaperMode": "Toilettenpapiermodus",
+    "multiTrackMachine": "Mehrspurenmaschine",
+    "codeEditor": "Code-Editor"
+  },
+
+  "bottomNavBar": {
+    "configurations": "Spezifikationen",
+    "table": "Tabelle"
+  },
+
+  "band": {
+    "addLeft": "Feld links",
+    "addRight": "Feld rechts",
+    "clearBand": "leeren",
+    "warningInputValueNotAllowed": "Dieser Eingabewert ist nicht länger zulässig!",
+    "warningNoStateAvailable": "Kein Zustand vorhanden!",
+
+    "mespumaExtension": {
+      "headline": "Mehrspuren-Maschine"
+    }
+  },
+  "bandItem": {
+    "warningValueNotIncluded": "Wert ist nicht im Alphabet enthalten!"
+  },
+  "teePeeBandItem": {
+    "warningValueNotIncluded": "Wert ist nicht im Alphabet enthalten!"
+  },
+
+  "table": {
+    "when": "Wenn",
+    "then": "Dann",
+    "currentState": "Zustand",
+    "read": "Lese",
+    "newState": "neuer Zustand",
+    "write": "Schreibe",
+    "direction": "Gehe nach"
+  },
+
+  "row":{
+    "stop": "STOPP"
+  },
+
+  "cell": {
+    "warningInputValueNotAllowed": "Dieser Eingabewert ist nicht länger zulässig!",
+    "warningValueNotIncluded": "Wert ist nicht im Alphabet enthalten!",
+
+    "toiletPaperMode": {
+      "empty": "leer",
+      "white": "weiß",
+      "black": "schwarz"
+    }
+  },
+
+  "list": {
+    "headline": "Spezifikationen",
+    "warningInitialState": "Dieser Zustand ist nicht länger vorhanden!",
+    "warningFinalState": "Einer der Endzustände ist nicht länger vorhanden!",
+    "finalStates": "Endzustand",
+    "finalStatesSelection": "Wähle",
+    "initialState": "Anfangszustand",
+    "tapeAlphabetSymbols": "Bandalphabet",
+    "states": "Zustandsmenge",
+    "transitionFunction": "Zustandsüberführungsfunktion",
+    "dropdown": {
+      "inputSymbols": "Eingabealphabet",
+      "addInputSymbols": "Eingabealphabet hinzufügen",
+      "description": "Sie können Zeichen eingeben oder Zeichen aus den Standard-Eingabealphabeten auswählen!",
+      "inputPlaceholder": "Erstellen Sie",
+      "saveAdding": "speichern",
+      "noOptionsMessage": "Geben Sie neues Zeichen ein!",
+      "addNewValue": "hinzufügen",
+      "emptyIsNotAllowed": "Ein leeres Alphabet ist nicht erlaubt!"
+    },
+    "mespumaExtension": {
+      "NumberOfTracks": "Anzahl Spuren"
+    }
+  },
+  "toiletPaperMode": {
+    "stateTable": "Zustandstabelle"
+  },
+
+  "codeEditor": {
+    "name": "Code-Editor",
+    "warningEmptyIsNotAllowed": "Ein leeres Alphabet ist nicht erlaubt!",
+    "warningNoValidJSON": "Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen!",
+    "saveButton": "konfigurieren",
+    "cancelButton": "abbrechen"
+  }
+}

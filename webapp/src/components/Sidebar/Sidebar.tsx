@@ -13,7 +13,8 @@ import { cartesianProduct } from "../../interfaces/CommonFunctions";
 import AceJsonEditor from "../codeEditor/AceJsonEditor";
 import { Link, useLocation } from "react-router-dom";
 import { FaLaptopCode } from "react-icons/fa";
-import { current } from "@reduxjs/toolkit";
+import { useTranslation } from "react-i18next";
+import { FlagIcon } from "react-flag-kit";
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -96,19 +97,37 @@ function Sidebar() {
     };
   }, []);
 
+  const { i18n, t } = useTranslation(["general"]);
+
+  /*useEffect(() => {
+    if (localStorage.getItem("i18nextLng")?.length > 2) {
+      i18next.changeLanguage("de")
+    }
+  }, []);*/
+
+  ///Wechselt die Sprache///
+  const handleLanguageChange = (language: { target: { value: string } }) => {
+    i18n.changeLanguage(language.target.value);
+  };
+
+  const lngs = {
+    de: { nativeName: "DE" },
+    en: { nativeName: "GB" },
+  };
+
   return (
     <Menu right width={450}>
       <div className={"mt-0"}>
         <Link className="no-underline" to="/">
           <a className={`text-white text-lg no-underline `} href="/">
-            Startseite
+            {t("sidebar.homePage")}
           </a>
         </Link>
       </div>
 
       <hr className="mt-5" />
 
-      <div className="">Modus</div>
+      <div className="">{t("sidebar.mode")}</div>
 
       <div className="inline-flex rounded-md shadow-sm text-center">
         <a
@@ -167,7 +186,7 @@ function Sidebar() {
               className={`w-50 ${(location.pathname==='/papier') ? 'bg-thm-primary' : 'bg-gray-400 '}`}
               onClick={() => changeTpMode()}
             >
-              Toilettenpapiermodus
+              {t("sidebar.toiletPaperMode")}
             </button>
           </Link>
         </a>
@@ -202,6 +221,21 @@ function Sidebar() {
           </a>
           {showModal ? <AceJsonEditor toggleEditor={toggleModal} /> : null}
         </a>
+      </div>
+
+      <div>
+        {Object.keys(lngs).map((lng) => (
+          <button
+            key={lng}
+            className={
+              i18n.resolvedLanguage === lng ? "activeLng" : "notActiveLng"
+            }
+            type="submit"
+            onClick={() => i18n.changeLanguage(lng)}
+          >
+            <FlagIcon code={lngs[lng].nativeName} size={32} />
+          </button>
+        ))}
       </div>
     </Menu>
   );

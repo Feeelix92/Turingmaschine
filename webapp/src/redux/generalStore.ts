@@ -399,8 +399,6 @@ export const generalSlice = createSlice({
     pauseMaschine: false,
     stoppMaschine: false,
     executable: false,
-    //// Table ////
-    header: ["Zustand", "Lese", "Neuer Zustand", "Schreibe", "Gehe nach"],
     // rows: initialRowTP,
     rows: initialRow,
     activeRow: activeRow,

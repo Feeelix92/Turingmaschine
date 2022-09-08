@@ -16,6 +16,8 @@ import {
 } from "../../redux/generalStore";
 import EditField from "./EditField";
 import ZustandSelect from "./ZustandSelect";
+import {useTranslation} from "react-i18next";
+import i18next from "i18next";
 
 export default function Cell(props: CellProps) {
   const mode = useSelector((state: RootState) => state.general.mode);
@@ -33,6 +35,9 @@ export default function Cell(props: CellProps) {
   // const initialRows = useSelector((state: RootState) => state.general.rows);
 
   const temp = [initialZustand3];
+
+  //Internationalization
+  const { t } = useTranslation(["general"])
 
   /////////// States from State ///////////
   let states =
@@ -164,7 +169,7 @@ export default function Cell(props: CellProps) {
     });
 
     if (!allowed) {
-      alert("Wert ist nicht im Alphabet enthalten!");
+      alert(i18next.t("cell.warningValueNotIncluded"));
     }
   }
 
@@ -239,7 +244,7 @@ export default function Cell(props: CellProps) {
       )}
       {mode == "toiletpaper" && props.value == "B" && (
         <input
-          value={"leer"}
+          value={t("cell.toiletPaperMode.empty")}
           className={
             "w-full rounded text-gray-700 focus:outline-none items-center border rounded text-center"
           }
@@ -247,7 +252,7 @@ export default function Cell(props: CellProps) {
       )}
       {mode == "toiletpaper" && props.value == "1" && (
         <input
-          value={"weiß"}
+          value={t("cell.toiletPaperMode.white")}
           className={
             "w-full rounded text-gray-700 focus:outline-none items-center border rounded text-center"
           }
@@ -255,7 +260,7 @@ export default function Cell(props: CellProps) {
       )}
       {mode == "toiletpaper" && props.value == "#" && (
         <input
-          value={"schwarz"}
+          value={t("cell.toiletPaperMode.black")}
           className={
             "w-full rounded text-gray-700 focus:outline-none items-center border rounded text-center"
           }
@@ -278,7 +283,7 @@ export default function Cell(props: CellProps) {
       {props.warningMode === true ? (
         <IoIosWarning
           color="orange"
-          title="Dieser Eingabewert ist nicht länger zulässig!"
+          title={t("cell.warningInputValueNotAllowed")}
           size="32"
         />
       ) : null}

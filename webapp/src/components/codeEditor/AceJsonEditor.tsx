@@ -40,6 +40,8 @@ import { FiDownload, FiSave, FiUpload } from "react-icons/all";
 import { Tab } from "@headlessui/react";
 import Tutorial from "./Tutorial";
 import { cartesianProduct } from "../../interfaces/CommonFunctions";
+import i18next from "i18next";
+import {useTranslation} from "react-i18next";
 
 interface tableZustand {
   [key: string]: tableZeichen;
@@ -254,31 +256,10 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               })
             );
           } else {
-            alert("Ein leeres Alphabet ist nicht erlaubt!");
+            alert(i18next.t("codeEditor.warningEmptyIsNotAllowed"));
           }
         } else {
-          dispatch(bandDeleteAll());
-          // save Band to store
-          // json.band.input...
-          const bandItems = json.band.input;
-          for (let index = 0; index < bandItems.length; index++) {
-            const temp: BandItemToChange = {
-              index: index,
-              value: bandItems[index],
-              label: bandItems[index],
-            };
-            dispatch(bandChangeItemAt(temp));
-          }
-          if (alphabet.length > 0) {
-            dispatch(alphabetDeleteCustom());
-            alphabet.forEach((value: string) => {
-              dispatch(alphabetPushToCustom(value));
-            });
-            dispatch(alphabetPushToDialogOptions(alphabet.toString()));
-            dispatch(alphabetGenerateBand(alphabet));
-          } else {
-            alert("Ein leeres Alphabet ist nicht erlaubt!");
-          }
+          alert(i18next.t("codeEditor.warningEmptyIsNotAllowed"));
         }
 
         //save states from editor to store
@@ -389,7 +370,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
       } catch (e) {
         // Error message is shown, if the entered code in editor is no valid JSON
         alert(
-          "Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen! \n" +
+            i18next.t("codeEditor.warningNoValidJSON") + " \n" +
             e
         );
       }
@@ -572,6 +553,9 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     // @ts-ignore
     inputRef.current.click();
   };
+
+  //Internationalization
+  const { t } = useTranslation(["general"])
 
   return (
     <div>

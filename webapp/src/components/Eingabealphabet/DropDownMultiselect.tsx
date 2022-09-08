@@ -15,8 +15,13 @@ import {
 } from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import watch from "redux-watch";
+import {useTranslation} from "react-i18next";
+import i18next from "i18next";
 
 export default function MultiselectDropDown(props: ZustandCustomProp) {
+  ///internationalization
+  const { t } = useTranslation(["general"])
+
   const dispatch = useDispatch();
   let currentAlphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
@@ -33,7 +38,7 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
   // valuesString = current selected options as String to use it as label
   let valuesString = "";
 
-  const [placeholderText, setPlaceholderText] = useState("Erstellen sie ");
+  const [placeholderText, setPlaceholderText] = useState(i18next.t("list.dropdown.inputPlaceholder"));
 
   /**
    * function handleChange checks if the selected option has changed
@@ -50,21 +55,22 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
     valuesString = valuesArray.toString();
   }
 
+
+
   return (
     <div className={""}>
       <div className={""}>
-        <h2>Eingabealphabet hinzufügen:</h2>
+        <h2>{t("list.dropdown.addInputSymbols")}:</h2>
       </div>
       <div className={""}>
         <p>
-          Sie können Zeichen eingeben oder Zeichen aus den
-          Standard-Eingabealphabeten auswählen!
+          {t("list.dropdown.description")}
         </p>
         <div className={"text-lg p-3"}>
           <CreatableSelect
             allowCreateWhileLoading={false}
-            formatCreateLabel={(inputValue) => inputValue + " hinzufügen"}
-            noOptionsMessage={() => "Geben Sie neues Zeichen ein!"}
+            formatCreateLabel={(inputValue) => inputValue + " " + t("list.dropdown.addNewValue")}
+            noOptionsMessage={() => t("list.dropdown.noOptionsMessage")}
             placeholder={placeholderText}
             className={"text-base text-black"}
             isMulti
@@ -86,13 +92,13 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
                 dispatch(alphabetPushToDialogOptions(valuesArray.toString()));
                 dispatch(alphabetChangeCurrent(currentAlphabet))
               } else {
-                alert("Ein leeres Alphabet ist nicht erlaubt!");
+                alert(i18next.t("list.dropdown.emptyIsNotAllowed"));
               }
               props.onCloseDialog();
             }}
             className={"col-start-3 col-span-2 m-2"}
           >
-            speichern
+            {t("list.dropdown.saveAdding")}
           </button>
         </div>
       </div>

@@ -336,3 +336,8 @@
 .face6 .dot7 {
   @apply visible;
 }
+
+/*active Language*/
+.activeLng{
+  background-color: rgb(128 186 36);
+}
