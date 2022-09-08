@@ -1,12 +1,11 @@
 import {
   CodeEditorProps,
   Direction,
-  EingabeAlphabet,
   tableRowToAdd,
   Zustand,
 } from "../../interfaces/CommonInterfaces";
 import { useDispatch, useSelector } from "react-redux";
-import React, {Fragment, useEffect, useRef, useState} from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { RootState } from "../../redux/store";
 import AceEditor from "react-ace";
 import { setCompleters } from "ace-builds/src-noconflict/ext-language_tools";
@@ -19,6 +18,7 @@ import {
   alphabetChangeEndzustand,
   alphabetDeleteCustom,
   alphabetDeleteZustand,
+  alphabetGenerateBand,
   alphabetPushToCustom,
   alphabetPushToDialogOptions,
   alphabetPushToIdxZustand,
@@ -278,6 +278,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               dispatch(alphabetPushToCustom(value));
             });
             dispatch(alphabetPushToDialogOptions(alphabet.toString()));
+            dispatch(alphabetGenerateBand(alphabet));
           } else {
             alert("Ein leeres Alphabet ist nicht erlaubt!");
           }
@@ -582,69 +583,75 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               <Tab.List>
                 <Tab as={Fragment}>
                   {({ selected }) => (
-                      <button
-                          className={
-                            selected ? 'bg-thm-primary2 text-white hover:bg-thm-primary2 rounded-b-none' : 'bg-thm-primary text-white rounded-b-none'
-                          }
-                      >
-                        Code-Editor
-                      </button>
-                  )}</Tab>
+                    <button
+                      className={
+                        selected
+                          ? "bg-thm-primary2 text-white hover:bg-thm-primary2 rounded-b-none"
+                          : "bg-thm-primary text-white rounded-b-none"
+                      }
+                    >
+                      Code-Editor
+                    </button>
+                  )}
+                </Tab>
                 <Tab as={Fragment}>
                   {({ selected }) => (
-                      <button
-                          className={
-                            selected ? 'bg-thm-primary2 text-white hover:bg-thm-primary2 rounded-b-none' : 'bg-thm-primary text-white rounded-b-none'
-                          }
-                      >
-                        Tutorial
-                      </button>
-                  )}</Tab>
+                    <button
+                      className={
+                        selected
+                          ? "bg-thm-primary2 text-white hover:bg-thm-primary2 rounded-b-none"
+                          : "bg-thm-primary text-white rounded-b-none"
+                      }
+                    >
+                      Tutorial
+                    </button>
+                  )}
+                </Tab>
               </Tab.List>
               <Tab.Panels>
                 <Tab.Panel>
                   <div className="text-left min-h-[300px]">
                     <AceEditor
-                        mode="json5"
-                        theme="twilight"
-                        onChange={onChange}
-                        name="json-editor"
-                        fontSize={16}
-                        width={"100%"}
-                        showPrintMargin={true}
-                        showGutter={true}
-                        editorProps={{ $blockScrolling: true }}
-                        value={tempEditorText}
-                        setOptions={{
-                          enableBasicAutocompletion: true,
-                          enableLiveAutocompletion: true,
-                          enableSnippets: true,
-                          showLineNumbers: true,
-                          tabSize: 2,
-                        }}
+                      mode="json5"
+                      theme="twilight"
+                      onChange={onChange}
+                      name="json-editor"
+                      fontSize={16}
+                      width={"100%"}
+                      showPrintMargin={true}
+                      showGutter={true}
+                      editorProps={{ $blockScrolling: true }}
+                      value={tempEditorText}
+                      setOptions={{
+                        enableBasicAutocompletion: true,
+                        enableLiveAutocompletion: true,
+                        enableSnippets: true,
+                        showLineNumbers: true,
+                        tabSize: 2,
+                      }}
                     />
                     <div className="flex items-center justify-center p-2 space-x-2 rounded-b border-gray-200 dark:border-gray-600">
                       <button
-                          data-modal-toggle="defaultModal"
-                          type="button"
-                          onClick={parseToJSON}
-                          className="bg-thm-primary"
+                        data-modal-toggle="defaultModal"
+                        type="button"
+                        onClick={parseToJSON}
+                        className="bg-thm-primary"
                       >
                         konfigurieren
                       </button>
                       <button
-                          data-modal-toggle="defaultModal"
-                          type="button"
-                          onClick={toggleEditor}
-                          className="bg-thm-secondary hover:bg-thm-primary2"
+                        data-modal-toggle="defaultModal"
+                        type="button"
+                        onClick={toggleEditor}
+                        className="bg-thm-secondary hover:bg-thm-primary2"
                       >
                         abbrechen
                       </button>
                       <button
-                          data-modal-toggle="defaultModal"
-                          type="button"
-                          onClick={exportData}
-                          className="bg-thm-primary"
+                        data-modal-toggle="defaultModal"
+                        type="button"
+                        onClick={exportData}
+                        className="bg-thm-primary"
                       >
                         <FiDownload />
                       </button>
@@ -652,21 +659,20 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                         <FiUpload />
                       </button>
                       <input
-                          hidden
-                          ref={inputRef}
-                          type="file"
-                          accept={".json"}
-                          onChange={onFileInputChange}
+                        hidden
+                        ref={inputRef}
+                        type="file"
+                        accept={".json"}
+                        onChange={onFileInputChange}
                       />
                     </div>
-                </div>
+                  </div>
                 </Tab.Panel>
                 <Tab.Panel>
                   <div className="p-6 space-y-6 text-left bg-white max-h-[500px] overflow-y-auto">
-                    <Tutorial/>
+                    <Tutorial />
                   </div>
-                  <div className="flex items-center justify-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                  </div>
+                  <div className="flex items-center justify-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600"></div>
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>

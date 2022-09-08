@@ -483,6 +483,18 @@ export const generalSlice = createSlice({
     alphabetDeleteCustom: (state) => {
       state.customAlphabet.alphabet = [];
     },
+    alphabetGenerateBand: (state, alphabet: PayloadAction<string[]>) => {
+      let finalArray: EingabeAlphabet[] = [];
+      alphabet.payload.forEach((literal) => {
+        finalArray.push({
+          value: literal,
+          label: literal,
+          warningMode: false,
+        });
+      });
+      finalArray.push({ value: "B", label: "", warningMode: false });
+      state.bandAlphabet = finalArray;
+    },
 
     ///////////////////// Dialog /////////////////////
     alphabetPushToDialogOptions: (state, optionName: PayloadAction<string>) => {
@@ -974,6 +986,7 @@ export const {
   alphabetPushToCustom,
   alphabetPushToDialogOptions,
   alphabetDeleteCustom,
+  alphabetGenerateBand,
   alphabetPushToZustand,
   alphabetPushToIdxZustand,
   alphabetChangeAnfangszustand,
