@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { slide as Menu } from "react-burger-menu";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,6 +13,7 @@ import { cartesianProduct } from "../../interfaces/CommonFunctions";
 import AceJsonEditor from "../codeEditor/AceJsonEditor";
 import { Link, useLocation } from "react-router-dom";
 import { FaLaptopCode } from "react-icons/fa";
+import { current } from "@reduxjs/toolkit";
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function Sidebar() {
   );
 
   const changeTpMode = () => {
+    dispatch(bandResetAll());
     dispatch(changeToiletPaperMode());
     dispatch(bandResetAll());
   };
@@ -36,7 +38,11 @@ function Sidebar() {
     setShowModal(!showModal);
   }
 
+  // Current Router Location:
+  const location = useLocation(); // Current Pathname = location.pathname
+
   const changeMSMMode = (mespuma: boolean) => {
+    dispatch(bandResetAll());
     dispatch(changeMespumaMode(mespuma));
     dispatch(bandResetAll());
 
@@ -75,10 +81,20 @@ function Sidebar() {
         })
       );
     }
-
-    // Current Router Location:
-    const location = useLocation(); // Current Pathname = location.pathname
   };
+
+  useEffect(() => {
+    window.performance;
+    return () => {
+      if (location.pathname === "/mehrspuren") {
+        changeMSMMode(true);
+      } else if (location.pathname === "/papier") {
+        changeTpMode();
+      } else {
+        changeMSMMode(false);
+      }
+    };
+  }, []);
 
   return (
     <Menu right width={450}>

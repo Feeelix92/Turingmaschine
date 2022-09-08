@@ -7,6 +7,17 @@ export const store = configureStore({
     general: generalReducer,
     band: bandReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore these action types
+        ignoredActions: ["general", "payload"],
+        // Ignore these field paths in all actions
+        ignoredActionPaths: ["general", "payload"],
+        // Ignore these paths in the state
+        ignoredPaths: ["general", "payload"],
+      },
+    }),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
