@@ -42,6 +42,7 @@ import Tutorial from "./Tutorial";
 import { cartesianProduct } from "../../interfaces/CommonFunctions";
 import i18next from "i18next";
 import {useTranslation} from "react-i18next";
+import { useAlert } from 'react-alert';
 
 interface tableZustand {
   [key: string]: tableZeichen;
@@ -259,7 +260,8 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             alert(i18next.t("codeEditor.warningEmptyIsNotAllowed"));
           }
         } else {
-          alert(i18next.t("codeEditor.warningEmptyIsNotAllowed"));
+          // alert("Ein leeres Alphabet ist nicht erlaubt!");
+          alert.show(i18next.t("codeEditor.warningEmptyIsNotAllowed"));
         }
 
         //save states from editor to store
@@ -369,10 +371,12 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         toggleEditor();
       } catch (e) {
         // Error message is shown, if the entered code in editor is no valid JSON
-        alert(
-            i18next.t("codeEditor.warningNoValidJSON") + " \n" +
-            e
-        );
+        // alert(
+        //   "Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen! \n" +
+        //     e
+        // );
+        alert.show(i18next.t("codeEditor.warningNoValidJSON") + " \n" +
+            e); //TODO: Wird immer hinter Code-Editor angezeigt!
       }
     }
   }
@@ -556,6 +560,8 @@ export default function AceJsonEditor(props: CodeEditorProps) {
 
   //Internationalization
   const { t } = useTranslation(["general"])
+
+   const alert = useAlert();
 
   return (
     <div>

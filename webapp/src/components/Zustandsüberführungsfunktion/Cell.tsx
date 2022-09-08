@@ -18,6 +18,7 @@ import EditField from "./EditField";
 import ZustandSelect from "./ZustandSelect";
 import {useTranslation} from "react-i18next";
 import i18next from "i18next";
+import { useAlert } from 'react-alert';
 
 export default function Cell(props: CellProps) {
   const mode = useSelector((state: RootState) => state.general.mode);
@@ -169,7 +170,8 @@ export default function Cell(props: CellProps) {
     });
 
     if (!allowed) {
-      alert(i18next.t("cell.warningValueNotIncluded"));
+      // alert("Wert ist nicht im Alphabet enthalten!");
+      alert.show(i18next.t("cell.warningValueNotIncluded"));
     }
   }
 
@@ -200,6 +202,8 @@ export default function Cell(props: CellProps) {
       return false;
     }
   }
+
+  const alert = useAlert();
 
   return (
     <td
