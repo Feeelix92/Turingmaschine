@@ -16,7 +16,7 @@ import { BsFillEraserFill } from "react-icons/bs";
 import BrickWhite from "../../assets/images/brick_white.svg";
 import BrickBlack from "../../assets/images/brick_black.svg";
 import i18next from "i18next";
-import { useAlert } from 'react-alert';
+import { useAlert } from "react-alert";
 
 export default function BandItem(props: BandItemProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -104,57 +104,76 @@ export default function BandItem(props: BandItemProps) {
       }
     });
 
-      if (!allowed) {
-          // alert("Wert ist nicht im Alphabet enthalten!");
-          alert.show(i18next.t("bandItem.warningValueNotIncluded"));
-      }
+    if (!allowed) {
+      // alert("Wert ist nicht im Alphabet enthalten!");
+      alert.show(i18next.t("bandItem.warningValueNotIncluded"));
+    }
   }
 
   const alert = useAlert();
 
-
-    return (
-        <div
-            className={`teepeeBandItem flex justify-center ${(pointerIdx===props.index) ? 'teepeePointerBorder' : ''}`}
-            key={props.index}
-            ref={wrapperRef}>
-            <div className={""}>
-                {pointerIdx===props.index ? (
-                    <div className="teepeePointer scroll-mx-16" ref={fieldRef}  draggable/>
-                ) : (
-                    ""
-                )}
-                <input
-                    type="text"
-                    name="value"
-                    id="teepeeValueInput"
-                    className={"teepeeBandInput"}
-                    value={props.label}
-                    onChange={(e) => checkValue(props.index, e.target.value)}
-                    onClick={toggleEditMode}
-                    onDragOver={props.setPointerAt}
-                    inputMode='none'
-                />
-                {props.label == "1" &&
-                    <img draggable={false} className={"brick"} src={BrickWhite} alt="brick black" onClick={toggleEditMode}/>
-                }
-                {props.label == "#" &&
-                    <img draggable={false} className={"brick"} src={BrickBlack} alt="brick white" onClick={toggleEditMode}/>
-                }
-                {editMode && props.showEditField ? (
-                    <div className={"brickEditBtnDiv"}>
-                      <EditField options={props.alphabet} updateValue={chooseOption}/>
-                      <button
-                          className={"brickDeleteBtn"}
-                          onClick={() => deleteValue(props.index)}
-                      >
-                        <BsFillEraserFill/>
-                      </button>
-                    </div>
-                ) : (
-                    ""
-                )}
-            </div>
-        </div>
-    );
+  return (
+    <div
+      className={`teepeeBandItem flex justify-center ${
+        pointerIdx === props.index ? "teepeePointerBorder" : ""
+      }`}
+      key={props.index}
+      ref={wrapperRef}
+    >
+      <div className={""}>
+        {pointerIdx === props.index ? (
+          <div
+            className="teepeePointer scroll-mx-16"
+            ref={fieldRef}
+            draggable
+          />
+        ) : (
+          ""
+        )}
+        <input
+          type="text"
+          name="value"
+          id="teepeeValueInput"
+          className={"teepeeBandInput"}
+          value={props.label}
+          onChange={(e) => checkValue(props.index, e.target.value)}
+          onClick={toggleEditMode}
+          onDragOver={props.setPointerAt}
+          inputMode="none"
+          autoComplete="off"
+        />
+        {props.label == "1" && (
+          <img
+            draggable={false}
+            className={"brick"}
+            src={BrickWhite}
+            alt="brick black"
+            onClick={toggleEditMode}
+          />
+        )}
+        {props.label == "#" && (
+          <img
+            draggable={false}
+            className={"brick"}
+            src={BrickBlack}
+            alt="brick white"
+            onClick={toggleEditMode}
+          />
+        )}
+        {editMode && props.showEditField ? (
+          <div className={"brickEditBtnDiv"}>
+            <EditField options={props.alphabet} updateValue={chooseOption} />
+            <button
+              className={"brickDeleteBtn"}
+              onClick={() => deleteValue(props.index)}
+            >
+              <BsFillEraserFill />
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
+    </div>
+  );
 }
