@@ -120,6 +120,7 @@ const initialZustandsmengeTP: Zustand[] = [
   new Zustand("3", "q3", false, false, false),
   new Zustand("4", "q4", false, false, false),
   new Zustand("5", "q5", false, true, false),
+  new Zustand("6", "q6", false, false, false),
 ];
 
 export const initialAnfangszustandTP: Zustand = initialZustandsmengeTP[0];

@@ -186,7 +186,8 @@ export default function BandItem(props: BandItemProps) {
           value={props.label}
           onChange={(e) => checkValue(props.index, e.target.value)}
           onDragOver={props.setPointerAt}
-          autoComplete="0" // Bringt das schon was gegen die Vorschläge vom Browser?
+          autoComplete="off"
+          // autoComplete="0" // Bringt das schon was gegen die Vorschläge vom Browser?
           inputMode={displayKeyboard ? "text" : "none"}
           onClick={() => {
             disableKeyboard();

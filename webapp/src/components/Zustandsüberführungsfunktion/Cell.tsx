@@ -35,7 +35,8 @@ export default function Cell(props: CellProps) {
   const temp = [initialZustand3];
 
   /////////// States from State ///////////
-  let states = zustandsmenge.concat(temp);
+  let states =
+    mode !== "toiletpaper" ? zustandsmenge.concat(temp) : zustandsmenge;
   let wStates = watch(store.getState, "general.zustandsmenge");
   store.subscribe(
     wStates((newVal) => {
