@@ -34,8 +34,6 @@ export default function ZustandSelect(props: ZustandSelectProps) {
 
   const mode = useSelector((state: RootState) => state.general.mode);
 
-  console.log(mode);
-
   return (
     <div>
       <div className={"flex gap-5 items-center mt-2"}>
