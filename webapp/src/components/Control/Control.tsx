@@ -209,8 +209,8 @@ function Control() {
     const item = selectedRows.find((elem) => {
       return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
     });
-    let tempFirstZustandVar = item?.cells[0].value as Zustand;
     let tempLastZustandVar = item?.cells[2].value as Zustand;
+    console.log("tempLastZustandVar: ", tempLastZustandVar);
     if (tempLastZustandVar.endzustand == true) {
       endConfetti();
     }
@@ -357,8 +357,11 @@ function Control() {
 
     while (stoppMaschine === false && pauseMaschine === false) {
       setMaschineRunning(true);
-      let tempSlider = 3000 / slider;
-      await sleep(tempSlider);
+      console.log(slider);
+      if (slider !== 100) {
+        let tempSlider = 3000 / slider;
+        await sleep(tempSlider);
+      }
       if (mode === "mespuma") {
         if (stoppMaschine === false && pauseMaschine === false) {
           makeStepMespuma(activePointerPosition);

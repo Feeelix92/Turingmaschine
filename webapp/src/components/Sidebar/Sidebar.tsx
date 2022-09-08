@@ -86,7 +86,6 @@ function Sidebar() {
   useEffect(() => {
     window.performance;
     return () => {
-      console.log("This page is reloaded");
       if (location.pathname === "/mehrspuren") {
         changeMSMMode(true);
       } else if (location.pathname === "/papier") {
