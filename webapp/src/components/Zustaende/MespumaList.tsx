@@ -356,7 +356,7 @@ function ConditionsList() {
       </div>
       {isActive && (
         <div className={""}>
-          {/* TODO: Auswahl für Anzahl Spuren: */}
+          {/* Auswahl für Anzahl Spuren: */}
           <div
             className={
               "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
@@ -511,9 +511,10 @@ function ConditionsList() {
             <span className={"col-span-2"}>
               {t("list.transitionFunction")} &delta; =
             </span>
-            <button
+            <div
               className={
-                "text-black font-medium bg-white hover:bg-white text-left border border-solid col-span-2"
+                // "text-black font-medium bg-white hover:bg-white text-left border border-solid col-span-2 max-h-60 overflow-y-scroll"
+                "border border-solid bg-gray-100 rounded p-2 col-span-2 max-h-60 overflow-y-scroll cursor-pointer"
               }
               onClick={() => getZustandsFunktion()}
             >
@@ -526,7 +527,7 @@ function ConditionsList() {
               ) : (
                 "δ:Q×Γ → Q×Γ×{R,L,N}"
               )}
-            </button>
+            </div>
           </div>
         </div>
       )}
