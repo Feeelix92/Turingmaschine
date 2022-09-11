@@ -50,7 +50,7 @@
     "direction": "Gehe nach"
   },
 
-  "row":{
+  "row": {
     "stop": "STOPP"
   },
 
@@ -99,5 +99,18 @@
     "warningNoValidJSON": "Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen!",
     "saveButton": "konfigurieren",
     "cancelButton": "abbrechen"
+  },
+
+  "calculator": {
+    "name": "Rechner",
+    "binary": "Binär",
+    "unary": "Unär",
+    "number": "Zahl",
+    "request": "Bitte fülle dieses Feld aus.",
+    "calculate": "Berechnen",
+    "addition": "Addition",
+    "substraction": "Substraktion",
+    "multiplication": "Multiplikation",
+    "division": "Division"
   }
 }

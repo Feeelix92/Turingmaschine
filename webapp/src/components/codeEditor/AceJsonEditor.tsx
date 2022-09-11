@@ -41,8 +41,8 @@ import { Tab } from "@headlessui/react";
 import Tutorial from "./Tutorial";
 import { cartesianProduct } from "../../interfaces/CommonFunctions";
 import i18next from "i18next";
-import {useTranslation} from "react-i18next";
-import { useAlert } from 'react-alert';
+import { useTranslation } from "react-i18next";
+import { useAlert } from "react-alert";
 
 interface tableZustand {
   [key: string]: tableZeichen;
@@ -260,8 +260,31 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             alert(i18next.t("codeEditor.warningEmptyIsNotAllowed"));
           }
         } else {
-          // alert("Ein leeres Alphabet ist nicht erlaubt!");
-          alert.show(i18next.t("codeEditor.warningEmptyIsNotAllowed"));
+          dispatch(bandDeleteAll());
+          // save Band to store
+          // json.band.input...
+          const bandItems = json.band.input;
+          for (let index = 0; index < bandItems.length; index++) {
+            const temp: BandItemToChange = {
+              index: index,
+              value: bandItems[index],
+              label: bandItems[index],
+            };
+            dispatch(bandChangeItemAt(temp));
+          }
+          // save alphabet from editor to store
+          // json.specifications.alphabet...
+          const alphabet = json.specifications.alphabet;
+          if (alphabet.length > 0) {
+            dispatch(alphabetDeleteCustom());
+            alphabet.forEach((value: string) => {
+              dispatch(alphabetPushToCustom(value));
+            });
+            dispatch(alphabetPushToDialogOptions(alphabet.toString()));
+            dispatch(alphabetGenerateBand(alphabet));
+          } else {
+            alert("Ein leeres Alphabet ist nicht erlaubt!");
+          }
         }
 
         //save states from editor to store
@@ -375,8 +398,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         //   "Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen! \n" +
         //     e
         // );
-        alert.show(i18next.t("codeEditor.warningNoValidJSON") + " \n" +
-            e); //TODO: Wird immer hinter Code-Editor angezeigt!
+        alert.show(i18next.t("codeEditor.warningNoValidJSON") + " \n" + e); //TODO: Wird immer hinter Code-Editor angezeigt!
       }
     }
   }
@@ -559,9 +581,9 @@ export default function AceJsonEditor(props: CodeEditorProps) {
   };
 
   //Internationalization
-  const { t } = useTranslation(["general"])
+  const { t } = useTranslation(["general"]);
 
-   const alert = useAlert();
+  const alert = useAlert();
 
   return (
     <div>
