@@ -166,7 +166,7 @@ function ConditionsList() {
   }
 
   const loadedRows = useSelector((state: RootState) => state.general.rows);
-  const [zustandsFunktion] = useState([""]);
+  let [zustandsFunktion] = useState([""]);
 
   function getZustandsFunktion() {
     let tempLenght = zustandsFunktion.length
@@ -194,8 +194,12 @@ function ConditionsList() {
         });
         zustandsFunktion.push(tempCellsString);
         tempCellsString = "δ(";
+
       });
-    
+
+      if(zustandsFunktion.length<1) {
+        zustandsFunktion.push("δ() = ()");
+      }    
     setShowZustandsfunktion(!showZustandsfunktion);
   }
 
