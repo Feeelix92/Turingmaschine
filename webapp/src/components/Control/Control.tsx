@@ -162,6 +162,7 @@ function Control() {
   store.subscribe(
     wActiveState((newVal) => {
       activeState = newVal;
+      console.log("watcher auf activeState", activeState.value);
     })
   );
 
@@ -206,12 +207,12 @@ function Control() {
   };
 
   const makeStep = async (idx: number) => {
+    console.log("makeStep: ", activeState.value);
     // get the row, which matches with the symbol we read on band
     const item = selectedRows.find((elem) => {
       return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
     });
     let tempLastZustandVar = item?.cells[2].value as Zustand;
-    console.log("tempLastZustandVar: ", tempLastZustandVar);
     if (tempLastZustandVar.endzustand == true) {
       endConfetti();
     }
@@ -252,6 +253,8 @@ function Control() {
             changePause(true);
           } else {
             dispatch(tableSetActiveState(item.cells[2].value as Zustand));
+            console.log("set Active State make Step", activeState.value);
+            console.log("_____________________________");
             setSelectedRows();
           }
         }
@@ -378,6 +381,11 @@ function Control() {
   };
 
   const stepByStep = () => {
+    /*
+    Er setzt bei example in makeStep auf q2 was richtig ist
+    Beim nächsten Schritt machen, ist activeState aber wieder q1
+    q2 wird aber auch nie mit q1 überschrieben
+    */
     setSelectedRows();
 
     if (mode === "mespuma") {

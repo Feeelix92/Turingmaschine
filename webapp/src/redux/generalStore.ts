@@ -523,6 +523,8 @@ export const generalSlice = createSlice({
         new Zustand("q" + tempNumber, "q" + tempNumber, false, false, false)
       );
 
+      console.log("alphabetPushToZustand");
+
       if (state.zustandsmenge.length === 1) {
         state.activeState = state.zustandsmenge[0];
       }
@@ -538,11 +540,13 @@ export const generalSlice = createSlice({
         )
       );
 
+      console.log("alphabetPushToIdxZustand");
       if (state.zustandsmenge.length === 1) {
         state.activeState = state.zustandsmenge[0];
       }
     },
     alphabetDeleteZustand: (state) => {
+      console.log("alphabetDeleteZustand");
       state.zustandsmenge.pop();
 
       if (state.zustandsmenge.length <= 0) {
@@ -550,6 +554,7 @@ export const generalSlice = createSlice({
       }
     },
     alphabetChangeAnfangszustand: (state, zustand: PayloadAction<Zustand>) => {
+      console.log("alphabetChangeAnfangszustand");
       state.zustandsmenge.forEach((option) => {
         if (option.value === zustand.payload.value) {
           option.anfangszustand = true;
@@ -872,6 +877,7 @@ export const generalSlice = createSlice({
       state.watchedRows = rows.payload;
     },
     tableSetActiveState: (state, newVal: PayloadAction<Zustand>) => {
+      console.log("--------->tableSetActiveState", newVal.payload);
       state.activeState = newVal.payload;
     },
     tableCheckWarning: (state, checkVal: PayloadAction<checkWarning>) => {
