@@ -536,9 +536,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
       "B":["q5", "B", "R"],
       "#":["q4", "B", "L"],
       "1":["q4", "1", "L"]
-    },
-    "q5":{
-      "B":["q5", "B", "R"]
     }
   }
 }`,
