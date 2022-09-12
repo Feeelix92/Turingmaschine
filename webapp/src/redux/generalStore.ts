@@ -875,12 +875,9 @@ export const generalSlice = createSlice({
       state.activeState = newVal.payload;
     },
     tableCheckWarning: (state, checkVal: PayloadAction<checkWarning>) => {
-      console.log("test");
       // create flat copy of all existing rows
       const newRows = checkVal.payload.rows;
       const copy = state.rows.slice(0, state.rows.length);
-
-      console.log(newRows);
 
       newRows.forEach((row, rowIndex) => {
         row.cells.forEach((cell, cellIndex) => {
