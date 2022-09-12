@@ -795,7 +795,7 @@ export const generalSlice = createSlice({
       state.rows = initialRow;
     },
     tableUpdateCell: (state, updateCell: PayloadAction<updateCellType>) => {
-      if (state.rows[updateCell.payload.rowIndex as number]) {
+      if (state.rows.length > 0) {
         const newCells: Cell[] = state.rows[
           updateCell.payload.rowIndex as number
         ].cells.slice(
