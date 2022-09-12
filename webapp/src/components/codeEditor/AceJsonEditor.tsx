@@ -6,7 +6,7 @@ import {
 } from "../../interfaces/CommonInterfaces";
 import { useDispatch, useSelector } from "react-redux";
 import React, { Fragment, useEffect, useRef, useState } from "react";
-import { RootState } from "../../redux/store";
+import { RootState, store } from "../../redux/store";
 import AceEditor from "react-ace";
 import { setCompleters } from "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-json5";
@@ -43,6 +43,7 @@ import { cartesianProduct } from "../../interfaces/CommonFunctions";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import { useAlert } from "react-alert";
+import watch from "redux-watch";
 
 interface tableZustand {
   [key: string]: tableZeichen;
@@ -79,6 +80,15 @@ export default function AceJsonEditor(props: CodeEditorProps) {
   const initTable = useSelector((state: RootState) => state.general.rows);
 
   const initRows = useSelector((state: RootState) => state.general.rows);
+
+  /////////// Band from State MeSpuMa ///////////
+  let rows = initRows;
+  let wRows = watch(store.getState, "general.rows");
+  store.subscribe(
+    wRows((newVal) => {
+      rows = newVal;
+    })
+  );
 
   // @TODO convert and insert current Table
   const [tempEditorText, setTempEditorText] = useState(
@@ -378,14 +388,14 @@ export default function AceJsonEditor(props: CodeEditorProps) {
           let cartesianArr = cartesianProduct(combinationArr);
           dispatch(
             tableCheckWarning({
-              rows: initRows,
+              rows: rows,
               alphabet: cartesianArr,
             })
           );
         } else {
           dispatch(
             tableCheckWarning({
-              rows: initRows,
+              rows: rows,
               alphabet: alphabet,
             })
           );

@@ -130,6 +130,7 @@ export const bandSlice = createSlice({
           label: "",
           warningMode: false,
         });
+        // state.pointerPosition += 1;
       } else if (step.payload < 0 && state.pointerPosition == 0) {
         // BandItem links hinzufügen
         state.currentBand.unshift({
@@ -137,6 +138,7 @@ export const bandSlice = createSlice({
           label: "",
           warningMode: false,
         });
+        // state.pointerPosition -= 1;
       } else if (
         (step.payload < 0 && state.pointerPosition == 0) ||
         (step.payload > 0 &&
