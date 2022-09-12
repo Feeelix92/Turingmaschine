@@ -44,7 +44,7 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
   /**
    * function handleChange checks if the selected option has changed
    * @param newValues
-   * @param actionMeta
+   * @param _actionMeta
    */
   function handleChange(
     newValues: OnChangeValue<EingabeAlphabet, true>,
@@ -91,11 +91,11 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
                 });
                 dispatch(alphabetPushToDialogOptions(valuesArray.toString()));
                 dispatch(alphabetChangeCurrent(currentAlphabet))
+                props.onCloseDialog();
               } else {
                 // alert("Ein leeres Alphabet ist nicht erlaubt!");
                 alert.show(i18next.t("list.dropdown.emptyIsNotAllowed"));
               }
-              props.onCloseDialog();
             }}
             className={"col-start-3 col-span-2 m-2"}
           >
