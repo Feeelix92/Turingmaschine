@@ -1,12 +1,7 @@
 import { t } from "i18next";
 import { useState } from "react";
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
-import {
-  SingleValue,
-  ActionMeta,
-  InputActionMeta,
-  OnChangeValue,
-} from "react-select";
+import { OnChangeValue } from "react-select";
 import Select from "react-select";
 import { OperationType } from "../../interfaces/CommonInterfaces";
 import { useDispatch } from "react-redux";
