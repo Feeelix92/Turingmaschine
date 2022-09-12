@@ -16,9 +16,9 @@ import {
 } from "../../redux/generalStore";
 import EditField from "./EditField";
 import ZustandSelect from "./ZustandSelect";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-import { useAlert } from 'react-alert';
+import { useAlert } from "react-alert";
 
 export default function Cell(props: CellProps) {
   const mode = useSelector((state: RootState) => state.general.mode);
@@ -38,7 +38,7 @@ export default function Cell(props: CellProps) {
   const temp = [initialZustand3];
 
   //Internationalization
-  const { t } = useTranslation(["general"])
+  const { t } = useTranslation(["general"]);
 
   /////////// States from State ///////////
   let states =

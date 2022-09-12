@@ -33,8 +33,7 @@ import {
 } from "../../redux/generalStore";
 import anime from "animejs";
 import party from "party-js";
-import { initReactI18next, useTranslation} from "react-i18next";
-
+import { initReactI18next, useTranslation } from "react-i18next";
 
 function Control() {
   const dispatch = useDispatch();
@@ -217,11 +216,7 @@ function Control() {
       endConfetti();
     }
 
-    if (
-      item !== undefined &&
-      typeof item.cells[3].value === "string" &&
-      tempLastZustandVar.endzustand === false
-    ) {
+    if (item !== undefined && typeof item.cells[3].value === "string") {
       store.dispatch(tableSetActiveRow(item));
       if (
         item.cells[0].value instanceof Zustand &&
@@ -393,7 +388,7 @@ function Control() {
   };
 
   ///Langauge Change///
-  const { t } = useTranslation(["general"])
+  const { t } = useTranslation(["general"]);
 
   return (
     <div className={"control w-screen"}>

@@ -6,7 +6,7 @@ import {
 } from "../../interfaces/CommonInterfaces";
 import { useDispatch, useSelector } from "react-redux";
 import React, { Fragment, useEffect, useRef, useState } from "react";
-import { RootState } from "../../redux/store";
+import { RootState, store } from "../../redux/store";
 import AceEditor from "react-ace";
 import { setCompleters } from "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-json5";
@@ -41,8 +41,9 @@ import { Tab } from "@headlessui/react";
 import Tutorial from "./Tutorial";
 import { cartesianProduct } from "../../interfaces/CommonFunctions";
 import i18next from "i18next";
-import {useTranslation} from "react-i18next";
-import { useAlert } from 'react-alert';
+import { useTranslation } from "react-i18next";
+import { useAlert } from "react-alert";
+import watch from "redux-watch";
 
 interface tableZustand {
   [key: string]: tableZeichen;
@@ -79,6 +80,15 @@ export default function AceJsonEditor(props: CodeEditorProps) {
   const initTable = useSelector((state: RootState) => state.general.rows);
 
   const initRows = useSelector((state: RootState) => state.general.rows);
+
+  /////////// Band from State MeSpuMa ///////////
+  let rows = initRows;
+  let wRows = watch(store.getState, "general.rows");
+  store.subscribe(
+    wRows((newVal) => {
+      rows = newVal;
+    })
+  );
 
   // @TODO convert and insert current Table
   const [tempEditorText, setTempEditorText] = useState(
@@ -260,8 +270,31 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             alert(i18next.t("codeEditor.warningEmptyIsNotAllowed"));
           }
         } else {
-          // alert("Ein leeres Alphabet ist nicht erlaubt!");
-          alert.show(i18next.t("codeEditor.warningEmptyIsNotAllowed"));
+          dispatch(bandDeleteAll());
+          // save Band to store
+          // json.band.input...
+          const bandItems = json.band.input;
+          for (let index = 0; index < bandItems.length; index++) {
+            const temp: BandItemToChange = {
+              index: index,
+              value: bandItems[index],
+              label: bandItems[index],
+            };
+            dispatch(bandChangeItemAt(temp));
+          }
+          // save alphabet from editor to store
+          // json.specifications.alphabet...
+          const alphabet = json.specifications.alphabet;
+          if (alphabet.length > 0) {
+            dispatch(alphabetDeleteCustom());
+            alphabet.forEach((value: string) => {
+              dispatch(alphabetPushToCustom(value));
+            });
+            dispatch(alphabetPushToDialogOptions(alphabet.toString()));
+            dispatch(alphabetGenerateBand(alphabet));
+          } else {
+            alert("Ein leeres Alphabet ist nicht erlaubt!");
+          }
         }
 
         //save states from editor to store
@@ -355,15 +388,18 @@ export default function AceJsonEditor(props: CodeEditorProps) {
           let cartesianArr = cartesianProduct(combinationArr);
           dispatch(
             tableCheckWarning({
-              rows: initRows,
+              rows: rows,
               alphabet: cartesianArr,
             })
           );
         } else {
+          const checkAlphabet = alphabet;
+          checkAlphabet.push("B");
+
           dispatch(
             tableCheckWarning({
-              rows: initRows,
-              alphabet: alphabet,
+              rows: rows,
+              alphabet: checkAlphabet,
             })
           );
         }
@@ -375,8 +411,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         //   "Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen! \n" +
         //     e
         // );
-        alert.show(i18next.t("codeEditor.warningNoValidJSON") + " \n" +
-            e); //TODO: Wird immer hinter Code-Editor angezeigt!
+        alert.show(i18next.t("codeEditor.warningNoValidJSON") + " \n" + e); //TODO: Wird immer hinter Code-Editor angezeigt!
       }
     }
   }
@@ -559,9 +594,9 @@ export default function AceJsonEditor(props: CodeEditorProps) {
   };
 
   //Internationalization
-  const { t } = useTranslation(["general"])
+  const { t } = useTranslation(["general"]);
 
-   const alert = useAlert();
+  const alert = useAlert();
 
   return (
     <div>
