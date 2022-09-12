@@ -556,6 +556,13 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     setCompleters([completer]);
   }, []);
 
+
+  //clear Editor
+  const clearEditor = () => {
+    const emptyString = "";
+    setTempEditorText(emptyString);
+  };
+
   // file download
   const exportData = () => {
     const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
@@ -688,6 +695,14 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                       >
                         konfigurieren
                       </button>
+                      {/*<button*/}
+                      {/*    data-modal-toggle="defaultModal"*/}
+                      {/*    type="button"*/}
+                      {/*    onClick={clearEditor}*/}
+                      {/*    className="bg-thm-primary"*/}
+                      {/*>*/}
+                      {/*  leeren*/}
+                      {/*</button>*/}
                       <button
                         data-modal-toggle="defaultModal"
                         type="button"
@@ -721,7 +736,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                   <div className="p-6 space-y-6 text-left bg-white max-h-[500px] overflow-y-auto">
                     <Tutorial />
                   </div>
-                  <div className="flex items-center justify-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600"></div>
+                  <div className="flex items-center justify-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600"/>
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
