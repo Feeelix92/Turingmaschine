@@ -380,12 +380,16 @@ function Control() {
     dispatch(alphabetChangeStoppMaschine(false));
   };
 
-  const stepByStep = () => {
+  const stepByStep = async () => {
     /*
     Er setzt bei example in makeStep auf q2 was richtig ist
     Beim nächsten Schritt machen, ist activeState aber wieder q1
     q2 wird aber auch nie mit q1 überschrieben
     */
+    if (slider !== 100) {
+      let tempSlider = 3000 / slider;
+      await sleep(tempSlider);
+    }
     setSelectedRows();
 
     if (mode === "mespuma") {
