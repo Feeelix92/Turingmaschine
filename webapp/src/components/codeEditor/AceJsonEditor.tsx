@@ -393,10 +393,13 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             })
           );
         } else {
+          const checkAlphabet = alphabet;
+          checkAlphabet.push("B");
+
           dispatch(
             tableCheckWarning({
               rows: rows,
-              alphabet: alphabet,
+              alphabet: checkAlphabet,
             })
           );
         }

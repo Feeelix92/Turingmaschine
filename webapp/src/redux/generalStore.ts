@@ -881,10 +881,7 @@ export const generalSlice = createSlice({
 
       newRows.forEach((row, rowIndex) => {
         row.cells.forEach((cell, cellIndex) => {
-          console.log(cell.value);
           if (cell.value instanceof Zustand) {
-            console.log(current(state));
-            console.log(cell.value);
             let tempBool = state.zustandsmenge.some((value) => {
               let newState = cell.value as Zustand;
               return value.value === newState.value;
