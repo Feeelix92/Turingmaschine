@@ -26,7 +26,7 @@ import {
   bandResetPointer,
   bandSetPointPos,
 } from "../../redux/bandStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   alphabetChangePauseMaschine,
   alphabetChangeStoppMaschine,
@@ -162,7 +162,7 @@ function Control() {
   store.subscribe(
     wActiveState((newVal) => {
       activeState = newVal;
-      console.log("watcher auf activeState", activeState.value);
+      console.log("watcher auf activeState", activeState);
     })
   );
 
@@ -386,11 +386,12 @@ function Control() {
     Beim nächsten Schritt machen, ist activeState aber wieder q1
     q2 wird aber auch nie mit q1 überschrieben
     */
+    setSelectedRows();
+
     if (slider !== 100) {
       let tempSlider = 3000 / slider;
       await sleep(tempSlider);
     }
-    setSelectedRows();
 
     if (mode === "mespuma") {
       makeStepMespuma(activePointerPosition);

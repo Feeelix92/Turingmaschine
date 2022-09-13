@@ -546,11 +546,14 @@ export const generalSlice = createSlice({
       }
     },
     alphabetDeleteZustand: (state) => {
-      console.log("alphabetDeleteZustand");
+      console.log("-------------alphabetDeleteZustand");
+      console.log(current(state));
       state.zustandsmenge.pop();
 
       if (state.zustandsmenge.length <= 0) {
+        console.log("if erfüllt");
         state.activeState = undefined;
+        console.log("activeState setted");
       }
     },
     alphabetChangeAnfangszustand: (state, zustand: PayloadAction<Zustand>) => {
