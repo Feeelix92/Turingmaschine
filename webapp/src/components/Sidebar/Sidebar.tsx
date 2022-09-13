@@ -133,45 +133,49 @@ function Sidebar() {
 
       <div className="">{t("sidebar.mode")}</div>
 
-      <div className="inline-flex rounded-md shadow-sm text-center">
-        <a
-          className={`no-underline py-2 px-4 text-sm font-medium rounded-l-lg text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
-              ${location.pathname === "/" ? "bg-thm-primary" : "bg-gray-700 "}`}
-          onClick={() => changeMSMMode(false)}
-        >
-          <Link to="/" className="no-underline text-white">
-            Normal
-          </Link>
-        </a>
+      <div className="hidden md:inline-flex">
+        <div className="rounded-md shadow-sm text-center inline-flex">
+          <a
+            className={`no-underline py-2 px-4 text-sm font-medium rounded-l-lg text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
+                ${location.pathname === "/" ? "bg-thm-primary" : "bg-gray-700 "}`}
+            onClick={() => changeMSMMode(false)}
+          >
+            <Link to="/" className="no-underline text-white">
+              Normal
+            </Link>
+          </a>
 
-        <a
-          className={`no-underline py-2 px-4 text-sm font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
-              ${
-                location.pathname === "/papier"
-                  ? "bg-thm-primary"
-                  : "bg-gray-700 "
-              }`}
-          onClick={() => changeTpMode()}
-        >
-          <Link to="/papier" className="no-underline text-white ">
-            Toilettenpapier
-          </Link>
-        </a>
+          <a
+            className={`no-underline py-2 px-4 text-sm font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
+                ${
+                  location.pathname === "/papier"
+                    ? "bg-thm-primary"
+                    : "bg-gray-700 "
+                }`}
+            onClick={() => changeTpMode()}
+          >
+            <Link to="/papier" className="no-underline text-white ">
+              Toilettenpapier
+            </Link>
+          </a>
 
-        <a
-          className={`no-underline py-2 px-4 text-sm rounded-r-md font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
-              ${
-                location.pathname === "/mehrspuren"
-                  ? "bg-thm-primary"
-                  : "bg-gray-700 "
-              }`}
-          onClick={() => changeMSMMode(true)}
-        >
-          <Link to="/mehrspuren" className="no-underline text-white ">
-            Mehrspuren-Maschine
-          </Link>
-        </a>
+          <a
+            className={`no-underline py-2 px-4 text-sm rounded-r-md font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
+                ${
+                  location.pathname === "/mehrspuren"
+                    ? "bg-thm-primary"
+                    : "bg-gray-700 "
+                }`}
+            onClick={() => changeMSMMode(true)}
+          >
+            <Link to="/mehrspuren" className="no-underline text-white ">
+              Mehrspuren-Maschine
+            </Link>
+          </a>
+        </div>
       </div>
+
+      
 
       {/* <div className={""}>
         <a className={"menu-item text-white text-lg no-underline"}>
