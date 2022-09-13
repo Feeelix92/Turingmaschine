@@ -28,11 +28,9 @@ function Sidebar() {
   );
 
   const changeTpMode = () => {
-      if (mode != "toiletenpapier"){
-          dispatch(bandResetAll());
-          dispatch(activateToiletPaperMode());
-          dispatch(bandResetAll());
-      }
+      dispatch(bandResetAll());
+      dispatch(activateToiletPaperMode());
+      dispatch(bandResetAll());
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -159,42 +157,7 @@ function Sidebar() {
         >Mehrspuren-Maschine
         </Link>
       </div>
-
-      {/* <div className={""}>
-        <a className={"menu-item text-white text-lg no-underline"}>
-          <Link to="/">
-            <button className={`w-50 ${(location.pathname==='/') ? 'bg-thm-primary' : 'bg-gray-400 '}`} onClick={() => changeMSMMode(false)}>
-              Normaler Modus
-            </button>
-          </Link>
-        </a>
-      </div>
-
-      <div className={""}>
-        <a className={"menu-item text-white text-lg no-underline"}>
-          <Link to="/papier">
-            <button
-              className={`w-50 ${(location.pathname==='/papier') ? 'bg-thm-primary' : 'bg-gray-400 '}`}
-              onClick={() => changeTpMode()}
-            >
-              {t("sidebar.toiletPaperMode")}
-            </button>
-          </Link>
-        </a>
-      </div>
-
-      <div className={""}>
-        <a className={"menu-item text-white text-lg no-underline"}>
-          <Link to="/mehrspuren">
-            <button className={`w-50 ${(location.pathname==='/mehrspuren') ? 'bg-thm-primary' : 'bg-gray-400 '}`} onClick={() => changeMSMMode(true)}>
-              Mehrspurenmaschine
-            </button>
-          </Link>
-        </a>
-      </div> */}
-
       <hr className="mt-5" />
-
       <div className={""}>
         <div
           className={
