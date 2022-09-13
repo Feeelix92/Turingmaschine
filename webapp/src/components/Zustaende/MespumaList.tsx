@@ -468,6 +468,7 @@ function ConditionsList() {
                 className={"col-span-2"}
                 onChange={handleChange}
                 options={zustandsmenge}
+                menuPortalTarget={document.querySelector("body")}
               />
             </div>
           </div>
@@ -504,6 +505,7 @@ function ConditionsList() {
                 options={possibleEnd}
                 isMulti={true}
                 placeholder={t("list.finalStatesSelection")}
+                menuPortalTarget={document.querySelector("body")}
               />
             </div>
           </div>
