@@ -10,8 +10,8 @@ import { render } from 'react-dom'
 import { transitions, positions, types, Provider as AlertProvider } from 'react-alert' // https://www.npmjs.com/package/react-alert
 //import AlertTemplate from 'react-alert-template-basic'
 
-const AlertTemplate = ({ style, options, message, close }) => (
-  <div style={style} className="z-[1200]">
+const AlertTemplate = ({ style, options, message, close, containerStyle }) => (
+  <div style={style} className="">
     {/* {options.type === 'info' && '!'}
     {options.type === 'success' && ':)'}
     {options.type === 'error' && ':('} */}
@@ -32,7 +32,9 @@ const options = {
   // you can also just use 'scale'
   transition: transitions.FADE,
   type: 'error',
-  zIndex: '1000'
+  containerStyle: {
+    zIndex: 1200
+  }
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
