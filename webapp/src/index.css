@@ -107,6 +107,10 @@
   @apply bg-thm-primary2;
 }
 
+.menu-options {
+  @apply w-screen md:w-[450px] !important;
+}
+
 /* Wrapper for item list */
 .bm-item-list {
   @apply text-white p-2.5 text-left;

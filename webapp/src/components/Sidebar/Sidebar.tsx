@@ -116,7 +116,11 @@ function Sidebar() {
   };
 
   return (
-    <Menu right width={450}>
+    <Menu 
+      right 
+      // width={450}
+      className='menu-options'
+    >
       <div className={"mt-0"}>
         <Link className="no-underline" to="/">
           <a className={`text-white text-lg no-underline `} href="/">
