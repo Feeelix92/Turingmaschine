@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { slide as Menu } from "react-burger-menu";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  changeToiletPaperMode,
-  changeMespumaMode,
-  alphabetChangeCurrentMespuma,
+    changeMespumaMode,
+    alphabetChangeCurrentMespuma,
+    activateToiletPaperMode,
 } from "../../redux/generalStore";
 import { RootState } from "../../redux/store";
 import { bandResetAll } from "../../redux/bandStore";
@@ -28,9 +28,11 @@ function Sidebar() {
   );
 
   const changeTpMode = () => {
-    dispatch(bandResetAll());
-    dispatch(changeToiletPaperMode());
-    dispatch(bandResetAll());
+      if (mode != "toiletenpapier"){
+          dispatch(bandResetAll());
+          dispatch(activateToiletPaperMode());
+          dispatch(bandResetAll());
+      }
   };
 
   const [showModal, setShowModal] = useState(false);

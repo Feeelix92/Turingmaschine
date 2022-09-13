@@ -953,22 +953,38 @@ export const generalSlice = createSlice({
     changeToiletPaperMode: (state) => {
       // mode für alle:
       if (state.mode != "toiletpaper") {
-        state.mode = "toiletpaper";
-        state.rows = initialRowTP;
-        state.zustandsmenge = initialZustandsmengeTP;
-        state.anfangsZustand = initialAnfangszustandTP;
-        state.endZustand = initialEndZustandsmengeTP;
-        state.currentAlphabet = defaultAlphabetOption2;
-        state.bandAlphabet = initialTeepeeBandAlphabet;
+        activateToiletPaperMode();
       } else {
-        state.mode = "default";
-        state.rows = initialRow;
-        state.zustandsmenge = initialZustandsmenge;
-        state.anfangsZustand = initialAnfangszustand;
-        state.endZustand = initialEndZustandsmenge;
-        state.currentAlphabet = defaultAlphabetOption1;
-        state.bandAlphabet = initialBandAlphabet;
+        activateNormalMode();
       }
+    },
+
+    /**
+     * This function activate toilet paper view
+     * @param state
+     */
+    activateToiletPaperMode: (state) => {
+      state.mode = "toiletpaper";
+      state.rows = initialRowTP;
+      state.zustandsmenge = initialZustandsmengeTP;
+      state.anfangsZustand = initialAnfangszustandTP;
+      state.endZustand = initialEndZustandsmengeTP;
+      state.currentAlphabet = defaultAlphabetOption2;
+      state.bandAlphabet = initialTeepeeBandAlphabet;
+    },
+
+    /**
+     * This function activate normal view
+     * @param state
+     */
+    activateNormalMode: (state) => {
+      state.mode = "default";
+      state.rows = initialRow;
+      state.zustandsmenge = initialZustandsmenge;
+      state.anfangsZustand = initialAnfangszustand;
+      state.endZustand = initialEndZustandsmenge;
+      state.currentAlphabet = defaultAlphabetOption1;
+      state.bandAlphabet = initialBandAlphabet;
     },
 
     ///////// MeSpuMa //////////////
@@ -1033,6 +1049,8 @@ export const {
   tableSetActiveState,
   tableCheckWarning,
   changeToiletPaperMode,
+  activateToiletPaperMode,
+  activateNormalMode,
   changeMespumaMode,
   mespumaPushToSpuren,
   mespumaDeleteSpuren,
