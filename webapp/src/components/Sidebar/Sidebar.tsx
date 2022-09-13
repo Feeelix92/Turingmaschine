@@ -118,10 +118,8 @@ function Sidebar() {
   return (
     <Menu right width={450}>
       <div className={"mt-0"}>
-        <Link className="no-underline" to="/">
-          <a className={`text-white text-lg no-underline `} href="/">
+        <Link className="no-underline text-white text-lg" to="/" onClick={() => changeMSMMode(false)}>
             {t("sidebar.homePage")}
-          </a>
         </Link>
       </div>
 
