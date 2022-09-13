@@ -196,7 +196,7 @@ function Sidebar() {
       <hr className="mt-5" />
 
       <div className={""}>
-        <a
+        <div
           className={
             "hidden md:block menu-item text-white text-lg no-underline cursor-pointer"
           }
@@ -211,7 +211,7 @@ function Sidebar() {
             </div>
           </a>
           {showModal ? <AceJsonEditor toggleEditor={toggleModal} /> : null}
-        </a>
+        </div>
       </div>
 
       <div>
