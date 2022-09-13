@@ -130,17 +130,14 @@ function Sidebar() {
       <div className="">{t("sidebar.mode")}</div>
 
       <div className="inline-flex rounded-md shadow-sm text-center">
-        <a
+        <Link to="/"
           className={`no-underline py-2 px-4 text-sm font-medium rounded-l-lg text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
               ${location.pathname === "/" ? "bg-thm-primary" : "bg-gray-700 "}`}
           onClick={() => changeMSMMode(false)}
-        >
-          <Link to="/" className="no-underline text-white">
-            Normal
-          </Link>
-        </a>
+        >Normal
+        </Link>
 
-        <a
+        <Link to="/papier"
           className={`no-underline py-2 px-4 text-sm font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
               ${
                 location.pathname === "/papier"
@@ -148,13 +145,10 @@ function Sidebar() {
                   : "bg-gray-700 "
               }`}
           onClick={() => changeTpMode()}
-        >
-          <Link to="/papier" className="no-underline text-white ">
-            Toilettenpapier
-          </Link>
-        </a>
+        >Toilettenpapier
+        </Link>
 
-        <a
+        <Link to="/mehrspuren"
           className={`no-underline py-2 px-4 text-sm rounded-r-md font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
               ${
                 location.pathname === "/mehrspuren"
@@ -162,11 +156,8 @@ function Sidebar() {
                   : "bg-gray-700 "
               }`}
           onClick={() => changeMSMMode(true)}
-        >
-          <Link to="/mehrspuren" className="no-underline text-white ">
-            Mehrspuren-Maschine
-          </Link>
-        </a>
+        >Mehrspuren-Maschine
+        </Link>
       </div>
 
       {/* <div className={""}>
