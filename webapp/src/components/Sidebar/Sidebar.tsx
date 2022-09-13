@@ -141,7 +141,7 @@ function Sidebar() {
             onClick={() => changeMSMMode(false)}
           >
             <Link to="/" className="no-underline text-white">
-              Normal
+            {t("sidebar.normalMode")}
             </Link>
           </a>
 
@@ -155,7 +155,7 @@ function Sidebar() {
             onClick={() => changeTpMode()}
           >
             <Link to="/papier" className="no-underline text-white ">
-              Toilettenpapier
+            {t("sidebar.toiletPaperMode")}
             </Link>
           </a>
 
@@ -169,7 +169,7 @@ function Sidebar() {
             onClick={() => changeMSMMode(true)}
           >
             <Link to="/mehrspuren" className="no-underline text-white ">
-              Mehrspuren-Maschine
+              {t("sidebar.multiTrackMachine")}
             </Link>
           </a>
         </div>

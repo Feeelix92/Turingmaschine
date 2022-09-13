@@ -11,8 +11,8 @@
   "sidebar": {
     "homePage": "Startseite",
     "mode": "Modus",
-    "normalMode": "Normaler Modus",
-    "toiletPaperMode": "Toilettenpapiermodus",
+    "normalMode": "Normal",
+    "toiletPaperMode": "Toilettenpapier",
     "multiTrackMachine": "Mehrspurenmaschine",
     "codeEditor": "Code-Editor"
   },
