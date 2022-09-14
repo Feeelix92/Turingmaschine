@@ -164,13 +164,6 @@ function Control() {
     })
   );
 
-  /* 
-  copy especially for stepByStep to fix issue concerning setting of activeState 
-  */
-  const stepByStepActiveState = useSelector(
-    (state: RootState) => state.general.activeState
-  );
-
   /////////// PointerPosition from State ///////////
   let activePointerPosition = pointerIdx;
   let wActivePointerPosition = watch(store.getState, "band.pointerPosition");
