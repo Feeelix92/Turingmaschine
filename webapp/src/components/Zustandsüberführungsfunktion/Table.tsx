@@ -59,10 +59,10 @@ export default function Table() {
   const { t } = useTranslation(["general"])
 
   return (
-    <div className="flex flex-col col-span-2 border rounded p-0 w-screen md:w-auto">
+    <div className="flex flex-col col-span-2 border rounded p-0 w-screen md:w-full">
       <div className="sm:-mx-0 lg:-mx-0">
         <div className=" sm:px-6 lg:px-8">
-          <div className="overflow-x-auto items-center">
+          <div className="overflow-x-hidden items-center">
             <div className="flex w-full text-left text-sm font-medium text-gray-900">
               <div className="w-1/2 pl-2">{t("table.when")}...</div>
               <div className="w-1/2 pl-2">{t("table.then")}...</div>
@@ -81,7 +81,7 @@ export default function Table() {
                   ))}
                 </tr>
               </thead>
-              <tbody className="flex flex-col items-center justify-between overflow-y-auto md:max-h-48 xl:max-h-96">
+              <tbody className="flex flex-col items-center justify-between md:max-h-48 xl:max-h-96 overflow-y-auto overflow-x-hidden">
                 {rows.map((value, key: React.Key) => (
                   // TODO functions still not working
                   <Row

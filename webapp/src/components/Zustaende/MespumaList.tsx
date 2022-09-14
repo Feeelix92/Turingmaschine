@@ -166,7 +166,7 @@ function ConditionsList() {
   }
 
   const loadedRows = useSelector((state: RootState) => state.general.rows);
-  const [zustandsFunktion] = useState([""]);
+  let [zustandsFunktion] = useState([""]);
 
   function getZustandsFunktion() {
     let tempLenght = zustandsFunktion.length
@@ -196,6 +196,10 @@ function ConditionsList() {
         tempCellsString = "δ(";
       });
     
+      if(zustandsFunktion.length<1) {
+        zustandsFunktion.push("δ() = ()");
+      } 
+
     setShowZustandsfunktion(!showZustandsfunktion);
   }
 
@@ -356,7 +360,7 @@ function ConditionsList() {
       </div>
       {isActive && (
         <div className={""}>
-          {/* TODO: Auswahl für Anzahl Spuren: */}
+          {/* Auswahl für Anzahl Spuren: */}
           <div
             className={
               "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
@@ -464,6 +468,7 @@ function ConditionsList() {
                 className={"col-span-2"}
                 onChange={handleChange}
                 options={zustandsmenge}
+                menuPortalTarget={document.querySelector("body")}
               />
             </div>
           </div>
@@ -500,6 +505,7 @@ function ConditionsList() {
                 options={possibleEnd}
                 isMulti={true}
                 placeholder={t("list.finalStatesSelection")}
+                menuPortalTarget={document.querySelector("body")}
               />
             </div>
           </div>
@@ -511,9 +517,9 @@ function ConditionsList() {
             <span className={"col-span-2"}>
               {t("list.transitionFunction")} &delta; =
             </span>
-            <button
+            <div
               className={
-                "text-black font-medium bg-white hover:bg-white text-left border border-solid col-span-2"
+                "border border-solid bg-gray-100 rounded p-2 col-span-2 max-h-60 overflow-y-scroll cursor-pointer"
               }
               onClick={() => getZustandsFunktion()}
             >
@@ -526,7 +532,7 @@ function ConditionsList() {
               ) : (
                 "δ:Q×Γ → Q×Γ×{R,L,N}"
               )}
-            </button>
+            </div>
           </div>
         </div>
       )}
