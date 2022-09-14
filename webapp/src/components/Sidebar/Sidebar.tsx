@@ -116,7 +116,11 @@ function Sidebar() {
   };
 
   return (
-    <Menu right width={450}>
+    <Menu 
+      right 
+      // width={450}
+      className='menu-options'
+    >
       <div className={"mt-0"}>
         <Link className="no-underline text-white text-lg" to="/" onClick={() => changeMSMMode(false)}>
             {t("sidebar.homePage")}
@@ -127,36 +131,39 @@ function Sidebar() {
 
       <div className="">{t("sidebar.mode")}</div>
 
-      <div className="inline-flex rounded-md shadow-sm text-center">
-        <Link to="/"
-          className={`no-underline py-2 px-4 text-sm font-medium rounded-l-lg text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
-              ${location.pathname === "/" ? "bg-thm-primary" : "bg-gray-700 "}`}
-          onClick={() => changeMSMMode(false)}
-        >Normal
-        </Link>
+      <div className="hidden md:inline-flex">
+        <div className="rounded-md shadow-sm text-center inline-flex">
+          <Link to="/"
+            className={`no-underline py-2 px-4 text-sm font-medium rounded-l-lg text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
+                ${location.pathname === "/" ? "bg-thm-primary" : "bg-gray-700 "}`}
+            onClick={() => changeMSMMode(false)}
+          >{t("sidebar.normalMode")}
+          </Link>
 
-        <Link to="/papier"
-          className={`no-underline py-2 px-4 text-sm font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
-              ${
-                location.pathname === "/papier"
-                  ? "bg-thm-primary"
-                  : "bg-gray-700 "
-              }`}
-          onClick={() => changeTpMode()}
-        >Toilettenpapier
-        </Link>
+          <Link to="/papier"
+            className={`no-underline py-2 px-4 text-sm font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
+                ${
+                  location.pathname === "/papier"
+                    ? "bg-thm-primary"
+                    : "bg-gray-700 "
+                }`}
+            onClick={() => changeTpMode()}
+          >{t("sidebar.toiletPaperMode")}
+          </Link>
 
-        <Link to="/mehrspuren"
-          className={`no-underline py-2 px-4 text-sm rounded-r-md font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
-              ${
-                location.pathname === "/mehrspuren"
-                  ? "bg-thm-primary"
-                  : "bg-gray-700 "
-              }`}
-          onClick={() => changeMSMMode(true)}
-        >Mehrspuren-Maschine
-        </Link>
+          <Link to="/mehrspuren"
+            className={`no-underline py-2 px-4 text-sm rounded-r-md font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
+                ${
+                  location.pathname === "/mehrspuren"
+                    ? "bg-thm-primary"
+                    : "bg-gray-700 "
+                }`}
+            onClick={() => changeMSMMode(true)}
+          >{t("sidebar.multiTrackMachine")}
+          </Link>
+        </div>
       </div>
+
       <hr className="mt-5" />
         {mode != "toiletpaper" &&
           <div className={""}>
