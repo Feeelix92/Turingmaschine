@@ -27,17 +27,17 @@ function Sidebar() {
     (state: RootState) => state.general.anzahlSpuren
   );
 
-  const changeTpMode = () => {
-      dispatch(bandResetAll());
-      dispatch(activateToiletPaperMode());
-      dispatch(bandResetAll());
-  };
-
-    const changeNormalMode = () => {
-        dispatch(bandResetAll());
-        dispatch(activateNormalMode());
-        dispatch(bandResetAll());
-    };
+  // const changeTpMode = () => {
+  //     dispatch(bandResetAll());
+  //     dispatch(activateToiletPaperMode());
+  //     dispatch(bandResetAll());
+  // };
+  //
+  //   const changeNormalMode = () => {
+  //       dispatch(bandResetAll());
+  //       dispatch(activateNormalMode());
+  //       dispatch(bandResetAll());
+  // };
   const [showModal, setShowModal] = useState(false);
 
   function toggleModal() {
@@ -47,10 +47,10 @@ function Sidebar() {
   // Current Router Location:
   const location = useLocation(); // Current Pathname = location.pathname
 
-  const changeMSMMode = (mespuma: boolean) => {
-    dispatch(bandResetAll());
-    dispatch(changeMespumaMode(mespuma));
-    dispatch(bandResetAll());
+  // const changeMSMMode = (mespuma: boolean) => {
+  //   dispatch(bandResetAll());
+  //   dispatch(changeMespumaMode(mespuma));
+  //   dispatch(bandResetAll());
 
     if (mespuma) {
       let literalArr: string[] = [];
