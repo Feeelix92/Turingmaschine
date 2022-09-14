@@ -158,24 +158,26 @@ function Sidebar() {
         </Link>
       </div>
       <hr className="mt-5" />
-      <div className={""}>
-        <div
-          className={
-            "hidden md:block menu-item text-white text-lg no-underline cursor-pointer"
-          }
-        >
-          <a
-            className="text-white text-lg no-underline flex items-center"
-            onClick={toggleModal}
-          >
-            Code-Editor
-            <div className="pl-2">
-              <FaLaptopCode />
+        {mode != "toiletpaper" &&
+          <div className={""}>
+            <div
+              className={
+                "hidden md:block menu-item text-white text-lg no-underline cursor-pointer"
+              }
+            >
+              <a
+                className="text-white text-lg no-underline flex items-center"
+                onClick={toggleModal}
+              >
+                Code-Editor
+                <div className="pl-2">
+                  <FaLaptopCode />
+                </div>
+              </a>
+              {showModal ? <AceJsonEditor toggleEditor={toggleModal} /> : null}
             </div>
-          </a>
-          {showModal ? <AceJsonEditor toggleEditor={toggleModal} /> : null}
-        </div>
-      </div>
+          </div>
+        }
 
       <div>
         {Object.keys(lngs).map((lng) => (
