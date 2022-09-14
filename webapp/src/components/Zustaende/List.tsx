@@ -143,7 +143,7 @@ function ConditionsList() {
   }
 
   const loadedRows = useSelector((state: RootState) => state.general.rows);
-  const [zustandsFunktion] = useState([""]);
+  let [zustandsFunktion] = useState([""]);
 
   function getZustandsFunktion() {
     let tempLenght = zustandsFunktion.length;
@@ -171,6 +171,9 @@ function ConditionsList() {
       zustandsFunktion.push(tempCellsString);
       tempCellsString = "δ(";
     });
+    if(zustandsFunktion.length<1) {
+      zustandsFunktion.push("δ() = ()");
+    } 
     setShowZustandsfunktion(!showZustandsfunktion);
   }
 
@@ -331,6 +334,7 @@ function ConditionsList() {
                 className={"col-span-2"}
                 onChange={handleChange}
                 options={zustandsmenge}
+                menuPortalTarget={document.querySelector("body")}
               />
             </div>
           </div>
@@ -367,6 +371,7 @@ function ConditionsList() {
                 options={possibleEnd}
                 isMulti={true}
                 placeholder={t("list.finalStatesSelection")}
+                menuPortalTarget={document.querySelector("body")}
               />
             </div>
           </div>
@@ -378,9 +383,9 @@ function ConditionsList() {
             <span className={"col-span-2"}>
               {t("list.transitionFunction")} &delta; =
             </span>
-            <button
+            <div
               className={
-                "text-black font-medium bg-white hover:bg-white text-left border border-solid col-span-2"
+                "text-black font-medium bg-white hover:bg-white text-left border border-solid col-span-2 cursor-pointer p-2 max-h-60 overflow-y-scroll"
               }
               onClick={() => getZustandsFunktion()}
             >
@@ -393,7 +398,7 @@ function ConditionsList() {
               ) : (
                 "δ:Q×Γ → Q×Γ×{R,L,N}"
               )}
-            </button>
+            </div>
           </div>
         </div>
       )}

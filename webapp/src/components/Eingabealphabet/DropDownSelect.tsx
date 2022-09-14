@@ -180,6 +180,7 @@ export default function DropDownSelect() {
               <span className={"m-2"}>{e.label}</span>
             </div>
           )}
+          menuPortalTarget={document.querySelector("body")}
         />
       </div>
       <div>

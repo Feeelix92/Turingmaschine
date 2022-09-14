@@ -92,7 +92,7 @@ function Mesuba() {
       </header>
 
       <div className={"App-body"}>
-        <div className={" hidden md:grid md:grid-cols-4 md:items-start px-2"}>
+        <div className={" hidden md:flex space-x-10 "}>
           <MespumaList />
           <Table />
         </div>
