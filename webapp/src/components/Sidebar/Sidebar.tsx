@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { slide as Menu } from "react-burger-menu";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  changeToiletPaperMode,
-  changeMespumaMode,
-  alphabetChangeCurrentMespuma,
+    changeMespumaMode,
+    alphabetChangeCurrentMespuma,
+    activateToiletPaperMode,
 } from "../../redux/generalStore";
 import { RootState } from "../../redux/store";
 import { bandResetAll } from "../../redux/bandStore";
@@ -28,9 +28,9 @@ function Sidebar() {
   );
 
   const changeTpMode = () => {
-    dispatch(bandResetAll());
-    dispatch(changeToiletPaperMode());
-    dispatch(bandResetAll());
+      dispatch(bandResetAll());
+      dispatch(activateToiletPaperMode());
+      dispatch(bandResetAll());
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -118,10 +118,8 @@ function Sidebar() {
   return (
     <Menu right width={450}>
       <div className={"mt-0"}>
-        <Link className="no-underline" to="/">
-          <a className={`text-white text-lg no-underline `} href="/">
+        <Link className="no-underline text-white text-lg" to="/" onClick={() => changeMSMMode(false)}>
             {t("sidebar.homePage")}
-          </a>
         </Link>
       </div>
 
@@ -130,17 +128,14 @@ function Sidebar() {
       <div className="">{t("sidebar.mode")}</div>
 
       <div className="inline-flex rounded-md shadow-sm text-center">
-        <a
+        <Link to="/"
           className={`no-underline py-2 px-4 text-sm font-medium rounded-l-lg text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
               ${location.pathname === "/" ? "bg-thm-primary" : "bg-gray-700 "}`}
           onClick={() => changeMSMMode(false)}
-        >
-          <Link to="/" className="no-underline text-white">
-            Normal
-          </Link>
-        </a>
+        >Normal
+        </Link>
 
-        <a
+        <Link to="/papier"
           className={`no-underline py-2 px-4 text-sm font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
               ${
                 location.pathname === "/papier"
@@ -148,13 +143,10 @@ function Sidebar() {
                   : "bg-gray-700 "
               }`}
           onClick={() => changeTpMode()}
-        >
-          <Link to="/papier" className="no-underline text-white ">
-            Toilettenpapier
-          </Link>
-        </a>
+        >Toilettenpapier
+        </Link>
 
-        <a
+        <Link to="/mehrspuren"
           className={`no-underline py-2 px-4 text-sm rounded-r-md font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
               ${
                 location.pathname === "/mehrspuren"
@@ -162,50 +154,12 @@ function Sidebar() {
                   : "bg-gray-700 "
               }`}
           onClick={() => changeMSMMode(true)}
-        >
-          <Link to="/mehrspuren" className="no-underline text-white ">
-            Mehrspuren-Maschine
-          </Link>
-        </a>
+        >Mehrspuren-Maschine
+        </Link>
       </div>
-
-      {/* <div className={""}>
-        <a className={"menu-item text-white text-lg no-underline"}>
-          <Link to="/">
-            <button className={`w-50 ${(location.pathname==='/') ? 'bg-thm-primary' : 'bg-gray-400 '}`} onClick={() => changeMSMMode(false)}>
-              Normaler Modus
-            </button>
-          </Link>
-        </a>
-      </div>
-
-      <div className={""}>
-        <a className={"menu-item text-white text-lg no-underline"}>
-          <Link to="/papier">
-            <button
-              className={`w-50 ${(location.pathname==='/papier') ? 'bg-thm-primary' : 'bg-gray-400 '}`}
-              onClick={() => changeTpMode()}
-            >
-              {t("sidebar.toiletPaperMode")}
-            </button>
-          </Link>
-        </a>
-      </div>
-
-      <div className={""}>
-        <a className={"menu-item text-white text-lg no-underline"}>
-          <Link to="/mehrspuren">
-            <button className={`w-50 ${(location.pathname==='/mehrspuren') ? 'bg-thm-primary' : 'bg-gray-400 '}`} onClick={() => changeMSMMode(true)}>
-              Mehrspurenmaschine
-            </button>
-          </Link>
-        </a>
-      </div> */}
-
       <hr className="mt-5" />
-
       <div className={""}>
-        <a
+        <div
           className={
             "hidden md:block menu-item text-white text-lg no-underline cursor-pointer"
           }
@@ -220,7 +174,7 @@ function Sidebar() {
             </div>
           </a>
           {showModal ? <AceJsonEditor toggleEditor={toggleModal} /> : null}
-        </a>
+        </div>
       </div>
 
       <div>
