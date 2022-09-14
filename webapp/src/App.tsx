@@ -9,6 +9,8 @@ import ToPaTable from "./components/Zustandsüberführungsfunktion/ToPaTable";
 import Band from "./components/Band/Band";
 import { Routes, Route } from "react-router-dom";
 import Calculator from "./components/Calculator/Calculator";
+import {useDispatch} from "react-redux";
+import {activateToiletPaperMode} from "./redux/generalStore";
 
 function App() {
   return (
@@ -46,7 +48,10 @@ function Home() {
 }
 
 function Papier() {
-  return (
+    const dispatch = useDispatch();
+    dispatch(activateToiletPaperMode());
+
+    return (
     <>
       <header className="App-header">
         <Menu />

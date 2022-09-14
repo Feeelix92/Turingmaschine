@@ -28,9 +28,11 @@ function Sidebar() {
   );
 
   const changeTpMode = () => {
-      dispatch(bandResetAll());
-      dispatch(activateToiletPaperMode());
-      dispatch(bandResetAll());
+      if (mode != "toiletpaper"){
+          dispatch(bandResetAll());
+          dispatch(activateToiletPaperMode());
+          dispatch(bandResetAll());
+      }
   };
 
   const [showModal, setShowModal] = useState(false);
