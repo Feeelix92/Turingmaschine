@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     changeMespumaMode,
     alphabetChangeCurrentMespuma,
-    activateToiletPaperMode,
+    activateToiletPaperMode, activateNormalMode,
 } from "../../redux/generalStore";
 import { RootState } from "../../redux/store";
 import { bandResetAll } from "../../redux/bandStore";
@@ -33,6 +33,11 @@ function Sidebar() {
       dispatch(bandResetAll());
   };
 
+    const changeNormalMode = () => {
+        dispatch(bandResetAll());
+        dispatch(activateNormalMode());
+        dispatch(bandResetAll());
+    };
   const [showModal, setShowModal] = useState(false);
 
   function toggleModal() {
@@ -84,18 +89,18 @@ function Sidebar() {
     }
   };
 
-  useEffect(() => {
-    window.performance;
-    return () => {
-      if (location.pathname === "/mehrspuren") {
-        changeMSMMode(true);
-      } else if (location.pathname === "/papier") {
-        changeTpMode();
-      } else {
-        changeMSMMode(false);
-      }
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.performance;
+  //   return () => {
+  //     if (location.pathname === "/mehrspuren") {
+  //       changeMSMMode(true);
+  //     } else if (location.pathname === "/papier") {
+  //       changeTpMode();
+  //     } else {
+  //       changeMSMMode(false);
+  //     }
+  //   };
+  // }, []);
 
   const { i18n, t } = useTranslation(["general"]);
 
@@ -118,7 +123,7 @@ function Sidebar() {
   return (
     <Menu right width={450}>
       <div className={"mt-0"}>
-        <Link className="no-underline text-white text-lg" to="/" onClick={() => changeMSMMode(false)}>
+        <Link className="no-underline text-white text-lg" to="/">
             {t("sidebar.homePage")}
         </Link>
       </div>
@@ -131,7 +136,7 @@ function Sidebar() {
         <Link to="/"
           className={`no-underline py-2 px-4 text-sm font-medium rounded-l-lg text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
               ${location.pathname === "/" ? "bg-thm-primary" : "bg-gray-700 "}`}
-          onClick={() => changeMSMMode(false)}
+          // onClick={() =>changeMSMMode(false)}
         >Normal
         </Link>
 
@@ -142,7 +147,7 @@ function Sidebar() {
                   ? "bg-thm-primary"
                   : "bg-gray-700 "
               }`}
-          onClick={() => changeTpMode()}
+          // onClick={() => changeTpMode()}
         >Toilettenpapier
         </Link>
 
@@ -153,7 +158,7 @@ function Sidebar() {
                   ? "bg-thm-primary"
                   : "bg-gray-700 "
               }`}
-          onClick={() => changeMSMMode(true)}
+          // onClick={() => changeMSMMode(true)}
         >Mehrspuren-Maschine
         </Link>
       </div>

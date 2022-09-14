@@ -10,11 +10,10 @@ import Band from "./components/Band/Band";
 import { Routes, Route } from "react-router-dom";
 import Calculator from "./components/Calculator/Calculator";
 import {useDispatch} from "react-redux";
-import {activateNormalMode, activateToiletPaperMode} from "./redux/generalStore";
+import {activateNormalMode, activateToiletPaperMode, changeMespumaMode} from "./redux/generalStore";
+import {bandResetAll} from "./redux/bandStore";
 
 function App() {
-    const dispatch = useDispatch();
-    dispatch(activateNormalMode());
   return (
     <div className="App">
       <Routes>
@@ -28,8 +27,11 @@ function App() {
 
 function Home() {
     const dispatch = useDispatch();
+    dispatch(bandResetAll());
     dispatch(activateNormalMode());
-  return (
+    dispatch(bandResetAll());
+
+    return (
     <>
       <header className="App-header">
         <Menu />
@@ -53,7 +55,10 @@ function Home() {
 
 function Papier() {
     const dispatch = useDispatch();
+    dispatch(bandResetAll());
     dispatch(activateToiletPaperMode());
+    dispatch(bandResetAll());
+
     return (
     <>
       <header className="App-header">
@@ -74,7 +79,12 @@ function Papier() {
 }
 
 function Mesuba() {
-  return (
+    const dispatch = useDispatch();
+    dispatch(bandResetAll());
+    dispatch(changeMespumaMode(true));
+    dispatch(bandResetAll());
+
+    return (
     <>
       <header className="App-header">
         <Menu />
