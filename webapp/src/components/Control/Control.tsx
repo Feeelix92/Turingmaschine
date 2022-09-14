@@ -23,17 +23,16 @@ import {
   bandChangeItemAt,
   bandChangeItemAtMespuma,
   bandChangePointPos,
-  bandResetPointer,
   bandSetPointPos,
 } from "../../redux/bandStore";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   alphabetChangePauseMaschine,
   alphabetChangeStoppMaschine,
 } from "../../redux/generalStore";
 import anime from "animejs";
 import party from "party-js";
-import { initReactI18next, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 function Control() {
   const dispatch = useDispatch();
@@ -113,7 +112,7 @@ function Control() {
   };
 
   const initialZustand = useSelector(
-    (state: RootState) => state.general.anfangsZustand
+    (state: RootState) => state.general.activeState
   );
 
   const currentBand = useSelector((state: RootState) => state.band.currentBand);
@@ -162,8 +161,14 @@ function Control() {
   store.subscribe(
     wActiveState((newVal) => {
       activeState = newVal;
-      console.log("watcher auf activeState", activeState);
     })
+  );
+
+  /* 
+  copy especially for stepByStep to fix issue concerning setting of activeState 
+  */
+  const stepByStepActiveState = useSelector(
+    (state: RootState) => state.general.activeState
   );
 
   /////////// PointerPosition from State ///////////
@@ -207,7 +212,6 @@ function Control() {
   };
 
   const makeStep = async (idx: number) => {
-    console.log("makeStep: ", activeState.value);
     // get the row, which matches with the symbol we read on band
     const item = selectedRows.find((elem) => {
       return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
@@ -253,8 +257,6 @@ function Control() {
             changePause(true);
           } else {
             dispatch(tableSetActiveState(item.cells[2].value as Zustand));
-            console.log("set Active State make Step", activeState.value);
-            console.log("_____________________________");
             setSelectedRows();
           }
         }
@@ -357,7 +359,6 @@ function Control() {
 
     while (stoppMaschine === false && pauseMaschine === false) {
       setMaschineRunning(true);
-      console.log(slider);
       if (slider !== 100) {
         let tempSlider = 3000 / slider;
         await sleep(tempSlider);
@@ -381,11 +382,6 @@ function Control() {
   };
 
   const stepByStep = async () => {
-    /*
-    Er setzt bei example in makeStep auf q2 was richtig ist
-    Beim nächsten Schritt machen, ist activeState aber wieder q1
-    q2 wird aber auch nie mit q1 überschrieben
-    */
     setSelectedRows();
 
     if (slider !== 100) {

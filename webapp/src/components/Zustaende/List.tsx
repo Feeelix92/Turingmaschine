@@ -15,7 +15,7 @@ import { RootState, store } from "../../redux/store";
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
 import { BiCaretDown, BiCaretUp, IoIosWarning } from "react-icons/all";
 import watch from "redux-watch";
-import { initReactI18next, useTranslation} from "react-i18next";
+import { initReactI18next, useTranslation } from "react-i18next";
 
 function ConditionsList() {
   /**
@@ -46,7 +46,7 @@ function ConditionsList() {
   );
 
   ///internationalization
-  const { t } = useTranslation(["general"])
+  const { t } = useTranslation(["general"]);
 
   let zustandsmenge: Zustand[] = initZustandsmenge;
   let wZustandsmenge = watch(store.getState, "general.zustandsmenge");
@@ -256,7 +256,9 @@ function ConditionsList() {
               "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
             }
           >
-            <div className={"col-span-2"}>{t("list.tapeAlphabetSymbols")} &Gamma; =</div>
+            <div className={"col-span-2"}>
+              {t("list.tapeAlphabetSymbols")} &Gamma; =
+            </div>
             <div
               className={
                 "border border-solid bg-gray-100 rounded p-2 col-span-2"

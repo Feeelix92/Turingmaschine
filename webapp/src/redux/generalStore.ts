@@ -517,17 +517,29 @@ export const generalSlice = createSlice({
      * function alphabetDeleteCustom deletes the customAlphabet
      * @param state
      */
-    alphabetPushToZustand: (state) => {
-      let tempNumber = state.zustandsmenge.length + 1;
-      state.zustandsmenge.push(
-        new Zustand("q" + tempNumber, "q" + tempNumber, false, false, false)
-      );
-
+    alphabetPushToZustand: (
+      state,
+      payload: PayloadAction<Zustand | undefined>
+    ) => {
       console.log("alphabetPushToZustand");
 
-      if (state.zustandsmenge.length === 1) {
-        state.activeState = state.zustandsmenge[0];
+      let states = state.zustandsmenge.slice(0, state.zustandsmenge.length);
+      if (!payload.payload) {
+        let tempNumber = state.zustandsmenge.length + 1;
+        states.push(
+          new Zustand("q" + tempNumber, "q" + tempNumber, false, false, false)
+        );
+      } else {
+        states.push(payload.payload);
       }
+
+      if (states.length === 1) {
+        state.activeState = states[0];
+      }
+
+      state.zustandsmenge = states;
+
+      console.log(current(state));
     },
     alphabetPushToIdxZustand: (state, zustandsName: PayloadAction<string>) => {
       state.zustandsmenge.push(
@@ -540,24 +552,18 @@ export const generalSlice = createSlice({
         )
       );
 
-      console.log("alphabetPushToIdxZustand");
       if (state.zustandsmenge.length === 1) {
         state.activeState = state.zustandsmenge[0];
       }
     },
     alphabetDeleteZustand: (state) => {
-      console.log("-------------alphabetDeleteZustand");
-      console.log(current(state));
       state.zustandsmenge.pop();
 
       if (state.zustandsmenge.length <= 0) {
-        console.log("if erfüllt");
         state.activeState = undefined;
-        console.log("activeState setted");
       }
     },
     alphabetChangeAnfangszustand: (state, zustand: PayloadAction<Zustand>) => {
-      console.log("alphabetChangeAnfangszustand");
       state.zustandsmenge.forEach((option) => {
         if (option.value === zustand.payload.value) {
           option.anfangszustand = true;
@@ -880,7 +886,6 @@ export const generalSlice = createSlice({
       state.watchedRows = rows.payload;
     },
     tableSetActiveState: (state, newVal: PayloadAction<Zustand>) => {
-      console.log("--------->tableSetActiveState", newVal.payload);
       state.activeState = newVal.payload;
     },
     tableCheckWarning: (state, checkVal: PayloadAction<checkWarning>) => {

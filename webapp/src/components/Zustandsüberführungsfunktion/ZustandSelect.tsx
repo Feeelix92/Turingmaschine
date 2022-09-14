@@ -25,10 +25,9 @@ export default function ZustandSelect(props: ZustandSelectProps) {
           false,
           false
         );
-        dispatch(alphabetPushToZustand());
+        dispatch(alphabetPushToZustand(state));
       }
     }
-
     props.updateValue(state);
   }
 
