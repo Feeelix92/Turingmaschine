@@ -10,9 +10,11 @@ import Band from "./components/Band/Band";
 import { Routes, Route } from "react-router-dom";
 import Calculator from "./components/Calculator/Calculator";
 import {useDispatch} from "react-redux";
-import {activateToiletPaperMode} from "./redux/generalStore";
+import {activateNormalMode, activateToiletPaperMode} from "./redux/generalStore";
 
 function App() {
+    const dispatch = useDispatch();
+    dispatch(activateNormalMode());
   return (
     <div className="App">
       <Routes>
@@ -25,6 +27,8 @@ function App() {
 }
 
 function Home() {
+    const dispatch = useDispatch();
+    dispatch(activateNormalMode());
   return (
     <>
       <header className="App-header">
@@ -50,7 +54,6 @@ function Home() {
 function Papier() {
     const dispatch = useDispatch();
     dispatch(activateToiletPaperMode());
-
     return (
     <>
       <header className="App-header">
