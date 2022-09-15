@@ -27,17 +27,17 @@ function Sidebar() {
     (state: RootState) => state.general.anzahlSpuren
   );
 
-  // const changeTpMode = () => {
-  //     dispatch(bandResetAll());
-  //     dispatch(activateToiletPaperMode());
-  //     dispatch(bandResetAll());
-  // };
-  //
-  //   const changeNormalMode = () => {
-  //       dispatch(bandResetAll());
-  //       dispatch(activateNormalMode());
-  //       dispatch(bandResetAll());
-  // };
+  const changeTpMode = () => {
+      dispatch(bandResetAll());
+      dispatch(activateToiletPaperMode());
+      dispatch(bandResetAll());
+  };
+
+    const changeNormalMode = () => {
+        dispatch(bandResetAll());
+        dispatch(activateNormalMode());
+        dispatch(bandResetAll());
+  };
   const [showModal, setShowModal] = useState(false);
 
   function toggleModal() {
@@ -47,10 +47,10 @@ function Sidebar() {
   // Current Router Location:
   const location = useLocation(); // Current Pathname = location.pathname
 
-  // const changeMSMMode = (mespuma: boolean) => {
-  //   dispatch(bandResetAll());
-  //   dispatch(changeMespumaMode(mespuma));
-  //   dispatch(bandResetAll());
+  const changeMSMMode = (mespuma: boolean) => {
+    dispatch(bandResetAll());
+    dispatch(changeMespumaMode(mespuma));
+    dispatch(bandResetAll());
 
     if (mespuma) {
       let literalArr: string[] = [];
@@ -89,18 +89,18 @@ function Sidebar() {
     }
   };
 
-  // useEffect(() => {
-  //   window.performance;
-  //   return () => {
-  //     if (location.pathname === "/mehrspuren") {
-  //       changeMSMMode(true);
-  //     } else if (location.pathname === "/papier") {
-  //       changeTpMode();
-  //     } else {
-  //       changeMSMMode(false);
-  //     }
-  //   };
-  // }, []);
+  useEffect(() => {
+    window.performance;
+    return () => {
+      if (location.pathname === "/mehrspuren") {
+        changeMSMMode(true);
+      } else if (location.pathname === "/papier") {
+        changeTpMode();
+      } else {
+        changeMSMMode(false);
+      }
+    };
+  }, []);
 
   const { i18n, t } = useTranslation(["general"]);
 
@@ -163,7 +163,7 @@ function Sidebar() {
                     ? "bg-thm-primary"
                     : "bg-gray-700 "
                 }`}
-            // onClick={() => changeMSMMode(true)}
+            onClick={() => changeMSMMode(true)}
         >{t("sidebar.multiTrackMachine")}
           </Link>
         </div>
