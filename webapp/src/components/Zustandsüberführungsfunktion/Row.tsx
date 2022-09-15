@@ -14,24 +14,12 @@ import {
 import { RootState, store } from "../../redux/store";
 import Cell from "./Cell";
 import watch from "redux-watch";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 export default function Row(props: RowProps) {
   // create flat copy of all existing cells
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(props.isFinal);
-
-  /////////// States from State ///////////
-  const zustandsmenge = useSelector(
-    (state: RootState) => state.general.zustandsmenge
-  );
-  let states = zustandsmenge;
-  let wStates = watch(store.getState, "general.zustandsmenge");
-  store.subscribe(
-    wStates((newVal) => {
-      states = newVal;
-    })
-  );
 
   function setCellValue(
     index: React.Key,
@@ -117,8 +105,8 @@ export default function Row(props: RowProps) {
 
   const mode = useSelector((state: RootState) => state.general.mode);
 
-    //Internationalization
-    const { t } = useTranslation(["general"])
+  //Internationalization
+  const { t } = useTranslation(["general"]);
 
   //TODO wie gewünscht?
   return (
@@ -158,7 +146,7 @@ export default function Row(props: RowProps) {
               ))}
           {visible ? (
             <td className="w-3/6 whitespace-nowrap text-gray-900 border-r items-center flex justify-center">
-                {t("row.stop")}
+              {t("row.stop")}
             </td>
           ) : null}
           <td className="w-1/6 text-gray-900 items-center ">

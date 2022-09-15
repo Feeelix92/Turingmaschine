@@ -521,7 +521,6 @@ export const generalSlice = createSlice({
       state,
       payload: PayloadAction<Zustand | undefined>
     ) => {
-      console.log("alphabetPushToZustand");
 
       let states = state.zustandsmenge.slice(0, state.zustandsmenge.length);
       if (!payload.payload) {
@@ -538,8 +537,6 @@ export const generalSlice = createSlice({
       }
 
       state.zustandsmenge = states;
-
-      console.log(current(state));
     },
     alphabetPushToIdxZustand: (state, zustandsName: PayloadAction<string>) => {
       state.zustandsmenge.push(
