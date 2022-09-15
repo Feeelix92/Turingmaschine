@@ -15,6 +15,7 @@ import {
   updateCellType,
   Zustand,
 } from "../interfaces/CommonInterfaces";
+import {cartesianProduct} from "../interfaces/CommonFunctions";
 
 ///////////////////// Zustandsmenge /////////////////////
 const initialZustandsmenge: Zustand[] = [
@@ -1006,10 +1007,43 @@ export const generalSlice = createSlice({
     /**
      * This function switches from or to the Mespuma views
      * @param state
+     * @param mespuma
      */
     changeMespumaMode: (state, mespuma: PayloadAction<boolean>) => {
       if (mespuma.payload) {
         state.mode = "mespuma";
+        let literalArr: string[] = [];
+
+        let tempAlphabet = Object.assign(
+            [],
+            state.currentAlphabet.alphabet
+        ) as EingabeAlphabet[];
+        tempAlphabet.push({ value: "B", label: "", warningMode: false });
+
+        tempAlphabet.forEach((literal) => {
+          literalArr.push(literal.value);
+        });
+
+        let combinationArr: string[][] = [];
+
+        for (let i = 0; i < state.anzahlSpuren; i++) {
+          combinationArr.push(literalArr);
+        }
+
+        let cartesianArr = cartesianProduct(combinationArr);
+
+        let finalBandAlphabet: string[] = [];
+
+        cartesianArr.forEach((element: any[]) => {
+          let el = "(" + element.join() + ")";
+          finalBandAlphabet.push(el);
+        });
+
+          alphabetChangeCurrentMespuma({
+            cartesian: finalBandAlphabet,
+            alphabet: state.currentAlphabet,
+          }
+        )
       } else {
         state.mode = "default";
       }
