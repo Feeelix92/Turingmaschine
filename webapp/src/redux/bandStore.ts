@@ -82,14 +82,37 @@ export const bandSlice = createSlice({
      * @param position
      */
     bandAddField: (state, position: PayloadAction<string>) => {
+      console.log("bandAddField");
       if (position.payload === "before") {
+        console.log("before - state.currentBand: " + state.currentBand);
         state.currentBand.unshift({
           value: state.emptyBandValue,
           label: "",
           warningMode: false,
         });
+        state.mespumaBand[0].unshift({
+          value: state.emptyBandValue,
+          label: "",
+          warningMode: false,
+        });
+        state.mespumaBand[1].unshift({
+          value: state.emptyBandValue,
+          label: "",
+          warningMode: false,
+        });
       } else {
+        console.log("after");
         state.currentBand.push({
+          value: state.emptyBandValue,
+          label: "",
+          warningMode: false,
+        });
+        state.mespumaBand[0].push({
+          value: state.emptyBandValue,
+          label: "",
+          warningMode: false,
+        });
+        state.mespumaBand[1].push({
           value: state.emptyBandValue,
           label: "",
           warningMode: false,

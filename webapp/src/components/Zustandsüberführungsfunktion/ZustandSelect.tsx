@@ -43,6 +43,7 @@ export default function ZustandSelect(props: ZustandSelectProps) {
             className={"col-span-2"}
             onChange={handleChange}
             options={props.states}
+            menuPortalTarget={document.querySelector("body")}
           />
         ) : (
           <Select
@@ -58,6 +59,7 @@ export default function ZustandSelect(props: ZustandSelectProps) {
                 <span className={"m-2"}>{e.label}</span>
               </div>
             )}
+            menuPortalTarget={document.querySelector("body")}
           />
         )}
       </div>
