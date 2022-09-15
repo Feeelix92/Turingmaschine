@@ -47,10 +47,11 @@ export default function Cell(props: CellProps) {
   store.subscribe(
     wStates((newVal) => {
       states = newVal;
-
       const failure = checkWarningModus();
 
-      props.updateCellValue(props.index, props.value, failure);
+      if (failure !== props.warningMode) {
+        props.updateCellValue(props.index, props.value, failure);
+      }
     })
   );
 
@@ -63,7 +64,9 @@ export default function Cell(props: CellProps) {
 
       const failure = checkWarningModus();
 
-      props.updateCellValue(props.index, props.value, failure);
+      if (failure !== props.warningMode) {
+        props.updateCellValue(props.index, props.value, failure);
+      }
 
       if (props.value instanceof Zustand) {
         let foundInFinal = false;
@@ -96,7 +99,9 @@ export default function Cell(props: CellProps) {
 
       const failure = checkWarningModus();
 
-      props.updateCellValue(props.index, props.value, failure);
+      if (failure !== props.warningMode) {
+        props.updateCellValue(props.index, props.value, failure);
+      }
     })
   );
 

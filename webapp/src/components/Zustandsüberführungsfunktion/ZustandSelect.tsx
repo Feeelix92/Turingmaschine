@@ -25,7 +25,7 @@ export default function ZustandSelect(props: ZustandSelectProps) {
           false,
           false
         );
-        dispatch(alphabetPushToZustand(state));
+        dispatch(alphabetPushToZustand());
       }
     }
     props.updateValue(state);
@@ -39,7 +39,7 @@ export default function ZustandSelect(props: ZustandSelectProps) {
         {mode === "toiletpaper" ? (
           <Select
             value={props.current}
-            blurInputOnSelect={false}
+            blurInputOnSelect={true}
             className={"col-span-2"}
             onChange={handleChange}
             options={props.states}
@@ -48,8 +48,8 @@ export default function ZustandSelect(props: ZustandSelectProps) {
         ) : (
           <Select
             value={props.current}
-            blurInputOnSelect={false}
-            className={"col-span-2 xl:w-32 p-1"}
+            blurInputOnSelect={true}
+            className={"col-span-2"}
             onChange={handleChange}
             options={props.states}
             // @ts-ignore
