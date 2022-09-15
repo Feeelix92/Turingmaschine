@@ -52,55 +52,55 @@ function Sidebar() {
     dispatch(changeMespumaMode(mespuma));
     dispatch(bandResetAll());
 
-    if (mespuma) {
-      let literalArr: string[] = [];
+    // if (mespuma) {
+    //   let literalArr: string[] = [];
+    //
+    //   let tempAlphabet = Object.assign(
+    //     [],
+    //     currentAlphabet.alphabet
+    //   ) as EingabeAlphabet[];
+    //   tempAlphabet.push({ value: "B", label: "", warningMode: false });
+    //
+    //   tempAlphabet.forEach((literal) => {
+    //     literalArr.push(literal.value);
+    //   });
+    //
+    //   let combinationArr: string[][] = [];
+    //
+    //   for (let i = 0; i < anzahlSpuren; i++) {
+    //     combinationArr.push(literalArr);
+    //   }
+    //
+    //   let cartesianArr = cartesianProduct(combinationArr);
+    //
+    //   let finalBandAlphabet: string[] = [];
+    //
+    //   cartesianArr.forEach((element: any[]) => {
+    //     let el = "(" + element.join() + ")";
+    //     finalBandAlphabet.push(el);
+    //   });
+    //
+    //   dispatch(
+    //     alphabetChangeCurrentMespuma({
+    //       cartesian: finalBandAlphabet,
+    //       alphabet: currentAlphabet,
+    //     })
+    //   );
+    // };
+  }
 
-      let tempAlphabet = Object.assign(
-        [],
-        currentAlphabet.alphabet
-      ) as EingabeAlphabet[];
-      tempAlphabet.push({ value: "B", label: "", warningMode: false });
-
-      tempAlphabet.forEach((literal) => {
-        literalArr.push(literal.value);
-      });
-
-      let combinationArr: string[][] = [];
-
-      for (let i = 0; i < anzahlSpuren; i++) {
-        combinationArr.push(literalArr);
-      }
-
-      let cartesianArr = cartesianProduct(combinationArr);
-
-      let finalBandAlphabet: string[] = [];
-
-      cartesianArr.forEach((element: any[]) => {
-        let el = "(" + element.join() + ")";
-        finalBandAlphabet.push(el);
-      });
-
-      dispatch(
-        alphabetChangeCurrentMespuma({
-          cartesian: finalBandAlphabet,
-          alphabet: currentAlphabet,
-        })
-      );
-    }
-  };
-
-  useEffect(() => {
-    window.performance;
-    return () => {
-      if (location.pathname === "/mehrspuren") {
-        changeMSMMode(true);
-      } else if (location.pathname === "/papier") {
-        changeTpMode();
-      } else {
-        changeMSMMode(false);
-      }
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.performance;
+  //   return () => {
+  //     if (location.pathname === "/mehrspuren") {
+  //       changeMSMMode(true);
+  //     } else if (location.pathname === "/papier") {
+  //       changeTpMode();
+  //     } else {
+  //       changeMSMMode(false);
+  //     }
+  //   };
+  // }, []);
 
   const { i18n, t } = useTranslation(["general"]);
 
@@ -163,7 +163,7 @@ function Sidebar() {
                     ? "bg-thm-primary"
                     : "bg-gray-700 "
                 }`}
-            onClick={() => changeMSMMode(true)}
+            // onClick={() => changeMSMMode(true)}
         >{t("sidebar.multiTrackMachine")}
           </Link>
         </div>
