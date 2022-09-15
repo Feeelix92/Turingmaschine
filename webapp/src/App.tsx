@@ -12,6 +12,7 @@ import Calculator from "./components/Calculator/Calculator";
 import {useDispatch} from "react-redux";
 import {activateNormalMode, activateToiletPaperMode, changeMespumaMode} from "./redux/generalStore";
 import {bandResetAll} from "./redux/bandStore";
+import React from "react";
 
 function App() {
   return (
