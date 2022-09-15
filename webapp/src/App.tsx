@@ -9,9 +9,13 @@ import ToPaTable from "./components/Zustandsüberführungsfunktion/ToPaTable";
 import Band from "./components/Band/Band";
 import { Routes, Route } from "react-router-dom";
 import Calculator from "./components/Calculator/Calculator";
-import {useDispatch} from "react-redux";
-import {activateNormalMode, activateToiletPaperMode, changeMespumaMode} from "./redux/generalStore";
-import {bandResetAll} from "./redux/bandStore";
+import { useDispatch } from "react-redux";
+import {
+  activateNormalMode,
+  activateToiletPaperMode,
+  changeMespumaMode,
+} from "./redux/generalStore";
+import { bandResetAll } from "./redux/bandStore";
 import React from "react";
 
 function App() {
@@ -20,19 +24,19 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/papier" element={<Papier />} />
-        <Route path="/mehrspuren" element={<Mesuba />} />
+        <Route path="/mehrspuren" element={<Mespuma />} />
       </Routes>
     </div>
   );
 }
 
 function Home() {
-    const dispatch = useDispatch();
-    dispatch(bandResetAll());
-    dispatch(activateNormalMode());
-    dispatch(bandResetAll());
+  const dispatch = useDispatch();
+  dispatch(bandResetAll());
+  dispatch(activateNormalMode());
+  dispatch(bandResetAll());
 
-    return (
+  return (
     <>
       <header className="App-header">
         <Menu />
@@ -55,12 +59,12 @@ function Home() {
 }
 
 function Papier() {
-    const dispatch = useDispatch();
-    dispatch(bandResetAll());
-    dispatch(activateToiletPaperMode());
-    dispatch(bandResetAll());
+  const dispatch = useDispatch();
+  dispatch(bandResetAll());
+  dispatch(activateToiletPaperMode());
+  dispatch(bandResetAll());
 
-    return (
+  return (
     <>
       <header className="App-header">
         <Menu />
@@ -79,13 +83,13 @@ function Papier() {
   );
 }
 
-function Mesuba() {
-    const dispatch = useDispatch();
-    dispatch(bandResetAll());
-    dispatch(changeMespumaMode(true));
-    dispatch(bandResetAll());
+function Mespuma() {
+  const dispatch = useDispatch();
+  dispatch(bandResetAll());
+  dispatch(changeMespumaMode(true));
+  dispatch(bandResetAll());
 
-    return (
+  return (
     <>
       <header className="App-header">
         <Menu />

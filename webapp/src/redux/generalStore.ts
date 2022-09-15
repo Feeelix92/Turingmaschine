@@ -15,7 +15,7 @@ import {
   updateCellType,
   Zustand,
 } from "../interfaces/CommonInterfaces";
-import {cartesianProduct} from "../interfaces/CommonFunctions";
+import { cartesianProduct } from "../interfaces/CommonFunctions";
 
 ///////////////////// Zustandsmenge /////////////////////
 const initialZustandsmenge: Zustand[] = [
@@ -522,7 +522,6 @@ export const generalSlice = createSlice({
       state,
       payload: PayloadAction<Zustand | undefined>
     ) => {
-
       let states = state.zustandsmenge.slice(0, state.zustandsmenge.length);
       if (!payload.payload) {
         let tempNumber = state.zustandsmenge.length + 1;
@@ -869,7 +868,7 @@ export const generalSlice = createSlice({
         state.rows.length
       ) as RowInterface[];
 
-      if (newValue.payload.cellIndex === 0) {
+      if (newValue.payload.cellIndex === 0 && newRows.length > 0) {
         newRows[newValue.payload.rowIndex as number].isFinal = newValue.payload
           .value as boolean;
       }
@@ -1012,8 +1011,8 @@ export const generalSlice = createSlice({
         let literalArr: string[] = [];
 
         let tempAlphabet = Object.assign(
-            [],
-            state.currentAlphabet.alphabet
+          [],
+          state.currentAlphabet.alphabet
         ) as EingabeAlphabet[];
         tempAlphabet.push({ value: "B", label: "", warningMode: false });
 
@@ -1036,11 +1035,10 @@ export const generalSlice = createSlice({
           finalBandAlphabet.push(el);
         });
 
-          alphabetChangeCurrentMespuma({
-            cartesian: finalBandAlphabet,
-            alphabet: state.currentAlphabet,
-          }
-        )
+        alphabetChangeCurrentMespuma({
+          cartesian: finalBandAlphabet,
+          alphabet: state.currentAlphabet,
+        });
       } else {
         state.mode = "default";
       }
