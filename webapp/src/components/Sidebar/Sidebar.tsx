@@ -20,24 +20,24 @@ function Sidebar() {
   const dispatch = useDispatch();
 
   const mode = useSelector((state: RootState) => state.general.mode);
-  const currentAlphabet = useSelector(
-    (state: RootState) => state.general.currentAlphabet
-  );
-  const anzahlSpuren = useSelector(
-    (state: RootState) => state.general.anzahlSpuren
-  );
+  // const currentAlphabet = useSelector(
+  //   (state: RootState) => state.general.currentAlphabet
+  // );
+  // const anzahlSpuren = useSelector(
+  //   (state: RootState) => state.general.anzahlSpuren
+  // );
 
-  const changeTpMode = () => {
-      dispatch(bandResetAll());
-      dispatch(activateToiletPaperMode());
-      dispatch(bandResetAll());
-  };
-
-    const changeNormalMode = () => {
-        dispatch(bandResetAll());
-        dispatch(activateNormalMode());
-        dispatch(bandResetAll());
-  };
+  // const changeTpMode = () => {
+  //     dispatch(bandResetAll());
+  //     dispatch(activateToiletPaperMode());
+  //     dispatch(bandResetAll());
+  // };
+  //
+  //   const changeNormalMode = () => {
+  //       dispatch(bandResetAll());
+  //       dispatch(activateNormalMode());
+  //       dispatch(bandResetAll());
+  // };
   const [showModal, setShowModal] = useState(false);
 
   function toggleModal() {
@@ -47,47 +47,47 @@ function Sidebar() {
   // Current Router Location:
   const location = useLocation(); // Current Pathname = location.pathname
 
-  const changeMSMMode = (mespuma: boolean) => {
-    dispatch(bandResetAll());
-    dispatch(changeMespumaMode(mespuma));
-    dispatch(bandResetAll());
-
-    // if (mespuma) {
-    //   let literalArr: string[] = [];
-    //
-    //   let tempAlphabet = Object.assign(
-    //     [],
-    //     currentAlphabet.alphabet
-    //   ) as EingabeAlphabet[];
-    //   tempAlphabet.push({ value: "B", label: "", warningMode: false });
-    //
-    //   tempAlphabet.forEach((literal) => {
-    //     literalArr.push(literal.value);
-    //   });
-    //
-    //   let combinationArr: string[][] = [];
-    //
-    //   for (let i = 0; i < anzahlSpuren; i++) {
-    //     combinationArr.push(literalArr);
-    //   }
-    //
-    //   let cartesianArr = cartesianProduct(combinationArr);
-    //
-    //   let finalBandAlphabet: string[] = [];
-    //
-    //   cartesianArr.forEach((element: any[]) => {
-    //     let el = "(" + element.join() + ")";
-    //     finalBandAlphabet.push(el);
-    //   });
-    //
-    //   dispatch(
-    //     alphabetChangeCurrentMespuma({
-    //       cartesian: finalBandAlphabet,
-    //       alphabet: currentAlphabet,
-    //     })
-    //   );
-    // };
-  }
+  // const changeMSMMode = (mespuma: boolean) => {
+  //   dispatch(bandResetAll());
+  //   dispatch(changeMespumaMode(mespuma));
+  //   dispatch(bandResetAll());
+  //
+  //   // if (mespuma) {
+  //   //   let literalArr: string[] = [];
+  //   //
+  //   //   let tempAlphabet = Object.assign(
+  //   //     [],
+  //   //     currentAlphabet.alphabet
+  //   //   ) as EingabeAlphabet[];
+  //   //   tempAlphabet.push({ value: "B", label: "", warningMode: false });
+  //   //
+  //   //   tempAlphabet.forEach((literal) => {
+  //   //     literalArr.push(literal.value);
+  //   //   });
+  //   //
+  //   //   let combinationArr: string[][] = [];
+  //   //
+  //   //   for (let i = 0; i < anzahlSpuren; i++) {
+  //   //     combinationArr.push(literalArr);
+  //   //   }
+  //   //
+  //   //   let cartesianArr = cartesianProduct(combinationArr);
+  //   //
+  //   //   let finalBandAlphabet: string[] = [];
+  //   //
+  //   //   cartesianArr.forEach((element: any[]) => {
+  //   //     let el = "(" + element.join() + ")";
+  //   //     finalBandAlphabet.push(el);
+  //   //   });
+  //   //
+  //   //   dispatch(
+  //   //     alphabetChangeCurrentMespuma({
+  //   //       cartesian: finalBandAlphabet,
+  //   //       alphabet: currentAlphabet,
+  //   //     })
+  //   //   );
+  //   // };
+  // }
 
   // useEffect(() => {
   //   window.performance;
