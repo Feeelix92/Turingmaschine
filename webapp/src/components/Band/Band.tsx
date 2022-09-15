@@ -15,6 +15,7 @@ import watch from "redux-watch";
 import { useState } from "react";
 import { EingabeAlphabetOption } from "../../data/Alphabet";
 import { initReactI18next, useTranslation} from "react-i18next";
+import React from "react";
 
 
 export default function Band() {
@@ -88,7 +89,7 @@ export default function Band() {
     const { t } = useTranslation(["general"])
 
   return (
-    <div className={"w-screen"}>
+    <div className={"w-full"}>
       <div className={"flex m-2 h-32"}>
         <button
           className={"mt-10 rounded-r-none md:rounded md:invisible"}
