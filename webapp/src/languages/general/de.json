@@ -10,6 +10,7 @@
 
   "sidebar": {
     "homePage": "Startseite",
+    "reload": "Zustand zurücksetzen",
     "mode": "Modus",
     "normalMode": "Normal",
     "toiletPaperMode": "Toilettenpapier",

@@ -15,6 +15,7 @@ import { Link, useLocation } from "react-router-dom";
 import { FaLaptopCode } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { FlagIcon } from "react-flag-kit";
+import React from "react";
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -42,6 +43,10 @@ function Sidebar() {
 
   function toggleModal() {
     setShowModal(!showModal);
+  }
+
+  function reloadPage() {
+    window.location.reload(false);
   }
 
   // Current Router Location:
@@ -130,6 +135,10 @@ function Sidebar() {
         <Link className="no-underline text-white text-lg" to="/">
             {t("sidebar.homePage")}
         </Link>
+      </div>
+
+      <div className={"mt-0 no-underline text-white text-lg cursor-pointer"} onClick={() => reloadPage()}>
+            {t("sidebar.reload")}
       </div>
 
       <hr className="mt-5" />
