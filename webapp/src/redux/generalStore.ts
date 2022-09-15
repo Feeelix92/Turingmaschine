@@ -539,6 +539,12 @@ export const generalSlice = createSlice({
       state.zustandsmenge = states;
     },
     alphabetPushToIdxZustand: (state, zustandsName: PayloadAction<string>) => {
+      state.zustandsmenge.forEach((value, index) => {
+        if (value.value === zustandsName.payload) {
+          state.zustandsmenge.splice(index, 1);
+        }
+      });
+
       state.zustandsmenge.push(
         new Zustand(
           zustandsName.payload,

@@ -297,12 +297,13 @@ export default function AceJsonEditor(props: CodeEditorProps) {
           }
         }
 
+        // too slow... changed pushIdxToZustand for that
         //save states from editor to store
         //json.specifications.states...
-        initZustandsmenge.forEach((_value) => {
-          // delete old store states
-          dispatch(alphabetDeleteZustand());
-        });
+        // initZustandsmenge.forEach((_value) => {
+        //   // delete old store states
+        //   dispatch(alphabetDeleteZustand());
+        // });
 
         const states = json.specifications.states;
 
@@ -556,7 +557,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     setCompleters([completer]);
   }, []);
 
-
   //clear Editor
   const clearEditor = () => {
     const emptyString = "";
@@ -736,7 +736,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                   <div className="p-6 space-y-6 text-left bg-white max-h-[500px] overflow-y-auto">
                     <Tutorial />
                   </div>
-                  <div className="flex items-center justify-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600"/>
+                  <div className="flex items-center justify-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600" />
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
