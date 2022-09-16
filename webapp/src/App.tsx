@@ -16,13 +16,12 @@ import {
   changeMespumaMode,
 } from "./redux/generalStore";
 import { bandResetAll } from "./redux/bandStore";
-import React from "react";
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />}/>
         <Route path="/papier" element={<Papier />} />
         <Route path="/mehrspuren" element={<Mespuma />} />
       </Routes>
@@ -110,33 +109,3 @@ function Mespuma() {
 }
 
 export default App;
-
-/*
-<header className="App-header">
-        <Menu />
-
-        {mode == "default" && <Band />}
-        {mode == "toiletpaper" && <TeepeeBand />}
-        {mode == "mespuma" && <MespumaBand />}
-      </header>
-
-      {mode != "toiletpaper" ? (
-        <button onClick={toggleModal}>Show Code-Editor</button>
-      ) : null}
-      {showModal ? <Tiptap toggleEditor={toggleModal} /> : null}
-
-      <div className={"App-body"}>
-        <div className={" hidden md:grid md:grid-cols-4 md:items-start px-2"}>
-          {mode == "default" && <ConditionsList />}
-          {mode == "default" && <Table />}
-
-          {mode == "toiletpaper" && <ToPaTable />}
-
-          {mode == "mespuma" && <MespumaList />}
-          {mode == "mespuma" && <Table />}
-        </div>
-        <div className={"md:hidden"}>
-          <Bottomnav />
-        </div>
-      </div>
- */
