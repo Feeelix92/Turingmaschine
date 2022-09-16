@@ -13,6 +13,7 @@ function Sidebar() {
 
   const [showModal, setShowModal] = useState(false);
 
+  // Toggle Modal
     function toggleModal() {
     setShowModal(!showModal);
   }

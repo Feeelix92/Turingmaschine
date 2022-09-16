@@ -99,6 +99,7 @@
     "warningEmptyIsNotAllowed": "Ein leeres Alphabet ist nicht erlaubt!",
     "warningNoValidJSON": "Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen!",
     "saveButton": "konfigurieren",
+    "clearButton": "leeren",
     "cancelButton": "abbrechen"
   },
 

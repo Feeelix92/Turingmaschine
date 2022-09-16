@@ -1,14 +1,9 @@
-import {
-  CodeEditorProps,
-  Direction,
-  tableRowToAdd,
-  Zustand,
-} from "../../interfaces/CommonInterfaces";
-import { useDispatch, useSelector } from "react-redux";
-import React, { Fragment, useEffect, useRef, useState } from "react";
-import { RootState, store } from "../../redux/store";
+import {CodeEditorProps, Direction, tableRowToAdd, Zustand,} from "../../interfaces/CommonInterfaces";
+import {useDispatch, useSelector} from "react-redux";
+import {Fragment, useEffect, useRef, useState} from "react";
+import {RootState, store} from "../../redux/store";
 import AceEditor from "react-ace";
-import { setCompleters } from "ace-builds/src-noconflict/ext-language_tools";
+import {setCompleters} from "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-json5";
 import "ace-builds/src-noconflict/theme-twilight";
 import "ace-builds/src-noconflict/ext-language_tools";
@@ -17,7 +12,6 @@ import {
   alphabetChangeCurrentMespuma,
   alphabetChangeEndzustand,
   alphabetDeleteCustom,
-  alphabetDeleteZustand,
   alphabetGenerateBand,
   alphabetPushToCustom,
   alphabetPushToDialogOptions,
@@ -27,22 +21,13 @@ import {
   tableDeleteAll,
   tableSetActiveState,
 } from "../../redux/generalStore";
-import {
-  bandChangeItemAt,
-  bandChangeItemAtMespuma,
-  bandDeleteAll,
-  bandDeleteAllMespuma,
-  BandItemToChange,
-  BandItemToChangeMespuma,
-} from "../../redux/bandStore";
-import Row from "../Zustandsüberführungsfunktion/Row";
-import { FiDownload, FiSave, FiUpload } from "react-icons/all";
-import { Tab } from "@headlessui/react";
+import {bandChangeItemAt, bandChangeItemAtMespuma, bandDeleteAll, bandDeleteAllMespuma, BandItemToChange, BandItemToChangeMespuma,} from "../../redux/bandStore";
+import {FiDownload, FiUpload} from "react-icons/all";
+import {Tab} from "@headlessui/react";
 import Tutorial from "./Tutorial";
-import { cartesianProduct } from "../../interfaces/CommonFunctions";
-import i18next from "i18next";
-import { useTranslation } from "react-i18next";
-import { useAlert } from "react-alert";
+import {cartesianProduct} from "../../interfaces/CommonFunctions";
+import {useTranslation} from "react-i18next";
+import {useAlert} from "react-alert";
 import watch from "redux-watch";
 
 interface tableZustand {
@@ -79,10 +64,8 @@ export default function AceJsonEditor(props: CodeEditorProps) {
   );
   const initTable = useSelector((state: RootState) => state.general.rows);
 
-  const initRows = useSelector((state: RootState) => state.general.rows);
-
   /////////// Band from State MeSpuMa ///////////
-  let rows = initRows;
+  let rows = useSelector((state: RootState) => state.general.rows);
   let wRows = watch(store.getState, "general.rows");
   store.subscribe(
     wRows((newVal) => {
@@ -90,7 +73,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     })
   );
 
-  // @TODO convert and insert current Table
   const [tempEditorText, setTempEditorText] = useState(
     `{
   "band":{
@@ -151,7 +133,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
   }
 
   function convertCurrentTable() {
-    //ToDo richtig einrücken
     let lastZustand = "q1";
     //der muss eingerückt werden jaja
     let finalString = `"q1":{}`;
@@ -237,20 +218,22 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             });
             dispatch(alphabetPushToDialogOptions(alphabet.toString()));
 
-            let literalArr: string[] = [];
+            let combinationArr = getCombinationArray(alphabet);
 
-            alphabet.forEach((literal: string) => {
-              literalArr.push(literal);
-            });
-
-            literalArr.push("B");
-
-            let combinationArr: string[][] = [];
-
-            for (let i = 0; i < anzahlSpuren; i++) {
-              combinationArr.push(literalArr);
-            }
-
+            // let literalArr: string[] = [];
+            //
+            // alphabet.forEach((literal: string) => {
+            //   literalArr.push(literal);
+            // });
+            //
+            // literalArr.push("B");
+            //
+            // let combinationArr: string[][] = [];
+            //
+            // for (let i = 0; i < anzahlSpuren; i++) {
+            //   combinationArr.push(literalArr);
+            // }
+            //
             let cartesianArr = cartesianProduct(combinationArr);
 
             let finalBandAlphabet: string[] = [];
@@ -267,7 +250,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               })
             );
           } else {
-            alert(i18next.t("codeEditor.warningEmptyIsNotAllowed"));
+            alert.show(t("codeEditor.warningEmptyIsNotAllowed"));
           }
         } else {
           dispatch(bandDeleteAll());
@@ -293,7 +276,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             dispatch(alphabetPushToDialogOptions(alphabet.toString()));
             dispatch(alphabetGenerateBand(alphabet));
           } else {
-            alert("Ein leeres Alphabet ist nicht erlaubt!");
+            alert.show("Ein leeres Alphabet ist nicht erlaubt!");
           }
         }
 
@@ -307,7 +290,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
 
         const states = json.specifications.states;
 
-        states.forEach((value: string) => {
+        states.forEach((value: any) => {
           //push new states to store
           dispatch(alphabetPushToIdxZustand(value));
         });
@@ -372,20 +355,21 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         });
 
         if (currentMode === "mespuma") {
-          let literalArr: string[] = [];
-
-          alphabet.forEach((literal: string) => {
-            literalArr.push(literal);
-          });
-
-          literalArr.push("B");
-
-          let combinationArr: string[][] = [];
-
-          for (let i = 0; i < anzahlSpuren; i++) {
-            combinationArr.push(literalArr);
-          }
-
+          let combinationArr = getCombinationArray(alphabet);
+          // let literalArr: string[] = [];
+          //
+          // alphabet.forEach((literal: string) => {
+          //   literalArr.push(literal);
+          // });
+          //
+          // literalArr.push("B");
+          //
+          // let combinationArr: string[][] = [];
+          //
+          // for (let i = 0; i < anzahlSpuren; i++) {
+          //   combinationArr.push(literalArr);
+          // }
+          //
           let cartesianArr = cartesianProduct(combinationArr);
           dispatch(
             tableCheckWarning({
@@ -407,14 +391,27 @@ export default function AceJsonEditor(props: CodeEditorProps) {
 
         toggleEditor();
       } catch (e) {
-        // Error message is shown, if the entered code in editor is no valid JSON
-        // alert(
-        //   "Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen! \n" +
-        //     e
-        // );
-        alert.show(i18next.t("codeEditor.warningNoValidJSON") + " \n" + e); //TODO: Wird immer hinter Code-Editor angezeigt!
+        // Error message
+        alert.show(e);
       }
     }
+  }
+
+  function getCombinationArray(alphabet: string[]) {
+    let literalArr: string[] = [];
+
+    alphabet.forEach((literal: string) => {
+      literalArr.push(literal);
+    });
+
+    literalArr.push("B");
+
+    let combinationArr: string[][] = [];
+
+    for (let i = 0; i < anzahlSpuren; i++) {
+      combinationArr.push(literalArr);
+    }
+  return combinationArr;
   }
 
   // Editor value
@@ -687,29 +684,32 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                       }}
                     />
                     <div className="flex items-center justify-center p-2 space-x-2 rounded-b border-gray-200 dark:border-gray-600">
+                      {/*Konfigurieren Button*/}
                       <button
                         data-modal-toggle="defaultModal"
                         type="button"
                         onClick={parseToJSON}
                         className="bg-thm-primary"
                       >
-                        konfigurieren
+                        {t("codeEditor.saveButton")}
                       </button>
-                      {/*<button*/}
-                      {/*    data-modal-toggle="defaultModal"*/}
-                      {/*    type="button"*/}
-                      {/*    onClick={clearEditor}*/}
-                      {/*    className="bg-thm-primary"*/}
-                      {/*>*/}
-                      {/*  leeren*/}
-                      {/*</button>*/}
+                      {/*Leeren Button*/}
+                      <button
+                          data-modal-toggle="defaultModal"
+                          type="button"
+                          onClick={clearEditor}
+                          className="bg-thm-secondary hover:bg-thm-primary2"
+                      >
+                        {t("codeEditor.clearButton")}
+                      </button>
+                      {/*Abrechen Button*/}
                       <button
                         data-modal-toggle="defaultModal"
                         type="button"
                         onClick={toggleEditor}
                         className="bg-thm-secondary hover:bg-thm-primary2"
                       >
-                        abbrechen
+                        {t("codeEditor.cancelButton")}
                       </button>
                       <button
                         data-modal-toggle="defaultModal"
