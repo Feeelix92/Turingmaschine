@@ -394,6 +394,8 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         // Error message
         alert.show(e);
       }
+    }else{
+      reloadPage();
     }
   }
 
@@ -412,6 +414,11 @@ export default function AceJsonEditor(props: CodeEditorProps) {
       combinationArr.push(literalArr);
     }
   return combinationArr;
+  }
+
+  // Page reload
+  function reloadPage() {
+    window.location.reload();
   }
 
   // Editor value
