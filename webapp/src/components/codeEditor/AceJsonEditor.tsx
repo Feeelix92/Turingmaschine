@@ -394,7 +394,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         // Error message
         alert.show(e);
       }
-    }else{
+    } else {
       reloadPage();
     }
   }
