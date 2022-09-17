@@ -14,6 +14,9 @@ import {
 } from "../../interfaces/CommonInterfaces";
 import { RootState, store } from "../../redux/store";
 import {
+  maschineSetSlider,
+  maschineSliderDecreaseNumber,
+  maschineSliderIncreaseNumber,
   tableSetActiveRow,
   tableSetActiveState,
   tableSetWatchedRows,
@@ -68,19 +71,21 @@ function Control() {
     })
   );
 
-  const [slider, setSlider] = useState(4);
+  let slider: number = useSelector(
+    (state: RootState) => state.general.sliderNumber
+  );
+  let wSlider = watch(store.getState, "general.sliderNumber");
+  store.subscribe(
+    wSlider((newVal) => {
+      slider = newVal;
+    })
+  );
 
   const increaseSlider = () => {
-    let val = slider;
-    if (val < 100) {
-      setSlider(++val);
-    }
+    dispatch(maschineSliderIncreaseNumber());
   };
   const decreaseSlider = () => {
-    let val = slider;
-    if (val > 1) {
-      setSlider(--val);
-    }
+    dispatch(maschineSliderDecreaseNumber());
   };
 
   const animateButton = (el) => {
@@ -411,7 +416,9 @@ function Control() {
             min={1}
             max={100}
             value={slider}
-            onChange={(e) => setSlider(e.target.valueAsNumber)}
+            onChange={(e) =>
+              dispatch(maschineSetSlider(e.target.valueAsNumber))
+            }
             step={1}
           />
 
@@ -472,14 +479,14 @@ function Control() {
           >
             <button
               className={"inline-block bg-white text-thm-primary pl-2 pr-1.5"}
-              onClick={decreaseSlider}
+              onClick={() => decreaseSlider()}
             >
               <FaAngleDoubleLeft />
             </button>
             {slider}
             <button
               className={"inline-block bg-white text-thm-primary pl-1.5 pr-2"}
-              onClick={increaseSlider}
+              onClick={() => increaseSlider()}
             >
               <FaAngleDoubleRight />
             </button>

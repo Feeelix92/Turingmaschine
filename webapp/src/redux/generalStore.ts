@@ -377,6 +377,8 @@ const activeState: Zustand | undefined = initialZustandsmenge[0];
 ///////////////////// Other /////////////////////
 let customKey = 5;
 
+const initialSliderNumber = 4;
+
 export const generalSlice = createSlice({
   name: "general",
   initialState: {
@@ -409,6 +411,7 @@ export const generalSlice = createSlice({
     mode: initialMode,
     //// Mehrspurenmaschine ////
     anzahlSpuren: initialanzahlSpuren,
+    sliderNumber: initialSliderNumber,
   },
   reducers: {
     ///////////////////// Alphabet /////////////////////
@@ -618,7 +621,23 @@ export const generalSlice = createSlice({
         state.executable = true;
       }
     },
-
+    maschineSetSlider: (state, value: PayloadAction<number>) => {
+      state.sliderNumber = value.payload;
+    },
+    maschineSliderIncreaseNumber: (state) => {
+      let val = state.sliderNumber;
+      if (val < 100) {
+        val = val + 1;
+        state.sliderNumber = val;
+      }
+    },
+    maschineSliderDecreaseNumber: (state) => {
+      let val = state.sliderNumber;
+      if (val > 0) {
+        val = val - 1;
+        state.sliderNumber = val;
+      }
+    },
     ///////////////////// Table /////////////////////
     tableAddRow: (state) => {
       // create flat copy of all existing rows
@@ -1077,6 +1096,9 @@ export const {
   alphabetChangeStoppMaschine,
   maschineChangeExecutable,
   maschineCheckExecutable,
+  maschineSetSlider,
+  maschineSliderIncreaseNumber,
+  maschineSliderDecreaseNumber,
   alphabetChangeWarningMode,
   tableAddRow,
   tableAddEditorRow,
