@@ -295,7 +295,7 @@ function Control() {
         let tempString = item.cells[3].value.slice(0, -1);
         tempString = tempString.substring(1);
 
-        var array = tempString.split(",");
+        const array = tempString.split(",");
 
         mespumaBand.forEach((_band, bandIndex) => {
           dispatch(
@@ -358,11 +358,11 @@ function Control() {
       }
       if (mode === "mespuma") {
         if (stoppMaschine === false && pauseMaschine === false) {
-          makeStepMespuma(activePointerPosition);
+          await makeStepMespuma(activePointerPosition);
         }
       } else {
         if (stoppMaschine === false && pauseMaschine === false) {
-          makeStep(activePointerPosition);
+          await makeStep(activePointerPosition);
         }
       }
     }
@@ -383,9 +383,9 @@ function Control() {
     }
 
     if (mode === "mespuma") {
-      makeStepMespuma(activePointerPosition);
+      await makeStepMespuma(activePointerPosition);
     } else {
-      makeStep(activePointerPosition);
+      await makeStep(activePointerPosition);
     }
   };
 
@@ -393,8 +393,8 @@ function Control() {
   const { t } = useTranslation(["general"]);
 
   return (
-    <div className={"control w-screen"}>
-      <div className={"p-0 justify-center"}>
+    <div className={"control"}>
+      <div className={"p-0"}>
         <div className={""}>
           <label
             htmlFor="velSlider"
@@ -405,7 +405,7 @@ function Control() {
           <input
             id="velSlider"
             className={
-              "xl:w-3/12 md:w-1/5 h-2 mr-4 xl:mr-8 bg-gray-500 rounded-lg appearance-none cursor-pointer  hidden md:inline-block"
+              "xl:w-4/12 md:w-1/5 h-2 mr-4 xl:mr-8 bg-gray-500 rounded-lg appearance-none cursor-pointer  hidden md:inline-block"
             }
             type="range"
             min={1}
