@@ -19,6 +19,7 @@ import ZustandSelect from "./ZustandSelect";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import { useAlert } from "react-alert";
+import React from "react";
 
 export default function Cell(props: CellProps) {
   const mode = useSelector((state: RootState) => state.general.mode);
@@ -233,6 +234,7 @@ export default function Cell(props: CellProps) {
           onChange={handleChange}
           options={directions}
           menuPortalTarget={document.querySelector("body")}
+          isSearchable={false}
         />
       ) : (
         ""
@@ -277,7 +279,7 @@ export default function Cell(props: CellProps) {
         />
       )}
 
-      {/* TODO: Mehrspurenmaschine:  */}
+      {/* Mehrspurenmaschine:  */}
       {mode == "mespuma" && typeof props.value === "string" ? (
         <Select
           placeholder={props.value}
@@ -286,6 +288,7 @@ export default function Cell(props: CellProps) {
           onChange={handleChange}
           options={eALphabet}
           menuPortalTarget={document.querySelector("body")}
+          isSearchable={false}
         />
       ) : (
         ""

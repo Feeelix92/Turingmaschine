@@ -469,6 +469,7 @@ function ConditionsList() {
                 onChange={handleChange}
                 options={zustandsmenge}
                 menuPortalTarget={document.querySelector("body")}
+                isSearchable={false}
               />
             </div>
           </div>
@@ -506,6 +507,7 @@ function ConditionsList() {
                 isMulti={true}
                 placeholder={t("list.finalStatesSelection")}
                 menuPortalTarget={document.querySelector("body")}
+                isSearchable={false}
               />
             </div>
           </div>

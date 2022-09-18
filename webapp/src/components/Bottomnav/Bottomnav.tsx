@@ -68,12 +68,12 @@ function Bottomnav() {
                  ? 
                  (
                      mode == "default" ? ( <ConditionsList/> ) : 
-                    //  mode == "toiletpaper" ? (  ) : 
                      mode == "mespuma" ? ( <MespumaList /> ) :
                      ""
                  ) 
                  : 
                  "" }
+                 
                 { (funk || mode=="toiletpaper") 
                 ? 
                 (<Table/>) : "" }                

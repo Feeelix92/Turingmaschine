@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { CgAddR } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,6 +45,7 @@ export default function ZustandSelect(props: ZustandSelectProps) {
             onChange={handleChange}
             options={props.states}
             menuPortalTarget={document.querySelector("body")}
+            isSearchable={false}
           />
         ) : (
           <Select
@@ -60,6 +62,7 @@ export default function ZustandSelect(props: ZustandSelectProps) {
               </div>
             )}
             menuPortalTarget={document.querySelector("body")}
+            isSearchable={false}
           />
         )}
       </div>
