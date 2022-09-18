@@ -16,6 +16,7 @@ import {
 import { RootState, store } from "../../redux/store";
 import MultiselectDropDown from "./DropDownMultiselect";
 import {useTranslation} from "react-i18next";
+import React from "react";
 
 export default function DropDownSelect() {
   // mode für alle:
@@ -181,6 +182,7 @@ export default function DropDownSelect() {
             </div>
           )}
           menuPortalTarget={document.querySelector("body")}
+          isSearchable={false}
         />
       </div>
       <div>

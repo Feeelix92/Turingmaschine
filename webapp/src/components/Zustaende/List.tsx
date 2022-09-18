@@ -238,7 +238,7 @@ function ConditionsList() {
   return (
     <div
       className={
-        "border-solid border rounded bg-white w-screen sm:w-3/4 lg:w-3/4 3xl:w-2/4 p-2 border rounded items-center hover:bg-gray-100 col-span-2 max-w-screen-sm"
+        "border-solid border rounded bg-white w-screen sm:w-3/4 lg:w-3/4 3xl:w-2/4 p-2 items-center hover:bg-gray-100 col-span-2 max-w-screen-sm"
       }
     >
       <div className={""} onClick={() => setIsActive(!isActive)}>
@@ -335,6 +335,7 @@ function ConditionsList() {
                 onChange={handleChange}
                 options={zustandsmenge}
                 menuPortalTarget={document.querySelector("body")}
+                isSearchable={false}
               />
             </div>
           </div>
@@ -372,6 +373,7 @@ function ConditionsList() {
                 isMulti={true}
                 placeholder={t("list.finalStatesSelection")}
                 menuPortalTarget={document.querySelector("body")}
+                isSearchable={false}
               />
             </div>
           </div>

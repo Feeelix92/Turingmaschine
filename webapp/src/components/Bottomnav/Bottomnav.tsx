@@ -1,12 +1,17 @@
 import React, {Key, useEffect, useRef} from "react";
 
 import ConditionsList from "../Zustaende/List";
+import MespumaList from "../Zustaende/MespumaList";
+
 import Table from "../Zustandsüberführungsfunktion/Table";
 import {
     FaTable,
     FaClipboardList
   } from "react-icons/fa";
 import {useTranslation} from "react-i18next";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+
 
 
 function Bottomnav() {
@@ -49,28 +54,49 @@ function Bottomnav() {
 
     })
 
+    const mode = useSelector(
+        (state: RootState) => state.general.mode
+      );
+
     ///internationalization
     const { t } = useTranslation(["general"])
 
     return (
         <div>
             <div className={"mt-11 mb-36"}>
-                { spez ? (<ConditionsList/>) : "" }
-                { funk ? (<Table/>) : "" }                
+                { spez
+                 ? 
+                 (
+                     mode == "default" ? ( <ConditionsList/> ) : 
+                    //  mode == "toiletpaper" ? (  ) : 
+                     mode == "mespuma" ? ( <MespumaList /> ) :
+                     ""
+                 ) 
+                 : 
+                 "" }
+                { (funk || mode=="toiletpaper") 
+                ? 
+                (<Table/>) : "" }                
             </div>
 
-            <div className={`bottomnav z-50 ${(keyboardIsOpen) ? 'hidden' : 'flex'}`}>
-                <button className={"grid justify-items-center"}  onClick={() => showSpez()}>
-                    <FaClipboardList/>
-                    {t("bottomNavBar.configurations")}
-                </button>
+            { (mode!="toiletpaper") 
+                ? 
+                (
+                    <div className={`bottomnav z-50 ${(keyboardIsOpen) ? 'hidden' : 'flex'}`}>
+                    <button className={"grid justify-items-center"}  onClick={() => showSpez()}>
+                        <FaClipboardList/>
+                        {t("bottomNavBar.configurations")}
+                    </button>
+    
+                    <button className={"grid justify-items-center"} onClick={() => showFunk()}>
+                         <FaTable/>
+                        {t("bottomNavBar.table")}
+                    </button>
+    
+                </div>
+                ) : "" }     
 
-                <button className={"grid justify-items-center"} onClick={() => showFunk()}>
-                     <FaTable/>
-                    {t("bottomNavBar.table")}
-                </button>
-
-            </div>
+            
         </div>
     );
 }
