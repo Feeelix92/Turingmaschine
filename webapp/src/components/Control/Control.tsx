@@ -36,6 +36,7 @@ import {
 import anime from "animejs";
 import party from "party-js";
 import { useTranslation } from "react-i18next";
+import React from "react";
 
 function Control() {
   const dispatch = useDispatch();
@@ -400,7 +401,7 @@ function Control() {
   return (
     <div className={"control"}>
       <div className={"p-0"}>
-        <div className={""}>
+        <div className={"xl:w-[40rem]"}>
           <label
             htmlFor="velSlider"
             className="form-label text-white pr-0 md:pr-1 xl:pr-1 pl-2 md:pl-4 xl:pl-5 hidden md:inline-block "
