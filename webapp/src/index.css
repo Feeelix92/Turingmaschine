@@ -64,7 +64,7 @@
 
 /* ********** MENU ********** */
 .menu {
-  @apply bg-thm-primary text-left h-16 pl-0;
+  @apply bg-thm-primary text-left h-fit sm:h-16 pl-0;
 }
 
 .bottomnav {
@@ -118,7 +118,7 @@
 
 /* Individual item */
 .bm-item {
-  @apply inline-block p-2.5;
+  @apply inline-block px-0 py-2.5 sm:p-2.5;
 }
 
 /* Styling of overlay */

@@ -475,7 +475,7 @@ function Control() {
           {/* Geschwindigkeit im mobile  */}
           <div
             className={
-              "inline-block md:hidden px-0 bg-white text-thm-primary rounded ml-2 "
+              "inline-block md:hidden px-0 mb-2 bg-white text-thm-primary rounded ml-2 "
             }
           >
             <button

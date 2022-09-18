@@ -62,7 +62,7 @@ function Sidebar() {
         <div className="rounded-md shadow-sm text-center inline-flex">
           {/*Link zum default Modus*/}
           <Link to="/"
-            className={`no-underline py-2 px-4 text-sm font-medium rounded-l-lg text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
+            className={`no-underline py-2 px-2 sm:px-4 text-sm font-medium rounded-l-lg text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
                 ${location.pathname === "/" ? "bg-thm-primary" : "bg-gray-700 "}`}
           >{t("sidebar.normalMode")}
           </Link>
