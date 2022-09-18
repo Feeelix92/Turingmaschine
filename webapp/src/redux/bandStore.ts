@@ -143,6 +143,9 @@ export const bandSlice = createSlice({
       }
     },
     bandChangePointPos: (state, step: PayloadAction<number>) => {
+      // console.log("step.playload = " + step.payload);
+      // console.log("state.pointerPosition = " + state.pointerPosition);
+      // console.log("state.currentBand.length = " + state.currentBand.length);
       if (
         step.payload > 0 &&
         state.pointerPosition >= state.currentBand.length - 1
@@ -153,9 +156,29 @@ export const bandSlice = createSlice({
           label: "",
           warningMode: false,
         });
+        state.mespumaBand[0].push({
+          value: state.emptyBandValue,
+          label: "",
+          warningMode: false,
+        });
+        state.mespumaBand[1].push({
+          value: state.emptyBandValue,
+          label: "",
+          warningMode: false,
+        });
       } else if (step.payload < 0 && state.pointerPosition == 0) {
         // BandItem links hinzufügen
         state.currentBand.unshift({
+          value: state.emptyBandValue,
+          label: "",
+          warningMode: false,
+        });
+        state.mespumaBand[0].unshift({
+          value: state.emptyBandValue,
+          label: "",
+          warningMode: false,
+        });
+        state.mespumaBand[1].unshift({
           value: state.emptyBandValue,
           label: "",
           warningMode: false,
