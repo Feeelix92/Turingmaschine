@@ -108,7 +108,7 @@
 }
 
 .menu-options {
-  @apply w-screen md:w-[450px] !important;
+  @apply w-screen md:w-[450px] h-screen !important;
 }
 
 /* Wrapper for item list */

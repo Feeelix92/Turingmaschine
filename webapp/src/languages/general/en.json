@@ -10,7 +10,7 @@
 
   "sidebar": {
     "homePage": "Home",
-    "reload": "Reset",
+    "reload": "Reset Turing Machine",
     "mode": "Mode",
     "normalMode": "Normal",
     "toiletPaperMode": "Toilet Paper",
