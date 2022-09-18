@@ -12,8 +12,6 @@ import {useTranslation} from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 
-
-
 function Bottomnav() {
 
     const [spez, setSpez] = React.useState(true);
@@ -28,7 +26,7 @@ function Bottomnav() {
         setFunk(true);
     }
 
-    const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false);
+    const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false); 
 
     const [windowHeight, setWindowHeight] = React.useState(window.innerHeight);
     function updateWindowHeight(height: React.SetStateAction<number>) {
@@ -40,10 +38,11 @@ function Bottomnav() {
 
         function handleResize() {
             var y = window.innerHeight;
+            var heightDiff = 200; // Soll erst ab einer bestimmten Differenz der Höhe getriggert werden --> Damit es nicht auch auf scrollen reagiert --> also quasi die vermutete Mindesthöhe des Keyboards
 
-            if(windowHeight > y) {
-                setKeyboardIsOpen(true);
-            } else {
+            if(windowHeight > y && ( (windowHeight-y) > heightDiff ) ) {
+                setKeyboardIsOpen(true); 
+            } else if (windowHeight < y && ( (y-windowHeight) > heightDiff ) ) {
                 setKeyboardIsOpen(false);
             }
            
@@ -83,16 +82,15 @@ function Bottomnav() {
                 ? 
                 (
                     <div className={`bottomnav z-50 ${(keyboardIsOpen) ? 'hidden' : 'flex'}`}>
-                    <button className={"grid justify-items-center"}  onClick={() => showSpez()}>
-                        <FaClipboardList/>
-                        {t("bottomNavBar.configurations")}
-                    </button>
-    
-                    <button className={"grid justify-items-center"} onClick={() => showFunk()}>
-                         <FaTable/>
-                        {t("bottomNavBar.table")}
-                    </button>
-    
+                        <button className={"grid justify-items-center"}  onClick={() => showSpez()}>
+                            <FaClipboardList/>
+                            {t("bottomNavBar.configurations")}
+                        </button>
+        
+                        <button className={"grid justify-items-center"} onClick={() => showFunk()}>
+                            <FaTable/>
+                            {t("bottomNavBar.table")}
+                        </button>
                 </div>
                 ) : "" }     
 
