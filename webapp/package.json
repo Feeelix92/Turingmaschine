@@ -3,9 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "createLanguageDirectory": "shx mkdir -p ./build/src/languages",
     "copyLanguageFiles": "shx cp -r ./src/languages ./build/src/",
     "dev": "vite",
-    "build": "tsc && vite build && npm run copyLanguageFiles",
+    "build": "tsc && vite build && npm run createLanguageDirectory && npm run copyLanguageFiles",
     "preview": "vite preview"
   },
   "dependencies": {
