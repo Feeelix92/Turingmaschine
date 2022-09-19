@@ -163,8 +163,7 @@
     "phone": "Telefon",
     "lecturer": "Zuständiger Dozent",
     "students": "Beteiligte Studierende",
-    "moreInformation1": "Weitere Informationen entnehmen Sie dem",
-    "moreInformationLink": "Impressum",
-    "moreInformation2": "der Technische Hochschule Mittelhessen (THM)"
+    "moreInformation": "Weitere Informationen entnehmen Sie bitte der",
+    "moreInformationLink": "Internetseite der Technische Hochschule Mittelhessen (THM)"
   }
 }

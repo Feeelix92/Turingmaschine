@@ -163,8 +163,7 @@
     "phone": "Phone",
     "lecturer": "Responsible lecturer",
     "students": "Involved students",
-    "moreInformation1": "For further information please refer to the",
-    "moreInformationLink": "imprint",
-    "moreInformation2": "of the Technische Hochschule Mittelhessen (THM)"
+    "moreInformation": "For further information, please refer to the",
+    "moreInformationLink": "website of the Technische Hochschule Mittelhessen (THM)"
   }
 }

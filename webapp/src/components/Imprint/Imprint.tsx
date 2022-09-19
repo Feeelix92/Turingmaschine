@@ -35,9 +35,7 @@ function Imprint() {
                 <li>Wegener, Felix</li>
             </div>
 
-
-
-            <p>{t("imprint.moreInformation1")} <a className={"no-underline text-thm-primary"} href={"https://www.thm.de/organizer/impressum.html"} target={"_blank"}>{t("imprint.moreInformationLink")}</a> {t("imprint.moreInformation2")}.</p>
+            <p>{t("imprint.moreInformation")} <a className={"no-underline text-thm-primary"} href={"https://www.thm.de/site/"} target={"_blank"}>{t("imprint.moreInformationLink")}</a>.</p>
         </div>
     )
 }
