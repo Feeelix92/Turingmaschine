@@ -131,16 +131,11 @@ export const bandSlice = createSlice({
         };
       }
       state.pointerPosition = 0;
+      state.showWarning = false;
     },
     bandResetAll: (state) => {
       state.currentBand = initBand;
-    },
-    bandChangeSkin: (state) => {
-      if (state.bandSkin === "paper") {
-        state.bandSkin = "tech";
-      } else {
-        state.bandSkin = "paper";
-      }
+      state.mespumaBand = initMespumaBand;
     },
     bandChangePointPos: (state, step: PayloadAction<number>) => {
       if (

@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />}/>
+        <Route path="/" element={<Home />} />
         <Route path="/papier" element={<Papier />} />
         <Route path="/mehrspuren" element={<Mespuma />} />
       </Routes>
@@ -33,7 +33,6 @@ function Home() {
   const dispatch = useDispatch();
   dispatch(bandResetAll());
   dispatch(activateNormalMode());
-  dispatch(bandResetAll());
 
   return (
     <>
@@ -61,7 +60,6 @@ function Papier() {
   const dispatch = useDispatch();
   dispatch(bandResetAll());
   dispatch(activateToiletPaperMode());
-  dispatch(bandResetAll());
 
   return (
     <>
@@ -86,7 +84,6 @@ function Mespuma() {
   const dispatch = useDispatch();
   dispatch(bandResetAll());
   dispatch(changeMespumaMode(true));
-  dispatch(bandResetAll());
 
   return (
     <>

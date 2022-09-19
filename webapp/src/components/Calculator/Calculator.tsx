@@ -132,6 +132,8 @@ export default function Calculator() {
       dispatch(alphabetPushToDialogOptions(alphabet.toString()));
       dispatch(alphabetGenerateBand(alphabet));
 
+      dispatch(bandDeleteAll());
+
       operandOne.forEach((param, idx) => {
         dispatch(bandChangeItemAt({ index: idx, value: param, label: param }));
       });
@@ -159,6 +161,8 @@ export default function Calculator() {
       });
       dispatch(alphabetPushToDialogOptions(alphabet.toString()));
       dispatch(alphabetGenerateBand(alphabet));
+
+      dispatch(bandDeleteAll());
 
       operandOne.forEach((param, idx) => {
         dispatch(bandChangeItemAt({ index: idx, value: param, label: param }));

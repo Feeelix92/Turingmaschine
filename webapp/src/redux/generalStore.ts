@@ -1033,6 +1033,13 @@ export const generalSlice = createSlice({
     changeMespumaMode: (state, mespuma: PayloadAction<boolean>) => {
       if (mespuma.payload) {
         state.mode = "mespuma";
+        state.rows = initialRow;
+        state.zustandsmenge = initialZustandsmenge;
+        state.anfangsZustand = initialAnfangszustand;
+        state.endZustand = initialEndZustandsmenge;
+        // state.currentAlphabet = defaultAlphabetOption1;
+        // state.bandAlphabet = initialBandAlphabet;
+
         let literalArr: string[] = [];
 
         let tempAlphabet = Object.assign(
@@ -1060,20 +1067,42 @@ export const generalSlice = createSlice({
           finalBandAlphabet.push(el);
         });
 
-        alphabetChangeCurrentMespuma({
-          cartesian: finalBandAlphabet,
-          alphabet: state.currentAlphabet,
+        // alphabetChangeCurrentMespuma({
+        //   cartesian: finalBandAlphabet,
+        //   alphabet: state.currentAlphabet,
+        // });
+
+        if (state.currentAlphabet) {
+          state.dialogOptions.forEach((option) => {
+            if (state.currentAlphabet) {
+              if (option.alphabet.key === state.currentAlphabet.key) {
+                state.currentAlphabet.alphabet = option.alphabet.alphabet;
+                state.currentDialogOption = option;
+              }
+            }
+          });
+        }
+
+        let tupelArray: EingabeAlphabet[] = [];
+
+        finalBandAlphabet.forEach((literal) => {
+          tupelArray.push({
+            value: literal,
+            label: literal,
+            warningMode: false,
+          });
         });
+
+        state.currentAlphabet.alphabet.forEach((element) => {
+          tupelArray.push(element);
+        });
+
+        tupelArray.push({ value: "B", label: "", warningMode: false });
+
+        state.bandAlphabet = tupelArray;
       } else {
         state.mode = "default";
       }
-
-      state.rows = initialRow;
-      state.zustandsmenge = initialZustandsmenge;
-      state.anfangsZustand = initialAnfangszustand;
-      state.endZustand = initialEndZustandsmenge;
-      state.currentAlphabet = defaultAlphabetOption1;
-      state.bandAlphabet = initialBandAlphabet;
     },
   },
 });

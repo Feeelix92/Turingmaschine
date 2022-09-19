@@ -9,14 +9,10 @@ import {
   bandSetWarning,
 } from "../../redux/bandStore";
 import { RootState, store } from "../../redux/store";
-import party from "party-js";
 import { IoIosWarning } from "react-icons/io";
 import watch from "redux-watch";
-import { useState } from "react";
-import { EingabeAlphabetOption } from "../../data/Alphabet";
-import { initReactI18next, useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import React from "react";
-
 
 export default function Band() {
   const dispatch = useDispatch();
@@ -63,6 +59,8 @@ export default function Band() {
         }
       });
 
+      console.log(found);
+
       if (found) {
         dispatch(bandSetWarning(true));
       } else {
@@ -85,15 +83,17 @@ export default function Band() {
     dispatch(bandChangePointPos(1));
   };
 
-    //Internationalization
-    const { t } = useTranslation(["general"])
+  //Internationalization
+  const { t } = useTranslation(["general"]);
 
   return (
     <div className={"w-full"}>
       <div className={"flex m-2 h-32"}>
         <button
           className={"mt-10 rounded-r-none md:rounded md:invisible"}
-          onClick={() => dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))}
+          onClick={() =>
+            dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))
+          }
         >
           +
         </button>
@@ -129,7 +129,6 @@ export default function Band() {
         </div>
       ) : null}
 
-
       <div
         className={
           "currentZustand flex-col content-center items-center justify-center mb-8 flex md:hidden"
@@ -139,22 +138,26 @@ export default function Band() {
                 <span className="block absolute -inset-1 w-12 rounded-full bg-thm-primary" aria-hidden="true"></span>
             </span>                */}
         {currentZustand ? (
-          <div className={"rounded-full w-12 bg-thm-primary text-white h-8 mt-3"}>
+          <div
+            className={"rounded-full w-12 bg-thm-primary text-white h-8 mt-3"}
+          >
             {currentZustand.value}
           </div>
         ) : (
           <div className={"rounded-full bg-thm-primary text-white h-8"}>
-              {t("band.warningNoStateAvailable")}
+            {t("band.warningNoStateAvailable")}
           </div>
         )}
       </div>
-
 
       <div className={"hidden md:block"}>
         <div className={"flex justify-center gap-2"}>
           <button
             className={"w-36 invertedButton"}
-            onClick={() => dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))}
+            onClick={() =>
+              dispatch(bandAddField("before")) &&
+              dispatch(bandChangePointPos(1))
+            }
           >
             + {t("band.addLeft")}
           </button>
@@ -164,13 +167,13 @@ export default function Band() {
             }}
             className={"w-36 invertedButton"}
           >
-              {t("band.clearBand")}
+            {t("band.clearBand")}
           </button>
           <button
             className={"w-36 invertedButton"}
             onClick={() => dispatch(bandAddField("after"))}
           >
-              {t("band.addRight")} +
+            {t("band.addRight")} +
           </button>
         </div>
       </div>
