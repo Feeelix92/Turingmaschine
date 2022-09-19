@@ -21,7 +21,7 @@ import {
   tableDeleteAll,
   tableSetActiveState,
 } from "../../redux/generalStore";
-import {bandChangeItemAt, bandChangeItemAtMespuma, bandDeleteAll, bandDeleteAllMespuma, BandItemToChange, BandItemToChangeMespuma,} from "../../redux/bandStore";
+import {bandChangeItemAt, bandChangeItemAtMespuma, bandDeleteAll, bandDeleteAllMespuma, BandItemToChange, BandItemToChangeMespuma, bandSetPointPos,} from "../../redux/bandStore";
 import {FiDownload, FiUpload} from "react-icons/all";
 import {Tab} from "@headlessui/react";
 import Tutorial from "./Tutorial";
@@ -47,6 +47,9 @@ export default function AceJsonEditor(props: CodeEditorProps) {
   const currentMespumaBand = useSelector(
     (state: RootState) => state.band.mespumaBand
   );
+  const setPointerAt = (index: number) => {
+    dispatch(bandSetPointPos(index));
+  };
   const anzahlSpuren = useSelector(
     (state: RootState) => state.general.anzahlSpuren
   );
@@ -198,7 +201,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
           // save Band to store
           // json.band.input...
           const bands = json.band.input;
-
           bands.forEach((bandItems: string[], bandIndex: number) => {
             for (let index = 0; index < bandItems.length; index++) {
               const temp: BandItemToChangeMespuma = {
@@ -210,6 +212,8 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               dispatch(bandChangeItemAtMespuma(temp));
             }
           });
+          // set Pointer at first Element which is not Blank ("B")
+          setPointerAt(getIndexOfFirstValue(bands[0]));
 
           if (alphabet.length > 0) {
             dispatch(alphabetDeleteCustom());
@@ -265,6 +269,8 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             };
             dispatch(bandChangeItemAt(temp));
           }
+          // set Pointer at first Element which is not Blank ("B")
+          setPointerAt(getIndexOfFirstValue(bandItems));
           // save alphabet from editor to store
           // json.specifications.alphabet...
           const alphabet = json.specifications.alphabet;
@@ -397,6 +403,14 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     } else {
       reloadPage();
     }
+  }
+
+  function isNotBlank(element, index, array) {
+    return element != "B";
+  }
+
+  function getIndexOfFirstValue(array: string[]){
+    return array.findIndex(isNotBlank);
   }
 
   function getCombinationArray(alphabet: string[]) {
