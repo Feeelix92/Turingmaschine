@@ -8,12 +8,13 @@ import {
   bandDeleteItemAt,
   bandChangeItemAtMespuma,
   BandItemToChangeMespuma,
+  bandDeleteItemAtMespuma,
 } from "../../redux/bandStore";
 import { BsFillEraserFill } from "react-icons/bs";
 import { BandItemProps } from "../../interfaces/CommonInterfaces";
 import watch from "redux-watch";
 import i18next from "i18next";
-import { useAlert } from 'react-alert';
+import { useAlert } from "react-alert";
 
 export default function BandItem(props: BandItemProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -81,7 +82,16 @@ export default function BandItem(props: BandItemProps) {
   }
 
   function deleteValue() {
-    dispatch(bandDeleteItemAt(props.index));
+    if (cMode === "mespuma") {
+      dispatch(
+        bandDeleteItemAtMespuma({
+          bandIndex: props.bandIndex,
+          index: props.index,
+        })
+      );
+    } else {
+      dispatch(bandDeleteItemAt(props.index));
+    }
   }
 
   useEffect(() => {
