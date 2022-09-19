@@ -12,6 +12,10 @@ export interface BandItemToChangeMespuma {
   value: string;
   label: string;
 }
+export interface MespumaIndex {
+  bandIndex: number;
+  index: number;
+}
 export interface PointerItemToChange {
   index: number;
   value: boolean;
@@ -37,7 +41,6 @@ export const bandSlice = createSlice({
     emptyBandValue: emptyBandValue,
     currentBand: initBand,
     mespumaBand: initMespumaBand,
-    bandSkin: "paper",
     pointerPosition: 0,
     showWarning: false,
   },
@@ -74,6 +77,18 @@ export const bandSlice = createSlice({
         value: state.emptyBandValue,
         label: "",
         warningMode: state.currentBand[index.payload].warningMode,
+      };
+    },
+    bandDeleteItemAtMespuma: (state, index: PayloadAction<MespumaIndex>) => {
+      state.mespumaBand[index.payload.bandIndex as number][
+        index.payload.index as number
+      ] = {
+        value: state.emptyBandValue,
+        label: "",
+        warningMode:
+          state.mespumaBand[index.payload.bandIndex as number][
+            index.payload.index as number
+          ].warningMode,
       };
     },
     /**
@@ -131,16 +146,11 @@ export const bandSlice = createSlice({
         };
       }
       state.pointerPosition = 0;
+      state.showWarning = false;
     },
     bandResetAll: (state) => {
       state.currentBand = initBand;
-    },
-    bandChangeSkin: (state) => {
-      if (state.bandSkin === "paper") {
-        state.bandSkin = "tech";
-      } else {
-        state.bandSkin = "paper";
-      }
+      state.mespumaBand = initMespumaBand;
     },
     bandChangePointPos: (state, step: PayloadAction<number>) => {
       // console.log("step.playload = " + step.payload);
@@ -261,10 +271,10 @@ export const bandSlice = createSlice({
 export const {
   bandChangeItemAt,
   bandDeleteItemAt,
+  bandDeleteItemAtMespuma,
   bandAddField,
   bandDeleteAll,
   bandResetAll,
-  bandChangeSkin,
   bandChangePointPos,
   bandSetPointPos,
   bandResetPointer,

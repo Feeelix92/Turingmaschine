@@ -152,7 +152,8 @@
     "addition": "Addition",
     "substraction": "Substraktion",
     "multiplication": "Multiplikation",
-    "division": "Division"
+    "division": "Division",
+    "insert": "Einfügen"
   },
 
   "imprint": {
@@ -165,5 +166,6 @@
     "students": "Beteiligte Studierende",
     "moreInformation": "Weitere Informationen entnehmen Sie bitte der",
     "moreInformationLink": "Internetseite der Technische Hochschule Mittelhessen (THM)"
+    
   }
 }

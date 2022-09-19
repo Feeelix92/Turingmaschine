@@ -1,9 +1,14 @@
-import {CodeEditorProps, Direction, tableRowToAdd, Zustand,} from "../../interfaces/CommonInterfaces";
-import {useDispatch, useSelector} from "react-redux";
-import {Fragment, useEffect, useRef, useState} from "react";
-import {RootState, store} from "../../redux/store";
+import {
+  CodeEditorProps,
+  Direction,
+  tableRowToAdd,
+  Zustand,
+} from "../../interfaces/CommonInterfaces";
+import { useDispatch, useSelector } from "react-redux";
+import { Fragment, useEffect, useRef, useState } from "react";
+import { RootState, store } from "../../redux/store";
 import AceEditor from "react-ace";
-import {setCompleters} from "ace-builds/src-noconflict/ext-language_tools";
+import { setCompleters } from "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-json5";
 import "ace-builds/src-noconflict/theme-twilight";
 import "ace-builds/src-noconflict/ext-language_tools";
@@ -21,19 +26,26 @@ import {
   tableDeleteAll,
   tableSetActiveState,
 } from "../../redux/generalStore";
-import {bandChangeItemAt, bandChangeItemAtMespuma, bandDeleteAll, bandDeleteAllMespuma, BandItemToChange, BandItemToChangeMespuma, bandSetPointPos,} from "../../redux/bandStore";
-import {FiDownload, FiUpload} from "react-icons/all";
-import {Tab} from "@headlessui/react";
+import {
+  bandChangeItemAt,
+  bandChangeItemAtMespuma,
+  bandDeleteAll,
+  bandDeleteAllMespuma,
+  BandItemToChange,
+  BandItemToChangeMespuma,
+} from "../../redux/bandStore";
+import { FiDownload, FiUpload } from "react-icons/all";
+import { Tab } from "@headlessui/react";
 import Tutorial from "./Tutorial";
-import {cartesianProduct} from "../../interfaces/CommonFunctions";
-import {useTranslation} from "react-i18next";
-import {useAlert} from "react-alert";
+import { cartesianProduct } from "../../interfaces/CommonFunctions";
+import { useTranslation } from "react-i18next";
+import { useAlert } from "react-alert";
 import watch from "redux-watch";
 
-interface tableZustand {
+export interface tableZustand {
   [key: string]: tableZeichen;
 }
-interface tableZeichen {
+export interface tableZeichen {
   [key: string]: string[];
 }
 
@@ -427,7 +439,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     for (let i = 0; i < anzahlSpuren; i++) {
       combinationArr.push(literalArr);
     }
-  return combinationArr;
+    return combinationArr;
   }
 
   // Page reload
@@ -531,7 +543,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             caption: "example",
             snippet: `{
   "band":{
-    "input":["B","B","1","#","1","B","B","B"]
+    "input":["1","#","1","B","B","B","B","B"]
   },
   "specifications":{
     "alphabet":["1","#"],
@@ -716,10 +728,10 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                       </button>
                       {/*Leeren Button*/}
                       <button
-                          data-modal-toggle="defaultModal"
-                          type="button"
-                          onClick={clearEditor}
-                          className="bg-thm-secondary hover:bg-thm-primary2"
+                        data-modal-toggle="defaultModal"
+                        type="button"
+                        onClick={clearEditor}
+                        className="bg-thm-secondary hover:bg-thm-primary2"
                       >
                         {t("codeEditor.clearButton")}
                       </button>

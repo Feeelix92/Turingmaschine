@@ -383,11 +383,6 @@ function Control() {
   const stepByStep = async () => {
     setSelectedRows();
 
-    if (slider !== 100) {
-      let tempSlider = 3000 / slider;
-      await sleep(tempSlider);
-    }
-
     if (mode === "mespuma") {
       await makeStepMespuma(activePointerPosition);
     } else {

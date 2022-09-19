@@ -1,11 +1,32 @@
-import {useState} from "react";
-import {useTranslation} from "react-i18next";
-import {BiCaretDown, BiCaretUp} from "react-icons/bi";
-import Select, {OnChangeValue} from "react-select";
-import {OperationType} from "../../interfaces/CommonInterfaces";
-import {useDispatch} from "react-redux";
-import {bandChangeItemAt, bandDeleteAll} from "../../redux/bandStore";
-import {alphabetDeleteCustom, alphabetGenerateBand, alphabetPushToCustom, alphabetPushToDialogOptions,} from "../../redux/generalStore";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { BiCaretDown, BiCaretUp } from "react-icons/bi";
+import Select, { OnChangeValue } from "react-select";
+import { bandChangeItemAt, bandDeleteAll } from "../../redux/bandStore";
+import {
+  OperationType,
+  tableRowToAdd,
+  Zustand,
+} from "../../interfaces/CommonInterfaces";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  alphabetChangeAnfangszustand,
+  alphabetChangeEndzustand,
+  alphabetDeleteCustom,
+  alphabetGenerateBand,
+  alphabetPushToCustom,
+  alphabetPushToDialogOptions,
+  alphabetPushToIdxZustand,
+  tableAddEditorRow,
+  tableDeleteAll,
+  tableSetActiveState,
+} from "../../redux/generalStore";
+import AdditionExample from "../../examples/addition.json";
+import SubstractionExample from "../../examples/substraction.json";
+import MultiplicationExample from "../../examples/multiplication.json";
+import DivisionExample from "../../examples/division.json";
+import { tableZeichen } from "../codeEditor/AceJsonEditor";
+import { RootState } from "../../redux/store";
 
 export default function Calculator() {
   const { t } = useTranslation(["general"]);
@@ -14,7 +35,7 @@ export default function Calculator() {
   /**
    * To check if Accordion opened or closed
    */
-  const [isOpen, setisOpen] = useState(true);
+  const [isOpen, setisOpen] = useState(false);
 
   /**
    * First Number
@@ -42,6 +63,10 @@ export default function Calculator() {
       </button>
     ),
   };
+
+  const initAnfangsZustand = useSelector(
+    (state: RootState) => state.general.anfangsZustand
+  );
 
   const { title, openAccordion, closeAccordion } = accordionData;
 
@@ -71,7 +96,28 @@ export default function Calculator() {
     }
   }
 
-  function compute() {
+  const operations = [
+    new OperationType(t("calculator.addition"), t("calculator.addition")),
+    new OperationType(
+      t("calculator.multiplication"),
+      t("calculator.multiplication")
+    ),
+    new OperationType(
+      t("calculator.substraction"),
+      t("calculator.substraction")
+    ),
+    new OperationType(t("calculator.division"), t("calculator.division")),
+  ];
+
+  const [selectedOperation, setSelectedOperation] = useState(operations[0]);
+
+  function selectOperation(type: OnChangeValue<OperationType, false>) {
+    if (type) {
+      setSelectedOperation(type);
+    }
+  }
+
+  function computeNumbers() {
     dispatch(bandDeleteAll());
     dispatch(alphabetDeleteCustom());
 
@@ -85,6 +131,8 @@ export default function Calculator() {
       });
       dispatch(alphabetPushToDialogOptions(alphabet.toString()));
       dispatch(alphabetGenerateBand(alphabet));
+
+      dispatch(bandDeleteAll());
 
       operandOne.forEach((param, idx) => {
         dispatch(bandChangeItemAt({ index: idx, value: param, label: param }));
@@ -114,6 +162,8 @@ export default function Calculator() {
       dispatch(alphabetPushToDialogOptions(alphabet.toString()));
       dispatch(alphabetGenerateBand(alphabet));
 
+      dispatch(bandDeleteAll());
+
       operandOne.forEach((param, idx) => {
         dispatch(bandChangeItemAt({ index: idx, value: param, label: param }));
       });
@@ -131,6 +181,80 @@ export default function Calculator() {
           })
         );
       });
+    }
+  }
+
+  function computeOperation() {
+    const additionFile = AdditionExample as any;
+    const substractionFile = SubstractionExample;
+    const multiplicationFile = MultiplicationExample;
+    const divisionFile = DivisionExample;
+
+    if (selectedOperation.value === t("calculator.addition")) {
+      additionFile.specifications.states.forEach((value: any) => {
+        //push new states to store
+        dispatch(alphabetPushToIdxZustand(value));
+      });
+
+      // save Anfangszustand from editor to store
+      const newAnfangszustand = new Zustand(
+        additionFile.specifications.startState[0],
+        additionFile.specifications.startState[0],
+        true,
+        false,
+        false
+      );
+      dispatch(alphabetChangeAnfangszustand(newAnfangszustand));
+      dispatch(tableSetActiveState(initAnfangsZustand));
+
+      // save Endzustand to store
+      // json.specifications.endStates...
+      // console.log(json.specifications.endStates);
+      const endStates = additionFile.specifications.endStates;
+      let temp: Zustand[] = [];
+      for (let index = 0; index < endStates.length; index++) {
+        let startState = false;
+        if (endStates[index] == additionFile.specifications.startState) {
+          startState = true;
+        }
+        temp.push(
+          new Zustand(
+            endStates[index],
+            endStates[index],
+            startState,
+            true,
+            false
+          )
+        );
+      }
+      dispatch(alphabetChangeEndzustand(temp));
+      // save table to store
+      // first step -> delete oldTable
+      dispatch(tableDeleteAll());
+      // json.table...
+      Object.entries(additionFile.table).forEach(
+        ([zustandName, zustandArray]) => {
+          let tempZustandArray = zustandArray as tableZeichen;
+          Object.entries(tempZustandArray).forEach(
+            ([zeichenName, zeichenArray]) => {
+              let tempTableRowToAdd: tableRowToAdd = {
+                zustand: "",
+                lese: "",
+                neuerZustand: "",
+                schreibe: "",
+                gehe: "",
+              };
+              tempTableRowToAdd.zustand = zustandName;
+              tempTableRowToAdd.lese = zeichenName;
+              tempTableRowToAdd.neuerZustand = zeichenArray[0];
+              tempTableRowToAdd.schreibe = zeichenArray[1];
+              tempTableRowToAdd.gehe = zeichenArray[2];
+
+              dispatch(tableAddEditorRow(tempTableRowToAdd));
+            }
+          );
+        }
+      );
     }
   }
 
@@ -167,7 +291,7 @@ export default function Calculator() {
               {t("calculator.number")} 1
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 focus:outline-none focus:bg-white"
               id="grid-number-one"
               type="number"
               value={number1}
@@ -175,42 +299,14 @@ export default function Calculator() {
                 setNumber1(parseInt(newValue.target.value))
               }
             />
-            <p className="text-red-500 text-xs italic">
+            {/* <p className="text-red-500 text-xs italic">
               {t("calculator.request")}
-            </p>
+            </p> */}
           </div>
           <div className="w-full md:w-1/3 px-3 mb-6">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-operation"
-            >
-              Operation
-            </label>
-            <div className="relative">
-              <select
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-operation"
-              >
-                <option> {t("calculator.addition")} </option>
-                <option> {t("calculator.multiplication")} </option>
-                <option> {t("calculator.substraction")} </option>
-                <option> {t("calculator.division")} </option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg
-                  className="fill-current h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div className="w-full md:w-1/3 px-3 mb-6">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-number-two"
+              for="grid-number-two"
             >
               {t("calculator.number")} 2
             </label>
@@ -223,13 +319,40 @@ export default function Calculator() {
                 setNumber2(parseInt(newValue.target.value))
               }
             />
-            <p className="text-red-500 text-xs italic">
+            {/* <p className="text-red-500 text-xs italic">
               {t("calculator.request")}
-            </p>
+            </p> */}
           </div>
-          <button className={`w-full`} onClick={compute}>
+          <button
+            className={`w-full md:w-1/3 px-3 self-center mb-4`}
+            onClick={computeNumbers}
+          >
             {" "}
-            {t("calculator.calculate")}{" "}
+            {t("calculator.insert")}{" "}
+          </button>
+          <div className="w-full md:w-2/3 px-3 mb-6">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              for="grid-operation"
+            >
+              Operation
+            </label>
+            <div className="relative">
+              <Select
+                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                options={operations}
+                value={selectedOperation}
+                blurInputOnSelect={false}
+                onChange={selectOperation}
+              />
+            </div>
+          </div>
+          <button
+            className={`w-full md:w-1/3 px-3 self-center`}
+            onClick={computeOperation}
+          >
+            {" "}
+            {t("calculator.insert")}{" "}
           </button>
         </div>
       )}
