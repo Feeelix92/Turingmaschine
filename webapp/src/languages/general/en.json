@@ -105,23 +105,23 @@
     "tutorial": {
       "section": {
         "1": {
-          "headline": "how to use",
+          "headline": "How to use",
           "description": "You can configure the Turing machine via the code editor in JSON format. \n For this, an empty tape, specifications and an empty table are available by default."
         },
         "2": {
-          "headline": "download",
+          "headline": "Download",
           "description": "You can save your Turing machine as a JSON file, click the download button to do so ("
         },
         "3": {
-          "headline": "upload",
+          "headline": "Upload",
           "description": "You can also load your programmed Turing machine back into the editor by clicking Upload button ("
         },
         "4": {
-          "headline": "shortcuts",
+          "headline": "Shortcuts",
           "description": "In the editor, shortcuts can be used to generate the corresponding code. \n The following shortcuts can be used within the editor:"
         },
         "5": {
-          "headline": "example"
+          "headline": "Example"
         }
       },
       "shortcuts": {
