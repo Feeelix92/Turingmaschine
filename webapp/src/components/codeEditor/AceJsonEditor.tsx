@@ -33,6 +33,7 @@ import {
   bandDeleteAllMespuma,
   BandItemToChange,
   BandItemToChangeMespuma,
+  bandSetPointPos,
 } from "../../redux/bandStore";
 import { FiDownload, FiUpload } from "react-icons/all";
 import { Tab } from "@headlessui/react";
@@ -421,7 +422,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     return element != "B";
   }
 
-  function getIndexOfFirstValue(array: string[]){
+  function getIndexOfFirstValue(array: string[]) {
     return array.findIndex(isNotBlank);
   }
 
