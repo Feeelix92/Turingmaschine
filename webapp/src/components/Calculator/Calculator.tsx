@@ -1,19 +1,15 @@
-import { t } from "i18next";
-import { useState } from "react";
-import { BiCaretDown, BiCaretUp } from "react-icons/bi";
-import { OnChangeValue } from "react-select";
-import Select from "react-select";
-import { OperationType } from "../../interfaces/CommonInterfaces";
-import { useDispatch } from "react-redux";
-import { bandChangeItemAt, bandDeleteAll } from "../../redux/bandStore";
-import {
-  alphabetDeleteCustom,
-  alphabetGenerateBand,
-  alphabetPushToCustom,
-  alphabetPushToDialogOptions,
-} from "../../redux/generalStore";
+import {useState} from "react";
+import {useTranslation} from "react-i18next";
+import {BiCaretDown, BiCaretUp} from "react-icons/bi";
+import Select, {OnChangeValue} from "react-select";
+import {OperationType} from "../../interfaces/CommonInterfaces";
+import {useDispatch} from "react-redux";
+import {bandChangeItemAt, bandDeleteAll} from "../../redux/bandStore";
+import {alphabetDeleteCustom, alphabetGenerateBand, alphabetPushToCustom, alphabetPushToDialogOptions,} from "../../redux/generalStore";
 
 export default function Calculator() {
+  const { t } = useTranslation(["general"]);
+
   const dispatch = useDispatch();
   /**
    * To check if Accordion opened or closed
@@ -51,8 +47,7 @@ export default function Calculator() {
 
   function toBinary(literal: number): string[] {
     const result = literal.toString(2);
-    const returnResult = result.split("");
-    return returnResult;
+    return result.split("");
   }
 
   function toUnary(literal: number): string[] {
@@ -167,7 +162,7 @@ export default function Calculator() {
           <div className="w-full md:w-1/3 px-3 mb-6">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-number-one"
+              htmlFor="grid-number-one"
             >
               {t("calculator.number")} 1
             </label>
@@ -187,7 +182,7 @@ export default function Calculator() {
           <div className="w-full md:w-1/3 px-3 mb-6">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-operation"
+              htmlFor="grid-operation"
             >
               Operation
             </label>
@@ -215,7 +210,7 @@ export default function Calculator() {
           <div className="w-full md:w-1/3 px-3 mb-6">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-number-two"
+              htmlFor="grid-number-two"
             >
               {t("calculator.number")} 2
             </label>
