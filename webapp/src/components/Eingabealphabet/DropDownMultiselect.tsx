@@ -16,7 +16,6 @@ import {
 import { RootState, store } from "../../redux/store";
 import watch from "redux-watch";
 import {useTranslation} from "react-i18next";
-import i18next from "i18next";
 import { useAlert } from 'react-alert';
 
 export default function MultiselectDropDown(props: ZustandCustomProp) {
@@ -39,7 +38,7 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
   // valuesString = current selected options as String to use it as label
   let valuesString = "";
 
-  const [placeholderText, setPlaceholderText] = useState(i18next.t("list.dropdown.inputPlaceholder"));
+  const [placeholderText, setPlaceholderText] = useState(t("list.dropdown.inputPlaceholder"));
 
   /**
    * function handleChange checks if the selected option has changed
@@ -94,7 +93,7 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
                 props.onCloseDialog();
               } else {
                 // alert("Ein leeres Alphabet ist nicht erlaubt!");
-                alert.show(i18next.t("list.dropdown.emptyIsNotAllowed"));
+                alert.show(t("list.dropdown.emptyIsNotAllowed"));
               }
             }}
             className={"col-start-3 col-span-2 m-2"}

@@ -1,5 +1,5 @@
 import BandItem from "./BandItem";
-import { FaAngleLeft, FaAngleRight, FaRedo, FaTrash } from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight, FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
   bandAddField,
@@ -9,13 +9,10 @@ import {
   bandSetWarning,
 } from "../../redux/bandStore";
 import { RootState, store } from "../../redux/store";
-import party from "party-js";
 import { IoIosWarning } from "react-icons/io";
 import watch from "redux-watch";
-import { useState } from "react";
-import { EingabeAlphabetOption } from "../../data/Alphabet";
-import { initReactI18next, useTranslation} from "react-i18next";
-import React from "react";
+import { useTranslation} from "react-i18next";
+import * as React from "react";
 
 
 export default function Band() {
