@@ -100,7 +100,45 @@
     "warningNoValidJSON": "Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen!",
     "saveButton": "konfigurieren",
     "clearButton": "leeren",
-    "cancelButton": "abbrechen"
+    "cancelButton": "abbrechen",
+    "tutorial": {
+      "section": {
+        "1": {
+          "headline": "Funktionsweise",
+          "description": "Sie können die Turingmaschine über den Code-Editor im JSON-Format konfigurieren. Hierfür ist standardmäßig ein leeres Band, Spezifikationen und eine leere Tabelle vorhanden."
+        },
+        "2": {
+          "headline": "Download",
+          "description": "Sie können Ihre Turingmaschine als JSON Datei speichern, klicken Sie dazu auf den Download Button ("
+        },
+        "3": {
+          "headline": "Upload",
+          "description": "Sie können Ihre programmierte Turingmaschine auch wieder in den Editor laden, indem Sie auf Upload-Button klicken ("
+        },
+        "4": {
+          "headline": "Shortcuts",
+          "description": "Im Editor können Shortcuts verwendet werden, mit denen der entsprechende Code erzeugt wird. Innerhalb des Editors können die folgenden Shortcuts verwendet werden:"
+        },
+        "5": {
+          "headline": "Beispiel"
+        }
+      },
+      "shortcuts": {
+        "band": "band - erzeugt ein leeres Band.",
+        "specifications": "specifications - erzeugt das Codegerüst für die Eingabe der Spezifikationen.",
+        "alphabet": "alphabet - erzeugt das Codegerüst für das Eingabealphabet.",
+        "alphabet_#_1": "alphabet_#_1 - erzeugt Code für ein Eingabealphabet mit # und 1.",
+        "alphabet_0_1": "alphabet_0_1 - erzeugt Code für ein Eingabealphabet mit 0 und 1.",
+        "states": "states - erzeugt das Codegerüst für die Eingabe von Zuständen.",
+        "states_q1_q2": "states_q1_q2 - erzeugt Code für die Zuständen q1 und q2.",
+        "startState": "startState - erzeugt das Codegerüst für die Eingabe des Anfangszustand.",
+        "startState_q1": "startState_q1 - erzeugt Code für Anfangszustand q1.",
+        "endStates": "endStates - erzeugt das Codegerüst für die Eingabe des Endzustand.",
+        "endStates_q2": "endStates_q2 - erzeugt Code für Endzustand q2.",
+        "table": "specifications - erzeugt das Codegerüst für die Eingabe der Tabelle.",
+        "example": "example -  erzeugt den kompletten Code, um die Turingmaschine für die Addition von zwei unär kodierten Zahlen zu programmieren, zusehen im nachfolgenden Abschnitt."
+      }
+    }
   },
 
   "calculator": {

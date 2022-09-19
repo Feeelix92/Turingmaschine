@@ -1,47 +1,46 @@
-import React from "react";
 import {FiDownload, FiUpload} from "react-icons/all";
-
+import {useTranslation} from "react-i18next";
 
 export default function Tutorial() {
+    const { t } = useTranslation(["general"]);
+
 
     return (
         <div className={""}>
-            <h3>Funktionsweise und Syntax</h3>
-            <p>Sie können die Turingmaschine über den Code-Editor im JSON-Format konfigurieren.</p>
-            <p>Hierfür ist standardmäßig ein leeres Band, Spezifikationen und eine leere Tabelle vorhanden.</p>
+            <h3>{t("codeEditor.tutorial.section.1.headline")}</h3>
+            <p>{t("codeEditor.tutorial.section.1.description")}</p>
             <br/>
-            <h3>Download</h3>
+            <h3>{t("codeEditor.tutorial.section.2.headline")}</h3>
             <div className={"flex text-black"}>
-                <p>Sie können Ihre Turingmaschine als JSON Datei speichern, klicken Sie dazu auf den Download Button &#160;</p>
-                <FiDownload />.
+                <p>{t("codeEditor.tutorial.section.2.description")}</p>
+                <FiDownload />).
             </div>
             <br/>
-            <h3>Upload</h3>
+            <h3>{t("codeEditor.tutorial.section.3.headline")}</h3>
             <div className={"flex text-black"}>
-                <p>Sie können Ihre programmierte Turingmaschine auch wieder in den Editor laden, indem Sie auf Upload-Button klicken &#160;</p>
-                <FiUpload />.
+                <p>{t("codeEditor.tutorial.section.3.description")} </p>
+                <FiUpload />).
             </div>
             <br/>
-            <h3>Shortcuts</h3>
-            <p>Im Editor können Shortcuts verwendet werden, mit denen der entsprechende Code erzeugt wird.</p>
-            <p>Innerhalb des Editors können die folgenden Shortcuts verwendet werden:</p>
+            <h3>{t("codeEditor.tutorial.section.4.headline")}</h3>
+            <p>{t("codeEditor.tutorial.section.4.description")}</p>
             <ul className={"text-black list-disc pl-5 text-base"}>
-                <li>band - erzeugt ein leeres Band.</li>
-                <li>specifications - erzeugt das Codegerüst für die Eingabe der Spezifikationen.</li>
-                <li>alphabet - erzeugt das Codegerüst für das Eingabealphabet.</li>
-                <li>alphabet_#_1 - erzeugt Code für ein Eingabealphabet mit "#" und "1".</li>
-                <li>alphabet_0_1 - erzeugt Code für ein Eingabealphabet mit "0" und "1".</li>
-                <li>states - erzeugt das Codegerüst für die Eingabe von Zuständen.</li>
-                <li>states_q1_q2 - erzeugt Code für die Zuständen "q1" und "q2" </li>
-                <li>startState - erzeugt das Codegerüst für die Eingabe des Anfangszustand.</li>
-                <li>startState_q1 - erzeugt Code für Anfangszustand "q1".</li>
-                <li>endStates - erzeugt das Codegerüst für die Eingabe des Endzustand.</li>
-                <li>endStates_q2 - erzeugt Code für Endzustand "q2".</li>
-                <li>specifications - erzeugt das Codegerüst für die Eingabe der Tabelle.</li>
-                <li>example - erzeugt den kompletten Code, um die Turingmaschine für die Addition von zwei unär kodierten Zahlen zu programmieren, zusehen im nachfolgenden Abschnitt</li>
+                <li>{t("codeEditor.tutorial.shortcuts.band")}</li>
+                <li>{t("codeEditor.tutorial.shortcuts.specifications")}</li>
+                <li>{t("codeEditor.tutorial.shortcuts.alphabet")}</li>
+                <li>{t("codeEditor.tutorial.shortcuts.alphabet_#_1")}</li>
+                <li>{t("codeEditor.tutorial.shortcuts.alphabet_0_1")}</li>
+                <li>{t("codeEditor.tutorial.shortcuts.states")}</li>
+                <li>{t("codeEditor.tutorial.shortcuts.states_q1_q2")}</li>
+                <li>{t("codeEditor.tutorial.shortcuts.startState")}</li>
+                <li>{t("codeEditor.tutorial.shortcuts.startState_q1")}</li>
+                <li>{t("codeEditor.tutorial.shortcuts.endStates")}</li>
+                <li>{t("codeEditor.tutorial.shortcuts.endStates_q2")}</li>
+                <li>{t("codeEditor.tutorial.shortcuts.table")}</li>
+                <li>{t("codeEditor.tutorial.shortcuts.example")}</li>
             </ul>
             <br/>
-            <h3>Beispiel</h3>
+            <h3>{t("codeEditor.tutorial.section.4.headline")}</h3>
             <p>&#123;<br/>
                 &#160; &#160; "band":&#123;<br/>
                 &#160; &#160; &#160; &#160; "input":["B","B","1","#","1","B","B","B"]<br/>

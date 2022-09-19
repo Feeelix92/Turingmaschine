@@ -101,7 +101,45 @@
     "warningNoValidJSON": "No valid JSON! Your input must be in JSON format!",
     "saveButton": "config",
     "clearButton": "clear",
-    "cancelButton": "cancel"
+    "cancelButton": "cancel",
+    "tutorial": {
+      "section": {
+        "1": {
+          "headline": "how to use",
+          "description": "You can configure the Turing machine via the code editor in JSON format. \n For this, an empty tape, specifications and an empty table are available by default."
+        },
+        "2": {
+          "headline": "download",
+          "description": "You can save your Turing machine as a JSON file, click the download button to do so ("
+        },
+        "3": {
+          "headline": "upload",
+          "description": "You can also load your programmed Turing machine back into the editor by clicking Upload button ("
+        },
+        "4": {
+          "headline": "shortcuts",
+          "description": "In the editor, shortcuts can be used to generate the corresponding code. \n The following shortcuts can be used within the editor:"
+        },
+        "5": {
+          "headline": "example"
+        }
+      },
+      "shortcuts": {
+        "band": "band - creates an empty tape",
+        "specifications": "specifications - creates the code framework for entering the specifications.",
+        "alphabet": "alphabet - creates the code frame for the input alphabet.",
+        "alphabet_#_1": "alphabet_#_1 - creates code for an input alphabet with # and 1.",
+        "alphabet_0_1": "alphabet_0_1 - creates code for an input alphabet with 0 and 1.",
+        "states": "states - generates code for input states.",
+        "states_q1_q2": "states_q1_q2 - generates code for the states q1 and q2.",
+        "startState": "startState - generates the code frame for the input of the initial state.",
+        "startState_q1": "startState_q1 - generates code for initial state q1.",
+        "endStates": "endStates - generates the code frame for the input of the final state.",
+        "endStates_q2": "endStates_q2 - generates code for final state q2.",
+        "table": "specifications - generates the code skeleton for entering the table.",
+        "example": "example - generates the complete code to program the Turing machine for the addition of two unary coded numbers, seen in the following section."
+      }
+    }
   },
 
   "calculator": {
