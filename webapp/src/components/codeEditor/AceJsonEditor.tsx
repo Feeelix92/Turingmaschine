@@ -529,7 +529,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             caption: "example",
             snippet: `{
   "band":{
-    "input":["B","B","1","#","1","B","B","B"]
+    "input":["1","#","1","B","B","B","B","B"]
   },
   "specifications":{
     "alphabet":["1","#"],

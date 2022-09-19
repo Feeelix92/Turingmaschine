@@ -1037,7 +1037,6 @@ export const generalSlice = createSlice({
         state.zustandsmenge = initialZustandsmenge;
         state.anfangsZustand = initialAnfangszustand;
         state.endZustand = initialEndZustandsmenge;
-        // state.currentAlphabet = defaultAlphabetOption1;
         // state.bandAlphabet = initialBandAlphabet;
 
         let literalArr: string[] = [];
@@ -1100,6 +1099,7 @@ export const generalSlice = createSlice({
         tupelArray.push({ value: "B", label: "", warningMode: false });
 
         state.bandAlphabet = tupelArray;
+        state.currentAlphabet = defaultAlphabetOption1;
       } else {
         state.mode = "default";
       }

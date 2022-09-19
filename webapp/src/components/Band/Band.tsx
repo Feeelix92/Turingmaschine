@@ -59,8 +59,6 @@ export default function Band() {
         }
       });
 
-      console.log(found);
-
       if (found) {
         dispatch(bandSetWarning(true));
       } else {
