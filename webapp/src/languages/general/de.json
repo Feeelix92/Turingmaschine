@@ -113,6 +113,7 @@
     "addition": "Addition",
     "substraction": "Substraktion",
     "multiplication": "Multiplikation",
-    "division": "Division"
+    "division": "Division",
+    "insert": "Einfügen"
   }
 }

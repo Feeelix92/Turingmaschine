@@ -114,6 +114,7 @@
     "addition": "Addition",
     "substraction": "Substraction",
     "multiplication": "Multiplication",
-    "division": "Division"
+    "division": "Division",
+    "insert": "Insert"
   }
 }
