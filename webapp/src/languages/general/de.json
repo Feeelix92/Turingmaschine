@@ -15,7 +15,8 @@
     "normalMode": "Normal",
     "toiletPaperMode": "Toiletten-Papier",
     "multiTrackMachine": "Mehrspuren-Maschine",
-    "codeEditor": "Code-Editor"
+    "codeEditor": "Code-Editor",
+    "imprint": "Impressum"
   },
 
   "bottomNavBar": {
@@ -152,5 +153,18 @@
     "substraction": "Substraktion",
     "multiplication": "Multiplikation",
     "division": "Division"
+  },
+
+  "imprint": {
+    "name": "Impressum",
+    "faculty": "Fachbereich",
+    "germany": "Deutschland",
+    "eMail": "E-Mail",
+    "phone": "Telefon",
+    "lecturer": "Zuständiger Dozent",
+    "students": "Beteiligte Studierende",
+    "moreInformation1": "Weitere Informationen entnehmen Sie dem",
+    "moreInformationLink": "Impressum",
+    "moreInformation2": "der Technische Hochschule Mittelhessen (THM)"
   }
 }

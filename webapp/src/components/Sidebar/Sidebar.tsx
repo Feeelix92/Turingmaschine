@@ -125,6 +125,19 @@ function Sidebar() {
           </button>
         ))}
       </div>
+
+      <div className={"mt-0"}>
+        {/*Link zum Imprint*/}
+        <Link to="/impressum"
+              className={`no-underline py-2 px-4 text-sm rounded font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
+                ${
+                  location.pathname === "/impressum"
+                      ? "bg-thm-primary"
+                      : "bg-gray-700 "
+              }`}
+        >{t("sidebar.imprint")}
+        </Link>
+      </div>
     </Menu>
   );
 }

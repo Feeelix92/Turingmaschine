@@ -16,6 +16,7 @@ import {
   changeMespumaMode,
 } from "./redux/generalStore";
 import { bandResetAll } from "./redux/bandStore";
+import Imprint from "./components/Imprint/Imprint";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element={<Home />}/>
         <Route path="/papier" element={<Papier />} />
         <Route path="/mehrspuren" element={<Mespuma />} />
+        <Route path="/impressum" element={<Impressum />} />
       </Routes>
     </div>
   );
@@ -105,6 +107,27 @@ function Mespuma() {
         </div>
       </div>
     </>
+  );
+}
+
+function Impressum() {
+  const dispatch = useDispatch();
+  dispatch(bandResetAll());
+  dispatch(activateToiletPaperMode());
+  dispatch(bandResetAll());
+
+  return (
+      <>
+          <header className="App-header">
+              <Menu/>
+          </header>
+
+          <div className={"App-body"}>
+              <div className={"ml-3 mr-3 md:ml-0 space-x-10 "}>
+                  <Imprint/>
+              </div>
+          </div>
+      </>
   );
 }
 

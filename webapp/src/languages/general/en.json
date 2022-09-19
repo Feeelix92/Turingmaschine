@@ -15,7 +15,8 @@
     "normalMode": "Normal",
     "toiletPaperMode": "Toilet Paper",
     "multiTrackMachine": "Multi-Track-Machine",
-    "codeEditor": "Code Editor"
+    "codeEditor": "Code Editor",
+    "imprint": "Imprint"
   },
 
   "bottomNavBar": {
@@ -153,5 +154,17 @@
     "substraction": "Substraction",
     "multiplication": "Multiplication",
     "division": "Division"
+  },
+  "imprint": {
+    "name": "Imprint",
+    "faculty": "Faculty",
+    "germany": "Germany",
+    "eMail": "E-mail",
+    "phone": "Phone",
+    "lecturer": "Responsible lecturer",
+    "students": "Involved students",
+    "moreInformation1": "For further information please refer to the",
+    "moreInformationLink": "imprint",
+    "moreInformation2": "of the Technische Hochschule Mittelhessen (THM)"
   }
 }
