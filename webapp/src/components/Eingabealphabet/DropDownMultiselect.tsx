@@ -92,7 +92,7 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
                 dispatch(alphabetChangeCurrent(currentAlphabet))
                 props.onCloseDialog();
               } else {
-                toast.error('Ein leeres Alphabet ist nicht erlaubt!', {
+                toast.error(''+t("list.dropdown.emptyIsNotAllowed"), {
                   position: "top-right",
                   autoClose: 5000,
                   hideProgressBar: false,

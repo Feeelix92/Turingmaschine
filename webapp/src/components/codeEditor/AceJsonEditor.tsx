@@ -268,7 +268,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               })
             );
           } else {
-            toast.error('Ein leeres Alphabet ist nicht erlaubt!', {
+            toast.error(''+ t("bandItem.warningEmptyIsNotAllowed"), {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
@@ -304,7 +304,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             dispatch(alphabetPushToDialogOptions(alphabet.toString()));
             dispatch(alphabetGenerateBand(alphabet));
           } else {
-            toast.error('Ein leeres Alphabet ist nicht erlaubt!', {
+            toast.error(''+ t("codeEditor.warningEmptyIsNotAllowed"), {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
@@ -428,8 +428,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         toggleEditor();
       } catch (e) {
         // Error message
-        console.log("error!");
-        toast.error("Error! "+ e, {
+        toast.error("Error!  "+ e, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,

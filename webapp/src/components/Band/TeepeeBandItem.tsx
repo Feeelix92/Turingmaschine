@@ -106,7 +106,7 @@ export default function BandItem(props: BandItemProps) {
     });
 
     if (!allowed) {
-      toast.error('Wert ist nicht im Alphabet enthalten!', {
+      toast.error(''+i18next.t("bandItem.warningValueNotIncluded"), {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

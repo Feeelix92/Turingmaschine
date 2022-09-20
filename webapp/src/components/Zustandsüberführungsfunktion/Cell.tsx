@@ -176,7 +176,7 @@ export default function Cell(props: CellProps) {
     });
 
     if (!allowed) {
-      toast.error('Wert ist nicht im Alphabet enthalten!', {
+      toast.error(''+t("bandItem.warningValueNotIncluded"), {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
