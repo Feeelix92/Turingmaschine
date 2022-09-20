@@ -7,6 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 import { FaLaptopCode } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { FlagIcon } from "react-flag-kit";
+import * as React from "react";
 
 function Sidebar() {
   const mode = useSelector((state: RootState) => state.general.mode);
@@ -62,27 +63,30 @@ function Sidebar() {
         <div className="rounded-md shadow-sm text-center inline-flex">
           {/*Link zum default Modus*/}
           <Link to="/"
-            className={`no-underline py-2 px-2 sm:px-4 text-sm font-medium rounded-l-lg text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
-                ${location.pathname === "/" ? "bg-thm-primary" : "bg-gray-700 "}`}
+            className={`no-underline py-2 px-2 sm:px-4 text-sm font-medium rounded-l-lg text-white cursor-pointer border border-thm-primary2
+                ${location.pathname === "/" 
+                  ? "bg-thm-primary pointer-events-none" 
+                  : "bg-gray-700 hover:bg-gray-900"
+                }`}
           >{t("sidebar.normalMode")}
           </Link>
           {/*Link zum Toilettenpapiermodus*/}
           <Link to="/papier"
-            className={`no-underline py-2 px-4 text-sm font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
+            className={`no-underline py-2 px-4 text-sm font-medium text-white cursor-pointer border border-thm-primary2
                 ${
                   location.pathname === "/papier"
-                    ? "bg-thm-primary"
-                    : "bg-gray-700 "
+                    ? "bg-thm-primary pointer-events-none"
+                    : "bg-gray-700 hover:bg-gray-900"
                 }`}
           >{t("sidebar.toiletPaperMode")}
           </Link>
           {/*Link zum Mehrspurenmodus*/}
           <Link to="/mehrspuren"
-            className={`no-underline py-2 px-4 text-sm rounded-r-md font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
+            className={`no-underline py-2 px-4 text-sm rounded-r-md font-medium text-white cursor-pointer border border-thm-primary2
                 ${
                   location.pathname === "/mehrspuren"
-                    ? "bg-thm-primary"
-                    : "bg-gray-700 "
+                    ? "bg-thm-primary pointer-events-none"
+                    : "bg-gray-700 hover:bg-gray-900"
                 }`}
           >{t("sidebar.multiTrackMachine")}
           </Link>

@@ -17,6 +17,7 @@ import {
 } from "./redux/generalStore";
 import { bandResetAll } from "./redux/bandStore";
 import Imprint from "./components/Imprint/Imprint";
+import * as React from "react";
 
 function App() {
   return (
