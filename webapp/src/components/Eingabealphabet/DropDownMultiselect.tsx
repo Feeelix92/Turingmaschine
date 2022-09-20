@@ -16,7 +16,8 @@ import {
 import { RootState, store } from "../../redux/store";
 import watch from "redux-watch";
 import {useTranslation} from "react-i18next";
-// import { useAlert } from 'react-alert';
+import { ToastContainer, toast } from 'react-toastify'; // https://fkhadra.github.io/react-toastify/introduction/
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function MultiselectDropDown(props: ZustandCustomProp) {
   ///internationalization
@@ -55,7 +56,6 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
     valuesString = valuesArray.toString();
   }
 
-  // const alert = useAlert();
   return (
     <div className={""}>
       <div className={""}>
@@ -92,8 +92,15 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
                 dispatch(alphabetChangeCurrent(currentAlphabet))
                 props.onCloseDialog();
               } else {
-                // alert("Ein leeres Alphabet ist nicht erlaubt!");
-                // alert.show(t("list.dropdown.emptyIsNotAllowed"));
+                toast.error('Ein leeres Alphabet ist nicht erlaubt!', {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  }); 
               }
             }}
             className={"col-start-3 col-span-2 m-2"}

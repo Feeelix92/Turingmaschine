@@ -40,8 +40,9 @@ import { Tab } from "@headlessui/react";
 import Tutorial from "./Tutorial";
 import { cartesianProduct } from "../../interfaces/CommonFunctions";
 import { useTranslation } from "react-i18next";
-// import { useAlert } from "react-alert";
 import watch from "redux-watch";
+import { ToastContainer, toast } from 'react-toastify'; // https://fkhadra.github.io/react-toastify/introduction/
+import 'react-toastify/dist/ReactToastify.css';
 
 export interface tableZustand {
   [key: string]: tableZeichen;
@@ -267,7 +268,15 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               })
             );
           } else {
-            // alert.show(t("codeEditor.warningEmptyIsNotAllowed"));
+            toast.error('Ein leeres Alphabet ist nicht erlaubt!', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              }); 
           }
         } else {
           dispatch(bandDeleteAll());
@@ -295,7 +304,15 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             dispatch(alphabetPushToDialogOptions(alphabet.toString()));
             dispatch(alphabetGenerateBand(alphabet));
           } else {
-            // alert.show("Ein leeres Alphabet ist nicht erlaubt!");
+            toast.error('Ein leeres Alphabet ist nicht erlaubt!', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              }); 
           }
         }
 
@@ -411,7 +428,16 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         toggleEditor();
       } catch (e) {
         // Error message
-        // alert.show(e);
+        console.log("error!");
+        toast.error("Error! "+ e, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          }); 
       }
     } else {
       reloadPage();
@@ -630,8 +656,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
 
   //Internationalization
   const { t } = useTranslation(["general"]);
-
-  // const alert = useAlert();
 
   return (
     <div>

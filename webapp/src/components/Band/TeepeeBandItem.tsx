@@ -16,7 +16,8 @@ import { BsFillEraserFill } from "react-icons/bs";
 import BrickWhite from "../../assets/images/brick_white.svg";
 import BrickBlack from "../../assets/images/brick_black.svg";
 import i18next from "i18next";
-// import { useAlert } from "react-alert";
+import { ToastContainer, toast } from 'react-toastify'; // https://fkhadra.github.io/react-toastify/introduction/
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function BandItem(props: BandItemProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -105,12 +106,17 @@ export default function BandItem(props: BandItemProps) {
     });
 
     if (!allowed) {
-      // alert("Wert ist nicht im Alphabet enthalten!");
-      // alert.show(i18next.t("bandItem.warningValueNotIncluded"));
+      toast.error('Wert ist nicht im Alphabet enthalten!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        }); 
     }
   }
-
-  // const alert = useAlert();
 
   return (
     <div
