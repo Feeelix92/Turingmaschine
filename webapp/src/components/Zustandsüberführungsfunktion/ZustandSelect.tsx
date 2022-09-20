@@ -41,7 +41,7 @@ export default function ZustandSelect(props: ZustandSelectProps) {
           <Select
             value={props.current}
             blurInputOnSelect={true}
-            className={"col-span-2 "}
+            className={"col-span-2 xl:w-24"}
             onChange={handleChange}
             options={props.states}
             menuPortalTarget={document.querySelector("body")}
