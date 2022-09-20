@@ -5,6 +5,7 @@ import {
   bandAddField,
   bandAddMespumaField,
   bandChangePointPos,
+  bandChangeMespumaPointPos,
   bandDeleteAll,
   bandSetPointPos,
   bandSetWarning,
@@ -79,12 +80,12 @@ export default function Band() {
 
   // Für Touch nach rechts & links:
   const setPointerLeft = () => {
-    dispatch(bandChangePointPos(-1));
+    dispatch(bandChangeMespumaPointPos(-1));
   };
 
   //Für Touch nach rechts:
   const setPointerRight = () => {
-    dispatch(bandChangePointPos(1));
+    dispatch(bandChangeMespumaPointPos(1));
   };
 
   //Für Internationalisierung
@@ -100,7 +101,7 @@ export default function Band() {
             className={"mt-10 rounded-r-none md:rounded md:invisible"}
             onClick={() =>
               dispatch(bandAddMespumaField("before")) &&
-              dispatch(bandChangePointPos(1))
+              dispatch(bandChangeMespumaPointPos(1))
             }
           >
             +
@@ -223,7 +224,7 @@ export default function Band() {
             className={"w-36 invertedButton"}
             onClick={() =>
               dispatch(bandAddMespumaField("before")) &&
-              dispatch(bandChangePointPos(1))
+              dispatch(bandChangeMespumaPointPos(1))
             }
           >
             + {t("band.addLeft")}

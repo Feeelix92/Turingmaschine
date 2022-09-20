@@ -159,11 +159,8 @@ export const bandSlice = createSlice({
       state.currentBand = initBand;
       state.mespumaBand = initMespumaBand;
     },
+
     bandChangePointPos: (state, step: PayloadAction<number>) => {
-      // console.log("step.playload = " + step.payload);
-      // console.log("state.pointerPosition = " + state.pointerPosition);
-      // console.log("state.currentBand.length = " + state.currentBand.length);
-      // console.log("state.mespumaBand.length :" + state.mespumaBand.length);
       if (
         step.payload > 0 &&
         state.pointerPosition >= state.currentBand.length - 1
@@ -174,29 +171,9 @@ export const bandSlice = createSlice({
           label: "",
           warningMode: false,
         });
-        state.mespumaBand[0].push({
-          value: state.emptyBandValue,
-          label: "",
-          warningMode: false,
-        });
-        state.mespumaBand[1].push({
-          value: state.emptyBandValue,
-          label: "",
-          warningMode: false,
-        });
       } else if (step.payload < 0 && state.pointerPosition == 0) {
         // BandItem links hinzufügen
         state.currentBand.unshift({
-          value: state.emptyBandValue,
-          label: "",
-          warningMode: false,
-        });
-        state.mespumaBand[0].unshift({
-          value: state.emptyBandValue,
-          label: "",
-          warningMode: false,
-        });
-        state.mespumaBand[1].unshift({
           value: state.emptyBandValue,
           label: "",
           warningMode: false,
@@ -211,6 +188,48 @@ export const bandSlice = createSlice({
         state.pointerPosition += step.payload;
       }
     },
+
+    bandChangeMespumaPointPos: (state, step: PayloadAction<number>) => {
+      // console.log("step.playload = " + step.payload);
+      // console.log("state.pointerPosition = " + state.pointerPosition);
+      // console.log("state.currentBand.length = " + state.currentBand.length);
+      // console.log("state.mespumaBand.length :" + state.mespumaBand.length);
+      if (
+        step.payload > 0 &&
+        state.pointerPosition >= state.currentBand.length - 1
+      ) {
+
+        // BandItem rechts hinzufügen
+        for(let i=0; i<state.mespumaBand.length; i++) {
+          state.mespumaBand[i].push({
+            value: state.emptyBandValue,
+            label: "",
+            warningMode: false,
+          });
+        }
+
+      } else if (step.payload < 0 && state.pointerPosition == 0) {
+
+        // BandItem links hinzufügen
+        for(let i=0; i<state.mespumaBand.length; i++) {
+          state.mespumaBand[i].unshift({
+            value: state.emptyBandValue,
+            label: "",
+            warningMode: false,
+          });
+        }
+       
+      } else if (
+        (step.payload < 0 && state.pointerPosition == 0) ||
+        (step.payload > 0 &&
+          state.pointerPosition >= state.currentBand.length - 1)
+      ) {
+        state.pointerPosition -= step.payload;
+      } else {
+        state.pointerPosition += step.payload;
+      }
+    },
+
     bandSetPointPos: (state, step: PayloadAction<number>) => {
       state.pointerPosition = step.payload;
     },
@@ -258,7 +277,6 @@ export const bandSlice = createSlice({
       }
       state.mespumaBand.push(initBandTmp);
 
-      
     },
     bandDeleteBandMespuma: (state) => {
       if (state.mespumaBand.length > 2) {
@@ -293,6 +311,7 @@ export const {
   bandDeleteAll,
   bandResetAll,
   bandChangePointPos,
+  bandChangeMespumaPointPos,
   bandSetPointPos,
   bandResetPointer,
   bandSetWarning,
