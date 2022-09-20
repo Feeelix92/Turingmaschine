@@ -33,6 +33,9 @@ const initBand: EingabeAlphabetOption[] = [
   { value: emptyBandValue, label: "", warningMode: false },
 ];
 
+let initBandTmp: EingabeAlphabetOption[] = [
+];
+
 const initMespumaBand: EingabeAlphabetOption[][] = [initBand, initBand];
 
 export const bandSlice = createSlice({
@@ -247,7 +250,15 @@ export const bandSlice = createSlice({
      * @param bandItem
      */
     bandAddBandMespuma: (state) => {
-      state.mespumaBand.push(initBand);
+      initBandTmp = [];
+      for(let i = 0; i<state.mespumaBand[0].length; i++) {
+        initBandTmp.push( 
+          { value: emptyBandValue, label: "", warningMode: false }
+        );
+      }
+      state.mespumaBand.push(initBandTmp);
+
+      
     },
     bandDeleteBandMespuma: (state) => {
       if (state.mespumaBand.length > 2) {
