@@ -97,41 +97,33 @@ export const bandSlice = createSlice({
      * @param position
      */
     bandAddField: (state, position: PayloadAction<string>) => {
-      console.log("bandAddField");
+      console.log("state.mespumaBand.length :" + state.mespumaBand.length);
       if (position.payload === "before") {
-        console.log("before - state.currentBand: " + state.currentBand);
         state.currentBand.unshift({
           value: state.emptyBandValue,
           label: "",
           warningMode: false,
         });
-        state.mespumaBand[0].unshift({
-          value: state.emptyBandValue,
-          label: "",
-          warningMode: false,
-        });
-        state.mespumaBand[1].unshift({
-          value: state.emptyBandValue,
-          label: "",
-          warningMode: false,
-        });
+        for(let i=0; i<state.mespumaBand.length; i++) {
+          state.mespumaBand[i].unshift({
+            value: state.emptyBandValue,
+            label: "",
+            warningMode: false,
+          });
+        }
       } else {
-        console.log("after");
         state.currentBand.push({
           value: state.emptyBandValue,
           label: "",
           warningMode: false,
         });
-        state.mespumaBand[0].push({
-          value: state.emptyBandValue,
-          label: "",
-          warningMode: false,
-        });
-        state.mespumaBand[1].push({
-          value: state.emptyBandValue,
-          label: "",
-          warningMode: false,
-        });
+        for(let i=0; i<state.mespumaBand.length; i++) {
+          state.mespumaBand[i].push({
+            value: state.emptyBandValue,
+            label: "",
+            warningMode: false,
+          });
+        }
       }
     },
     /**
@@ -156,6 +148,7 @@ export const bandSlice = createSlice({
       // console.log("step.playload = " + step.payload);
       // console.log("state.pointerPosition = " + state.pointerPosition);
       // console.log("state.currentBand.length = " + state.currentBand.length);
+      // console.log("state.mespumaBand.length :" + state.mespumaBand.length);
       if (
         step.payload > 0 &&
         state.pointerPosition >= state.currentBand.length - 1
