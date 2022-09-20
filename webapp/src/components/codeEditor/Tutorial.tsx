@@ -40,7 +40,7 @@ export default function Tutorial() {
                 <li>{t("codeEditor.tutorial.shortcuts.example")}</li>
             </ul>
             <br/>
-            <h3>{t("codeEditor.tutorial.section.4.headline")}</h3>
+            <h3>{t("codeEditor.tutorial.section.5.headline")}</h3>
             <p>&#123;<br/>
                 &#160; &#160; "band":&#123;<br/>
                 &#160; &#160; &#160; &#160; "input":["B","B","1","#","1","B","B","B"]<br/>
