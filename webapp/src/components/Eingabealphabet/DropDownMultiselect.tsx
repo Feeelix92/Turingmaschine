@@ -16,7 +16,7 @@ import {
 import { RootState, store } from "../../redux/store";
 import watch from "redux-watch";
 import {useTranslation} from "react-i18next";
-import { useAlert } from 'react-alert';
+// import { useAlert } from 'react-alert';
 
 export default function MultiselectDropDown(props: ZustandCustomProp) {
   ///internationalization
@@ -55,7 +55,7 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
     valuesString = valuesArray.toString();
   }
 
-  const alert = useAlert();
+  // const alert = useAlert();
   return (
     <div className={""}>
       <div className={""}>
@@ -93,7 +93,7 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
                 props.onCloseDialog();
               } else {
                 // alert("Ein leeres Alphabet ist nicht erlaubt!");
-                alert.show(t("list.dropdown.emptyIsNotAllowed"));
+                // alert.show(t("list.dropdown.emptyIsNotAllowed"));
               }
             }}
             className={"col-start-3 col-span-2 m-2"}

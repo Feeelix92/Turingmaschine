@@ -22,8 +22,6 @@
     "party-js": "^2.1.2",
     "react": "^18.0.0",
     "react-ace": "^10.1.0",
-    "react-alert": "^7.0.3",
-    "react-alert-template-basic": "^1.0.2",
     "react-burger-menu": "^3.0.8",
     "react-dom": "^18.0.0",
     "react-flag-kit": "^1.1.1",

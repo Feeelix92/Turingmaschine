@@ -40,7 +40,7 @@ import { Tab } from "@headlessui/react";
 import Tutorial from "./Tutorial";
 import { cartesianProduct } from "../../interfaces/CommonFunctions";
 import { useTranslation } from "react-i18next";
-import { useAlert } from "react-alert";
+// import { useAlert } from "react-alert";
 import watch from "redux-watch";
 
 export interface tableZustand {
@@ -267,7 +267,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               })
             );
           } else {
-            alert.show(t("codeEditor.warningEmptyIsNotAllowed"));
+            // alert.show(t("codeEditor.warningEmptyIsNotAllowed"));
           }
         } else {
           dispatch(bandDeleteAll());
@@ -295,7 +295,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             dispatch(alphabetPushToDialogOptions(alphabet.toString()));
             dispatch(alphabetGenerateBand(alphabet));
           } else {
-            alert.show("Ein leeres Alphabet ist nicht erlaubt!");
+            // alert.show("Ein leeres Alphabet ist nicht erlaubt!");
           }
         }
 
@@ -411,7 +411,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         toggleEditor();
       } catch (e) {
         // Error message
-        alert.show(e);
+        // alert.show(e);
       }
     } else {
       reloadPage();
@@ -631,7 +631,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
   //Internationalization
   const { t } = useTranslation(["general"]);
 
-  const alert = useAlert();
+  // const alert = useAlert();
 
   return (
     <div>
