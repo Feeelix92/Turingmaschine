@@ -97,13 +97,29 @@ export const bandSlice = createSlice({
      * @param position
      */
     bandAddField: (state, position: PayloadAction<string>) => {
-      console.log("state.mespumaBand.length :" + state.mespumaBand.length);
       if (position.payload === "before") {
         state.currentBand.unshift({
           value: state.emptyBandValue,
           label: "",
           warningMode: false,
         });
+      } else {
+        state.currentBand.push({
+          value: state.emptyBandValue,
+          label: "",
+          warningMode: false,
+        });
+      }
+    },
+
+    /**
+     * fügt ein neues leeres Bandfeld an der Position "before" oder "after" hinzu
+     * @param state
+     * @param position
+     */
+     bandAddMespumaField: (state, position: PayloadAction<string>) => {
+      console.log("state.mespumaBand.length :" + state.mespumaBand.length);
+      if (position.payload === "before") {
         for(let i=0; i<state.mespumaBand.length; i++) {
           state.mespumaBand[i].unshift({
             value: state.emptyBandValue,
@@ -112,11 +128,6 @@ export const bandSlice = createSlice({
           });
         }
       } else {
-        state.currentBand.push({
-          value: state.emptyBandValue,
-          label: "",
-          warningMode: false,
-        });
         for(let i=0; i<state.mespumaBand.length; i++) {
           state.mespumaBand[i].push({
             value: state.emptyBandValue,
@@ -126,6 +137,7 @@ export const bandSlice = createSlice({
         }
       }
     },
+
     /**
      * setzt Band auf Default zurück & löscht Inhalt der BandItems
      */
@@ -266,6 +278,7 @@ export const {
   bandDeleteItemAt,
   bandDeleteItemAtMespuma,
   bandAddField,
+  bandAddMespumaField,
   bandDeleteAll,
   bandResetAll,
   bandChangePointPos,

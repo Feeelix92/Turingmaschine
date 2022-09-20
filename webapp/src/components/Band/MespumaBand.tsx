@@ -3,6 +3,7 @@ import { FaAngleLeft, FaAngleRight, FaRedo, FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
   bandAddField,
+  bandAddMespumaField,
   bandChangePointPos,
   bandDeleteAll,
   bandSetPointPos,
@@ -15,6 +16,7 @@ import watch from "redux-watch";
 import { useState } from "react";
 import { EingabeAlphabetOption } from "../../data/Alphabet";
 import {useTranslation} from "react-i18next";
+import * as React from "react";
 
 export default function Band() {
   const dispatch = useDispatch();
@@ -97,7 +99,7 @@ export default function Band() {
           <button
             className={"mt-10 rounded-r-none md:rounded md:invisible"}
             onClick={() =>
-              dispatch(bandAddField("before")) &&
+              dispatch(bandAddMespumaField("before")) &&
               dispatch(bandChangePointPos(1))
             }
           >
@@ -135,7 +137,7 @@ export default function Band() {
         <div className="flex-none  mx-1">
           <button
             className={"mt-10 rounded-l-none md:rounded md:invisible"}
-            onClick={() => dispatch(bandAddField("after"))}
+            onClick={() => dispatch(bandAddMespumaField("after"))}
           >
             +
           </button>
@@ -220,7 +222,7 @@ export default function Band() {
           <button
             className={"w-36 invertedButton"}
             onClick={() =>
-              dispatch(bandAddField("before")) &&
+              dispatch(bandAddMespumaField("before")) &&
               dispatch(bandChangePointPos(1))
             }
           >
@@ -236,7 +238,7 @@ export default function Band() {
           </button>
           <button
             className={"w-36 invertedButton"}
-            onClick={() => dispatch(bandAddField("after"))}
+            onClick={() => dispatch(bandAddMespumaField("after"))}
           >
             {t("band.addRight")} +
           </button>
