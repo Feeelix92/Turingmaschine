@@ -44,7 +44,7 @@
   },
 
   "table": {
-    "when": "When",
+    "if": "If",
     "then": "Then",
     "currentState": "Current State",
     "read": "Read",

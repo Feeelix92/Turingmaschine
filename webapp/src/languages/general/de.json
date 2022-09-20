@@ -43,7 +43,7 @@
   },
 
   "table": {
-    "when": "Wenn",
+    "if": "Wenn",
     "then": "Dann",
     "currentState": "Zustand",
     "read": "Lese",

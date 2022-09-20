@@ -9,6 +9,7 @@ import {
 import Row from "./Row";
 import {useTranslation} from "react-i18next";
 import i18next from "i18next";
+import * as React from "react";
 
 export default function Table() {
   const loadedRows = useSelector((state: RootState) => state.general.rows);
@@ -64,7 +65,7 @@ export default function Table() {
         <div className=" sm:px-6 lg:px-8">
           <div className="overflow-x-hidden items-center">
             <div className="flex w-full text-left text-sm font-medium text-gray-900">
-              <div className="w-1/2 pl-2">{t("table.when")}...</div>
+              <div className="w-1/2 pl-2">{t("table.if")}...</div>
               <div className="w-1/2 pl-2">{t("table.then")}...</div>
             </div>
             <table className="min-w-full w-full">
