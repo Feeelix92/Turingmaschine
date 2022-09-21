@@ -34,10 +34,6 @@ function ConditionsList() {
    */
   const [showZustandsfunktion, setShowZustandsfunktion] = useState(false);
 
-  const alphabet = useSelector(
-    (state: RootState) => state.general.currentAlphabet
-  );
-
   const bandAlphabet = useSelector(
     (state: RootState) => state.general.bandAlphabet
   );
@@ -58,12 +54,16 @@ function ConditionsList() {
   ///internationalization
   const { t } = useTranslation(["general"]);
 
+  const alphabet = useSelector(
+    (state: RootState) => state.general.currentAlphabet
+  );
+
   let zustandsmenge: Zustand[] = initZustandsmenge;
   let wZustandsmenge = watch(store.getState, "general.zustandsmenge");
   store.subscribe(
     wZustandsmenge((newVal) => {
       zustandsmenge = newVal;
-      // checkWarningModus();
+      console.log("LIST zustandsmenge");
     })
   );
   let anfangsZustand: Zustand = initAnfangsZustand;
@@ -78,7 +78,6 @@ function ConditionsList() {
   store.subscribe(
     wEndZustand((newVal) => {
       endZustand = newVal;
-      dispatch(maschineCheckExecutable());
     })
   );
 
@@ -176,12 +175,6 @@ function ConditionsList() {
   }
 
   function checkWarningModus() {
-    var tempAlphabet: string[] = [];
-    alphabet.alphabet.forEach((entry) => {
-      tempAlphabet.push(entry.value);
-    });
-    dispatch(tableCheckWarning({ rows: loadedRows, alphabet: tempAlphabet }));
-
     setEndZustandWarningOn(false);
     let tempBool = zustandsmenge.some((value) => {
       return value.value === anfangsZustand.value;
@@ -207,7 +200,6 @@ function ConditionsList() {
       let tempBool2 = zustandsmenge.some((value) => {
         return value.value === endZustand.value;
       });
-
       if (tempBool2) {
         endZustand.warningMode = false;
       } else {
@@ -226,6 +218,11 @@ function ConditionsList() {
         setEndZustandWarningOn(true);
       }
     });
+    var tempAlphabet: string[] = [];
+    alphabet.alphabet.forEach((entry) => {
+      tempAlphabet.push(entry.value);
+    });
+    dispatch(tableCheckWarning({ rows: loadedRows, alphabet: tempAlphabet }));
   }
 
   function changeZustandsmenge(push: boolean) {

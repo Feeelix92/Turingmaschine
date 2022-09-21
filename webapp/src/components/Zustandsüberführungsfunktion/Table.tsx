@@ -31,16 +31,6 @@ export default function Table() {
   store.subscribe(
     wRows((newVal) => {
       rows = newVal;
-      // let executable = true;
-
-      // rows.forEach((row) => {
-      //   row.cells.forEach((cell) => {
-      //     if (cell.warningMode === true) {
-      //       executable = false;
-      //     }
-      //   });
-      // });
-      // dispatch(maschineChangeExecutable(executable))
       dispatch(maschineCheckExecutable());
     })
   );
@@ -48,15 +38,6 @@ export default function Table() {
   const zustandsmenge = useSelector(
     (state: RootState) => state.general.zustandsmenge
   );
-
-  // /////////// States from State ///////////
-  // let states = zustandsmenge;
-  // let wStates = watch(store.getState, "general.zustandsmenge");
-  // store.subscribe(
-  //   wStates((newVal) => {
-  //     states = newVal;
-  //   })
-  // );
 
   const mode = useSelector((state: RootState) => state.general.mode);
 
@@ -85,7 +66,7 @@ export default function Table() {
               </thead>
               <tbody className="flex flex-col items-center justify-between md:max-h-48 xl:max-h-96 overflow-y-auto overflow-x-hidden">
                 {rows.map((value, key: React.Key) =>
-                  mode === "toiletpaper" || !value.isFinal ? (
+                  mode === "toiletpaper" && value.isFinal ? null : (
                     <Row
                       key={key}
                       index={key}
@@ -93,7 +74,7 @@ export default function Table() {
                       isFinal={value.isFinal}
                       deleteRow={() => dispatch(tableDeleteRow(key))}
                     />
-                  ) : null
+                  )
                 )}
               </tbody>
             </table>

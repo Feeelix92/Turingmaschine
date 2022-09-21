@@ -49,11 +49,11 @@ export default function Cell(props: CellProps) {
   let wStates = watch(store.getState, "general.zustandsmenge");
   store.subscribe(
     wStates((newVal) => {
+      console.log("CELL STATES");
       states = newVal;
       const failure = checkWarningModus();
 
       if (failure !== props.warningMode) {
-        // props.updateCellValue(props.index, props.value, failure);
         dispatch(
           tableUpdateCell({
             cellIndex: props.index,
@@ -76,7 +76,6 @@ export default function Cell(props: CellProps) {
       const failure = checkWarningModus();
 
       if (failure !== props.warningMode) {
-        // props.updateCellValue(props.index, props.value, failure);
         dispatch(
           tableUpdateCell({
             cellIndex: props.index,
@@ -119,7 +118,6 @@ export default function Cell(props: CellProps) {
       const failure = checkWarningModus();
 
       if (failure !== props.warningMode) {
-        // props.updateCellValue(props.index, props.value, failure);
         dispatch(
           tableUpdateCell({
             cellIndex: props.index,
@@ -142,7 +140,6 @@ export default function Cell(props: CellProps) {
   function chooseOption(option: string) {
     const failure = checkWarningModus(option);
     // pass chosen options to the parent to update the cell
-    // props.updateCellValue(props.index, option, failure);
     dispatch(
       tableUpdateCell({
         cellIndex: props.index,
@@ -188,7 +185,6 @@ export default function Cell(props: CellProps) {
         value: newValue,
       })
     );
-    // props.updateCellValueIsFinal(props.index, newValue);
   }
 
   useEffect(() => {
@@ -225,7 +221,6 @@ export default function Cell(props: CellProps) {
       ) {
         // if its allowed, we pass the new value to the parent to update the cell value
         const failure = checkWarningModus(value);
-        // props.updateCellValue(index, value, failure);
         dispatch(
           tableUpdateCell({
             cellIndex: props.index,

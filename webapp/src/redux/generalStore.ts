@@ -38,7 +38,7 @@ const defaultCustomAlphabet: Alphabet = {
   key: 0,
   alphabet: [],
 };
-const defaultAlphabetOption1: Alphabet = {
+export const defaultAlphabetOption1: Alphabet = {
   key: 1,
   alphabet: [{ label: "1", value: "1", warningMode: false }],
 };
@@ -566,7 +566,8 @@ export const generalSlice = createSlice({
       state.zustandsmenge.pop();
 
       if (state.zustandsmenge.length <= 0) {
-        state.activeState = undefined;
+        let stateCopy = state.activeState;
+        state.activeState = stateCopy;
       }
     },
     alphabetChangeAnfangszustand: (state, zustand: PayloadAction<Zustand>) => {
