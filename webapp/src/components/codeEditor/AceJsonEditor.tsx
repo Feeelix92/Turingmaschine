@@ -660,12 +660,12 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     <div>
       <div
         id="defaultModal"
-        className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex bg-gray-400 dark:bg-gray-500"
+        className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex bg-gray-200 dark:bg-gray-200"
         aria-modal="true"
         role="dialog"
       >
         <div className="relative w-full max-w-7xl h-full md:h-auto">
-          <div className="relative bg-gray-700 rounded-lg shadow">
+          <div className="relative bg-thm-primary2 rounded-lg shadow">
             <div className="flex items-center p-2 rounded-t dark:border-gray-600">
               <button
                 type="button"
@@ -696,8 +696,8 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                     <button
                       className={
                         selected
-                          ? "bg-thm-primary2 text-white hover:bg-thm-primary2 rounded-b-none"
-                          : "bg-thm-primary text-white rounded-b-none"
+                          ? "bg-thm-primary text-white rounded-b-none pointer-events-none"
+                          : "bg-gray-700 hover:bg-gray-900 text-white rounded-b-none"
                       }
                     >
                       Code-Editor
@@ -709,8 +709,8 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                     <button
                       className={
                         selected
-                          ? "bg-thm-primary2 text-white hover:bg-thm-primary2 rounded-b-none"
-                          : "bg-thm-primary text-white rounded-b-none"
+                          ? "bg-thm-primary text-white rounded-b-none pointer-events-none"
+                          : "bg-gray-700 hover:bg-gray-900 text-white rounded-b-none"
                       }
                     >
                       Tutorial
