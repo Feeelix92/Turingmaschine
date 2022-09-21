@@ -68,14 +68,9 @@ export interface tableRowToAdd {
 export interface CellProps {
   value: string | Zustand | Direction;
   index: Key;
+  rowIndex: Key;
   showEditField: boolean;
   warningMode: boolean;
-  updateCellValue: (
-    index: Key,
-    arg: string | boolean | Zustand | Direction,
-    warningMode: boolean
-  ) => void;
-  updateCellValueIsFinal: (index: Key, arg: boolean) => void;
 }
 
 export interface EditProps {

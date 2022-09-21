@@ -10,10 +10,16 @@ import {
   alphabetChangeWarningMode,
   maschineChangeExecutable,
   maschineCheckExecutable,
+  tableCheckWarning,
 } from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
-import { BiCaretDown, BiCaretUp, IoIosWarning } from "react-icons/all";
+import {
+  BiCaretDown,
+  BiCaretUp,
+  GiConsoleController,
+  IoIosWarning,
+} from "react-icons/all";
 import watch from "redux-watch";
 import { useTranslation } from "react-i18next";
 
@@ -27,6 +33,10 @@ function ConditionsList() {
    * To show the Zustandsüberführungsfunktion
    */
   const [showZustandsfunktion, setShowZustandsfunktion] = useState(false);
+
+  const alphabet = useSelector(
+    (state: RootState) => state.general.currentAlphabet
+  );
 
   const bandAlphabet = useSelector(
     (state: RootState) => state.general.bandAlphabet
@@ -53,8 +63,7 @@ function ConditionsList() {
   store.subscribe(
     wZustandsmenge((newVal) => {
       zustandsmenge = newVal;
-
-      checkWarningModus();
+      // checkWarningModus();
     })
   );
   let anfangsZustand: Zustand = initAnfangsZustand;
@@ -62,8 +71,6 @@ function ConditionsList() {
   store.subscribe(
     wAnfangsZustand((newVal) => {
       anfangsZustand = newVal;
-
-      checkWarningModus();
     })
   );
   let endZustand: Zustand[] = initEndZustand;
@@ -72,8 +79,6 @@ function ConditionsList() {
     wEndZustand((newVal) => {
       endZustand = newVal;
       dispatch(maschineCheckExecutable());
-
-      checkWarningModus();
     })
   );
 
@@ -102,10 +107,6 @@ function ConditionsList() {
 
   function handleChange(newValue: OnChangeValue<Zustand, false>) {
     if (newValue) {
-      // if (!newValue.endzustand) {
-      //     const newAnfangszustand = new Zustand(newValue.label, newValue.value, true, false)
-      //     dispatch(alphabetChangeAnfangszustand(newAnfangszustand))
-      // } else {
       const newAnfangszustand = new Zustand(
         newValue.label,
         newValue.value,
@@ -114,9 +115,6 @@ function ConditionsList() {
         false
       );
       dispatch(alphabetChangeAnfangszustand(newAnfangszustand));
-      // dispatch(alphabetClearEndzustand())
-      // alert("Bitt vergiss nicht deine Endzustandsmenge neu zu setzen!");
-      // }
       checkWarningModus();
     }
   }
@@ -171,13 +169,19 @@ function ConditionsList() {
       zustandsFunktion.push(tempCellsString);
       tempCellsString = "δ(";
     });
-    if(zustandsFunktion.length<1) {
+    if (zustandsFunktion.length < 1) {
       zustandsFunktion.push("δ() = ()");
-    } 
+    }
     setShowZustandsfunktion(!showZustandsfunktion);
   }
 
   function checkWarningModus() {
+    var tempAlphabet: string[] = [];
+    alphabet.alphabet.forEach((entry) => {
+      tempAlphabet.push(entry.value);
+    });
+    dispatch(tableCheckWarning({ rows: loadedRows, alphabet: tempAlphabet }));
+
     setEndZustandWarningOn(false);
     let tempBool = zustandsmenge.some((value) => {
       return value.value === anfangsZustand.value;

@@ -53,7 +53,6 @@ export const bandSlice = createSlice({
      * @param bandItem
      */
     bandChangeItemAt: (state, bandItem: PayloadAction<BandItemToChange>) => {
-      console.log(bandItem.payload.index, state.currentBand.length);
       if (bandItem.payload.index >= state.currentBand.length - 1) {
         state.currentBand.push({
           value: state.emptyBandValue,
@@ -121,7 +120,6 @@ export const bandSlice = createSlice({
      * @param position
      */
     bandAddMespumaField: (state, position: PayloadAction<string>) => {
-      console.log("state.mespumaBand.length :" + state.mespumaBand.length);
       if (position.payload === "before") {
         for (let i = 0; i < state.mespumaBand.length; i++) {
           state.mespumaBand[i].unshift({
