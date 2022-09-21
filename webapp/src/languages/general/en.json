@@ -84,6 +84,8 @@
       "inputPlaceholder": "Create",
       "saveAdding": "Save",
       "noOptionsMessage": "Type new character!",
+      "onlyOneStateAllowed": "There can only be one initial State!",
+      "noStatesLeftMessage": "There are no states left!",
       "addNewValue": "Add",
       "emptyIsNotAllowed": "An empty set of input symbols is not allowed!"
     },

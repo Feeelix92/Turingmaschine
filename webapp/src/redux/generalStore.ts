@@ -1,5 +1,4 @@
-import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
-import { EingabeAlphabetOption } from "../data/Alphabet";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {
   Alphabet,
   Cell,
@@ -15,7 +14,8 @@ import {
   updateCellType,
   Zustand,
 } from "../interfaces/CommonInterfaces";
-import { cartesianProduct } from "../interfaces/CommonFunctions";
+import {cartesianProduct} from "../interfaces/CommonFunctions";
+import * as React from "react";
 
 ///////////////////// Zustandsmenge /////////////////////
 const initialZustandsmenge: Zustand[] = [
@@ -431,9 +431,7 @@ export const generalSlice = createSlice({
       ) as EingabeAlphabet[];
       tempAlphabet.push({ value: "B", label: "", warningMode: false });
 
-      let finalArray = tempAlphabet;
-
-      state.bandAlphabet = finalArray;
+      state.bandAlphabet = tempAlphabet;
     },
     alphabetChangeCurrentMespuma: (
       state,
@@ -470,6 +468,7 @@ export const generalSlice = createSlice({
     },
     /**
      * function alphabetPushToCustom pushes a new Value to the customAlphabet
+     * @param state
      * @param value
      */
     alphabetPushToCustom: (state, value: PayloadAction<string>) => {
@@ -520,6 +519,7 @@ export const generalSlice = createSlice({
     /**
      * function alphabetDeleteCustom deletes the customAlphabet
      * @param state
+     * @param payload
      */
     alphabetPushToZustand: (
       state,
@@ -588,12 +588,7 @@ export const generalSlice = createSlice({
         const result = state.endZustand.some((value) => {
           return value.value === option.value;
         });
-
-        if (result) {
-          option.endzustand = true;
-        } else {
-          option.endzustand = false;
-        }
+        option.endzustand = !!result;
       });
     },
     alphabetClearEndzustand: (state) => {
