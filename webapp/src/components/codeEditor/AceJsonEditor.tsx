@@ -443,7 +443,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     }
   }
 
-  function isNotBlank(element, index, array) {
+  function isNotBlank(element: string) {
     return element != "B";
   }
 
