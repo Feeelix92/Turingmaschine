@@ -52,7 +52,6 @@ function ConditionsList() {
   const initEndZustand = useSelector(
     (state: RootState) => state.general.endZustand
   );
-  const possibleEnd = initZustandsmenge.filter(Zustand => !Zustand.anfangszustand);
 
   // TODO: Spuren-Anzahl:
   const anzahlSpuren = useSelector(
@@ -421,7 +420,7 @@ function ConditionsList() {
                 blurInputOnSelect={false}
                 className={"w-full"}
                 onChange={handleChange}
-                options={zustandsmenge}
+                options={zustandsmenge.filter(Zustand => !Zustand.endzustand)}
                 menuPortalTarget={document.querySelector("body")}
                 isSearchable={false}
                 hideSelectedOptions={true}
@@ -454,7 +453,7 @@ function ConditionsList() {
                 blurInputOnSelect={false}
                 className={"w-full"}
                 onChange={handleChangeMulti}
-                options={possibleEnd}
+                options={zustandsmenge.filter(Zustand => !Zustand.anfangszustand)}
                 isMulti
                 placeholder={t("list.finalStatesSelection")}
                 menuPortalTarget={document.querySelector("body")}

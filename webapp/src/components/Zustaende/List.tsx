@@ -42,8 +42,6 @@ function ConditionsList() {
     (state: RootState) => state.general.endZustand
   );
 
-  const possibleEnd = initZustandsmenge.filter(Zustand => !Zustand.anfangszustand) ;
-
   ///internationalization
   const { t } = useTranslation(["general"]);
 
@@ -113,6 +111,7 @@ function ConditionsList() {
   ) {
     if (newValues) {
       const endStatesArray = Array.from(newValues.values());
+      console.log(endStatesArray);
       dispatch(alphabetChangeEndzustand(endStatesArray));
       checkWarningModus();
       setShowZustandsfunktion(false);
@@ -285,11 +284,11 @@ function ConditionsList() {
                 blurInputOnSelect={false}
                 className={"w-full"}
                 onChange={handleChange}
-                options={zustandsmenge}
+                options={zustandsmenge.filter(Zustand => !Zustand.endzustand)}
                 menuPortalTarget={document.querySelector("body")}
                 isSearchable={false}
                 hideSelectedOptions={true}
-                noOptionsMessage={() => t("list.dropdown.onlyOneStateAllowed")}
+                noOptionsMessage={() => t("list.dropdown.noStatesLeftMessage")}
               />
             </div>
           </div>
@@ -318,7 +317,7 @@ function ConditionsList() {
                 blurInputOnSelect={false}
                 className={"w-full"}
                 onChange={handleChangeMulti}
-                options={possibleEnd}
+                options={zustandsmenge.filter(Zustand => !Zustand.anfangszustand)}
                 isMulti
                 placeholder={t("list.finalStatesSelection")}
                 menuPortalTarget={document.querySelector("body")}
