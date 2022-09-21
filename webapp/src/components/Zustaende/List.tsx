@@ -318,8 +318,8 @@ function ConditionsList() {
                 blurInputOnSelect={false}
                 className={"w-full"}
                 onChange={handleChangeMulti}
-                // options={zustandsmenge}
-                options={zustandsmenge.filter(Zustand => !Zustand.anfangszustand)}
+                options={zustandsmenge}
+                // options={zustandsmenge.filter(Zustand => !Zustand.anfangszustand)}
                 isMulti
                 placeholder={t("list.finalStatesSelection")}
                 menuPortalTarget={document.querySelector("body")}
