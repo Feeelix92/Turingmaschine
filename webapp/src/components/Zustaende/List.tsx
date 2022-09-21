@@ -298,6 +298,8 @@ function ConditionsList() {
                 options={zustandsmenge}
                 menuPortalTarget={document.querySelector("body")}
                 isSearchable={false}
+                hideSelectedOptions={true}
+                noOptionsMessage={() => t("list.dropdown.onlyOneStateAllowed")}
               />
             </div>
           </div>
