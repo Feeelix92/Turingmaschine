@@ -30,6 +30,7 @@ export default function Table() {
   let wRows = watch(store.getState, "general.rows");
   store.subscribe(
     wRows((newVal) => {
+      console.log("WATCHER TABLE ROWS");
       rows = newVal;
       dispatch(maschineCheckExecutable());
     })

@@ -63,7 +63,7 @@ function ConditionsList() {
   store.subscribe(
     wZustandsmenge((newVal) => {
       zustandsmenge = newVal;
-      console.log("LIST zustandsmenge");
+      console.log("WATCHER LIST ZUSTANDSMENGE");
     })
   );
   let anfangsZustand: Zustand = initAnfangsZustand;

@@ -904,6 +904,9 @@ export const generalSlice = createSlice({
             if (!tempBool) {
               maschineChangeExecutable(false);
               copy[rowIndex].cells[cellIndex].warningMode = true;
+            } else {
+              maschineChangeExecutable(true);
+              copy[rowIndex].cells[cellIndex].warningMode = false;
             }
           } else if (!(cell.value instanceof Direction)) {
             let tempBool: boolean;

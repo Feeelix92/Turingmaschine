@@ -13,6 +13,7 @@ import { RootState, store } from "../../redux/store";
 import {
   initialZustand3,
   maschineChangeExecutable,
+  tableCheckWarning,
   tableUpdateCell,
   tableUpdateRowIsFinal,
 } from "../../redux/generalStore";
@@ -36,7 +37,11 @@ export default function Cell(props: CellProps) {
     (state: RootState) => state.general.endZustand
   );
 
-  // const initialRows = useSelector((state: RootState) => state.general.rows);
+  const alphabet = useSelector(
+    (state: RootState) => state.general.currentAlphabet
+  );
+
+  const rows = useSelector((state: RootState) => state.general.rows);
 
   const temp = [initialZustand3];
 
@@ -46,6 +51,7 @@ export default function Cell(props: CellProps) {
   /////////// States from State ///////////
   let states =
     mode !== "toiletpaper" ? zustandsmenge.concat(temp) : zustandsmenge;
+
   let wStates = watch(store.getState, "general.zustandsmenge");
   store.subscribe(
     wStates((newVal) => {
@@ -54,14 +60,11 @@ export default function Cell(props: CellProps) {
       const failure = checkWarningModus();
 
       if (failure !== props.warningMode) {
-        dispatch(
-          tableUpdateCell({
-            cellIndex: props.index,
-            rowIndex: props.rowIndex,
-            value: props.value,
-            warningMode: failure,
-          })
-        );
+        var tempAlphabet: string[] = [];
+        alphabet.alphabet.forEach((entry) => {
+          tempAlphabet.push(entry.value);
+        });
+        dispatch(tableCheckWarning({ rows: rows, alphabet: tempAlphabet }));
       }
     })
   );
@@ -114,9 +117,7 @@ export default function Cell(props: CellProps) {
   store.subscribe(
     wEingabeAlphabet((newVal) => {
       eALphabet = newVal;
-
       const failure = checkWarningModus();
-
       if (failure !== props.warningMode) {
         dispatch(
           tableUpdateCell({
