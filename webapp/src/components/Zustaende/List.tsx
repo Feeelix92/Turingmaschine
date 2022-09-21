@@ -41,8 +41,8 @@ function ConditionsList() {
   const initEndZustand = useSelector(
     (state: RootState) => state.general.endZustand
   );
+
   const possibleEnd = initZustandsmenge.filter(Zustand => !Zustand.anfangszustand) ;
-  console.log(possibleEnd);
 
   ///internationalization
   const { t } = useTranslation(["general"]);
@@ -101,32 +101,22 @@ function ConditionsList() {
 
   function handleChange(newValue: OnChangeValue<Zustand, false>) {
     if (newValue) {
-      // if (!newValue.endzustand) {
-      //     const newAnfangszustand = new Zustand(newValue.label, newValue.value, true, false)
-      //     dispatch(alphabetChangeAnfangszustand(newAnfangszustand))
-      // } else {
-      const newAnfangszustand = new Zustand(
-        newValue.label,
-        newValue.value,
-        true,
-        false,
-        false
-      );
-      dispatch(alphabetChangeAnfangszustand(newAnfangszustand));
-      // dispatch(alphabetClearEndzustand())
-      // alert("Bitt vergiss nicht deine Endzustandsmenge neu zu setzen!");
-      // }
+      newValue.anfangszustand = true;
+      dispatch(alphabetChangeAnfangszustand(newValue));
       checkWarningModus();
+      setShowZustandsfunktion(false)
     }
   }
   function handleChangeMulti(
       newValues: OnChangeValue<Zustand, true>,
       _actionMeta: ActionMeta<Zustand>
   ) {
-    const endStatesArray = Array.from(newValues.values());
-    dispatch(alphabetChangeEndzustand(endStatesArray));
-    checkWarningModus();
-    setShowZustandsfunktion(false);
+    if (newValues) {
+      const endStatesArray = Array.from(newValues.values());
+      dispatch(alphabetChangeEndzustand(endStatesArray));
+      checkWarningModus();
+      setShowZustandsfunktion(false);
+    }
   }
 
   const loadedRows = useSelector((state: RootState) => state.general.rows);
