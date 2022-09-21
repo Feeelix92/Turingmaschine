@@ -160,6 +160,7 @@ export const bandSlice = createSlice({
       state.mespumaBand = initMespumaBand;
     },
 
+    //TODO: Evtl bräuchte man hier 2 separate Funktionen --> Für normal und Mespuma
     bandChangePointPos: (state, step: PayloadAction<number>) => {
       if (
         step.payload > 0 &&
@@ -171,6 +172,16 @@ export const bandSlice = createSlice({
           label: "",
           warningMode: false,
         });
+
+        // für Mespuma:
+        for(let i=0; i<state.mespumaBand.length; i++) {
+          state.mespumaBand[i].push({
+            value: state.emptyBandValue,
+            label: "",
+            warningMode: false,
+          });
+        }
+
       } else if (step.payload < 0 && state.pointerPosition == 0) {
         // BandItem links hinzufügen
         state.currentBand.unshift({
@@ -178,6 +189,16 @@ export const bandSlice = createSlice({
           label: "",
           warningMode: false,
         });
+
+        // für Mespuma:
+        for(let i=0; i<state.mespumaBand.length; i++) {
+          state.mespumaBand[i].unshift({
+            value: state.emptyBandValue,
+            label: "",
+            warningMode: false,
+          });
+        }
+
       } else if (
         (step.payload < 0 && state.pointerPosition == 0) ||
         (step.payload > 0 &&
