@@ -124,64 +124,45 @@ export default function Calculator() {
     if (selectedType.value === t("calculator.binary")) {
       const operandOne = toBinary(number1);
       const operandTwo = toBinary(number2);
-
+      // Binary alphabet
       const alphabet = ["1", "0", "#"];
-      alphabet.forEach((value: string) => {
-        dispatch(alphabetPushToCustom(value));
-      });
-      dispatch(alphabetPushToDialogOptions(alphabet.toString()));
-      dispatch(alphabetGenerateBand(alphabet));
-
-      dispatch(bandDeleteAll());
-
-      operandOne.forEach((param, idx) => {
-        dispatch(bandChangeItemAt({ index: idx, value: param, label: param }));
-      });
-
-      dispatch(
-        bandChangeItemAt({ index: operandOne.length, value: "#", label: "#" })
-      );
-
-      operandTwo.forEach((param, idx) => {
-        dispatch(
-          bandChangeItemAt({
-            index: operandOne.length + idx + 1,
-            value: param,
-            label: param,
-          })
-        );
-      });
+      saveOperandsToBand(alphabet, operandOne, operandTwo);
     } else {
       const operandOne = toUnary(number1);
       const operandTwo = toUnary(number2);
-
+      // Unary alphabet
       const alphabet = ["1", "#"];
-      alphabet.forEach((value: string) => {
-        dispatch(alphabetPushToCustom(value));
-      });
-      dispatch(alphabetPushToDialogOptions(alphabet.toString()));
-      dispatch(alphabetGenerateBand(alphabet));
+      saveOperandsToBand(alphabet, operandOne, operandTwo);
+    }
+  }
 
-      dispatch(bandDeleteAll());
+  function saveOperandsToBand(alphabet: string[], operandOne: string[], operandTwo: string[]){
+    alphabet.forEach((value: string) => {
+      dispatch(alphabetPushToCustom(value));
+    });
+    dispatch(alphabetPushToDialogOptions(alphabet.toString()));
+    dispatch(alphabetGenerateBand(alphabet));
 
-      operandOne.forEach((param, idx) => {
-        dispatch(bandChangeItemAt({ index: idx, value: param, label: param }));
-      });
+    dispatch(bandDeleteAll());
 
-      dispatch(
+    operandOne.forEach((param, idx) => {
+      dispatch(bandChangeItemAt({ index: idx, value: param, label: param }));
+    });
+
+    dispatch(
         bandChangeItemAt({ index: operandOne.length, value: "#", label: "#" })
-      );
+    );
 
-      operandTwo.forEach((param, idx) => {
-        dispatch(
+    operandTwo.forEach((param, idx) => {
+      dispatch(
           bandChangeItemAt({
             index: operandOne.length + idx + 1,
             value: param,
             label: param,
           })
-        );
-      });
-    }
+      );
+    });
+
   }
 
   function computeOperation() {
@@ -306,7 +287,7 @@ export default function Calculator() {
           <div className="w-full md:w-1/3 px-3 mb-6">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-number-two"
+              htmlFor={"grid-number-two"}
             >
               {t("calculator.number")} 2
             </label>
@@ -333,7 +314,7 @@ export default function Calculator() {
           <div className="w-full md:w-2/3 px-3 mb-6">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-operation"
+              htmlFor={"grid-operation"}
             >
               Operation
             </label>

@@ -1,22 +1,15 @@
-import { useEffect, useState } from "react";
-import { CgAddR } from "react-icons/cg";
-import { useSelector, useDispatch } from "react-redux";
-import Select, { ActionMeta, OnChangeValue } from "react-select";
+import {useEffect, useState} from "react";
+import {CgAddR} from "react-icons/cg";
+import {useDispatch, useSelector} from "react-redux";
+import Select, {ActionMeta, OnChangeValue} from "react-select";
 import watch from "redux-watch";
-import { cartesianProduct } from "../../interfaces/CommonFunctions";
-import {
-  EingabeAlphabet,
-  EingabeAlphabetDialogOptions,
-} from "../../interfaces/CommonInterfaces";
-import { bandDeleteAll } from "../../redux/bandStore";
-import {
-  alphabetChangeCurrent,
-  alphabetChangeCurrentMespuma,
-} from "../../redux/generalStore";
-import { RootState, store } from "../../redux/store";
+import {cartesianProduct} from "../../interfaces/CommonFunctions";
+import {EingabeAlphabet, EingabeAlphabetDialogOptions,} from "../../interfaces/CommonInterfaces";
+import {alphabetChangeCurrent, alphabetChangeCurrentMespuma,} from "../../redux/generalStore";
+import {RootState, store} from "../../redux/store";
 import MultiselectDropDown from "./DropDownMultiselect";
 import {useTranslation} from "react-i18next";
-import React from "react";
+import * as React from "react";
 
 export default function DropDownSelect() {
   // mode für alle:
@@ -33,14 +26,13 @@ export default function DropDownSelect() {
     (state: RootState) => state.general.currentDialogOption
   );
   const dispatch = useDispatch();
-  const currentAlphabet = useSelector(
-    (state: RootState) => state.general.currentAlphabet
+  let currentAlphabet = useSelector(
+      (state: RootState) => state.general.currentAlphabet
   );
-  let cAlphabet = currentAlphabet;
   let wAlphabet = watch(store.getState, "general.currentAlphabet");
   store.subscribe(
     wAlphabet((newVal) => {
-      cAlphabet = newVal;
+      currentAlphabet = newVal;
     })
   );
   /**
@@ -56,7 +48,7 @@ export default function DropDownSelect() {
 
       let tempAlphabet = Object.assign(
         [],
-        cAlphabet.alphabet
+        currentAlphabet.alphabet
       ) as EingabeAlphabet[];
       tempAlphabet.push({ value: "B", label: "", warningMode: false });
 
@@ -82,11 +74,11 @@ export default function DropDownSelect() {
       dispatch(
         alphabetChangeCurrentMespuma({
           cartesian: finalBandAlphabet,
-          alphabet: cAlphabet,
+          alphabet: currentAlphabet,
         })
       );
     } else {
-      dispatch(alphabetChangeCurrent(cAlphabet));
+      dispatch(alphabetChangeCurrent(currentAlphabet));
     }
   };
 
@@ -107,7 +99,7 @@ export default function DropDownSelect() {
   /**
    * function handleChange checks if the selected option has changed
    * @param newValue
-   * @param actionMeta
+   * @param _actionMeta
    */
   function handleChange(
     newValue: OnChangeValue<EingabeAlphabetDialogOptions, false>,

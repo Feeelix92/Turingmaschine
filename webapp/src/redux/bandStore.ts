@@ -171,6 +171,7 @@ export const bandSlice = createSlice({
           label: "",
           warningMode: false,
         });
+
       } else if (step.payload < 0 && state.pointerPosition == 0) {
         // BandItem links hinzufügen
         state.currentBand.unshift({
@@ -178,6 +179,7 @@ export const bandSlice = createSlice({
           label: "",
           warningMode: false,
         });
+
       } else if (
         (step.payload < 0 && state.pointerPosition == 0) ||
         (step.payload > 0 &&
@@ -189,17 +191,13 @@ export const bandSlice = createSlice({
       }
     },
 
+    ///////////// MeSpuMa //////////////////
+
     bandChangeMespumaPointPos: (state, step: PayloadAction<number>) => {
-      // console.log("step.playload = " + step.payload);
-      // console.log("state.pointerPosition = " + state.pointerPosition);
-      // console.log("state.currentBand.length = " + state.currentBand.length);
-      // console.log("state.mespumaBand.length :" + state.mespumaBand.length);
       if (
         step.payload > 0 &&
-        state.pointerPosition >= state.currentBand.length - 1
+        state.pointerPosition >= state.mespumaBand[0].length - 1
       ) {
-
-        // BandItem rechts hinzufügen
         for(let i=0; i<state.mespumaBand.length; i++) {
           state.mespumaBand[i].push({
             value: state.emptyBandValue,
@@ -209,8 +207,7 @@ export const bandSlice = createSlice({
         }
 
       } else if (step.payload < 0 && state.pointerPosition == 0) {
-
-        // BandItem links hinzufügen
+      
         for(let i=0; i<state.mespumaBand.length; i++) {
           state.mespumaBand[i].unshift({
             value: state.emptyBandValue,
@@ -218,11 +215,11 @@ export const bandSlice = createSlice({
             warningMode: false,
           });
         }
-       
+
       } else if (
         (step.payload < 0 && state.pointerPosition == 0) ||
         (step.payload > 0 &&
-          state.pointerPosition >= state.currentBand.length - 1)
+          state.pointerPosition >= state.mespumaBand[0].length - 1)
       ) {
         state.pointerPosition -= step.payload;
       } else {
@@ -239,7 +236,7 @@ export const bandSlice = createSlice({
     bandSetWarning: (state, value: PayloadAction<boolean>) => {
       state.showWarning = value.payload;
     },
-    ///////////// MeSpuMa //////////////////
+
     /**
      * function bandChangeItemAtMespuma changes the Band at the index and the BandIndex, at MeSpuMa
      * @param state

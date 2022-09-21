@@ -39,8 +39,6 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
   // valuesString = current selected options as String to use it as label
   let valuesString = "";
 
-  const [placeholderText, setPlaceholderText] = useState(t("list.dropdown.inputPlaceholder"));
-
   /**
    * function handleChange checks if the selected option has changed
    * @param newValues
@@ -57,20 +55,20 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
   }
 
   return (
-    <div className={""}>
-      <div className={""}>
-        <h2>{t("list.dropdown.addInputSymbols")}:</h2>
+    <div className={"border rounded p-2"}>
+      <div className={"text-left"}>
+        <h4>{t("list.dropdown.addInputSymbols")}:</h4>
       </div>
       <div className={""}>
-        <p>
+        <p className={"text-left"}>
           {t("list.dropdown.description")}
         </p>
-        <div className={"text-lg p-3"}>
+        <div className={"text-lg pb-2 pt-2"}>
           <CreatableSelect
             allowCreateWhileLoading={false}
             formatCreateLabel={(inputValue) => inputValue + " " + t("list.dropdown.addNewValue")}
             noOptionsMessage={() => t("list.dropdown.noOptionsMessage")}
-            placeholder={placeholderText}
+            placeholder={t("list.dropdown.inputPlaceholder")}
             className={"text-base text-black"}
             isMulti
             onChange={handleChange}
@@ -80,7 +78,7 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
             }
           />
         </div>
-        <div className={""}>
+        <div className={"text-right"}>
           <button
             onClick={() => {
               if (valuesArray.length > 0) {
@@ -103,7 +101,7 @@ export default function MultiselectDropDown(props: ZustandCustomProp) {
                   }); 
               }
             }}
-            className={"col-start-3 col-span-2 m-2"}
+            className={"col-start-3 col-span-2"}
           >
             {t("list.dropdown.saveAdding")}
           </button>

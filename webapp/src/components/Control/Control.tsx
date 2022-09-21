@@ -26,6 +26,7 @@ import {
   bandChangeItemAt,
   bandChangeItemAtMespuma,
   bandChangePointPos,
+  bandChangeMespumaPointPos,
   bandSetPointPos,
 } from "../../redux/bandStore";
 import { useState } from "react";
@@ -317,11 +318,11 @@ function Control() {
       if (item.cells[4].value instanceof Direction) {
         switch (item.cells[4].value.label) {
           case "R": {
-            dispatch(bandChangePointPos(1));
+            dispatch(bandChangeMespumaPointPos(1));
             break;
           }
           case "L": {
-            dispatch(bandChangePointPos(-1));
+            dispatch(bandChangeMespumaPointPos(-1));
             break;
           }
           case "N":
