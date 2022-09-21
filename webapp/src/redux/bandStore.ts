@@ -33,8 +33,7 @@ const initBand: EingabeAlphabetOption[] = [
   { value: emptyBandValue, label: "", warningMode: false },
 ];
 
-let initBandTmp: EingabeAlphabetOption[] = [
-];
+let initBandTmp: EingabeAlphabetOption[] = [];
 
 const initMespumaBand: EingabeAlphabetOption[][] = [initBand, initBand];
 
@@ -54,7 +53,8 @@ export const bandSlice = createSlice({
      * @param bandItem
      */
     bandChangeItemAt: (state, bandItem: PayloadAction<BandItemToChange>) => {
-      if (bandItem.payload.index >= state.currentBand.length) {
+      console.log(bandItem.payload.index, state.currentBand.length);
+      if (bandItem.payload.index >= state.currentBand.length - 1) {
         state.currentBand.push({
           value: state.emptyBandValue,
           label: "",
@@ -120,10 +120,10 @@ export const bandSlice = createSlice({
      * @param state
      * @param position
      */
-     bandAddMespumaField: (state, position: PayloadAction<string>) => {
+    bandAddMespumaField: (state, position: PayloadAction<string>) => {
       console.log("state.mespumaBand.length :" + state.mespumaBand.length);
       if (position.payload === "before") {
-        for(let i=0; i<state.mespumaBand.length; i++) {
+        for (let i = 0; i < state.mespumaBand.length; i++) {
           state.mespumaBand[i].unshift({
             value: state.emptyBandValue,
             label: "",
@@ -131,7 +131,7 @@ export const bandSlice = createSlice({
           });
         }
       } else {
-        for(let i=0; i<state.mespumaBand.length; i++) {
+        for (let i = 0; i < state.mespumaBand.length; i++) {
           state.mespumaBand[i].push({
             value: state.emptyBandValue,
             label: "",
@@ -171,7 +171,6 @@ export const bandSlice = createSlice({
           label: "",
           warningMode: false,
         });
-
       } else if (step.payload < 0 && state.pointerPosition == 0) {
         // BandItem links hinzufügen
         state.currentBand.unshift({
@@ -179,7 +178,6 @@ export const bandSlice = createSlice({
           label: "",
           warningMode: false,
         });
-
       } else if (
         (step.payload < 0 && state.pointerPosition == 0) ||
         (step.payload > 0 &&
@@ -198,24 +196,21 @@ export const bandSlice = createSlice({
         step.payload > 0 &&
         state.pointerPosition >= state.mespumaBand[0].length - 1
       ) {
-        for(let i=0; i<state.mespumaBand.length; i++) {
+        for (let i = 0; i < state.mespumaBand.length; i++) {
           state.mespumaBand[i].push({
             value: state.emptyBandValue,
             label: "",
             warningMode: false,
           });
         }
-
       } else if (step.payload < 0 && state.pointerPosition == 0) {
-      
-        for(let i=0; i<state.mespumaBand.length; i++) {
+        for (let i = 0; i < state.mespumaBand.length; i++) {
           state.mespumaBand[i].unshift({
             value: state.emptyBandValue,
             label: "",
             warningMode: false,
           });
         }
-
       } else if (
         (step.payload < 0 && state.pointerPosition == 0) ||
         (step.payload > 0 &&
@@ -267,13 +262,14 @@ export const bandSlice = createSlice({
      */
     bandAddBandMespuma: (state) => {
       initBandTmp = [];
-      for(let i = 0; i<state.mespumaBand[0].length; i++) {
-        initBandTmp.push( 
-          { value: emptyBandValue, label: "", warningMode: false }
-        );
+      for (let i = 0; i < state.mespumaBand[0].length; i++) {
+        initBandTmp.push({
+          value: emptyBandValue,
+          label: "",
+          warningMode: false,
+        });
       }
       state.mespumaBand.push(initBandTmp);
-
     },
     bandDeleteBandMespuma: (state) => {
       if (state.mespumaBand.length > 2) {
