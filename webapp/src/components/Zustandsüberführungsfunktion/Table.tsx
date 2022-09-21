@@ -7,7 +7,7 @@ import {
   maschineCheckExecutable,
 } from "../../redux/generalStore";
 import Row from "./Row";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import * as React from "react";
 
 export default function Table() {
@@ -15,15 +15,15 @@ export default function Table() {
   const dispatch = useDispatch();
 
   ///internationalization
-  const { t } = useTranslation(["general"])
+  const { t } = useTranslation(["general"]);
 
   const headerArray = [
-      t("table.currentState"),
-      t("table.read"),
-      t("table.newState"),
-      t("table.write"),
-      t("table.direction"),
-  ]
+    t("table.currentState"),
+    t("table.read"),
+    t("table.newState"),
+    t("table.write"),
+    t("table.direction"),
+  ];
 
   /////////// Rows from State ///////////
   let rows = loadedRows;
@@ -58,6 +58,8 @@ export default function Table() {
   //   })
   // );
 
+  const mode = useSelector((state: RootState) => state.general.mode);
+
   return (
     <div className="flex flex-col col-span-2 border rounded p-0 w-screen md:w-full">
       <div className="sm:-mx-0 lg:-mx-0">
@@ -82,16 +84,17 @@ export default function Table() {
                 </tr>
               </thead>
               <tbody className="flex flex-col items-center justify-between md:max-h-48 xl:max-h-96 overflow-y-auto overflow-x-hidden">
-                {rows.map((value, key: React.Key) => (
-                  // TODO functions still not working
-                  <Row
-                    key={key}
-                    index={key}
-                    cells={value.cells}
-                    isFinal={value.isFinal}
-                    deleteRow={() => dispatch(tableDeleteRow(key))}
-                  />
-                ))}
+                {rows.map((value, key: React.Key) =>
+                  mode === "toiletpaper" || !value.isFinal ? (
+                    <Row
+                      key={key}
+                      index={key}
+                      cells={value.cells}
+                      isFinal={value.isFinal}
+                      deleteRow={() => dispatch(tableDeleteRow(key))}
+                    />
+                  ) : null
+                )}
               </tbody>
             </table>
             <button
