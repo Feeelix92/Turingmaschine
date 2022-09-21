@@ -284,7 +284,8 @@ function ConditionsList() {
                 blurInputOnSelect={false}
                 className={"w-full"}
                 onChange={handleChange}
-                options={zustandsmenge.filter(Zustand => !Zustand.endzustand)}
+                options={zustandsmenge}
+                // options={zustandsmenge.filter(Zustand => !Zustand.endzustand)}
                 menuPortalTarget={document.querySelector("body")}
                 isSearchable={false}
                 hideSelectedOptions={true}
@@ -317,6 +318,7 @@ function ConditionsList() {
                 blurInputOnSelect={false}
                 className={"w-full"}
                 onChange={handleChangeMulti}
+                // options={zustandsmenge}
                 options={zustandsmenge.filter(Zustand => !Zustand.anfangszustand)}
                 isMulti
                 placeholder={t("list.finalStatesSelection")}
