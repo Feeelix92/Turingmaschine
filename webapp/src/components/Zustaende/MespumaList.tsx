@@ -421,6 +421,7 @@ function ConditionsList() {
                 className={"w-full"}
                 onChange={handleChange}
                 options={zustandsmenge}
+                // filter options to exclude endzustand
                 // options={zustandsmenge.filter(Zustand => !Zustand.endzustand)}
                 menuPortalTarget={document.querySelector("body")}
                 isSearchable={false}
@@ -455,6 +456,7 @@ function ConditionsList() {
                 className={"w-full"}
                 onChange={handleChangeMulti}
                 options={zustandsmenge}
+                // filter options to exclude anfangszustand
                 // options={zustandsmenge.filter(Zustand => !Zustand.anfangszustand)}
                 isMulti
                 placeholder={t("list.finalStatesSelection")}
