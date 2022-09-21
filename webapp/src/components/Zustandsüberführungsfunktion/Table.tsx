@@ -99,7 +99,7 @@ export default function Table() {
             </table>
             <button
               className={`w-full addRow`}
-              disabled={zustandsmenge.length === 0 ? true : false}
+              disabled={zustandsmenge.length === 0}
               onClick={() => dispatch(tableAddRow())}
             >
               +

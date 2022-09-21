@@ -295,6 +295,7 @@ export default function Cell(props: CellProps) {
           options={eALphabet}
           menuPortalTarget={document.querySelector("body")}
           isSearchable={false}
+          hideSelectedOptions={true}
         />
       ) : (
         ""

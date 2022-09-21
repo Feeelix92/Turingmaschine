@@ -46,6 +46,7 @@ export default function ZustandSelect(props: ZustandSelectProps) {
             options={props.states}
             menuPortalTarget={document.querySelector("body")}
             isSearchable={false}
+            hideSelectedOptions={true}
           />
         ) : (
           <Select
@@ -63,6 +64,7 @@ export default function ZustandSelect(props: ZustandSelectProps) {
             )}
             menuPortalTarget={document.querySelector("body")}
             isSearchable={false}
+            hideSelectedOptions={true}
           />
         )}
       </div>
