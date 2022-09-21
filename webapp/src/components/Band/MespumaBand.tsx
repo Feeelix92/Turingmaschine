@@ -7,6 +7,7 @@ import {
   bandChangePointPos,
   bandChangeMespumaPointPos,
   bandDeleteAll,
+  bandDeleteAllMespuma,
   bandSetPointPos,
   bandSetWarning,
 } from "../../redux/bandStore";
@@ -231,7 +232,7 @@ export default function Band() {
           </button>
           <button
             onClick={(e) => {
-              dispatch(bandDeleteAll());
+              dispatch(bandDeleteAllMespuma());
             }}
             className={"w-36 invertedButton"}
           >
@@ -262,7 +263,7 @@ export default function Band() {
         </div>
 
         <div className={"w-1/4 text-right md:hidden"}>
-          <button onClick={() => dispatch(bandDeleteAll())} className={"m-2"}>
+          <button onClick={() => dispatch(bandDeleteAllMespuma())} className={"m-2"}>
             <FaTrash />
           </button>
         </div>
