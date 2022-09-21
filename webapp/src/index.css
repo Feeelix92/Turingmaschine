@@ -341,7 +341,9 @@
   @apply visible;
 }
 
-/*active Language*/
-.activeLng{
-  background-color: rgb(128 186 36);
+@media (max-width: 767px) {
+  .editBtn-group{
+    left: 1vw;
+    max-width: 98vw;
+  }
 }
