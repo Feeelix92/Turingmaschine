@@ -27,7 +27,7 @@
   "band": {
     "addLeft": "Feld links",
     "addRight": "Feld rechts",
-    "clearBand": "leeren",
+    "clearBand": "Leeren",
     "warningInputValueNotAllowed": "Dieser Eingabewert ist nicht länger zulässig!",
     "warningNoStateAvailable": "Kein Zustand vorhanden!",
 
@@ -47,7 +47,7 @@
     "then": "Dann",
     "currentState": "Zustand",
     "read": "Lese",
-    "newState": "neuer Zustand",
+    "newState": "Neuer Zustand",
     "write": "Schreibe",
     "direction": "Gehe nach"
   },
@@ -82,9 +82,9 @@
       "addInputSymbols": "Eingabealphabet hinzufügen",
       "description": "Sie können Zeichen eingeben oder Zeichen aus den Standard-Eingabealphabeten auswählen!",
       "inputPlaceholder": "Erstellen Sie",
-      "saveAdding": "speichern",
+      "saveAdding": "Speichern",
       "noOptionsMessage": "Geben Sie neues Zeichen ein!",
-      "addNewValue": "hinzufügen",
+      "addNewValue": "Hinzufügen",
       "emptyIsNotAllowed": "Ein leeres Alphabet ist nicht erlaubt!"
     },
     "mespumaExtension": {
@@ -99,9 +99,9 @@
     "name": "Code-Editor",
     "warningEmptyIsNotAllowed": "Ein leeres Alphabet ist nicht erlaubt!",
     "warningNoValidJSON": "Kein gültiges JSON! Ihre Eingabe muss im JSON-Format erfolgen!",
-    "saveButton": "konfigurieren",
-    "clearButton": "leeren",
-    "cancelButton": "abbrechen",
+    "saveButton": "Konfigurieren",
+    "clearButton": "Leeren",
+    "cancelButton": "Abbrechen",
     "tutorial": {
       "section": {
         "1": {

@@ -15,7 +15,7 @@ import { RootState, store } from "../../redux/store";
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
 import { BiCaretDown, BiCaretUp, IoIosWarning } from "react-icons/all";
 import watch from "redux-watch";
-import { initReactI18next, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 function ConditionsList() {
   /**

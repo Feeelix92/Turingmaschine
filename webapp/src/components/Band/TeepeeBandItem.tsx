@@ -15,7 +15,7 @@ import { icons } from "react-icons";
 import { BsFillEraserFill } from "react-icons/bs";
 import BrickWhite from "../../assets/images/brick_white.svg";
 import BrickBlack from "../../assets/images/brick_black.svg";
-import i18next from "i18next";
+import { useTranslation } from "react-i18next";
 import { ToastContainer, toast } from 'react-toastify'; // https://fkhadra.github.io/react-toastify/introduction/
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -47,6 +47,9 @@ export default function BandItem(props: BandItemProps) {
   const pointerIdx = useSelector(
     (state: RootState) => state.band.pointerPosition
   );
+
+  //Internationalization
+  const { t } = useTranslation(["general"]);
 
   function chooseOption(option: string) {
     const temp: BandItemToChange = {
@@ -106,7 +109,7 @@ export default function BandItem(props: BandItemProps) {
     });
 
     if (!allowed) {
-      toast.error(''+i18next.t("bandItem.warningValueNotIncluded"), {
+      toast.error(''+ t("bandItem.warningValueNotIncluded"), {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

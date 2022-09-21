@@ -8,19 +8,21 @@ import {
 } from "../../redux/generalStore";
 import Row from "./Row";
 import {useTranslation} from "react-i18next";
-import i18next from "i18next";
 import * as React from "react";
 
 export default function Table() {
   const loadedRows = useSelector((state: RootState) => state.general.rows);
   const dispatch = useDispatch();
 
+  ///internationalization
+  const { t } = useTranslation(["general"])
+
   const headerArray = [
-      i18next.t("table.currentState"),
-      i18next.t("table.read"),
-      i18next.t("table.newState"),
-      i18next.t("table.write"),
-      i18next.t("table.direction"),
+      t("table.currentState"),
+      t("table.read"),
+      t("table.newState"),
+      t("table.write"),
+      t("table.direction"),
   ]
 
   /////////// Rows from State ///////////
@@ -55,9 +57,6 @@ export default function Table() {
   //     states = newVal;
   //   })
   // );
-
-  ///internationalization
-  const { t } = useTranslation(["general"])
 
   return (
     <div className="flex flex-col col-span-2 border rounded p-0 w-screen md:w-full">

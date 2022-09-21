@@ -25,9 +25,9 @@
   },
 
   "band": {
-    "addLeft": "Field left",
-    "addRight": "Field right",
-    "clearBand": "clear",
+    "addLeft": "Field Left",
+    "addRight": "Field Right",
+    "clearBand": "Clear",
     "warningInputValueNotAllowed": "This input value is no longer allowed!",
     "warningNoStateAvailable": "No state available!",
 
@@ -82,9 +82,9 @@
       "addInputSymbols": "Add Input Symbols",
       "description": "You can enter characters or select characters from the standard Input Symbols!",
       "inputPlaceholder": "Create",
-      "saveAdding": "save",
+      "saveAdding": "Save",
       "noOptionsMessage": "Type new character!",
-      "addNewValue": "add",
+      "addNewValue": "Add",
       "emptyIsNotAllowed": "An empty set of input symbols is not allowed!"
     },
     "mespumaExtension": {
@@ -93,16 +93,16 @@
   },
 
   "toiletPaperMode": {
-    "stateTable": "State table"
+    "stateTable": "State Table"
   },
 
   "codeEditor": {
     "name": "Code Editor",
     "warningEmptyIsNotAllowed": "An empty alphabet is not allowed!",
     "warningNoValidJSON": "No valid JSON! Your input must be in JSON format!",
-    "saveButton": "config",
-    "clearButton": "clear",
-    "cancelButton": "cancel",
+    "saveButton": "Config",
+    "clearButton": "Clear",
+    "cancelButton": "Cancel",
     "tutorial": {
       "section": {
         "1": {
