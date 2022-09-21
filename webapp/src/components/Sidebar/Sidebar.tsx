@@ -120,7 +120,7 @@ function Sidebar() {
           <button
             key={lng}
             className={
-              i18n.resolvedLanguage === lng ? "activeLng" : "notActiveLng"
+              i18n.resolvedLanguage === lng ? "bg-thm-primary" : "notActiveLng"
             }
             type="submit"
             onClick={() => i18n.changeLanguage(lng)}
