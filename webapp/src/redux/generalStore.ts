@@ -615,7 +615,7 @@ export const generalSlice = createSlice({
       state.executable = value.payload;
     },
     maschineCheckExecutable: (state) => {
-      if (state.rows.length === 0 || state.endZustand.length === 0) {
+      if (state.rows.length === 0) {
         state.executable = false;
       } else {
         state.executable = true;
@@ -839,52 +839,30 @@ export const generalSlice = createSlice({
           state.rows[updateCell.payload.rowIndex as number].cells.length
         );
 
-        if (typeof updateCell.payload.value === "boolean") {
-          // tableUpdateRow({index: updateCell.payload.index, cells: newCells})
-
-          const newRows: RowInterface[] = state.rows.slice(
-            0,
-            state.rows.length
-          ) as RowInterface[];
-          // overwrite rows at certain index with new value
-          newRows[updateCell.payload.rowIndex as number].cells = newCells;
-
-          if (newCells[0].value instanceof Zustand) {
-            if (newCells[0].value.endzustand === true) {
-              newRows[updateCell.payload.rowIndex as number].isFinal = true;
-            } else {
-              newRows[updateCell.payload.rowIndex as number].isFinal = false;
-            }
-          }
-          //update the rows in state with our new rows-array
-          state.rows = newRows;
-        } else {
+        if (typeof updateCell.payload.value !== "boolean") {
           newCells[updateCell.payload.cellIndex as number].value =
             updateCell.payload.value;
           if (updateCell.payload.warningMode !== undefined) {
             newCells[updateCell.payload.cellIndex as number].warningMode =
               updateCell.payload.warningMode;
           }
-
-          // tableUpdateRow({index: updateCell.payload.index, cells: newCells})
-
-          const newRows: RowInterface[] = state.rows.slice(
-            0,
-            state.rows.length
-          ) as RowInterface[];
-          // overwrite rows at certain index with new value
-          newRows[updateCell.payload.rowIndex as number].cells = newCells;
-
-          if (newCells[0].value instanceof Zustand) {
-            if (newCells[0].value.endzustand === true) {
-              newRows[updateCell.payload.rowIndex as number].isFinal = true;
-            } else {
-              newRows[updateCell.payload.rowIndex as number].isFinal = false;
-            }
-          }
-          //update the rows in state with our new rows-array
-          state.rows = newRows;
         }
+        const newRows: RowInterface[] = state.rows.slice(
+          0,
+          state.rows.length
+        ) as RowInterface[];
+        // overwrite rows at certain index with new value
+        newRows[updateCell.payload.rowIndex as number].cells = newCells;
+
+        if (newCells[0].value instanceof Zustand) {
+          if (newCells[0].value.endzustand === true) {
+            newRows[updateCell.payload.rowIndex as number].isFinal = true;
+          } else {
+            newRows[updateCell.payload.rowIndex as number].isFinal = false;
+          }
+        }
+        //update the rows in state with our new rows-array
+        state.rows = newRows;
       }
     },
     tableUpdateRowIsFinal: (state, newValue: PayloadAction<updateCellType>) => {

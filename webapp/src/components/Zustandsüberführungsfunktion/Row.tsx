@@ -104,67 +104,61 @@ export default function Row(props: RowProps) {
     }
   }, [props.isFinal]);
 
-  const mode = useSelector((state: RootState) => state.general.mode);
-
   //Internationalization
   const { t } = useTranslation(["general"]);
 
   //TODO wie gewünscht?
   return (
-    <div>
-      {mode === "toiletpaper" || !visible ? (
-        <tr
-          className={`border-b flex w-full hover:bg-gray-100 ${
-            activeRow != undefined && activeRow.cells === props.cells
-              ? "bg-lime-300"
-              : ""
-          }`}
-        >
-          {visible
-            ? props.cells
-                .slice(0, 2)
-                .map((value, key: React.Key) => (
-                  <Cell
-                    key={key}
-                    value={value.value}
-                    index={key}
-                    showEditField={value.editField}
-                    warningMode={value.warningMode}
-                    updateCellValue={setCellValue}
-                    updateCellValueIsFinal={setCellValueIsFinal}
-                  />
-                ))
-            : props.cells.map((value, key: React.Key) => (
-                <Cell
-                  key={key}
-                  value={value.value}
-                  index={key}
-                  showEditField={value.editField}
-                  warningMode={value.warningMode}
-                  updateCellValue={setCellValue}
-                  updateCellValueIsFinal={setCellValueIsFinal}
-                />
-              ))}
-          {visible ? (
-            <td className="w-3/6 whitespace-nowrap text-gray-900 border-r items-center flex justify-center">
-              {t("row.stop")}
-            </td>
-          ) : null}
-          <td className="w-1/6 text-gray-900 items-center ">
-            <a
-              href="#"
-              className="w-full min-w-full text-gray-700 focus:outline-none"
-              onClick={() => dispatch(tableDeleteRow(props.index))}
-            >
-              <div className={"p-7 px-1 xl:px-7"}>
-                <button className={"invertedButton"}>
-                  <FaTrash />
-                </button>
-              </div>
-            </a>
-          </td>
-        </tr>
+    <tr
+      className={`border-b flex w-full hover:bg-gray-100 ${
+        activeRow != undefined && activeRow.cells === props.cells
+          ? "bg-lime-300"
+          : ""
+      }`}
+    >
+      {visible
+        ? props.cells
+            .slice(0, 2)
+            .map((value, key: React.Key) => (
+              <Cell
+                key={key}
+                value={value.value}
+                index={key}
+                showEditField={value.editField}
+                warningMode={value.warningMode}
+                updateCellValue={setCellValue}
+                updateCellValueIsFinal={setCellValueIsFinal}
+              />
+            ))
+        : props.cells.map((value, key: React.Key) => (
+            <Cell
+              key={key}
+              value={value.value}
+              index={key}
+              showEditField={value.editField}
+              warningMode={value.warningMode}
+              updateCellValue={setCellValue}
+              updateCellValueIsFinal={setCellValueIsFinal}
+            />
+          ))}
+      {visible ? (
+        <td className="w-3/6 whitespace-nowrap text-gray-900 border-r items-center flex justify-center">
+          {t("row.stop")}
+        </td>
       ) : null}
-    </div>
+      <td className="w-1/6 text-gray-900 items-center ">
+        <a
+          href="#"
+          className="w-full min-w-full text-gray-700 focus:outline-none"
+          onClick={() => dispatch(tableDeleteRow(props.index))}
+        >
+          <div className={"p-7 px-1 xl:px-7"}>
+            <button className={"invertedButton"}>
+              <FaTrash />
+            </button>
+          </div>
+        </a>
+      </td>
+    </tr>
   );
 }
