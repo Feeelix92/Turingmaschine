@@ -306,7 +306,7 @@ export default function Calculator() {
           <div className="w-full md:w-1/3 px-3 mb-6">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-number-two"
+              htmlFor={"grid-number-two"}
             >
               {t("calculator.number")} 2
             </label>
@@ -333,7 +333,7 @@ export default function Calculator() {
           <div className="w-full md:w-2/3 px-3 mb-6">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-operation"
+              htmlFor={"grid-operation"}
             >
               Operation
             </label>
