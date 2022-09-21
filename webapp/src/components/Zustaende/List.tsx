@@ -111,7 +111,6 @@ function ConditionsList() {
   ) {
     if (newValues) {
       const endStatesArray = Array.from(newValues.values());
-      console.log(endStatesArray);
       dispatch(alphabetChangeEndzustand(endStatesArray));
       checkWarningModus();
       setShowZustandsfunktion(false);
