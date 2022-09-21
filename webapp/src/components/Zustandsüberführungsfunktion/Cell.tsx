@@ -18,8 +18,8 @@ import EditField from "./EditField";
 import ZustandSelect from "./ZustandSelect";
 import { useTranslation } from "react-i18next";
 import * as React from "react";
-import { ToastContainer, toast } from 'react-toastify'; // https://fkhadra.github.io/react-toastify/introduction/
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Cell(props: CellProps) {
   const mode = useSelector((state: RootState) => state.general.mode);
@@ -176,7 +176,7 @@ export default function Cell(props: CellProps) {
     });
 
     if (!allowed) {
-      toast.error(''+t("bandItem.warningValueNotIncluded"), {
+      toast.error("" + t("bandItem.warningValueNotIncluded"), {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -184,7 +184,7 @@ export default function Cell(props: CellProps) {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        }); 
+      });
     }
   }
 
@@ -259,6 +259,7 @@ export default function Cell(props: CellProps) {
       ) : (
         ""
       )}
+      {/* onChange needed (to change the value) OR defaultValue instead of value */}
       {mode == "toiletpaper" && props.value == "B" && (
         <input
           value={t("cell.toiletPaperMode.empty")}
