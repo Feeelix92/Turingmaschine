@@ -4,7 +4,8 @@
     "currentState": "State",
     "currentStateWarning": "No state available!",
     "control": {
-      "actualSpeed": "Speed"
+      "actualSpeed": "Speed",
+      "missingRuleError": "No rule was defined for the read character!"
     }
   },
 

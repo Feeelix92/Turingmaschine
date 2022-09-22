@@ -185,7 +185,7 @@ export default function BandItem(props: BandItemProps) {
       key={props.index}
       ref={wrapperRef}
     >
-      <div>
+      <div className={""}>
         {pointerIdx === props.index ? (
           <div
             className={
@@ -222,10 +222,10 @@ export default function BandItem(props: BandItemProps) {
           <div className={"editBtnDiv"}>
             <EditField options={props.alphabet} updateValue={chooseOption} />
             <button
-              className={"editBtn delete z-50"}
+              className={"editBtn delete z-50 "}
               onClick={() => deleteValue()}
             >
-              <BsFillEraserFill />
+              <BsFillEraserFill className={""}/>
             </button>
           </div>
         ) : (

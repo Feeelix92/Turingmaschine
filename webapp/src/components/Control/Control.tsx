@@ -38,6 +38,7 @@ import anime from "animejs";
 import party from "party-js";
 import { useTranslation } from "react-i18next";
 import React from "react";
+import {toast} from "react-toastify";
 
 function Control() {
   const dispatch = useDispatch();
@@ -217,9 +218,23 @@ function Control() {
       return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
     });
     let tempLastZustandVar = item?.cells[2].value as Zustand;
-    if (tempLastZustandVar.endzustand) {
-      endConfetti();
+    try {
+      if (tempLastZustandVar.endzustand) {
+        endConfetti();
+      }
+    }catch (error){
+      toast.error((''+ t("menu.control.missingRuleError")), {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      changeStopp(true);
     }
+
 
     if (item !== undefined && typeof item.cells[3].value === "string") {
       store.dispatch(tableSetActiveRow(item));

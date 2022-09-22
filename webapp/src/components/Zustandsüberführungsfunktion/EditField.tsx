@@ -23,7 +23,7 @@ export default function EditField(props: EditProps) {
   });
 
   return (
-    <div className="flex gap-2 z-10 overflow-auto absolute mb-24 editBtn-group" role="group">
+      <div className="flex gap-2 z-10" role="group">
       {mode == "default" &&
         props.options.map((value: EingabeAlphabetOption, key: React.Key) => (
           <button
