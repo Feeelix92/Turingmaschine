@@ -416,7 +416,7 @@ function ConditionsList() {
             </div>
             <div className="flex col-span-2">
               <Select
-                placeholder={anfangsZustand.value}
+                value={initAnfangsZustand}
                 blurInputOnSelect={false}
                 className={"w-full"}
                 onChange={handleChange}
@@ -426,7 +426,7 @@ function ConditionsList() {
                 menuPortalTarget={document.querySelector("body")}
                 isSearchable={false}
                 hideSelectedOptions={true}
-                noOptionsMessage={() => t("list.dropdown.onlyOneStateAllowed")}
+                noOptionsMessage={() => t("list.dropdown.noStatesLeftMessage")}
               />
             </div>
           </div>
