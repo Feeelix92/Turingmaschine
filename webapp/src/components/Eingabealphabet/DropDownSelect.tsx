@@ -152,7 +152,7 @@ export default function DropDownSelect() {
           className={"col-span-2"}
           onChange={handleChange}
           options={dialogOptions}
-          getOptionValue={option => option.alphabet.alphabet.toString()}
+          getOptionValue={option => option.alphabet.key.toString()}
           //@ts-ignore
           getOptionLabel={(e) => (
             <div className={"flex items-center place-content-start"}>
