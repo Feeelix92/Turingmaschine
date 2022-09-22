@@ -34,9 +34,17 @@ function Sidebar() {
   };
 
   const lngs = {
-    de: { nativeName: "DE" },
-    en: { nativeName: "GB" },
+    de: "DE",
+    en: "GB",
   };
+
+  function getFlag(lng: any) {
+    if (lng == "de"){
+      return <FlagIcon code={"DE"} size={32} />
+    }else if (lng == "en"){
+      return <FlagIcon code={"GB"} size={32} />
+    }
+  }
 
   return (
     <Menu
@@ -125,7 +133,7 @@ function Sidebar() {
             type="submit"
             onClick={() => i18n.changeLanguage(lng)}
           >
-            <FlagIcon code={lngs[lng].nativeName} size={32} />
+            {getFlag(lng)}
           </button>
         ))}
       </div>
