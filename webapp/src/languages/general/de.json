@@ -85,7 +85,7 @@
       "saveAdding": "Speichern",
       "noOptionsMessage": "Geben Sie neues Zeichen ein!",
       "onlyOneStateAllowed": "Es kann nur einen Anfangzustand geben!",
-      "noStatesLeftMessage": "Es sind keine Zustände übrig!",
+      "noStatesLeftMessage": "Keine Zustände übrig!",
       "addNewValue": "Hinzufügen",
       "emptyIsNotAllowed": "Ein leeres Alphabet ist nicht erlaubt!"
     },
