@@ -342,7 +342,7 @@ export default function Cell(props: CellProps) {
           blurInputOnSelect={false}
           className={"text-black py-3 px-2 text-base xl:w-32"}
           onChange={handleChange}
-          options={eALphabet.filter(Eingabealphabet => Eingabealphabet.value != "1" && Eingabealphabet.value != "B")}
+          options={eALphabet.filter(Eingabealphabet => Eingabealphabet.value.length > 1)}
           menuPortalTarget={document.querySelector("body")}
           isSearchable={false}
           hideSelectedOptions={true}
