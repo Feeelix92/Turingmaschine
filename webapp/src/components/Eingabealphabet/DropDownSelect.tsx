@@ -153,7 +153,7 @@ export default function DropDownSelect() {
           onChange={handleChange}
           options={dialogOptions}
           getOptionValue={option => option.alphabet.alphabet.toString()}
-          // @ts-ignore
+          //@ts-ignore
           getOptionLabel={(e) => (
             <div className={"flex items-center place-content-start"}>
               {e.icon ? <CgAddR /> : ""}
@@ -162,7 +162,7 @@ export default function DropDownSelect() {
           )}
           menuPortalTarget={document.querySelector("body")}
           isSearchable={false}
-          hideSelectedOptions={true}
+          // hideSelectedOptions={true}
         />
       </div>
       <div>
