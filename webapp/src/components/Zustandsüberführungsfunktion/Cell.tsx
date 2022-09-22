@@ -3,20 +3,9 @@ import { IoIosWarning } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import Select, { OnChangeValue } from "react-select";
 import watch from "redux-watch";
-import {
-  CellProps,
-  Direction,
-  directions,
-  Zustand,
-} from "../../interfaces/CommonInterfaces";
+import { CellProps, Direction, directions, Zustand,} from "../../interfaces/CommonInterfaces";
 import { RootState, store } from "../../redux/store";
-import {
-  initialZustand3,
-  maschineChangeExecutable,
-  tableCheckWarning,
-  tableUpdateCell,
-  tableUpdateRowIsFinal,
-} from "../../redux/generalStore";
+import { initialZustand3, maschineChangeExecutable, tableCheckWarning, tableUpdateCell, tableUpdateRowIsFinal } from "../../redux/generalStore";
 import EditField from "./EditField";
 import ZustandSelect from "./ZustandSelect";
 import { useTranslation } from "react-i18next";
@@ -60,7 +49,7 @@ export default function Cell(props: CellProps) {
       const failure = checkWarningModus();
 
       if (failure !== props.warningMode) {
-        var tempAlphabet: string[] = [];
+        const tempAlphabet: string[] = [];
         alphabet.alphabet.forEach((entry) => {
           tempAlphabet.push(entry.value);
         });
@@ -215,9 +204,7 @@ export default function Cell(props: CellProps) {
     // map the passed alphabet to check whether the alphabet contains the new input value
     eingabeAlphabet.map((entry) => {
       if (
-        entry.value === value ||
-        props.showEditField === false ||
-        value === "" ||
+        entry.value === value || !props.showEditField || value === "" ||
         value === "B"
       ) {
         // if its allowed, we pass the new value to the parent to update the cell value
@@ -292,13 +279,14 @@ export default function Cell(props: CellProps) {
 
       {props.value instanceof Direction ? (
         <Select
-          placeholder={props.value.value}
+          defaultValue={props.value}
           blurInputOnSelect={false}
           className={"text-black p-3 text-base xl:w-24"}
           onChange={handleChange}
           options={directions}
           menuPortalTarget={document.querySelector("body")}
           isSearchable={false}
+          hideSelectedOptions={true}
         />
       ) : (
         ""
@@ -321,7 +309,7 @@ export default function Cell(props: CellProps) {
       {/* onChange needed (to change the value) OR defaultValue instead of value */}
       {mode == "toiletpaper" && props.value == "B" && (
         <input
-          value={t("cell.toiletPaperMode.empty")}
+          defaultValue={t("cell.toiletPaperMode.empty")}
           className={
             "w-full rounded text-gray-700 focus:outline-none items-center border text-center"
           }
@@ -329,7 +317,7 @@ export default function Cell(props: CellProps) {
       )}
       {mode == "toiletpaper" && props.value == "1" && (
         <input
-          value={t("cell.toiletPaperMode.white")}
+          defaultValue={t("cell.toiletPaperMode.white")}
           className={
             "w-full rounded text-gray-700 focus:outline-none items-center border text-center"
           }
@@ -337,7 +325,7 @@ export default function Cell(props: CellProps) {
       )}
       {mode == "toiletpaper" && props.value == "#" && (
         <input
-          value={t("cell.toiletPaperMode.black")}
+          defaultValue={t("cell.toiletPaperMode.black")}
           className={
             "w-full rounded text-gray-700 focus:outline-none items-center border text-center"
           }
@@ -360,7 +348,7 @@ export default function Cell(props: CellProps) {
         ""
       )}
 
-      {props.warningMode === true ? (
+      {props.warningMode ? (
         <IoIosWarning
           color="orange"
           title={t("cell.warningInputValueNotAllowed")}

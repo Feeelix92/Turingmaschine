@@ -12,7 +12,6 @@ export default function ZustandSelect(props: ZustandSelectProps) {
   /**
    * function handleChange checks if the selected option has changed
    * @param newValue
-   * @param actionMeta
    */
   function handleChange(newValue: OnChangeValue<Zustand, false>) {
     let state = newValue as Zustand;
@@ -39,7 +38,7 @@ export default function ZustandSelect(props: ZustandSelectProps) {
       <div className={"flex gap-5 items-center mt-2"}>
         {mode === "toiletpaper" ? (
           <Select
-            value={props.current}
+            defaultValue={props.current}
             blurInputOnSelect={true}
             className={"col-span-2 xl:w-24"}
             onChange={handleChange}
@@ -50,7 +49,7 @@ export default function ZustandSelect(props: ZustandSelectProps) {
           />
         ) : (
           <Select
-            value={props.current}
+            defaultValue={props.current}
             blurInputOnSelect={true}
             className={"col-span-2 xl:w-24"}
             onChange={handleChange}
