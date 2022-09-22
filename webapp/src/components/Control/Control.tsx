@@ -38,7 +38,7 @@ import anime from "animejs";
 import party from "party-js";
 import { useTranslation } from "react-i18next";
 import React from "react";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 
 function Control() {
   const dispatch = useDispatch();
@@ -222,8 +222,8 @@ function Control() {
       if (tempLastZustandVar.endzustand) {
         endConfetti();
       }
-    }catch (error){
-      toast.error((''+ t("menu.control.missingRuleError")), {
+    } catch (error) {
+      toast.error("" + t("menu.control.missingRuleError"), {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -302,8 +302,8 @@ function Control() {
       if (tempLastZustandVar.endzustand) {
         endConfetti();
       }
-    }catch (error){
-      toast.error((''+ t("menu.control.missingRuleError")), {
+    } catch (error) {
+      toast.error("" + t("menu.control.missingRuleError"), {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -385,10 +385,10 @@ function Control() {
 
     while (!stoppMaschine && !pauseMaschine) {
       setMaschineRunning(true);
-      if (slider !== 100) {
-        let tempSlider = 3000 / slider;
-        await sleep(tempSlider);
-      }
+
+      let tempSlider = 3000 / slider;
+      await sleep(tempSlider);
+
       if (mode === "mespuma") {
         if (!stoppMaschine && !pauseMaschine) {
           await makeStepMespuma(activePointerPosition);
