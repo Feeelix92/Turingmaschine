@@ -10,10 +10,16 @@ import {
   alphabetChangeWarningMode,
   maschineChangeExecutable,
   maschineCheckExecutable,
+  tableCheckWarning,
 } from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
-import { BiCaretDown, BiCaretUp, IoIosWarning } from "react-icons/all";
+import {
+  BiCaretDown,
+  BiCaretUp,
+  GiConsoleController,
+  IoIosWarning,
+} from "react-icons/all";
 import watch from "redux-watch";
 import { useTranslation } from "react-i18next";
 
@@ -45,13 +51,16 @@ function ConditionsList() {
   ///internationalization
   const { t } = useTranslation(["general"]);
 
+  const alphabet = useSelector(
+    (state: RootState) => state.general.currentAlphabet
+  );
+
   let zustandsmenge: Zustand[] = initZustandsmenge;
   let wZustandsmenge = watch(store.getState, "general.zustandsmenge");
   store.subscribe(
     wZustandsmenge((newVal) => {
       zustandsmenge = newVal;
-
-      checkWarningModus();
+      console.log("WATCHER LIST ZUSTANDSMENGE");
     })
   );
   let anfangsZustand: Zustand = initAnfangsZustand;
@@ -59,8 +68,6 @@ function ConditionsList() {
   store.subscribe(
     wAnfangsZustand((newVal) => {
       anfangsZustand = newVal;
-
-      checkWarningModus();
     })
   );
   let endZustand: Zustand[] = initEndZustand;
@@ -68,9 +75,6 @@ function ConditionsList() {
   store.subscribe(
     wEndZustand((newVal) => {
       endZustand = newVal;
-      dispatch(maschineCheckExecutable());
-
-      checkWarningModus();
     })
   );
 
@@ -102,7 +106,6 @@ function ConditionsList() {
       newValue.anfangszustand = true;
       dispatch(alphabetChangeAnfangszustand(newValue));
       checkWarningModus();
-      setShowZustandsfunktion(false)
     }
   }
   function handleChangeMulti(
@@ -113,7 +116,6 @@ function ConditionsList() {
       const endStatesArray = Array.from(newValues.values());
       dispatch(alphabetChangeEndzustand(endStatesArray));
       checkWarningModus();
-      setShowZustandsfunktion(false);
     }
   }
 
@@ -146,9 +148,9 @@ function ConditionsList() {
       zustandsFunktion.push(tempCellsString);
       tempCellsString = "δ(";
     });
-    if(zustandsFunktion.length<1) {
+    if (zustandsFunktion.length < 1) {
       zustandsFunktion.push("δ() = ()");
-    } 
+    }
     setShowZustandsfunktion(!showZustandsfunktion);
   }
 
@@ -192,6 +194,11 @@ function ConditionsList() {
         setEndZustandWarningOn(true);
       }
     });
+    const tempAlphabet: string[] = [];
+    alphabet.alphabet.forEach((entry) => {
+      tempAlphabet.push(entry.value);
+    });
+    dispatch(tableCheckWarning({ rows: loadedRows, alphabet: tempAlphabet }));
   }
 
   function changeZustandsmenge(push: boolean) {

@@ -136,7 +136,11 @@ export default function Calculator() {
     }
   }
 
-  function saveOperandsToBand(alphabet: string[], operandOne: string[], operandTwo: string[]){
+  function saveOperandsToBand(
+    alphabet: string[],
+    operandOne: string[],
+    operandTwo: string[]
+  ) {
     alphabet.forEach((value: string) => {
       dispatch(alphabetPushToCustom(value));
     });
@@ -150,19 +154,18 @@ export default function Calculator() {
     });
 
     dispatch(
-        bandChangeItemAt({ index: operandOne.length, value: "#", label: "#" })
+      bandChangeItemAt({ index: operandOne.length, value: "#", label: "#" })
     );
 
     operandTwo.forEach((param, idx) => {
       dispatch(
-          bandChangeItemAt({
-            index: operandOne.length + idx + 1,
-            value: param,
-            label: param,
-          })
+        bandChangeItemAt({
+          index: operandOne.length + idx + 1,
+          value: param,
+          label: param,
+        })
       );
     });
-
   }
 
   function computeOperation() {
@@ -190,7 +193,6 @@ export default function Calculator() {
 
       // save Endzustand to store
       // json.specifications.endStates...
-      // console.log(json.specifications.endStates);
       const endStates = additionFile.specifications.endStates;
       let temp: Zustand[] = [];
       for (let index = 0; index < endStates.length; index++) {

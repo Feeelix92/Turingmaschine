@@ -13,6 +13,9 @@ import { RootState, store } from "../../redux/store";
 import {
   initialZustand3,
   maschineChangeExecutable,
+  tableCheckWarning,
+  tableUpdateCell,
+  tableUpdateRowIsFinal,
 } from "../../redux/generalStore";
 import EditField from "./EditField";
 import ZustandSelect from "./ZustandSelect";
@@ -34,7 +37,11 @@ export default function Cell(props: CellProps) {
     (state: RootState) => state.general.endZustand
   );
 
-  // const initialRows = useSelector((state: RootState) => state.general.rows);
+  const alphabet = useSelector(
+    (state: RootState) => state.general.currentAlphabet
+  );
+
+  const rows = useSelector((state: RootState) => state.general.rows);
 
   const temp = [initialZustand3];
 
@@ -44,14 +51,20 @@ export default function Cell(props: CellProps) {
   /////////// States from State ///////////
   let states =
     mode !== "toiletpaper" ? zustandsmenge.concat(temp) : zustandsmenge;
+
   let wStates = watch(store.getState, "general.zustandsmenge");
   store.subscribe(
     wStates((newVal) => {
+      console.log("CELL STATES");
       states = newVal;
       const failure = checkWarningModus();
 
       if (failure !== props.warningMode) {
-        props.updateCellValue(props.index, props.value, failure);
+        var tempAlphabet: string[] = [];
+        alphabet.alphabet.forEach((entry) => {
+          tempAlphabet.push(entry.value);
+        });
+        dispatch(tableCheckWarning({ rows: rows, alphabet: tempAlphabet }));
       }
     })
   );
@@ -66,7 +79,14 @@ export default function Cell(props: CellProps) {
       const failure = checkWarningModus();
 
       if (failure !== props.warningMode) {
-        props.updateCellValue(props.index, props.value, failure);
+        dispatch(
+          tableUpdateCell({
+            cellIndex: props.index,
+            rowIndex: props.rowIndex,
+            value: props.value,
+            warningMode: failure,
+          })
+        );
       }
 
       if (props.value instanceof Zustand) {
@@ -97,11 +117,16 @@ export default function Cell(props: CellProps) {
   store.subscribe(
     wEingabeAlphabet((newVal) => {
       eALphabet = newVal;
-
       const failure = checkWarningModus();
-
       if (failure !== props.warningMode) {
-        props.updateCellValue(props.index, props.value, failure);
+        dispatch(
+          tableUpdateCell({
+            cellIndex: props.index,
+            rowIndex: props.rowIndex,
+            value: props.value,
+            warningMode: failure,
+          })
+        );
       }
     })
   );
@@ -116,24 +141,51 @@ export default function Cell(props: CellProps) {
   function chooseOption(option: string) {
     const failure = checkWarningModus(option);
     // pass chosen options to the parent to update the cell
-    props.updateCellValue(props.index, option, failure);
+    dispatch(
+      tableUpdateCell({
+        cellIndex: props.index,
+        rowIndex: props.rowIndex,
+        value: option,
+        warningMode: failure,
+      })
+    );
     // close the edit-buttons
     setEditMode(false);
   }
 
   function handleChange(newValue: OnChangeValue<Direction | Zustand, false>) {
     if (newValue) {
-      // pass chosen options to the parent to update the cell
+      const failure = checkWarningModus(newValue);
       if (mode == "mespuma" && (props.index === 1 || props.index === 3)) {
-        props.updateCellValue(props.index, newValue.value, props.warningMode);
+        dispatch(
+          tableUpdateCell({
+            cellIndex: props.index,
+            rowIndex: props.rowIndex,
+            value: newValue.value,
+            warningMode: failure,
+          })
+        );
       } else {
-        props.updateCellValue(props.index, newValue, props.warningMode);
+        dispatch(
+          tableUpdateCell({
+            cellIndex: props.index,
+            rowIndex: props.rowIndex,
+            value: newValue,
+            warningMode: failure,
+          })
+        );
       }
     }
   }
 
   function setFinal(newValue: boolean) {
-    props.updateCellValueIsFinal(props.index, newValue);
+    dispatch(
+      tableUpdateRowIsFinal({
+        cellIndex: props.index,
+        rowIndex: props.rowIndex,
+        value: newValue,
+      })
+    );
   }
 
   useEffect(() => {
@@ -170,7 +222,14 @@ export default function Cell(props: CellProps) {
       ) {
         // if its allowed, we pass the new value to the parent to update the cell value
         const failure = checkWarningModus(value);
-        props.updateCellValue(index, value, failure);
+        dispatch(
+          tableUpdateCell({
+            cellIndex: props.index,
+            rowIndex: props.rowIndex,
+            value: value,
+            warningMode: failure,
+          })
+        );
         allowed = true;
       }
     });

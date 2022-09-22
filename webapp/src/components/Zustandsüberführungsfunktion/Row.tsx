@@ -22,70 +22,6 @@ export default function Row(props: RowProps) {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(props.isFinal);
 
-  function setCellValue(
-    index: React.Key,
-    value: string | boolean | Zustand | Direction,
-    warningMode: boolean
-  ) {
-    // pass new data to table to update its rows-array
-    if (typeof value === "string") {
-      dispatch(
-        tableUpdateCell({
-          cellIndex: index,
-          rowIndex: props.index,
-          value: value,
-          warningMode: warningMode,
-        })
-      );
-    } else if (value instanceof Direction) {
-      const tempDirection = new Direction(value.value, value.label);
-      dispatch(
-        tableUpdateCell({
-          cellIndex: index,
-          rowIndex: props.index,
-          value: tempDirection,
-          warningMode: warningMode,
-        })
-      );
-    } else if (typeof value === "boolean") {
-      dispatch(
-        tableUpdateCell({
-          cellIndex: index,
-          rowIndex: props.index,
-          value: value,
-          warningMode: warningMode,
-        })
-      );
-    } else {
-      const tempZustand = new Zustand(
-        value.label,
-        value.value,
-        value.anfangszustand,
-        value.endzustand,
-        value.warningMode
-      );
-
-      dispatch(
-        tableUpdateCell({
-          cellIndex: index,
-          rowIndex: props.index,
-          value: tempZustand,
-          warningMode: warningMode,
-        })
-      );
-    }
-  }
-
-  function setCellValueIsFinal(index: React.Key, value: boolean) {
-    dispatch(
-      tableUpdateRowIsFinal({
-        cellIndex: index,
-        rowIndex: props.index,
-        value: value,
-      })
-    );
-  }
-
   const activeRow = useSelector((state: RootState) => state.general.activeRow);
   /////////// Active-Row from State ///////////
   let row = activeRow;
@@ -107,7 +43,6 @@ export default function Row(props: RowProps) {
   //Internationalization
   const { t } = useTranslation(["general"]);
 
-  //TODO wie gewünscht?
   return (
     <tr
       className={`border-b flex w-full hover:bg-gray-100 ${
@@ -124,10 +59,9 @@ export default function Row(props: RowProps) {
                 key={key}
                 value={value.value}
                 index={key}
+                rowIndex={props.index}
                 showEditField={value.editField}
                 warningMode={value.warningMode}
-                updateCellValue={setCellValue}
-                updateCellValueIsFinal={setCellValueIsFinal}
               />
             ))
         : props.cells.map((value, key: React.Key) => (
@@ -135,10 +69,9 @@ export default function Row(props: RowProps) {
               key={key}
               value={value.value}
               index={key}
+              rowIndex={props.index}
               showEditField={value.editField}
               warningMode={value.warningMode}
-              updateCellValue={setCellValue}
-              updateCellValueIsFinal={setCellValueIsFinal}
             />
           ))}
       {visible ? (
