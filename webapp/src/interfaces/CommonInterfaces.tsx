@@ -24,6 +24,7 @@ export class Zustand {
   anfangszustand: boolean;
   endzustand: boolean;
   warningMode: boolean;
+  icon?: any;
 
   constructor(
     label: string,
