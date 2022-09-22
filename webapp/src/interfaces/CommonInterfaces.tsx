@@ -172,3 +172,4 @@ export class OperationType {
     this.value = value;
   }
 }
+

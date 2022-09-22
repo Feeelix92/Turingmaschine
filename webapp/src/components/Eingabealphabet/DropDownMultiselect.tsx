@@ -3,7 +3,6 @@ import CreatableSelect from "react-select/creatable";
 import { ActionMeta, OnChangeValue } from "react-select";
 import {
   EingabeAlphabet,
-  ZustandCustomProp,
 } from "../../interfaces/CommonInterfaces";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -19,7 +18,7 @@ import {useTranslation} from "react-i18next";
 import { ToastContainer, toast } from 'react-toastify'; // https://fkhadra.github.io/react-toastify/introduction/
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function MultiselectDropDown(props: ZustandCustomProp) {
+export default function MultiselectDropDown(props: any) {
   ///internationalization
   const { t } = useTranslation(["general"])
 
