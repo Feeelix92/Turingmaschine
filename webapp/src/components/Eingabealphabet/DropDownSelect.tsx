@@ -83,20 +83,6 @@ export default function DropDownSelect() {
   };
 
   /**
-   * copy of the currentDialogOption from state, to get the correct labels in Select
-   */
-  const [copiedCurrentDialogOption, setCopiedCurrentDialogOption] = useState({
-    label: "",
-    value: "",
-  });
-  useEffect(() => {
-    setCopiedCurrentDialogOption({
-      label: currentDialogOption.label,
-      value: currentDialogOption.label,
-    });
-  }, [currentDialogOption]);
-
-  /**
    * function handleChange checks if the selected option has changed
    * @param newValue
    * @param _actionMeta
@@ -161,11 +147,12 @@ export default function DropDownSelect() {
       <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2"}>
         <p className={"col-span-2 text-left"}> {t("list.dropdown.inputSymbols")} ∑ =</p>
         <Select
-          value={copiedCurrentDialogOption}
+          value={currentDialogOption}
           blurInputOnSelect={false}
           className={"col-span-2"}
           onChange={handleChange}
           options={dialogOptions}
+          getOptionValue={option => option.alphabet.alphabet.toString()}
           // @ts-ignore
           getOptionLabel={(e) => (
             <div className={"flex items-center place-content-start"}>
@@ -175,6 +162,7 @@ export default function DropDownSelect() {
           )}
           menuPortalTarget={document.querySelector("body")}
           isSearchable={false}
+          hideSelectedOptions={true}
         />
       </div>
       <div>
