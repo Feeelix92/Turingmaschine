@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   Alphabet,
   Cell,
@@ -14,7 +14,7 @@ import {
   updateCellType,
   Zustand,
 } from "../interfaces/CommonInterfaces";
-import {cartesianProduct} from "../interfaces/CommonFunctions";
+import { cartesianProduct } from "../interfaces/CommonFunctions";
 import * as React from "react";
 
 ///////////////////// Zustandsmenge /////////////////////
@@ -583,7 +583,7 @@ export const generalSlice = createSlice({
       state.activeState = zustand.payload;
     },
 
-   alphabetChangeEndzustand: (state, zustand: PayloadAction<Zustand[]>) => {
+    alphabetChangeEndzustand: (state, zustand: PayloadAction<Zustand[]>) => {
       state.endZustand = zustand.payload;
 
       state.zustandsmenge.forEach((option) => {
@@ -979,6 +979,7 @@ export const generalSlice = createSlice({
       state.endZustand = initialEndZustandsmengeTP;
       state.currentAlphabet = defaultAlphabetOption2;
       state.bandAlphabet = initialTeepeeBandAlphabet;
+      state.executable = true;
     },
 
     /**
