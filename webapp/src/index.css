@@ -194,7 +194,7 @@
 }
 
 .editBtn {
-  @apply w-10 h-10 text-sm round font-medium text-gray-900 bg-white hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white;
+  @apply w-10 h-10 text-sm round font-medium bg-gray-700 border-gray-600 text-white hover:text-white hover:bg-gray-600 focus:ring-blue-500 focus:text-white;
 }
 
 .editBtn.delete {
