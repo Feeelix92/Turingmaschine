@@ -110,9 +110,9 @@ export default function Band() {
         </div>
 
         <div className="flex-1 w-64 overflow-x-auto mx-2">
-          <div className="pb-0 my-10 ">
+          <div className="pb-0 my-10">
             {mBand.map((band, bandIndex) => (
-              <div
+              <div key={bandIndex}
                 className={
                   "band-container-mespuma overflow-auto col-span-12  z-" +
                   (mBand.length * 10 - bandIndex * 10)
