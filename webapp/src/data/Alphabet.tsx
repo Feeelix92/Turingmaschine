@@ -1,4 +1,5 @@
 export interface EingabeAlphabetOption {
+  pointer?: boolean;
   label: string;
   value: string;
   warningMode?: boolean;

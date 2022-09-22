@@ -84,7 +84,7 @@ export interface BandItemProps {
   index: number;
   bandIndex: number;
   //skin: string;
-  //pointer: boolean;
+  pointer?: boolean;
   alphabet: EingabeAlphabetOption[];
   showEditField: boolean;
   //setPointer: (index: Key, e: any) => void;

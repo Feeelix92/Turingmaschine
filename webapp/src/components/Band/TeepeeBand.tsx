@@ -1,27 +1,12 @@
-import BandItem from "./BandItem";
 import TeepeeBandItem from "./TeepeeBandItem";
-import {
-    FaArrowAltCircleLeft,
-    FaArrowAltCircleRight,
-    FaAngleLeft,
-    FaAngleRight,
-    FaRedo, FaTrash,
-} from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight, FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  bandAddField,
-  bandChangePointer,
-  bandChangePointPos,
-  bandDeleteAll,
-  bandSetPointPos,
-} from "../../redux/bandStore";
+import { bandAddField, bandChangePointPos, bandDeleteAll, bandSetPointPos} from "../../redux/bandStore";
 import { RootState } from "../../redux/store";
 import React from "react";
 import Dice from "./Dice";
 
 export default function TeepeeBand() {
-  const defaultPointerPos = 1; // Feld, auf dem Pointer im Default stehen soll
-
   const currentBand = useSelector((state: RootState) => state.band.currentBand);
   const currentAlphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
@@ -64,6 +49,7 @@ export default function TeepeeBand() {
                                alphabet={currentAlphabet.alphabet}
                                showEditField={true}
                                setPointerAt={() => setPointerAt(index)}
+                               bandIndex={index}
                             />
                         ))}
                     </div>
