@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Select, {ActionMeta, OnChangeValue} from "react-select";
 import { Direction, Zustand } from "../../interfaces/CommonInterfaces";
@@ -22,6 +22,7 @@ import {
 } from "react-icons/all";
 import watch from "redux-watch";
 import { useTranslation } from "react-i18next";
+import * as React from "react";
 
 function ConditionsList() {
   /**
