@@ -90,7 +90,7 @@ function Control() {
     dispatch(maschineSliderDecreaseNumber());
   };
 
-  const animateButton = (el) => {
+  const animateButton = (el: EventTarget) => {
     anime({
       targets: el,
       scale: "1.1",
@@ -217,7 +217,7 @@ function Control() {
       return elem.cells[1].value === selectedBand[idx].value ? elem : undefined;
     });
     let tempLastZustandVar = item?.cells[2].value as Zustand;
-    if (tempLastZustandVar.endzustand == true) {
+    if (tempLastZustandVar.endzustand) {
       endConfetti();
     }
 
@@ -253,7 +253,7 @@ function Control() {
       }
       if (item.cells[0].value instanceof Zustand) {
         if (item.cells[0].value != item.cells[2].value) {
-          if (tempLastZustandVar.endzustand !== false) {
+          if (tempLastZustandVar.endzustand) {
             changePause(true);
           } else {
             dispatch(tableSetActiveState(item.cells[2].value as Zustand));
@@ -285,14 +285,14 @@ function Control() {
     });
 
     let tempLastZustandVar = item?.cells[2].value as Zustand;
-    if (tempLastZustandVar.endzustand == true) {
+    if (tempLastZustandVar.endzustand) {
       endConfetti();
     }
 
     if (
       item !== undefined &&
       typeof item.cells[3].value === "string" &&
-      tempLastZustandVar.endzustand === false
+      !tempLastZustandVar.endzustand
     ) {
       store.dispatch(tableSetActiveRow(item));
       if (
@@ -333,7 +333,7 @@ function Control() {
       }
       if (item.cells[0].value instanceof Zustand) {
         if (item.cells[0].value != item.cells[2].value) {
-          if (tempLastZustandVar.endzustand !== false) {
+          if (tempLastZustandVar.endzustand) {
             changePause(true);
           } else {
             dispatch(tableSetActiveState(item.cells[2].value as Zustand));
@@ -357,18 +357,18 @@ function Control() {
     changePause(false);
     setOldPointerPos(activePointerPosition);
 
-    while (stoppMaschine === false && pauseMaschine === false) {
+    while (!stoppMaschine && !pauseMaschine) {
       setMaschineRunning(true);
       if (slider !== 100) {
         let tempSlider = 3000 / slider;
         await sleep(tempSlider);
       }
       if (mode === "mespuma") {
-        if (stoppMaschine === false && pauseMaschine === false) {
+        if (!stoppMaschine && !pauseMaschine) {
           await makeStepMespuma(activePointerPosition);
         }
       } else {
-        if (stoppMaschine === false && pauseMaschine === false) {
+        if (!stoppMaschine && !pauseMaschine) {
           await makeStep(activePointerPosition);
         }
       }
