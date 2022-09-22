@@ -200,7 +200,6 @@ export default function Cell(props: CellProps) {
 
   function checkValue(index: Key, value: string) {
     let allowed = false;
-
     // map the passed alphabet to check whether the alphabet contains the new input value
     eingabeAlphabet.map((entry) => {
       if (
@@ -234,7 +233,7 @@ export default function Cell(props: CellProps) {
     }
   }
 
-  function checkWarningModus(newValue?: Direction | Zustand | String) {
+  function checkWarningModus(newValue?: any) {
     let tempVar = newValue ? newValue : props.value;
     if (tempVar instanceof Zustand) {
       let tempBool = states.some((value) => {
@@ -242,23 +241,27 @@ export default function Cell(props: CellProps) {
         return value.value === val.value;
       });
       if (tempBool) {
-        return false;
+          return false;
       } else {
         dispatch(maschineChangeExecutable(false));
-        return true;
+          return true;
       }
     } else if (!(tempVar instanceof Direction)) {
       let tempBool = eALphabet.some((value) => {
-        return value.value === tempVar;
+          if (tempVar.value){
+              return value.value === tempVar.value;
+          }else{
+              return value.value === tempVar;
+          }
       });
       if (tempBool) {
-        return false;
+          return false;
       } else {
         dispatch(maschineChangeExecutable(false));
-        return true;
+          return true;
       }
     } else {
-      return false;
+        return false;
     }
   }
 
@@ -334,12 +337,12 @@ export default function Cell(props: CellProps) {
 
       {/* Mehrspurenmaschine:  */}
       {mode == "mespuma" && typeof props.value === "string" ? (
-        <Select
+          <Select
           placeholder={props.value}
           blurInputOnSelect={false}
           className={"text-black py-3 px-2 text-base xl:w-32"}
           onChange={handleChange}
-          options={eALphabet}
+          options={eALphabet.filter(Eingabealphabet => Eingabealphabet.value != "1" && Eingabealphabet.value != "B")}
           menuPortalTarget={document.querySelector("body")}
           isSearchable={false}
           hideSelectedOptions={true}
