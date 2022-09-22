@@ -286,7 +286,7 @@ function ConditionsList() {
             </div>
             <div className="flex col-span-2">
               <Select
-                placeholder={anfangsZustand.value}
+                value={initAnfangsZustand}
                 blurInputOnSelect={false}
                 className={"w-full"}
                 onChange={handleChange}
