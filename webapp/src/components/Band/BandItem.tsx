@@ -45,9 +45,6 @@ export default function BandItem(props: BandItemProps) {
     setKeyboard(true);
   }
 
-  const currentBandSkin = useSelector(
-    (state: RootState) => state.band.bandSkin
-  );
   const currentMode = useSelector((state: RootState) => state.general.mode);
   let cMode = currentMode;
   let wMode = watch(store.getState, "general.mode");
@@ -182,7 +179,7 @@ export default function BandItem(props: BandItemProps) {
 
   return (
     <div
-      className={`band-container__band ${currentBandSkin} flex justify-center ${
+      className={`band-container__band flex justify-center ${
         pointerIdx === props.index ? "pointerBorder" : ""
       }`}
       key={props.index}

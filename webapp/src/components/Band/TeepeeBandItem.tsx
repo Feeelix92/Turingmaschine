@@ -39,9 +39,6 @@ export default function BandItem(props: BandItemProps) {
     }
   });
 
-  const currentBandSkin = useSelector(
-    (state: RootState) => state.band.bandSkin
-  );
   const dispatch = useDispatch();
 
   const pointerIdx = useSelector(
