@@ -235,7 +235,6 @@ function Control() {
       changeStopp(true);
     }
 
-
     if (item !== undefined && typeof item.cells[3].value === "string") {
       store.dispatch(tableSetActiveRow(item));
       if (
@@ -298,10 +297,22 @@ function Control() {
     const item = selectedRows.find((elem) => {
       return elem.cells[1].value === finalString ? elem : undefined;
     });
-
     let tempLastZustandVar = item?.cells[2].value as Zustand;
-    if (tempLastZustandVar.endzustand) {
-      endConfetti();
+    try {
+      if (tempLastZustandVar.endzustand) {
+        endConfetti();
+      }
+    }catch (error){
+      toast.error((''+ t("menu.control.missingRuleError")), {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      changeStopp(true);
     }
 
     if (
