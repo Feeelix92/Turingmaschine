@@ -88,7 +88,9 @@
       "onlyOneStateAllowed": "Es kann nur einen Anfangzustand geben!",
       "noStatesLeftMessage": "Keine Zustände übrig!",
       "addNewValue": "Hinzufügen",
-      "emptyIsNotAllowed": "Ein leeres Alphabet ist nicht erlaubt!"
+      "emptyIsNotAllowed": "Ein leeres Alphabet ist nicht erlaubt!",
+      "alphabetAlreadyExists": "Das gewählte Alphabet existiert bereits!"
+      "alphabetCreated": "Das Eingabealphabet wurde erfolgreich erstellt!"
     },
     "mespumaExtension": {
       "NumberOfTracks": "Anzahl Spuren"

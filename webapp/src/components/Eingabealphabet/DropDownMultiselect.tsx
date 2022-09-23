@@ -23,6 +23,11 @@ export default function MultiselectDropDown(props: any) {
   const { t } = useTranslation(["general"])
 
   const dispatch = useDispatch();
+
+  const dialogOptions = useSelector(
+      (state: RootState) => state.general.dialogOptions
+  );
+
   let currentAlphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
   );
@@ -50,7 +55,7 @@ export default function MultiselectDropDown(props: any) {
     // converting the object to an iteratable Array
     const optionsArray = Array.from(newValues.values());
     valuesArray = optionsArray.map(({ value }) => value);
-    valuesString = valuesArray.toString();
+    valuesString =  "{"+valuesArray.toString()+"}";
   }
 
   return (
@@ -80,7 +85,8 @@ export default function MultiselectDropDown(props: any) {
         <div className={"text-right"}>
           <button
             onClick={() => {
-              if (valuesArray.length > 0) {
+              const uniqueOptions = dialogOptions.filter(item => item.label.split("").sort().toString() === valuesString.split("").sort().toString());
+              if (valuesArray.length > 0 && uniqueOptions.length < 1) {
                 dispatch(alphabetDeleteCustom());
                 valuesArray.forEach((value) => {
                   dispatch(alphabetPushToCustom(value));
@@ -88,6 +94,25 @@ export default function MultiselectDropDown(props: any) {
                 dispatch(alphabetPushToDialogOptions(valuesArray.toString()));
                 dispatch(alphabetChangeCurrent(currentAlphabet))
                 props.onCloseDialog();
+                toast.success(''+t("list.dropdown.alphabetCreated"), {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                });
+              }else if (valuesArray.length > 0 && uniqueOptions.length >= 1){
+                toast.error(''+t("list.dropdown.alphabetAlreadyExists"), {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                });
               } else {
                 toast.error(''+t("list.dropdown.emptyIsNotAllowed"), {
                   position: "top-right",

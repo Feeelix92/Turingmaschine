@@ -88,7 +88,9 @@
       "onlyOneStateAllowed": "There can only be one initial State!",
       "noStatesLeftMessage": "No states left!",
       "addNewValue": "Add",
-      "emptyIsNotAllowed": "An empty set of input symbols is not allowed!"
+      "emptyIsNotAllowed": "An empty set of input symbols is not allowed!",
+      "alphabetAlreadyExists": "The selected input symbols already exists!",
+      "alphabetCreated": "New input symbols were created successfully!"
     },
     "mespumaExtension": {
       "NumberOfTracks": "Number of Tracks"
