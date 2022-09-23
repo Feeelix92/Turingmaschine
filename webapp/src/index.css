@@ -40,7 +40,15 @@
 }
 
 .secondaryButton {
-  @apply text-thm-primary2 bg-white font-bold px-3 text-center h-12 hover:bg-thm-primary2 hover:text-white border border-solid border-thm-primary2;
+  @apply text-thm-primary2 bg-white font-bold px-3 text-center h-12 hover:bg-red-900 hover:text-white border border-solid border-thm-primary2;
+}
+
+.redButton {
+  @apply text-white bg-thm-secondary px-3 rounded text-center h-12 hover:bg-red-900 hover:text-white border border-solid border-thm-primary2;
+}
+
+.greenButton {
+  @apply text-white bg-thm-primary px-3 rounded text-center h-12 hover:bg-thm-hover hover:text-white border border-solid border-thm-primary2;
 }
 
 .App {

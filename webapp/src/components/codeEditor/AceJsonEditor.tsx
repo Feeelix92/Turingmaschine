@@ -746,7 +746,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                         data-modal-toggle="defaultModal"
                         type="button"
                         onClick={parseToJSON}
-                        className="bg-thm-primary"
+                        className="greenButton"
                       >
                         {t("codeEditor.saveButton")}
                       </button>
@@ -755,7 +755,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                         data-modal-toggle="defaultModal"
                         type="button"
                         onClick={clearEditor}
-                        className="bg-thm-secondary hover:bg-thm-primary2"
+                        className="redButton"
                       >
                         {t("codeEditor.clearButton")}
                       </button>
@@ -764,7 +764,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                         data-modal-toggle="defaultModal"
                         type="button"
                         onClick={toggleEditor}
-                        className="bg-thm-secondary hover:bg-thm-primary2"
+                        className="redButton"
                       >
                         {t("codeEditor.cancelButton")}
                       </button>
@@ -772,11 +772,13 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                         data-modal-toggle="defaultModal"
                         type="button"
                         onClick={exportData}
-                        className="bg-thm-primary"
+                        className="greenButton"
                       >
                         <FiDownload />
                       </button>
-                      <button onClick={fileUpload}>
+                      <button onClick={fileUpload}
+                        className={"greenButton"}
+                      >
                         <FiUpload />
                       </button>
                       <input
