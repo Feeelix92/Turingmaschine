@@ -162,7 +162,7 @@ export default function DropDownSelect() {
           )}
           menuPortalTarget={document.querySelector("body")}
           isSearchable={false}
-          // hideSelectedOptions={true}
+          hideSelectedOptions={true}
         />
       </div>
       <div>
