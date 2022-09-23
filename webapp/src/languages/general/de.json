@@ -89,7 +89,7 @@
       "noStatesLeftMessage": "Keine Zustände übrig!",
       "addNewValue": "Hinzufügen",
       "emptyIsNotAllowed": "Ein leeres Alphabet ist nicht erlaubt!",
-      "alphabetAlreadyExists": "Das gewählte Alphabet existiert bereits!"
+      "alphabetAlreadyExists": "Das gewählte Alphabet existiert bereits!",
       "alphabetCreated": "Das Eingabealphabet wurde erfolgreich erstellt!"
     },
     "mespumaExtension": {
