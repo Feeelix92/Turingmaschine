@@ -1,20 +1,11 @@
 import { useEffect, useState } from "react";
 import * as React from "react";
-import {
-  Direction,
-  RowProps,
-  Zustand,
-} from "../../interfaces/CommonInterfaces";
+import { RowProps } from "../../interfaces/CommonInterfaces";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  tableDeleteRow,
-  tableUpdateCell,
-  tableUpdateRowIsFinal,
-} from "../../redux/generalStore";
+import { tableDeleteRow } from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import Cell from "./Cell";
-import watch from "redux-watch";
 import { useTranslation } from "react-i18next";
 
 export default function Row(props: RowProps) {
@@ -22,15 +13,12 @@ export default function Row(props: RowProps) {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(props.isFinal);
 
-  const activeRow = useSelector((state: RootState) => state.general.activeRow);
   /////////// Active-Row from State ///////////
+  const activeRow = useSelector((state: RootState) => state.general.activeRow);
   let row = activeRow;
-  let wRow = watch(store.getState, "general.activeRow");
-  store.subscribe(
-    wRow((newVal) => {
-      row = newVal;
-    })
-  );
+  useEffect(() => {
+    row = activeRow;
+  }, [activeRow]);
 
   useEffect(() => {
     if (props.isFinal) {

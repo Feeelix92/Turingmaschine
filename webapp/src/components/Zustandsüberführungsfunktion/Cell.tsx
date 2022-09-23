@@ -2,15 +2,24 @@ import { createRef, Key, RefObject, useEffect, useState } from "react";
 import { IoIosWarning } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import Select, { OnChangeValue } from "react-select";
-import watch from "redux-watch";
-import { CellProps, Direction, directions, Zustand,} from "../../interfaces/CommonInterfaces";
+import {
+  CellProps,
+  Direction,
+  directions,
+  Zustand,
+} from "../../interfaces/CommonInterfaces";
 import { RootState, store } from "../../redux/store";
-import { initialZustand3, maschineChangeExecutable, tableCheckWarning, tableUpdateCell, tableUpdateRowIsFinal } from "../../redux/generalStore";
+import {
+  initialZustand3,
+  maschineChangeExecutable,
+  tableCheckWarning,
+  tableUpdateCell,
+  tableUpdateRowIsFinal,
+} from "../../redux/generalStore";
 import EditField from "./EditField";
 import ZustandSelect from "./ZustandSelect";
 import { useTranslation } from "react-i18next";
-import * as React from "react";
-import { ToastContainer, toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
+import { toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Cell(props: CellProps) {
@@ -18,13 +27,6 @@ export default function Cell(props: CellProps) {
   const wrapperRef: RefObject<HTMLTableCellElement> = createRef();
 
   const dispatch = useDispatch();
-
-  const zustandsmenge = useSelector(
-    (state: RootState) => state.general.zustandsmenge
-  );
-  const endzustandsMenge = useSelector(
-    (state: RootState) => state.general.endZustand
-  );
 
   const alphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
@@ -38,87 +40,83 @@ export default function Cell(props: CellProps) {
   const { t } = useTranslation(["general"]);
 
   /////////// States from State ///////////
+  const zustandsmenge = useSelector(
+    (state: RootState) => state.general.zustandsmenge
+  );
   let states =
     mode !== "toiletpaper" ? zustandsmenge.concat(temp) : zustandsmenge;
+  useEffect(() => {
+    console.log("CELL STATES");
+    states = zustandsmenge;
+    const failure = checkWarningModus();
 
-  let wStates = watch(store.getState, "general.zustandsmenge");
-  store.subscribe(
-    wStates((newVal) => {
-      console.log("CELL STATES");
-      states = newVal;
-      const failure = checkWarningModus();
-
-      if (failure !== props.warningMode) {
-        const tempAlphabet: string[] = [];
-        alphabet.alphabet.forEach((entry) => {
-          tempAlphabet.push(entry.value);
-        });
-        dispatch(tableCheckWarning({ rows: rows, alphabet: tempAlphabet }));
-      }
-    })
-  );
+    if (failure !== props.warningMode) {
+      const tempAlphabet: string[] = [];
+      alphabet.alphabet.forEach((entry) => {
+        tempAlphabet.push(entry.value);
+      });
+      dispatch(tableCheckWarning({ rows: rows, alphabet: tempAlphabet }));
+    }
+  }, [zustandsmenge]);
 
   /////////// finalStates from State ///////////
-  let finalStates = endzustandsMenge;
-  let wFinalStates = watch(store.getState, "general.endZustand");
-  store.subscribe(
-    wFinalStates((newVal) => {
-      finalStates = newVal;
-
-      const failure = checkWarningModus();
-
-      if (failure !== props.warningMode) {
-        dispatch(
-          tableUpdateCell({
-            cellIndex: props.index,
-            rowIndex: props.rowIndex,
-            value: props.value,
-            warningMode: failure,
-          })
-        );
-      }
-
-      if (props.value instanceof Zustand) {
-        let foundInFinal = false;
-
-        finalStates.forEach((state) => {
-          if (props.value instanceof Zustand) {
-            if (state.value === props.value.value) {
-              foundInFinal = true;
-              setFinal(true);
-            }
-          }
-        });
-
-        if (!foundInFinal) {
-          setFinal(false);
-        }
-      }
-    })
+  const endzustandsMenge = useSelector(
+    (state: RootState) => state.general.endZustand
   );
+  let finalStates = endzustandsMenge;
+  useEffect(() => {
+    finalStates = endzustandsMenge;
 
+    const failure = checkWarningModus();
+
+    if (failure !== props.warningMode) {
+      dispatch(
+        tableUpdateCell({
+          cellIndex: props.index,
+          rowIndex: props.rowIndex,
+          value: props.value,
+          warningMode: failure,
+        })
+      );
+    }
+
+    if (props.value instanceof Zustand) {
+      let foundInFinal = false;
+
+      finalStates.forEach((state) => {
+        if (props.value instanceof Zustand) {
+          if (state.value === props.value.value) {
+            foundInFinal = true;
+            setFinal(true);
+          }
+        }
+      });
+
+      if (!foundInFinal) {
+        setFinal(false);
+      }
+    }
+  }, [endzustandsMenge]);
+
+  /////////// Eingabealphabet from State ///////////
   const eingabeAlphabet = useSelector(
     (state: RootState) => state.general.bandAlphabet
   );
-  /////////// Eingabealphabet from State ///////////
   let eALphabet = eingabeAlphabet;
-  let wEingabeAlphabet = watch(store.getState, "general.bandAlphabet");
-  store.subscribe(
-    wEingabeAlphabet((newVal) => {
-      eALphabet = newVal;
-      const failure = checkWarningModus();
-      if (failure !== props.warningMode) {
-        dispatch(
-          tableUpdateCell({
-            cellIndex: props.index,
-            rowIndex: props.rowIndex,
-            value: props.value,
-            warningMode: failure,
-          })
-        );
-      }
-    })
-  );
+  useEffect(() => {
+    eALphabet = eingabeAlphabet;
+    const failure = checkWarningModus();
+    if (failure !== props.warningMode) {
+      dispatch(
+        tableUpdateCell({
+          cellIndex: props.index,
+          rowIndex: props.rowIndex,
+          value: props.value,
+          warningMode: failure,
+        })
+      );
+    }
+  }, [eingabeAlphabet]);
 
   const [editMode, setEditMode] = useState(false);
 
@@ -203,7 +201,9 @@ export default function Cell(props: CellProps) {
     // map the passed alphabet to check whether the alphabet contains the new input value
     eingabeAlphabet.map((entry) => {
       if (
-        entry.value === value || !props.showEditField || value === "" ||
+        entry.value === value ||
+        !props.showEditField ||
+        value === "" ||
         value === "B"
       ) {
         // if its allowed, we pass the new value to the parent to update the cell value
@@ -241,27 +241,27 @@ export default function Cell(props: CellProps) {
         return value.value === val.value;
       });
       if (tempBool) {
-          return false;
+        return false;
       } else {
         dispatch(maschineChangeExecutable(false));
-          return true;
+        return true;
       }
     } else if (!(tempVar instanceof Direction)) {
       let tempBool = eALphabet.some((value) => {
-          if (tempVar.value){
-              return value.value === tempVar.value;
-          }else{
-              return value.value === tempVar;
-          }
+        if (tempVar.value) {
+          return value.value === tempVar.value;
+        } else {
+          return value.value === tempVar;
+        }
       });
       if (tempBool) {
-          return false;
+        return false;
       } else {
         dispatch(maschineChangeExecutable(false));
-          return true;
+        return true;
       }
     } else {
-        return false;
+      return false;
     }
   }
 
@@ -337,12 +337,14 @@ export default function Cell(props: CellProps) {
 
       {/* Mehrspurenmaschine:  */}
       {mode == "mespuma" && typeof props.value === "string" ? (
-          <Select
+        <Select
           placeholder={props.value}
           blurInputOnSelect={false}
           className={"text-black py-3 px-2 text-base xl:w-32"}
           onChange={handleChange}
-          options={eALphabet.filter(Eingabealphabet => Eingabealphabet.value.length > 1)}
+          options={eALphabet.filter(
+            (Eingabealphabet) => Eingabealphabet.value.length > 1
+          )}
           menuPortalTarget={document.querySelector("body")}
           isSearchable={false}
           hideSelectedOptions={true}

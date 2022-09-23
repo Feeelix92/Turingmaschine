@@ -1,15 +1,19 @@
-import {useEffect, useState} from "react";
-import {CgAddR} from "react-icons/cg";
-import {useDispatch, useSelector} from "react-redux";
-import Select, {ActionMeta, OnChangeValue} from "react-select";
-import watch from "redux-watch";
-import {cartesianProduct} from "../../interfaces/CommonFunctions";
-import {EingabeAlphabet, EingabeAlphabetDialogOptions,} from "../../interfaces/CommonInterfaces";
-import {alphabetChangeCurrent, alphabetChangeCurrentMespuma,} from "../../redux/generalStore";
-import {RootState, store} from "../../redux/store";
+import { useEffect, useState } from "react";
+import { CgAddR } from "react-icons/cg";
+import { useDispatch, useSelector } from "react-redux";
+import Select, { ActionMeta, OnChangeValue } from "react-select";
+import { cartesianProduct } from "../../interfaces/CommonFunctions";
+import {
+  EingabeAlphabet,
+  EingabeAlphabetDialogOptions,
+} from "../../interfaces/CommonInterfaces";
+import {
+  alphabetChangeCurrent,
+  alphabetChangeCurrentMespuma,
+} from "../../redux/generalStore";
+import { RootState, store } from "../../redux/store";
 import MultiselectDropDown from "./DropDownMultiselect";
-import {useTranslation} from "react-i18next";
-import * as React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function DropDownSelect() {
   // mode für alle:
@@ -27,14 +31,12 @@ export default function DropDownSelect() {
   );
   const dispatch = useDispatch();
   let currentAlphabet = useSelector(
-      (state: RootState) => state.general.currentAlphabet
+    (state: RootState) => state.general.currentAlphabet
   );
-  let wAlphabet = watch(store.getState, "general.currentAlphabet");
-  store.subscribe(
-    wAlphabet((newVal) => {
-      currentAlphabet = newVal;
-    })
-  );
+  useEffect(() => {
+    currentAlphabet = currentAlphabet;
+  }, [currentAlphabet]);
+
   /**
    * checks if Dialog opened or closed
    */
@@ -140,19 +142,22 @@ export default function DropDownSelect() {
   }
 
   ///internationalization
-  const { t } = useTranslation(["general"])
+  const { t } = useTranslation(["general"]);
 
   return (
     <div>
       <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2"}>
-        <p className={"col-span-2 text-left"}> {t("list.dropdown.inputSymbols")} ∑ =</p>
+        <p className={"col-span-2 text-left"}>
+          {" "}
+          {t("list.dropdown.inputSymbols")} ∑ =
+        </p>
         <Select
           value={currentDialogOption}
           blurInputOnSelect={false}
           className={"col-span-2"}
           onChange={handleChange}
           options={dialogOptions}
-          getOptionValue={option => option.alphabet.key.toString()}
+          getOptionValue={(option) => option.alphabet.key.toString()}
           //@ts-ignore
           getOptionLabel={(e) => (
             <div className={"flex items-center place-content-start"}>

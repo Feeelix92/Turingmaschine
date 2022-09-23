@@ -21,7 +21,6 @@ import {
   tableSetActiveState,
   tableSetWatchedRows,
 } from "../../redux/generalStore";
-import watch from "redux-watch";
 import {
   bandChangeItemAt,
   bandChangeItemAtMespuma,
@@ -56,33 +55,31 @@ function Control() {
     });
   };
 
+  const pauseMaschineStore = useSelector(
+    (state: RootState) => state.general.pauseMaschine
+  );
   let pauseMaschine: boolean = false;
-  let wPauseMaschine = watch(store.getState, "general.pauseMaschine");
-  store.subscribe(
-    wPauseMaschine((newVal) => {
-      pauseMaschine = newVal;
-      setMaschineRunning(false);
-    })
-  );
+  React.useEffect(() => {
+    pauseMaschine = pauseMaschineStore;
+    setMaschineRunning(false);
+  }, [pauseMaschineStore]);
 
+  const stoppMaschineStore = useSelector(
+    (state: RootState) => state.general.stoppMaschine
+  );
   let stoppMaschine: boolean = false;
-  let wStoppMaschine = watch(store.getState, "general.stoppMaschine");
-  store.subscribe(
-    wStoppMaschine((newVal) => {
-      stoppMaschine = newVal;
-      setMaschineRunning(false);
-    })
-  );
+  React.useEffect(() => {
+    stoppMaschine = stoppMaschineStore;
+    setMaschineRunning(false);
+  }, [stoppMaschineStore]);
 
-  let slider: number = useSelector(
+  let sliderStore: number = useSelector(
     (state: RootState) => state.general.sliderNumber
   );
-  let wSlider = watch(store.getState, "general.sliderNumber");
-  store.subscribe(
-    wSlider((newVal) => {
-      slider = newVal;
-    })
-  );
+  let slider: number = 0;
+  React.useEffect(() => {
+    slider = sliderStore;
+  }, [sliderStore]);
 
   const increaseSlider = () => {
     dispatch(maschineSliderIncreaseNumber());
@@ -119,69 +116,54 @@ function Control() {
     dispatch(bandSetPointPos(oldPointerPos));
   };
 
-  const initialZustand = useSelector(
-    (state: RootState) => state.general.activeState
-  );
-
-  const currentBand = useSelector((state: RootState) => state.band.currentBand);
-  const currentMespumaBand = useSelector(
-    (state: RootState) => state.band.mespumaBand
-  );
   const currentTable = useSelector((state: RootState) => state.general.rows);
-  const pointerIdx = useSelector(
-    (state: RootState) => state.band.pointerPosition
-  );
+
   const bandWarning = useSelector((state: RootState) => state.band.showWarning);
   const [maschineRunning, setMaschineRunning] = useState(false);
-
   const mode = useSelector((state: RootState) => state.general.mode);
 
   /////////// Rows from State ///////////
-  let selectedRows: RowInterface[] = [];
-  let wSelectedRows = watch(store.getState, "general.watchedRows");
-  store.subscribe(
-    wSelectedRows((newVal) => {
-      selectedRows = newVal;
-    })
+  let selectedRowsStore: RowInterface[] = useSelector(
+    (state: RootState) => state.general.watchedRows
   );
+  let selectedRows: RowInterface[] = [];
+  React.useEffect(() => {
+    selectedRows = selectedRowsStore;
+  }, [selectedRowsStore]);
 
   /////////// Band from State ///////////
+  const currentBand = useSelector((state: RootState) => state.band.currentBand);
   let selectedBand = currentBand;
-  let wSelectedBand = watch(store.getState, "band.currentBand");
-  store.subscribe(
-    wSelectedBand((newVal) => {
-      selectedBand = newVal;
-    })
-  );
+  React.useEffect(() => {
+    selectedBand = currentBand;
+  }, [currentBand]);
 
   /////////// Band from State MeSpuMa ///////////
-  let mespumaBand = currentMespumaBand;
-  let wmespumaBand = watch(store.getState, "band.mespumaBand");
-  store.subscribe(
-    wmespumaBand((newVal) => {
-      mespumaBand = newVal;
-    })
+  const currentMespumaBand = useSelector(
+    (state: RootState) => state.band.mespumaBand
   );
+  let mespumaBand = currentMespumaBand;
+  React.useEffect(() => {
+    mespumaBand = currentMespumaBand;
+  }, [currentMespumaBand]);
 
   /////////// ActiveState from State ///////////
-  let activeState = initialZustand;
-  let wActiveState = watch(store.getState, "general.activeState");
-  store.subscribe(
-    wActiveState((newVal) => {
-      activeState = newVal;
-    })
+  const initialZustand = useSelector(
+    (state: RootState) => state.general.activeState
   );
+  let activeState = initialZustand;
+  React.useEffect(() => {
+    activeState = initialZustand;
+  }, [initialZustand]);
 
   /////////// PointerPosition from State ///////////
-  let activePointerPosition = pointerIdx;
-  let wActivePointerPosition = watch(store.getState, "band.pointerPosition");
-  store.subscribe(
-    wActivePointerPosition((newVal) => {
-      activePointerPosition = newVal;
-      if (newVal != undefined) {
-      }
-    })
+  const pointerIdx = useSelector(
+    (state: RootState) => state.band.pointerPosition
   );
+  let activePointerPosition = pointerIdx;
+  React.useEffect(() => {
+    activePointerPosition = activePointerPosition;
+  }, [activePointerPosition]);
 
   const setSelectedRows = () => {
     // get all rows, that match our current Zustand and which are therefore relevant

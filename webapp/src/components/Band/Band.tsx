@@ -8,10 +8,9 @@ import {
   bandSetPointPos,
   bandSetWarning,
 } from "../../redux/bandStore";
-import { RootState, store } from "../../redux/store";
+import { RootState } from "../../redux/store";
 import { IoIosWarning } from "react-icons/io";
-import watch from "redux-watch";
-import { useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import * as React from "react";
 
 export default function Band() {
@@ -31,41 +30,35 @@ export default function Band() {
 
   /////////// Band from State ///////////
   let cBand = currentBand;
-  let wBand = watch(store.getState, "general.currentBand");
-  store.subscribe(
-    wBand((newVal) => {
-      cBand = newVal;
-    })
-  );
+  React.useEffect(() => {
+    cBand = currentBand;
+  }, [currentBand]);
 
   /////////// Eingabealphabet from State ///////////
   let bAlphabet = bandAlphabet;
-  let wEingabeAlphabet = watch(store.getState, "general.bandAlphabet");
-  store.subscribe(
-    wEingabeAlphabet((newVal) => {
-      bAlphabet = newVal;
+  React.useEffect(() => {
+    bAlphabet = bandAlphabet;
 
-      let bandVal: string[] = [];
-      // wenn banditem nicht in Eingabealphabet vorhanden, dann warning auf true
-      bAlphabet.forEach((item) => {
-        bandVal.push(item.value);
-      });
+    let bandVal: string[] = [];
+    // wenn banditem nicht in Eingabealphabet vorhanden, dann warning auf true
+    bAlphabet.forEach((item) => {
+      bandVal.push(item.value);
+    });
 
-      let found = false;
+    let found = false;
 
-      cBand.forEach((bandItem) => {
-        if (!bandVal.includes(bandItem.value)) {
-          found = true;
-        }
-      });
-
-      if (found) {
-        dispatch(bandSetWarning(true));
-      } else {
-        dispatch(bandSetWarning(false));
+    cBand.forEach((bandItem) => {
+      if (!bandVal.includes(bandItem.value)) {
+        found = true;
       }
-    })
-  );
+    });
+
+    if (found) {
+      dispatch(bandSetWarning(true));
+    } else {
+      dispatch(bandSetWarning(false));
+    }
+  }, [bandAlphabet]);
 
   const setPointerAt = (index: number) => {
     dispatch(bandSetPointPos(index));

@@ -1,23 +1,16 @@
 import BandItem from "./BandItem";
-import { FaAngleLeft, FaAngleRight, FaRedo, FaTrash } from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight, FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  bandAddField,
   bandAddMespumaField,
-  bandChangePointPos,
   bandChangeMespumaPointPos,
-  bandDeleteAll,
   bandDeleteAllMespuma,
   bandSetPointPos,
   bandSetWarning,
 } from "../../redux/bandStore";
-import { RootState, store } from "../../redux/store";
-import party from "party-js";
+import { RootState } from "../../redux/store";
 import { IoIosWarning } from "react-icons/io";
-import watch from "redux-watch";
-import { useState } from "react";
-import { EingabeAlphabetOption } from "../../data/Alphabet";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import * as React from "react";
 
 export default function Band() {
@@ -37,43 +30,37 @@ export default function Band() {
 
   /////////// Band from State ///////////
   let mBand = mespumaBand;
-  let wBand = watch(store.getState, "band.mespumaBand");
-  store.subscribe(
-    wBand((newVal) => {
-      mBand = newVal;
-    })
-  );
+  React.useEffect(() => {
+    mBand = mespumaBand;
+  }, [mespumaBand]);
 
   /////////// Eingabealphabet from State ///////////
   let bAlphabet = bandAlphabet;
-  let wEingabeAlphabet = watch(store.getState, "general.bandAlphabet");
-  store.subscribe(
-    wEingabeAlphabet((newVal) => {
-      bAlphabet = newVal;
+  React.useEffect(() => {
+    bAlphabet = bandAlphabet;
 
-      let bandVal: string[] = [];
-      // wenn banditem nicht in Eingabealphabet vorhanden, dann warning auf true
-      bAlphabet.forEach((item) => {
-        bandVal.push(item.value);
+    let bandVal: string[] = [];
+    // wenn banditem nicht in Eingabealphabet vorhanden, dann warning auf true
+    bAlphabet.forEach((item) => {
+      bandVal.push(item.value);
+    });
+
+    let found = false;
+
+    mBand.forEach((band) => {
+      band.forEach((bandItem) => {
+        if (!bandVal.includes(bandItem.value)) {
+          found = true;
+        }
       });
+    });
 
-      let found = false;
-
-      mBand.forEach((band) => {
-        band.forEach((bandItem) => {
-          if (!bandVal.includes(bandItem.value)) {
-            found = true;
-          }
-        });
-      });
-
-      if (found) {
-        dispatch(bandSetWarning(true));
-      } else {
-        dispatch(bandSetWarning(false));
-      }
-    })
-  );
+    if (found) {
+      dispatch(bandSetWarning(true));
+    } else {
+      dispatch(bandSetWarning(false));
+    }
+  }, [bandAlphabet]);
 
   const setPointerAt = (index: number) => {
     dispatch(bandSetPointPos(index));
@@ -90,7 +77,7 @@ export default function Band() {
   };
 
   //Für Internationalisierung
-  const { t } = useTranslation(["general"])
+  const { t } = useTranslation(["general"]);
 
   return (
     <div className={"w-screen"}>
@@ -112,7 +99,8 @@ export default function Band() {
         <div className="flex-1 w-64 overflow-x-auto mx-2">
           <div className="pb-0 my-10">
             {mBand.map((band, bandIndex) => (
-              <div key={bandIndex}
+              <div
+                key={bandIndex}
                 className={
                   "band-container-mespuma overflow-auto col-span-12  z-" +
                   (mBand.length * 10 - bandIndex * 10)
@@ -214,7 +202,7 @@ export default function Band() {
           </div>
         ) : (
           <div className={"rounded-full bg-thm-primary text-white h-8"}>
-              {t("band.warningNoStateAvailable")}
+            {t("band.warningNoStateAvailable")}
           </div>
         )}
       </div>
@@ -263,7 +251,10 @@ export default function Band() {
         </div>
 
         <div className={"w-1/4 text-right md:hidden"}>
-          <button onClick={() => dispatch(bandDeleteAllMespuma())} className={"m-2"}>
+          <button
+            onClick={() => dispatch(bandDeleteAllMespuma())}
+            className={"m-2"}
+          >
             <FaTrash />
           </button>
         </div>
