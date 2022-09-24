@@ -81,7 +81,7 @@ export default function MultiselectDropDown(props: any) {
           setOptionString("");
         } else {
           // display warning
-          toast.error("" + t("list.dropdown.alphabetAlreadyExists"), {
+          toast.error("" + t("list.dropdown.literalAlreadyExists"), {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
