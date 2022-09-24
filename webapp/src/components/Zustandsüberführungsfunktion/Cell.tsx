@@ -276,6 +276,7 @@ export default function Cell(props: CellProps) {
       if (tempBool) {
         return false;
       } else {
+        console.log("unexecutable", props.value);
         dispatch(maschineChangeExecutable(false));
         return true;
       }

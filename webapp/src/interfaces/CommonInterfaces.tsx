@@ -116,6 +116,10 @@ export interface ZustandSelectProps {
   updateValue: (arg: Zustand) => void;
 }
 
+export interface ExampleSelectProps {
+  examples: CodeExample[];
+}
+
 export interface EingabeAlphabetDialogOptions {
   label: string;
   alphabet: Alphabet;
@@ -174,3 +178,8 @@ export class OperationType {
   }
 }
 
+export interface CodeExample {
+  value: string;
+  label: string;
+  type: "normal" | "mespuma";
+}
