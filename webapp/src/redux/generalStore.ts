@@ -27,12 +27,12 @@ const initialEndZustandsmenge: Zustand[] = [];
 ///////////////////// BandAlphabet /////////////////////
 const initialBandAlphabet: EingabeAlphabet[] = [
   { label: "1", value: "1", warningMode: false },
-  { label: "", value: "B", warningMode: false },
+  { label: "B", value: "B", warningMode: false },
 ];
 const initialTeepeeBandAlphabet: EingabeAlphabet[] = [
   { label: "1", value: "1", warningMode: false },
   { label: "#", value: "#", warningMode: false },
-  { label: "", value: "B", warningMode: false },
+  { label: "B", value: "B", warningMode: false },
 ];
 const defaultCustomAlphabet: Alphabet = {
   key: 0,
