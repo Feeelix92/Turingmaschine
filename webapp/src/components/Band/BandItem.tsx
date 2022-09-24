@@ -14,8 +14,8 @@ import { BsFillEraserFill } from "react-icons/bs";
 import { BandItemProps } from "../../interfaces/CommonInterfaces";
 import watch from "redux-watch";
 import { useTranslation } from "react-i18next";
-import { ToastContainer, toast } from 'react-toastify'; // https://fkhadra.github.io/react-toastify/introduction/
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
+import "react-toastify/dist/ReactToastify.css";
 
 export default function BandItem(props: BandItemProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -49,8 +49,10 @@ export default function BandItem(props: BandItemProps) {
   let cMode = currentMode;
   let wMode = watch(store.getState, "general.mode");
   store.subscribe(
-    wMode((newVal) => {
-      cMode = newVal;
+    wMode((newVal, oldVal) => {
+      if (newVal != oldVal) {
+        cMode = newVal;
+      }
     })
   );
   const dispatch = useDispatch();
@@ -165,16 +167,16 @@ export default function BandItem(props: BandItemProps) {
     });
 
     if (!allowed) {
-    toast.error(''+ t("bandItem.warningValueNotIncluded"), {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      }); 
-  }
+      toast.error("" + t("bandItem.warningValueNotIncluded"), {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   }
 
   return (
@@ -225,7 +227,7 @@ export default function BandItem(props: BandItemProps) {
               className={"editBtn delete z-50 "}
               onClick={() => deleteValue()}
             >
-              <BsFillEraserFill className={""}/>
+              <BsFillEraserFill className={""} />
             </button>
           </div>
         ) : (

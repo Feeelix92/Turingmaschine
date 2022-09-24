@@ -29,10 +29,13 @@ export default function Table() {
   let rows = loadedRows;
   let wRows = watch(store.getState, "general.rows");
   store.subscribe(
-    wRows((newVal) => {
-      console.log("WATCHER TABLE ROWS");
-      rows = newVal;
-      dispatch(maschineCheckExecutable());
+    wRows((newVal, oldVal) => {
+      console.log(newVal, oldVal);
+      if (newVal != oldVal) {
+        console.log("WATCHER TABLE ROWS");
+        rows = newVal;
+        dispatch(maschineCheckExecutable());
+      }
     })
   );
 

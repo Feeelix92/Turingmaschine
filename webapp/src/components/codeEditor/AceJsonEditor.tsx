@@ -41,8 +41,8 @@ import Tutorial from "./Tutorial";
 import { cartesianProduct } from "../../interfaces/CommonFunctions";
 import { useTranslation } from "react-i18next";
 import watch from "redux-watch";
-import { ToastContainer, toast } from 'react-toastify'; // https://fkhadra.github.io/react-toastify/introduction/
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
+import "react-toastify/dist/ReactToastify.css";
 
 export interface tableZustand {
   [key: string]: tableZeichen;
@@ -85,8 +85,10 @@ export default function AceJsonEditor(props: CodeEditorProps) {
   let rows = useSelector((state: RootState) => state.general.rows);
   let wRows = watch(store.getState, "general.rows");
   store.subscribe(
-    wRows((newVal) => {
-      rows = newVal;
+    wRows((newVal, oldVal) => {
+      if (newVal != oldVal) {
+        rows = newVal;
+      }
     })
   );
 
@@ -268,7 +270,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               })
             );
           } else {
-            toast.error(''+ t("bandItem.warningEmptyIsNotAllowed"), {
+            toast.error("" + t("bandItem.warningEmptyIsNotAllowed"), {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
@@ -276,7 +278,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-              }); 
+            });
           }
         } else {
           dispatch(bandDeleteAll());
@@ -304,7 +306,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             dispatch(alphabetPushToDialogOptions(alphabet.toString()));
             dispatch(alphabetGenerateBand(alphabet));
           } else {
-            toast.error(''+ t("codeEditor.warningEmptyIsNotAllowed"), {
+            toast.error("" + t("codeEditor.warningEmptyIsNotAllowed"), {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
@@ -312,7 +314,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-              }); 
+            });
           }
         }
 
@@ -428,7 +430,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         toggleEditor();
       } catch (e) {
         // Error message
-        toast.error("Error!  "+ e, {
+        toast.error("Error!  " + e, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -436,7 +438,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          }); 
+        });
       }
     } else {
       reloadPage();
@@ -776,9 +778,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                       >
                         <FiDownload />
                       </button>
-                      <button onClick={fileUpload}
-                        className={"greenButton"}
-                      >
+                      <button onClick={fileUpload} className={"greenButton"}>
                         <FiUpload />
                       </button>
                       <input

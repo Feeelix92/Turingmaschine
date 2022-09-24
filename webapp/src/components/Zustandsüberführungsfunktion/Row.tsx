@@ -27,8 +27,10 @@ export default function Row(props: RowProps) {
   let row = activeRow;
   let wRow = watch(store.getState, "general.activeRow");
   store.subscribe(
-    wRow((newVal) => {
-      row = newVal;
+    wRow((newVal, oldVal) => {
+      if (newVal != oldVal) {
+        row = newVal;
+      }
     })
   );
 
