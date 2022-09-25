@@ -584,7 +584,6 @@ export const generalSlice = createSlice({
     },
 
     alphabetChangeEndzustand: (state, zustand: PayloadAction<Zustand[]>) => {
-      console.log(zustand.payload);
       state.endZustand = zustand.payload;
 
       state.zustandsmenge.forEach((option) => {

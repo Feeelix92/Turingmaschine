@@ -169,6 +169,8 @@ function ConditionsList() {
     alphabet.alphabet.forEach((entry) => {
       tempAlphabet.push(entry.value);
     });
+    // add B to check all literals including empty
+    tempAlphabet.push("B");
     dispatch(tableCheckWarning({ rows: loadedRows, alphabet: tempAlphabet }));
   }
 
@@ -230,7 +232,9 @@ function ConditionsList() {
               "flex grid grid-cols-3 lg:grid-cols-4 gap-5 items-center mt-2 text-left"
             }
           >
-            <div className={"col-span-3 lg:col-span-2"}>{t("list.states")} Q =</div>
+            <div className={"col-span-3 lg:col-span-2"}>
+              {t("list.states")} Q =
+            </div>
             <div
               className={
                 "col-span-2 lg:col-span-1 border border-solid bg-gray-100 rounded p-2 break-all"
@@ -297,23 +301,23 @@ function ConditionsList() {
             }
           >
             {/*<div className={"flex col-span-3 lg:col-span-2 justify-between"}>*/}
-              <div className={"col-span-3 lg:col-span-2"}>
-                {t("list.finalStates")} F = {kA}
-                {endZustand.map((value, index) => (
-                  <span key={index}>
-                    {value.value}
-                    {index === endZustand.length - 1 ? "" : ","}
-                  </span>
-                ))}
-                {kZ}
-              </div>
-              {endZustandWarningOn ? (
-                <IoIosWarning
-                  color="orange"
-                  title={t("list.warningFinalState")}
-                  size="32"
-                />
-              ) : null}
+            <div className={"col-span-3 lg:col-span-2"}>
+              {t("list.finalStates")} F = {kA}
+              {endZustand.map((value, index) => (
+                <span key={index}>
+                  {value.value}
+                  {index === endZustand.length - 1 ? "" : ","}
+                </span>
+              ))}
+              {kZ}
+            </div>
+            {endZustandWarningOn ? (
+              <IoIosWarning
+                color="orange"
+                title={t("list.warningFinalState")}
+                size="32"
+              />
+            ) : null}
             {/*</div>*/}
             <div className="flex col-span-3 lg:col-span-2">
               <Select

@@ -337,7 +337,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
 
         // save Endzustand to store
         // json.specifications.endStates...
-        // console.log(json.specifications.endStates);
         const endStates = json.specifications.endStates;
         let temp: Zustand[] = [];
         for (let index = 0; index < endStates.length; index++) {
