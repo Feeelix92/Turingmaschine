@@ -110,7 +110,6 @@ export default function ExampleSelect(props: ExampleSelectProps) {
    * @param newValue
    */
   function handleChange(newValue: OnChangeValue<CodeExample, false>) {
-
     if (newValue) {
       try {
         let json = JSON.parse(newValue.value);
@@ -316,9 +315,14 @@ export default function ExampleSelect(props: ExampleSelectProps) {
   return (
     <div>
       <div className={"flex gap-5 items-center mt-2"}>
+        <span className="block uppercase tracking-wide text-gray-700 text-xs font-bold">
+          {t("calculator.chooseExample")}
+        </span>
         <Select
           blurInputOnSelect={true}
-          className={"col-span-2 xl:w-24"}
+          className={
+            "block appearance-none w-full bg-gray-200 text-gray-700 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          }
           onChange={handleChange}
           options={props.examples}
           // @ts-ignore

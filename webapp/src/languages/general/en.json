@@ -150,7 +150,7 @@
   },
 
   "calculator": {
-    "name": "Calculator",
+    "name": "Tools",
     "binary": "Binary",
     "unary": "Unary",
     "number": "Number",
@@ -160,7 +160,8 @@
     "substraction": "Substraction",
     "multiplication": "Multiplication",
     "division": "Division",
-    "insert": "Insert"
+    "insert": "Insert",
+    "chooseExample": "Choose an example:"
   },
   "imprint": {
     "name": "Imprint",

@@ -149,7 +149,7 @@
   },
 
   "calculator": {
-    "name": "Rechner",
+    "name": "Hilfswerkzeuge",
     "binary": "Binär",
     "unary": "Unär",
     "number": "Zahl",
@@ -159,7 +159,8 @@
     "substraction": "Substraktion",
     "multiplication": "Multiplikation",
     "division": "Division",
-    "insert": "Einfügen"
+    "insert": "Einfügen",
+    "chooseExample": "Wähle ein Beispiel:"
   },
 
   "imprint": {
@@ -172,6 +173,5 @@
     "students": "Beteiligte Studierende",
     "moreInformation": "Weitere Informationen entnehmen Sie bitte der",
     "moreInformationLink": "Internetseite der Technische Hochschule Mittelhessen (THM)"
-    
   }
 }

@@ -17,11 +17,6 @@ import {
 } from "./redux/generalStore";
 import { bandResetAll } from "./redux/bandStore";
 import Imprint from "./components/Imprint/Imprint";
-import ExampleSelect from "./components/Example/ExampleSelect";
-import { CodeExample } from "./interfaces/CommonInterfaces";
-import { examples } from "./examples/Examples";
-
-const currentOptions: CodeExample[] = examples;
 
 function App() {
   return (
@@ -57,7 +52,6 @@ function Home() {
           <div className={"md:col-span-2"}>
             <ConditionsList />
             <Calculator />
-            <ExampleSelect examples={currentOptions} />
           </div>
           <Table />
         </div>

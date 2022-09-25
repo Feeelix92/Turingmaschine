@@ -1,5 +1,3 @@
-import React from "react";
-import { useState } from "react";
 import { CgAddR } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
 import Select, { OnChangeValue } from "react-select";
