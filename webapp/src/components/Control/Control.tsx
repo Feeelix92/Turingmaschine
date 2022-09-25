@@ -45,6 +45,20 @@ function Control() {
   const executable = useSelector(
     (state: RootState) => state.general.executable
   );
+  let exec = executable;
+  let wExecutable = watch(store.getState, "general.executable");
+  store.subscribe(
+    wExecutable((newVal, oldVal) => {
+      if (newVal != oldVal) {
+        exec = newVal;
+        console.group();
+        console.log(exec);
+        console.log(maschineRunning);
+        console.log(bandWarning);
+        console.groupEnd();
+      }
+    })
+  );
 
   const endConfetti = () => {
     party.confetti(document.body, {
@@ -469,7 +483,7 @@ function Control() {
               animateButton(e.target);
             }}
             onMouseLeave={animateBack}
-            disabled={!executable || maschineRunning || bandWarning}
+            disabled={!exec || maschineRunning || bandWarning}
           >
             <FaPlay />
           </button>
@@ -480,7 +494,7 @@ function Control() {
               animateButton(e.target);
             }}
             onMouseLeave={animateBack}
-            disabled={!executable || maschineRunning || bandWarning}
+            disabled={!exec || maschineRunning || bandWarning}
           >
             <FaStepForward />
           </button>
@@ -493,7 +507,7 @@ function Control() {
               animateButton(e.target);
             }}
             onMouseLeave={animateBack}
-            disabled={!executable || !maschineRunning || bandWarning}
+            disabled={!exec || !maschineRunning || bandWarning}
           >
             <FaPause />
           </button>
@@ -504,7 +518,7 @@ function Control() {
               animateButton(e.target);
             }}
             onMouseLeave={animateBack}
-            disabled={!executable || bandWarning || pauseMaschine}
+            disabled={!exec || bandWarning || pauseMaschine}
           >
             <FaStop />
           </button>

@@ -609,13 +609,23 @@ export const generalSlice = createSlice({
       state.activeRow = activeRow;
     },
     maschineChangeExecutable: (state, value: PayloadAction<boolean>) => {
+      console.log("maschineChangeExecutable", value.payload);
       state.executable = value.payload;
     },
     maschineCheckExecutable: (state) => {
+      // nonsense cause other inconsitencies could exist
       if (state.rows.length === 0) {
         state.executable = false;
       } else {
-        state.executable = true;
+        // state.executable = true;
+        const tempAlphabet: string[] = [];
+        state.bandAlphabet.forEach((entry) => {
+          tempAlphabet.push(entry.value);
+        });
+        tableCheckWarning({
+          rows: state.rows,
+          alphabet: tempAlphabet,
+        });
       }
     },
     maschineSetSlider: (state, value: PayloadAction<number>) => {
