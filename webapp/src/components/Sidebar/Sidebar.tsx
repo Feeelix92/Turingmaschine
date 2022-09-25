@@ -15,7 +15,7 @@ function Sidebar() {
   const [showModal, setShowModal] = useState(false);
 
   // Toggle Modal
-    function toggleModal() {
+  function toggleModal() {
     setShowModal(!showModal);
   }
 
@@ -39,10 +39,10 @@ function Sidebar() {
   };
 
   function getFlag(lng: any) {
-    if (lng == "de"){
-      return <FlagIcon code={"DE"} size={32} />
-    }else if (lng == "en"){
-      return <FlagIcon code={"GB"} size={32} />
+    if (lng == "de") {
+      return <FlagIcon code={"DE"} size={32} />;
+    } else if (lng == "en") {
+      return <FlagIcon code={"GB"} size={32} />;
     }
   }
 
@@ -50,17 +50,20 @@ function Sidebar() {
     <Menu
       right
       // width={450}
-      className='menu-options'
+      className="menu-options"
     >
       <div className={"mt-0"}>
         {/*Link zum default Modus*/}
         <Link className="no-underline text-white text-lg" to="/">
-            {t("sidebar.homePage")}
+          {t("sidebar.homePage")}
         </Link>
       </div>
 
-      <div className={"mt-0 no-underline text-white text-lg cursor-pointer"} onClick={() => reloadPage()}>
-            {t("sidebar.reload")}
+      <div
+        className={"mt-0 no-underline text-white text-lg cursor-pointer"}
+        onClick={() => reloadPage()}
+      >
+        {t("sidebar.reload")}
       </div>
 
       <hr className="mt-5" />
@@ -70,58 +73,65 @@ function Sidebar() {
       <div className="hidden md:inline-flex">
         <div className="rounded-md shadow-sm text-center inline-flex">
           {/*Link zum default Modus*/}
-          <Link to="/"
+          <Link
+            to="/"
             className={`no-underline py-2 px-2 sm:px-4 text-sm font-medium rounded-l-lg text-white cursor-pointer border border-thm-primary2
-                ${location.pathname === "/" 
-                  ? "bg-thm-primary pointer-events-none" 
-                  : "bg-gray-700 hover:bg-gray-900"
+                ${
+                  location.pathname === "/"
+                    ? "bg-thm-primary pointer-events-none"
+                    : "bg-gray-700 hover:bg-gray-900"
                 }`}
-          >{t("sidebar.normalMode")}
+          >
+            {t("sidebar.normalMode")}
           </Link>
           {/*Link zum Toilettenpapiermodus*/}
-          <Link to="/papier"
+          <Link
+            to="/papier"
             className={`no-underline py-2 px-4 text-sm font-medium text-white cursor-pointer border border-thm-primary2
                 ${
                   location.pathname === "/papier"
                     ? "bg-thm-primary pointer-events-none"
                     : "bg-gray-700 hover:bg-gray-900"
                 }`}
-          >{t("sidebar.toiletPaperMode")}
+          >
+            {t("sidebar.toiletPaperMode")}
           </Link>
           {/*Link zum Mehrspurenmodus*/}
-          <Link to="/mehrspuren"
+          <Link
+            to="/mehrspuren"
             className={`no-underline py-2 px-4 text-sm rounded-r-md font-medium text-white cursor-pointer border border-thm-primary2
                 ${
                   location.pathname === "/mehrspuren"
                     ? "bg-thm-primary pointer-events-none"
                     : "bg-gray-700 hover:bg-gray-900"
                 }`}
-          >{t("sidebar.multiTrackMachine")}
+          >
+            {t("sidebar.multiTrackMachine")}
           </Link>
         </div>
       </div>
 
       <hr className="mt-5" />
-        {mode != "toiletpaper" &&
-          <div className={""}>
-            <div
-              className={
-                "hidden md:block menu-item text-white text-lg no-underline cursor-pointer"
-              }
+      {mode != "toiletpaper" && (
+        <div className={""}>
+          <div
+            className={
+              "hidden md:block menu-item text-white text-lg no-underline cursor-pointer"
+            }
+          >
+            <a
+              className="text-white text-lg no-underline flex items-center"
+              onClick={toggleModal}
             >
-              <a
-                className="text-white text-lg no-underline flex items-center"
-                onClick={toggleModal}
-              >
-                Code-Editor
-                <div className="pl-2">
-                  <FaLaptopCode />
-                </div>
-              </a>
-              {showModal ? <AceJsonEditor toggleEditor={toggleModal} /> : null}
-            </div>
+              Code-Editor
+              <div className="pl-2">
+                <FaLaptopCode />
+              </div>
+            </a>
+            {showModal ? <AceJsonEditor toggleEditor={toggleModal} /> : null}
           </div>
-        }
+        </div>
+      )}
 
       <div>
         {Object.keys(lngs).map((lng) => (
@@ -140,14 +150,16 @@ function Sidebar() {
 
       <div className={"mt-0"}>
         {/*Link zum Imprint*/}
-        <Link to="/impressum"
-              className={`no-underline py-2 px-4 text-sm rounded font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
+        <Link
+          to="/impressum"
+          className={`no-underline py-2 px-4 text-sm rounded font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
                 ${
                   location.pathname === "/impressum"
-                      ? "bg-thm-primary"
-                      : "bg-gray-700 "
-              }`}
-        >{t("sidebar.imprint")}
+                    ? "bg-thm-primary"
+                    : "bg-gray-700 "
+                }`}
+        >
+          {t("sidebar.imprint")}
         </Link>
       </div>
     </Menu>

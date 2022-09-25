@@ -90,7 +90,8 @@
       "addNewValue": "Add",
       "emptyIsNotAllowed": "An empty set of input symbols is not allowed!",
       "alphabetAlreadyExists": "The selected input symbols already exists!",
-      "alphabetCreated": "New input symbols were created successfully!"
+      "alphabetCreated": "New input symbols were created successfully!",
+      "literalAlreadyExists": "The selected input symbol already exists!"
     },
     "mespumaExtension": {
       "NumberOfTracks": "Number of Tracks"
@@ -171,6 +172,5 @@
     "students": "Involved students",
     "moreInformation": "For further information, please refer to the",
     "moreInformationLink": "website of the Technische Hochschule Mittelhessen (THM)"
-    
   }
 }

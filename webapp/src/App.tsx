@@ -18,6 +18,11 @@ import {
 import { bandResetAll } from "./redux/bandStore";
 import Imprint from "./components/Imprint/Imprint";
 import * as React from "react";
+import ExampleSelect from "./components/Example/ExampleSelect";
+import { CodeExample } from "./interfaces/CommonInterfaces";
+import { examples } from "./examples/Examples";
+
+const currentOptions: CodeExample[] = examples
 
 function App() {
   return (
@@ -51,6 +56,7 @@ function Home() {
               <Calculator />
           </div>
           <Table />
+          <ExampleSelect examples={currentOptions} />
         </div>
         <div className={"lg:hidden"}>
           <Bottomnav />
@@ -113,17 +119,17 @@ function Impressum() {
   dispatch(bandResetAll());
 
   return (
-      <>
-          <header className="App-header">
-              <Menu/>
-          </header>
+    <>
+      <header className="App-header">
+        <Menu />
+      </header>
 
-          <div className={"App-body"}>
-              <div className={"ml-3 mr-3 md:ml-0 space-x-10 "}>
-                  <Imprint/>
-              </div>
-          </div>
-      </>
+      <div className={"App-body"}>
+        <div className={"ml-3 mr-3 md:ml-0 space-x-10 "}>
+          <Imprint />
+        </div>
+      </div>
+    </>
   );
 }
 

@@ -90,7 +90,8 @@
       "addNewValue": "Hinzufügen",
       "emptyIsNotAllowed": "Ein leeres Alphabet ist nicht erlaubt!",
       "alphabetAlreadyExists": "Das gewählte Alphabet existiert bereits!",
-      "alphabetCreated": "Das Eingabealphabet wurde erfolgreich erstellt!"
+      "alphabetCreated": "Das Eingabealphabet wurde erfolgreich erstellt!",
+      "literalAlreadyExists": "Das gewählte Zeichen existiert bereits!"
     },
     "mespumaExtension": {
       "NumberOfTracks": "Anzahl Spuren"

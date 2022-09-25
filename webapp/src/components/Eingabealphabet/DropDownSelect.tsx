@@ -27,6 +27,7 @@ export default function DropDownSelect() {
   const dialogOptions = useSelector(
     (state: RootState) => state.general.dialogOptions
   );
+
   const currentDialogOption = useSelector(
     (state: RootState) => state.general.currentDialogOption
   );
@@ -36,8 +37,10 @@ export default function DropDownSelect() {
   );
   let wAlphabet = watch(store.getState, "general.currentAlphabet");
   store.subscribe(
-    wAlphabet((newVal) => {
-      currentAlphabet = newVal;
+    wAlphabet((newVal, oldVal) => {
+      if (newVal != oldVal) {
+        currentAlphabet = newVal;
+      }
     })
   );
 

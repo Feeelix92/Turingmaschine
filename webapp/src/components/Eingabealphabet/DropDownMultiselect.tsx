@@ -1,3 +1,4 @@
+import { KeyboardEventHandler, useState } from "react";
 import CreatableSelect from "react-select/creatable";
 import { ActionMeta, OnChangeValue } from "react-select";
 import { EingabeAlphabet } from "../../interfaces/CommonInterfaces";
@@ -7,13 +8,15 @@ import {
   alphabetDeleteCustom,
   alphabetPushToCustom,
   alphabetPushToDialogOptions,
-  defaultAlphabetOption4,
 } from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
 import "react-toastify/dist/ReactToastify.css";
 import watch from "redux-watch";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
+import "react-toastify/dist/ReactToastify.css";
 
 export default function MultiselectDropDown(props: any) {
   ///internationalization
@@ -28,6 +31,7 @@ export default function MultiselectDropDown(props: any) {
   let currentAlphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
   );
+
   let wAlphabet = watch(store.getState, "general.currentAlphabet");
   store.subscribe(
     wAlphabet((newVal) => {
@@ -35,10 +39,8 @@ export default function MultiselectDropDown(props: any) {
     })
   );
 
-  // valuesArray = current selected options as Array
-  let valuesArray: string[] = [];
-  // valuesString = current selected options as String to use it as label
-  let valuesString = "";
+  const [optionString, setOptionString] = useState("");
+  const [optionArray, setOptionArray] = useState<EingabeAlphabet[]>([]);
 
   /**
    * function handleChange checks if the selected option has changed
@@ -49,11 +51,115 @@ export default function MultiselectDropDown(props: any) {
     newValues: OnChangeValue<EingabeAlphabet, true>,
     _actionMeta: ActionMeta<EingabeAlphabet>
   ) {
-    // converting the object to an iteratable Array
-    const optionsArray = Array.from(newValues.values());
-    valuesArray = optionsArray.map(({ value }) => value);
-    valuesString = "{" + valuesArray.toString() + "}";
+    // // converting the object to an iteratable Array
+    const temp = Array.from(newValues.values());
+    setOptionArray(temp);
   }
+
+  function handleInputChange(inputValue: string) {
+    if (inputValue) {
+      setOptionString(inputValue);
+    }
+  }
+
+  function handleKeyDown(event: KeyboardEventHandler<HTMLDivElement>) {
+    const ev = event as unknown as KeyboardEvent;
+    if (!optionString) return;
+    switch (ev.key) {
+      case "Enter":
+      case "Tab": {
+        let temp = optionArray.slice(0, optionArray.length);
+
+        const exists = temp.some((el) => {
+          return el.label === optionString;
+        });
+
+        if (!exists) {
+          temp.push({
+            label: optionString,
+            value: optionString,
+            warningMode: false,
+          });
+          setOptionArray(temp);
+          setOptionString("");
+        } else {
+          // display warning
+          toast.error("" + t("list.dropdown.literalAlreadyExists"), {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+
+        ev.preventDefault();
+        break;
+      }
+      case "Backspace": {
+        setOptionString("");
+        ev.preventDefault();
+        break;
+      }
+    }
+  }
+
+  const pushOptions = () => {
+    let compString = "{";
+    optionArray.forEach((option, idx) => {
+      compString += idx === 0 ? option.label : "," + option.label;
+    });
+    compString += "}";
+    const uniqueOptions = dialogOptions.filter(
+      (item) =>
+        item.label.split("").sort().toString() ===
+        compString.split("").sort().toString()
+    );
+    if (optionArray.length > 0 && uniqueOptions.length < 1) {
+      dispatch(alphabetDeleteCustom());
+      let tempOptions: string[] = [];
+      optionArray.forEach((value) => {
+        dispatch(alphabetPushToCustom(value.value));
+        tempOptions.push(value.value);
+      });
+
+      dispatch(alphabetPushToDialogOptions(tempOptions.toString()));
+
+      dispatch(alphabetChangeCurrent(currentAlphabet));
+      props.onCloseDialog();
+      toast.success("" + t("list.dropdown.alphabetCreated"), {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (optionArray.length > 0 && uniqueOptions.length >= 1) {
+      toast.error("" + t("list.dropdown.alphabetAlreadyExists"), {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.error("" + t("list.dropdown.emptyIsNotAllowed"), {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
 
   return (
     <div className={"border rounded p-2"}>
@@ -64,70 +170,23 @@ export default function MultiselectDropDown(props: any) {
         <p className={"text-left"}>{t("list.dropdown.description")}</p>
         <div className={"text-lg pb-2 pt-2"}>
           <CreatableSelect
-            allowCreateWhileLoading={false}
-            formatCreateLabel={(inputValue) =>
-              inputValue + " " + t("list.dropdown.addNewValue")
-            }
-            noOptionsMessage={() => t("list.dropdown.noOptionsMessage")}
-            placeholder={t("list.dropdown.inputPlaceholder")}
-            className={"text-base text-black"}
+            inputValue={optionString}
+            isClearable
             isMulti
+            menuIsOpen={false}
             onChange={handleChange}
-            options={defaultAlphabetOption4.alphabet}
-            onInputChange={(inputValue) =>
-              inputValue.length <= 1 ? inputValue : inputValue.substr(0, 1)
+            onInputChange={handleInputChange}
+            onKeyDown={(ev) =>
+              handleKeyDown(
+                ev as unknown as KeyboardEventHandler<HTMLDivElement>
+              )
             }
+            placeholder="Type something and press enter..."
+            value={optionArray}
           />
         </div>
         <div className={"text-right"}>
-          <button
-            onClick={() => {
-              const uniqueOptions = dialogOptions.filter(
-                (item) =>
-                  item.label.split("").sort().toString() ===
-                  valuesString.split("").sort().toString()
-              );
-              if (valuesArray.length > 0 && uniqueOptions.length < 1) {
-                dispatch(alphabetDeleteCustom());
-                valuesArray.forEach((value) => {
-                  dispatch(alphabetPushToCustom(value));
-                });
-                dispatch(alphabetPushToDialogOptions(valuesArray.toString()));
-                dispatch(alphabetChangeCurrent(currentAlphabet));
-                props.onCloseDialog();
-                toast.success("" + t("list.dropdown.alphabetCreated"), {
-                  position: "top-right",
-                  autoClose: 5000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                });
-              } else if (valuesArray.length > 0 && uniqueOptions.length >= 1) {
-                toast.error("" + t("list.dropdown.alphabetAlreadyExists"), {
-                  position: "top-right",
-                  autoClose: 5000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                });
-              } else {
-                toast.error("" + t("list.dropdown.emptyIsNotAllowed"), {
-                  position: "top-right",
-                  autoClose: 5000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                });
-              }
-            }}
-            className={"col-start-3 col-span-2"}
-          >
+          <button onClick={pushOptions} className={"col-start-3 col-span-2"}>
             {t("list.dropdown.saveAdding")}
           </button>
         </div>
