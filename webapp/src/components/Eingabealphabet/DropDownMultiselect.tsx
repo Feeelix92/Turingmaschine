@@ -8,12 +8,11 @@ import {
   alphabetDeleteCustom,
   alphabetPushToCustom,
   alphabetPushToDialogOptions,
-  defaultAlphabetOption4,
 } from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
 import watch from "redux-watch";
 import { useTranslation } from "react-i18next";
-import { ToastContainer, toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
+import { toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
 import "react-toastify/dist/ReactToastify.css";
 
 export default function MultiselectDropDown(props: any) {
@@ -61,8 +60,9 @@ export default function MultiselectDropDown(props: any) {
   }
 
   function handleKeyDown(event: KeyboardEventHandler<HTMLDivElement>) {
+    const ev = event as unknown as KeyboardEvent;
     if (!optionString) return;
-    switch (event.key) {
+    switch (ev.key) {
       case "Enter":
       case "Tab": {
         let temp = optionArray.slice(0, optionArray.length);
@@ -92,24 +92,29 @@ export default function MultiselectDropDown(props: any) {
           });
         }
 
-        event.preventDefault();
+        ev.preventDefault();
         break;
       }
       case "Backspace": {
         setOptionString("");
-        event.preventDefault();
+        ev.preventDefault();
         break;
       }
     }
   }
 
   const pushOptions = () => {
+    let compString = "{";
+    optionArray.forEach((option, idx) => {
+      compString += idx === 0 ? option.label : "," + option.label;
+    });
+    compString += "}";
     const uniqueOptions = dialogOptions.filter(
       (item) =>
         item.label.split("").sort().toString() ===
-        optionString.split("").sort().toString()
+        compString.split("").sort().toString()
     );
-    if (optionArray.length > 0 && uniqueOptions.length - 1 < 1) {
+    if (optionArray.length > 0 && uniqueOptions.length < 1) {
       dispatch(alphabetDeleteCustom());
       let tempOptions: string[] = [];
       optionArray.forEach((value) => {
@@ -130,7 +135,7 @@ export default function MultiselectDropDown(props: any) {
         draggable: true,
         progress: undefined,
       });
-    } else if (optionArray.length > 0 && uniqueOptions.length - 1 >= 1) {
+    } else if (optionArray.length > 0 && uniqueOptions.length >= 1) {
       toast.error("" + t("list.dropdown.alphabetAlreadyExists"), {
         position: "top-right",
         autoClose: 5000,
@@ -168,7 +173,11 @@ export default function MultiselectDropDown(props: any) {
             menuIsOpen={false}
             onChange={handleChange}
             onInputChange={handleInputChange}
-            onKeyDown={handleKeyDown}
+            onKeyDown={(ev) =>
+              handleKeyDown(
+                ev as unknown as KeyboardEventHandler<HTMLDivElement>
+              )
+            }
             placeholder="Type something and press enter..."
             value={optionArray}
           />
