@@ -45,29 +45,15 @@ export default function ExampleSelect(props: ExampleSelectProps) {
   const currentMode = useSelector((state: RootState) => state.general.mode);
 
   // Editor content
-  const currentBand = useSelector((state: RootState) => state.band.currentBand);
-  const currentMespumaBand = useSelector(
-    (state: RootState) => state.band.mespumaBand
-  );
   const setPointerAt = (index: number) => {
     dispatch(bandSetPointPos(index));
   };
   const anzahlSpuren = useSelector(
     (state: RootState) => state.general.anzahlSpuren
   );
-  const currentAlphabet = useSelector(
-    (state: RootState) => state.general.currentAlphabet
-  );
-  const initZustandsmenge = useSelector(
-    (state: RootState) => state.general.zustandsmenge
-  );
   const initAnfangsZustand = useSelector(
     (state: RootState) => state.general.anfangsZustand
   );
-  const initEndZustand = useSelector(
-    (state: RootState) => state.general.endZustand
-  );
-  const initTable = useSelector((state: RootState) => state.general.rows);
 
   /////////// Band from State MeSpuMa ///////////
   let rows = useSelector((state: RootState) => state.general.rows);
@@ -230,7 +216,6 @@ export default function ExampleSelect(props: ExampleSelectProps) {
 
         // save Endzustand to store
         // json.specifications.endStates...
-        // console.log(json.specifications.endStates);
         const endStates = json.specifications.endStates;
         let temp: Zustand[] = [];
         for (let index = 0; index < endStates.length; index++) {
