@@ -9,10 +9,11 @@ import {
   alphabetPushToDialogOptions,
   defaultAlphabetOption4,
 } from "../../redux/generalStore";
-import { RootState } from "../../redux/store";
+import { RootState, store } from "../../redux/store";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
 import "react-toastify/dist/ReactToastify.css";
+import watch from "redux-watch";
 
 export default function MultiselectDropDown(props: any) {
   ///internationalization
@@ -26,6 +27,12 @@ export default function MultiselectDropDown(props: any) {
 
   let currentAlphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
+  );
+  let wAlphabet = watch(store.getState, "general.currentAlphabet");
+  store.subscribe(
+    wAlphabet((newVal) => {
+      currentAlphabet = newVal;
+    })
   );
 
   // valuesArray = current selected options as Array

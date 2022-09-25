@@ -11,9 +11,10 @@ import {
   alphabetChangeCurrent,
   alphabetChangeCurrentMespuma,
 } from "../../redux/generalStore";
-import { RootState } from "../../redux/store";
+import { RootState, store } from "../../redux/store";
 import MultiselectDropDown from "./DropDownMultiselect";
 import { useTranslation } from "react-i18next";
+import watch from "redux-watch";
 
 export default function DropDownSelect() {
   // mode für alle:
@@ -33,6 +34,13 @@ export default function DropDownSelect() {
   let currentAlphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
   );
+  let wAlphabet = watch(store.getState, "general.currentAlphabet");
+  store.subscribe(
+    wAlphabet((newVal) => {
+      currentAlphabet = newVal;
+    })
+  );
+
   /**
    * checks if Dialog opened or closed
    */

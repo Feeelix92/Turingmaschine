@@ -47,7 +47,6 @@ export default function Cell(props: CellProps) {
     mode !== "toiletpaper" ? zustandsmenge.concat(temp) : zustandsmenge;
 
   useEffect(() => {
-    console.log("CELL STATES");
     states = zustandsmenge;
     const failure = checkWarningModus();
 
