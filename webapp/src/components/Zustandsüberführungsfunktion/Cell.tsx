@@ -273,6 +273,59 @@ export default function Cell(props: CellProps) {
     }
 
     const placeholderTP = eALphabet.find(e => e.value === props.value)
+    const placeholderTpMultiLang = () => {
+        if (placeholderTP?.label === "\u26AA") {
+            return '\u26AA'
+        }
+        if (placeholderTP?.label === "\u26AB") {
+            return '\u26AB'
+        }
+        if (placeholderTP?.label === "\u1F5C") {
+            return '\u1F5C'
+        }
+
+    }
+
+    /*
+    const multiLangLabel = () => {
+        if(placeholderTP?.label === "weiß"){
+            const index = eALphabet.findIndex(choice => {
+                return choice.label === "weiß"
+            })
+            console.log(eALphabet[index].label)
+            Object.freeze(eALphabet)
+            const copy = [...eALphabet]
+            copy[index].label = 'moin'
+            console.log(copy[index].label)
+        }
+
+
+        if (placeholderTP?.label === "weiß") {
+            const index = eALphabet.findIndex(choice => {
+                return choice.label === "weiß"
+            })
+            if (index !== -1){
+                eALphabet[index].label = "moin"
+            }
+        }
+        if (placeholderTP?.label === "schwarz") {
+            const index = eALphabet.findIndex(choice => {
+                return choice.label === "schwarz"
+            })
+            if (index !== -1){
+                eALphabet[index].label = "moin"
+            }
+        }
+        console.log('mointest', eALphabet)
+        if (placeholderTP?.label === "leer") {
+            const index = eALphabet.findIndex(choice => {
+                return choice.label === "leer"
+            })
+            if (index !== -1){
+                eALphabet[index].label = "moin"
+            }
+        }
+    }*/
 
     return (
         <td
@@ -304,7 +357,7 @@ export default function Cell(props: CellProps) {
             )}
             {mode == "default" && typeof props.value === "string" ? (
                 <Select
-                    placeholder={props.value}
+                    placeholder={placeholderTpMultiLang()}
                     blurInputOnSelect={false}
                     className={"text-black py-3 px-2 text-base xl:w-32"}
                     onChange={handleChange}
@@ -319,7 +372,7 @@ export default function Cell(props: CellProps) {
             {/* onChange needed (to change the value) OR defaultValue instead of value */}
             {mode == "toiletpaper" && typeof props.value === "string" ? (
                 <Select
-                    placeholder={placeholderTP?.label}
+                    placeholder={placeholderTpMultiLang()}
                     blurInputOnSelect={false}
                     className={"text-black py-3 px-2 text-base xl:w-32"}
                     onChange={handleChange}
