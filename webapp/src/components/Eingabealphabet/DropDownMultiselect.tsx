@@ -10,8 +10,6 @@ import {
   alphabetPushToDialogOptions,
 } from "../../redux/generalStore";
 import { RootState, store } from "../../redux/store";
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
 import "react-toastify/dist/ReactToastify.css";
 import watch from "redux-watch";
 import { useTranslation } from "react-i18next";
