@@ -38,29 +38,29 @@ export default function Table() {
   const mode = useSelector((state: RootState) => state.general.mode);
 
   return (
-    <div className="flex flex-col col-span-2 border rounded p-0 w-screen md:w-full">
-      <div className="sm:-mx-0 lg:-mx-0">
-        <div className=" sm:px-6 lg:px-8">
+    <div className="flex flex-col col-span-2 border rounded">
+      <div className="">
+        <div className="">
           <div className="overflow-x-hidden items-center">
             <div className="flex w-full text-left text-sm font-medium text-gray-900">
-              <div className="w-1/2 pl-2">{t("table.if")}...</div>
-              <div className="w-1/2 pl-2">{t("table.then")}...</div>
+              <div className="w-1/2 pl-2 pt-2">{t("table.if")}...</div>
+              <div className="w-1/2 pl-2 pt-2">{t("table.then")}...</div>
             </div>
             <table className="min-w-full w-full">
-              <thead className="flex border-b w-full">
+              <thead className="flex border-b w-full pr-[1.2rem]">
                 <tr className="flex w-full">
                   {headerArray.map((value, key: React.Key) => (
                     <th
                       key={key}
                       scope="col"
-                      className="text-sm px-2 font-medium text-gray-900 py-4 w-1/6 text-left border-r"
+                      className="text-sm px-2 font-medium text-gray-900 py-2 w-1/6 text-left border-r"
                     >
                       {value}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="flex flex-col items-center justify-between md:max-h-48 xl:max-h-96 overflow-y-auto overflow-x-hidden">
+              <tbody className="flex flex-col items-center justify-between md:max-h-96 xl:max-h-[48rem] overflow-y-scroll overflow-x-hidden">
                 {rows.map((value, key: React.Key) =>
                   mode === "toiletpaper" && value.isFinal ? null : (
                     <Row

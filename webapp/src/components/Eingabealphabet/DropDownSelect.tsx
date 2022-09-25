@@ -150,15 +150,15 @@ export default function DropDownSelect() {
 
   return (
     <div>
-      <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2"}>
-        <p className={"col-span-2 text-left"}>
+      <div className={"flex grid grid-cols-3 lg:grid-cols-4 gap-5 items-center mt-2"}>
+        <p className={"col-span-3 lg:col-span-2 text-left"}>
           {" "}
           {t("list.dropdown.inputSymbols")} ∑ =
         </p>
         <Select
           value={currentDialogOption}
           blurInputOnSelect={false}
-          className={"col-span-2"}
+          className={"col-span-3 lg:col-span-2"}
           onChange={handleChange}
           options={dialogOptions}
           getOptionValue={(option) => option.alphabet.key.toString()}

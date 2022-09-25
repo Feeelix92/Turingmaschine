@@ -280,11 +280,11 @@ function ConditionsList() {
   return (
     <div
       className={
-        "border-solid border rounded bg-white w-screen sm:w-3/4 lg:w-3/4 3xl:w-2/4 p-2 items-center hover:bg-gray-100 col-span-2 max-w-screen-sm"
+        "border-solid border rounded bg-white p-2 items-center hover:bg-gray-100 col-span-2"
       }
     >
       <div className={""} onClick={() => setIsActive(!isActive)}>
-        <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center"}>
+        <div className={"flex grid grid-cols-3 gap-5 items-center"}>
           <span className={""}>
             {isActive ? closeAccordion : openAccordion}
           </span>
@@ -296,16 +296,16 @@ function ConditionsList() {
           {/* Auswahl für Anzahl Spuren: */}
           <div
             className={
-              "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
+              "flex grid grid-cols-3 lg:grid-cols-4 gap-5 items-center mt-2 text-left"
             }
           >
-            <div className={"flex col-span-2 justify-between"}>
+            <div className={"flex col-span-1 lg:col-span-2 justify-between"}>
               <div>{t("list.mespumaExtension.NumberOfTracks")} =</div>
             </div>
 
             <div
               className={
-                "border border-solid bg-gray-100 rounded p-2 break-all"
+                "col-span-1 border border-solid bg-gray-100 rounded p-2 break-all"
               }
             >
               {anzahlSpuren}
@@ -325,15 +325,15 @@ function ConditionsList() {
           </div>
           <div
             className={
-              "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
+              "flex grid grid-cols-3 lg:grid-cols-4 gap-5 items-center mt-2 text-left"
             }
           >
-            <div className={"col-span-2"}>
+            <div className={"col-span-3 lg:col-span-2"}>
               {t("list.tapeAlphabetSymbols")} &Gamma; =
             </div>
             <div
               className={
-                "border border-solid bg-gray-100 rounded p-2 col-span-2 max-h-60 overflow-y-scroll"
+                "border border-solid bg-gray-100 rounded p-2 col-span-3 lg:col-span-2 max-h-60 overflow-y-scroll"
               }
             >
               {kA}
@@ -348,13 +348,13 @@ function ConditionsList() {
           </div>
           <div
             className={
-              "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
+              "flex grid grid-cols-3 lg:grid-cols-4 gap-5 items-center mt-2 text-left"
             }
           >
-            <div className={"col-span-2"}>{t("list.states")} Q =</div>
+            <div className={"col-span-3 lg:col-span-2"}>{t("list.states")} Q =</div>
             <div
               className={
-                "border border-solid bg-gray-100 rounded p-2 break-all"
+                "border border-solid bg-gray-100 rounded p-2 break-all col-span-2 lg:col-span-1"
               }
             >
               {kA}
@@ -383,10 +383,10 @@ function ConditionsList() {
           </div>
           <div
             className={
-              "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
+              "flex grid grid-cols-3 lg:grid-cols-4 gap-5 items-center mt-2 text-left"
             }
           >
-            <div className={"flex col-span-2 justify-between"}>
+            <div className={"flex col-span-3 lg:col-span-2 justify-between"}>
               {t("list.initialState")} q0 = {anfangsZustand.value}{" "}
               {anfangsZustand.warningMode ? (
                 <IoIosWarning
@@ -396,7 +396,7 @@ function ConditionsList() {
                 />
               ) : null}
             </div>
-            <div className="flex col-span-2">
+            <div className="flex col-span-3 lg:col-span-2">
               <Select
                 value={anfangsZustand}
                 blurInputOnSelect={false}
@@ -414,10 +414,10 @@ function ConditionsList() {
           </div>
           <div
             className={
-              "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
+              "flex grid grid-cols-3 lg:grid-cols-4 gap-5 items-center mt-2 text-left"
             }
           >
-            <div className={"flex col-span-2 justify-between"}>
+            <div className={"flex col-span-3 lg:col-span-2 justify-between"}>
               <div>
                 {t("list.finalStates")} F = {kA}
                 {endZustand.map((value, index) => (
@@ -436,7 +436,7 @@ function ConditionsList() {
                 />
               ) : null}
             </div>
-            <div className="flex col-span-2">
+            <div className="flex col-span-3 lg:col-span-2">
               <Select
                 blurInputOnSelect={false}
                 className={"w-full"}
@@ -455,15 +455,15 @@ function ConditionsList() {
           </div>
           <div
             className={
-              "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
+              "flex grid grid-cols-3 lg:grid-cols-4 gap-5 items-center mt-2 text-left"
             }
           >
-            <span className={"col-span-2"}>
+            <span className={"col-span-3 lg:col-span-2"}>
               {t("list.transitionFunction")} &delta; =
             </span>
             <div
               className={
-                "border border-solid bg-gray-100 rounded p-2 col-span-2 max-h-60 overflow-y-scroll cursor-pointer"
+                "border border-solid bg-gray-100 rounded p-2 col-span-3 lg:col-span-2 max-h-60 overflow-y-scroll cursor-pointer"
               }
               onClick={() => getZustandsFunktion()}
             >

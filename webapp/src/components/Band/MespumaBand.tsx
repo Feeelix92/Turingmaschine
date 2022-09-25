@@ -77,7 +77,7 @@ export default function Band() {
   const { t } = useTranslation(["general"]);
 
   return (
-    <div className={"w-screen"}>
+    <div className={"w-full"}>
       <h4 className="pb-3 pt-5">{t("band.mespumaExtension.headline")}</h4>
 
       <div className="flex ">

@@ -264,7 +264,7 @@ export default function Cell(props: CellProps) {
   return (
     <td
       ref={wrapperRef}
-      className="px-2 py-4 w-auto whitespace-nowrap text-sm font-medium text-gray-900 border-r flex justify-center items-center"
+      className="px-2 py-2 w-1/6 whitespace-nowrap text-sm text-gray-900 border-r flex justify-center items-center"
     >
       {props.value instanceof Zustand ? (
         <ZustandSelect
@@ -280,7 +280,7 @@ export default function Cell(props: CellProps) {
         <Select
           defaultValue={props.value}
           blurInputOnSelect={false}
-          className={"text-black p-3 text-base xl:w-24"}
+          className={"text-black text-base"}
           onChange={handleChange}
           options={directions}
           menuPortalTarget={document.querySelector("body")}
@@ -296,7 +296,7 @@ export default function Cell(props: CellProps) {
           name="value"
           id="tableValueInput"
           className={
-            "w-full rounded text-gray-700 focus:outline-none items-center border text-center"
+            "w-full h-full rounded text-gray-700 focus:outline-none items-center border text-center"
           }
           value={props.value}
           onChange={(e) => checkValue(props.index, e.target.value)}
@@ -310,7 +310,7 @@ export default function Cell(props: CellProps) {
         <input
           defaultValue={t("cell.toiletPaperMode.empty")}
           className={
-            "w-full rounded text-gray-700 focus:outline-none items-center border text-center"
+            "rounded text-gray-700 focus:outline-none items-center border text-center w-full h-full"
           }
         />
       )}
@@ -318,7 +318,7 @@ export default function Cell(props: CellProps) {
         <input
           defaultValue={t("cell.toiletPaperMode.white")}
           className={
-            "w-full rounded text-gray-700 focus:outline-none items-center border text-center"
+            "rounded text-gray-700 focus:outline-none items-center border text-center w-full h-full"
           }
         />
       )}
@@ -326,7 +326,7 @@ export default function Cell(props: CellProps) {
         <input
           defaultValue={t("cell.toiletPaperMode.black")}
           className={
-            "w-full rounded text-gray-700 focus:outline-none items-center border text-center"
+            "rounded text-gray-700 focus:outline-none items-center border text-center w-full h-full "
           }
         />
       )}
@@ -336,7 +336,7 @@ export default function Cell(props: CellProps) {
         <Select
           placeholder={props.value}
           blurInputOnSelect={false}
-          className={"text-black py-3 px-2 text-base xl:w-32"}
+          className={"text-black text-base"}
           onChange={handleChange}
           options={eALphabet.filter(
             (Eingabealphabet) => Eingabealphabet.value.length > 1

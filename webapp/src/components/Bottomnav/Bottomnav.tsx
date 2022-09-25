@@ -37,8 +37,8 @@ function Bottomnav() {
     useEffect(() => {
 
         function handleResize() {
-            var y = window.innerHeight;
-            var heightDiff = 200; // Soll erst ab einer bestimmten Differenz der Höhe getriggert werden --> Damit es nicht auch auf scrollen reagiert --> also quasi die vermutete Mindesthöhe des Keyboards
+            const y = window.innerHeight;
+            const heightDiff = 200; // Soll erst ab einer bestimmten Differenz der Höhe getriggert werden --> Damit es nicht auch auf scrollen reagiert --> also quasi die vermutete Mindesthöhe des Keyboards
 
             if(windowHeight > y && ( (windowHeight-y) > heightDiff ) ) {
                 setKeyboardIsOpen(true); 
@@ -81,14 +81,14 @@ function Bottomnav() {
             { (mode!="toiletpaper") 
                 ? 
                 (
-                    <div className={`bottomnav z-50 ${(keyboardIsOpen) ? 'hidden' : 'flex'}`}>
-                        <button className={"grid justify-items-center"}  onClick={() => showSpez()}>
-                            <FaClipboardList/>
+                    <div className={`bottomnav z-0 ${(keyboardIsOpen) ? 'hidden' : 'grid grid-cols-2 justify-items-center'}`}>
+                        <button className={"flex gap-4 items-center"}  onClick={() => showSpez()}>
+                            <FaClipboardList size={30}/>
                             {t("bottomNavBar.configurations")}
                         </button>
         
-                        <button className={"grid justify-items-center"} onClick={() => showFunk()}>
-                            <FaTable/>
+                        <button className={"flex gap-4 items-center"} onClick={() => showFunk()}>
+                            <FaTable size={30}/>
                             {t("bottomNavBar.table")}
                         </button>
                 </div>
