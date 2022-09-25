@@ -82,7 +82,7 @@
       "inputSymbols": "Eingabealphabet",
       "addInputSymbols": "Eingabealphabet hinzufügen",
       "description": "Definieren Sie Ihr eigenes Eingabealphabet!",
-      "inputPlaceholder": "Tippen Sie etwas ein und drücken Sie die Eingabetaste",
+      "inputPlaceholder": "Tippen Sie etwas ein und drücken Sie die Eingabetaste!",
       "saveAdding": "Speichern",
       "noOptionsMessage": "Geben Sie neues Zeichen ein!",
       "onlyOneStateAllowed": "Es kann nur einen Anfangzustand geben!",
