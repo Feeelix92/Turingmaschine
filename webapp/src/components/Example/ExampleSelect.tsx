@@ -110,11 +110,9 @@ export default function ExampleSelect(props: ExampleSelectProps) {
    * @param newValue
    */
   function handleChange(newValue: OnChangeValue<CodeExample, false>) {
-    console.log(newValue);
 
     if (newValue) {
       try {
-        console.log(newValue.value);
         let json = JSON.parse(newValue.value);
 
         // save alphabet from editor to store

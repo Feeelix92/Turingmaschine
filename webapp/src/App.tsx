@@ -17,12 +17,11 @@ import {
 } from "./redux/generalStore";
 import { bandResetAll } from "./redux/bandStore";
 import Imprint from "./components/Imprint/Imprint";
-import * as React from "react";
 import ExampleSelect from "./components/Example/ExampleSelect";
 import { CodeExample } from "./interfaces/CommonInterfaces";
 import { examples } from "./examples/Examples";
 
-const currentOptions: CodeExample[] = examples
+const currentOptions: CodeExample[] = examples;
 
 function App() {
   return (
@@ -50,13 +49,17 @@ function Home() {
       </header>
 
       <div className={"App-body"}>
-        <div className={"hidden w-full max-w-screen-2xl lg:grid lg:grid-cols-4 lg:items-start px-2 gap-4"}>
+        <div
+          className={
+            "hidden w-full max-w-screen-2xl lg:grid lg:grid-cols-4 lg:items-start px-2 gap-4"
+          }
+        >
           <div className={"md:col-span-2"}>
-              <ConditionsList />
-              <Calculator />
+            <ConditionsList />
+            <Calculator />
+            <ExampleSelect examples={currentOptions} />
           </div>
           <Table />
-          <ExampleSelect examples={currentOptions} />
         </div>
         <div className={"lg:hidden"}>
           <Bottomnav />
@@ -79,7 +82,11 @@ function Papier() {
       </header>
 
       <div className={"App-body"}>
-        <div className={"w-full max-w-screen-2xl grid grid-cols-4 md:items-start px-2"}>
+        <div
+          className={
+            "w-full max-w-screen-2xl grid grid-cols-4 md:items-start px-2"
+          }
+        >
           <ToPaTable />
         </div>
       </div>
@@ -100,7 +107,11 @@ function Mespuma() {
       </header>
 
       <div className={"App-body"}>
-        <div className={"hidden w-full max-w-screen-2xl lg:grid lg:grid-cols-4 lg:items-start px-2 gap-4"}>
+        <div
+          className={
+            "hidden w-full max-w-screen-2xl lg:grid lg:grid-cols-4 lg:items-start px-2 gap-4"
+          }
+        >
           <MespumaList />
           <Table />
         </div>

@@ -28,8 +28,6 @@ export default function ZustandSelect(props: ZustandSelectProps) {
         dispatch(alphabetPushToZustand());
       }
     }
-
-    console.log(state);
     props.updateValue(state);
   }
 
