@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import watch from "redux-watch";
-import { RootState, store } from "../../redux/store";
+import { RootState } from "../../redux/store";
 import {
   tableDeleteRow,
   tableAddRow,
@@ -11,7 +10,6 @@ import { useTranslation } from "react-i18next";
 import * as React from "react";
 
 export default function Table() {
-  const loadedRows = useSelector((state: RootState) => state.general.rows);
   const dispatch = useDispatch();
 
   ///internationalization
@@ -26,15 +24,12 @@ export default function Table() {
   ];
 
   /////////// Rows from State ///////////
+  const loadedRows = useSelector((state: RootState) => state.general.rows);
   let rows = loadedRows;
-  let wRows = watch(store.getState, "general.rows");
-  store.subscribe(
-    wRows((newVal) => {
-      console.log("WATCHER TABLE ROWS");
-      rows = newVal;
-      dispatch(maschineCheckExecutable());
-    })
-  );
+  React.useEffect(() => {
+    rows = loadedRows;
+    dispatch(maschineCheckExecutable());
+  }, [loadedRows]);
 
   const zustandsmenge = useSelector(
     (state: RootState) => state.general.zustandsmenge

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Select, {ActionMeta, OnChangeValue} from "react-select";
+import Select, { ActionMeta, OnChangeValue } from "react-select";
 import {
   Direction,
   EingabeAlphabet,
@@ -12,21 +12,19 @@ import {
   alphabetPushToZustand,
   alphabetDeleteZustand,
   alphabetChangeWarningMode,
-  maschineCheckExecutable,
   mespumaPushToSpuren,
   mespumaDeleteSpuren,
   alphabetChangeCurrentMespuma,
 } from "../../redux/generalStore";
-import { RootState, store } from "../../redux/store";
+import { RootState } from "../../redux/store";
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
 import { BiCaretDown, BiCaretUp, IoIosWarning } from "react-icons/all";
-import watch from "redux-watch";
 import {
   bandAddBandMespuma,
   bandDeleteBandMespuma,
 } from "../../redux/bandStore";
 import { cartesianProduct } from "../../interfaces/CommonFunctions";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 function ConditionsList() {
   /**
@@ -42,52 +40,19 @@ function ConditionsList() {
   const bandAlphabet = useSelector(
     (state: RootState) => state.general.bandAlphabet
   );
-
-  const initZustandsmenge = useSelector(
-    (state: RootState) => state.general.zustandsmenge
-  );
-  const initAnfangsZustand = useSelector(
-    (state: RootState) => state.general.anfangsZustand
-  );
-  const initEndZustand = useSelector(
-    (state: RootState) => state.general.endZustand
-  );
-
   // TODO: Spuren-Anzahl:
   const anzahlSpuren = useSelector(
     (state: RootState) => state.general.anzahlSpuren
   );
-  let spuren = anzahlSpuren;
-  let wSpuren = watch(store.getState, "general.anzahlSpuren");
-  store.subscribe(
-    wSpuren((newVal) => {
-      spuren = newVal;
-    })
+  const zustandsmenge = useSelector(
+    (state: RootState) => state.general.zustandsmenge
   );
-
-  let zustandsmenge: Zustand[] = initZustandsmenge;
-  let wZustandsmenge = watch(store.getState, "general.zustandsmenge");
-  store.subscribe(
-    wZustandsmenge((newVal) => {
-      zustandsmenge = newVal;
-    })
+  const anfangsZustand = useSelector(
+    (state: RootState) => state.general.anfangsZustand
   );
-  let anfangsZustand: Zustand = initAnfangsZustand;
-  let wAnfangsZustand = watch(store.getState, "general.anfangsZustand");
-  store.subscribe(
-    wAnfangsZustand((newVal) => {
-      anfangsZustand = newVal;
-    })
+  const endZustand = useSelector(
+    (state: RootState) => state.general.endZustand
   );
-  let endZustand: Zustand[] = initEndZustand;
-  let wEndZustand = watch(store.getState, "general.endZustand");
-  store.subscribe(
-    wEndZustand((newVal) => {
-      endZustand = newVal;
-      dispatch(maschineCheckExecutable());
-    })
-  );
-
   const currentAlphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
   );
@@ -98,7 +63,7 @@ function ConditionsList() {
   const kZ = "}";
 
   ///internationalization
-  const { t } = useTranslation(["general"])
+  const { t } = useTranslation(["general"]);
 
   /**
    * Accordion data (Title, Icons)
@@ -123,13 +88,13 @@ function ConditionsList() {
       newValue.anfangszustand = true;
       dispatch(alphabetChangeAnfangszustand(newValue));
       checkWarningModus();
-      setShowZustandsfunktion(false)
+      setShowZustandsfunktion(false);
     }
   }
 
   function handleChangeMulti(
-      newValues: OnChangeValue<Zustand, true>,
-      _actionMeta: ActionMeta<Zustand>
+    newValues: OnChangeValue<Zustand, true>,
+    _actionMeta: ActionMeta<Zustand>
   ) {
     if (newValues) {
       const endStatesArray = Array.from(newValues.values());
@@ -143,36 +108,35 @@ function ConditionsList() {
   let [zustandsFunktion] = useState([""]);
 
   function getZustandsFunktion() {
-    let tempLenght = zustandsFunktion.length
-    for(let i=0; i <= tempLenght; i++){
-      zustandsFunktion.pop()
+    let tempLenght = zustandsFunktion.length;
+    for (let i = 0; i <= tempLenght; i++) {
+      zustandsFunktion.pop();
     }
-      let tempCellsString = "δ(";
-      let tempHelper = true;
-      loadedRows.forEach((row) => {
-        row.cells.forEach((cell) => {
-          if (cell.value instanceof Zustand) {
-            tempCellsString = tempCellsString + cell.value.value + ",";
-          } else if (cell.value instanceof Direction) {
-            tempCellsString = tempCellsString + cell.value.value + ")";
+    let tempCellsString = "δ(";
+    let tempHelper = true;
+    loadedRows.forEach((row) => {
+      row.cells.forEach((cell) => {
+        if (cell.value instanceof Zustand) {
+          tempCellsString = tempCellsString + cell.value.value + ",";
+        } else if (cell.value instanceof Direction) {
+          tempCellsString = tempCellsString + cell.value.value + ")";
+        } else {
+          if (tempHelper === true) {
+            tempCellsString = tempCellsString + cell.value.toString() + ") = (";
+            tempHelper = false;
           } else {
-            if (tempHelper === true) {
-              tempCellsString =
-                tempCellsString + cell.value.toString() + ") = (";
-              tempHelper = false;
-            } else {
-              tempCellsString = tempCellsString + cell.value.toString() + ",";
-              tempHelper = true;
-            }
+            tempCellsString = tempCellsString + cell.value.toString() + ",";
+            tempHelper = true;
           }
-        });
-        zustandsFunktion.push(tempCellsString);
-        tempCellsString = "δ(";
+        }
       });
+      zustandsFunktion.push(tempCellsString);
+      tempCellsString = "δ(";
+    });
 
-      if(zustandsFunktion.length<1) {
-        zustandsFunktion.push("δ() = ()");
-      }
+    if (zustandsFunktion.length < 1) {
+      zustandsFunktion.push("δ() = ()");
+    }
 
     setShowZustandsfunktion(!showZustandsfunktion);
   }
@@ -217,7 +181,7 @@ function ConditionsList() {
         setEndZustandWarningOn(true);
       }
     });
-    setShowZustandsfunktion(false)
+    setShowZustandsfunktion(false);
   }
 
   function changeZustandsmenge(push: boolean) {
@@ -227,14 +191,13 @@ function ConditionsList() {
       dispatch(alphabetPushToZustand());
     }
     checkWarningModus();
-    setShowZustandsfunktion(false)
+    setShowZustandsfunktion(false);
   }
 
   function addSpur() {
     dispatch(bandAddBandMespuma());
 
     dispatch(mespumaPushToSpuren());
-
 
     let literalArr: string[] = [];
 
@@ -250,7 +213,7 @@ function ConditionsList() {
 
     let combinationArr: string[][] = [];
 
-    for (let i = 0; i < spuren; i++) {
+    for (let i = 0; i < anzahlSpuren; i++) {
       combinationArr.push(literalArr);
     }
 
@@ -268,7 +231,7 @@ function ConditionsList() {
         cartesian: finalBandAlphabet,
       })
     );
-    setShowZustandsfunktion(false)
+    setShowZustandsfunktion(false);
   }
 
   function deleteSpur() {
@@ -290,7 +253,7 @@ function ConditionsList() {
 
     let combinationArr: string[][] = [];
 
-    for (let i = 0; i < spuren; i++) {
+    for (let i = 0; i < anzahlSpuren; i++) {
       combinationArr.push(literalArr);
     }
 
@@ -308,7 +271,7 @@ function ConditionsList() {
         cartesian: finalBandAlphabet,
       })
     );
-    setShowZustandsfunktion(false)
+    setShowZustandsfunktion(false);
   }
 
   const [endZustandWarningOn, setEndZustandWarningOn] = useState(false);
@@ -359,11 +322,19 @@ function ConditionsList() {
           <div onClick={() => setShowZustandsfunktion(false)}>
             <DropDownSelect />
           </div>
-          <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
+          <div
+            className={
+              "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
+            }
+          >
             <div className={"col-span-2"}>
               {t("list.tapeAlphabetSymbols")} &Gamma; =
             </div>
-            <div className={"border border-solid bg-gray-100 rounded p-2 col-span-2 max-h-60 overflow-y-scroll"}>
+            <div
+              className={
+                "border border-solid bg-gray-100 rounded p-2 col-span-2 max-h-60 overflow-y-scroll"
+              }
+            >
               {kA}
               {bandAlphabet.map((value, index) => (
                 <span key={index}>
@@ -374,11 +345,17 @@ function ConditionsList() {
               {kZ}
             </div>
           </div>
-          <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
-            <div className={"col-span-2"}>
-                {t("list.states")} Q =
-            </div>
-            <div className={"border border-solid bg-gray-100 rounded p-2 break-all"}>
+          <div
+            className={
+              "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
+            }
+          >
+            <div className={"col-span-2"}>{t("list.states")} Q =</div>
+            <div
+              className={
+                "border border-solid bg-gray-100 rounded p-2 break-all"
+              }
+            >
               {kA}
               {zustandsmenge.map((value, index) => (
                 <span key={index}>
@@ -403,7 +380,11 @@ function ConditionsList() {
               </button>
             </div>
           </div>
-          <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
+          <div
+            className={
+              "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
+            }
+          >
             <div className={"flex col-span-2 justify-between"}>
               {t("list.initialState")} q0 = {anfangsZustand.value}{" "}
               {anfangsZustand.warningMode ? (
@@ -416,7 +397,7 @@ function ConditionsList() {
             </div>
             <div className="flex col-span-2">
               <Select
-                value={initAnfangsZustand}
+                value={anfangsZustand}
                 blurInputOnSelect={false}
                 className={"w-full"}
                 onChange={handleChange}
@@ -430,7 +411,11 @@ function ConditionsList() {
               />
             </div>
           </div>
-          <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
+          <div
+            className={
+              "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
+            }
+          >
             <div className={"flex col-span-2 justify-between"}>
               <div>
                 {t("list.finalStates")} F = {kA}
@@ -467,12 +452,20 @@ function ConditionsList() {
               />
             </div>
           </div>
-          <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
+          <div
+            className={
+              "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
+            }
+          >
             <span className={"col-span-2"}>
               {t("list.transitionFunction")} &delta; =
             </span>
-            <div className={"border border-solid bg-gray-100 rounded p-2 col-span-2 max-h-60 overflow-y-scroll cursor-pointer"}
-              onClick={() => getZustandsFunktion()}>
+            <div
+              className={
+                "border border-solid bg-gray-100 rounded p-2 col-span-2 max-h-60 overflow-y-scroll cursor-pointer"
+              }
+              onClick={() => getZustandsFunktion()}
+            >
               {showZustandsfunktion ? (
                 <div>
                   {zustandsFunktion.map((value) => (

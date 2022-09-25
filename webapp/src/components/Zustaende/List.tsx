@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Select, {ActionMeta, OnChangeValue} from "react-select";
+import Select, { ActionMeta, OnChangeValue } from "react-select";
 import { Direction, Zustand } from "../../interfaces/CommonInterfaces";
 import {
   alphabetChangeAnfangszustand,
@@ -8,21 +8,12 @@ import {
   alphabetPushToZustand,
   alphabetDeleteZustand,
   alphabetChangeWarningMode,
-  maschineChangeExecutable,
-  maschineCheckExecutable,
   tableCheckWarning,
 } from "../../redux/generalStore";
-import { RootState, store } from "../../redux/store";
+import { RootState } from "../../redux/store";
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
-import {
-  BiCaretDown,
-  BiCaretUp,
-  GiConsoleController,
-  IoIosWarning,
-} from "react-icons/all";
-import watch from "redux-watch";
+import { BiCaretDown, BiCaretUp, IoIosWarning } from "react-icons/all";
 import { useTranslation } from "react-i18next";
-import * as React from "react";
 
 function ConditionsList() {
   /**
@@ -39,16 +30,6 @@ function ConditionsList() {
     (state: RootState) => state.general.bandAlphabet
   );
 
-  const initZustandsmenge = useSelector(
-    (state: RootState) => state.general.zustandsmenge
-  );
-  const initAnfangsZustand = useSelector(
-    (state: RootState) => state.general.anfangsZustand
-  );
-  const initEndZustand = useSelector(
-    (state: RootState) => state.general.endZustand
-  );
-
   ///internationalization
   const { t } = useTranslation(["general"]);
 
@@ -56,27 +37,16 @@ function ConditionsList() {
     (state: RootState) => state.general.currentAlphabet
   );
 
-  let zustandsmenge: Zustand[] = initZustandsmenge;
-  let wZustandsmenge = watch(store.getState, "general.zustandsmenge");
-  store.subscribe(
-    wZustandsmenge((newVal) => {
-      zustandsmenge = newVal;
-      console.log("WATCHER LIST ZUSTANDSMENGE");
-    })
+  const zustandsmenge = useSelector(
+    (state: RootState) => state.general.zustandsmenge
   );
-  let anfangsZustand: Zustand = initAnfangsZustand;
-  let wAnfangsZustand = watch(store.getState, "general.anfangsZustand");
-  store.subscribe(
-    wAnfangsZustand((newVal) => {
-      anfangsZustand = newVal;
-    })
+
+  const anfangsZustand = useSelector(
+    (state: RootState) => state.general.anfangsZustand
   );
-  let endZustand: Zustand[] = initEndZustand;
-  let wEndZustand = watch(store.getState, "general.endZustand");
-  store.subscribe(
-    wEndZustand((newVal) => {
-      endZustand = newVal;
-    })
+
+  const endZustand = useSelector(
+    (state: RootState) => state.general.endZustand
   );
 
   const dispatch = useDispatch();
@@ -110,8 +80,8 @@ function ConditionsList() {
     }
   }
   function handleChangeMulti(
-      newValues: OnChangeValue<Zustand, true>,
-      _actionMeta: ActionMeta<Zustand>
+    newValues: OnChangeValue<Zustand, true>,
+    _actionMeta: ActionMeta<Zustand>
   ) {
     if (newValues) {
       const endStatesArray = Array.from(newValues.values());
@@ -232,11 +202,19 @@ function ConditionsList() {
           <div>
             <DropDownSelect />
           </div>
-          <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
+          <div
+            className={
+              "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
+            }
+          >
             <div className={"col-span-2"}>
               {t("list.tapeAlphabetSymbols")} &Gamma; =
             </div>
-            <div className={"border border-solid bg-gray-100 rounded p-2 col-span-2"}>
+            <div
+              className={
+                "border border-solid bg-gray-100 rounded p-2 col-span-2"
+              }
+            >
               {kA}
               {bandAlphabet.map((value, index) => (
                 <span key={index}>
@@ -247,9 +225,17 @@ function ConditionsList() {
               {kZ}
             </div>
           </div>
-          <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
+          <div
+            className={
+              "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
+            }
+          >
             <div className={"col-span-2"}>{t("list.states")} Q =</div>
-            <div className={"border border-solid bg-gray-100 rounded p-2 break-all"}>
+            <div
+              className={
+                "border border-solid bg-gray-100 rounded p-2 break-all"
+              }
+            >
               {kA}
               {zustandsmenge.map((value, index) => (
                 <span key={index}>
@@ -274,7 +260,11 @@ function ConditionsList() {
               </button>
             </div>
           </div>
-          <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
+          <div
+            className={
+              "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
+            }
+          >
             <div className={"flex col-span-2 justify-between"}>
               {t("list.initialState")} q0 = {anfangsZustand.value}{" "}
               {anfangsZustand.warningMode ? (
@@ -287,7 +277,7 @@ function ConditionsList() {
             </div>
             <div className="flex col-span-2">
               <Select
-                value={initAnfangsZustand}
+                value={anfangsZustand}
                 blurInputOnSelect={false}
                 className={"w-full"}
                 onChange={handleChange}
@@ -301,7 +291,11 @@ function ConditionsList() {
               />
             </div>
           </div>
-          <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
+          <div
+            className={
+              "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
+            }
+          >
             <div className={"flex col-span-2 justify-between"}>
               <div>
                 {t("list.finalStates")} F = {kA}
@@ -337,12 +331,20 @@ function ConditionsList() {
               />
             </div>
           </div>
-          <div className={"flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"}>
+          <div
+            className={
+              "flex xl:grid xl:grid-cols-4 gap-5 items-center mt-2 text-left"
+            }
+          >
             <span className={"col-span-2"}>
               {t("list.transitionFunction")} &delta; =
             </span>
-            <div className={"text-black font-medium bg-white hover:bg-white text-left border border-solid col-span-2 cursor-pointer p-2 max-h-60 overflow-y-scroll"}
-                 onClick={() => getZustandsFunktion()}>
+            <div
+              className={
+                "text-black font-medium bg-white hover:bg-white text-left border border-solid col-span-2 cursor-pointer p-2 max-h-60 overflow-y-scroll"
+              }
+              onClick={() => getZustandsFunktion()}
+            >
               {showZustandsfunktion ? (
                 <div>
                   {zustandsFunktion.map((value) => (

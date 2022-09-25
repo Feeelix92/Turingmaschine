@@ -10,8 +10,7 @@ import {
 } from "../../redux/bandStore";
 import { RootState, store } from "../../redux/store";
 import { IoIosWarning } from "react-icons/io";
-import watch from "redux-watch";
-import { useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import * as React from "react";
 
 export default function Band() {
@@ -20,52 +19,41 @@ export default function Band() {
   const currentZustand = useSelector(
     (state: RootState) => state.general.activeState
   );
-  const currentBand = useSelector((state: RootState) => state.band.currentBand);
+
   const currentAlphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
   );
-  const bandAlphabet = useSelector(
-    (state: RootState) => state.general.bandAlphabet
-  );
+
   const showWarning = useSelector((state: RootState) => state.band.showWarning);
 
   /////////// Band from State ///////////
-  let cBand = currentBand;
-  let wBand = watch(store.getState, "general.currentBand");
-  store.subscribe(
-    wBand((newVal) => {
-      cBand = newVal;
-    })
-  );
+  const currentBand = useSelector((state: RootState) => state.band.currentBand);
 
   /////////// Eingabealphabet from State ///////////
-  let bAlphabet = bandAlphabet;
-  let wEingabeAlphabet = watch(store.getState, "general.bandAlphabet");
-  store.subscribe(
-    wEingabeAlphabet((newVal) => {
-      bAlphabet = newVal;
-
-      let bandVal: string[] = [];
-      // wenn banditem nicht in Eingabealphabet vorhanden, dann warning auf true
-      bAlphabet.forEach((item) => {
-        bandVal.push(item.value);
-      });
-
-      let found = false;
-
-      cBand.forEach((bandItem) => {
-        if (!bandVal.includes(bandItem.value)) {
-          found = true;
-        }
-      });
-
-      if (found) {
-        dispatch(bandSetWarning(true));
-      } else {
-        dispatch(bandSetWarning(false));
-      }
-    })
+  const bandAlphabet = useSelector(
+    (state: RootState) => state.general.bandAlphabet
   );
+  React.useEffect(() => {
+    let bandVal: string[] = [];
+    // wenn banditem nicht in Eingabealphabet vorhanden, dann warning auf true
+    bandAlphabet.forEach((item) => {
+      bandVal.push(item.value);
+    });
+
+    let found = false;
+
+    currentBand.forEach((bandItem) => {
+      if (!bandVal.includes(bandItem.value)) {
+        found = true;
+      }
+    });
+
+    if (found) {
+      dispatch(bandSetWarning(true));
+    } else {
+      dispatch(bandSetWarning(false));
+    }
+  }, [bandAlphabet]);
 
   const setPointerAt = (index: number) => {
     dispatch(bandSetPointPos(index));

@@ -37,7 +37,6 @@ import {
 import anime from "animejs";
 import party from "party-js";
 import { useTranslation } from "react-i18next";
-import React from "react";
 import { toast } from "react-toastify";
 
 function Control() {

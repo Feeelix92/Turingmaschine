@@ -1,7 +1,7 @@
 import React, { Key, useEffect } from "react";
 import EditField from "../Zustandsüberführungsfunktion/EditField";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState, store } from "../../redux/store";
+import { RootState } from "../../redux/store";
 import {
   BandItemToChange,
   bandChangeItemAt,
@@ -12,10 +12,9 @@ import {
 } from "../../redux/bandStore";
 import { BsFillEraserFill } from "react-icons/bs";
 import { BandItemProps } from "../../interfaces/CommonInterfaces";
-import watch from "redux-watch";
 import { useTranslation } from "react-i18next";
-import { ToastContainer, toast } from 'react-toastify'; // https://fkhadra.github.io/react-toastify/introduction/
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
+import "react-toastify/dist/ReactToastify.css";
 
 export default function BandItem(props: BandItemProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -46,13 +45,7 @@ export default function BandItem(props: BandItemProps) {
   }
 
   const currentMode = useSelector((state: RootState) => state.general.mode);
-  let cMode = currentMode;
-  let wMode = watch(store.getState, "general.mode");
-  store.subscribe(
-    wMode((newVal) => {
-      cMode = newVal;
-    })
-  );
+
   const dispatch = useDispatch();
 
   const pointerIdx = useSelector(
@@ -63,7 +56,7 @@ export default function BandItem(props: BandItemProps) {
   const { t } = useTranslation(["general"]);
 
   function chooseOption(option: string) {
-    if (cMode === "mespuma") {
+    if (currentMode === "mespuma") {
       const tempMespuma: BandItemToChangeMespuma = {
         bandIndex: props.bandIndex,
         index: props.index,
@@ -83,7 +76,7 @@ export default function BandItem(props: BandItemProps) {
   }
 
   function deleteValue() {
-    if (cMode === "mespuma") {
+    if (currentMode === "mespuma") {
       dispatch(
         bandDeleteItemAtMespuma({
           bandIndex: props.bandIndex,
@@ -121,7 +114,7 @@ export default function BandItem(props: BandItemProps) {
 
     props.alphabet.map((entry) => {
       if (entry.value === value || value === "") {
-        if (cMode === "mespuma") {
+        if (currentMode === "mespuma") {
           const tempMespuma: BandItemToChangeMespuma = {
             bandIndex: props.bandIndex,
             index: index as number,
@@ -144,7 +137,7 @@ export default function BandItem(props: BandItemProps) {
           value: value,
           label: "",
         };
-        if (cMode === "mespuma") {
+        if (currentMode === "mespuma") {
           const tempMespuma: BandItemToChangeMespuma = {
             bandIndex: props.bandIndex,
             index: index as number,
@@ -165,16 +158,16 @@ export default function BandItem(props: BandItemProps) {
     });
 
     if (!allowed) {
-    toast.error(''+ t("bandItem.warningValueNotIncluded"), {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      }); 
-  }
+      toast.error("" + t("bandItem.warningValueNotIncluded"), {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   }
 
   return (
@@ -225,7 +218,7 @@ export default function BandItem(props: BandItemProps) {
               className={"editBtn delete z-50 "}
               onClick={() => deleteValue()}
             >
-              <BsFillEraserFill className={""}/>
+              <BsFillEraserFill className={""} />
             </button>
           </div>
         ) : (
