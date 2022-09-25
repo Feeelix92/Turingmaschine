@@ -33,10 +33,6 @@ function ConditionsList() {
   ///internationalization
   const { t } = useTranslation(["general"]);
 
-  const alphabet = useSelector(
-    (state: RootState) => state.general.currentAlphabet
-  );
-
   const zustandsmenge = useSelector(
     (state: RootState) => state.general.zustandsmenge
   );
@@ -166,11 +162,9 @@ function ConditionsList() {
       }
     });
     const tempAlphabet: string[] = [];
-    alphabet.alphabet.forEach((entry) => {
+    bandAlphabet.forEach((entry) => {
       tempAlphabet.push(entry.value);
     });
-    // add B to check all literals including empty
-    tempAlphabet.push("B");
     dispatch(tableCheckWarning({ rows: loadedRows, alphabet: tempAlphabet }));
   }
 
