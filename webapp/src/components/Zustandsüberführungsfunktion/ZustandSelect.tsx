@@ -35,7 +35,7 @@ export default function ZustandSelect(props: ZustandSelectProps) {
 
   return (
     <div>
-      <div className={"flex gap-5 items-center mt-2"}>
+      <div className={"flex gap-5 items-center"}>
         {mode === "toiletpaper" ? (
           <Select
             defaultValue={props.current}

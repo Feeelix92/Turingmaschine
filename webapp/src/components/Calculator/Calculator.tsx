@@ -244,7 +244,7 @@ export default function Calculator() {
   return (
     <div
       className={
-        "border-solid border rounded bg-white w-screen sm:w-3/4 lg:w-3/4 3xl:w-2/4 p-2 border rounded items-center hover:bg-gray-100 col-span-2 max-w-screen-sm"
+        "border-solid border rounded bg-white p-2 border rounded items-center hover:bg-gray-100 col-span-2"
       }
     >
       <div className={"mb-2"} onClick={() => setisOpen(!isOpen)}>
@@ -254,11 +254,11 @@ export default function Calculator() {
         </div>
       </div>
       {isOpen && (
-        <div className="flex flex-wrap -mx-3 mb-2">
-          <div className="w-full px-3 mb-6">
+        <div className="flex flex-wrap mb-2">
+          <div className="w-full px-2 mb-2">
             <div className="relative">
               <Select
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="block appearance-none w-full bg-gray-200 text-gray-700 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 options={types}
                 value={selectedType}
                 blurInputOnSelect={false}
@@ -266,7 +266,7 @@ export default function Calculator() {
               />
             </div>
           </div>
-          <div className="w-full md:w-1/3 px-3 mb-6">
+          <div className="w-full md:w-1/3 px-2 mb-2">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               htmlFor="grid-number-one"
@@ -286,7 +286,7 @@ export default function Calculator() {
               {t("calculator.request")}
             </p> */}
           </div>
-          <div className="w-full md:w-1/3 px-3 mb-6">
+          <div className="w-full md:w-1/3 px-2 mb-2">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               htmlFor={"grid-number-two"}
@@ -307,22 +307,22 @@ export default function Calculator() {
             </p> */}
           </div>
           <button
-            className={`w-full md:w-1/3 px-3 self-center mb-4`}
+            className={`w-full md:w-1/3 px-2 self-center`}
             onClick={computeNumbers}
           >
             {" "}
             {t("calculator.insert")}{" "}
           </button>
-          <div className="w-full md:w-2/3 px-3 mb-6">
+          <div className="w-full md:w-2/3 px-2 mb-4">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold"
               htmlFor={"grid-operation"}
             >
               Operation
             </label>
             <div className="relative">
               <Select
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="block appearance-none w-full bg-gray-200 text-gray-700 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 options={operations}
                 value={selectedOperation}
                 blurInputOnSelect={false}
