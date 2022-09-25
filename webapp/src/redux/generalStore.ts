@@ -584,6 +584,7 @@ export const generalSlice = createSlice({
     },
 
     alphabetChangeEndzustand: (state, zustand: PayloadAction<Zustand[]>) => {
+      console.log("alphabetChangeEndzustand", zustand.payload);
       state.endZustand = zustand.payload;
 
       state.zustandsmenge.forEach((option) => {
@@ -594,6 +595,7 @@ export const generalSlice = createSlice({
       });
     },
     alphabetClearEndzustand: (state) => {
+      console.log("alphabetClearEndzustand");
       state.zustandsmenge.forEach((option) => {
         option.endzustand = false;
       });
@@ -941,6 +943,7 @@ export const generalSlice = createSlice({
       state,
       warningValue: PayloadAction<ChangeWarningModus>
     ) => {
+      console.log("alphabetChangeWarningMode");
       switch (warningValue.payload.prop) {
         case "anfangsZustand":
           state.anfangsZustand.warningMode = warningValue.payload.value;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Select, { ActionMeta, OnChangeValue } from "react-select";
 import { Direction, Zustand } from "../../interfaces/CommonInterfaces";
@@ -10,10 +10,11 @@ import {
   alphabetChangeWarningMode,
   tableCheckWarning,
 } from "../../redux/generalStore";
-import { RootState } from "../../redux/store";
+import { RootState, store } from "../../redux/store";
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
 import { BiCaretDown, BiCaretUp, IoIosWarning } from "react-icons/all";
 import { useTranslation } from "react-i18next";
+import watch from "redux-watch";
 
 function ConditionsList() {
   /**
@@ -44,6 +45,16 @@ function ConditionsList() {
   const endZustand = useSelector(
     (state: RootState) => state.general.endZustand
   );
+  let final = endZustand;
+  let wFinal = watch(store.getState, "general.endZustand");
+  store.subscribe(
+    wFinal((newVal, oldVal) => {
+      if (newVal != oldVal) {
+        console.log("changed!", newVal);
+        final = newVal;
+      }
+    })
+  );
 
   const dispatch = useDispatch();
 
@@ -73,6 +84,7 @@ function ConditionsList() {
       newValue.anfangszustand = true;
       dispatch(alphabetChangeAnfangszustand(newValue));
       checkWarningModus();
+      console.log(anfangsZustand);
     }
   }
   function handleChangeMulti(
@@ -81,8 +93,10 @@ function ConditionsList() {
   ) {
     if (newValues) {
       const endStatesArray = Array.from(newValues.values());
+      console.log(endStatesArray);
       dispatch(alphabetChangeEndzustand(endStatesArray));
       checkWarningModus();
+      console.log(endZustand);
     }
   }
 
@@ -153,7 +167,7 @@ function ConditionsList() {
       alphabetChangeWarningMode({
         prop: "endZustand",
         value: true,
-        payload: endZustand,
+        payload: final,
       })
     );
     endZustand.forEach((endZustand) => {
@@ -297,10 +311,10 @@ function ConditionsList() {
             {/*<div className={"flex col-span-3 lg:col-span-2 justify-between"}>*/}
             <div className={"col-span-3 lg:col-span-2"}>
               {t("list.finalStates")} F = {kA}
-              {endZustand.map((value, index) => (
-                <span key={index}>
+              {final.map((value, index) => (
+                <span key={index + value.label}>
                   {value.value}
-                  {index === endZustand.length - 1 ? "" : ","}
+                  {index === final.length - 1 ? "" : ","}
                 </span>
               ))}
               {kZ}

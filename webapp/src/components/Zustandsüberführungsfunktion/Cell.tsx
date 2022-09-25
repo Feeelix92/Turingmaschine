@@ -80,6 +80,8 @@ export default function Cell(props: CellProps) {
     if (props.value instanceof Zustand) {
       let foundInFinal = false;
 
+      console.log("Zustand Check");
+
       finalStates.forEach((state) => {
         if (props.value instanceof Zustand) {
           if (state.value === props.value.value) {
