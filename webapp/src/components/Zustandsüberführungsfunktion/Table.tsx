@@ -43,8 +43,8 @@ export default function Table() {
   const mode = useSelector((state: RootState) => state.general.mode);
 
   return (
-    <div className="flex flex-col col-span-2 border rounded p-0 w-screen md:w-full">
-      <div className="sm:-mx-0 lg:-mx-0">
+    <div className="flex flex-col col-span-2 border rounded">
+      <div className="">
         <div className="">
           <div className="overflow-x-hidden items-center">
             <div className="flex w-full text-left text-sm font-medium text-gray-900">

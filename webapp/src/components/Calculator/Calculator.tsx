@@ -248,7 +248,7 @@ export default function Calculator() {
       }
     >
       <div className={"mb-2"} onClick={() => setisOpen(!isOpen)}>
-        <div className={"flex xl:grid xl:grid-cols-3 gap-5 items-center"}>
+        <div className={"flex grid grid-cols-3 gap-5 items-center"}>
           <span className={""}>{isOpen ? closeAccordion : openAccordion}</span>
           <span>{title}</span>
         </div>

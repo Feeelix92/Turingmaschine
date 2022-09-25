@@ -40,7 +40,7 @@ export default function ZustandSelect(props: ZustandSelectProps) {
           <Select
             defaultValue={props.current}
             blurInputOnSelect={true}
-            className={"col-span-2 xl:w-24"}
+            className={""}
             onChange={handleChange}
             options={props.states}
             menuPortalTarget={document.querySelector("body")}
@@ -51,14 +51,14 @@ export default function ZustandSelect(props: ZustandSelectProps) {
           <Select
             defaultValue={props.current}
             blurInputOnSelect={true}
-            className={"col-span-2 xl:w-24"}
+            className={""}
             onChange={handleChange}
             options={props.states}
             // @ts-ignore
             getOptionLabel={(e) => (
               <div className={"flex items-center place-content-start"}>
                 {e.icon ? <CgAddR /> : ""}
-                <span className={"m-2"}>{e.label}</span>
+                <span className={""}>{e.label}</span>
               </div>
             )}
             menuPortalTarget={document.querySelector("body")}

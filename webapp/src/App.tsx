@@ -45,7 +45,7 @@ function Home() {
       </header>
 
       <div className={"App-body"}>
-        <div className={"hidden lg:grid lg:grid-cols-4 lg:items-start px-2 gap-4"}>
+        <div className={"hidden w-full max-w-screen-2xl lg:grid lg:grid-cols-4 lg:items-start px-2 gap-4"}>
           <div className={"md:col-span-2"}>
               <ConditionsList />
               <Calculator />
@@ -73,7 +73,7 @@ function Papier() {
       </header>
 
       <div className={"App-body"}>
-        <div className={"grid grid-cols-4 md:items-start px-2"}>
+        <div className={"w-full max-w-screen-2xl grid grid-cols-4 md:items-start px-2"}>
           <ToPaTable />
         </div>
       </div>
@@ -94,11 +94,11 @@ function Mespuma() {
       </header>
 
       <div className={"App-body"}>
-        <div className={"hidden lg:grid lg:grid-cols-4 lg:items-start px-2 gap-4"}>
+        <div className={"hidden w-full max-w-screen-2xl lg:grid lg:grid-cols-4 lg:items-start px-2 gap-4"}>
           <MespumaList />
           <Table />
         </div>
-        <div className={"md:hidden"}>
+        <div className={"lg:hidden"}>
           <Bottomnav />
         </div>
       </div>

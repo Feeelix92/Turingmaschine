@@ -314,7 +314,7 @@ export default function Cell(props: CellProps) {
         <input
           defaultValue={t("cell.toiletPaperMode.empty")}
           className={
-            "w-full rounded text-gray-700 focus:outline-none items-center border text-center w-full h-full"
+            "rounded text-gray-700 focus:outline-none items-center border text-center w-full h-full"
           }
         />
       )}
@@ -322,7 +322,7 @@ export default function Cell(props: CellProps) {
         <input
           defaultValue={t("cell.toiletPaperMode.white")}
           className={
-            "w-full rounded text-gray-700 focus:outline-none items-center border text-center w-full h-full"
+            "rounded text-gray-700 focus:outline-none items-center border text-center w-full h-full"
           }
         />
       )}
@@ -330,7 +330,7 @@ export default function Cell(props: CellProps) {
         <input
           defaultValue={t("cell.toiletPaperMode.black")}
           className={
-            "w-full rounded text-gray-700 focus:outline-none items-center border text-center w-full h-full "
+            "rounded text-gray-700 focus:outline-none items-center border text-center w-full h-full "
           }
         />
       )}
