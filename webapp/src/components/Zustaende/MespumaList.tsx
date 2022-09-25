@@ -213,7 +213,7 @@ function ConditionsList() {
 
     let combinationArr: string[][] = [];
 
-    for (let i = 0; i < anzahlSpuren; i++) {
+    for (let i = 0; i < anzahlSpuren + 1; i++) {
       combinationArr.push(literalArr);
     }
 
@@ -253,7 +253,7 @@ function ConditionsList() {
 
     let combinationArr: string[][] = [];
 
-    for (let i = 0; i < anzahlSpuren; i++) {
+    for (let i = 0; i < anzahlSpuren - 1; i++) {
       combinationArr.push(literalArr);
     }
 
@@ -271,6 +271,7 @@ function ConditionsList() {
         cartesian: finalBandAlphabet,
       })
     );
+
     setShowZustandsfunktion(false);
   }
 
