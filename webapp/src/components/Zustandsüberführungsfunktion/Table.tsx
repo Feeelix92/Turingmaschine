@@ -52,7 +52,7 @@ export default function Table() {
               <div className="w-1/2 pl-2 pt-2">{t("table.then")}...</div>
             </div>
             <table className="min-w-full w-full">
-              <thead className="flex border-b w-full">
+              <thead className="flex border-b w-full pr-[1.2rem]">
                 <tr className="flex w-full">
                   {headerArray.map((value, key: React.Key) => (
                     <th
@@ -65,7 +65,7 @@ export default function Table() {
                   ))}
                 </tr>
               </thead>
-              <tbody className="flex flex-col items-center justify-between md:max-h-96 xl:max-h-[48rem] overflow-y-auto overflow-x-hidden">
+              <tbody className="flex flex-col items-center justify-between md:max-h-96 xl:max-h-[48rem] overflow-y-scroll overflow-x-hidden">
                 {rows.map((value, key: React.Key) =>
                   mode === "toiletpaper" && value.isFinal ? null : (
                     <Row
