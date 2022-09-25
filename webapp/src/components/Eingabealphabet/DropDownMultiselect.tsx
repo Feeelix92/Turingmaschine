@@ -158,6 +158,10 @@ export default function MultiselectDropDown(props: any) {
       });
     }
   };
+  // hide Dropdown
+  const components = {
+    DropdownIndicator: null,
+  };
 
   return (
     <div className={"border rounded p-2"}>
@@ -166,8 +170,9 @@ export default function MultiselectDropDown(props: any) {
       </div>
       <div className={""}>
         <p className={"text-left"}>{t("list.dropdown.description")}</p>
-        <div className={"text-lg pb-2 pt-2"}>
+        <div className={"pb-2 pt-2"}>
           <CreatableSelect
+            components={components}
             inputValue={optionString}
             isClearable
             isMulti
@@ -179,8 +184,9 @@ export default function MultiselectDropDown(props: any) {
                 ev as unknown as KeyboardEventHandler<HTMLDivElement>
               )
             }
-            placeholder="Type something and press enter..."
+            placeholder={t("list.dropdown.inputPlaceholder")}
             value={optionArray}
+            className={"text-base"}
           />
         </div>
         <div className={"text-right"}>

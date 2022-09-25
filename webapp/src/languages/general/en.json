@@ -81,8 +81,8 @@
     "dropdown": {
       "inputSymbols": "Input Symbols",
       "addInputSymbols": "Add Input Symbols",
-      "description": "You can enter characters or select characters from the standard Input Symbols!",
-      "inputPlaceholder": "Create",
+      "description": "Define your own input symbols!",
+      "inputPlaceholder": "Type something and press enter!",
       "saveAdding": "Save",
       "noOptionsMessage": "Type new character!",
       "onlyOneStateAllowed": "There can only be one initial State!",
