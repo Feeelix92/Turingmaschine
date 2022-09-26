@@ -261,7 +261,7 @@ function ConditionsList() {
             </div>
             <div className={"flex justify-end gap-2 col-span-1"}>
               <button
-                className={"w-10"}
+                className={`w-10 ${zustandsmenge.length>1 ? "" : "pointer-events-none bg-gray-700"}`}
                 onClick={() => changeZustandsmenge(false)}
               >
                 -

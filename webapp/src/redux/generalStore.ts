@@ -563,8 +563,9 @@ export const generalSlice = createSlice({
       }
     },
     alphabetDeleteZustand: (state) => {
-      state.zustandsmenge.pop();
-
+      if(state.zustandsmenge.length>1) { // Es muss immer mindestens ein Zustand vorhanden sein
+        state.zustandsmenge.pop();
+      }
       if (state.zustandsmenge.length <= 0) {
         let stateCopy = state.activeState;
         state.activeState = stateCopy;
