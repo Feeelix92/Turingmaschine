@@ -157,6 +157,9 @@ export const bandSlice = createSlice({
       state.currentBand = initBand;
       state.mespumaBand = initMespumaBand;
     },
+    bandResetPointerPos: (state) => {
+      state.pointerPosition = 0;
+    },
 
     bandChangePointPos: (state, step: PayloadAction<number>) => {
       if (
@@ -301,6 +304,7 @@ export const {
   bandAddMespumaField,
   bandDeleteAll,
   bandResetAll,
+  bandResetPointerPos,
   bandChangePointPos,
   bandChangeMespumaPointPos,
   bandSetPointPos,
