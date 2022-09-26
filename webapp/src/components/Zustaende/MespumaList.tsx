@@ -205,7 +205,7 @@ function ConditionsList() {
       [],
       currentAlphabet.alphabet
     ) as EingabeAlphabet[];
-    tempAlphabet.push({ value: "B", label: "", warningMode: false });
+    tempAlphabet.push({ value: "B", label: "B", warningMode: false });
 
     tempAlphabet.forEach((literal) => {
       literalArr.push(literal.value);
@@ -245,7 +245,7 @@ function ConditionsList() {
       [],
       currentAlphabet.alphabet
     ) as EingabeAlphabet[];
-    tempAlphabet.push({ value: "B", label: "", warningMode: false });
+    tempAlphabet.push({ value: "B", label: "B", warningMode: false });
 
     tempAlphabet.forEach((literal) => {
       literalArr.push(literal.value);
@@ -351,7 +351,9 @@ function ConditionsList() {
               "flex grid grid-cols-3 lg:grid-cols-4 gap-5 items-center mt-2 text-left"
             }
           >
-            <div className={"col-span-3 lg:col-span-2"}>{t("list.states")} Q =</div>
+            <div className={"col-span-3 lg:col-span-2"}>
+              {t("list.states")} Q =
+            </div>
             <div
               className={
                 "border border-solid bg-gray-100 rounded p-2 break-all col-span-2 lg:col-span-1"
@@ -368,7 +370,11 @@ function ConditionsList() {
             </div>
             <div className={"flex justify-end gap-2 col-span-1"}>
               <button
-                className={`w-10 ${zustandsmenge.length>1 ? "" : "pointer-events-none bg-gray-700"}`}
+                className={`w-10 ${
+                  zustandsmenge.length > 1
+                    ? ""
+                    : "pointer-events-none bg-gray-700"
+                }`}
                 onClick={() => changeZustandsmenge(false)}
               >
                 -
