@@ -74,7 +74,7 @@ export default function Band() {
 
   return (
     <div className={"w-full"}>
-      <div className={"flex m-2 h-32"}>
+      <div className={"flex m-2 h-36"}>
         <button
           className={"mt-10 rounded-r-none md:rounded md:invisible"}
           onClick={() =>
