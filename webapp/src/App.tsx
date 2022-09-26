@@ -17,7 +17,6 @@ import {
 } from "./redux/generalStore";
 import { bandResetAll } from "./redux/bandStore";
 import Imprint from "./components/Imprint/Imprint";
-import * as React from "react";
 
 function App() {
   return (
@@ -41,17 +40,22 @@ function Home() {
     <>
       <header className="App-header">
         <Menu />
-
         <Band />
       </header>
 
       <div className={"App-body"}>
-        <div className={" hidden md:grid md:grid-cols-4 md:items-start px-2"}>
-          <ConditionsList />
+        <div
+          className={
+            "hidden w-full max-w-screen-2xl lg:grid lg:grid-cols-4 lg:items-start px-2 gap-4"
+          }
+        >
+          <div className={"md:col-span-2"}>
+            <ConditionsList />
+            <Calculator />
+          </div>
           <Table />
-          <Calculator />
         </div>
-        <div className={"md:hidden"}>
+        <div className={"lg:hidden"}>
           <Bottomnav />
         </div>
       </div>
@@ -72,11 +76,12 @@ function Papier() {
       </header>
 
       <div className={"App-body"}>
-        <div className={" hidden md:grid md:grid-cols-4 md:items-start px-2"}>
+        <div
+          className={
+            "w-full max-w-screen-2xl grid grid-cols-4 md:items-start px-2"
+          }
+        >
           <ToPaTable />
-        </div>
-        <div className={"md:hidden"}>
-          <Bottomnav />
         </div>
       </div>
     </>
@@ -96,11 +101,15 @@ function Mespuma() {
       </header>
 
       <div className={"App-body"}>
-        <div className={" hidden md:flex space-x-10 "}>
+        <div
+          className={
+            "hidden w-full max-w-screen-2xl lg:grid lg:grid-cols-4 lg:items-start px-2 gap-4"
+          }
+        >
           <MespumaList />
           <Table />
         </div>
-        <div className={"md:hidden"}>
+        <div className={"lg:hidden"}>
           <Bottomnav />
         </div>
       </div>
@@ -115,17 +124,17 @@ function Impressum() {
   dispatch(bandResetAll());
 
   return (
-      <>
-          <header className="App-header">
-              <Menu/>
-          </header>
+    <>
+      <header className="App-header">
+        <Menu />
+      </header>
 
-          <div className={"App-body"}>
-              <div className={"ml-3 mr-3 md:ml-0 space-x-10 "}>
-                  <Imprint/>
-              </div>
-          </div>
-      </>
+      <div className={"App-body"}>
+        <div className={"ml-3 mr-3 md:ml-0 space-x-10 "}>
+          <Imprint />
+        </div>
+      </div>
+    </>
   );
 }
 

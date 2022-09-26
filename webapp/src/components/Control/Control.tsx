@@ -37,7 +37,6 @@ import {
 import anime from "animejs";
 import party from "party-js";
 import { useTranslation } from "react-i18next";
-import React from "react";
 import { toast } from "react-toastify";
 
 function Control() {
@@ -59,18 +58,22 @@ function Control() {
   let pauseMaschine: boolean = false;
   let wPauseMaschine = watch(store.getState, "general.pauseMaschine");
   store.subscribe(
-    wPauseMaschine((newVal) => {
-      pauseMaschine = newVal;
-      setMaschineRunning(false);
+    wPauseMaschine((newVal, oldVal) => {
+      if (newVal != oldVal) {
+        pauseMaschine = newVal;
+        setMaschineRunning(false);
+      }
     })
   );
 
   let stoppMaschine: boolean = false;
   let wStoppMaschine = watch(store.getState, "general.stoppMaschine");
   store.subscribe(
-    wStoppMaschine((newVal) => {
-      stoppMaschine = newVal;
-      setMaschineRunning(false);
+    wStoppMaschine((newVal, oldVal) => {
+      if (newVal != oldVal) {
+        stoppMaschine = newVal;
+        setMaschineRunning(false);
+      }
     })
   );
 
@@ -79,8 +82,10 @@ function Control() {
   );
   let wSlider = watch(store.getState, "general.sliderNumber");
   store.subscribe(
-    wSlider((newVal) => {
-      slider = newVal;
+    wSlider((newVal, oldVal) => {
+      if (newVal != oldVal) {
+        slider = newVal;
+      }
     })
   );
 
@@ -140,8 +145,10 @@ function Control() {
   let selectedRows: RowInterface[] = [];
   let wSelectedRows = watch(store.getState, "general.watchedRows");
   store.subscribe(
-    wSelectedRows((newVal) => {
-      selectedRows = newVal;
+    wSelectedRows((newVal, oldVal) => {
+      if (newVal != oldVal) {
+        selectedRows = newVal;
+      }
     })
   );
 
@@ -149,8 +156,10 @@ function Control() {
   let selectedBand = currentBand;
   let wSelectedBand = watch(store.getState, "band.currentBand");
   store.subscribe(
-    wSelectedBand((newVal) => {
-      selectedBand = newVal;
+    wSelectedBand((newVal, oldVal) => {
+      if (newVal != oldVal) {
+        selectedBand = newVal;
+      }
     })
   );
 
@@ -158,8 +167,10 @@ function Control() {
   let mespumaBand = currentMespumaBand;
   let wmespumaBand = watch(store.getState, "band.mespumaBand");
   store.subscribe(
-    wmespumaBand((newVal) => {
-      mespumaBand = newVal;
+    wmespumaBand((newVal, oldVal) => {
+      if (newVal != oldVal) {
+        mespumaBand = newVal;
+      }
     })
   );
 
@@ -167,8 +178,10 @@ function Control() {
   let activeState = initialZustand;
   let wActiveState = watch(store.getState, "general.activeState");
   store.subscribe(
-    wActiveState((newVal) => {
-      activeState = newVal;
+    wActiveState((newVal, oldVal) => {
+      if (newVal != oldVal) {
+        activeState = newVal;
+      }
     })
   );
 
@@ -176,9 +189,11 @@ function Control() {
   let activePointerPosition = pointerIdx;
   let wActivePointerPosition = watch(store.getState, "band.pointerPosition");
   store.subscribe(
-    wActivePointerPosition((newVal) => {
-      activePointerPosition = newVal;
-      if (newVal != undefined) {
+    wActivePointerPosition((newVal, oldVal) => {
+      if (newVal != oldVal) {
+        activePointerPosition = newVal;
+        if (newVal != undefined) {
+        }
       }
     })
   );

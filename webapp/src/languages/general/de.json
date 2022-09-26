@@ -81,8 +81,8 @@
     "dropdown": {
       "inputSymbols": "Eingabealphabet",
       "addInputSymbols": "Eingabealphabet hinzufügen",
-      "description": "Sie können Zeichen eingeben oder Zeichen aus den Standard-Eingabealphabeten auswählen!",
-      "inputPlaceholder": "Erstellen Sie",
+      "description": "Definieren Sie Ihr eigenes Eingabealphabet!",
+      "inputPlaceholder": "Tippen Sie etwas ein und drücken Sie die Eingabetaste!",
       "saveAdding": "Speichern",
       "noOptionsMessage": "Geben Sie neues Zeichen ein!",
       "onlyOneStateAllowed": "Es kann nur einen Anfangzustand geben!",
@@ -90,7 +90,8 @@
       "addNewValue": "Hinzufügen",
       "emptyIsNotAllowed": "Ein leeres Alphabet ist nicht erlaubt!",
       "alphabetAlreadyExists": "Das gewählte Alphabet existiert bereits!",
-      "alphabetCreated": "Das Eingabealphabet wurde erfolgreich erstellt!"
+      "alphabetCreated": "Das Eingabealphabet wurde erfolgreich erstellt!",
+      "literalAlreadyExists": "Das gewählte Zeichen existiert bereits!"
     },
     "mespumaExtension": {
       "NumberOfTracks": "Anzahl Spuren"
@@ -148,7 +149,7 @@
   },
 
   "calculator": {
-    "name": "Rechner",
+    "name": "Hilfswerkzeuge",
     "binary": "Binär",
     "unary": "Unär",
     "number": "Zahl",
@@ -158,7 +159,8 @@
     "substraction": "Substraktion",
     "multiplication": "Multiplikation",
     "division": "Division",
-    "insert": "Einfügen"
+    "insert": "Einfügen",
+    "chooseExample": "Wähle ein Beispiel:"
   },
 
   "imprint": {
@@ -171,6 +173,5 @@
     "students": "Beteiligte Studierende",
     "moreInformation": "Weitere Informationen entnehmen Sie bitte der",
     "moreInformationLink": "Internetseite der Technische Hochschule Mittelhessen (THM)"
-    
   }
 }

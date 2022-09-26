@@ -1,20 +1,11 @@
 import { useEffect, useState } from "react";
 import * as React from "react";
-import {
-  Direction,
-  RowProps,
-  Zustand,
-} from "../../interfaces/CommonInterfaces";
+import { RowProps } from "../../interfaces/CommonInterfaces";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  tableDeleteRow,
-  tableUpdateCell,
-  tableUpdateRowIsFinal,
-} from "../../redux/generalStore";
-import { RootState, store } from "../../redux/store";
+import { tableDeleteRow } from "../../redux/generalStore";
+import { RootState } from "../../redux/store";
 import Cell from "./Cell";
-import watch from "redux-watch";
 import { useTranslation } from "react-i18next";
 
 export default function Row(props: RowProps) {
@@ -22,15 +13,8 @@ export default function Row(props: RowProps) {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(props.isFinal);
 
-  const activeRow = useSelector((state: RootState) => state.general.activeRow);
   /////////// Active-Row from State ///////////
-  let row = activeRow;
-  let wRow = watch(store.getState, "general.activeRow");
-  store.subscribe(
-    wRow((newVal) => {
-      row = newVal;
-    })
-  );
+  const activeRow = useSelector((state: RootState) => state.general.activeRow);
 
   useEffect(() => {
     if (props.isFinal) {
@@ -75,17 +59,17 @@ export default function Row(props: RowProps) {
             />
           ))}
       {visible ? (
-        <td className="w-3/6 whitespace-nowrap text-gray-900 border-r items-center flex justify-center">
+        <td className="w-3/6 whitespace-nowrap text-gray-900 border-r">
           {t("row.stop")}
         </td>
       ) : null}
-      <td className="w-1/6 text-gray-900 items-center ">
+      <td className="w-1/6 text-gray-900 items-center">
         <a
           href="#"
-          className="w-full min-w-full text-gray-700 focus:outline-none"
+          className="text-gray-700 focus:outline-none"
           onClick={() => dispatch(tableDeleteRow(props.index))}
         >
-          <div className={"p-7 px-1 xl:px-7"}>
+          <div className={"py-2 px-2"}>
             <button className={"invertedButton"}>
               <FaTrash />
             </button>

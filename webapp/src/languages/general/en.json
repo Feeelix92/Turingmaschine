@@ -81,8 +81,8 @@
     "dropdown": {
       "inputSymbols": "Input Symbols",
       "addInputSymbols": "Add Input Symbols",
-      "description": "You can enter characters or select characters from the standard Input Symbols!",
-      "inputPlaceholder": "Create",
+      "description": "Define your own input symbols!",
+      "inputPlaceholder": "Type something and press enter!",
       "saveAdding": "Save",
       "noOptionsMessage": "Type new character!",
       "onlyOneStateAllowed": "There can only be one initial State!",
@@ -90,7 +90,8 @@
       "addNewValue": "Add",
       "emptyIsNotAllowed": "An empty set of input symbols is not allowed!",
       "alphabetAlreadyExists": "The selected input symbols already exists!",
-      "alphabetCreated": "New input symbols were created successfully!"
+      "alphabetCreated": "New input symbols were created successfully!",
+      "literalAlreadyExists": "The selected input symbol already exists!"
     },
     "mespumaExtension": {
       "NumberOfTracks": "Number of Tracks"
@@ -149,7 +150,7 @@
   },
 
   "calculator": {
-    "name": "Calculator",
+    "name": "Tools",
     "binary": "Binary",
     "unary": "Unary",
     "number": "Number",
@@ -159,7 +160,8 @@
     "substraction": "Substraction",
     "multiplication": "Multiplication",
     "division": "Division",
-    "insert": "Insert"
+    "insert": "Insert",
+    "chooseExample": "Choose an example:"
   },
   "imprint": {
     "name": "Imprint",
@@ -171,6 +173,5 @@
     "students": "Involved students",
     "moreInformation": "For further information, please refer to the",
     "moreInformationLink": "website of the Technische Hochschule Mittelhessen (THM)"
-    
   }
 }

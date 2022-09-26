@@ -6,7 +6,7 @@ import {
 } from "../../interfaces/CommonInterfaces";
 import { useDispatch, useSelector } from "react-redux";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { RootState, store } from "../../redux/store";
+import { RootState } from "../../redux/store";
 import AceEditor from "react-ace";
 import { setCompleters } from "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-json5";
@@ -40,9 +40,8 @@ import { Tab } from "@headlessui/react";
 import Tutorial from "./Tutorial";
 import { cartesianProduct } from "../../interfaces/CommonFunctions";
 import { useTranslation } from "react-i18next";
-import watch from "redux-watch";
-import { ToastContainer, toast } from 'react-toastify'; // https://fkhadra.github.io/react-toastify/introduction/
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
+import "react-toastify/dist/ReactToastify.css";
 
 export interface tableZustand {
   [key: string]: tableZeichen;
@@ -83,12 +82,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
 
   /////////// Band from State MeSpuMa ///////////
   let rows = useSelector((state: RootState) => state.general.rows);
-  let wRows = watch(store.getState, "general.rows");
-  store.subscribe(
-    wRows((newVal) => {
-      rows = newVal;
-    })
-  );
 
   const [tempEditorText, setTempEditorText] = useState(
     `{
@@ -268,7 +261,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               })
             );
           } else {
-            toast.error(''+ t("bandItem.warningEmptyIsNotAllowed"), {
+            toast.error("" + t("bandItem.warningEmptyIsNotAllowed"), {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
@@ -276,7 +269,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-              }); 
+            });
           }
         } else {
           dispatch(bandDeleteAll());
@@ -304,7 +297,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             dispatch(alphabetPushToDialogOptions(alphabet.toString()));
             dispatch(alphabetGenerateBand(alphabet));
           } else {
-            toast.error(''+ t("codeEditor.warningEmptyIsNotAllowed"), {
+            toast.error("" + t("codeEditor.warningEmptyIsNotAllowed"), {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
@@ -312,7 +305,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-              }); 
+            });
           }
         }
 
@@ -344,7 +337,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
 
         // save Endzustand to store
         // json.specifications.endStates...
-        // console.log(json.specifications.endStates);
         const endStates = json.specifications.endStates;
         let temp: Zustand[] = [];
         for (let index = 0; index < endStates.length; index++) {
@@ -428,7 +420,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         toggleEditor();
       } catch (e) {
         // Error message
-        toast.error("Error!  "+ e, {
+        toast.error("Error!  " + e, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -436,7 +428,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          }); 
+        });
       }
     } else {
       reloadPage();
@@ -776,9 +768,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                       >
                         <FiDownload />
                       </button>
-                      <button onClick={fileUpload}
-                        className={"greenButton"}
-                      >
+                      <button onClick={fileUpload} className={"greenButton"}>
                         <FiUpload />
                       </button>
                       <input
