@@ -260,7 +260,7 @@
 .teepeeBandInput:active,
 .teepeeBandInput:focus,
 .teepeeBandInput:hover {
-  @apply border-2 border-thm-secondary border-dashed relative z-20 cursor-move -translate-x-0.5 -translate-y-0.5;
+  @apply border-2 border-thm-secondary border-dashed relative cursor-move -translate-x-0.5 -translate-y-0.5;
 }
 
 .teepeePointerBorder {
