@@ -29,7 +29,7 @@ export default function EditField(props: EditProps) {
           <button
             key={key}
             type="button"
-            className={"editBtn"}
+            className={"editPill"}
             onClick={() => props.updateValue(value.value)}
           >
             {value.value}
@@ -70,7 +70,7 @@ export default function EditField(props: EditProps) {
           <button
             key={key}
             type="button"
-            className={"editBtn"}
+            className={"editPill"}
             onClick={() => props.updateValue(value.value)}
           >
             {value.value}
