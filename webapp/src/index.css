@@ -31,6 +31,14 @@
   Select {
     @apply text-black text-base;
   }
+
+  .firstTeepeeBandItem .brickEditBtnDiv{
+    @apply absolute z-50 left-0;
+  }
+
+  .lastTeepeeBandItem .brickEditBtnDiv{
+    @apply absolute z-50 right-0;
+  }
 }
 @tailwind components;
 @tailwind utilities;
@@ -238,8 +246,9 @@
 }
 
 .teepeeBandItem {
-  @apply bg-white inline-block w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] border-2 border-dashed border-r-0 border-l-2 -translate-y-[15%] sm:translate-y-[15%];
+  @apply first:firstTeepeeBandItem last:lastTeepeeBandItem bg-white inline-block w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] border-2 border-dashed border-r-0 border-l-2 -translate-y-[15%] sm:translate-y-[15%];
 }
+
 .teepeeHead {
   @apply w-[50px] h-[25px] sm:w-[100px] sm:h-[50px] round translate-y-[50%] bg-gradient-to-r from-white to-gray-100 border-t-2;
 }
