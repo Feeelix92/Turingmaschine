@@ -32,7 +32,7 @@ const initialBandAlphabet: EingabeAlphabet[] = [
 const initialTeepeeBandAlphabet: EingabeAlphabet[] = [
   { label: "\u26AA", value: "1", warningMode: false },
   { label: "\u26AB", value: "#", warningMode: false },
-  { label: "\u1F5C", value: "B", warningMode: false },
+  { label: "\u2205", value: "B", warningMode: false },
 ];
 const defaultCustomAlphabet: Alphabet = {
   key: 0,

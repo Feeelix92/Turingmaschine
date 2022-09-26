@@ -280,8 +280,8 @@ export default function Cell(props: CellProps) {
         if (placeholderTP?.label === "\u26AB") {
             return '\u26AB'
         }
-        if (placeholderTP?.label === "\u1F5C") {
-            return '\u1F5C'
+        if (placeholderTP?.label === "\u2205") {
+            return '\u2205'
         }
 
     }
@@ -357,7 +357,7 @@ export default function Cell(props: CellProps) {
             )}
             {mode == "default" && typeof props.value === "string" ? (
                 <Select
-                    placeholder={placeholderTpMultiLang()}
+                    placeholder={props.value}
                     blurInputOnSelect={false}
                     className={"text-black py-3 px-2 text-base xl:w-32"}
                     onChange={handleChange}
