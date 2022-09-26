@@ -315,7 +315,7 @@ export default function Cell(props: CellProps) {
               blurInputOnSelect={false}
               className={"text-black text-base"}
               onChange={handleChange}
-              options={eALphabet}
+              options={eALphabet.filter(item => item.label != "")}
               menuPortalTarget={document.querySelector("body")}
               isSearchable={false}
               hideSelectedOptions={true}
