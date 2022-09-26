@@ -311,7 +311,7 @@ function ConditionsList() {
               {anzahlSpuren}
             </div>
             <div className={"flex justify-end gap-2 col-span-1"}>
-              <button className={"w-10"} onClick={() => deleteSpur()}>
+              <button className={`w-10 ${anzahlSpuren>2 ? "" : "pointer-events-none bg-gray-700"}`}onClick={() => deleteSpur()}>
                 -
               </button>
               <button className={"w-10"} onClick={() => addSpur()}>
