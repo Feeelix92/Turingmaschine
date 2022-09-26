@@ -269,7 +269,11 @@ export default function Cell(props: CellProps) {
       {/* Mehrspurenmaschine:  */}
       {mode == "mespuma" && typeof props.value === "string" ? (
         <Select
-          value={bALphabet.filter((item) => item.label === props.value)}
+          value={
+            bALphabet.filter((item) => item.label === props.value)[0]
+              ? bALphabet.filter((item) => item.label === props.value)[0]
+              : { value: props.value, label: props.value, warningMode: true }
+          }
           blurInputOnSelect={false}
           className={"text-black text-base"}
           onChange={handleChange}

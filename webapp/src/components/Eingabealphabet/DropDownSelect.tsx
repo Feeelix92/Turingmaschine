@@ -173,7 +173,7 @@ export default function DropDownSelect() {
           getOptionLabel={(e) => (
             <div className={"flex items-center place-content-start"}>
               {e.icon ? <CgAddR /> : ""}
-              <span className={"m-2"}>{e.label}</span>
+              <span className={"m-2"}>{e.label === "B" ? "" : e.label}</span>
             </div>
           )}
           menuPortalTarget={document.querySelector("body")}
