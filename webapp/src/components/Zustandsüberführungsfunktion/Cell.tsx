@@ -306,26 +306,25 @@ export default function Cell(props: CellProps) {
         ""
       )}
       {mode == "default" && typeof props.value === "string" ? (
-        <input
-          type="text"
-          name="value"
-          id="tableValueInput"
-          className={
-            "w-full h-full rounded text-gray-700 focus:outline-none items-center border text-center"
-          }
-          value={props.value}
-          onChange={(e) => checkValue(props.index, e.target.value)}
-          onClick={toggleEditMode}
-        />
+          <Select
+              placeholder={props.value}
+              blurInputOnSelect={false}
+              className={"text-black text-base"}
+              onChange={handleChange}
+              options={eALphabet}
+              menuPortalTarget={document.querySelector("body")}
+              isSearchable={false}
+              hideSelectedOptions={true}
+          />
       ) : (
         ""
       )}
-      {/* onChange needed (to change the value) OR defaultValue instead of value */}
+      {/* Toilettenpapiermodus */}
         {mode == "toiletpaper" && typeof props.value === "string" ? (
             <Select
                 placeholder={placeholderTpMultiLang()}
                 blurInputOnSelect={false}
-                className={"text-black py-3 px-2 text-base xl:w-32"}
+                className={"text-black text-base"}
                 onChange={handleChange}
                 options={eALphabet}
                 menuPortalTarget={document.querySelector("body")}
