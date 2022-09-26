@@ -4,9 +4,9 @@ function Imprint() {
     const { t } = useTranslation(["general"])
 
     return (
-        <div className={"imprint text-left"}>
+        <div className={"imprint text-left mt-10"}>
             <h1>{t("imprint.name")}</h1>
-            <div className={"iem mb-3"} >
+            <div className={"iem mb-3 mt-5"} >
                 <p>Technische Hochschule Mittelhessen (THM)</p>
                 <p>University of Applied Sciences</p>
                 <p>{t("imprint.faculty")} 11 - IEM</p>

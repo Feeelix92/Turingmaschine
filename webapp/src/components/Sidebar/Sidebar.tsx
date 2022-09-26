@@ -160,7 +160,7 @@ function Sidebar() {
           className={`no-underline py-2 px-4 text-sm rounded font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
                 ${
                   location.pathname === "/impressum"
-                    ? "bg-thm-primary"
+                    ? "bg-thm-primary pointer-events-none"
                     : "bg-gray-700 "
                 }`}
         >
