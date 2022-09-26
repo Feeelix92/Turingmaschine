@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import { EingabeAlphabetOption } from "../data/Alphabet";
 
 export interface BandItemToChange {
@@ -204,6 +204,7 @@ export const bandSlice = createSlice({
             warningMode: false,
           });
         }
+        state.pointerPosition += step.payload;
       } else if (step.payload < 0 && state.pointerPosition == 0) {
         for (let i = 0; i < state.mespumaBand.length; i++) {
           state.mespumaBand[i].unshift({
@@ -255,6 +256,7 @@ export const bandSlice = createSlice({
           bandItem.payload.index
         ].label = "";
       }
+      console.log(current(state));
     },
     /**
      * function bandChangeItemAtMespuma changes the Band at the index and the BandIndex, at MeSpuMa
