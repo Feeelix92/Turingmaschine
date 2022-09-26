@@ -3,6 +3,7 @@ import Control from "../Control/Control";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { useTranslation} from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 
 function Menu() {
@@ -17,12 +18,20 @@ function Menu() {
         (state: RootState) => state.general.mode
       );
       
+      // Current Router Location:
+      const location = useLocation(); // Current Pathname = location.pathname
+
     return (
         <div className={"menu w-full flex justify-between"}>
             <h1 className="text-white text-xl p-3 md:pl-2 min-w-max self-center float-left hidden xl:block w-[250px]">
                 {t("menu.name")}
             </h1>
-            <div className={"flex"}>
+            <div className={`flex
+    ${
+      location.pathname === "/impressum"
+        ? "hidden"
+        : ""
+    }`}>
                 <Control />
                 <div className={"currentZustand flex-col content-center items-center justify-center mb-8 hidden md:flex pr-0" } >
                     { mode != "toiletpaper" && currentZustand ? (
