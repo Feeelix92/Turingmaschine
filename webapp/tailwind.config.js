@@ -49,6 +49,9 @@ module.exports = {
           hover: '#5a811b',
           link: '#61dafb',
         },
+      },
+      minWidth: {
+        '10': '2.5rem'
       }
     }
   },

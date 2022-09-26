@@ -195,6 +195,10 @@
   @apply min-w-fit max-w-full h-10 w-full focus:outline-none flex justify-center pt-3;
 }
 
+.editPill {
+  @apply min-w-10 h-10 text-sm font-medium bg-gray-700 border-gray-600 text-white hover:text-white hover:bg-gray-600 focus:ring-blue-500 focus:text-white rounded-full;
+}
+
 /* ********** TABLE ********** */
 
 .editBtnDiv {
