@@ -16,8 +16,8 @@ import { BsFillEraserFill } from "react-icons/bs";
 import BrickWhite from "../../assets/images/brick_white.svg";
 import BrickBlack from "../../assets/images/brick_black.svg";
 import { useTranslation } from "react-i18next";
-import { ToastContainer, toast } from 'react-toastify'; // https://fkhadra.github.io/react-toastify/introduction/
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
+import "react-toastify/dist/ReactToastify.css";
 
 export default function BandItem(props: BandItemProps) {
   const wrapperRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -86,7 +86,7 @@ export default function BandItem(props: BandItemProps) {
     let allowed = false;
 
     props.alphabet.map((entry) => {
-      if (entry.value === value || value === "") {
+      if (entry.value === value || value === "B") {
         const temp: BandItemToChange = {
           index: index as number,
           value: value,
@@ -94,11 +94,11 @@ export default function BandItem(props: BandItemProps) {
         };
         dispatch(bandChangeItemAt(temp));
         allowed = true;
-      } else if (value === "") {
+      } else if (value === "B") {
         const temp: BandItemToChange = {
           index: index as number,
           value: value,
-          label: "",
+          label: "B",
         };
         dispatch(bandChangeItemAt(temp));
         allowed = true;
@@ -106,7 +106,7 @@ export default function BandItem(props: BandItemProps) {
     });
 
     if (!allowed) {
-      toast.error(''+ t("bandItem.warningValueNotIncluded"), {
+      toast.error("" + t("bandItem.warningValueNotIncluded"), {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -114,7 +114,7 @@ export default function BandItem(props: BandItemProps) {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        }); 
+      });
     }
   }
 

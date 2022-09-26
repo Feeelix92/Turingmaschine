@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import { EingabeAlphabetOption } from "../data/Alphabet";
 
 export interface BandItemToChange {
@@ -23,14 +23,14 @@ export interface PointerItemToChange {
 let emptyBandValue = "B";
 
 const initBand: EingabeAlphabetOption[] = [
-  { value: emptyBandValue, label: "", warningMode: false },
-  { value: emptyBandValue, label: "", warningMode: false },
-  { value: emptyBandValue, label: "", warningMode: false },
-  { value: emptyBandValue, label: "", warningMode: false },
-  { value: emptyBandValue, label: "", warningMode: false },
-  { value: emptyBandValue, label: "", warningMode: false },
-  { value: emptyBandValue, label: "", warningMode: false },
-  { value: emptyBandValue, label: "", warningMode: false },
+  { value: emptyBandValue, label: "B", warningMode: false },
+  { value: emptyBandValue, label: "B", warningMode: false },
+  { value: emptyBandValue, label: "B", warningMode: false },
+  { value: emptyBandValue, label: "B", warningMode: false },
+  { value: emptyBandValue, label: "B", warningMode: false },
+  { value: emptyBandValue, label: "B", warningMode: false },
+  { value: emptyBandValue, label: "B", warningMode: false },
+  { value: emptyBandValue, label: "B", warningMode: false },
 ];
 
 let initBandTmp: EingabeAlphabetOption[] = [];
@@ -56,7 +56,7 @@ export const bandSlice = createSlice({
       if (bandItem.payload.index >= state.currentBand.length - 1) {
         state.currentBand.push({
           value: state.emptyBandValue,
-          label: "",
+          label: "B",
           warningMode: false,
         });
       }
@@ -67,7 +67,7 @@ export const bandSlice = createSlice({
         state.currentBand[bandItem.payload.index].label =
           bandItem.payload.label;
       } else {
-        state.currentBand[bandItem.payload.index].label = "";
+        state.currentBand[bandItem.payload.index].label = "B";
       }
     },
     /**
@@ -77,7 +77,7 @@ export const bandSlice = createSlice({
     bandDeleteItemAt: (state, index: PayloadAction<number>) => {
       state.currentBand[index.payload as number] = {
         value: state.emptyBandValue,
-        label: "",
+        label: "B",
         warningMode: state.currentBand[index.payload].warningMode,
       };
     },
@@ -86,7 +86,7 @@ export const bandSlice = createSlice({
         index.payload.index as number
       ] = {
         value: state.emptyBandValue,
-        label: "",
+        label: "B",
         warningMode:
           state.mespumaBand[index.payload.bandIndex as number][
             index.payload.index as number
@@ -102,13 +102,13 @@ export const bandSlice = createSlice({
       if (position.payload === "before") {
         state.currentBand.unshift({
           value: state.emptyBandValue,
-          label: "",
+          label: "B",
           warningMode: false,
         });
       } else {
         state.currentBand.push({
           value: state.emptyBandValue,
-          label: "",
+          label: "B",
           warningMode: false,
         });
       }
@@ -124,7 +124,7 @@ export const bandSlice = createSlice({
         for (let i = 0; i < state.mespumaBand.length; i++) {
           state.mespumaBand[i].unshift({
             value: state.emptyBandValue,
-            label: "",
+            label: "B",
             warningMode: false,
           });
         }
@@ -132,7 +132,7 @@ export const bandSlice = createSlice({
         for (let i = 0; i < state.mespumaBand.length; i++) {
           state.mespumaBand[i].push({
             value: state.emptyBandValue,
-            label: "",
+            label: "B",
             warningMode: false,
           });
         }
@@ -146,7 +146,7 @@ export const bandSlice = createSlice({
       for (let index = 0; index < state.currentBand.length; index++) {
         state.currentBand[index] = {
           value: state.emptyBandValue,
-          label: "",
+          label: "B",
           warningMode: false,
         };
       }
@@ -169,14 +169,14 @@ export const bandSlice = createSlice({
         // BandItem rechts hinzufügen
         state.currentBand.push({
           value: state.emptyBandValue,
-          label: "",
+          label: "B",
           warningMode: false,
         });
       } else if (step.payload < 0 && state.pointerPosition == 0) {
         // BandItem links hinzufügen
         state.currentBand.unshift({
           value: state.emptyBandValue,
-          label: "",
+          label: "B",
           warningMode: false,
         });
       } else if (
@@ -200,15 +200,16 @@ export const bandSlice = createSlice({
         for (let i = 0; i < state.mespumaBand.length; i++) {
           state.mespumaBand[i].push({
             value: state.emptyBandValue,
-            label: "",
+            label: "B",
             warningMode: false,
           });
         }
+        state.pointerPosition += step.payload;
       } else if (step.payload < 0 && state.pointerPosition == 0) {
         for (let i = 0; i < state.mespumaBand.length; i++) {
           state.mespumaBand[i].unshift({
             value: state.emptyBandValue,
-            label: "",
+            label: "B",
             warningMode: false,
           });
         }
@@ -253,8 +254,9 @@ export const bandSlice = createSlice({
       } else {
         state.mespumaBand[bandItem.payload.bandIndex][
           bandItem.payload.index
-        ].label = "";
+        ].label = "B";
       }
+      console.log(current(state));
     },
     /**
      * function bandChangeItemAtMespuma changes the Band at the index and the BandIndex, at MeSpuMa
@@ -266,7 +268,7 @@ export const bandSlice = createSlice({
       for (let i = 0; i < state.mespumaBand[0].length; i++) {
         initBandTmp.push({
           value: emptyBandValue,
-          label: "",
+          label: "B",
           warningMode: false,
         });
       }
@@ -282,7 +284,7 @@ export const bandSlice = createSlice({
         for (let index = 0; index < band.length; index++) {
           band[index] = {
             value: state.emptyBandValue,
-            label: "",
+            label: "B",
             warningMode: false,
           };
         }

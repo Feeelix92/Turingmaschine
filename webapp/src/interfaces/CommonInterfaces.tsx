@@ -156,6 +156,7 @@ export interface updateCellType {
 
 export interface CodeEditorProps {
   toggleEditor: () => void;
+  checkIfOpen: (arg0: boolean) => void;
 }
 
 export interface MespumaChangeAlphabet {
