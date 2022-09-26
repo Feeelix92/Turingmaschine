@@ -71,7 +71,7 @@ const initialDialogOption: EingabeAlphabetDialogOptions = {
   alphabet: defaultAlphabetOption1,
 };
 export const eingabeAlphabetDialogOptions: EingabeAlphabetDialogOptions[] = [
-  { label: "", alphabet: defaultCustomAlphabet, icon: true },
+  { label: "B", alphabet: defaultCustomAlphabet, icon: true },
   { label: "{1}", alphabet: defaultAlphabetOption1 },
   { label: "{1,#}", alphabet: defaultAlphabetOption2 },
   { label: "{0,1}", alphabet: defaultAlphabetOption3 },
@@ -429,7 +429,7 @@ export const generalSlice = createSlice({
         [],
         alphabet.payload.alphabet
       ) as EingabeAlphabet[];
-      tempAlphabet.push({ value: "B", label: "", warningMode: false });
+      tempAlphabet.push({ value: "B", label: "B", warningMode: false });
 
       state.bandAlphabet = tempAlphabet;
     },
@@ -462,7 +462,7 @@ export const generalSlice = createSlice({
         tupelArray.push(element);
       });
 
-      tupelArray.push({ value: "B", label: "", warningMode: false });
+      tupelArray.push({ value: "B", label: "B", warningMode: false });
 
       state.bandAlphabet = tupelArray;
     },
@@ -494,7 +494,7 @@ export const generalSlice = createSlice({
           warningMode: false,
         });
       });
-      finalArray.push({ value: "B", label: "", warningMode: false });
+      finalArray.push({ value: "B", label: "B", warningMode: false });
       state.bandAlphabet = finalArray;
     },
 
@@ -563,7 +563,8 @@ export const generalSlice = createSlice({
       }
     },
     alphabetDeleteZustand: (state) => {
-      if(state.zustandsmenge.length>1) { // Es muss immer mindestens ein Zustand vorhanden sein
+      if (state.zustandsmenge.length > 1) {
+        // Es muss immer mindestens ein Zustand vorhanden sein
         state.zustandsmenge.pop();
       }
       if (state.zustandsmenge.length <= 0) {
@@ -1031,7 +1032,7 @@ export const generalSlice = createSlice({
           [],
           state.currentAlphabet.alphabet
         ) as EingabeAlphabet[];
-        tempAlphabet.push({ value: "B", label: "", warningMode: false });
+        tempAlphabet.push({ value: "B", label: "B", warningMode: false });
 
         tempAlphabet.forEach((literal) => {
           literalArr.push(literal.value);
@@ -1082,7 +1083,7 @@ export const generalSlice = createSlice({
           tupelArray.push(element);
         });
 
-        tupelArray.push({ value: "B", label: "", warningMode: false });
+        tupelArray.push({ value: "B", label: "B", warningMode: false });
 
         state.bandAlphabet = tupelArray;
         state.currentAlphabet = defaultAlphabetOption1;
