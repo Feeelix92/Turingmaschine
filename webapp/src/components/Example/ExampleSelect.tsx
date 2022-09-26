@@ -319,6 +319,7 @@ export default function ExampleSelect(props: ExampleSelectProps) {
           menuPortalTarget={document.querySelector("body")}
           isSearchable={false}
           hideSelectedOptions={true}
+          placeholder={t("calculator.chooseExamplePlaceholder")}
         />
       </div>
     </div>

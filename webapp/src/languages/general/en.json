@@ -161,7 +161,8 @@
     "multiplication": "Multiplication",
     "division": "Division",
     "insert": "Insert",
-    "chooseExample": "Choose an example:"
+    "chooseExample": "Choose an example:",
+    "chooseExamplePlaceholder": "Select"
   },
   "imprint": {
     "name": "Imprint",
