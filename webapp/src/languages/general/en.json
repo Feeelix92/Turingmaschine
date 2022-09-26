@@ -17,7 +17,7 @@
     "toiletPaperMode": "Toilet Paper",
     "multiTrackMachine": "Multi-Track-Machine",
     "codeEditor": "Code Editor",
-    "imprint": "Imprint"
+    "imprint": "About"
   },
 
   "bottomNavBar": {
@@ -165,7 +165,7 @@
     "chooseExamplePlaceholder": "Select"
   },
   "imprint": {
-    "name": "Imprint",
+    "name": "About this Website",
     "faculty": "Faculty",
     "germany": "Germany",
     "eMail": "E-mail",

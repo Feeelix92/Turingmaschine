@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { slide as Menu } from "react-burger-menu";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { bandResetPointerPos} from "../../redux/bandStore";
 import AceJsonEditor from "../codeEditor/AceJsonEditor";
 import { Link, useLocation } from "react-router-dom";
 import { FaLaptopCode } from "react-icons/fa";
@@ -12,6 +13,7 @@ import * as React from "react";
 function Sidebar() {
   const mode = useSelector((state: RootState) => state.general.mode);
 
+  const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
 
   // Toggle Modal
@@ -81,6 +83,7 @@ function Sidebar() {
                     ? "bg-thm-primary pointer-events-none"
                     : "bg-gray-700 hover:bg-gray-900"
                 }`}
+                onClick={() => dispatch(bandResetPointerPos())}
           >
             {t("sidebar.normalMode")}
           </Link>
@@ -93,6 +96,7 @@ function Sidebar() {
                     ? "bg-thm-primary pointer-events-none"
                     : "bg-gray-700 hover:bg-gray-900"
                 }`}
+                onClick={() => dispatch(bandResetPointerPos())}
           >
             {t("sidebar.toiletPaperMode")}
           </Link>
@@ -105,6 +109,7 @@ function Sidebar() {
                     ? "bg-thm-primary pointer-events-none"
                     : "bg-gray-700 hover:bg-gray-900"
                 }`}
+                onClick={() => dispatch(bandResetPointerPos())}
           >
             {t("sidebar.multiTrackMachine")}
           </Link>
@@ -155,7 +160,7 @@ function Sidebar() {
           className={`no-underline py-2 px-4 text-sm rounded font-medium text-white hover:bg-gray-900 cursor-pointer border border-thm-primary2
                 ${
                   location.pathname === "/impressum"
-                    ? "bg-thm-primary"
+                    ? "bg-thm-primary pointer-events-none"
                     : "bg-gray-700 "
                 }`}
         >

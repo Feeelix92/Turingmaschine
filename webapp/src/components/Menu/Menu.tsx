@@ -22,8 +22,16 @@ function Menu() {
       const location = useLocation(); // Current Pathname = location.pathname
 
     return (
-        <div className={"menu w-full flex justify-between"}>
-            <h1 className="text-white text-xl p-3 md:pl-2 min-w-max self-center float-left hidden xl:block w-[250px]">
+        <div className={"menu w-screen flex justify-between"}>
+            <h1 
+            className={`text-white text-xl p-3 md:pl-2 min-w-max self-center float-left xl:block w-[250px]
+            ${
+            location.pathname === "/impressum"
+                ? ""
+                : "hidden"
+            }`}
+
+            >
                 {t("menu.name")}
             </h1>
             <div className={`flex
