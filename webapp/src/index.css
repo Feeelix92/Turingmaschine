@@ -255,7 +255,12 @@
   @apply w-[25px] h-[12.5px] sm:w-[50px] sm:h-[25px] round translate-y-[50%] translate-x-[45%] sm:translate-x-[50%] bg-gradient-to-t from-gray-100 to-gray-300 border-2;
 }
 .teepeeBandInput {
-  @apply animate-fadeIn w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] text-center bg-transparent;
+  @apply animate-fadeIn w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] text-center bg-transparent focus:outline-none;
+}
+.teepeeBandInput:active,
+.teepeeBandInput:focus,
+.teepeeBandInput:hover {
+  @apply border-2 border-thm-secondary border-dashed relative z-20 cursor-move -translate-x-0.5 -translate-y-0.5;
 }
 
 .teepeePointerBorder {
