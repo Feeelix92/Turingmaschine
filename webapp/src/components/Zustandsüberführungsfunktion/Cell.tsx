@@ -1,7 +1,7 @@
 import { createRef, Key, RefObject, useEffect, useState } from "react";
 import { IoIosWarning } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import Select, { OnChangeValue } from "react-select";
+import Select, {ActionMeta, OnChangeValue} from "react-select";
 import {
   CellProps,
   Direction,
@@ -136,7 +136,10 @@ export default function Cell(props: CellProps) {
         setEditMode(false);
     }
 
-    function handleChange(newValue: OnChangeValue<Direction | Zustand, false>) {
+    function handleChange(
+        newValue: OnChangeValue<Direction | Zustand, false>,
+        _actionMeta: ActionMeta<Direction | Zustand>
+        ) {
         if (newValue) {
             const failure = checkWarningModus(newValue);
             if ((mode == "mespuma" || mode == "default" || mode == "toiletpaper") && (props.index === 1 || props.index === 3)) {
@@ -276,7 +279,7 @@ export default function Cell(props: CellProps) {
 
     }
 
-  return (
+    return (
     <td
       ref={wrapperRef}
       className="px-2 py-2 w-1/6 whitespace-nowrap text-sm text-gray-900 border-r flex justify-center items-center"
@@ -285,6 +288,7 @@ export default function Cell(props: CellProps) {
         <ZustandSelect
           states={states}
           current={props.value}
+            // @ts-ignore
           updateValue={handleChange}
         />
       ) : (
@@ -293,7 +297,7 @@ export default function Cell(props: CellProps) {
 
       {props.value instanceof Direction ? (
         <Select
-          defaultValue={props.value}
+          value={props.value}
           blurInputOnSelect={false}
           className={"text-black text-base"}
           onChange={handleChange}
@@ -307,7 +311,7 @@ export default function Cell(props: CellProps) {
       )}
       {mode == "default" && typeof props.value === "string" ? (
           <Select
-              placeholder={props.value}
+              value={eALphabet.filter(item => item.label === props.value)}
               blurInputOnSelect={false}
               className={"text-black text-base"}
               onChange={handleChange}
@@ -322,7 +326,7 @@ export default function Cell(props: CellProps) {
       {/* Toilettenpapiermodus */}
         {mode == "toiletpaper" && typeof props.value === "string" ? (
             <Select
-                placeholder={placeholderTpMultiLang()}
+                value={eALphabet.filter(item => item.label === placeholderTpMultiLang())}
                 blurInputOnSelect={false}
                 className={"text-black text-base"}
                 onChange={handleChange}
@@ -338,7 +342,7 @@ export default function Cell(props: CellProps) {
       {/* Mehrspurenmaschine:  */}
       {mode == "mespuma" && typeof props.value === "string" ? (
         <Select
-          placeholder={props.value}
+          value={eALphabet.filter(item => item.label === props.value)}
           blurInputOnSelect={false}
           className={"text-black text-base"}
           onChange={handleChange}

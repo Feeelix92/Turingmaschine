@@ -36,7 +36,7 @@ export default function ZustandSelect(props: ZustandSelectProps) {
       <div className={"flex gap-5 items-center"}>
         {mode === "toiletpaper" ? (
           <Select
-            defaultValue={props.current}
+            value={props.current}
             blurInputOnSelect={true}
             className={""}
             onChange={handleChange}
@@ -47,7 +47,7 @@ export default function ZustandSelect(props: ZustandSelectProps) {
           />
         ) : (
           <Select
-            defaultValue={props.current}
+            value={props.current}
             blurInputOnSelect={true}
             className={""}
             onChange={handleChange}

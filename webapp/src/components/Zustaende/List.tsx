@@ -68,7 +68,9 @@ function ConditionsList() {
   };
   const { title, openAccordion, closeAccordion } = accordionData;
 
-  function handleChange(newValue: OnChangeValue<Zustand, false>) {
+  function handleChange(
+    newValue: OnChangeValue<Zustand, false>,
+    _actionMeta: ActionMeta<Zustand>) {
     if (newValue) {
       newValue.anfangszustand = true;
       dispatch(alphabetChangeAnfangszustand(newValue));
