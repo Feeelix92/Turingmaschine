@@ -91,7 +91,7 @@ export default function Band() {
             </div>
         )}
       </div>
-      <div className={"flex m-2 h-36"}>
+      <div className={"flex m-2 h-40"}>
         <div className="band-container overflow-x-auto col-span-12">
           {currentBand.map((value, index) => (
             <BandItem

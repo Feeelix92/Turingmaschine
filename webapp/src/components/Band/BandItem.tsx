@@ -178,53 +178,51 @@ export default function BandItem(props: BandItemProps) {
       key={props.index}
       ref={wrapperRef}
     >
-      <div className={""}>
-        {pointerIdx === props.index ? (
-          <div
-            className={
-              " scroll-mx-16" + (props.bandIndex == 0 ? " pointer" : "")
-            }
-            ref={fieldRef}
-            draggable
+      {pointerIdx === props.index ? (
+        <div
+          className={
+            "scroll-mx-16" + (props.bandIndex == 0 ? " pointer" : "")
+          }
+          ref={fieldRef}
+          draggable
+        >
+          {" "}
+        </div>
+      ) : (
+        ""
+      )}
+      <input
+        type="text"
+        name="value"
+        id="valueInput"
+        className={"bandInput bg-transparent"}
+        value={props.label === "B" ? "" : props.label}
+        onChange={(e) => checkValue(props.index, e.target.value)}
+        onDragOver={props.setPointerAt}
+        autoComplete="off"
+        // autoComplete="0" // Bringt das schon was gegen die Vorschläge vom Browser?
+        inputMode={displayKeyboard ? "text" : "none"}
+        onClick={() => {
+          disableKeyboard();
+          toggleEditMode();
+        }}
+        onDoubleClick={() => {
+          enableKeyboard();
+        }}
+      />
+      {editMode && props.showEditField ? (
+        <div className={"editBtnDiv"}>
+          <EditField options={props.alphabet} updateValue={chooseOption} />
+          <button
+            className={"editBtn delete z-50 "}
+            onClick={() => deleteValue()}
           >
-            {" "}
-          </div>
-        ) : (
-          ""
-        )}
-        <input
-          type="text"
-          name="value"
-          id="valueInput"
-          className={"bandInput bg-transparent"}
-          value={props.label === "B" ? "" : props.label}
-          onChange={(e) => checkValue(props.index, e.target.value)}
-          onDragOver={props.setPointerAt}
-          autoComplete="off"
-          // autoComplete="0" // Bringt das schon was gegen die Vorschläge vom Browser?
-          inputMode={displayKeyboard ? "text" : "none"}
-          onClick={() => {
-            disableKeyboard();
-            toggleEditMode();
-          }}
-          onDoubleClick={() => {
-            enableKeyboard();
-          }}
-        />
-        {editMode && props.showEditField ? (
-          <div className={"editBtnDiv"}>
-            <EditField options={props.alphabet} updateValue={chooseOption} />
-            <button
-              className={"editBtn delete z-50 "}
-              onClick={() => deleteValue()}
-            >
-              <BsFillEraserFill className={""} />
-            </button>
-          </div>
-        ) : (
-          ""
-        )}
-      </div>
+            <BsFillEraserFill className={""} />
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
