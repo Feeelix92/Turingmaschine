@@ -40,12 +40,12 @@
     @apply absolute z-50 right-0;
   }
 
-  .firstBandItem .editBtnDiv{
-    @apply absolute z-50 left-0.5;
+  .firstBandItem div.editBtnDiv{
+    @apply justify-start;
   }
 
-  .lastBandItem .editBtnDiv{
-    @apply absolute z-50 right-0.5;
+  .lastBandItem div.editBtnDiv{
+    @apply justify-end;
   }
 }
 @tailwind components;

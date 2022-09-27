@@ -1,7 +1,7 @@
 import { createRef, Key, RefObject, useEffect, useState } from "react";
 import { IoIosWarning } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import Select, {ActionMeta, OnChangeValue} from "react-select";
+import Select, { ActionMeta, OnChangeValue } from "react-select";
 import {
   CellProps,
   Direction,
@@ -36,8 +36,8 @@ export default function Cell(props: CellProps) {
 
   const temp = [initialZustand3];
 
-    //Internationalization
-    const {t} = useTranslation(["general"]);
+  //Internationalization
+  const { t } = useTranslation(["general"]);
 
   /////////// States from State ///////////
   const zustandsmenge = useSelector(
@@ -80,8 +80,6 @@ export default function Cell(props: CellProps) {
     if (props.value instanceof Zustand) {
       let foundInFinal = false;
 
-      console.log("Zustand Check");
-
       finalStates.forEach((state) => {
         if (props.value instanceof Zustand) {
           if (state.value === props.value.value) {
@@ -96,13 +94,13 @@ export default function Cell(props: CellProps) {
     }
   }, [endzustandsMenge]);
 
-  /////////// Eingabealphabet from State ///////////
-  const eingabeAlphabet = useSelector(
+  /////////// Bandalphabet from State ///////////
+  const bandAlphabet = useSelector(
     (state: RootState) => state.general.bandAlphabet
   );
-  let eALphabet = eingabeAlphabet;
+  let bALphabet = bandAlphabet;
   useEffect(() => {
-    eALphabet = eingabeAlphabet;
+    bALphabet = bandAlphabet;
     const failure = checkWarningModus();
     if (failure !== props.warningMode) {
       dispatch(
@@ -114,125 +112,47 @@ export default function Cell(props: CellProps) {
         })
       );
     }
-  }, [eingabeAlphabet]);
+  }, [bandAlphabet]);
 
-    const [editMode, setEditMode] = useState(false);
-
-    function toggleEditMode() {
-        // hide/show the edit-buttons
-        setEditMode(!editMode);
-    }
-
-    function chooseOption(option: string) {
-        const failure = checkWarningModus(option);
-        // pass chosen options to the parent to update the cell
-        dispatch(
-            tableUpdateCell({
-                cellIndex: props.index,
-                rowIndex: props.rowIndex,
-                value: option,
-                warningMode: failure,
-            })
-        );
-        // close the edit-buttons
-        setEditMode(false);
-    }
-
-    function handleChange(
-        newValue: OnChangeValue<Direction | Zustand, false>,
-        _actionMeta: ActionMeta<Direction | Zustand>
-        ) {
-        if (newValue) {
-            const failure = checkWarningModus(newValue);
-            if ((mode == "mespuma" || mode == "default" || mode == "toiletpaper") && (props.index === 1 || props.index === 3)) {
-                dispatch(
-                    tableUpdateCell({
-                        cellIndex: props.index,
-                        rowIndex: props.rowIndex,
-                        value: newValue.value,
-                        warningMode: failure,
-                    })
-                );
-            } else {
-                dispatch(
-                    tableUpdateCell({
-                        cellIndex: props.index,
-                        rowIndex: props.rowIndex,
-                        value: newValue,
-                        warningMode: failure,
-                    })
-                );
-            }
-        }
-    }
-
-    function setFinal(newValue: boolean) {
-        dispatch(
-            tableUpdateRowIsFinal({
-                cellIndex: props.index,
-                rowIndex: props.rowIndex,
-                value: newValue,
-            })
-        );
-    }
-
-    useEffect(() => {
-        // event to handle click outside to hide the edit-buttons
-        function handleClickOutside(event: MouseEvent) {
-            if (wrapperRef) {
-                if (
-                    wrapperRef.current != null &&
-                    event.target != null &&
-                    event.target instanceof Node
-                ) {
-                    if (!wrapperRef.current.contains(event.target)) {
-                        setEditMode(false);
-                    }
-                }
-            }
-        }
-
-        document.addEventListener("click", handleClickOutside);
-        return () => {
-            document.removeEventListener("click", handleClickOutside);
-        };
-    });
-
-  function checkValue(index: Key, value: string) {
-    let allowed = false;
-    // map the passed alphabet to check whether the alphabet contains the new input value
-    eingabeAlphabet.map((entry) => {
+  function handleChange(
+    newValue: OnChangeValue<Direction | Zustand, false>,
+    _actionMeta: ActionMeta<Direction | Zustand>
+  ) {
+    if (newValue) {
+      const failure = checkWarningModus(newValue);
       if (
-        entry.value === value ||
-        !props.showEditField ||
-        value === "" ||
-        value === "B"
+        (mode == "mespuma" || mode == "default" || mode == "toiletpaper") &&
+        (props.index === 1 || props.index === 3)
       ) {
-        // if its allowed, we pass the new value to the parent to update the cell value
-        const failure = checkWarningModus(value);
         dispatch(
           tableUpdateCell({
             cellIndex: props.index,
             rowIndex: props.rowIndex,
-            value: value,
+            value: newValue.value,
             warningMode: failure,
           })
         );
-        allowed = true;
+      } else {
+        dispatch(
+          tableUpdateCell({
+            cellIndex: props.index,
+            rowIndex: props.rowIndex,
+            value: newValue,
+            warningMode: failure,
+          })
+        );
       }
-    });
-
-    if (!allowed) {
-      toast.error("" + t("bandItem.warningValueNotIncluded"), {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
     }
+  }
+
+  function setFinal(newValue: boolean) {
+    dispatch(
+      tableUpdateRowIsFinal({
+        cellIndex: props.index,
+        rowIndex: props.rowIndex,
+        value: newValue,
+      })
+    );
   }
 
   function checkWarningModus(newValue?: any) {
@@ -249,7 +169,7 @@ export default function Cell(props: CellProps) {
         return true;
       }
     } else if (!(tempVar instanceof Direction)) {
-      let tempBool = eALphabet.some((value) => {
+      let tempBool = bALphabet.some((value) => {
         if (tempVar.value) {
           return value.value === tempVar.value;
         } else {
@@ -267,21 +187,20 @@ export default function Cell(props: CellProps) {
     }
   }
 
-    const placeholderTP = eALphabet.find(e => e.value === props.value)
-    const placeholderTpMultiLang = () => {
-        if (placeholderTP?.label === "\u26AA") {
-            return '\u26AA'
-        }
-        if (placeholderTP?.label === "\u26AB") {
-            return '\u26AB'
-        }
-        if (placeholderTP?.label === "\u2205") {
-            return '\u2205'
-        }
-
+  const placeholderTP = bALphabet.find((e) => e.value === props.value);
+  const placeholderTpMultiLang = () => {
+    if (placeholderTP?.label === "\u26AA") {
+      return "\u26AA";
     }
+    if (placeholderTP?.label === "\u26AB") {
+      return "\u26AB";
+    }
+    if (placeholderTP?.label === "\u2205") {
+      return "\u2205";
+    }
+  };
 
-    return (
+  return (
     <td
       ref={wrapperRef}
       className="px-2 py-2 w-1/6 whitespace-nowrap text-sm text-gray-900 border-r flex justify-center items-center"
@@ -290,7 +209,7 @@ export default function Cell(props: CellProps) {
         <ZustandSelect
           states={states}
           current={props.value}
-            // @ts-ignore
+          // @ts-ignore
           updateValue={handleChange}
         />
       ) : (
@@ -312,43 +231,53 @@ export default function Cell(props: CellProps) {
         ""
       )}
       {mode == "default" && typeof props.value === "string" ? (
-          <Select
-              value={eALphabet.filter(item => item.label === props.value)}
-              blurInputOnSelect={false}
-              className={"text-black text-base"}
-              onChange={handleChange}
-              options={eALphabet.filter(item => item.label != "")}
-              menuPortalTarget={document.querySelector("body")}
-              isSearchable={false}
-              hideSelectedOptions={true}
-          />
+        <Select
+          value={
+            bALphabet.filter((item) => item.label === props.value)[0]
+              ? bALphabet.filter((item) => item.label === props.value)[0]
+              : { value: props.value, label: props.value, warningMode: true }
+          }
+          blurInputOnSelect={false}
+          className={"text-black text-base"}
+          onChange={handleChange}
+          options={bALphabet}
+          menuPortalTarget={document.querySelector("body")}
+          isSearchable={false}
+          hideSelectedOptions={true}
+        />
       ) : (
         ""
       )}
       {/* Toilettenpapiermodus */}
-        {mode == "toiletpaper" && typeof props.value === "string" ? (
-            <Select
-                value={eALphabet.filter(item => item.label === placeholderTpMultiLang())}
-                blurInputOnSelect={false}
-                className={"text-black text-base"}
-                onChange={handleChange}
-                options={eALphabet}
-                menuPortalTarget={document.querySelector("body")}
-                isSearchable={false}
-                hideSelectedOptions={true}
-            />
-        ) : (
-            ""
-        )}
+      {mode == "toiletpaper" && typeof props.value === "string" ? (
+        <Select
+          value={bALphabet.filter(
+            (item) => item.label === placeholderTpMultiLang()
+          )}
+          blurInputOnSelect={false}
+          className={"text-black text-base"}
+          onChange={handleChange}
+          options={bALphabet}
+          menuPortalTarget={document.querySelector("body")}
+          isSearchable={false}
+          hideSelectedOptions={true}
+        />
+      ) : (
+        ""
+      )}
 
       {/* Mehrspurenmaschine:  */}
       {mode == "mespuma" && typeof props.value === "string" ? (
         <Select
-          value={eALphabet.filter(item => item.label === props.value)}
+          value={
+            bALphabet.filter((item) => item.label === props.value)[0]
+              ? bALphabet.filter((item) => item.label === props.value)[0]
+              : { value: props.value, label: props.value, warningMode: true }
+          }
           blurInputOnSelect={false}
           className={"text-black text-base"}
           onChange={handleChange}
-          options={eALphabet.filter(
+          options={bALphabet.filter(
             (Eingabealphabet) => Eingabealphabet.value.length > 1
           )}
           menuPortalTarget={document.querySelector("body")}
@@ -359,19 +288,13 @@ export default function Cell(props: CellProps) {
         ""
       )}
 
-            {props.warningMode ? (
-                <IoIosWarning
-                    color="orange"
-                    title={t("cell.warningInputValueNotAllowed")}
-                    size="32"
-                />
-            ) : null}
-
-      {editMode && props.showEditField ? (
-        <EditField options={eingabeAlphabet} updateValue={chooseOption} />
-      ) : (
-        ""
-      )}
+      {props.warningMode ? (
+        <IoIosWarning
+          color="orange"
+          title={t("cell.warningInputValueNotAllowed")}
+          size="32"
+        />
+      ) : null}
     </td>
   );
 }

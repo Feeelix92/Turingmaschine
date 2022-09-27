@@ -16,6 +16,8 @@ function Sidebar() {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
 
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+
   // Toggle Modal
   function toggleModal() {
     setShowModal(!showModal);
@@ -48,11 +50,15 @@ function Sidebar() {
     }
   }
 
+  const pull_data = (data: boolean) => {
+    setMenuIsOpen(data);
+  }
+
   return (
     <Menu
       right
-      // width={450}
       className="menu-options"
+      isOpen={menuIsOpen}
     >
       <div className={"mt-0"}>
         {/*Link zum default Modus*/}
@@ -133,7 +139,10 @@ function Sidebar() {
                 <FaLaptopCode />
               </div>
             </a>
-            {showModal ? <AceJsonEditor toggleEditor={toggleModal} /> : null}
+            {showModal ? <AceJsonEditor 
+              toggleEditor={toggleModal} 
+              checkIfOpen={pull_data}
+            /> : null}
           </div>
         </div>
       )}

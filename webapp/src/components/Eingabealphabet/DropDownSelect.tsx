@@ -59,7 +59,7 @@ export default function DropDownSelect() {
         [],
         currentAlphabet.alphabet
       ) as EingabeAlphabet[];
-      tempAlphabet.push({ value: "B", label: "", warningMode: false });
+      tempAlphabet.push({ value: "B", label: "B", warningMode: false });
 
       tempAlphabet.forEach((literal) => {
         literalArr.push(literal.value);
@@ -109,7 +109,7 @@ export default function DropDownSelect() {
             [],
             newValue.alphabet.alphabet
           ) as EingabeAlphabet[];
-          tempAlphabet.push({ value: "B", label: "", warningMode: false });
+          tempAlphabet.push({ value: "B", label: "B", warningMode: false });
 
           tempAlphabet.forEach((literal) => {
             literalArr.push(literal.value);
@@ -153,7 +153,11 @@ export default function DropDownSelect() {
 
   return (
     <div>
-      <div className={"flex grid grid-cols-3 lg:grid-cols-4 gap-5 items-center mt-2"}>
+      <div
+        className={
+          "flex grid grid-cols-3 lg:grid-cols-4 gap-5 items-center mt-2"
+        }
+      >
         <p className={"col-span-3 lg:col-span-2 text-left"}>
           {" "}
           {t("list.dropdown.inputSymbols")} ∑ =
@@ -169,7 +173,7 @@ export default function DropDownSelect() {
           getOptionLabel={(e) => (
             <div className={"flex items-center place-content-start"}>
               {e.icon ? <CgAddR /> : ""}
-              <span className={"m-2"}>{e.label}</span>
+              <span className={"m-2"}>{e.label === "B" ? "" : e.label}</span>
             </div>
           )}
           menuPortalTarget={document.querySelector("body")}

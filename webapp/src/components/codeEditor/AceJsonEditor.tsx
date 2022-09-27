@@ -198,6 +198,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
     if (tempEditorText) {
       try {
         let json = JSON.parse(tempEditorText);
+        props.checkIfOpen(false);
 
         // save alphabet from editor to store
         // json.specifications.alphabet...
@@ -471,6 +472,8 @@ export default function AceJsonEditor(props: CodeEditorProps) {
   }
 
   useEffect(() => {
+    props.checkIfOpen(true);
+
     const completer = {
       getCompletions: function (
         editor: any,
@@ -751,7 +754,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
                       >
                         {t("codeEditor.clearButton")}
                       </button>
-                      {/*Abrechen Button*/}
+                      {/*Abbrechen Button*/}
                       <button
                         data-modal-toggle="defaultModal"
                         type="button"
