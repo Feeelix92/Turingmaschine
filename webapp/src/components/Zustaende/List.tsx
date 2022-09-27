@@ -326,6 +326,9 @@ function ConditionsList() {
               ))}
               {kZ}
             </div>
+
+            {/*</div>*/}
+            <div className="flex col-span-3 lg:col-span-2">
             {endZustandWarningOn ? (
               <IoIosWarning
                 color="orange"
@@ -333,8 +336,6 @@ function ConditionsList() {
                 size="32"
               />
             ) : null}
-            {/*</div>*/}
-            <div className="flex col-span-3 lg:col-span-2">
               <Select
                 blurInputOnSelect={false}
                 className={"w-full"}
