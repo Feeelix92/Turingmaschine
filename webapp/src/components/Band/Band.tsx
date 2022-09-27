@@ -79,9 +79,6 @@ export default function Band() {
             "currentZustand flex-col content-center items-center justify-center mb-4 mt-4 flex md:hidden"
           }
       >
-        {/* <span className="relative">
-                <span className="block absolute -inset-1 w-12 rounded-full bg-thm-primary" aria-hidden="true"></span>
-            </span>                */}
         {currentZustand ? (
             <div
                 className={"rounded-full w-12 bg-thm-primary text-white h-8 mt-3"}
@@ -95,14 +92,6 @@ export default function Band() {
         )}
       </div>
       <div className={"flex m-2 h-36"}>
-        {/*<button*/}
-        {/*  className={"mt-10 rounded-r-none md:rounded md:invisible"}*/}
-        {/*  onClick={() =>*/}
-        {/*    dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))*/}
-        {/*  }*/}
-        {/*>*/}
-        {/*  +*/}
-        {/*</button>*/}
         <div className="band-container overflow-x-auto col-span-12">
           {currentBand.map((value, index) => (
             <BandItem
@@ -118,12 +107,6 @@ export default function Band() {
             />
           ))}
         </div>
-        {/*<button*/}
-        {/*  className={"mt-10 rounded-l-none md:rounded md:invisible"}*/}
-        {/*  onClick={() => dispatch(bandAddField("after"))}*/}
-        {/*>*/}
-        {/*  +*/}
-        {/*</button>*/}
       </div>
       {showWarning ? (
         <div className="flex justify-center">
@@ -134,10 +117,6 @@ export default function Band() {
           />
         </div>
       ) : null}
-
-
-
-      <div className={""}>
         <div className="flex justify-center m-2 gap-2">
             <button
                 className={"secondaryButton"}
@@ -151,12 +130,6 @@ export default function Band() {
             >
               <FaAngleRight />
             </button>
-
-          {/*<div className={"w-1/4 text-right md:hidden"}>*/}
-          {/*  <button onClick={() => dispatch(bandDeleteAll())} className={"m-2"}>*/}
-          {/*    <FaTrash />*/}
-          {/*  </button>*/}
-          {/*</div>*/}
         </div>
         <div className={"flex justify-center gap-2 pl-2 pr-2 pb-2"}>
           <button
@@ -184,7 +157,5 @@ export default function Band() {
           </button>
         </div>
       </div>
-
-    </div>
   );
 }

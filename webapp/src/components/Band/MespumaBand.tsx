@@ -79,20 +79,25 @@ export default function Band() {
   return (
     <div className={"w-full"}>
       <h4 className="pb-3 pt-5">{t("band.mespumaExtension.headline")}</h4>
+      <div
+          className={
+            "currentZustand flex-col content-center items-center justify-center mb-8 flex md:hidden"
+          }
+      >
+        {currentZustand ? (
+            <div
+                className={"rounded-full w-12 bg-thm-primary text-white h-8 mt-3"}
+            >
+              {currentZustand.value}
+            </div>
+        ) : (
+            <div className={"rounded-full bg-thm-primary text-white h-8"}>
+              {t("band.warningNoStateAvailable")}
+            </div>
+        )}
+      </div>
 
       <div className="flex ">
-        <div className="flex-none mx-1 ">
-          <button
-            className={"mt-10 rounded-r-none md:rounded md:invisible"}
-            onClick={() =>
-              dispatch(bandAddMespumaField("before")) &&
-              dispatch(bandChangeMespumaPointPos(1))
-            }
-          >
-            +
-          </button>
-        </div>
-
         <div className="flex-1 w-64 overflow-x-auto mx-2">
           <div className="pb-0 mb-16 mt-10">
             {mespumaBand.map((band, bandIndex) => (
@@ -120,59 +125,7 @@ export default function Band() {
             ))}
           </div>
         </div>
-
-        <div className="flex-none  mx-1">
-          <button
-            className={"mt-10 rounded-l-none md:rounded md:invisible"}
-            onClick={() => dispatch(bandAddMespumaField("after"))}
-          >
-            +
-          </button>
-        </div>
       </div>
-
-      {/* <div className={"flex flex-col overflow-x-auto"}> */}
-
-      {/*  Button für Felderhinzufügen - mobile: */}
-
-      {/* <button
-          className={"mt-10 rounded-r-none md:rounded md:invisible"}
-          onClick={() =>
-            dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))
-          }
-        >
-          +
-        </button> */}
-      {/* <div className="pb-0 my-10 ">
-          {mBand.map((band, bandIndex) => (
-            <div className={"band-container-mespuma col-span-12 overflow-auto z-" + (mBand.length*10-bandIndex*10)}>
-              {band.map((value, index) => (
-                <BandItem
-                  value={value.value}
-                  label={value.label}
-                  index={index}
-                  bandIndex={bandIndex}
-                  pointer={value.pointer!}
-                  key={bandIndex + index}
-                  alphabet={currentAlphabet.alphabet}
-                  showEditField={true}
-                  setPointerAt={() => setPointerAt(index)}
-                />
-              ))}
-            </div>
-          ))}
-        </div> */}
-
-      {/* Button für Felderhinzufügen - mobile: */}
-      {/* <button
-          className={"mt-10 rounded-l-none md:rounded md:invisible"}
-          onClick={() => dispatch(bandAddField("after"))}
-        >
-          +
-        </button> */}
-
-      {/* </div> */}
-
       {showWarning ? (
         <div className="flex justify-center">
           <IoIosWarning
@@ -183,29 +136,21 @@ export default function Band() {
         </div>
       ) : null}
 
-      <div
-        className={
-          "currentZustand flex-col content-center items-center justify-center mb-8 flex md:hidden"
-        }
-      >
-        {/* <span className="relative">
-                <span className="block absolute -inset-1 w-12 rounded-full bg-thm-primary" aria-hidden="true"></span>
-            </span>                */}
-        {currentZustand ? (
-          <div
-            className={"rounded-full w-12 bg-thm-primary text-white h-8 mt-3"}
+        <div className={"flex justify-center gap-2 pl-2 pr-2 m-2"}>
+          <button
+              className={"secondaryButton"}
+              onClick={() => setPointerLeft()}
           >
-            {currentZustand.value}
-          </div>
-        ) : (
-          <div className={"rounded-full bg-thm-primary text-white h-8"}>
-            {t("band.warningNoStateAvailable")}
-          </div>
-        )}
-      </div>
-
-      <div className={"hidden md:block"}>
-        <div className={"flex justify-center gap-2"}>
+            <FaAngleLeft />
+          </button>
+          <button
+              className={"secondaryButton"}
+              onClick={() => setPointerRight()}
+          >
+            <FaAngleRight />
+          </button>
+        </div>
+        <div className={"flex justify-center gap-2 ml-2 mr-2"}>
           <button
             className={"w-36 invertedButton"}
             onClick={() =>
@@ -230,32 +175,6 @@ export default function Band() {
             {t("band.addRight")} +
           </button>
         </div>
-      </div>
-      <div className="flex md:pb-10">
-        <div className={"w-3/4 text-left"}>
-          <button
-            className={"m-2 md:hidden secondaryButton"}
-            onClick={() => setPointerLeft()}
-          >
-            <FaAngleLeft />
-          </button>
-          <button
-            className={"md:hidden secondaryButton"}
-            onClick={() => setPointerRight()}
-          >
-            <FaAngleRight />
-          </button>
-        </div>
-
-        <div className={"w-1/4 text-right md:hidden"}>
-          <button
-            onClick={() => dispatch(bandDeleteAllMespuma())}
-            className={"m-2"}
-          >
-            <FaTrash />
-          </button>
-        </div>
-      </div>
     </div>
   );
 }
