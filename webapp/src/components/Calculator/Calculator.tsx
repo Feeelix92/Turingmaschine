@@ -82,50 +82,37 @@ export default function Calculator() {
     }
   }
 
+  const currentPointerPos = useSelector(
+    (state: RootState) => state.band.pointerPosition
+  );
+
   function computeNumbers() {
-    dispatch(bandDeleteAll());
     dispatch(alphabetDeleteCustom());
 
     if (selectedType.value === t("calculator.binary")) {
       const operandOne = toBinary(number1);
-      const operandTwo = toBinary(number2);
       // Binary alphabet
       const alphabet = ["1", "0", "#"];
-      saveOperandsToBand(alphabet, operandOne, operandTwo);
+      saveOperandsToBand(alphabet, operandOne);
     } else {
       const operandOne = toUnary(number1);
-      const operandTwo = toUnary(number2);
       // Unary alphabet
       const alphabet = ["1", "#"];
-      saveOperandsToBand(alphabet, operandOne, operandTwo);
+      saveOperandsToBand(alphabet, operandOne);
     }
   }
 
-  function saveOperandsToBand(
-    alphabet: string[],
-    operandOne: string[],
-    operandTwo: string[]
-  ) {
+  function saveOperandsToBand(alphabet: string[], operandOne: string[]) {
     alphabet.forEach((value: string) => {
       dispatch(alphabetPushToCustom(value));
     });
     dispatch(alphabetPushToDialogOptions(alphabet.toString()));
     dispatch(alphabetGenerateBand(alphabet));
 
-    dispatch(bandDeleteAll());
-
     operandOne.forEach((param, idx) => {
-      dispatch(bandChangeItemAt({ index: idx, value: param, label: param }));
-    });
-
-    dispatch(
-      bandChangeItemAt({ index: operandOne.length, value: "#", label: "#" })
-    );
-
-    operandTwo.forEach((param, idx) => {
       dispatch(
         bandChangeItemAt({
-          index: operandOne.length + idx + 1,
+          index: currentPointerPos + idx,
           value: param,
           label: param,
         })
@@ -147,7 +134,7 @@ export default function Calculator() {
       </div>
       {isOpen && (
         <div className="flex flex-wrap mb-2">
-          <div className="w-full px-2 mb-2">
+          <div className="w-full md:w-1/3 px-2 mb-2 self-center">
             <div className="relative">
               <Select
                 className="block appearance-none w-full bg-gray-200 text-gray-700 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -178,26 +165,7 @@ export default function Calculator() {
               {t("calculator.request")}
             </p> */}
           </div>
-          <div className="w-full md:w-1/3 px-2 mb-2">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor={"grid-number-two"}
-            >
-              {t("calculator.number")} 2
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-              id="grid-number-two"
-              type="number"
-              value={number2}
-              onChange={(newValue) =>
-                setNumber2(parseInt(newValue.target.value))
-              }
-            />
-            {/* <p className="text-red-500 text-xs italic">
-              {t("calculator.request")}
-            </p> */}
-          </div>
+
           <button
             className={`w-full md:w-1/3 px-2 self-center`}
             onClick={computeNumbers}

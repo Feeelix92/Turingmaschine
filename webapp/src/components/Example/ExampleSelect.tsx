@@ -159,40 +159,64 @@ export default function ExampleSelect(props: ExampleSelectProps) {
             });
           }
         } else {
-          dispatch(bandDeleteAll());
-          // save Band to store
-          // json.band.input...
-          const bandItems = json.band.input;
-          for (let index = 0; index < bandItems.length; index++) {
-            const temp: BandItemToChange = {
-              index: index,
-              value: bandItems[index],
-              label: bandItems[index],
-            };
-            dispatch(bandChangeItemAt(temp));
-          }
-          // set Pointer at first Element which is not Blank ("ß")
-          setPointerAt(getIndexOfFirstValue(bandItems));
-          // save alphabet from editor to store
-          // json.specifications.alphabet...
-          const alphabet = json.specifications.alphabet;
-          if (alphabet.length > 0) {
-            dispatch(alphabetDeleteCustom());
-            alphabet.forEach((value: string) => {
-              dispatch(alphabetPushToCustom(value));
-            });
-            dispatch(alphabetPushToDialogOptions(alphabet.toString()));
-            dispatch(alphabetGenerateBand(alphabet));
+          if (newValue.label === "example1") {
+            dispatch(bandDeleteAll());
+            // save Band to store
+            // json.band.input...
+            const bandItems = json.band.input;
+            for (let index = 0; index < bandItems.length; index++) {
+              const temp: BandItemToChange = {
+                index: index,
+                value: bandItems[index],
+                label: bandItems[index],
+              };
+              dispatch(bandChangeItemAt(temp));
+            }
+            // set Pointer at first Element which is not Blank ("ß")
+            setPointerAt(getIndexOfFirstValue(bandItems));
+            // save alphabet from editor to store
+            // json.specifications.alphabet...
+            const alphabet = json.specifications.alphabet;
+            if (alphabet.length > 0) {
+              dispatch(alphabetDeleteCustom());
+              alphabet.forEach((value: string) => {
+                dispatch(alphabetPushToCustom(value));
+              });
+              dispatch(alphabetPushToDialogOptions(alphabet.toString()));
+              dispatch(alphabetGenerateBand(alphabet));
+            } else {
+              toast.error("" + t("codeEditor.warningEmptyIsNotAllowed"), {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+            }
           } else {
-            toast.error("" + t("codeEditor.warningEmptyIsNotAllowed"), {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
+            // save alphabet from editor to store
+            // json.specifications.alphabet...
+            const alphabet = json.specifications.alphabet;
+            if (alphabet.length > 0) {
+              dispatch(alphabetDeleteCustom());
+              alphabet.forEach((value: string) => {
+                dispatch(alphabetPushToCustom(value));
+              });
+              dispatch(alphabetPushToDialogOptions(alphabet.toString()));
+              dispatch(alphabetGenerateBand(alphabet));
+            } else {
+              toast.error("" + t("codeEditor.warningEmptyIsNotAllowed"), {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+            }
           }
         }
 
