@@ -362,7 +362,7 @@ function ConditionsList() {
             </span>
             <div
               className={
-                "text-black font-medium bg-white hover:bg-white text-left border border-solid col-span-3 lg:col-span-2 cursor-pointer p-2 max-h-60 overflow-y-scroll"
+                "text-black font-medium bg-white hover:bg-white text-left border border-solid col-span-3 lg:col-span-2 cursor-pointer p-2 max-h-60 overflow-y-auto"
               }
               onClick={() => getZustandsFunktion()}
             >

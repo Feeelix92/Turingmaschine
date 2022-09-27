@@ -469,7 +469,7 @@ function ConditionsList() {
             </span>
             <div
               className={
-                "border border-solid bg-gray-100 rounded p-2 col-span-3 lg:col-span-2 max-h-60 overflow-y-scroll cursor-pointer"
+                "border border-solid bg-gray-100 rounded p-2 col-span-3 lg:col-span-2 max-h-60 overflow-y-auto cursor-pointer"
               }
               onClick={() => getZustandsFunktion()}
             >
