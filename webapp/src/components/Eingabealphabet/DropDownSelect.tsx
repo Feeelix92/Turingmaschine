@@ -59,7 +59,7 @@ export default function DropDownSelect() {
         [],
         currentAlphabet.alphabet
       ) as EingabeAlphabet[];
-      tempAlphabet.push({ value: "\u212c", label: "\u212c", warningMode: false });
+      tempAlphabet.push({ value: "ß", label: "ß", warningMode: false });
 
       tempAlphabet.forEach((literal) => {
         literalArr.push(literal.value);
@@ -109,7 +109,7 @@ export default function DropDownSelect() {
             [],
             newValue.alphabet.alphabet
           ) as EingabeAlphabet[];
-          tempAlphabet.push({ value: "\u212c", label: "\u212c", warningMode: false });
+          tempAlphabet.push({ value: "ß", label: "ß", warningMode: false });
 
           tempAlphabet.forEach((literal) => {
             literalArr.push(literal.value);
@@ -173,7 +173,7 @@ export default function DropDownSelect() {
           getOptionLabel={(e) => (
             <div className={"flex items-center place-content-start"}>
               {e.icon ? <CgAddR /> : ""}
-              <span className={"m-2"}>{e.label === "\u212c" ? "" : e.label}</span>
+              <span className={"m-2"}>{e.label === "ß" ? "" : e.label}</span>
             </div>
           )}
           menuPortalTarget={document.querySelector("body")}
