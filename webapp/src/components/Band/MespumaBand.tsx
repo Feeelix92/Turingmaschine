@@ -150,7 +150,7 @@ export default function Band() {
             <FaAngleRight />
           </button>
         </div>
-        <div className={"flex justify-center gap-2 ml-2 mr-2"}>
+        <div className={"flex justify-center gap-2 m-2"}>
           <button
             className={"w-36 invertedButton"}
             onClick={() =>
