@@ -156,7 +156,7 @@
 }
 
 .band-container-mespuma {
-  @apply  overflow-visible whitespace-nowrap pb-0 pl-10 pr-10 pt-0 flex flex-row justify-start max-w-max ml-auto mr-auto;
+  @apply  overflow-visible whitespace-nowrap flex flex-row justify-start max-w-max ml-auto mr-auto;
 }
 
 .band-container__band {

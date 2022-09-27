@@ -96,34 +96,31 @@ export default function Band() {
             </div>
         )}
       </div>
-
-      <div className="flex ">
-        <div className="flex-1 w-64 overflow-x-auto mx-2">
-          <div className="pb-0 mb-16 mt-10">
-            {mespumaBand.map((band, bandIndex) => (
-              <div
-                key={bandIndex}
-                className={
-                  "band-container-mespuma overflow-auto col-span-12  z-" +
-                  (mespumaBand.length * 10 - bandIndex * 10)
-                }
-              >
-                {band.map((value, index) => (
-                  <BandItem
-                    value={value.value}
-                    label={value.label}
-                    index={index}
-                    bandIndex={bandIndex}
-                    pointer={value.pointer!}
-                    key={bandIndex + index}
-                    alphabet={currentAlphabet.alphabet}
-                    showEditField={true}
-                    setPointerAt={() => setPointerAt(index)}
-                  />
-                ))}
-              </div>
-            ))}
-          </div>
+      <div className="flex overflow-x-auto mx-2">
+        <div className="pb-0 mb-16 mt-10 pb-0 pl-10 pr-10 pt-0">
+          {mespumaBand.map((band, bandIndex) => (
+            <div
+              key={bandIndex}
+              className={
+                "band-container-mespuma overflow-auto" +
+                (mespumaBand.length * 10 - bandIndex * 10)
+              }
+            >
+              {band.map((value, index) => (
+                <BandItem
+                  value={value.value}
+                  label={value.label}
+                  index={index}
+                  bandIndex={bandIndex}
+                  pointer={value.pointer!}
+                  key={bandIndex + index}
+                  alphabet={currentAlphabet.alphabet}
+                  showEditField={true}
+                  setPointerAt={() => setPointerAt(index)}
+                />
+              ))}
+            </div>
+          ))}
         </div>
       </div>
       {showWarning ? (
