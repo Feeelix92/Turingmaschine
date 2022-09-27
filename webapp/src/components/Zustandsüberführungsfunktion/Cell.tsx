@@ -28,11 +28,11 @@ export default function Cell(props: CellProps) {
 
   const dispatch = useDispatch();
 
-  const alphabet = useSelector(
-    (state: RootState) => state.general.currentAlphabet
-  );
-
-  const rows = useSelector((state: RootState) => state.general.rows);
+  // needed if use alternative
+  
+  // const alphabet = useSelector(
+  //   (state: RootState) => state.general.bandAlphabet
+  // );
 
   const temp = [initialZustand3];
 
@@ -51,11 +51,24 @@ export default function Cell(props: CellProps) {
     const failure = checkWarningModus();
 
     if (failure !== props.warningMode) {
-      const tempAlphabet: string[] = [];
-      alphabet.alphabet.forEach((entry) => {
-        tempAlphabet.push(entry.value);
-      });
-      dispatch(tableCheckWarning({ rows: rows, alphabet: tempAlphabet }));
+      // alternative if other is not working
+
+      // const tempAlphabet: string[] = [];
+      // alphabet.forEach((entry) => {
+      //   tempAlphabet.push(entry.value);
+      // });
+      // dispatch(tableCheckWarning({ rows: rows, alphabet: tempAlphabet }));
+
+      // changed cause warning appeared
+
+      dispatch(
+        tableUpdateCell({
+          cellIndex: props.index,
+          rowIndex: props.rowIndex,
+          value: props.value,
+          warningMode: failure,
+        })
+      );
     }
   }, [zustandsmenge]);
 
