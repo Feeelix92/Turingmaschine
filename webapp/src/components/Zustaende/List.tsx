@@ -81,7 +81,8 @@ function ConditionsList() {
 
   function handleChange(
     newValue: OnChangeValue<Zustand, false>,
-    _actionMeta: ActionMeta<Zustand>) {
+    _actionMeta: ActionMeta<Zustand>
+  ) {
     if (newValue) {
       newValue.anfangszustand = true;
       dispatch(alphabetChangeAnfangszustand(newValue));
@@ -261,7 +262,11 @@ function ConditionsList() {
             </div>
             <div className={"flex justify-end gap-2 col-span-1"}>
               <button
-                className={`w-10 ${zustandsmenge.length>1 ? "" : "pointer-events-none bg-gray-700"}`}
+                className={`w-10 ${
+                  zustandsmenge.length > 1
+                    ? ""
+                    : "pointer-events-none bg-gray-700"
+                }`}
                 onClick={() => changeZustandsmenge(false)}
               >
                 -
@@ -335,6 +340,7 @@ function ConditionsList() {
                 className={"w-full"}
                 onChange={handleChangeMulti}
                 options={zustandsmenge}
+                value={final}
                 // filter options to exclude anfangszustand
                 // options={zustandsmenge.filter(Zustand => !Zustand.anfangszustand)}
                 isMulti
