@@ -50,7 +50,6 @@ function ConditionsList() {
   store.subscribe(
     wFinal((newVal, oldVal) => {
       if (newVal != oldVal) {
-        console.log("changed!", newVal);
         final = newVal;
       }
     })
@@ -87,7 +86,6 @@ function ConditionsList() {
       newValue.anfangszustand = true;
       dispatch(alphabetChangeAnfangszustand(newValue));
       checkWarningModus();
-      console.log(anfangsZustand);
     }
   }
   function handleChangeMulti(
@@ -96,10 +94,8 @@ function ConditionsList() {
   ) {
     if (newValues) {
       const endStatesArray = Array.from(newValues.values());
-      console.log(endStatesArray);
       dispatch(alphabetChangeEndzustand(endStatesArray));
       checkWarningModus();
-      console.log(endZustand);
     }
   }
 
@@ -329,13 +325,13 @@ function ConditionsList() {
 
             {/*</div>*/}
             <div className="flex col-span-3 lg:col-span-2">
-            {endZustandWarningOn ? (
-              <IoIosWarning
-                color="orange"
-                title={t("list.warningFinalState")}
-                size="32"
-              />
-            ) : null}
+              {endZustandWarningOn ? (
+                <IoIosWarning
+                  color="orange"
+                  title={t("list.warningFinalState")}
+                  size="32"
+                />
+              ) : null}
               <Select
                 blurInputOnSelect={false}
                 className={"w-full"}

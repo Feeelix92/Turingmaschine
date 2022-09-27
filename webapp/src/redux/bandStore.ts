@@ -257,7 +257,6 @@ export const bandSlice = createSlice({
           bandItem.payload.index
         ].label = "ß";
       }
-      console.log(current(state));
     },
     /**
      * function bandChangeItemAtMespuma changes the Band at the index and the BandIndex, at MeSpuMa
