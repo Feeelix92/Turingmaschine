@@ -20,17 +20,17 @@ export interface PointerItemToChange {
   index: number;
   value: boolean;
 }
-let emptyBandValue = "B";
+let emptyBandValue = "\u212c";
 
 const initBand: EingabeAlphabetOption[] = [
-  { value: emptyBandValue, label: "B", warningMode: false },
-  { value: emptyBandValue, label: "B", warningMode: false },
-  { value: emptyBandValue, label: "B", warningMode: false },
-  { value: emptyBandValue, label: "B", warningMode: false },
-  { value: emptyBandValue, label: "B", warningMode: false },
-  { value: emptyBandValue, label: "B", warningMode: false },
-  { value: emptyBandValue, label: "B", warningMode: false },
-  { value: emptyBandValue, label: "B", warningMode: false },
+  { value: emptyBandValue, label: "\u212c", warningMode: false },
+  { value: emptyBandValue, label: "\u212c", warningMode: false },
+  { value: emptyBandValue, label: "\u212c", warningMode: false },
+  { value: emptyBandValue, label: "\u212c", warningMode: false },
+  { value: emptyBandValue, label: "\u212c", warningMode: false },
+  { value: emptyBandValue, label: "\u212c", warningMode: false },
+  { value: emptyBandValue, label: "\u212c", warningMode: false },
+  { value: emptyBandValue, label: "\u212c", warningMode: false },
 ];
 
 let initBandTmp: EingabeAlphabetOption[] = [];
@@ -56,7 +56,7 @@ export const bandSlice = createSlice({
       if (bandItem.payload.index >= state.currentBand.length - 1) {
         state.currentBand.push({
           value: state.emptyBandValue,
-          label: "B",
+          label: "\u212c",
           warningMode: false,
         });
       }
@@ -67,17 +67,18 @@ export const bandSlice = createSlice({
         state.currentBand[bandItem.payload.index].label =
           bandItem.payload.label;
       } else {
-        state.currentBand[bandItem.payload.index].label = "B";
+        state.currentBand[bandItem.payload.index].label = "\u212c";
       }
     },
     /**
      * function bandDeleteItemAt deletes the Band Values at the index
+     * @param state
      * @param index
      */
     bandDeleteItemAt: (state, index: PayloadAction<number>) => {
       state.currentBand[index.payload as number] = {
         value: state.emptyBandValue,
-        label: "B",
+        label: "\u212c",
         warningMode: state.currentBand[index.payload].warningMode,
       };
     },
@@ -86,7 +87,7 @@ export const bandSlice = createSlice({
         index.payload.index as number
       ] = {
         value: state.emptyBandValue,
-        label: "B",
+        label: "\u212c",
         warningMode:
           state.mespumaBand[index.payload.bandIndex as number][
             index.payload.index as number
@@ -102,13 +103,13 @@ export const bandSlice = createSlice({
       if (position.payload === "before") {
         state.currentBand.unshift({
           value: state.emptyBandValue,
-          label: "B",
+          label: "\u212c",
           warningMode: false,
         });
       } else {
         state.currentBand.push({
           value: state.emptyBandValue,
-          label: "B",
+          label: "\u212c",
           warningMode: false,
         });
       }
@@ -124,7 +125,7 @@ export const bandSlice = createSlice({
         for (let i = 0; i < state.mespumaBand.length; i++) {
           state.mespumaBand[i].unshift({
             value: state.emptyBandValue,
-            label: "B",
+            label: "\u212c",
             warningMode: false,
           });
         }
@@ -132,7 +133,7 @@ export const bandSlice = createSlice({
         for (let i = 0; i < state.mespumaBand.length; i++) {
           state.mespumaBand[i].push({
             value: state.emptyBandValue,
-            label: "B",
+            label: "\u212c",
             warningMode: false,
           });
         }
@@ -146,7 +147,7 @@ export const bandSlice = createSlice({
       for (let index = 0; index < state.currentBand.length; index++) {
         state.currentBand[index] = {
           value: state.emptyBandValue,
-          label: "B",
+          label: "\u212c",
           warningMode: false,
         };
       }
@@ -169,14 +170,14 @@ export const bandSlice = createSlice({
         // BandItem rechts hinzufügen
         state.currentBand.push({
           value: state.emptyBandValue,
-          label: "B",
+          label: "\u212c",
           warningMode: false,
         });
       } else if (step.payload < 0 && state.pointerPosition == 0) {
         // BandItem links hinzufügen
         state.currentBand.unshift({
           value: state.emptyBandValue,
-          label: "B",
+          label: "\u212c",
           warningMode: false,
         });
       } else if (
@@ -200,7 +201,7 @@ export const bandSlice = createSlice({
         for (let i = 0; i < state.mespumaBand.length; i++) {
           state.mespumaBand[i].push({
             value: state.emptyBandValue,
-            label: "B",
+            label: "\u212c",
             warningMode: false,
           });
         }
@@ -209,7 +210,7 @@ export const bandSlice = createSlice({
         for (let i = 0; i < state.mespumaBand.length; i++) {
           state.mespumaBand[i].unshift({
             value: state.emptyBandValue,
-            label: "B",
+            label: "\u212c",
             warningMode: false,
           });
         }
@@ -254,21 +255,20 @@ export const bandSlice = createSlice({
       } else {
         state.mespumaBand[bandItem.payload.bandIndex][
           bandItem.payload.index
-        ].label = "B";
+        ].label = "\u212c";
       }
       console.log(current(state));
     },
     /**
      * function bandChangeItemAtMespuma changes the Band at the index and the BandIndex, at MeSpuMa
      * @param state
-     * @param bandItem
      */
     bandAddBandMespuma: (state) => {
       initBandTmp = [];
       for (let i = 0; i < state.mespumaBand[0].length; i++) {
         initBandTmp.push({
           value: emptyBandValue,
-          label: "B",
+          label: "\u212c",
           warningMode: false,
         });
       }
@@ -284,7 +284,7 @@ export const bandSlice = createSlice({
         for (let index = 0; index < band.length; index++) {
           band[index] = {
             value: state.emptyBandValue,
-            label: "B",
+            label: "\u212c",
             warningMode: false,
           };
         }

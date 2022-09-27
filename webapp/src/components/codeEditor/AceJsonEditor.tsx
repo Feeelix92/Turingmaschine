@@ -220,7 +220,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
               dispatch(bandChangeItemAtMespuma(temp));
             }
           });
-          // set Pointer at first Element which is not Blank ("B")
+          // set Pointer at first Element which is not Blank ("\u212c")
           setPointerAt(getIndexOfFirstValue(bands[0]));
 
           if (alphabet.length > 0) {
@@ -238,7 +238,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             //   literalArr.push(literal);
             // });
             //
-            // literalArr.push("B");
+            // literalArr.push("\u212c");
             //
             // let combinationArr: string[][] = [];
             //
@@ -285,7 +285,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             };
             dispatch(bandChangeItemAt(temp));
           }
-          // set Pointer at first Element which is not Blank ("B")
+          // set Pointer at first Element which is not Blank ("\u212c")
           setPointerAt(getIndexOfFirstValue(bandItems));
           // save alphabet from editor to store
           // json.specifications.alphabet...
@@ -391,7 +391,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
           //   literalArr.push(literal);
           // });
           //
-          // literalArr.push("B");
+          // literalArr.push("\u212c");
           //
           // let combinationArr: string[][] = [];
           //
@@ -408,7 +408,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
           );
         } else {
           const checkAlphabet = alphabet;
-          checkAlphabet.push("B");
+          checkAlphabet.push("\u212c");
 
           dispatch(
             tableCheckWarning({
@@ -437,7 +437,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
   }
 
   function isNotBlank(element: string) {
-    return element != "B";
+    return element != "\u212c";
   }
 
   function getIndexOfFirstValue(array: string[]) {
@@ -451,7 +451,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
       literalArr.push(literal);
     });
 
-    literalArr.push("B");
+    literalArr.push("\u212c");
 
     let combinationArr: string[][] = [];
 
@@ -494,7 +494,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
           {
             caption: "band",
             snippet: `"band":{
-    "input":["B","B","B","B","B","B","B","B"]
+    "input":["\u212c","\u212c","\u212c","\u212c","\u212c","\u212c","\u212c","\u212c"]
   },`,
             type: "snippet",
           },
@@ -564,7 +564,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             caption: "example",
             snippet: `{
   "band":{
-    "input":["1","#","1","B","B","B","B","B"]
+    "input":["1","#","1","\u212c","\u212c","\u212c","\u212c","\u212c"]
   },
   "specifications":{
     "alphabet":["1","#"],
@@ -578,15 +578,15 @@ export default function AceJsonEditor(props: CodeEditorProps) {
       "1":["q1", "1", "R"]
     },
     "q2":{
-      "B":["q4", "B", "L"],
+      "\u212c":["q4", "\u212c", "L"],
       "1":["q3", "#", "L"]
     },
     "q3":{
       "#":["q1", "1", "R"]
     },
     "q4":{
-      "B":["q5", "B", "R"],
-      "#":["q4", "B", "L"],
+      "\u212c":["q5", "\u212c", "R"],
+      "#":["q4", "\u212c", "L"],
       "1":["q4", "1", "L"]
     }
   }

@@ -27,12 +27,12 @@ const initialEndZustandsmenge: Zustand[] = [];
 ///////////////////// BandAlphabet /////////////////////
 const initialBandAlphabet: EingabeAlphabet[] = [
   { label: "1", value: "1", warningMode: false },
-  { label: "B", value: "B", warningMode: false },
+  { label: "\u212c", value: "\u212c", warningMode: false },
 ];
 const initialTeepeeBandAlphabet: EingabeAlphabet[] = [
   { label: "\u26AA", value: "1", warningMode: false },
   { label: "\u26AB", value: "#", warningMode: false },
-  { label: "\u2205", value: "B", warningMode: false },
+  { label: "\u2205", value: "\u212c", warningMode: false },
 ];
 const defaultCustomAlphabet: Alphabet = {
   key: 0,
@@ -71,7 +71,7 @@ const initialDialogOption: EingabeAlphabetDialogOptions = {
   alphabet: defaultAlphabetOption1,
 };
 export const eingabeAlphabetDialogOptions: EingabeAlphabetDialogOptions[] = [
-  { label: "B", alphabet: defaultCustomAlphabet, icon: true },
+  { label: "\u212c", alphabet: defaultCustomAlphabet, icon: true },
   { label: "{1}", alphabet: defaultAlphabetOption1 },
   { label: "{1,#}", alphabet: defaultAlphabetOption2 },
   { label: "{0,1}", alphabet: defaultAlphabetOption3 },
@@ -197,13 +197,13 @@ export const initialCellTP4: Cell[] = [
     editField: false,
     warningMode: false,
   },
-  { value: "B", editField: true, warningMode: false },
+  { value: "\u212c", editField: true, warningMode: false },
   {
     value: initialZustandsmengeTP[3],
     editField: false,
     warningMode: false,
   },
-  { value: "B", editField: true, warningMode: false },
+  { value: "\u212c", editField: true, warningMode: false },
   {
     value: new Direction(directions[1].value, directions[1].label),
     editField: false,
@@ -263,7 +263,7 @@ export const initialCellTP7: Cell[] = [
     editField: false,
     warningMode: false,
   },
-  { value: "B", editField: true, warningMode: false },
+  { value: "\u212c", editField: true, warningMode: false },
   {
     value: new Direction(directions[1].value, directions[1].label),
     editField: false,
@@ -277,13 +277,13 @@ export const initialCellTP8: Cell[] = [
     editField: false,
     warningMode: false,
   },
-  { value: "B", editField: true, warningMode: false },
+  { value: "\u212c", editField: true, warningMode: false },
   {
     value: initialZustandsmengeTP[4],
     editField: false,
     warningMode: false,
   },
-  { value: "B", editField: true, warningMode: false },
+  { value: "\u212c", editField: true, warningMode: false },
   {
     value: new Direction(directions[0].value, directions[0].label),
     editField: false,
@@ -297,13 +297,13 @@ export const initialCellTP9: Cell[] = [
     editField: false,
     warningMode: false,
   },
-  { value: "B", editField: true, warningMode: false },
+  { value: "\u212c", editField: true, warningMode: false },
   {
     value: initialZustandsmengeTP[4],
     editField: false,
     warningMode: false,
   },
-  { value: "B", editField: true, warningMode: false },
+  { value: "\u212c", editField: true, warningMode: false },
   {
     value: new Direction(directions[0].value, directions[0].label),
     editField: false,
@@ -429,7 +429,7 @@ export const generalSlice = createSlice({
         [],
         alphabet.payload.alphabet
       ) as EingabeAlphabet[];
-      tempAlphabet.push({ value: "B", label: "B", warningMode: false });
+      tempAlphabet.push({ value: "\u212c", label: "\u212c", warningMode: false });
 
       state.bandAlphabet = tempAlphabet;
     },
@@ -462,7 +462,7 @@ export const generalSlice = createSlice({
         tupelArray.push(element);
       });
 
-      tupelArray.push({ value: "B", label: "B", warningMode: false });
+      tupelArray.push({ value: "\u212c", label: "\u212c", warningMode: false });
 
       state.bandAlphabet = tupelArray;
     },
@@ -494,7 +494,7 @@ export const generalSlice = createSlice({
           warningMode: false,
         });
       });
-      finalArray.push({ value: "B", label: "B", warningMode: false });
+      finalArray.push({ value: "\u212c", label: "\u212c", warningMode: false });
       state.bandAlphabet = finalArray;
     },
 
@@ -1032,7 +1032,7 @@ export const generalSlice = createSlice({
           [],
           state.currentAlphabet.alphabet
         ) as EingabeAlphabet[];
-        tempAlphabet.push({ value: "B", label: "B", warningMode: false });
+        tempAlphabet.push({ value: "\u212c", label: "\u212c", warningMode: false });
 
         tempAlphabet.forEach((literal) => {
           literalArr.push(literal.value);
@@ -1083,7 +1083,7 @@ export const generalSlice = createSlice({
           tupelArray.push(element);
         });
 
-        tupelArray.push({ value: "B", label: "B", warningMode: false });
+        tupelArray.push({ value: "\u212c", label: "\u212c", warningMode: false });
 
         state.bandAlphabet = tupelArray;
         state.currentAlphabet = defaultAlphabetOption1;
