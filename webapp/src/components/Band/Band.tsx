@@ -125,7 +125,7 @@ export default function Band() {
 
 
   return (
-    <div className={"w-full"}>
+    <div className={"w-full decimalContainer"}>
       <div
           className={
             "currentZustand flex-col content-center items-center justify-center mb-4 mt-4 flex md:hidden"
@@ -143,26 +143,27 @@ export default function Band() {
             </div>
         )}
       </div>
-      <div className={"flex m-2 h-40"}>
+      <div className={"m-2 h-40 flex"}>
         <div className="band-container overflow-x-auto col-span-12">
           {currentBand.map((value, index) => (
-            <BandItem
-              value={value.value}
-              label={value.label}
-              index={index}
-              bandIndex={0}
-              pointer={value.pointer!}
-              key={index}
-              alphabet={currentAlphabet.alphabet}
-              showEditField={true}
-              setPointerAt={() => setPointerAt(index)}
-            />
+              <BandItem
+                  value={value.value}
+                  label={value.label}
+                  index={index}
+                  bandIndex={0}
+                  pointer={value.pointer!}
+                  key={index}
+                  alphabet={currentAlphabet.alphabet}
+                  showEditField={true}
+                  setPointerAt={() => setPointerAt(index)}
+              />
           ))}
         </div>
       </div>
-      <div className={"border-2 mb-10 overflow-x-auto"}>
-        <p className={"text-xl"}>{readOperands()}</p>
+      <div className={"decimalNumbers"}>
+        <p className={"text-xl"}>Bandeingabe in Dezimal: {readOperands()}</p>
       </div>
+
       {showWarning ? (
         <div className="flex justify-center">
           <IoIosWarning
