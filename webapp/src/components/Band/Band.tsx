@@ -74,15 +74,35 @@ export default function Band() {
 
   return (
     <div className={"w-full"}>
-      <div className={"flex m-2 h-36"}>
-        <button
-          className={"mt-10 rounded-r-none md:rounded md:invisible"}
-          onClick={() =>
-            dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))
+      <div
+          className={
+            "currentZustand flex-col content-center items-center justify-center mb-4 mt-4 flex md:hidden"
           }
-        >
-          +
-        </button>
+      >
+        {/* <span className="relative">
+                <span className="block absolute -inset-1 w-12 rounded-full bg-thm-primary" aria-hidden="true"></span>
+            </span>                */}
+        {currentZustand ? (
+            <div
+                className={"rounded-full w-12 bg-thm-primary text-white h-8 mt-3"}
+            >
+              {currentZustand.value}
+            </div>
+        ) : (
+            <div className={"rounded-full bg-thm-primary text-white h-8"}>
+              {t("band.warningNoStateAvailable")}
+            </div>
+        )}
+      </div>
+      <div className={"flex m-2 h-36"}>
+        {/*<button*/}
+        {/*  className={"mt-10 rounded-r-none md:rounded md:invisible"}*/}
+        {/*  onClick={() =>*/}
+        {/*    dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))*/}
+        {/*  }*/}
+        {/*>*/}
+        {/*  +*/}
+        {/*</button>*/}
         <div className="band-container overflow-x-auto col-span-12">
           {currentBand.map((value, index) => (
             <BandItem
@@ -98,12 +118,12 @@ export default function Band() {
             />
           ))}
         </div>
-        <button
-          className={"mt-10 rounded-l-none md:rounded md:invisible"}
-          onClick={() => dispatch(bandAddField("after"))}
-        >
-          +
-        </button>
+        {/*<button*/}
+        {/*  className={"mt-10 rounded-l-none md:rounded md:invisible"}*/}
+        {/*  onClick={() => dispatch(bandAddField("after"))}*/}
+        {/*>*/}
+        {/*  +*/}
+        {/*</button>*/}
       </div>
       {showWarning ? (
         <div className="flex justify-center">
@@ -115,29 +135,30 @@ export default function Band() {
         </div>
       ) : null}
 
-      <div
-        className={
-          "currentZustand flex-col content-center items-center justify-center mb-8 flex md:hidden"
-        }
-      >
-        {/* <span className="relative">
-                <span className="block absolute -inset-1 w-12 rounded-full bg-thm-primary" aria-hidden="true"></span>
-            </span>                */}
-        {currentZustand ? (
-          <div
-            className={"rounded-full w-12 bg-thm-primary text-white h-8 mt-3"}
-          >
-            {currentZustand.value}
-          </div>
-        ) : (
-          <div className={"rounded-full bg-thm-primary text-white h-8"}>
-            {t("band.warningNoStateAvailable")}
-          </div>
-        )}
-      </div>
 
-      <div className={"hidden md:block"}>
-        <div className={"flex justify-center gap-2"}>
+
+      <div className={""}>
+        <div className="flex justify-center m-2 gap-2">
+            <button
+                className={"secondaryButton"}
+                onClick={() => setPointerLeft()}
+            >
+              <FaAngleLeft />
+            </button>
+            <button
+                className={"secondaryButton"}
+                onClick={() => setPointerRight()}
+            >
+              <FaAngleRight />
+            </button>
+
+          {/*<div className={"w-1/4 text-right md:hidden"}>*/}
+          {/*  <button onClick={() => dispatch(bandDeleteAll())} className={"m-2"}>*/}
+          {/*    <FaTrash />*/}
+          {/*  </button>*/}
+          {/*</div>*/}
+        </div>
+        <div className={"flex justify-center gap-2 pl-2 pr-2 pb-2"}>
           <button
             className={"w-36 invertedButton"}
             onClick={() =>
@@ -163,28 +184,7 @@ export default function Band() {
           </button>
         </div>
       </div>
-      <div className="flex md:pb-10">
-        <div className={"w-3/4 text-left"}>
-          <button
-            className={"m-2 md:hidden secondaryButton"}
-            onClick={() => setPointerLeft()}
-          >
-            <FaAngleLeft />
-          </button>
-          <button
-            className={"md:hidden secondaryButton"}
-            onClick={() => setPointerRight()}
-          >
-            <FaAngleRight />
-          </button>
-        </div>
 
-        <div className={"w-1/4 text-right md:hidden"}>
-          <button onClick={() => dispatch(bandDeleteAll())} className={"m-2"}>
-            <FaTrash />
-          </button>
-        </div>
-      </div>
     </div>
   );
 }

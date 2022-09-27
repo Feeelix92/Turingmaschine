@@ -39,6 +39,14 @@
   .lastTeepeeBandItem .brickEditBtnDiv{
     @apply absolute z-50 right-0;
   }
+
+  .firstBandItem .editBtnDiv{
+    @apply absolute z-50 left-0.5;
+  }
+
+  .lastBandItem .editBtnDiv{
+    @apply absolute z-50 right-0.5;
+  }
 }
 @tailwind components;
 @tailwind utilities;
@@ -144,7 +152,7 @@
 
 /*********** BAND ***********/
 .band-container {
-  @apply overflow-x-auto overflow-y-hidden whitespace-nowrap pb-5 pl-10 pr-10 pt-10 flex flex-row justify-start max-w-max ml-auto mr-auto;
+  @apply overflow-x-auto overflow-y-hidden whitespace-nowrap pl-1 pr-1 pb-5 pt-10 flex flex-row justify-start max-w-max ml-auto mr-auto;
 }
 
 .band-container-mespuma {
@@ -152,7 +160,7 @@
 }
 
 .band-container__band {
-  @apply inline-block w-14 h-10 text-black border border-solid border-thm-primary2;
+  @apply inline-block w-14 h-10 text-black border border-solid border-thm-primary2 first:firstBandItem last:lastBandItem;
 }
 
 .pointerBorder {
