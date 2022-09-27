@@ -22,7 +22,7 @@ function Menu() {
       const location = useLocation(); // Current Pathname = location.pathname
 
     return (
-        <div className={"menu w-screen flex justify-between"}>
+        <div className={"menu w-full flex justify-between"}>
             <h1 
             className={`text-white text-xl p-3 md:pl-2 min-w-max self-center float-left xl:block w-[250px]
             ${

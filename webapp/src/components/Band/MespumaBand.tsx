@@ -96,8 +96,8 @@ export default function Band() {
             </div>
         )}
       </div>
-      <div className="flex overflow-x-auto mx-2">
-        <div className="pb-0 mb-16 mt-10 pb-0 pl-1 pr-1 pt-0 ml-auto mr-auto">
+      <div className="flex overflow-x-auto">
+        <div className="pb-0 mb-16 mt-10 pl-1 pr-1 pt-0 ml-auto mr-auto">
           {mespumaBand.map((band, bandIndex) => (
             <div
               key={bandIndex}
