@@ -92,7 +92,7 @@
 }
 
 .bottomnav {
-  @apply bg-thm-primary w-screen p-5 justify-around  fixed bottom-0 left-0;
+  @apply bg-thm-primary w-full p-5 justify-around  fixed bottom-0 left-0;
 }
 
 /* Position and sizing of burger button */
@@ -132,7 +132,7 @@
 }
 
 .menu-options {
-  @apply w-screen md:w-[450px] h-screen !important;
+  @apply w-full md:w-[450px] h-screen !important;
 }
 
 /* Wrapper for item list */
