@@ -304,6 +304,10 @@
   border-radius: 50%;
 }
 
+.empty-value{
+  @apply text-teePeeDropDown font-bold
+}
+
 /* Dice */
 
 .dice {

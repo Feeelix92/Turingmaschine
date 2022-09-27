@@ -213,6 +213,16 @@ export default function Cell(props: CellProps) {
     }
   };
 
+  const emptyStyles = {
+    option: (styles: any,  data: any) => {
+      return {
+        ...styles,
+        fontWeight: data.value === "ß" ? 'bold' : '',
+        fontSize: data.value === "ß" ? '1.373rem' : '',
+      }
+    }
+  }
+
   return (
     <td
       ref={wrapperRef}
@@ -268,12 +278,13 @@ export default function Cell(props: CellProps) {
             (item) => item.label === placeholderTpMultiLang()
           )}
           blurInputOnSelect={false}
-          className={"text-black text-base"}
+          className={`text-black text-base ${ props.value === "ß" ? "empty-value" : ""}`}
           onChange={handleChange}
           options={bALphabet}
           menuPortalTarget={document.querySelector("body")}
           isSearchable={false}
           hideSelectedOptions={true}
+          styles={emptyStyles}
         />
       ) : (
         ""

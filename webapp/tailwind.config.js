@@ -52,6 +52,9 @@ module.exports = {
       },
       minWidth: {
         '10': '2.5rem'
+      },
+      fontSize: {
+        'teePeeDropDown': '1.373rem'
       }
     }
   },
