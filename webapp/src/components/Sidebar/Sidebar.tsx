@@ -3,6 +3,7 @@ import { slide as Menu } from "react-burger-menu";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { bandResetPointerPos} from "../../redux/bandStore";
+import { bandResetAnzahlSpuren } from "../../redux/generalStore";
 import AceJsonEditor from "../codeEditor/AceJsonEditor";
 import { Link, useLocation } from "react-router-dom";
 import { FaLaptopCode } from "react-icons/fa";
@@ -89,7 +90,11 @@ function Sidebar() {
                     ? "bg-thm-primary pointer-events-none"
                     : "bg-gray-700 hover:bg-gray-900"
                 }`}
-                onClick={() => dispatch(bandResetPointerPos())}
+                onClick={() => {
+                  dispatch(bandResetPointerPos());
+                  dispatch(bandResetAnzahlSpuren());
+                  }
+                }
           >
             {t("sidebar.normalMode")}
           </Link>

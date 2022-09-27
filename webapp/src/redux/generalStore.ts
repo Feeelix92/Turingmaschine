@@ -1006,6 +1006,10 @@ export const generalSlice = createSlice({
       state.anzahlSpuren += 1;
     },
 
+    bandResetAnzahlSpuren: (state) => {
+      state.anzahlSpuren = initialanzahlSpuren;
+    },
+
     mespumaDeleteSpuren: (state) => {
       if (state.anzahlSpuren > 2) {
         state.anzahlSpuren -= 1;
@@ -1131,6 +1135,7 @@ export const {
   activateNormalMode,
   changeMespumaMode,
   mespumaPushToSpuren,
+  bandResetAnzahlSpuren,
   mespumaDeleteSpuren,
 } = generalSlice.actions;
 
