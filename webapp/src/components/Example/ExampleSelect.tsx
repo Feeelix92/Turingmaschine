@@ -67,7 +67,7 @@ export default function ExampleSelect(props: ExampleSelectProps) {
   );
 
   function isNotBlank(element: string) {
-    return element != "B";
+    return element != "ß";
   }
 
   function getIndexOfFirstValue(array: string[]) {
@@ -81,7 +81,7 @@ export default function ExampleSelect(props: ExampleSelectProps) {
       literalArr.push(literal);
     });
 
-    literalArr.push("B");
+    literalArr.push("ß");
 
     let combinationArr: string[][] = [];
 
@@ -120,7 +120,7 @@ export default function ExampleSelect(props: ExampleSelectProps) {
               dispatch(bandChangeItemAtMespuma(temp));
             }
           });
-          // set Pointer at first Element which is not Blank ("B")
+          // set Pointer at first Element which is not Blank ("ß")
           setPointerAt(getIndexOfFirstValue(bands[0]));
 
           if (alphabet.length > 0) {
@@ -171,7 +171,7 @@ export default function ExampleSelect(props: ExampleSelectProps) {
             };
             dispatch(bandChangeItemAt(temp));
           }
-          // set Pointer at first Element which is not Blank ("B")
+          // set Pointer at first Element which is not Blank ("ß")
           setPointerAt(getIndexOfFirstValue(bandItems));
           // save alphabet from editor to store
           // json.specifications.alphabet...
@@ -273,7 +273,7 @@ export default function ExampleSelect(props: ExampleSelectProps) {
           );
         } else {
           const checkAlphabet = alphabet;
-          checkAlphabet.push("B");
+          checkAlphabet.push("ß");
 
           dispatch(
             tableCheckWarning({

@@ -205,7 +205,7 @@ function ConditionsList() {
       [],
       currentAlphabet.alphabet
     ) as EingabeAlphabet[];
-    tempAlphabet.push({ value: "B", label: "B", warningMode: false });
+    tempAlphabet.push({ value: "ß", label: "ß", warningMode: false });
 
     tempAlphabet.forEach((literal) => {
       literalArr.push(literal.value);
@@ -245,7 +245,7 @@ function ConditionsList() {
       [],
       currentAlphabet.alphabet
     ) as EingabeAlphabet[];
-    tempAlphabet.push({ value: "B", label: "B", warningMode: false });
+    tempAlphabet.push({ value: "ß", label: "ß", warningMode: false });
 
     tempAlphabet.forEach((literal) => {
       literalArr.push(literal.value);

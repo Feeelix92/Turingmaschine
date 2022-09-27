@@ -86,7 +86,7 @@ export default function BandItem(props: BandItemProps) {
     let allowed = false;
 
     props.alphabet.map((entry) => {
-      if (entry.value === value || value === "B") {
+      if (entry.value === value || value === "ß") {
         const temp: BandItemToChange = {
           index: index as number,
           value: value,
@@ -94,11 +94,11 @@ export default function BandItem(props: BandItemProps) {
         };
         dispatch(bandChangeItemAt(temp));
         allowed = true;
-      } else if (value === "B") {
+      } else if (value === "ß") {
         const temp: BandItemToChange = {
           index: index as number,
           value: value,
-          label: "B",
+          label: "ß",
         };
         dispatch(bandChangeItemAt(temp));
         allowed = true;

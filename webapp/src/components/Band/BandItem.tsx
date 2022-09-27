@@ -113,7 +113,7 @@ export default function BandItem(props: BandItemProps) {
     let allowed = false;
 
     props.alphabet.map((entry) => {
-      if (entry.value === value || value === "B") {
+      if (entry.value === value || value === "ß") {
         if (currentMode === "mespuma") {
           const tempMespuma: BandItemToChangeMespuma = {
             bandIndex: props.bandIndex,
@@ -131,25 +131,25 @@ export default function BandItem(props: BandItemProps) {
           dispatch(bandChangeItemAt(temp));
         }
         allowed = true;
-      } else if (value === "B") {
+      } else if (value === "ß") {
         const temp: BandItemToChange = {
           index: index as number,
           value: value,
-          label: "B",
+          label: "ß",
         };
         if (currentMode === "mespuma") {
           const tempMespuma: BandItemToChangeMespuma = {
             bandIndex: props.bandIndex,
             index: index as number,
             value: value,
-            label: "B",
+            label: "ß",
           };
           dispatch(bandChangeItemAtMespuma(tempMespuma));
         } else {
           const temp: BandItemToChange = {
             index: index as number,
             value: value,
-            label: "B",
+            label: "ß",
           };
           dispatch(bandChangeItemAt(temp));
         }
@@ -196,7 +196,7 @@ export default function BandItem(props: BandItemProps) {
         name="value"
         id="valueInput"
         className={"bandInput bg-transparent"}
-        value={props.label === "B" ? "" : props.label}
+        value={props.label === "ß" ? "" : props.label}
         onChange={(e) => checkValue(props.index, e.target.value)}
         onDragOver={props.setPointerAt}
         autoComplete="off"
