@@ -634,7 +634,7 @@ export const generalSlice = createSlice({
     },
     maschineSliderDecreaseNumber: (state) => {
       let val = state.sliderNumber;
-      if (val > 0) {
+      if (val > 1) {
         val = val - 1;
         state.sliderNumber = val;
       }
