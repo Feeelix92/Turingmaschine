@@ -1,7 +1,7 @@
 import { CgAddR } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
-import Select, { OnChangeValue } from "react-select";
-import { Zustand, ZustandSelectProps } from "../../interfaces/CommonInterfaces";
+import Select, {ActionMeta, OnChangeValue} from "react-select";
+import {Direction, Zustand, ZustandSelectProps} from "../../interfaces/CommonInterfaces";
 import { alphabetPushToZustand } from "../../redux/generalStore";
 import { RootState } from "../../redux/store";
 
@@ -10,8 +10,11 @@ export default function ZustandSelect(props: ZustandSelectProps) {
   /**
    * function handleChange checks if the selected option has changed
    * @param newValue
+   * @param _actionMeta
    */
-  function handleChange(newValue: OnChangeValue<Zustand, false>) {
+  function handleChange(
+      newValue: OnChangeValue<Zustand, false>,
+      _actionMeta: ActionMeta<Direction | Zustand>) {
     let state = newValue as Zustand;
 
     if (mode !== "toiletpaper") {
