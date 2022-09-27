@@ -22,6 +22,7 @@ export default function Calculator() {
   const { t } = useTranslation(["general"]);
 
   const dispatch = useDispatch();
+
   /**
    * To check if Accordion opened or closed
    */
@@ -132,7 +133,6 @@ export default function Calculator() {
       );
     });
   }
-
   return (
     <div
       className={

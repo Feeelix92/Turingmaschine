@@ -72,6 +72,58 @@ export default function Band() {
   //Internationalization
   const { t } = useTranslation(["general"]);
 
+  function readOperands(){
+    const alphabetArray = currentAlphabet.alphabet;
+    let counter = 0;
+    const counted: number[] = [];
+    let value = "";
+    const values: string[] = [];
+    let binaryString: string = "";
+
+    // binary operands
+    if ((alphabetArray.length === 3 && (alphabetArray.some(e => e.value === "#"))
+        && (alphabetArray.some(e => e.value === "1")) && (alphabetArray.some(e => e.value === "0"))) ||
+        (alphabetArray.length === 2 && (alphabetArray.some(e => e.value === "1")) && (alphabetArray.some(e => e.value === "0")))
+    ){
+      currentBand.forEach((item) => {
+        if(item.value === "1" || item.value === "0") {
+          binaryString += item.value;
+        }else if (binaryString != ""){
+          values.push(binaryString);
+          binaryString = "";
+        }
+      });
+      values.filter(item => item !== "");
+      values.forEach((value) => {
+        counted.push( parseInt(value, 2));
+      });
+      return counted.join(" # ");
+    }
+    // unary operands
+    else if ((alphabetArray.length === 2 && (alphabetArray.some(e => e.value === "#")) && (alphabetArray.some(e => e.value === "1"))) ||
+        (alphabetArray.length === 1 && (alphabetArray.some(e => e.value === "1")))
+    ){
+      currentBand.forEach((item) => {
+          if(item.value == "1") {
+            counter++;
+          } else{
+            counted.push(counter);
+            counter = 0;
+          }
+      });
+      if (counted.length > 1){
+        counted.forEach((count)=> {
+          if(count != 0) {
+            value = count.toString();
+            values.push(value);
+          }
+        })
+      }
+      return values.join(" # ");
+    }
+  }
+
+
   return (
     <div className={"w-full"}>
       <div
@@ -107,6 +159,9 @@ export default function Band() {
             />
           ))}
         </div>
+      </div>
+      <div className={"border-2 mb-10 overflow-x-auto"}>
+        <p className={"text-xl"}>{readOperands()}</p>
       </div>
       {showWarning ? (
         <div className="flex justify-center">
