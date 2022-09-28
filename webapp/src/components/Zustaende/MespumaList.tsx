@@ -432,7 +432,6 @@ function ConditionsList() {
                 onChange={handleChange}
                 options={zustandsmenge}
                 // filter options to exclude endzustand
-                // options={zustandsmenge.filter(Zustand => !Zustand.endzustand)}
                 menuPortalTarget={document.querySelector("body")}
                 isSearchable={false}
                 hideSelectedOptions={true}
@@ -472,7 +471,6 @@ function ConditionsList() {
                 options={zustandsmenge}
                 value={final}
                 // filter options to exclude anfangszustand
-                // options={zustandsmenge.filter(Zustand => !Zustand.anfangszustand)}
                 isMulti
                 placeholder={t("list.finalStatesSelection")}
                 menuPortalTarget={document.querySelector("body")}

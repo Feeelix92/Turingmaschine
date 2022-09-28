@@ -36,7 +36,7 @@ export default function BandItem(props: BandItemProps) {
     setEditMode(!editMode);
   }
 
-  const [displayKeyboard, setKeyboard] = React.useState(false); // Damit Keyboard sich erst beim 2. Klick öffnet
+  const [displayKeyboard, setKeyboard] = React.useState(false); // Damit Keyboard sich erst beim 2. Tippen öffnet
   function disableKeyboard() {
     setKeyboard(false);
   }
@@ -52,7 +52,7 @@ export default function BandItem(props: BandItemProps) {
     (state: RootState) => state.band.pointerPosition
   );
 
-  //Internationalization
+  // Internationalization
   const { t } = useTranslation(["general"]);
 
   function chooseOption(option: string) {
@@ -198,7 +198,6 @@ export default function BandItem(props: BandItemProps) {
         onChange={(e) => checkValue(props.index, e.target.value)}
         onDragOver={props.setPointerAt}
         autoComplete="off"
-        // autoComplete="0" // Bringt das schon was gegen die Vorschläge vom Browser?
         inputMode={displayKeyboard ? "text" : "none"}
         onClick={() => {
           disableKeyboard();

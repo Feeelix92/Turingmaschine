@@ -371,7 +371,6 @@ export const generalSlice = createSlice({
     endZustand: initialEndZustandsmenge,
     //// Alphabet ////
     currentAlphabet: defaultAlphabetOption1,
-    //currentAlphabet: defaultAlphabetOption1,
     bandAlphabet: initialBandAlphabet,
     customAlphabet: defaultCustomAlphabet,
     //// Dialog ////
@@ -381,7 +380,6 @@ export const generalSlice = createSlice({
     pauseMaschine: false,
     stoppMaschine: false,
     executable: false,
-    // rows: initialRowTP,
     rows: initialRow,
     activeRow: activeRow,
     watchedRows: watchedRows,
@@ -1114,7 +1112,6 @@ export const generalSlice = createSlice({
         state.zustandsmenge = initialZustandsmenge;
         state.anfangsZustand = initialAnfangszustand;
         state.endZustand = initialEndZustandsmenge;
-        // state.bandAlphabet = initialBandAlphabet;
 
         let literalArr: string[] = [];
 

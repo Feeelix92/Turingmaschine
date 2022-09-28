@@ -35,8 +35,6 @@ export default function Table() {
     (state: RootState) => state.general.zustandsmenge
   );
 
-  const mode = useSelector((state: RootState) => state.general.mode);
-
   return (
     <div className="flex flex-col col-span-2 border rounded">
       <div className="">

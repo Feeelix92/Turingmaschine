@@ -81,6 +81,7 @@ function Control() {
     })
   );
 
+  // Regulierung der Geschwindigkeit über den Slider
   let slider: number = useSelector(
     (state: RootState) => state.general.sliderNumber
   );
@@ -92,7 +93,8 @@ function Control() {
       }
     })
   );
-
+  
+  // Regulierung der Geschwindigkeit über die Buttons im mobilen Modus
   const increaseSlider = () => {
     dispatch(maschineSliderIncreaseNumber());
   };
@@ -346,7 +348,6 @@ function Control() {
       if (
         item.cells[0].value instanceof Zustand &&
         item.cells[0].value.endzustand === false
-        // && !tempLastZustandVar.endzustand
       ) {
         let tempString = item.cells[3].value.slice(0, -1);
         tempString = tempString.substring(1);
@@ -441,7 +442,7 @@ function Control() {
     }
   };
 
-  ///Langauge Change///
+  ///Language Change///
   const { t } = useTranslation(["general"]);
 
   return (

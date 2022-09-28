@@ -1,4 +1,4 @@
-import { createRef, Key, RefObject, useEffect, useState } from "react";
+import { createRef, RefObject, useEffect } from "react";
 import { IoIosWarning } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import Select, { ActionMeta, OnChangeValue } from "react-select";
@@ -12,14 +12,11 @@ import { RootState } from "../../redux/store";
 import {
   initialZustand3,
   maschineChangeExecutable,
-  tableCheckWarning,
   tableUpdateCell,
   tableUpdateRowIsFinal,
 } from "../../redux/generalStore";
-import EditField from "./EditField";
 import ZustandSelect from "./ZustandSelect";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Cell(props: CellProps) {
@@ -27,12 +24,6 @@ export default function Cell(props: CellProps) {
   const wrapperRef: RefObject<HTMLTableCellElement> = createRef();
 
   const dispatch = useDispatch();
-
-  // needed if use alternative
-  
-  // const alphabet = useSelector(
-  //   (state: RootState) => state.general.bandAlphabet
-  // );
 
   const temp = [initialZustand3];
 
@@ -51,16 +42,6 @@ export default function Cell(props: CellProps) {
     const failure = checkWarningModus();
 
     if (failure !== props.warningMode) {
-      // alternative if other is not working
-
-      // const tempAlphabet: string[] = [];
-      // alphabet.forEach((entry) => {
-      //   tempAlphabet.push(entry.value);
-      // });
-      // dispatch(tableCheckWarning({ rows: rows, alphabet: tempAlphabet }));
-
-      // changed cause warning appeared
-
       dispatch(
         tableUpdateCell({
           cellIndex: props.index,
@@ -133,6 +114,7 @@ export default function Cell(props: CellProps) {
   ) {
     if (newValue) {
       const failure = checkWarningModus(newValue);
+      // case for literals
       if (
         (mode == "mespuma" || mode == "default" || mode == "toiletpaper") &&
         (props.index === 1 || props.index === 3)
@@ -158,6 +140,7 @@ export default function Cell(props: CellProps) {
     }
   }
 
+  // function to mark a row as final
   function setFinal(newValue: boolean) {
     dispatch(
       tableUpdateRowIsFinal({
@@ -168,6 +151,7 @@ export default function Cell(props: CellProps) {
     );
   }
 
+  // check if cell-value isnt allowed
   function checkWarningModus(newValue?: any) {
     let tempVar = newValue ? newValue : props.value;
     if (tempVar instanceof Zustand) {
@@ -214,14 +198,14 @@ export default function Cell(props: CellProps) {
   };
 
   const emptyStyles = {
-    option: (styles: any,  data: any) => {
+    option: (styles: any, data: any) => {
       return {
         ...styles,
-        fontWeight: data.value === "ß" ? 'bold' : '',
-        fontSize: data.value === "ß" ? '1.373rem' : '',
-      }
-    }
-  }
+        fontWeight: data.value === "ß" ? "bold" : "",
+        fontSize: data.value === "ß" ? "1.373rem" : "",
+      };
+    },
+  };
 
   return (
     <td
@@ -278,7 +262,9 @@ export default function Cell(props: CellProps) {
             (item) => item.label === placeholderTpMultiLang()
           )}
           blurInputOnSelect={false}
-          className={`text-black text-base ${ props.value === "ß" ? "empty-value" : ""}`}
+          className={`text-black text-base ${
+            props.value === "ß" ? "empty-value" : ""
+          }`}
           onChange={handleChange}
           options={bALphabet}
           menuPortalTarget={document.querySelector("body")}

@@ -87,12 +87,12 @@ export default function Band() {
     dispatch(bandChangePointPos(-1));
   };
 
-  //Für Touch nach rechts:
+  // Für Touch nach rechts:
   const setPointerRight = () => {
     dispatch(bandChangePointPos(1));
   };
 
-  //Internationalization
+  // Internationalization
   const { t } = useTranslation(["general"]);
 
   // set showDecimal to true if selected alphabet is binary or unary

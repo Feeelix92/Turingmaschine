@@ -9,7 +9,6 @@ import { Link, useLocation } from "react-router-dom";
 import { FaLaptopCode } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { FlagIcon } from "react-flag-kit";
-import * as React from "react";
 
 function Sidebar() {
   const mode = useSelector((state: RootState) => state.general.mode);
@@ -59,6 +58,7 @@ function Sidebar() {
       isOpen={menuIsOpen}
     >
       <div className={"mt-0"}>
+
         {/*Link zum default Modus*/}
         <Link className="no-underline text-white text-lg" to="/">
           {t("sidebar.homePage")}
@@ -78,6 +78,7 @@ function Sidebar() {
 
       <div className="hidden md:inline-flex">
         <div className="rounded-md shadow-sm text-center inline-flex">
+
           {/*Link zum default Modus*/}
           <Link
             to="/"
@@ -95,6 +96,7 @@ function Sidebar() {
           >
             {t("sidebar.normalMode")}
           </Link>
+
           {/*Link zum Toilettenpapiermodus*/}
           <Link
             to="/papier"
@@ -108,6 +110,7 @@ function Sidebar() {
           >
             {t("sidebar.toiletPaperMode")}
           </Link>
+
           {/*Link zum Mehrspurenmodus*/}
           <Link
             to="/mehrspuren"
@@ -165,6 +168,7 @@ function Sidebar() {
       </div>
 
       <div className={"mt-0"}>
+        
         {/*Link zum Imprint*/}
         <Link
           to="/impressum"
