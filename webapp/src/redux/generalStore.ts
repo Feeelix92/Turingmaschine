@@ -352,23 +352,7 @@ const initialRowTP: RowInterface[] = [
   },
 ];
 
-//Rows
 
-///////////
-/*
-const initialRow: RowInterface[] = [
-  {
-    cells: initialCell,
-    isFinal: false,
-  },
-];
-*/
-// const initialRow: RowInterface[] = [
-//   {
-//     cells: initialCell,
-//     isFinal: false,
-//   },
-// ];
 const initialRow: RowInterface[] = [];
 let activeRow: RowInterface | undefined;
 
@@ -388,7 +372,6 @@ export const generalSlice = createSlice({
     endZustand: initialEndZustandsmenge,
     //// Alphabet ////
     currentAlphabet: defaultAlphabetOption1,
-    //currentAlphabet: defaultAlphabetOption1,
     bandAlphabet: initialBandAlphabet,
     customAlphabet: defaultCustomAlphabet,
     //// Dialog ////
@@ -398,7 +381,6 @@ export const generalSlice = createSlice({
     pauseMaschine: false,
     stoppMaschine: false,
     executable: false,
-    // rows: initialRowTP,
     rows: initialRow,
     activeRow: activeRow,
     watchedRows: watchedRows,
@@ -1024,7 +1006,6 @@ export const generalSlice = createSlice({
         state.zustandsmenge = initialZustandsmenge;
         state.anfangsZustand = initialAnfangszustand;
         state.endZustand = initialEndZustandsmenge;
-        // state.bandAlphabet = initialBandAlphabet;
 
         let literalArr: string[] = [];
 
@@ -1052,11 +1033,6 @@ export const generalSlice = createSlice({
           let el = "(" + element.join() + ")";
           finalBandAlphabet.push(el);
         });
-
-        // alphabetChangeCurrentMespuma({
-        //   cartesian: finalBandAlphabet,
-        //   alphabet: state.currentAlphabet,
-        // });
 
         if (state.currentAlphabet) {
           state.dialogOptions.forEach((option) => {

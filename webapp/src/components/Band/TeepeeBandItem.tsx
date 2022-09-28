@@ -1,22 +1,18 @@
 import React, { Key, useEffect, useRef } from "react";
 import EditField from "../Zustandsüberführungsfunktion/EditField";
 import { BandItemProps } from "../../interfaces/CommonInterfaces";
-import { FaRedo, FaTimes, FaTrash } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
-import brickWhite from "../../assets/images/brick_white.svg";
-import brickBlack from "../../assets/images/brick_black.svg";
 import {
   BandItemToChange,
   bandChangeItemAt,
   bandDeleteItemAt,
 } from "../../redux/bandStore";
-import { icons } from "react-icons";
 import { BsFillEraserFill } from "react-icons/bs";
 import BrickWhite from "../../assets/images/brick_white.svg";
 import BrickBlack from "../../assets/images/brick_black.svg";
 import { useTranslation } from "react-i18next";
-import { ToastContainer, toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
+import { toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
 import "react-toastify/dist/ReactToastify.css";
 
 export default function BandItem(props: BandItemProps) {

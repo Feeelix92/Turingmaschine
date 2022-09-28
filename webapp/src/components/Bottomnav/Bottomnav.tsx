@@ -1,4 +1,4 @@
-import React, {Key, useEffect, useRef} from "react";
+import React, {useEffect} from "react";
 
 import ConditionsList from "../Zustaende/List";
 import MespumaList from "../Zustaende/MespumaList";
@@ -14,18 +14,21 @@ import { RootState } from "../../redux/store";
 
 function Bottomnav() {
 
+    // Anzeige der Spezifikation
     const [spez, setSpez] = React.useState(true);
     function showSpez() {
         setFunk(false);
         setSpez(true);
     }
 
+    // Anzeige der Zustandsüberführungsfunktion
     const [funk, setFunk] = React.useState(false);
     function showFunk() {
         setSpez(false);
         setFunk(true);
     }
 
+    // Wenn Keyboard geöffnet ist, soll die BottomNavigation ausgeblendet werden
     const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false); 
 
     const [windowHeight, setWindowHeight] = React.useState(window.innerHeight);
@@ -38,7 +41,7 @@ function Bottomnav() {
 
         function handleResize() {
             const y = window.innerHeight;
-            const heightDiff = 200; // Soll erst ab einer bestimmten Differenz der Höhe getriggert werden --> Damit es nicht auch auf scrollen reagiert --> also quasi die vermutete Mindesthöhe des Keyboards
+            const heightDiff = 200; // Soll erst ab einer bestimmten Differenz der Höhe getriggert werden --> Damit es nicht auch auf scrollen reagiert, also quasi die vermutete Mindesthöhe des Keyboards
 
             if(windowHeight > y && ( (windowHeight-y) > heightDiff ) ) {
                 setKeyboardIsOpen(true); 
@@ -57,7 +60,7 @@ function Bottomnav() {
         (state: RootState) => state.general.mode
       );
 
-    ///internationalization
+    /// internationalization
     const { t } = useTranslation(["general"])
 
     return (
@@ -94,7 +97,6 @@ function Bottomnav() {
                 </div>
                 ) : "" }     
 
-            
         </div>
     );
 }

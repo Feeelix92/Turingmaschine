@@ -3,7 +3,6 @@ import { FaAngleLeft, FaAngleRight, FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { bandAddField, bandChangePointPos, bandDeleteAll, bandSetPointPos} from "../../redux/bandStore";
 import { RootState } from "../../redux/store";
-import React from "react";
 import Dice from "./Dice";
 
 export default function TeepeeBand() {

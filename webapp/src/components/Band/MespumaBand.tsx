@@ -1,5 +1,5 @@
 import BandItem from "./BandItem";
-import { FaAngleLeft, FaAngleRight, FaTrash } from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
   bandAddMespumaField,
@@ -68,12 +68,12 @@ export default function Band() {
     dispatch(bandChangeMespumaPointPos(-1));
   };
 
-  //Für Touch nach rechts:
+  // Für Touch nach rechts:
   const setPointerRight = () => {
     dispatch(bandChangeMespumaPointPos(1));
   };
 
-  //Für Internationalisierung
+  // Für Internationalisierung
   const { t } = useTranslation(["general"]);
 
   return (

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Select, { ActionMeta, OnChangeValue } from "react-select";
 import { Direction, Zustand } from "../../interfaces/CommonInterfaces";
@@ -311,7 +311,6 @@ function ConditionsList() {
               "flex grid grid-cols-3 lg:grid-cols-4 gap-5 items-center mt-2 text-left"
             }
           >
-            {/*<div className={"flex col-span-3 lg:col-span-2 justify-between"}>*/}
             <div className={"col-span-3 lg:col-span-2"}>
               {t("list.finalStates")} F = {kA}
               {final.map((value, index) => (
@@ -323,7 +322,6 @@ function ConditionsList() {
               {kZ}
             </div>
 
-            {/*</div>*/}
             <div className="flex col-span-3 lg:col-span-2">
               {endZustandWarningOn ? (
                 <IoIosWarning
@@ -339,7 +337,6 @@ function ConditionsList() {
                 options={zustandsmenge}
                 value={final}
                 // filter options to exclude anfangszustand
-                // options={zustandsmenge.filter(Zustand => !Zustand.anfangszustand)}
                 isMulti
                 placeholder={t("list.finalStatesSelection")}
                 menuPortalTarget={document.querySelector("body")}

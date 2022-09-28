@@ -6,7 +6,6 @@ import "./index.css";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import "./i18n";
-import { render } from "react-dom";
 import { ToastContainer, toast } from 'react-toastify'; // https://fkhadra.github.io/react-toastify/introduction/
 import 'react-toastify/dist/ReactToastify.css';
 

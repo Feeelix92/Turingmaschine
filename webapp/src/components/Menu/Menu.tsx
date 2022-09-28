@@ -14,6 +14,7 @@ function Menu() {
         (state: RootState) => state.general.activeState
       );
 
+      // aktuell aktiver Modus
       const mode = useSelector(
         (state: RootState) => state.general.mode
       );

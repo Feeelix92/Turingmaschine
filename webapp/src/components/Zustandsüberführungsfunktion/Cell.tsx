@@ -1,4 +1,4 @@
-import { createRef, Key, RefObject, useEffect, useState } from "react";
+import { createRef, RefObject, useEffect } from "react";
 import { IoIosWarning } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import Select, { ActionMeta, OnChangeValue } from "react-select";
@@ -12,14 +12,11 @@ import { RootState } from "../../redux/store";
 import {
   initialZustand3,
   maschineChangeExecutable,
-  tableCheckWarning,
   tableUpdateCell,
   tableUpdateRowIsFinal,
 } from "../../redux/generalStore";
-import EditField from "./EditField";
 import ZustandSelect from "./ZustandSelect";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Cell(props: CellProps) {
@@ -27,12 +24,6 @@ export default function Cell(props: CellProps) {
   const wrapperRef: RefObject<HTMLTableCellElement> = createRef();
 
   const dispatch = useDispatch();
-
-  // needed if use alternative
-  
-  // const alphabet = useSelector(
-  //   (state: RootState) => state.general.bandAlphabet
-  // );
 
   const temp = [initialZustand3];
 
@@ -51,15 +42,6 @@ export default function Cell(props: CellProps) {
     const failure = checkWarningModus();
 
     if (failure !== props.warningMode) {
-      // alternative if other is not working
-
-      // const tempAlphabet: string[] = [];
-      // alphabet.forEach((entry) => {
-      //   tempAlphabet.push(entry.value);
-      // });
-      // dispatch(tableCheckWarning({ rows: rows, alphabet: tempAlphabet }));
-
-      // changed cause warning appeared
 
       dispatch(
         tableUpdateCell({
