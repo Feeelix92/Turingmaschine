@@ -7,7 +7,7 @@
 5. Projekt im Browser erreichbar unter http://localhost:3000/
 
 ## Projekt für den Betrieb auf einem Server deployen
-1. GitHub Projekt klonen, https://github.com/Feeelix92/Turingmaschine
+1. GitHub Projekt klonen
 2. In den Ordner webapp wechseln, im Terminal `cd webapp` eingeben.
 3. Verwendete Packages mit `npm install` installieren.
 4. `npm run build` erzeugt die Anwendung im Projektverzeichnis, im Ordner `build`.
