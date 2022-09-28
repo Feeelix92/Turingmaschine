@@ -24,9 +24,13 @@ Der Ausgabepfad der erzeugten Anwendung kann in der Vite Config geändert werden
 - TailwindCSS, https://tailwindcss.com
 - animejs, https://animejs.com/
 - partyjs, https://party.js.org/
+- react-ace, https://www.npmjs.com/package/react-ace
+- react-burger-menu, https://github.com/negomi/react-burger-menu
+- react-flag-kit, https://www.npmjs.com/package/react-flag-kit
+- react-i18next, https://www.npmjs.com/package/react-i18next
+- react-icons, https://www.npmjs.com/package/react-icons
+- react-select, https://react-select.com/
 - react-toastify, https://www.npmjs.com/package/react-toastify 
-- party.js, https://party.js.org/ 
-- react-burger-menu, https://github.com/negomi/react-burger-menu 
 
 
 [//]: # (Turing Favicon:)
