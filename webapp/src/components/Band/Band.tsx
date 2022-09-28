@@ -139,7 +139,7 @@ export default function Band() {
 
 
   return (
-    <div className={"w-full decimalContainer"}>
+    <div className={"w-full"}>
       <div
           className={
             "currentZustand flex-col content-center items-center justify-center mb-4 mt-4 flex md:hidden"
@@ -157,10 +157,11 @@ export default function Band() {
             </div>
         )}
       </div>
-      {showDecimal ? <div className={"decimalNumbers"}>
-        <p className={"text-xl"}>Bandeingabe als Dezimalzahl:</p>
-        <p className={"text-xl"}>{readOperands()}</p>
-      </div> : null}
+      <div className={"decimalContainer"}>
+        {showDecimal ? <div className={"decimalNumbers"}>
+          <p className={"text-xl"}>Bandeingabe als Dezimalzahl(en):</p>
+          <p className={"text-xl"}>{readOperands()}</p>
+        </div> : null}
       <div className={"m-2 h-40 flex"}>
         <div className="band-container overflow-x-auto col-span-12">
           {currentBand.map((value, index) => (
@@ -177,6 +178,7 @@ export default function Band() {
               />
           ))}
         </div>
+      </div>
       </div>
       {checkUnary() || checkBinary() ? (
         <div className="flex justify-center">
