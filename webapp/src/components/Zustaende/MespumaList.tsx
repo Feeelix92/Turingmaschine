@@ -60,7 +60,6 @@ function ConditionsList() {
     wFinal((newVal, oldVal) => {
       if (newVal != oldVal) {
         final = newVal;
-        console.log("ja moin", newVal);
       }
     })
   );

@@ -213,7 +213,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
           // save Band to store
           // json.band.input...
           const bands = json.band.input;
-          console.log(bands.length);
           for (let i = 1; i < bands.length - 1; i++) {
             dispatch(bandAddBandMespuma());
             dispatch(mespumaPushToSpuren());
