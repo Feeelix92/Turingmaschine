@@ -64,6 +64,7 @@ export default function MultiselectDropDown(props: any) {
     const ev = event as unknown as KeyboardEvent;
     if (!optionString) return;
     switch (ev.key) {
+      case " ":
       case "Enter":
       case "Tab": {
         let temp = optionArray.slice(0, optionArray.length);
