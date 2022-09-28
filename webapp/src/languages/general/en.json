@@ -145,7 +145,7 @@
         "endStates": "endStates - generates the code frame for the input of the final state.",
         "endStates_q2": "endStates_q2 - generates code for final state q2.",
         "table": "specifications - generates the code skeleton for entering the table.",
-        "example": "example - generates the complete code to program the Turing machine for the addition of two unary coded numbers, seen in the following section."
+        "addUn": "addUn - generates the complete code to program the Turing machine for the addition of two unary coded numbers, seen in the following section."
       }
     }
   },

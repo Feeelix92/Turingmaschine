@@ -144,7 +144,7 @@
         "endStates": "endStates - erzeugt das Codegerüst für die Eingabe des Endzustand.",
         "endStates_q2": "endStates_q2 - erzeugt Code für Endzustand q2.",
         "table": "specifications - erzeugt das Codegerüst für die Eingabe der Tabelle.",
-        "example": "example -  erzeugt den kompletten Code, um die Turingmaschine für die Addition von zwei unär kodierten Zahlen zu programmieren, zusehen im nachfolgenden Abschnitt."
+        "addUn": "addUn -  erzeugt den kompletten Code, um die Turingmaschine für die Addition von zwei unär kodierten Zahlen zu programmieren, zusehen im nachfolgenden Abschnitt."
       }
     }
   },
