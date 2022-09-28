@@ -12,6 +12,7 @@ import { RootState, store } from "../../redux/store";
 import { IoIosWarning } from "react-icons/io";
 import { useTranslation } from "react-i18next";
 import * as React from "react";
+import {useEffect, useState} from "react";
 
 export default function Band() {
   const dispatch = useDispatch();
@@ -72,8 +73,27 @@ export default function Band() {
   //Internationalization
   const { t } = useTranslation(["general"]);
 
-  function readOperands(){
+  // set showDecimal to true if selected alphabet is binary or unary
+  const showDecimal = checkBinary() || checkUnary();
+
+  // Check if actual alphabets for binary selected
+  function checkBinary(){
     const alphabetArray = currentAlphabet.alphabet;
+    return !!((alphabetArray.length === 3 && (alphabetArray.some(e => e.value === "#"))
+            && (alphabetArray.some(e => e.value === "1")) && (alphabetArray.some(e => e.value === "0"))) ||
+        (alphabetArray.length === 2 && (alphabetArray.some(e => e.value === "1")) && (alphabetArray.some(e => e.value === "0"))));
+  }
+
+  // Check if actual alphabets for unary selected
+  function checkUnary(){
+    const alphabetArray = currentAlphabet.alphabet;
+    return !!((alphabetArray.length === 2 && (alphabetArray.some(e => e.value === "#")) && (alphabetArray.some(e => e.value === "1"))) ||
+        (alphabetArray.length === 1 && (alphabetArray.some(e => e.value === "1"))));
+  }
+
+
+  // read Operands from Band
+  function readOperands() {
     let counter = 0;
     const counted: number[] = [];
     let value = "";
@@ -81,39 +101,34 @@ export default function Band() {
     let binaryString: string = "";
 
     // binary operands
-    if ((alphabetArray.length === 3 && (alphabetArray.some(e => e.value === "#"))
-        && (alphabetArray.some(e => e.value === "1")) && (alphabetArray.some(e => e.value === "0"))) ||
-        (alphabetArray.length === 2 && (alphabetArray.some(e => e.value === "1")) && (alphabetArray.some(e => e.value === "0")))
-    ){
+    if (checkBinary()) {
       currentBand.forEach((item) => {
-        if(item.value === "1" || item.value === "0") {
+        if (item.value === "1" || item.value === "0") {
           binaryString += item.value;
-        }else if (binaryString != ""){
+        } else if (binaryString != "") {
           values.push(binaryString);
           binaryString = "";
         }
       });
       values.filter(item => item !== "");
       values.forEach((value) => {
-        counted.push( parseInt(value, 2));
+        counted.push(parseInt(value, 2));
       });
       return counted.join(" # ");
     }
     // unary operands
-    else if ((alphabetArray.length === 2 && (alphabetArray.some(e => e.value === "#")) && (alphabetArray.some(e => e.value === "1"))) ||
-        (alphabetArray.length === 1 && (alphabetArray.some(e => e.value === "1")))
-    ){
+    else if (checkUnary()) {
       currentBand.forEach((item) => {
-          if(item.value == "1") {
-            counter++;
-          } else{
-            counted.push(counter);
-            counter = 0;
-          }
+        if (item.value == "1") {
+          counter++;
+        } else {
+          counted.push(counter);
+          counter = 0;
+        }
       });
-      if (counted.length > 1){
-        counted.forEach((count)=> {
-          if(count != 0) {
+      if (counted.length > 1) {
+        counted.forEach((count) => {
+          if (count != 0) {
             value = count.toString();
             values.push(value);
           }
@@ -143,6 +158,10 @@ export default function Band() {
             </div>
         )}
       </div>
+      {showDecimal ? <div className={"decimalNumbers"}>
+        <p className={"text-xl"}>Bandeingabe als Dezimalzahl:</p>
+        <p className={"text-xl"}>{readOperands()}</p>
+      </div> : null}
       <div className={"m-2 h-40 flex"}>
         <div className="band-container overflow-x-auto col-span-12">
           {currentBand.map((value, index) => (
@@ -160,11 +179,7 @@ export default function Band() {
           ))}
         </div>
       </div>
-      <div className={"decimalNumbers"}>
-        <p className={"text-xl"}>Bandeingabe in Dezimal: {readOperands()}</p>
-      </div>
-
-      {showWarning ? (
+      {checkUnary() || checkBinary() ? (
         <div className="flex justify-center">
           <IoIosWarning
             color="orange"
