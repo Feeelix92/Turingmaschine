@@ -40,15 +40,9 @@
     @apply absolute z-50 right-0;
   }
 
-  .firstBandItem div.editBtnDiv{
-    @apply justify-start;
+  div.editBtnDiv{
+    @apply justify-start
   }
-
-  .lastBandItem div.editBtnDiv{
-    @apply justify-end;
-  }
-
-
 }
 @tailwind components;
 @tailwind utilities;
@@ -170,7 +164,7 @@
 }
 
 .band-container__band {
-  @apply inline-block w-14 h-10 text-black border border-solid border-thm-primary2 first:firstBandItem last:lastBandItem;
+  @apply inline-block w-14 h-10 text-black border border-solid border-thm-primary2;
 }
 
 .pointerBorder {
