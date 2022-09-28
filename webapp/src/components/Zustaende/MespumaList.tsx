@@ -40,7 +40,7 @@ function ConditionsList() {
   const bandAlphabet = useSelector(
     (state: RootState) => state.general.bandAlphabet
   );
-  // TODO: Spuren-Anzahl:
+  // Spuren-Anzahl:
   const anzahlSpuren = useSelector(
     (state: RootState) => state.general.anzahlSpuren
   );

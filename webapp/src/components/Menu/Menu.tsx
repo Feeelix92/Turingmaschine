@@ -58,7 +58,6 @@ function Menu() {
             <div className={"lg:w-[250px]"}>
                 <Sidebar/>
             </div>
-            {/* TODO: Wenn Sidebar nicht ganz am Anfang steht, ist Overlay nicht zu sehen (das ist immer rechts von Burgermenu-Icon?) */}
         </div>
     );
 }
