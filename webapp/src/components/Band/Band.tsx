@@ -153,7 +153,7 @@ export default function Band() {
         )}
       </div>
       <div className={"decimalContainer"}>
-        {showDecimal ? <div className={"decimalNumbers"}>
+        {showDecimal && currentBand.filter(item => item.value !== "ß").length > 0? <div className={"decimalNumbers"}>
           <p className={"text-xl"}>{t("band.decimal")}</p>
           <p className={"text-xl"}>{readOperands()}</p>
         </div> : null}

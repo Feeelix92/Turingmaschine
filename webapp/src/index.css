@@ -158,7 +158,7 @@
 }
 
 .decimalNumbers{
-  @apply bg-transparent mt-4 overflow-x-auto hidden sm:block sm:invisible;
+  @apply bg-transparent mt-4 overflow-x-auto hidden sm:block invisible;
 }
 
 .decimalContainer:hover .decimalNumbers {
