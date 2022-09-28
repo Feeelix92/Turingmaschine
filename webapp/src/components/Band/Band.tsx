@@ -97,8 +97,6 @@ export default function Band() {
     let binaryString: string = "";
     let unaryString: string = "";
     const counted: number[] = [];
-    // count unary
-    let counter = 0;
 
     // binary operands
     if (checkBinary()) {
