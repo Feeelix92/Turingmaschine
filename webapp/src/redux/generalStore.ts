@@ -616,7 +616,31 @@ export const generalSlice = createSlice({
       if (state.rows.length === 0) {
         state.executable = false;
       } else {
-        state.executable = true;
+        let danger = false;
+
+        state.rows.forEach((row) => {
+          row.cells.forEach((cell) => {
+            if (cell.warningMode === true) {
+              danger = true;
+            }
+          });
+        });
+
+        if (state.anfangsZustand.warningMode === true) {
+          danger = true;
+        }
+
+        state.endZustand.forEach((state) => {
+          if (state.warningMode === true) {
+            danger = true;
+          }
+        });
+
+        if (danger === false) {
+          state.executable = true;
+        } else {
+          state.executable = false;
+        }
       }
     },
     maschineSetSlider: (state, value: PayloadAction<number>) => {

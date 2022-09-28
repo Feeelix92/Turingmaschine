@@ -12,7 +12,7 @@ import { RootState } from "../../redux/store";
 import { IoIosWarning } from "react-icons/io";
 import { useTranslation } from "react-i18next";
 import * as React from "react";
-import {useEffect} from "react";
+import { useEffect } from "react";
 
 export default function Band() {
   const dispatch = useDispatch();
@@ -29,6 +29,28 @@ export default function Band() {
 
   /////////// Band from State ///////////
   const currentBand = useSelector((state: RootState) => state.band.currentBand);
+
+  useEffect(() => {
+    let bandVal: string[] = [];
+    // wenn banditem nicht in Eingabealphabet vorhanden, dann warning auf true
+    bandAlphabet.forEach((item) => {
+      bandVal.push(item.value);
+    });
+
+    let found = false;
+
+    currentBand.forEach((bandItem) => {
+      if (!bandVal.includes(bandItem.value)) {
+        found = true;
+      }
+    });
+
+    if (found) {
+      dispatch(bandSetWarning(true));
+    } else {
+      dispatch(bandSetWarning(false));
+    }
+  }, [currentBand]);
 
   /////////// Eingabealphabet from State ///////////
   const bandAlphabet = useSelector(
@@ -77,18 +99,28 @@ export default function Band() {
   const showDecimal = checkBinary() || checkUnary();
 
   // Check if actual alphabets for binary selected
-  function checkBinary(){
+  function checkBinary() {
     const alphabetArray = currentAlphabet.alphabet;
-    return !!((alphabetArray.length === 3 && (alphabetArray.some(e => e.value === "#"))
-            && (alphabetArray.some(e => e.value === "1")) && (alphabetArray.some(e => e.value === "0"))) ||
-        (alphabetArray.length === 2 && (alphabetArray.some(e => e.value === "1")) && (alphabetArray.some(e => e.value === "0"))));
+    return !!(
+      (alphabetArray.length === 3 &&
+        alphabetArray.some((e) => e.value === "#") &&
+        alphabetArray.some((e) => e.value === "1") &&
+        alphabetArray.some((e) => e.value === "0")) ||
+      (alphabetArray.length === 2 &&
+        alphabetArray.some((e) => e.value === "1") &&
+        alphabetArray.some((e) => e.value === "0"))
+    );
   }
 
   // Check if actual alphabets for unary selected
-  function checkUnary(){
+  function checkUnary() {
     const alphabetArray = currentAlphabet.alphabet;
-    return !!((alphabetArray.length === 2 && (alphabetArray.some(e => e.value === "#")) && (alphabetArray.some(e => e.value === "1"))) ||
-        (alphabetArray.length === 1 && (alphabetArray.some(e => e.value === "1"))));
+    return !!(
+      (alphabetArray.length === 2 &&
+        alphabetArray.some((e) => e.value === "#") &&
+        alphabetArray.some((e) => e.value === "1")) ||
+      (alphabetArray.length === 1 && alphabetArray.some((e) => e.value === "1"))
+    );
   }
 
   // read Operands from Band
@@ -108,12 +140,12 @@ export default function Band() {
           binaryString = "";
         }
       });
-      values.filter(item => item !== "");
+      values.filter((item) => item !== "");
       values.forEach((value) => {
         counted.push(parseInt(value, 2));
       });
       return counted.join(" # ");
-    }else if (checkUnary()) {
+    } else if (checkUnary()) {
       currentBand.forEach((item) => {
         if (item.value === "1") {
           unaryString += item.value;
@@ -122,105 +154,100 @@ export default function Band() {
           unaryString = "";
         }
       });
-      values.filter(item => item !== "");
+      values.filter((item) => item !== "");
       values.forEach((value) => {
-        counted.push(value.length)
+        counted.push(value.length);
       });
       return counted.join(" # ");
     }
   }
 
-
   return (
     <div className={"w-full"}>
       <div
-          className={
-            "currentZustand flex-col content-center items-center justify-center mb-4 mt-4 flex md:hidden"
-          }
+        className={
+          "currentZustand flex-col content-center items-center justify-center mb-4 mt-4 flex md:hidden"
+        }
       >
         {currentZustand ? (
-            <div
-                className={"rounded-full w-12 bg-thm-primary text-white h-8 mt-3"}
-            >
-              {currentZustand.value}
-            </div>
+          <div
+            className={"rounded-full w-12 bg-thm-primary text-white h-8 mt-3"}
+          >
+            {currentZustand.value}
+          </div>
         ) : (
-            <div className={"rounded-full bg-thm-primary text-white h-8"}>
-              {t("band.warningNoStateAvailable")}
-            </div>
+          <div className={"rounded-full bg-thm-primary text-white h-8"}>
+            {t("band.warningNoStateAvailable")}
+          </div>
         )}
       </div>
       <div className={"decimalContainer"}>
-        {showDecimal && currentBand.filter(item => item.value !== "ß").length > 0? <div className={"decimalNumbers"}>
-          <p className={"text-xl"}>{t("band.decimal")}</p>
-          <p className={"text-xl"}>{readOperands()}</p>
-        </div> : null}
+        {showDecimal &&
+        currentBand.filter((item) => item.value !== "ß").length > 0 ? (
+          <div className={"decimalNumbers"}>
+            <p className={"text-xl"}>{t("band.decimal")}</p>
+            <p className={"text-xl"}>{readOperands()}</p>
+          </div>
+        ) : null}
         <div className={"m-2 h-40 flex"}>
           <div className="band-container overflow-x-auto col-span-12">
             {currentBand.map((value, index) => (
-                <BandItem
-                    value={value.value}
-                    label={value.label}
-                    index={index}
-                    bandIndex={0}
-                    pointer={value.pointer!}
-                    key={index}
-                    alphabet={currentAlphabet.alphabet}
-                    showEditField={true}
-                    setPointerAt={() => setPointerAt(index)}
-                />
+              <BandItem
+                value={value.value}
+                label={value.label}
+                index={index}
+                bandIndex={0}
+                pointer={value.pointer!}
+                key={index}
+                alphabet={currentAlphabet.alphabet}
+                showEditField={true}
+                setPointerAt={() => setPointerAt(index)}
+              />
             ))}
           </div>
         </div>
       </div>
       {showWarning ? (
-          <div className="flex justify-center">
-            <IoIosWarning
-                color="orange"
-                title={t("band.warningInputValueNotAllowed")}
-                size="48"
-            />
-          </div>
+        <div className="flex justify-center">
+          <IoIosWarning
+            color="orange"
+            title={t("band.warningInputValueNotAllowed")}
+            size="48"
+          />
+        </div>
       ) : null}
-        <div className="flex justify-center m-2 gap-2">
-            <button
-                className={"secondaryButton"}
-                onClick={() => setPointerLeft()}
-            >
-              <FaAngleLeft />
-            </button>
-            <button
-                className={"secondaryButton"}
-                onClick={() => setPointerRight()}
-            >
-              <FaAngleRight />
-            </button>
-        </div>
-        <div className={"flex justify-center gap-2 pl-2 pr-2 pb-2"}>
-          <button
-            className={"w-36 invertedButton"}
-            onClick={() =>
-              dispatch(bandAddField("before")) &&
-              dispatch(bandChangePointPos(1))
-            }
-          >
-            + {t("band.addLeft")}
-          </button>
-          <button
-            onClick={(e) => {
-              dispatch(bandDeleteAll());
-            }}
-            className={"w-36 invertedButton"}
-          >
-            {t("band.clearBand")}
-          </button>
-          <button
-            className={"w-36 invertedButton"}
-            onClick={() => dispatch(bandAddField("after"))}
-          >
-            {t("band.addRight")} +
-          </button>
-        </div>
+      <div className="flex justify-center m-2 gap-2">
+        <button className={"secondaryButton"} onClick={() => setPointerLeft()}>
+          <FaAngleLeft />
+        </button>
+        <button className={"secondaryButton"} onClick={() => setPointerRight()}>
+          <FaAngleRight />
+        </button>
       </div>
+      <div className={"flex justify-center gap-2 pl-2 pr-2 pb-2"}>
+        <button
+          className={"w-36 invertedButton"}
+          onClick={() =>
+            dispatch(bandAddField("before")) && dispatch(bandChangePointPos(1))
+          }
+        >
+          + {t("band.addLeft")}
+        </button>
+        <button
+          onClick={(e) => {
+            dispatch(bandDeleteAll());
+          }}
+          className={"w-36 invertedButton"}
+        >
+          {t("band.clearBand")}
+        </button>
+        <button
+          className={"w-36 invertedButton"}
+          onClick={() => dispatch(bandAddField("after"))}
+        >
+          {t("band.addRight")} +
+        </button>
+      </div>
+    </div>
   );
 }
