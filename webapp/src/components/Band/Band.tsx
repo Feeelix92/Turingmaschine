@@ -154,7 +154,7 @@ export default function Band() {
       </div>
       <div className={"decimalContainer"}>
         {showDecimal ? <div className={"decimalNumbers"}>
-          <p className={"text-xl"}>Bandeingabe als Dezimalzahl(en):</p>
+          <p className={"text-xl"}>{t("band.decimal")}</p>
           <p className={"text-xl"}>{readOperands()}</p>
         </div> : null}
         <div className={"m-2 h-40 flex"}>
