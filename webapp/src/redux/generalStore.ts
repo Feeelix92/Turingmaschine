@@ -572,6 +572,9 @@ export const generalSlice = createSlice({
         state.activeState = stateCopy;
       }
     },
+    alphabetClearZustand: (state) => {
+      state.zustandsmenge = [];
+    },
     alphabetChangeAnfangszustand: (state, zustand: PayloadAction<Zustand>) => {
       state.zustandsmenge.forEach((option) => {
         if (option.value === zustand.payload.value) {
@@ -1109,6 +1112,7 @@ export const {
   alphabetChangeEndzustand,
   alphabetClearEndzustand,
   alphabetDeleteZustand,
+  alphabetClearZustand,
   alphabetChangePauseMaschine,
   alphabetChangeStoppMaschine,
   maschineChangeExecutable,

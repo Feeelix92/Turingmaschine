@@ -21,6 +21,7 @@ import {
   alphabetChangeAnfangszustand,
   alphabetChangeCurrentMespuma,
   alphabetChangeEndzustand,
+  alphabetClearZustand,
   alphabetDeleteCustom,
   alphabetGenerateBand,
   alphabetPushToCustom,
@@ -219,6 +220,8 @@ export default function ExampleSelect(props: ExampleSelectProps) {
             }
           }
         }
+
+        dispatch(alphabetClearZustand());
 
         const states = json.specifications.states;
 

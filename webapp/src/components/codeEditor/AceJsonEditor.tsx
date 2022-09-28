@@ -16,6 +16,7 @@ import {
   alphabetChangeAnfangszustand,
   alphabetChangeCurrentMespuma,
   alphabetChangeEndzustand,
+  alphabetClearZustand,
   alphabetDeleteCustom,
   alphabetGenerateBand,
   alphabetPushToCustom,
@@ -295,13 +296,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
           }
         }
 
-        // too slow... changed pushIdxToZustand for that
-        //save states from editor to store
-        //json.specifications.states...
-        // initZustandsmenge.forEach((_value) => {
-        //   // delete old store states
-        //   dispatch(alphabetDeleteZustand());
-        // });
+        dispatch(alphabetClearZustand());
 
         const states = json.specifications.states;
 
@@ -601,7 +596,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
   }
 }`,
             type: "snippet",
-          }
+          },
         ];
 
         completions.forEach((i) => {
