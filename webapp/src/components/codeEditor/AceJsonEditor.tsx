@@ -34,7 +34,6 @@ import {
   bandChangeItemAt,
   bandChangeItemAtMespuma,
   bandDeleteAll,
-  bandDeleteAllMespuma,
   BandItemToChange,
   BandItemToChangeMespuma,
   bandResetAllMespuma,
@@ -160,14 +159,13 @@ export default function AceJsonEditor(props: CodeEditorProps) {
 
   function convertCurrentTable() {
     let lastZustand = "q1";
-    //der muss eingerückt werden jaja
     let finalString = `"q1":{}`;
     if (initTable.length > 0) {
       initTable.forEach((row) => {
         let tempZustand = row.cells[0].value as Zustand;
         let tempToBeZustand = row.cells[2].value as Zustand;
         let tempDirection = row.cells[4].value as Direction;
-        //wenn es Zustand schon gibt
+        // if state already exists
         if (lastZustand === tempZustand.value) {
           let tempIdx = finalString.search(`"${lastZustand}":{`) + 6;
           let tempString = `\n\t\t\t"${row.cells[1].value}":["${tempToBeZustand.value}", "${row.cells[3].value}", "${tempDirection.label}"],`;
@@ -176,19 +174,8 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             tempString +
             finalString.slice(tempIdx);
           lastZustand = tempZustand.value;
-          //TODO richtige Reihenfolge
-          // let tempIdx = finalString.search(`"${lastZustand}":{}`)
-          // let tempString = `\n"${row.cells[1].value}":["${tempToBeZustand.value}, ${row.cells[3].value}"", "${tempDirection.label}""],`
-          // if(tempIdx !== undefined){
-          //     tempIdx = tempIdx + 6
-          //     finalString = finalString.slice(0, tempIdx) + tempString + finalString.slice(tempIdx);
-          // } else{
-          //    tempIdx = finalString.search(`"${lastZustand}":{`) + 6
-          //    let lastIdx = finalString.indexOf('],}', tempIdx) + 2;
-          //    finalString = finalString.slice(0, lastIdx) + tempString + finalString.slice(lastIdx);
-          // }
         }
-        //wenn Zustand neu hinzugefügt werden muss
+        // if state needs to be added new
         else {
           finalString =
             finalString +
