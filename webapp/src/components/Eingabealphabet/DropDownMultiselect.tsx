@@ -98,11 +98,6 @@ export default function MultiselectDropDown(props: any) {
         ev.preventDefault();
         break;
       }
-      // case 8: {
-      //   setOptionString("");
-      //   ev.preventDefault();
-      //   break;
-      // }
     }
   }
 
