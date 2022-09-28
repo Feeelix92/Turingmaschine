@@ -382,10 +382,6 @@ const initialSliderNumber = 4;
 export const generalSlice = createSlice({
   name: "general",
   initialState: {
-    //// ZustandTP ////
-    // zustandsmenge: initialZustandsmengeTP,
-    // anfangsZustand: initialAnfangszustandTP,
-    // endZustand: initialEndZustandsmengeTP,
     //// Zustand ////
     zustandsmenge: initialZustandsmenge,
     anfangsZustand: initialAnfangszustand,

@@ -6,7 +6,7 @@ import {
 } from "../../interfaces/CommonInterfaces";
 import { useDispatch, useSelector } from "react-redux";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { RootState } from "../../redux/store";
+import { RootState, store } from "../../redux/store";
 import AceEditor from "react-ace";
 import { setCompleters } from "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-json5";
@@ -26,14 +26,18 @@ import {
   tableCheckWarning,
   tableDeleteAll,
   tableSetActiveState,
+  mespumaPushToSpuren,
+  bandResetAnzahlSpuren,
 } from "../../redux/generalStore";
 import {
+  bandAddBandMespuma,
   bandChangeItemAt,
   bandChangeItemAtMespuma,
   bandDeleteAll,
   bandDeleteAllMespuma,
   BandItemToChange,
   BandItemToChangeMespuma,
+  bandResetAllMespuma,
   bandSetPointPos,
 } from "../../redux/bandStore";
 import { FiDownload, FiUpload } from "react-icons/all";
@@ -43,6 +47,7 @@ import { cartesianProduct } from "../../interfaces/CommonFunctions";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify"; // https://fkhadra.github.io/react-toastify/introduction/
 import "react-toastify/dist/ReactToastify.css";
+import watch from "redux-watch";
 
 export interface tableZustand {
   [key: string]: tableZeichen;
@@ -64,9 +69,19 @@ export default function AceJsonEditor(props: CodeEditorProps) {
   const setPointerAt = (index: number) => {
     dispatch(bandSetPointPos(index));
   };
-  const anzahlSpuren = useSelector(
+
+  let anzahlSpuren = useSelector(
     (state: RootState) => state.general.anzahlSpuren
   );
+  let wSpuren = watch(store.getState, "general.anzahlSpuren");
+  store.subscribe(
+    wSpuren((newVal, oldVal) => {
+      if (newVal != oldVal) {
+        anzahlSpuren = newVal;
+      }
+    })
+  );
+
   const currentAlphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
   );
@@ -206,10 +221,16 @@ export default function AceJsonEditor(props: CodeEditorProps) {
         const alphabet = json.specifications.alphabet;
 
         if (currentMode === "mespuma") {
-          dispatch(bandDeleteAllMespuma());
+          dispatch(bandResetAllMespuma());
+          dispatch(bandResetAnzahlSpuren());
           // save Band to store
           // json.band.input...
           const bands = json.band.input;
+          console.log(bands.length);
+          for (let i = 1; i < bands.length - 1; i++) {
+            dispatch(bandAddBandMespuma());
+            dispatch(mespumaPushToSpuren());
+          }
           bands.forEach((bandItems: string[], bandIndex: number) => {
             for (let index = 0; index < bandItems.length; index++) {
               const temp: BandItemToChangeMespuma = {
