@@ -195,43 +195,46 @@ function ConditionsList() {
   }
 
   function addSpur() {
-    dispatch(bandAddBandMespuma());
+    if( anzahlSpuren < 5) {
+      dispatch(bandAddBandMespuma());
 
-    dispatch(mespumaPushToSpuren());
-
-    let literalArr: string[] = [];
-
-    let tempAlphabet = Object.assign(
-      [],
-      currentAlphabet.alphabet
-    ) as EingabeAlphabet[];
-    tempAlphabet.push({ value: "ß", label: "ß", warningMode: false });
-
-    tempAlphabet.forEach((literal) => {
-      literalArr.push(literal.value);
-    });
-
-    let combinationArr: string[][] = [];
-
-    for (let i = 0; i < anzahlSpuren + 1; i++) {
-      combinationArr.push(literalArr);
+      dispatch(mespumaPushToSpuren());
+  
+      let literalArr: string[] = [];
+  
+      let tempAlphabet = Object.assign(
+        [],
+        currentAlphabet.alphabet
+      ) as EingabeAlphabet[];
+      tempAlphabet.push({ value: "ß", label: "ß", warningMode: false });
+  
+      tempAlphabet.forEach((literal) => {
+        literalArr.push(literal.value);
+      });
+  
+      let combinationArr: string[][] = [];
+  
+      for (let i = 0; i < anzahlSpuren + 1; i++) {
+        combinationArr.push(literalArr);
+      }
+  
+      let cartesianArr = cartesianProduct(combinationArr);
+  
+      let finalBandAlphabet: string[] = [];
+  
+      cartesianArr.forEach((element: any[]) => {
+        let el = "(" + element.join() + ")";
+        finalBandAlphabet.push(el);
+      });
+  
+      dispatch(
+        alphabetChangeCurrentMespuma({
+          cartesian: finalBandAlphabet,
+        })
+      );
+      setShowZustandsfunktion(false);
     }
-
-    let cartesianArr = cartesianProduct(combinationArr);
-
-    let finalBandAlphabet: string[] = [];
-
-    cartesianArr.forEach((element: any[]) => {
-      let el = "(" + element.join() + ")";
-      finalBandAlphabet.push(el);
-    });
-
-    dispatch(
-      alphabetChangeCurrentMespuma({
-        cartesian: finalBandAlphabet,
-      })
-    );
-    setShowZustandsfunktion(false);
+    
   }
 
   function deleteSpur() {
@@ -314,7 +317,7 @@ function ConditionsList() {
               <button className={`w-10 ${anzahlSpuren>2 ? "" : "pointer-events-none bg-gray-700"}`}onClick={() => deleteSpur()}>
                 -
               </button>
-              <button className={"w-10"} onClick={() => addSpur()}>
+              <button className={`w-10 ${anzahlSpuren<5 ? "" : "pointer-events-none bg-gray-700"}`} onClick={() => addSpur()}>
                 +
               </button>
             </div>
