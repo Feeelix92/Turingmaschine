@@ -878,6 +878,7 @@ export const generalSlice = createSlice({
       state,
       row: PayloadAction<RowInterface | undefined>
     ) => {
+      console.log("setAvtiveRow:", row.payload);
       state.activeRow = row.payload;
     },
     tableSetWatchedRows: (state, rows: PayloadAction<RowInterface[]>) => {
