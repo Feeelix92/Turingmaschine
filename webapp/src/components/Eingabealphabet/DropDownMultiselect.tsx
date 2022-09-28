@@ -64,7 +64,7 @@ export default function MultiselectDropDown(props: any) {
     const ev = event as unknown as KeyboardEvent;
     if (!optionString) return;
     console.log(ev);
-    // alert(ev.key + " " + ev.keyCode + " " + ev.code);
+    alert(ev.key + " " + ev.keyCode + " " + ev.code);
     switch (ev.keyCode) {
       case 229:
       case 32:
