@@ -74,7 +74,7 @@ export default function MultiselectDropDown(props: any) {
           return el.label === optionString;
         });
 
-        if (!exists) {
+        if (!exists && optionString !== "ß") {
           temp.push({
             label: optionString,
             value: optionString,
