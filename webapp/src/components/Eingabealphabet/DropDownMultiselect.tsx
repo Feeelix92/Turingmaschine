@@ -63,8 +63,6 @@ export default function MultiselectDropDown(props: any) {
   function handleKeyDown(event: KeyboardEventHandler<HTMLDivElement>) {
     const ev = event as unknown as KeyboardEvent;
     if (!optionString) return;
-    console.log(ev);
-    alert(ev.key + " " + ev.keyCode + " " + ev.code);
     switch (ev.keyCode) {
       case 229:
       case 32:
@@ -96,15 +94,15 @@ export default function MultiselectDropDown(props: any) {
             progress: undefined,
           });
         }
-
-        ev.preventDefault();
-        break;
-      }
-      case 8: {
         setOptionString("");
         ev.preventDefault();
         break;
       }
+      // case 8: {
+      //   setOptionString("");
+      //   ev.preventDefault();
+      //   break;
+      // }
     }
   }
 
