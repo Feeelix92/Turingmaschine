@@ -49,6 +49,7 @@ export default function ExampleSelect(props: ExampleSelectProps) {
   const setPointerAt = (index: number) => {
     dispatch(bandSetPointPos(index));
   };
+
   const anzahlSpuren = useSelector(
     (state: RootState) => state.general.anzahlSpuren
   );
@@ -222,6 +223,7 @@ export default function ExampleSelect(props: ExampleSelectProps) {
           }
         }
 
+        // deletes all existing states
         dispatch(alphabetClearZustand());
 
         const states = json.specifications.states;

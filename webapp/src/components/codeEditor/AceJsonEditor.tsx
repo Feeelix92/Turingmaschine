@@ -317,6 +317,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
           }
         }
 
+        // deletes all existing states
         dispatch(alphabetClearZustand());
 
         const states = json.specifications.states;

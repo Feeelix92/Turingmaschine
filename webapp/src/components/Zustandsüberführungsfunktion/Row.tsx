@@ -9,7 +9,7 @@ import Cell from "./Cell";
 import { useTranslation } from "react-i18next";
 
 export default function Row(props: RowProps) {
-  // create flat copy of all existing cells
+
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(props.isFinal);
 

@@ -42,7 +42,6 @@ export default function Cell(props: CellProps) {
     const failure = checkWarningModus();
 
     if (failure !== props.warningMode) {
-
       dispatch(
         tableUpdateCell({
           cellIndex: props.index,
@@ -115,6 +114,7 @@ export default function Cell(props: CellProps) {
   ) {
     if (newValue) {
       const failure = checkWarningModus(newValue);
+      // case for literals
       if (
         (mode == "mespuma" || mode == "default" || mode == "toiletpaper") &&
         (props.index === 1 || props.index === 3)
@@ -140,6 +140,7 @@ export default function Cell(props: CellProps) {
     }
   }
 
+  // function to mark a row as final
   function setFinal(newValue: boolean) {
     dispatch(
       tableUpdateRowIsFinal({
@@ -150,6 +151,7 @@ export default function Cell(props: CellProps) {
     );
   }
 
+  // check if cell-value isnt allowed
   function checkWarningModus(newValue?: any) {
     let tempVar = newValue ? newValue : props.value;
     if (tempVar instanceof Zustand) {
@@ -196,14 +198,14 @@ export default function Cell(props: CellProps) {
   };
 
   const emptyStyles = {
-    option: (styles: any,  data: any) => {
+    option: (styles: any, data: any) => {
       return {
         ...styles,
-        fontWeight: data.value === "ß" ? 'bold' : '',
-        fontSize: data.value === "ß" ? '1.373rem' : '',
-      }
-    }
-  }
+        fontWeight: data.value === "ß" ? "bold" : "",
+        fontSize: data.value === "ß" ? "1.373rem" : "",
+      };
+    },
+  };
 
   return (
     <td
@@ -260,7 +262,9 @@ export default function Cell(props: CellProps) {
             (item) => item.label === placeholderTpMultiLang()
           )}
           blurInputOnSelect={false}
-          className={`text-black text-base ${ props.value === "ß" ? "empty-value" : ""}`}
+          className={`text-black text-base ${
+            props.value === "ß" ? "empty-value" : ""
+          }`}
           onChange={handleChange}
           options={bALphabet}
           menuPortalTarget={document.querySelector("body")}
