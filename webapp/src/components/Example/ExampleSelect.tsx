@@ -159,7 +159,7 @@ export default function ExampleSelect(props: ExampleSelectProps) {
             });
           }
         } else {
-          if (newValue.label === "example1") {
+          if (newValue.label) {
             dispatch(bandDeleteAll());
             // save Band to store
             // json.band.input...
