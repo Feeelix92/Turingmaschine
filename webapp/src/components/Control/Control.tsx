@@ -122,7 +122,11 @@ function Control() {
   const changeStopp = (value: boolean) => {
     dispatch(alphabetChangeStoppMaschine(value));
     dispatch(bandSetPointPos(oldPointerPos));
+    setPaused(false);
   };
+
+    // Reguliert, wann Nutzer auf Pause geklickt hat
+  const [paused, setPaused] = useState(false);
 
   const initialZustand = useSelector(
     (state: RootState) => state.general.activeState
@@ -397,6 +401,7 @@ function Control() {
     dispatch(alphabetChangeStoppMaschine(false));
     changePause(false);
     setOldPointerPos(activePointerPosition);
+    setPaused(false);
 
     while (!stoppMaschine && !pauseMaschine) {
       setMaschineRunning(true);
@@ -488,6 +493,7 @@ function Control() {
             className={"invertedButton py-1 px-2 m-2 mx-1 disabled:opacity-50"}
             onClick={() => {
               pauseMaschine ? changePause(false) : changePause(true);
+              setPaused(true);
             }}
             onMouseEnter={(e) => {
               animateButton(e.target);
@@ -504,7 +510,11 @@ function Control() {
               animateButton(e.target);
             }}
             onMouseLeave={animateBack}
-            disabled={!executable || bandWarning || pauseMaschine}
+            disabled={
+              !executable 
+              || bandWarning 
+              || ( !maschineRunning && !paused )
+            }
           >
             <FaStop />
           </button>
