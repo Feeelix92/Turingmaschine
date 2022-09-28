@@ -11,6 +11,7 @@ import {
 import {useTranslation} from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import Tools from "../Tools/Tools";
 
 function Bottomnav() {
 
@@ -35,7 +36,6 @@ function Bottomnav() {
     function updateWindowHeight(height: React.SetStateAction<number>) {
         setWindowHeight(height);
     }
-
     
     useEffect(() => {
 
@@ -69,7 +69,15 @@ function Bottomnav() {
                 { spez
                  ? 
                  (
-                     mode == "default" ? ( <ConditionsList/> ) : 
+                     mode == "default" ? ( 
+                        <div>
+                            <ConditionsList/>
+                            <div className="pt-5">
+                                <Tools />
+                            </div>
+                        </div> 
+                     
+                     ) : 
                      mode == "mespuma" ? ( <MespumaList /> ) :
                      ""
                  ) 
