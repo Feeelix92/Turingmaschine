@@ -63,10 +63,11 @@ export default function MultiselectDropDown(props: any) {
   function handleKeyDown(event: KeyboardEventHandler<HTMLDivElement>) {
     const ev = event as unknown as KeyboardEvent;
     if (!optionString) return;
-    switch (ev.key) {
-      case " ":
-      case "Enter":
-      case "Tab": {
+    switch (ev.keyCode) {
+      case 229:
+      case 32:
+      case 13:
+      case 9: {
         let temp = optionArray.slice(0, optionArray.length);
 
         const exists = temp.some((el) => {
@@ -93,11 +94,6 @@ export default function MultiselectDropDown(props: any) {
             progress: undefined,
           });
         }
-
-        ev.preventDefault();
-        break;
-      }
-      case "Backspace": {
         setOptionString("");
         ev.preventDefault();
         break;
