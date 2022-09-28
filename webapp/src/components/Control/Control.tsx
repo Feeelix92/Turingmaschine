@@ -342,7 +342,7 @@ function Control() {
       if (
         item.cells[0].value instanceof Zustand &&
         item.cells[0].value.endzustand === false
-        && !tempLastZustandVar.endzustand
+        // && !tempLastZustandVar.endzustand
       ) {
         let tempString = item.cells[3].value.slice(0, -1);
         tempString = tempString.substring(1);
@@ -453,7 +453,7 @@ function Control() {
           <input
             id="velSlider"
             className={
-              "xl:w-4/12 md:w-1/5 h-2 mr-4 xl:mr-8 bg-gray-500 rounded-lg appearance-none cursor-pointer  hidden md:inline-block"
+              "xl:w-4/12 md:w-1/5 h-2 mr-4 xl:mr-8 bg-gray-500 rounded-lg appearance-none cursor-pointer hidden md:inline-block"
             }
             type="range"
             min={1}
