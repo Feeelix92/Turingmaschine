@@ -40,8 +40,11 @@
     @apply absolute z-50 right-0;
   }
 
-  div.editBtnDiv{
-    @apply justify-start
+  .firstBandItem div.editBtnDiv{
+    @apply justify-start;
+  }
+  .lastBandItem div.editBtnDiv{
+    @apply justify-end;
   }
 }
 @tailwind components;
@@ -160,11 +163,35 @@
 }
 
 .band-container-mespuma {
-  @apply  overflow-visible whitespace-nowrap flex flex-row justify-start max-w-max;
+  @apply  overflow-visible whitespace-nowrap flex flex-row justify-start max-w-max ;
 }
 
 .band-container__band {
-  @apply inline-block w-14 h-10 text-black border border-solid border-thm-primary2;
+  @apply inline-block w-14 h-10 text-black border border-solid border-thm-primary2 
+  first:firstBandItem 
+  last:lastBandItem;
+}
+
+.band-container__band:nth-child(2) {
+  @apply firstBandItem;
+}
+
+.band-container__band:nth-child(3) {
+  @apply firstBandItem;
+}
+
+.band-container__band:nth-child(4) {
+  @apply firstBandItem;
+}
+
+.band-container__band:nth-last-child(2) {
+  @apply lastBandItem;
+}
+.band-container__band:nth-last-child(3) {
+  @apply lastBandItem;
+}
+.band-container__band:nth-last-child(4) {
+  @apply lastBandItem;
 }
 
 .pointerBorder {
