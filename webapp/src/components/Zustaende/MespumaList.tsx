@@ -16,7 +16,7 @@ import {
   mespumaDeleteSpuren,
   alphabetChangeCurrentMespuma,
 } from "../../redux/generalStore";
-import { RootState } from "../../redux/store";
+import { RootState, store } from "../../redux/store";
 import DropDownSelect from "../Eingabealphabet/DropDownSelect";
 import { BiCaretDown, BiCaretUp, IoIosWarning } from "react-icons/all";
 import {
@@ -25,6 +25,7 @@ import {
 } from "../../redux/bandStore";
 import { cartesianProduct } from "../../interfaces/CommonFunctions";
 import { useTranslation } from "react-i18next";
+import watch from "redux-watch";
 
 function ConditionsList() {
   /**
@@ -52,6 +53,16 @@ function ConditionsList() {
   );
   const endZustand = useSelector(
     (state: RootState) => state.general.endZustand
+  );
+  let final = endZustand;
+  let wFinal = watch(store.getState, "general.endZustand");
+  store.subscribe(
+    wFinal((newVal, oldVal) => {
+      if (newVal != oldVal) {
+        final = newVal;
+        console.log("ja moin", newVal);
+      }
+    })
   );
   const currentAlphabet = useSelector(
     (state: RootState) => state.general.currentAlphabet
@@ -163,7 +174,7 @@ function ConditionsList() {
         })
       );
     }
-    endZustand.forEach((endZustand) => {
+    final.forEach((endZustand) => {
       let tempBool2 = zustandsmenge.some((value) => {
         return value.value === endZustand.value;
       });
@@ -173,10 +184,10 @@ function ConditionsList() {
       alphabetChangeWarningMode({
         prop: "endZustand",
         value: true,
-        payload: endZustand,
+        payload: final,
       })
     );
-    endZustand.forEach((endZustand) => {
+    final.forEach((endZustand) => {
       if (endZustand.warningMode === true) {
         setEndZustandWarningOn(true);
       }
@@ -195,43 +206,45 @@ function ConditionsList() {
   }
 
   function addSpur() {
-    dispatch(bandAddBandMespuma());
+    if (anzahlSpuren < 5) {
+      dispatch(bandAddBandMespuma());
 
-    dispatch(mespumaPushToSpuren());
+      dispatch(mespumaPushToSpuren());
 
-    let literalArr: string[] = [];
+      let literalArr: string[] = [];
 
-    let tempAlphabet = Object.assign(
-      [],
-      currentAlphabet.alphabet
-    ) as EingabeAlphabet[];
-    tempAlphabet.push({ value: "ß", label: "ß", warningMode: false });
+      let tempAlphabet = Object.assign(
+        [],
+        currentAlphabet.alphabet
+      ) as EingabeAlphabet[];
+      tempAlphabet.push({ value: "ß", label: "ß", warningMode: false });
 
-    tempAlphabet.forEach((literal) => {
-      literalArr.push(literal.value);
-    });
+      tempAlphabet.forEach((literal) => {
+        literalArr.push(literal.value);
+      });
 
-    let combinationArr: string[][] = [];
+      let combinationArr: string[][] = [];
 
-    for (let i = 0; i < anzahlSpuren + 1; i++) {
-      combinationArr.push(literalArr);
+      for (let i = 0; i < anzahlSpuren + 1; i++) {
+        combinationArr.push(literalArr);
+      }
+
+      let cartesianArr = cartesianProduct(combinationArr);
+
+      let finalBandAlphabet: string[] = [];
+
+      cartesianArr.forEach((element: any[]) => {
+        let el = "(" + element.join() + ")";
+        finalBandAlphabet.push(el);
+      });
+
+      dispatch(
+        alphabetChangeCurrentMespuma({
+          cartesian: finalBandAlphabet,
+        })
+      );
+      setShowZustandsfunktion(false);
     }
-
-    let cartesianArr = cartesianProduct(combinationArr);
-
-    let finalBandAlphabet: string[] = [];
-
-    cartesianArr.forEach((element: any[]) => {
-      let el = "(" + element.join() + ")";
-      finalBandAlphabet.push(el);
-    });
-
-    dispatch(
-      alphabetChangeCurrentMespuma({
-        cartesian: finalBandAlphabet,
-      })
-    );
-    setShowZustandsfunktion(false);
   }
 
   function deleteSpur() {
@@ -311,10 +324,20 @@ function ConditionsList() {
               {anzahlSpuren}
             </div>
             <div className={"flex justify-end gap-2 col-span-1"}>
-              <button className={`w-10 ${anzahlSpuren>2 ? "" : "pointer-events-none bg-gray-700"}`}onClick={() => deleteSpur()}>
+              <button
+                className={`w-10 ${
+                  anzahlSpuren > 2 ? "" : "pointer-events-none bg-gray-700"
+                }`}
+                onClick={() => deleteSpur()}
+              >
                 -
               </button>
-              <button className={"w-10"} onClick={() => addSpur()}>
+              <button
+                className={`w-10 ${
+                  anzahlSpuren < 5 ? "" : "pointer-events-none bg-gray-700"
+                }`}
+                onClick={() => addSpur()}
+              >
                 +
               </button>
             </div>
@@ -426,10 +449,10 @@ function ConditionsList() {
             <div className={"flex col-span-3 lg:col-span-2 justify-between"}>
               <div>
                 {t("list.finalStates")} F = {kA}
-                {endZustand.map((value, index) => (
+                {final.map((value, index) => (
                   <span key={index}>
                     {value.value}
-                    {index === endZustand.length - 1 ? "" : ","}
+                    {index === final.length - 1 ? "" : ","}
                   </span>
                 ))}
                 {kZ}
@@ -448,6 +471,7 @@ function ConditionsList() {
                 className={"w-full"}
                 onChange={handleChangeMulti}
                 options={zustandsmenge}
+                value={final}
                 // filter options to exclude anfangszustand
                 // options={zustandsmenge.filter(Zustand => !Zustand.anfangszustand)}
                 isMulti

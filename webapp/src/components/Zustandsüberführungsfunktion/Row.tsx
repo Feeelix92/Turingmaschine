@@ -37,7 +37,7 @@ export default function Row(props: RowProps) {
     >
       {visible
         ? props.cells
-            .slice(0, 2)
+            .slice(0, 1)
             .map((value, key: React.Key) => (
               <Cell
                 key={key}
@@ -59,7 +59,7 @@ export default function Row(props: RowProps) {
             />
           ))}
       {visible ? (
-        <td className="w-3/6 whitespace-nowrap text-gray-900 border-r">
+        <td className="w-4/6 whitespace-nowrap text-gray-900 border-r self-center">
           {t("row.stop")}
         </td>
       ) : null}

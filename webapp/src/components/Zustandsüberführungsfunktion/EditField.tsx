@@ -16,7 +16,7 @@ export default function EditField(props: EditProps) {
       duration: 750,
     });
     tl.add({
-      targets: " .editPill",
+      targets: ".editPill",
       scale: ["0", "1"],
       delay: anime.stagger(100),
     });

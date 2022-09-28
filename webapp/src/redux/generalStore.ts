@@ -382,10 +382,6 @@ const initialSliderNumber = 4;
 export const generalSlice = createSlice({
   name: "general",
   initialState: {
-    //// ZustandTP ////
-    // zustandsmenge: initialZustandsmengeTP,
-    // anfangsZustand: initialAnfangszustandTP,
-    // endZustand: initialEndZustandsmengeTP,
     //// Zustand ////
     zustandsmenge: initialZustandsmenge,
     anfangsZustand: initialAnfangszustand,
@@ -882,6 +878,7 @@ export const generalSlice = createSlice({
       state,
       row: PayloadAction<RowInterface | undefined>
     ) => {
+      console.log("setAvtiveRow:", row.payload);
       state.activeRow = row.payload;
     },
     tableSetWatchedRows: (state, rows: PayloadAction<RowInterface[]>) => {

@@ -110,6 +110,7 @@ export default function ExampleSelect(props: ExampleSelectProps) {
           // save Band to store
           // json.band.input...
           const bands = json.band.input;
+
           bands.forEach((bandItems: string[], bandIndex: number) => {
             for (let index = 0; index < bandItems.length; index++) {
               const temp: BandItemToChangeMespuma = {
