@@ -32,9 +32,9 @@ export default function TeepeeBand() {
             <Dice />
             <div className={"flex h-60 sm:h-80 justify-center"}>
                 <div className={"teepeeContainerLeft"}>
-                        <div className={"teepeeHead"} onClick={() => dispatch(bandAddField('before'))}/>
-                        <div className={"teepeeBody"} onClick={() => dispatch(bandAddField('before'))}/>
-                        <div className={"teepeeBottom"} onClick={() => dispatch(bandAddField('before'))}>
+                        <div className={"teepeeHead"} onClick={() => dispatch(bandAddField('before')) &&  dispatch(bandChangePointPos(1))}/>
+                        <div className={"teepeeBody"} onClick={() => dispatch(bandAddField('before')) &&  dispatch(bandChangePointPos(1))}/>
+                        <div className={"teepeeBottom"} onClick={() => dispatch(bandAddField('before')) &&  dispatch(bandChangePointPos(1))}>
                             <div className={"teepeeCardboard"}/>
                         </div>
                     </div>
