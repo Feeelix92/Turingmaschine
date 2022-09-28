@@ -37,6 +37,15 @@ function ConditionsList() {
   const zustandsmenge = useSelector(
     (state: RootState) => state.general.zustandsmenge
   );
+  let states = zustandsmenge;
+  let wStates = watch(store.getState, "general.zustandsmenge");
+  store.subscribe(
+    wStates((newVal, oldVal) => {
+      if (newVal != oldVal) {
+        states = newVal;
+      }
+    })
+  );
 
   const anfangsZustand = useSelector(
     (state: RootState) => state.general.anfangsZustand
@@ -136,7 +145,7 @@ function ConditionsList() {
 
   function checkWarningModus() {
     setEndZustandWarningOn(false);
-    let tempBool = zustandsmenge.some((value) => {
+    let tempBool = states.some((value) => {
       return value.value === anfangsZustand.value;
     });
     if (tempBool) {
@@ -157,7 +166,7 @@ function ConditionsList() {
       );
     }
     endZustand.forEach((endZustand) => {
-      let tempBool2 = zustandsmenge.some((value) => {
+      let tempBool2 = states.some((value) => {
         return value.value === endZustand.value;
       });
       endZustand.warningMode = !tempBool2;
@@ -248,10 +257,10 @@ function ConditionsList() {
               }
             >
               {kA}
-              {zustandsmenge.map((value, index) => (
+              {states.map((value, index) => (
                 <span key={index}>
                   {value.value}
-                  {index === zustandsmenge.length - 1 ? "" : ","}
+                  {index === states.length - 1 ? "" : ","}
                 </span>
               ))}
               {kZ}
@@ -259,9 +268,7 @@ function ConditionsList() {
             <div className={"flex justify-end gap-2 col-span-1"}>
               <button
                 className={`w-10 ${
-                  zustandsmenge.length > 1
-                    ? ""
-                    : "pointer-events-none bg-gray-700"
+                  states.length > 1 ? "" : "pointer-events-none bg-gray-700"
                 }`}
                 onClick={() => changeZustandsmenge(false)}
               >
@@ -296,7 +303,7 @@ function ConditionsList() {
                 blurInputOnSelect={false}
                 className={"w-full"}
                 onChange={handleChange}
-                options={zustandsmenge}
+                options={states}
                 // filter options to exclude endzustand
                 // options={zustandsmenge.filter(Zustand => !Zustand.endzustand)}
                 menuPortalTarget={document.querySelector("body")}
@@ -334,7 +341,7 @@ function ConditionsList() {
                 blurInputOnSelect={false}
                 className={"w-full"}
                 onChange={handleChangeMulti}
-                options={zustandsmenge}
+                options={states}
                 value={final}
                 // filter options to exclude anfangszustand
                 isMulti

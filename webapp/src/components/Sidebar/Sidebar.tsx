@@ -33,9 +33,6 @@ function Sidebar() {
 
   ///Wechselt die Sprache///
   const { i18n, t } = useTranslation(["general"]);
-  const handleLanguageChange = (language: { target: { value: string } }) => {
-    i18n.changeLanguage(language.target.value);
-  };
 
   const lngs = {
     de: "DE",

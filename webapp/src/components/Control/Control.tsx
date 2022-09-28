@@ -46,7 +46,10 @@ function Control() {
     (state: RootState) => state.general.executable
   );
 
-  // Konfetti-Regen, wenn der Endzustand erreicht wird
+  const initialZustand = useSelector(
+    (state: RootState) => state.general.anfangsZustand
+  );
+
   const endConfetti = () => {
     party.confetti(document.body, {
       count: party.variation.range(50, 120),
@@ -131,7 +134,7 @@ function Control() {
   // Reguliert, wann Nutzer auf Pause geklickt hat
   const [paused, setPaused] = useState(false);
 
-  const initialZustand = useSelector(
+  const activeZustand = useSelector(
     (state: RootState) => state.general.activeState
   );
 
@@ -182,7 +185,7 @@ function Control() {
   );
 
   /////////// ActiveState from State ///////////
-  let activeState = initialZustand;
+  let activeState = activeZustand;
   let wActiveState = watch(store.getState, "general.activeState");
   store.subscribe(
     wActiveState((newVal, oldVal) => {
@@ -291,6 +294,9 @@ function Control() {
         if (item.cells[0].value != item.cells[2].value) {
           if (tempLastZustandVar.endzustand) {
             changePause(true);
+            dispatch(tableSetActiveState(initialZustand));
+            dispatch(tableSetActiveRow(undefined));
+            dispatch(alphabetChangeStoppMaschine(false));
           } else {
             dispatch(tableSetActiveState(item.cells[2].value as Zustand));
             setSelectedRows();
@@ -337,10 +343,7 @@ function Control() {
       changeStopp(true);
     }
 
-    if (
-      item !== undefined &&
-      typeof item.cells[3].value === "string"
-    ) {
+    if (item !== undefined && typeof item.cells[3].value === "string") {
       store.dispatch(tableSetActiveRow(item));
       if (
         item.cells[0].value instanceof Zustand &&
@@ -382,6 +385,9 @@ function Control() {
         if (item.cells[0].value != item.cells[2].value) {
           if (tempLastZustandVar.endzustand) {
             changePause(true);
+            dispatch(tableSetActiveState(initialZustand));
+            dispatch(tableSetActiveRow(undefined));
+            dispatch(alphabetChangeStoppMaschine(false));
           } else {
             dispatch(tableSetActiveState(item.cells[2].value as Zustand));
             setSelectedRows();
@@ -422,11 +428,8 @@ function Control() {
       }
     }
 
-    dispatch(tableSetActiveRow(undefined));
-    dispatch(tableSetActiveState(initialZustand));
     changePause(false);
     setMaschineRunning(false);
-    dispatch(alphabetChangeStoppMaschine(false));
   };
 
   const stepByStep = async () => {
@@ -513,9 +516,7 @@ function Control() {
             }}
             onMouseLeave={animateBack}
             disabled={
-              !executable 
-              || bandWarning 
-              || ( !maschineRunning && !paused )
+              !executable || bandWarning || (!maschineRunning && !paused)
             }
           >
             <FaStop />
