@@ -29,10 +29,10 @@ export default function Row(props: RowProps) {
 
   return (
     <tr
-      className={`border-b flex w-full hover:bg-gray-100 ${
+      className={`border-b flex w-full ${
         activeRow != undefined && activeRow.cells === props.cells
-          ? "bg-lime-300"
-          : ""
+          ? "bg-lime-300 hover:bg-lime-3000"
+          : " hover:bg-gray-100"
       }`}
     >
       {visible
