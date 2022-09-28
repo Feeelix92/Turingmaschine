@@ -5,7 +5,7 @@
     "currentStateWarning": "No state available!",
     "control": {
       "actualSpeed": "Speed",
-      "missingRuleError": "No rule was defined for the read character!"
+      "missingRuleError": "No rule was defined for the read character or state!"
     }
   },
 

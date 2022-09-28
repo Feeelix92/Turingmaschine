@@ -336,13 +336,13 @@ function Control() {
 
     if (
       item !== undefined &&
-      typeof item.cells[3].value === "string" &&
-      !tempLastZustandVar.endzustand
+      typeof item.cells[3].value === "string"
     ) {
       store.dispatch(tableSetActiveRow(item));
       if (
         item.cells[0].value instanceof Zustand &&
         item.cells[0].value.endzustand === false
+        && !tempLastZustandVar.endzustand
       ) {
         let tempString = item.cells[3].value.slice(0, -1);
         tempString = tempString.substring(1);

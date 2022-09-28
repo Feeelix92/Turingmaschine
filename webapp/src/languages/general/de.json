@@ -5,7 +5,7 @@
     "currentStateWarning": "Kein Zustand vorhanden!",
     "control": {
       "actualSpeed": "Geschwindigkeit",
-      "missingRuleError": "Für das gelesene Zeichen wurde keine Regel definiert!"
+      "missingRuleError": "Für das gelesene Zeichen oder den gelesenen Zustand wurde keine Regel definiert!"
     }
   },
 
