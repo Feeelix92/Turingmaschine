@@ -16,14 +16,14 @@ export default function EditField(props: EditProps) {
       duration: 750,
     });
     tl.add({
-      targets: ".editBtn",
+      targets: " .editPill",
       scale: ["0", "1"],
       delay: anime.stagger(100),
     });
   });
 
   return (
-      <div className="flex gap-2 z-10" role="group">
+    <div className="flex gap-2 z-10" role="group">
       {mode == "default" &&
         props.options.map((value: EingabeAlphabetOption, key: React.Key) => (
           <button

@@ -180,9 +180,7 @@ export default function BandItem(props: BandItemProps) {
     >
       {pointerIdx === props.index ? (
         <div
-          className={
-            "scroll-mx-16" + (props.bandIndex == 0 ? " pointer" : "")
-          }
+          className={"scroll-mx-16" + (props.bandIndex == 0 ? " pointer" : "")}
           ref={fieldRef}
           draggable
         >
@@ -214,7 +212,7 @@ export default function BandItem(props: BandItemProps) {
         <div className={"editBtnDiv"}>
           <EditField options={props.alphabet} updateValue={chooseOption} />
           <button
-            className={"editBtn delete z-50 "}
+            className={"editBtn editPill delete z-50 "}
             onClick={() => deleteValue()}
           >
             <BsFillEraserFill className={""} />
