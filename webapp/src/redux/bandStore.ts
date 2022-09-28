@@ -1,4 +1,4 @@
-import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { EingabeAlphabetOption } from "../data/Alphabet";
 
 export interface BandItemToChange {
@@ -49,8 +49,6 @@ export const bandSlice = createSlice({
   reducers: {
     /**
      * function bandChangeItemAt changes the Band at the index
-     * @param state
-     * @param bandItem
      */
     bandChangeItemAt: (state, bandItem: PayloadAction<BandItemToChange>) => {
       if (bandItem.payload.index >= state.currentBand.length - 1) {
@@ -72,8 +70,6 @@ export const bandSlice = createSlice({
     },
     /**
      * function bandDeleteItemAt deletes the Band Values at the index
-     * @param state
-     * @param index
      */
     bandDeleteItemAt: (state, index: PayloadAction<number>) => {
       state.currentBand[index.payload as number] = {
@@ -82,6 +78,9 @@ export const bandSlice = createSlice({
         warningMode: state.currentBand[index.payload].warningMode,
       };
     },
+    /**
+     * function bandDeleteItemAt deletes the Band Values at the index in MespumaMode
+     */
     bandDeleteItemAtMespuma: (state, index: PayloadAction<MespumaIndex>) => {
       state.mespumaBand[index.payload.bandIndex as number][
         index.payload.index as number
@@ -95,9 +94,7 @@ export const bandSlice = createSlice({
       };
     },
     /**
-     * fügt ein neues leeres Bandfeld an der Position "before" oder "after" hinzu
-     * @param state
-     * @param position
+     * function bandAddField inserts empty field at position "before" or "after"
      */
     bandAddField: (state, position: PayloadAction<string>) => {
       if (position.payload === "before") {
@@ -116,9 +113,7 @@ export const bandSlice = createSlice({
     },
 
     /**
-     * fügt ein neues leeres Bandfeld an der Position "before" oder "after" hinzu
-     * @param state
-     * @param position
+     * function bandAddMespumaField inserts empty field at position "before" or "after" in mespuma mode
      */
     bandAddMespumaField: (state, position: PayloadAction<string>) => {
       if (position.payload === "before") {
@@ -141,7 +136,7 @@ export const bandSlice = createSlice({
     },
 
     /**
-     * setzt Band auf Default zurück & löscht Inhalt der BandItems
+     * function bandDeleteAll resets pointer and deletes Items in Band
      */
     bandDeleteAll: (state) => {
       for (let index = 0; index < state.currentBand.length; index++) {
@@ -154,14 +149,22 @@ export const bandSlice = createSlice({
       state.pointerPosition = 0;
       state.showWarning = false;
     },
+    /**
+     * function bandResetAll resets Band and MespumaBand to initialValue
+     */
     bandResetAll: (state) => {
       state.currentBand = initBand;
       state.mespumaBand = initMespumaBand;
     },
+    /**
+     * function bandResetPointerPos resets Pointer to 0
+     */
     bandResetPointerPos: (state) => {
       state.pointerPosition = 0;
     },
-
+    /**
+     * function bandChangePointPos changes state.pointerPosition to step-value
+     */
     bandChangePointPos: (state, step: PayloadAction<number>) => {
       if (
         step.payload > 0 &&
@@ -192,7 +195,9 @@ export const bandSlice = createSlice({
     },
 
     ///////////// MeSpuMa //////////////////
-
+    /**
+     * function bandChangeMespumaPointPos changes state.pointerPosition to step-value in mespuma mode
+     */
     bandChangeMespumaPointPos: (state, step: PayloadAction<number>) => {
       if (
         step.payload > 0 &&
@@ -224,21 +229,27 @@ export const bandSlice = createSlice({
         state.pointerPosition += step.payload;
       }
     },
-
+    /**
+     * function bandSetPointPos changes state.pointerPosition to step-value
+     */
     bandSetPointPos: (state, step: PayloadAction<number>) => {
       state.pointerPosition = step.payload;
     },
+    /**
+     * function bandSetPointPos resets state.pointerPosition to 0
+     */
     bandResetPointer: (state) => {
       state.pointerPosition = 0;
     },
+    /**
+     * function bandSetPointPos changes state.showWarning
+     */
     bandSetWarning: (state, value: PayloadAction<boolean>) => {
       state.showWarning = value.payload;
     },
 
     /**
      * function bandChangeItemAtMespuma changes the Band at the index and the BandIndex, at MeSpuMa
-     * @param state
-     * @param bandItem
      */
     bandChangeItemAtMespuma: (
       state,
@@ -259,8 +270,7 @@ export const bandSlice = createSlice({
       }
     },
     /**
-     * function bandChangeItemAtMespuma changes the Band at the index and the BandIndex, at MeSpuMa
-     * @param state
+     * function bandAddBandMespuma adds a new band in mespuma mode
      */
     bandAddBandMespuma: (state) => {
       initBandTmp = [];
@@ -273,11 +283,18 @@ export const bandSlice = createSlice({
       }
       state.mespumaBand.push(initBandTmp);
     },
+    /**
+     * function bandDeleteBandMespuma deletes a band in mespuma mode
+     * min band-anzahl = 2
+     */
     bandDeleteBandMespuma: (state) => {
       if (state.mespumaBand.length > 2) {
         state.mespumaBand.pop();
       }
     },
+    /**
+     * function bandDeleteAllMespuma deletes the banditems in mespuma and resets pointer to 0
+     */
     bandDeleteAllMespuma: (state) => {
       state.mespumaBand.forEach((band) => {
         for (let index = 0; index < band.length; index++) {
@@ -290,6 +307,9 @@ export const bandSlice = createSlice({
       });
       state.pointerPosition = 0;
     },
+    /**
+     * function bandResetAllMespuma resets state.mespumaBand to the initial Value
+     */
     bandResetAllMespuma: (state) => {
       state.mespumaBand = initMespumaBand;
     },

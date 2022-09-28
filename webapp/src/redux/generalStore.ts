@@ -128,7 +128,7 @@ const initialZustandsmengeTP: Zustand[] = [
 export const initialAnfangszustandTP: Zustand = initialZustandsmengeTP[0];
 const initialEndZustandsmengeTP: Zustand[] = [initialZustandsmengeTP[4]];
 
-//Zellen
+//Cells for TP Mode
 export const initialCellTP: Cell[] = [
   //1
   {
@@ -312,7 +312,6 @@ export const initialCellTP9: Cell[] = [
 ];
 
 //Rows wechsel
-
 const initialRowTP: RowInterface[] = [
   {
     cells: initialCellTP,
@@ -353,22 +352,6 @@ const initialRowTP: RowInterface[] = [
 ];
 
 //Rows
-
-///////////
-/*
-const initialRow: RowInterface[] = [
-  {
-    cells: initialCell,
-    isFinal: false,
-  },
-];
-*/
-// const initialRow: RowInterface[] = [
-//   {
-//     cells: initialCell,
-//     isFinal: false,
-//   },
-// ];
 const initialRow: RowInterface[] = [];
 let activeRow: RowInterface | undefined;
 
@@ -429,6 +412,9 @@ export const generalSlice = createSlice({
 
       state.bandAlphabet = tempAlphabet;
     },
+    /**
+     * function alphabetChangeCurrentMespuma changes current Alphabet in MespumaMode
+     */
     alphabetChangeCurrentMespuma: (
       state,
       data: PayloadAction<MespumaChangeAlphabet>
@@ -464,8 +450,6 @@ export const generalSlice = createSlice({
     },
     /**
      * function alphabetPushToCustom pushes a new Value to the customAlphabet
-     * @param state
-     * @param value
      */
     alphabetPushToCustom: (state, value: PayloadAction<string>) => {
       state.customAlphabet.alphabet.push({
@@ -476,11 +460,14 @@ export const generalSlice = createSlice({
     },
     /**
      * function alphabetDeleteCustom deletes the customAlphabet
-     * @param state
      */
     alphabetDeleteCustom: (state) => {
       state.customAlphabet.alphabet = [];
     },
+    /**
+     * function alphabetGenerateBand creates a new Band from String Array
+     * primary used by CodeEditor & ExampleSelect
+     */
     alphabetGenerateBand: (state, alphabet: PayloadAction<string[]>) => {
       let finalArray: EingabeAlphabet[] = [];
       alphabet.payload.forEach((literal) => {
@@ -495,6 +482,9 @@ export const generalSlice = createSlice({
     },
 
     ///////////////////// Dialog /////////////////////
+    /**
+     * function alphabetPushToDialogOptions pushes a new Alphabet to the Options in Eingabealphabet Select
+     */
     alphabetPushToDialogOptions: (state, optionName: PayloadAction<string>) => {
       state.customAlphabet.key = customKey;
       state.dialogOptions.push({
@@ -513,9 +503,7 @@ export const generalSlice = createSlice({
 
     ///////////////////// Zustand /////////////////////
     /**
-     * function alphabetDeleteCustom deletes the customAlphabet
-     * @param state
-     * @param payload
+     * function alphabetPushToZustand adds a new Zustand
      */
     alphabetPushToZustand: (
       state,
@@ -537,6 +525,10 @@ export const generalSlice = createSlice({
 
       state.zustandsmenge = states;
     },
+    /**
+     * function alphabetPushToIdxZustand adds a new Zustand with a unique Name
+     * primary used by CodeEditor & ExampleSelect
+     */
     alphabetPushToIdxZustand: (state, zustandsName: PayloadAction<string>) => {
       state.zustandsmenge.forEach((value, index) => {
         if (value.value === zustandsName.payload) {
@@ -558,6 +550,9 @@ export const generalSlice = createSlice({
         state.activeState = state.zustandsmenge[0];
       }
     },
+    /**
+     * function alphabetDeleteZustand deletes the last Zustand
+     */
     alphabetDeleteZustand: (state) => {
       if (state.zustandsmenge.length > 1) {
         // Es muss immer mindestens ein Zustand vorhanden sein
@@ -568,9 +563,16 @@ export const generalSlice = createSlice({
         state.activeState = stateCopy;
       }
     },
+    /**
+     * function alphabetClearZustand deletes whole Zustandsmenge
+     * primary used by CodeEditor & ExampleSelect
+     */
     alphabetClearZustand: (state) => {
       state.zustandsmenge = [];
     },
+    /**
+     * function alphabetChangeAnfangszustand changes state.anfangszustand
+     */
     alphabetChangeAnfangszustand: (state, zustand: PayloadAction<Zustand>) => {
       state.zustandsmenge.forEach((option) => {
         if (option.value === zustand.payload.value) {
@@ -583,7 +585,9 @@ export const generalSlice = createSlice({
       state.anfangsZustand = zustand.payload;
       state.activeState = zustand.payload;
     },
-
+    /**
+     * function alphabetChangeAnfangszustand changes state.endZustand
+     */
     alphabetChangeEndzustand: (state, zustand: PayloadAction<Zustand[]>) => {
       state.endZustand = zustand.payload;
 
@@ -594,6 +598,9 @@ export const generalSlice = createSlice({
         option.endzustand = !!result;
       });
     },
+    /**
+     * function alphabetClearEndzustand deletes everything from state.endZustand
+     */
     alphabetClearEndzustand: (state) => {
       state.zustandsmenge.forEach((option) => {
         option.endzustand = false;
@@ -602,16 +609,29 @@ export const generalSlice = createSlice({
     },
 
     ///////////////////// Maschine /////////////////////
+    /**
+     * function alphabetChangePauseMaschine changes state.pauseMaschine
+     */
     alphabetChangePauseMaschine: (state, value: PayloadAction<boolean>) => {
       state.pauseMaschine = value.payload;
     },
+    /**
+     * function alphabetChangeStoppMaschine changes state.stoppMaschine
+     */
     alphabetChangeStoppMaschine: (state, value: PayloadAction<boolean>) => {
       state.stoppMaschine = value.payload;
       state.activeRow = activeRow;
     },
+    /**
+     * function maschineChangeExecutable changes state.executable
+     */
     maschineChangeExecutable: (state, value: PayloadAction<boolean>) => {
       state.executable = value.payload;
     },
+    /**
+     * function maschineChangeExecutable checks if Maschine is executable
+     * no warnings = executable
+     */
     maschineCheckExecutable: (state) => {
       if (state.rows.length === 0) {
         state.executable = false;
@@ -643,9 +663,15 @@ export const generalSlice = createSlice({
         }
       }
     },
+    /**
+     * function maschineSetSlider changes state.sliderNumber to specific number
+     */
     maschineSetSlider: (state, value: PayloadAction<number>) => {
       state.sliderNumber = value.payload;
     },
+    /**
+     * function maschineSliderIncreaseNumber changes state.sliderNumber + 1
+     */
     maschineSliderIncreaseNumber: (state) => {
       let val = state.sliderNumber;
       if (val < 100) {
@@ -653,6 +679,9 @@ export const generalSlice = createSlice({
         state.sliderNumber = val;
       }
     },
+    /**
+     * function maschineSliderDecreaseNumber changes state.sliderNumber - 1
+     */
     maschineSliderDecreaseNumber: (state) => {
       let val = state.sliderNumber;
       if (val > 1) {
@@ -661,6 +690,9 @@ export const generalSlice = createSlice({
       }
     },
     ///////////////////// Table /////////////////////
+    /**
+     * function tableAddRow adds a new empty Row to the table
+     */
     tableAddRow: (state) => {
       // create flat copy of all existing rows
       const newRows = state.rows.slice(0, state.rows.length);
@@ -757,6 +789,10 @@ export const generalSlice = createSlice({
       // update the rows in state with our new rows-array
       state.rows = newRows;
     },
+    /**
+     * function tableAddEditorRow adds a new empty Row to the table from JSON
+     * primary used by CodeEditor & ExampleSelect
+     */
     tableAddEditorRow: (state, zustandToAdd: PayloadAction<tableRowToAdd>) => {
       // create flat copy of all existing rows
       const newRows = state.rows.slice(0, state.rows.length);
@@ -839,6 +875,9 @@ export const generalSlice = createSlice({
       // update the rows in state with our new rows-array
       state.rows = newRows;
     },
+    /**
+     * function tableDeleteRow deletes a row from the table
+     */
     tableDeleteRow: (state, i: PayloadAction<React.Key>) => {
       // create flat copy of all existing rows
       const newRows = state.rows.slice(0, state.rows.length);
@@ -849,9 +888,15 @@ export const generalSlice = createSlice({
       // update the rows in state with our new rows-array
       state.rows = newRows;
     },
+    /**
+     * function tableDeleteAll deletes whole table
+     */
     tableDeleteAll: (state) => {
       state.rows = initialRow;
     },
+    /**
+     * function tableUpdateCell changes the value of a cell
+     */
     tableUpdateCell: (state, updateCell: PayloadAction<updateCellType>) => {
       if (state.rows.length > 0) {
         const newCells: Cell[] = state.rows[
@@ -887,6 +932,9 @@ export const generalSlice = createSlice({
         state.rows = newRows;
       }
     },
+    /**
+     * function tableUpdateRowIsFinal changes isFinal prop at Row
+     */
     tableUpdateRowIsFinal: (state, newValue: PayloadAction<updateCellType>) => {
       const newRows: RowInterface[] = state.rows.slice(
         0,
@@ -898,19 +946,30 @@ export const generalSlice = createSlice({
           .value as boolean;
       }
     },
+    /**
+     * function tableSetActiveRow changes state.activeRow
+     */
     tableSetActiveRow: (
       state,
       row: PayloadAction<RowInterface | undefined>
     ) => {
-      console.log("setAvtiveRow:", row.payload);
       state.activeRow = row.payload;
     },
+    /**
+     * function tableSetWatchedRows changes state.watchedRows
+     */
     tableSetWatchedRows: (state, rows: PayloadAction<RowInterface[]>) => {
       state.watchedRows = rows.payload;
     },
+    /**
+     * function tableSetActiveState changes state.activeState
+     */
     tableSetActiveState: (state, newVal: PayloadAction<Zustand>) => {
       state.activeState = newVal.payload;
     },
+    /**
+     * function tableCheckWarning checkes if table is filled correctly
+     */
     tableCheckWarning: (state, checkVal: PayloadAction<checkWarning>) => {
       // create flat copy of all existing rows
       const newRows = checkVal.payload.rows;
@@ -963,6 +1022,9 @@ export const generalSlice = createSlice({
     },
 
     ///////////////////// Other /////////////////////
+    /**
+     * function alphabetChangeWarningMode changes the warningMode for state.anfangsZustand or state.endZustand
+     */
     alphabetChangeWarningMode: (
       state,
       warningValue: PayloadAction<ChangeWarningModus>
@@ -981,8 +1043,7 @@ export const generalSlice = createSlice({
     },
 
     /**
-     * This function switches from or to the toilet paper views
-     * @param state
+     * function changeToiletPaperMode switches from or to the toilet paper views
      */
     changeToiletPaperMode: (state) => {
       // mode für alle:
@@ -994,8 +1055,7 @@ export const generalSlice = createSlice({
     },
 
     /**
-     * This function activate toilet paper view
-     * @param state
+     * function activateToiletPaperMode activate toilet paper view
      */
     activateToiletPaperMode: (state) => {
       state.mode = "toiletpaper";
@@ -1009,8 +1069,7 @@ export const generalSlice = createSlice({
     },
 
     /**
-     * This function activate normal view
-     * @param state
+     * function activateNormalMode activate normal view
      */
     activateNormalMode: (state) => {
       state.mode = "default";
@@ -1023,14 +1082,22 @@ export const generalSlice = createSlice({
     },
 
     ///////// MeSpuMa //////////////
+    /**
+     * function mespumaPushToSpuren changes state.anzahlSpuren + 1
+     */
     mespumaPushToSpuren: (state) => {
       state.anzahlSpuren += 1;
     },
-
+    /**
+     * function bandResetAnzahlSpuren resets state.anzahlSpuren to 2
+     */
     bandResetAnzahlSpuren: (state) => {
       state.anzahlSpuren = initialanzahlSpuren;
     },
-
+    /**
+     * function mespumaDeleteSpuren changes state.anzahlSpuren - 1
+     * min 2 Spuren has to be left
+     */
     mespumaDeleteSpuren: (state) => {
       if (state.anzahlSpuren > 2) {
         state.anzahlSpuren -= 1;
@@ -1038,9 +1105,7 @@ export const generalSlice = createSlice({
     },
 
     /**
-     * This function switches from or to the Mespuma views
-     * @param state
-     * @param mespuma
+     * function changeMespumaMode switches from or to the Mespuma views
      */
     changeMespumaMode: (state, mespuma: PayloadAction<boolean>) => {
       if (mespuma.payload) {
@@ -1077,11 +1142,6 @@ export const generalSlice = createSlice({
           let el = "(" + element.join() + ")";
           finalBandAlphabet.push(el);
         });
-
-        // alphabetChangeCurrentMespuma({
-        //   cartesian: finalBandAlphabet,
-        //   alphabet: state.currentAlphabet,
-        // });
 
         if (state.currentAlphabet) {
           state.dialogOptions.forEach((option) => {
