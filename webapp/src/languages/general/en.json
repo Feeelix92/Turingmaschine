@@ -31,6 +31,7 @@
     "clearBand": "Clear",
     "warningInputValueNotAllowed": "This input value is no longer allowed!",
     "warningNoStateAvailable": "No state available!",
+    "decimal": "Tape Symbols as decimal number(s):",
 
     "mespumaExtension": {
       "headline": "Multi-Track-Machine"

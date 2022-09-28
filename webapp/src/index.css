@@ -47,6 +47,8 @@
   .lastBandItem div.editBtnDiv{
     @apply justify-end;
   }
+
+
 }
 @tailwind components;
 @tailwind utilities;
@@ -152,7 +154,15 @@
 
 /*********** BAND ***********/
 .band-container {
-  @apply overflow-x-auto overflow-y-hidden whitespace-nowrap pl-1 pr-1 pb-5 pt-10 flex flex-row max-w-max ml-auto mr-auto;
+  @apply overflow-x-auto overflow-y-hidden whitespace-nowrap pl-1 pr-1 pb-5 pt-10 flex flex-row max-w-max ml-auto mr-auto
+}
+
+.decimalNumbers{
+  @apply bg-transparent mt-4 overflow-x-auto hidden sm:block invisible;
+}
+
+.decimalContainer:hover .decimalNumbers {
+  @apply sm:visible;
 }
 
 .band-container-mespuma {

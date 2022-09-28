@@ -60,7 +60,7 @@ export default function Table() {
                   ))}
                 </tr>
               </thead>
-              <tbody className="flex flex-col items-center justify-between md:max-h-96 xl:max-h-[48rem] overflow-y-scroll md:overflow-y-auto overflow-x-hidden">
+              <tbody className="flex flex-col items-center justify-between md:max-h-96 xl:max-h-[48rem] overflow-y-scroll overflow-x-hidden">
                 {rows.map((value, key: React.Key) =>
                   mode === "toiletpaper" && value.isFinal ? null : (
                     <Row

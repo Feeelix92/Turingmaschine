@@ -31,6 +31,7 @@
     "clearBand": "Leeren",
     "warningInputValueNotAllowed": "Dieser Eingabewert ist nicht länger zulässig!",
     "warningNoStateAvailable": "Kein Zustand vorhanden!",
+    "decimal": "Bandeingabe als Dezimalzahl(en):",
 
     "mespumaExtension": {
       "headline": "Mehrspuren-Maschine"
