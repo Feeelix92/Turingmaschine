@@ -91,11 +91,11 @@ export default function Band() {
         (alphabetArray.length === 1 && (alphabetArray.some(e => e.value === "1"))));
   }
 
-
   // read Operands from Band
   function readOperands() {
     const values: string[] = [];
     let binaryString: string = "";
+    let unaryString: string = "";
     const counted: number[] = [];
     // count unary
     let counter = 0;
@@ -115,25 +115,20 @@ export default function Band() {
         counted.push(parseInt(value, 2));
       });
       return counted.join(" # ");
-    }
-    // unary operands
-    else if (checkUnary()) {
+    }else if (checkUnary()) {
       currentBand.forEach((item) => {
-        if (item.value == "1") {
-          counter++;
-        } else {
-          counted.push(counter);
-          counter = 0;
+        if (item.value === "1") {
+          unaryString += item.value;
+        } else if (unaryString != "") {
+          values.push(unaryString);
+          unaryString = "";
         }
       });
-      if (counted.length > 1) {
-        counted.forEach((count) => {
-          if (count != 0) {
-            values.push(count.toString());
-          }
-        })
-      }
-      return values.join(" # ");
+      values.filter(item => item !== "");
+      values.forEach((value) => {
+        counted.push(value.length)
+      });
+      return counted.join(" # ");
     }
   }
 
@@ -162,32 +157,32 @@ export default function Band() {
           <p className={"text-xl"}>Bandeingabe als Dezimalzahl(en):</p>
           <p className={"text-xl"}>{readOperands()}</p>
         </div> : null}
-      <div className={"m-2 h-40 flex"}>
-        <div className="band-container overflow-x-auto col-span-12">
-          {currentBand.map((value, index) => (
-              <BandItem
-                  value={value.value}
-                  label={value.label}
-                  index={index}
-                  bandIndex={0}
-                  pointer={value.pointer!}
-                  key={index}
-                  alphabet={currentAlphabet.alphabet}
-                  showEditField={true}
-                  setPointerAt={() => setPointerAt(index)}
-              />
-          ))}
+        <div className={"m-2 h-40 flex"}>
+          <div className="band-container overflow-x-auto col-span-12">
+            {currentBand.map((value, index) => (
+                <BandItem
+                    value={value.value}
+                    label={value.label}
+                    index={index}
+                    bandIndex={0}
+                    pointer={value.pointer!}
+                    key={index}
+                    alphabet={currentAlphabet.alphabet}
+                    showEditField={true}
+                    setPointerAt={() => setPointerAt(index)}
+                />
+            ))}
+          </div>
         </div>
       </div>
-      </div>
-      {checkUnary() || checkBinary() ? (
-        <div className="flex justify-center">
-          <IoIosWarning
-            color="orange"
-            title={t("band.warningInputValueNotAllowed")}
-            size="48"
-          />
-        </div>
+      {showWarning ? (
+          <div className="flex justify-center">
+            <IoIosWarning
+                color="orange"
+                title={t("band.warningInputValueNotAllowed")}
+                size="48"
+            />
+          </div>
       ) : null}
         <div className="flex justify-center m-2 gap-2">
             <button

@@ -158,11 +158,11 @@
 }
 
 .decimalNumbers{
-  @apply bg-transparent mt-4 overflow-x-auto hidden;
+  @apply bg-transparent mt-4 overflow-x-auto hidden sm:block sm:invisible;
 }
 
 .decimalContainer:hover .decimalNumbers {
-  @apply block;
+  @apply sm:visible;
 }
 
 .band-container-mespuma {
