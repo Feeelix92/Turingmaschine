@@ -1,5 +1,5 @@
 import BandItem from "./BandItem";
-import { FaAngleLeft, FaAngleRight, FaTrash } from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
   bandAddField,
@@ -8,11 +8,11 @@ import {
   bandSetPointPos,
   bandSetWarning,
 } from "../../redux/bandStore";
-import { RootState, store } from "../../redux/store";
+import { RootState } from "../../redux/store";
 import { IoIosWarning } from "react-icons/io";
 import { useTranslation } from "react-i18next";
 import * as React from "react";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 
 export default function Band() {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ export default function Band() {
   const bandAlphabet = useSelector(
     (state: RootState) => state.general.bandAlphabet
   );
-  React.useEffect(() => {
+  useEffect(() => {
     let bandVal: string[] = [];
     // wenn banditem nicht in Eingabealphabet vorhanden, dann warning auf true
     bandAlphabet.forEach((item) => {
@@ -94,11 +94,11 @@ export default function Band() {
 
   // read Operands from Band
   function readOperands() {
-    let counter = 0;
-    const counted: number[] = [];
-    let value = "";
     const values: string[] = [];
     let binaryString: string = "";
+    const counted: number[] = [];
+    // count unary
+    let counter = 0;
 
     // binary operands
     if (checkBinary()) {
@@ -129,8 +129,7 @@ export default function Band() {
       if (counted.length > 1) {
         counted.forEach((count) => {
           if (count != 0) {
-            value = count.toString();
-            values.push(value);
+            values.push(count.toString());
           }
         })
       }
