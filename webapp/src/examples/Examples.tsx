@@ -1,12 +1,18 @@
 import { CodeExample } from "../interfaces/CommonInterfaces";
-import example1 from "./example1.json";
-import additionUnär from "./additionUnär.json";
+import addUn from "./addUn.json";
+import incUn from "./incUn.json";
+import incBin from "./incBin.json";
+import bitNot from "./bitNot.json";
+import accEvenUn from "./accEvenUn.json";
+import accEvenBin from "./accEvenBin.json";
+import hello from "./hello.json";
 
 export const examples: CodeExample[] = [
-  { label: "example1", value: JSON.stringify(example1), type: "normal" },
-  {
-    label: "AdditionUnär",
-    value: JSON.stringify(additionUnär),
-    type: "normal",
-  },
+  { label: "addUn", value: JSON.stringify(addUn), type: "normal" },
+  { label: "incUn", value: JSON.stringify(incUn), type: "normal" },
+  { label: "incBin", value: JSON.stringify(incBin), type: "normal" },
+  { label: "bitNot", value: JSON.stringify(bitNot), type: "normal" },
+  { label: "accEvenUn", value: JSON.stringify(accEvenUn), type: "normal" },
+  { label: "accEvenBin", value: JSON.stringify(accEvenBin), type: "normal" },
+  { label: "hello", value: JSON.stringify(hello), type: "normal" },
 ];
