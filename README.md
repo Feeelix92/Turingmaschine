@@ -1,5 +1,4 @@
 # Turingmaschine
-
 ## Projekt als Entwickler starten
 1. GitHub Projekt klonen
 2. In den Ordner webapp wechseln, `cd webapp` eingeben.
