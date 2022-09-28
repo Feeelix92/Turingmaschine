@@ -63,6 +63,7 @@ export default function MultiselectDropDown(props: any) {
   function handleKeyDown(event: KeyboardEventHandler<HTMLDivElement>) {
     const ev = event as unknown as KeyboardEvent;
     if (!optionString) return;
+    console.log(ev);
     switch (ev.key) {
       case " ":
       case "Enter":
