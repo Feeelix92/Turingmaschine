@@ -14,5 +14,5 @@ export const examples: CodeExample[] = [
   { label: "bitNot", value: JSON.stringify(bitNot), type: "normal" },
   { label: "accEvenUn", value: JSON.stringify(accEvenUn), type: "normal" },
   { label: "accEvenBin", value: JSON.stringify(accEvenBin), type: "normal" },
-  { label: "hello", value: JSON.stringify(hello), type: "normal" },
+  { label: "hello", value: JSON.stringify(hello), type: "normal" }
 ];
