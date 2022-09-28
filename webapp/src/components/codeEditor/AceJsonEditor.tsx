@@ -231,21 +231,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             dispatch(alphabetPushToDialogOptions(alphabet.toString()));
 
             let combinationArr = getCombinationArray(alphabet);
-
-            // let literalArr: string[] = [];
-            //
-            // alphabet.forEach((literal: string) => {
-            //   literalArr.push(literal);
-            // });
-            //
-            // literalArr.push("ß");
-            //
-            // let combinationArr: string[][] = [];
-            //
-            // for (let i = 0; i < anzahlSpuren; i++) {
-            //   combinationArr.push(literalArr);
-            // }
-            //
             let cartesianArr = cartesianProduct(combinationArr);
 
             let finalBandAlphabet: string[] = [];
@@ -385,20 +370,6 @@ export default function AceJsonEditor(props: CodeEditorProps) {
 
         if (currentMode === "mespuma") {
           let combinationArr = getCombinationArray(alphabet);
-          // let literalArr: string[] = [];
-          //
-          // alphabet.forEach((literal: string) => {
-          //   literalArr.push(literal);
-          // });
-          //
-          // literalArr.push("ß");
-          //
-          // let combinationArr: string[][] = [];
-          //
-          // for (let i = 0; i < anzahlSpuren; i++) {
-          //   combinationArr.push(literalArr);
-          // }
-          //
           let cartesianArr = cartesianProduct(combinationArr);
           dispatch(
             tableCheckWarning({
@@ -561,7 +532,7 @@ export default function AceJsonEditor(props: CodeEditorProps) {
             type: "snippet",
           },
           {
-            caption: "example",
+            caption: "addUn",
             snippet: `{
   "band":{
     "input":["1","#","1","ß","ß","ß","ß","ß"]
@@ -593,6 +564,44 @@ export default function AceJsonEditor(props: CodeEditorProps) {
 }`,
             type: "snippet",
           },
+          {
+            caption: "mespuma_addBin",
+            snippet: `{
+  "band":{
+    "input":[["ß","1","0","0","1","1","0","ß"],["ß","1","1","1","0","0","0","ß"],["ß","ß","ß","ß","ß","ß","ß","ß"]]
+  },
+  "specifications":{
+    "alphabet":["0","1"],
+    "states":["q1","q2","q3","q4"],
+    "startState":["q1"],
+    "endStates":["q4"]
+  },
+  "table":{             
+    "q1":{
+			"(0,0,ß)":["q1", "(0,0,ß)", "R"],
+			"(0,1,ß)":["q1", "(0,1,ß)", "R"],
+			"(1,0,ß)":["q1", "(1,0,ß)", "R"],
+			"(1,1,ß)":["q1", "(1,1,ß)", "R"],
+			"(ß,ß,ß)":["q2", "(ß,ß,ß)", "L"]
+		},
+		"q2":{
+			"(0,0,ß)":["q2", "(0,0,0)", "L"],
+			"(0,1,ß)":["q2", "(0,1,1)", "L"],
+			"(1,0,ß)":["q2", "(1,0,1)", "L"],
+			"(1,1,ß)":["q3", "(1,1,0)", "L"],
+			"(ß,ß,ß)":["q4", "(ß,ß,ß)", "R"]
+		},
+		"q3":{
+			"(0,0,ß)":["q2", "(0,0,1)", "L"],
+			"(0,1,ß)":["q3", "(0,1,0)", "L"],
+			"(1,0,ß)":["q3", "(1,0,0)", "L"],
+			"(1,1,ß)":["q3", "(1,1,1)", "L"],
+			"(ß,ß,ß)":["q4", "(ß,ß,1)", "N"]
+		}
+  }
+}`,
+            type: "snippet",
+          }
         ];
 
         completions.forEach((i) => {
