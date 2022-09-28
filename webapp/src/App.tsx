@@ -8,7 +8,7 @@ import Bottomnav from "./components/Bottomnav/Bottomnav";
 import ToPaTable from "./components/Zustandsüberführungsfunktion/ToPaTable";
 import Band from "./components/Band/Band";
 import { Routes, Route } from "react-router-dom";
-import Calculator from "./components/Calculator/Calculator";
+import Tools from "./components/Tools/Tools";
 import { useDispatch } from "react-redux";
 import {
   activateNormalMode,
@@ -51,7 +51,7 @@ function Home() {
         >
           <div className={"md:col-span-2"}>
             <ConditionsList />
-            <Calculator />
+            <Tools />
           </div>
           <Table />
         </div>

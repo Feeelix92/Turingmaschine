@@ -157,6 +157,7 @@ export default function Calculator() {
               id="grid-number-one"
               type="number"
               value={number1}
+              min="0"
               onChange={(newValue) =>
                 setNumber1(parseInt(newValue.target.value))
               }

@@ -55,7 +55,7 @@
   },
 
   "row": {
-    "stop": "STOPP"
+    "stop": "Endzustandsreihe! - Diese Reihe kann gelöscht werden"
   },
 
   "cell": {

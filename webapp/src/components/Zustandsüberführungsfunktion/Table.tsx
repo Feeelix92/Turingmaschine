@@ -61,17 +61,15 @@ export default function Table() {
                 </tr>
               </thead>
               <tbody className="flex flex-col items-center justify-between md:max-h-96 xl:max-h-[48rem] overflow-y-scroll overflow-x-hidden">
-                {rows.map((value, key: React.Key) =>
-                  mode === "toiletpaper" && value.isFinal ? null : (
-                    <Row
-                      key={key}
-                      index={key}
-                      cells={value.cells}
-                      isFinal={value.isFinal}
-                      deleteRow={() => dispatch(tableDeleteRow(key))}
-                    />
-                  )
-                )}
+                {rows.map((value, key: React.Key) => (
+                  <Row
+                    key={key}
+                    index={key}
+                    cells={value.cells}
+                    isFinal={value.isFinal}
+                    deleteRow={() => dispatch(tableDeleteRow(key))}
+                  />
+                ))}
               </tbody>
             </table>
             <button
