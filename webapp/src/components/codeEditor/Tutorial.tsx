@@ -37,7 +37,8 @@ export default function Tutorial() {
                 <li>{t("codeEditor.tutorial.shortcuts.endStates")}</li>
                 <li>{t("codeEditor.tutorial.shortcuts.endStates_q2")}</li>
                 <li>{t("codeEditor.tutorial.shortcuts.table")}</li>
-                <li>{t("codeEditor.tutorial.shortcuts.example")}</li>
+                <li>{t("codeEditor.tutorial.shortcuts.addUn")}</li>
+                <li>{t("codeEditor.tutorial.shortcuts.mespuma_addBin")}</li>
             </ul>
             <br/>
             <h3>{t("codeEditor.tutorial.section.5.headline")}</h3>
